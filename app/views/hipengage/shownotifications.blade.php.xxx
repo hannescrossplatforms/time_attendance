@@ -1,0 +1,113 @@
+@extends('layout')
+
+@section('content')
+
+  <body class="hipENGAGE">
+    <div class="container-fluid">
+      <div class="row">
+
+        @include('hipengage.sidebar')
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+          <a id="initiatelists"></a>
+          <a id="initiatesmslist"></a>
+          <a id="initiateemaillist"></a>
+          <a id="initiatepushlist"></a>
+          <a id="initiateapilist"></a>
+
+          <h1 class="page-header">Manage Notifications</h1>
+          <div role="tabpanel"> 
+            
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#notificationSMS" aria-controls="notificationSMS" role="tab" data-toggle="tab">SMS</a></li>
+              <li role="presentation"><a href="#notificationEmail" aria-controls="notificationEmail" role="tab" data-toggle="tab">Email</a></li>
+              <li role="presentation"><a href="#notificationPush" aria-controls="notificationPush" role="tab" data-toggle="tab">Push</a></li>
+              <li role="presentation"><a href="#notificationMgr" aria-controls="notificationMgr" role="tab" data-toggle="tab">Mgr</a></li>
+              <li role="presentation"><a href="#notificationApi" aria-controls="notificationApi" role="tab" data-toggle="tab">Api</a></li>
+            </ul>
+           
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+              <div role="tabpanel" class="tab-pane active" id="notificationSMS">
+                    @include('hipengage.event_sms')
+              </div>
+              
+              <div role="tabpanel" class="tab-pane" id="notificationEmail">
+                    @include('hipengage.event_email')
+              </div>
+              
+              <div role="tabpanel" class="tab-pane" id="notificationPush">
+                    @include('hipengage.event_push')
+              </div>
+
+              <div role="tabpanel" class="tab-pane" id="notificationMgr">
+                    @include('hipengage.event_mgr')
+              </div>
+
+              <div role="tabpanel" class="tab-pane" id="notificationApi">
+                    @include('hipengage.event_api')
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    
+    <script src="/js/jquery.form.js"></script>
+    <script src="/js/prefixfree.min.js"></script> 
+    <script src="/js/jquery.timepicker.min.js"></script> 
+
+    <script src="/js/hipengage/event_manager/sms.js"></script> 
+    <script src="/js/hipengage/event_manager/email.js"></script> 
+    <script src="/js/hipengage/event_manager/push.js"></script> 
+    <script src="/js/hipengage/event_manager/mgr.js"></script> 
+    <script src="/js/hipengage/event_manager/api.js"></script> 
+    <script src="/js/locationmanager.js"></script> 
+
+    <script>
+
+
+
+      $(function() {
+
+        previewurl = "{{$data['previewurl']}}";
+
+        $(' #initiatesmslist ').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+        $(' #initiateemaillist ').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+        $(' #initiatepushlist ').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+        $(' #initiateapilist ').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+
+        // if(1) {
+
+
+          // pushnotification_id = eventjson["pushnotification_id"];
+          // apinotification_id = eventjson["apinotification_id"];
+          // smsnotification_id = eventjson["smsnotification_id"];
+          // emailnotification_id = eventjson["emailnotification_id"];
+          // notification_type_primary = eventjson["notification_type_primary"];
+          // $( '#notificationtypelist' ).val(notification_type_primary);
+          // alert("notification_type_primary : " + notification_type_primary);
+          // buildNotificationDropDown( notification_type_primary );
+
+
+      });
+
+
+    </script> 
+
+  </body>
+
+@stop

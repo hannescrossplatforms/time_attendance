@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+body {
+/*  margin-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+   background:url(/images/frontend/blue.gif); 
+  background:url(/images/frontend/redbrand1.gif);
+  background-repeat: no-repeat;
+  background-position: center top;
+  */
+
+  	background: url(/images/frontend/redbrand1.gif) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+
+ 

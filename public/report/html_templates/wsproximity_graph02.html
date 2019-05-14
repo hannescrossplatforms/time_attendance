@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>FusionCharts XT - My First Chart </title>
+        <script type="text/javascript" src="./incs/jquery.min.js"></script>
+        <script type="text/javascript" src="./incs/fusioncharts.js"></script>
+        <script type="text/javascript" src="./incs/fusioncharts.charts.js"></script>
+        <script type="text/javascript" src="./incs/fusioncharts.theme.zune.js"></script>
+
+        <style type="text/css">
+            body {
+                    margin: 0;
+                    padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+    	<div id="most_proximity_list"></div>
+        <script type="text/javascript" src="MSData-no-animation.xml.js"></script>
+        <script type="text/javascript">
+        var dataString; 			
+        $.getJSON( "../json_file/json_result.json", function( data ) {
+            dataString = data;
+              //get most 5 proximity details
+              var most_proximity = [];
+              $.each(data.staff_proximity.slice(0,5), function(i, list) {
+                  most_proximity.push(list);
+              });
+              var chartProperties = {
+                      "caption": "Top 5",
+                      "xAxisName": "Name", // This whould be the full name in the format "Surname, first names"
+                      "yAxisName": "Proximity",
+                      "rotatevalues": "1",
+                      "theme": "zune",
+                      "link": "JavaScript:membergraph("+data.external_user_id+")"
+                  };
+
+                  apiChart = new FusionCharts({
+                      type: 'bar2d',
+                      renderAt: 'most_proximity_list',
+                      width: '300',
+                      height: '220',
+                      dataFormat: 'json',
+                      dataSource: {
+                          "chart": chartProperties,
+                          "data": most_proximity
+
+                      }
+                  });
+                  apiChart.render();
+});
+
+		</script>
+                        
+    </body>
+</html>

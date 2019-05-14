@@ -1,0 +1,22 @@
+
+
+.merrormsg {
+    color: red;
+}
+
+.pernod_field {
+    width: 100% !important;
+}
+
+.popupheading {
+    font-weight:  bolder;
+    text-align: center;
+}
+
+body {
+    padding: 20px 10% !important;
+}
+
+li {
+	padding-bottom: 10px;
+}

@@ -1,0 +1,75 @@
+.modsta-row {
+        width:120px; 
+    }
+
+.staff_absence_list {
+    float: left;
+}
+
+.staff_absence_list img {
+    width: 400px;
+    
+}
+
+.col-sm-8 {
+    width: 450px;
+    float: left;
+}
+
+.col-sm-4 {
+    width:250px;
+    float: right;
+}
+
+.csv-button {
+    display: none;
+}
+
+.pdf_doc_logo { 
+    position: absolute;
+    min-height: 107px;
+    min-weight: 107px;
+    right: 6%;
+    top: -10px;
+}
+.pdf_doc_logo img {
+    height: 102px;
+    width: 125px;
+}
+.page-header {
+    margin-top: 1px;
+}
+
+#report_period {
+    display: block;
+    font-size: 25px;
+    color: #5ba5d8;
+}
+
+.hide-modsta {
+    display: none;
+}
+/*.col-sm-8 .fusioncharts-container img {
+    width: 700px; height: 650px;
+}*/
+
+.modstattitle {
+    background: #58A5DA;
+    height: 70px;
+    padding: 10px;
+}
+.modstattitle h3 {
+    color: white;
+}
+.page-head {
+    color: #5ba5d8;
+    font-size: 5px;
+    font-family: sans-serif;
+}
+.page-header {
+    color: #5ba5d8;
+    font-family: sans-serif;
+}
+.modstattitle h3 {
+     font-family: sans-serif;
+}

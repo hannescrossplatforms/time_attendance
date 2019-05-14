@@ -1,0 +1,14 @@
+update venues set mon_from = "08:00";
+update venues set mon_to = "20:00";
+update venues set tue_from = "08:00";
+update venues set tue_to = "20:00";
+update venues set wed_from = "08:00";
+update venues set wed_to = "20:00";
+update venues set thu_from = "08:00";
+update venues set thu_to = "20:00";
+update venues set fri_from = "08:00";
+update venues set fri_to = "20:00";
+update venues set sat_from = "08:00";
+update venues set sat_to = "20:00";
+update venues set sun_from = "08:00";
+update venues set sun_to = "20:00";

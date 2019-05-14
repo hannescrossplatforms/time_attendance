@@ -1,0 +1,13 @@
+
+footer p a {
+    display: inline-block;
+    margin: -6px 0 0 6px;
+    width: 68px;
+    height: 63px;
+    /*background: url(/images/v3m/hipzone_logo2x.png) no-repeat;*/
+    background: url(/images/v3m/wefilogo-sm.png) no-repeat !important; 
+    
+    background-size: 100%;
+    text-indent: -9000%;
+    vertical-align: middle;
+}

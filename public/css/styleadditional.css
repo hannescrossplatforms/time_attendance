@@ -1,0 +1,826 @@
+.shiftup {
+  margin-top:10px;
+  font-size: 18px;
+ }
+
+.small-mod-title {
+  font-size: 20px;
+
+}
+
+
+#flash_notice, #flash_error {
+    padding: 5px 8px;
+    margin: 10px 0;
+}
+
+#flash_notice {
+    background-color: #CFC;
+    border: solid 1px #6C6;
+}
+
+#flash_error {
+
+}
+
+#brand_code {
+    size: 6;
+}
+
+.clear {
+    clear: both;
+}
+
+.input-big {
+    float: right;
+}
+
+.input-left {
+    float: left;
+}
+
+.tbl{
+    width:100%;
+    height:100%;
+    float:left;
+}
+.tblHeader{
+    width:100%;
+    height:100%;
+    float:left;
+    font-weight:bold;
+}
+.tblRow{
+    width:100%;
+    height:100%;
+    float:left;
+    padding: 10px 0px;
+}
+.tblCell{
+    width:25%;
+    height:100%;
+    border:0px solid;
+    padding-left: 10px;
+    float:left;
+    text-align: center;
+}
+
+.centered-cell {
+  text-align: center;
+}
+
+.left-cell {
+  text-align: left;
+}
+
+.zonein_btn_text {
+    padding: 10px;
+}
+
+.support-iframe {
+    width: 100%;
+    height: 700px;
+    border: none;
+    margin: 50px 0px;
+}
+
+.support-container {
+    padding-left: 16.6667%;
+}
+
+
+.dashboard-background {
+    background-image: url('/img/hipjam_dashboard.jpg');
+    background-repeat: no-repeat;
+    width:100%;
+    height:600px;
+}
+.redBg
+{
+  background-color: red !important;
+  text-align: center;
+  color: white;
+}
+.OfflineBg
+{
+  background-color: red !important;
+  text-align: center;
+  color: white;
+  width: 80px;
+}
+.greenBg
+{
+  background-color: green !important;
+  text-align: left;
+  color: white;
+
+}
+.OnlineBg
+{
+  background-color: green !important;
+  text-align: center;
+  color: white;
+  width: 80px;
+}
+.totals
+{
+    font-weight:bold;
+}
+/*#file {
+    display:none;
+}​*/
+
+.graph-container 
+{
+    width: 100%;
+    padding: 10px;
+    clear: both;
+}
+
+.graph-container h1
+{
+    font-size: 18px;
+    text-align: center;
+}
+
+.graphcol {
+    width: 20%;
+    margin: 20px;
+    float: left;
+    border: 2px solid !important;
+}
+
+.graphcell {
+    /*border: 1px solid !important;*/
+
+}
+
+.widegraph {
+    clear: both;
+    width: 100%;
+}
+
+.reports-subheader {
+}
+
+.venuereports{
+    width: 100%;
+    clear: both;
+}
+
+.venuecol1{
+    float:left;
+    width: 25%;
+    margin-right: 20px;
+}
+
+.venuecol2{
+    float:left;
+    width: 25%;
+    margin-right: 20px;
+}
+
+.venuecol3{
+    float:left;
+    width: 40%;
+    margin-right: 20px;
+}
+
+.dashboardstat{
+    border: 1px solid #999999;
+    margin: 10px 0;
+    overflow:auto; 
+    background-color: #ffffff;
+    width: 150px;
+}
+
+
+.venuerow{
+    border: 1px solid #999999;
+    margin: 10px 0;
+    overflow:auto; 
+    background-color: #ffffff;
+}
+
+.venuerowleft, .venuerowright{
+    width: 50%;
+    height: 100%;
+    float: left;
+    height: auto;
+}
+
+.dwelltime-dialog {
+    width: 50%;
+}
+
+.venuerowleft{
+    border-right: 1px solid #999999;
+}
+
+.venuerowright{
+    border-left: 1px solid #999999;
+}
+
+.dashboardmodStatspan {
+     /*display: block;*/
+     font-size: 200%;
+     height: 70px;
+     
+
+}
+.dashboardtextalign {
+    text-align: center;
+}
+
+ .modStatspan {
+     /*display: block;*/
+     font-size: 300%;
+     height: 70px;
+}
+
+.modal-link {
+    color: #555555 !important;
+}
+
+.modstat {
+    margin-bottom: 0;
+}
+
+
+.dashboardmodstattitle{
+    background-color: #147186;
+    height: 60px;
+    padding: 5px;
+    color: #FFFFFF;
+
+}
+
+.modstattitle{
+    background-color: #FFCC29;
+    height: 60px;
+    padding: 10px;
+}
+
+
+.venuecolheading {
+    font-size: 18px;
+}
+
+.backtovenues {
+    float: right;
+}
+
+.venuefilterform {
+    float: left;
+}
+.btn-showvenue {
+    
+}
+
+.venueheader {
+    float: left;
+    margin-bottom: 20px;   
+    margin-right: 10px;   
+}
+
+.sitename {
+    font-size: 26px;
+    font-weight: bold;
+    margin-right: 30px;   
+
+}
+
+.reportperiod {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.appcheckboxes {
+    padding-right: 50px;
+    float: left;
+}
+
+/*.criteriatable td {
+    width: 150px;
+}*/
+
+.criteriatable  {
+    /*margin-left: 55px;*/
+}
+
+.logicelement  {
+    width: 150px;
+}
+
+.criteriadiv {
+    margin-top: 20px;
+}
+
+.perioddiv {
+    float: left;
+}
+
+.addcriteriabtn {
+    float: left;
+}
+
+.pushname {
+    padding: 0 15px 10px 15px;
+/*    padding-left: 10px;
+    padding-right: 10px;*/
+}
+
+.editpush {
+    float: right;
+}
+
+.submitpush {
+    float: left;
+    clear: both;
+}
+
+.eventsper {
+    width: 100px;
+    float: left;
+    padding-left: 20px;
+}
+
+.numericlist {
+    width: 80px !important;
+}
+
+.pushpic {
+    width: 140px;
+}
+
+.positioncheckbox {
+    
+}
+
+.criteriaheading {
+    font-size: 18px;
+    text-align: center;
+}
+
+.criterialistelements {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.logicLbl {
+    font-size: 16px;
+    text-align: center;
+}
+
+.criteriatable { 
+    border-collapse: collapse; 
+    /*border: solid 1px #d1d1e0; */
+}
+.criteriaheading { 
+    border: none; 
+}
+.cr {
+  /*border-right: solid 1px #d1d1e0; 
+  border-left: solid 1px #d1d1e0;*/
+  text-align: center;
+}
+
+.toptr {
+    /*border-top: solid 1px #d1d1e0;*/
+}
+
+.rmfirstcol{
+    float: left;
+}
+
+.rmsecondcol{
+    float: left;
+    padding-left: 10px;
+}
+
+.rmanswersdiv {
+    padding-top: 20px;
+}
+
+.hiprmandordiv {
+    clear: both;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.then {
+    clear: both;
+}
+
+.hiprmcriteriadiv {
+    padding-top: 20px;
+}
+
+.answerlist {
+    clear: both;
+}
+
+.bottomtr{
+    height: 25px;
+    /*border-bottom: solid 1px #d1d1e0;*/
+}
+
+.criteriabar {
+  /*border-bottom: solid 4px #d1d1e0; */
+}
+
+.iftd {
+/*    border-collapse: collapse !important; 
+    border-right: solid 1px #d1d1e0 !important; */
+}
+.ifspace{
+    /*width: 75px;*/
+}
+.measuretd {    
+    width: 150px;
+}
+.operatortd {
+    width: 150px;
+}
+.valuetd {
+    width: 150px;
+}
+.spacertd {
+    width: 150px;
+}
+.spacersmalltd {
+    width: 50px;
+}
+.counttd {
+    width: 100px;
+}
+.periodtd {
+    width: 150px;
+}
+.buttontd {
+}
+.vspace{
+    height: 15px;
+}
+
+.measuretdyn {    
+    width: 150px;
+}
+.operatortdyn {
+    width: 150px;
+}
+.valuetdyn {
+    width: 150px;
+}
+.spacertdyn {
+    width: 150px;
+}
+.counttdyn {
+    width: 100px;
+}
+.periodtdyn {
+    width: 150px;
+}
+.buttontdyn {
+}
+
+
+.hoursfromto {
+    width: 215px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    float: left;
+}
+
+.hoursseparator {
+    width: 15px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    float: left;
+
+}
+
+.venueposition_name {
+    width: 300px;
+}
+
+.beacon_name {
+    width: 180px;
+}
+
+.venuepositiontoptr {
+    height: 50px;
+    background-color: #f2f1f0;
+}
+
+.configureZeroRegModalClass {
+    width: 1000px;
+}
+
+.brandperiod, .venueperiod {
+    float: left;
+}
+
+.venuedaterange {
+    margin-top: 5px;
+}
+
+.branddaterange, .venuedaterange {
+    float: left;
+    padding-left: 20px;
+}
+
+
+.eventdaterange {
+    float: left;
+}
+
+#myModalLabel {
+    text-align: center;
+}
+
+.rscdeployed{
+    text-align: center;
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.rscnotdeployed{
+    text-align: center;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.dayofweek{
+    width: 90px;
+    margin-right: 10px;
+    font-size: 14px;
+    /*font-weight: bold;*/
+}
+
+.datefromto, .datefromtoheader{
+    width: 250px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.datefromtoheader{
+}
+
+.userdatabtn {
+    padding-left: 3px;
+    float: right;
+}
+
+.notification-edit-save{
+    float: right;
+}
+
+
+.validationerror {
+    text-align: center;
+    background-color: #FCC;
+    color: red;
+    /*border: solid 1px #C66;*/
+}
+
+#notificationdisplaywrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.expandcontract {
+    padding-left: 20px;
+}
+
+.signalstrength {
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.selectnotification {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.schto{
+    padding-right: 5px;
+    padding-left: 5px;
+    float: left;
+    vertical-align: baseline;
+}
+
+.schedulecell{
+    height: 27px;
+    width: 210px;
+}
+
+.frequencydiv {
+    padding-top: 10px;
+}
+
+.monitoring-form {
+    float: left;
+}
+
+.monitoring-icons {
+    float: right;
+}
+
+table.table-venuegrid {
+   border: 2px solid black;
+   border-top: 2px solid #000 !important;
+   table-layout: fixed;
+   width: 1500px;
+}
+
+th.table-venuegrid {
+   border: 2px solid black;
+   border-top: 2px solid #000 !important;
+}
+
+td.table-venuegrid {
+   border: 2px solid black;
+   border-top: 2px solid #000 !important;
+   width: 150px;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+a.gridlinks  {
+    color: #000;
+}
+
+
+.battery {
+    border-style: solid;
+    border-width: 1px;
+    border-color: fff;
+    /*width: 200px;*/
+}
+
+.batterycell {
+    border-style: solid;
+    border-width: 1px;
+    border-color: fff;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    padding: 0px;
+    text-align: center;
+    color: #000;
+    /*float: left;*/
+}
+
+.memberModalClass {
+    width: 750px;
+}
+
+.fa-3x {
+  font-size: 2em !important;
+}
+
+.tnastafftr1 {
+    border-bottom: 1px solid #ddd;
+}
+
+.tnastafftable {    
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+.tnastafftableheader {
+    text-align: center;
+    background-color: #f2f2f2;
+    background-color: #f2f2f2;
+}
+
+.tnastafftd_name {    
+    width: 250px;
+}
+
+.tnastafftd_email {    
+    width: 300px;
+}
+
+.tnastafftd_absence {    
+    text-align: left;
+    width: 105px;
+}
+
+.tnastafftd_time_management {    
+    text-align: left;
+    width: 180px;
+}
+
+.tnastafftd_ws_proximity {    
+    text-align: left;
+    width: 160px;
+}
+
+.tnastafftd_daily {    
+    text-align: left;
+    width: 90px;
+}
+
+.tnastafftd_weekly {    
+    text-align: left;
+    width: 100px;
+}
+
+.tnastafftd_monthy {    
+    text-align: left;
+    width: 100px;
+}
+
+.tnastafftd_add_update {   
+    text-align: left;
+    width: 100px;
+}   
+
+.tnastafftd3 {   
+    text-align: center;
+    width: 400px;
+}
+
+.tnastafftd4 {   
+    text-align: center;
+    width: 250px;
+}
+
+.tnastafftd5 {   
+    text-align: center;
+    width: 50px;
+}
+
+.sethead1 {
+    padding-left: 120px;
+    width: 260px;
+    float: left;
+}
+
+
+.sethead2 {
+    padding-left: 85px;
+    width: 300px;
+    float: left;
+}
+/*$batteryWidth: 36px;
+$batteryHeight: 12px;
+$batteryBorderSize: 1px;
+$batteryStrokeColor: #fff;
+$batteryBorderRadius: 2px;
+$batteryNubSize: $batteryHeight * 0.5;*/
+
+
+/*.battery {
+  position:relative;
+  width: $batteryWidth;
+  height: $batteryHeight;
+  border: $batteryBorderSize solid $batteryStrokeColor;
+  border-radius: $batteryBorderRadius;
+  position: relative;
+  padding: $batteryBorderSize;
+  -webkit-transform: scale(0.5);//for retina display
+    &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: -1 * (($batteryNubSize*0.35) + $batteryBorderSize + 2);
+    margin-top:-1 * ($batteryNubSize/2);
+    width: $batteryNubSize;
+    height: $batteryNubSize;
+    background: $batteryStrokeColor;
+    clip: rect(0, $batteryNubSize, $batteryNubSize, ($batteryNubSize*0.65));
+    border-radius: 50%;
+  }
+  &.plugged:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: -1 * ($batteryBorderSize + ($batteryWidth * 0.5)) ;
+    margin-top:-1 * ($batteryNubSize/2);
+    width: $batteryNubSize;
+    height: $batteryNubSize;
+    background: #f00;
+    border-radius: 50%;
+  }
+  .level{
+    width: 20%;
+    height: 100%;
+    background: $batteryStrokeColor;
+    border-radius: $batteryBorderRadius/2;
+  }
+}*/
+
+

@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="cufon-active cufon-ready" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Simple Slide Panel</title>
+<!--
+<link href="css/style_yellow.css" rel="stylesheet" type="text/css" />
+<link href="css/style_pink.css" rel="stylesheet" type="text/css" />
+<link href="css/style_gray.css" rel="stylesheet" type="text/css" />
+-->
+<link href="research_files/green.css" rel="stylesheet" type="text/css">
+ 
+
+<link rel="stylesheet" href="research_files/main.css">
+<link href="research_files/form.css" rel="stylesheet" type="text/css">
+<link href="research_files/v26.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="research_files/jquery.css">
+<script type="text/javascript" src="research_files/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="research_files/dragdrop-min.js"></script>
+<script type="text/javascript" src="research_files/slider-min.js"></script>
+<script type="text/javascript" src="research_files/element-min.js"></script>
+<script type="text/javascript" src="research_files/progressbar-min.js"></script>
+<script type="text/javascript" src="research_files/jquery_002.js"></script>
+<script type="text/javascript" src="research_files/screen.html"></script>
+
+<link rel="stylesheet" type="text/css" media="screen" href="research_files/main.css">
+<link rel="stylesheet" type="text/css" media="screen" href="research_files/slider.css">
+<script type="text/javascript" src="research_files/custom-form-elements.js"></script><style type="text/css">input.styled { display: none; } select.styled { position: relative; width: 200px; opacity: 0; filter: alpha(opacity=0); z-index: 10; top: 10px; } .disabled { opacity: 0.5; filter: alpha(opacity=50); }</style>
+<!--<script type="text/javascript" src="js/jquery-1.6.js"></script>-->
+<script type="text/javascript" src="research_files/jquery.js"></script>
+<script type="text/javascript" src="research_files/scripts.js"></script>
+<!--<script type="text/javascript" src="js/jquery.js"></script>-->
+<script type="text/javascript" src="research_files/cufon-yui.js"></script><style type="text/css">cufon{text-indent:0!important;}@media screen,projection{cufon{display:inline!important;display:inline-block!important;position:relative!important;vertical-align:middle!important;font-size:1px!important;line-height:1px!important;}cufon cufontext{display:-moz-inline-box!important;display:inline-block!important;width:0!important;height:0!important;overflow:hidden!important;text-indent:-10000in!important;}cufon canvas{position:relative!important;}}@media print{cufon{padding:0!important;}cufon canvas{display:none!important;}}</style>
+<script type="text/javascript" src="research_files/Gotham_Rounded_Bold_400.js"></script>
+<script type="text/javascript">
+	Cufon.replace('.button, .green-col',{fontFamily:"Gotham Rounded Bold", hover: true});
+</script>
+
+
+
+<script type="text/javascript" src="research_files/jquery_003.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+  var pageType   = "Modalbox";
+  var webRoot   = "http://www.hip-zone.co.za/";
+  var isLocalhost = false;
+/* ]]> */
+</script>
+
+
+<!-- YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY -->
+    <script type="text/javascript">
+    /* <![CDATA[ */
+      var pageType   = "Modalbox";
+      var webRoot   = "http://www.hip-zone.co.za/";
+      var isLocalhost = false;
+    /* ]]> */
+    </script>
+    <script type="text/javascript">
+      <!--
+      function MM_swapImgRestore() { //v3.0
+        var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+      }
+      function MM_preloadImages() { //v3.0
+        var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+          var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+          if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+      }
+
+      function MM_findObj(n, d) { //v4.01
+        var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+          d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+        if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+        for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+        if(!x && d.getElementById) x=d.getElementById(n); return x;
+      }
+
+      function MM_swapImage() { //v3.0
+        var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+         if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+      }
+      //-->
+  </script>
+  <style>
+    #content_2, #content_3 { display:none; }
+/*
+GCW - At some point might put this in so that we don't have to write a new css for every new location
+body {
+
+  	background: url() no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+    }*/
+
+
+  </style>
+    <script type="text/javascript" src="research_files/jquery-1.html"></script>
+    <script type="text/javascript" src="research_files/jquery_003.js"></script>
+
+<script>
+
+    // When the document loads do everything inside here ...
+    $(document).ready(function(){
+
+    // When a link is clicked
+    $("a.tab").click(function () {
+
+
+      // switch all tabs off
+      $(".active").removeClass("active");
+
+      // switch this tab on
+      $(this).addClass("active");
+
+      // slide all content up
+      $(".content").slideUp();
+
+      // slide this content up
+      var content_show = $(this).attr("title");
+      $("#"+content_show).slideDown();
+
+    });
+
+    });
+  </script> 
+<!-- YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY -->
+
+
+
+</head>
+
+<body>
+
+<div id="box">
+	<!-- start tab -->
+	<div class="tabs">
+
+            
+
+<!-- start tab container -->
+<div class="tab-container">
+    <div style="display: block;" class="tab-content " id="tab2">
+        <b class="rc lb"></b> <b class="rc rb"></b>
+        <span class="tab-heading1">You're one step away from the HipZone FREE WIFI</span>
+        <span class="tab-subheading1">Please answer these questions to Zone in</span>
+        <div class="clear"></div>
+        <div id="imag_box">
+            <div id="answer"><div class="box_top"></div>
+            <div class="top_middle"> <img src="research_files/banner.jpg"> </div>
+            <div class="box_bottom">&nbsp;</div></div>
+        </div>
+
+
+        <div id="que">
+
+            <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+              <form name="research" method="post" action="/research">
+               
+    <div id="que_lt"><div class="que_top"></div>
+                <div class="que_middle">
+
+
+<!--            <div style="background-color: #fff;font-size: 12px;min-height: 132px;padding-top: 6px;" class="BodyCopy" id="research1"><strong>Do you personally  make more or less than R15,000 a month (before tax)?</strong>-->
+<!--               <br /><br />-->
+        <strong>Do you personally  make more or less than R15,000 a month (before tax)?</strong> <br><br>
+            <div id="scale" class="yui-skin-sam">
+        <table style="width: 100%; margin-left: -2px;">
+
+                        <tbody><tr>
+                                <td style="padding-left: 4px;" height="28" align="left">&lt; 15K</td>
+                 
+                                   <td style="padding-right: 4px;" height="28" align="right">&gt; 15K</td>
+                 
+                    </tr>
+                    </tbody></table>
+            <div id="sliderWidth" class="yui-h-slider" tabindex="-1" title="Width slider">
+        <div style="margin: 0pt; padding: 0pt; left: 100px; top: 4px;" id="sliderWidthThumb" class="yui-slider-thumb"><img src="research_files/thumb-n.gif"></div>
+      </div>
+            <span style="display: none;" id="width">99</span>
+
+      <div style="margin-top:2px;min-height:20px;">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      </div>
+
+            </div>
+            
+
+<div class="que_bottom">&nbsp;</div>
+                                    </div>
+                
+<!--            </div>-->
+
+
+    <div id="que_rt"><div class="que_top"></div>
+                <div class="que_middle">
+
+
+<!--            <div style="background-color: #fff;font-size: 12px;min-height: 132px;padding-top: 6px;" class="BodyCopy" id="research2"><strong>Is your total household income more or less than R25,000 a month (before tax)?</strong>-->
+<!--               <br /><br />-->
+        <strong>Is your total household income more or less than R25,000 a month (before tax)?</strong> <br><br>
+            <div id="scale" class="yui-skin-sam">
+        <table style="width: 100%; margin-left: -2px;">
+
+                                      <tbody><tr>
+
+              <td style="padding-left: 15px;" height="28" align="left">
+                               <div id="ansFloater"><input name="height-converted-value" value="More than R25,000 pm" type="radio"></div><div id="ansFloater" class="smlPad">More than R25,000 pm</div>
+                 
+                            </td>
+
+            </tr>
+                        <tr>
+
+              <td style="padding-left: 15px;" height="28" align="left">
+                               <div id="ansFloater"><input name="height-converted-value" value="R25,000 or less pm" type="radio"></div><div id="ansFloater" class="smlPad">R25,000 or less pm</div>
+                 
+                            </td>
+
+            </tr>
+                                </tbody></table>
+            <div tabindex="-1">
+        <div style="margin: 0;padding:0;left:1px">
+
+        </div>
+      </div>
+             <span style="display: none;" id="height"></span>
+
+      <div style="margin-top:2px;min-height:20px;">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      </div>
+
+            </div>
+            
+
+<div class="que_bottom">&nbsp;</div>
+                                    </div>
+                
+<!--            </div>-->
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+                         <input name="quickie[1]" value="1" type="hidden">
+              <input name="quickie[2]" value="2" type="hidden">
+                              <input autocomplete="off" name="width-converted-value" id="width-converted-value" value="50" size="4" maxlength="4" type="hidden">
+                                              <input name="validate" value="true" type="hidden">
+              
+
+
+
+
+            <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+
+        </form></div>
+
+            
+                <div class="fill-form frm_box">
+                        <div>
+
+                            <div class="column2">
+                                <textarea rows="" cols="" class="textarea textarea2" onfocus="if(this.value == 'Message box') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Message box'; }">Please Answer the Questions above before we send you along
+                                </textarea>
+
+
+                            </div>
+                            <!-- column2 -->
+
+                        </div>
+
+                </div>
+
+
+            
+
+
+        <!-- form -->
+
+        <!-- button -->
+        <div class="button-col btn_box">
+
+            <input class="button button1 left" value="Continue" alt="Register &amp; Zone In" type="submit">
+
+        </div>
+        <!-- button -->
+
+                    
+
+        <div class="clear"></div>
+        <span class="left left1"><a href="#" title="Hipzone"><img src="research_files/logo.html" alt="Hipzone" height="45" width="75"></a></span>
+        <span class="green-col right"><a href="#" title="Hipzone"><img src="research_files/faq.html" alt="Hipzone" height="29" width="89"></a></span>
+
+
+        <!-- tab content2 -->
+        <div class="clear"></div>
+    </div>
+
+
+    <!-- end tab container -->
+</div>
+<!-- end tab -->
+<script type="text/javascript">
+YAHOO.util.Event.onDOMReady( function () {
+  var Dom = YAHOO.util.Dom,
+    Event = YAHOO.util.Event;
+
+
+  var pb = new YAHOO.widget.ProgressBar({value:0,minValue:0,maxValue:100}).render('basic');
+
+
+
+  var widthSlider = YAHOO.widget.Slider.getHorizSlider('sliderWidth',
+        'sliderWidthThumb', 0, 200, 0
+  );
+  widthSlider.animate = true;
+  widthSlider.setValue(99);
+  widthSlider.subscribe("change", function(offsetFromStart) {
+    var value = Math.round(offsetFromStart);
+    var valuearea="width";
+    var widthfield="width-converted-value";
+
+     var valnode = Dom.get(valuearea);
+     var fld = Dom.get(widthfield);
+
+     valnode.innerHTML = value;
+
+     fld.value = Math.round(value / 2);
+
+    //Dom.get('width').innerHTML = value;
+    //Dom.get('width-converted-value').input = fld.value;
+  });
+
+
+
+  widthSlider.subscribe("slideEnd", function() {
+    var value = widthSlider.getValue();
+    pb.set('width',value);
+  });
+
+
+  var heightSlider = YAHOO.widget.Slider.getHorizSlider('sliderHeight',
+        'sliderHeightThumb', 0, 200, 0
+  );
+  heightSlider.animate = true;
+  heightSlider.setValue(99);
+  heightSlider.subscribe("change", function(offsetFromStart) {
+    var value = Math.round(offsetFromStart);
+    var valuearea="height";
+    var heightfield="height-converted-value";
+
+     var valnode = Dom.get(valuearea);
+     var fld = Dom.get(heightfield);
+
+     valnode.innerHTML = value;
+
+     fld.value = Math.round(value / 2);
+     Dom.get('height').innerHTML = value;
+
+  });
+
+  heightSlider.subscribe("slideEnd", function() {
+    var value = Math.round(heightSlider.getValue() / 0.5);
+    pb.set('height',value);
+  });
+
+});
+</script>
+
+        	<div class="clear"></div>
+
+    </div>    
+
+</div>
+
+
+      <script type="text/javascript">
+  /* <![CDATA[ */
+    jQuery(document).ready(function(){
+      jQuery("a.initialSimpleDemo").modalBox({
+        getStaticContentFrom : "#simpleDemo"
+      });
+    });
+  /* ]]> */
+  </script>
+
+
+
+<div id="modalboxPreCacheContainer" style="position:absolute; left:-9999px; top:-9999px;"><div style="display: block;" id="modalBox"><div id="modalBoxBody"><div class="modalboxStyleContainerTopLeft"><div class="modalboxStyleContainerTopRight"><div class="modalboxStyleContainerContent"><div class="modalBoxBodyContent"><div id="modalBoxAjaxLoader">Please wait</div></div></div></div></div><div class="modalboxStyleContainerBottomLeft"><div class="modalboxStyleContainerBottomRight"></div></div><div id="modalBoxCloseButton"><a href="javascript:void(0);" class="closeModalBox"><span class="closeModalBox">Close Window</span></a></div></div></div></div></body></html>

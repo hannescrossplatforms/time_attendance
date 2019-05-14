@@ -1,0 +1,194 @@
+/* 
+    Document   : mobile
+    Created on : Feb 27, 2012, 9:18:19 AM
+    Author     : gavinwerner
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+
+input.ui-slider-input {
+    display : none !important;
+}
+
+.ui-field-contain div.ui-slider {
+    width: 95%;
+}
+
+.hz-scale-labels {
+    clear: both;
+    width: 95%;
+    margin-left: 20px;
+}
+
+.hz-scale-label-l {
+    float: left;
+}
+.hz-scale-label-r {
+    float: right;
+}
+
+.hz-fieldset  {
+    padding: 0;
+}
+
+.hz-submit {
+/*    background-color: #38CB45;*/
+    
+
+}
+
+.hz-submit-div {
+
+
+    width: 200px;
+    float: right;
+}
+
+.hz-logo {
+    float: right;
+    padding-right: 20px;
+}
+
+.hz-header {
+    clear: both;
+    background-color: #000;
+    width: auto;
+    padding: 10px;
+}
+
+.hz-questionbox {
+    clear: both;
+    width: auto;
+    padding: 10px;
+    border: 1px solid #9796FE;
+    margin: 5px;
+}
+
+.mb-instructions {
+    clear: both;
+    width: auto;
+    padding: 10px;
+    margin: 5px;
+    font-size: small;
+    font-style: italic;
+}
+
+.hz-alertbox {
+    clear: both;
+    width: auto;
+    padding: 10px;
+    text-align: center;
+    color: red;
+    margin: 5px;
+}
+
+.hz-countdownbox {
+    clear: both;
+    width: auto;
+    padding: 10px;
+    text-align: center;
+    color: whitesmoke;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.hz-btn-separator {
+
+    clear: both;
+    height: 15px;
+}
+
+
+.ui-checkbox, .ui-radio {
+    clear: both;
+    width: 100%;
+    text-align: center;
+    margin: 0 !important;
+
+
+}
+
+.ui-btn {
+    
+    width: 100%;
+    text-align: center; 
+    
+
+}
+
+.ui-btn-inner {
+
+    text-align: center;
+
+
+}
+
+.ui-bar-a {
+    background: -moz-linear-gradient(#000, #000) repeat scroll 0 0 #000;
+/*    background-color: #000;*/
+}
+
+.ui-btn-up-a {
+
+	font-weight:  normal;
+	text-shadow:  0  /*{a-bup-shadow-x}*/ 0 /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/  /*{a-bup-shadow-color}*/;
+
+}
+
+.ui-btn-hover-a {
+
+	font-weight:  normal;
+	text-shadow:  0  /*{a-bhover-shadow-x}*/  0  /*{a-bhover-shadow-y}*/  0  /*{a-bhover-shadow-radius}*/    /*{a-bhover-shadow-color}*/;
+
+}
+
+.ui-btn-down-a {
+
+	font-weight: normal;
+	text-shadow:  0  /*{a-bdown-shadow-x}*/ 0 /*{a-bdown-shadow-y}*/ 0 /*{a-bdown-shadow-radius}*/  /*{a-bdown-shadow-color}*/;
+}
+
+.mb-image-div {
+    text-align: center;
+    width: 100%;
+}
+
+.mb-image {
+    width: 100%;
+}
+
+
+.error_message {
+	color: red;
+	font-style: italic;
+}
+
+label.error {
+	color: red;
+	font-style: italic;
+        display: none;
+}
+
+.ui-btn-active {
+	border: 1px solid  #000000  /*{global-active-border}*/;
+	background:  #9796FE  /*{global-active-background-color}*/;
+	font-weight: bold;
+	color:   					#fff   /*{global-active-color}*/;
+	cursor: pointer;
+	text-shadow:   0   /*{global-active-shadow-x}*/  0  /*{global-active-shadow-y}*/  0  /*{global-active-shadow-radius}*/    /*{global-active-shadow-color}*/;
+	text-decoration: none;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(  #38CB45  /*{global-active-background-start}*/), to(  #9796FE  /*{global-active-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/);
+	  font-family: Helvetica, Arial, sans-serif   /*{global-font-family}*/;
+}

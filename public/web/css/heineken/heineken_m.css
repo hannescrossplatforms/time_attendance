@@ -1,0 +1,327 @@
+@font-face {
+    font-family: 'Futura';
+    src: url('futurafont/futurastd-condensed.eot');
+    src: url('futurafont/futurastd-condensed.eot') format('embedded-opentype'),
+         url('futurafont/futurastd-condensed.woff') format('woff'),
+         url('futurafont/futurastd-condensed.ttf') format('truetype'),
+         url('futurafont/futurastd-condensed.svg#FuturaStdMediumCondensed') format('svg');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    padding: 0 10%;
+    background: fixed url(/images/heineken/bg.png) no-repeat center;
+    background-size: 100% auto;
+    background-color: #00200B;
+    color: #fff;
+    font: 62.5%/2em Arial, sans-serif;
+}
+
+body.bg {
+    background-image: url(/images/heineken/bg_empty.png);
+}
+
+body.welcome {
+    background: #0e3216 url(/images/heineken/bg_welcome.png) no-repeat center;
+    background-size: cover;
+}
+
+body.website {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMWI0ZDI2Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGUxODEzIi8+PC9yYWRpYWxHcmFkaWVudD48cmVjdCB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMwZTE4MTMiIC8+PHJlY3QgeD0iMCUiIHk9Ii0xMDcuNzU4NiUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjMxNS41MTcyJSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 183, color-stop(0%, #1b4d26), color-stop(100%, #0e1813));
+    background-image: -webkit-radial-gradient(center center, farthest-side circle, #1b4d26 0%, #0e1813 100%);
+    background-image: -moz-radial-gradient(center center, farthest-side circle, #1b4d26 0%, #0e1813 100%);
+    background-image: -ms-radial-gradient(center center, farthest-side circle, #1b4d26 0%, #0e1813 100%);
+    background-image: -o-radial-gradient(center center, farthest-side circle, #1b4d26 0%, #0e1813 100%);
+    background-image: radial-gradient(farthest-side circle at center center, #1b4d26 0%, #0e1813 100%);
+}
+
+.layout {
+    margin-bottom: -95px;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+.layout:after {
+    content: "";
+    display: block;
+    height: 95px;
+}
+
+body.website .layout .connect {
+    display: block;
+    margin: 0 auto;
+    width: 78%;
+    height: 529px;
+    background: url(/images/heineken/connect.png) no-repeat center;
+    background-size: 50% auto;
+    text-indent: -90000%;
+    position: absolute;
+}
+
+.layout > header {
+    padding: 32px 0 22px 4px;
+}
+
+body.website .layout > header {
+    padding-right: 10%;
+}
+
+.layout > header span {
+    float: right;
+    margin-left: 6px;
+    width: 33px;
+    height: 33px;
+    background: url(/images/heineken/icons.png) no-repeat;
+    background-size: 68px 33px;
+    text-indent: -9000%;
+}
+
+.layout > header span.enjoy {
+    background-position: -36px 0;
+}
+
+h1 {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+h2 {
+    margin-bottom: 16px;
+    font-size: 1.4em;
+}
+
+a {
+    color: #fff;
+}
+
+.link {
+    float: right;
+    padding-top: 7px;
+    color: #27f116;
+    font: bold 1.1em Arial, sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+p, dt, dd, li {
+    font-size: 1.3em;
+}
+
+.faq dt:before {
+    content: "(Q) ";
+}
+
+.faq dd:before {
+    content: "(A) ";
+}
+
+.faq dd {
+    margin-bottom: 25px;
+}
+
+form {
+    margin-bottom: 10px;
+}
+
+form fieldset {
+    margin-bottom: 10px;
+    border: none;
+}
+
+form label {
+    display: block;
+    margin-bottom: 12px;
+}
+
+form input,
+form select {
+    margin-bottom: 8px;
+    padding: 0 10px;
+    width: 100%;
+    height: 28px;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,255,255,0.4);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+form select {
+    line-height: 22px;
+    padding-top: 3px;
+}
+
+@-moz-document url-prefix() {
+    form .select {
+	position: relative;
+	display: block;
+	padding: 0;
+	margin-bottom: 8px;
+	width: 100%;
+	height: 28px;
+	background: rgba(0,0,0,0.7);
+	border: 1px solid rgba(255,255,255,0.4);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #fff;
+    }
+
+    form .select:after {
+	content: "\25BC";
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 10px;
+	width: 30px;
+	height: 26px;
+	background: #000803;
+	color: #000;
+	font-size: 10px;
+	line-height: 26px;
+	text-align: center;
+    }
+
+    form .select select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	padding-top: 4px;
+	height: 25px;
+	background: none;
+	border: none;
+    }
+}
+
+form .date input {
+    margin-right: 2%;
+    width: 20%;
+}
+
+form .date input:last-child {
+    width: 29%;
+}
+
+form button {
+    margin-right: 14px;
+    padding: 0 16px;
+    min-width: 75px;
+    height: 30px;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #fff),
+        color-stop(1, #787878)
+    );
+    background-image: -o-linear-gradient(bottom, #fff 0%, #787878 100%);
+    background-image: -moz-linear-gradient(bottom, #fff 0%, #787878 100%);
+    background-image: -webkit-linear-gradient(bottom, #fff 0%, #787878 100%);
+    background-image: -ms-linear-gradient(bottom, #fff 0%, #787878 100%);
+    background-image: linear-gradient(to bottom, #fff 0%, #787878 100%);
+    border: none;
+    border-radius: 6px;
+    color: #000;
+    font: bold 14px Futura, sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+form button.btn {
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #65CE5E),
+        color-stop(1, #097202)
+    );
+    background-image: -o-linear-gradient(bottom, #65CE5E 0%, #097202 100%);
+    background-image: -moz-linear-gradient(bottom, #65CE5E 0%, #097202 100%);
+    background-image: -webkit-linear-gradient(bottom, #65CE5E 0%, #097202 100%);
+    background-image: -ms-linear-gradient(bottom, #65CE5E 0%, #097202 100%);
+    background-image: linear-gradient(to bottom, #65CE5E 0%, #097202 100%);
+    color: #fff;
+}
+
+form p a {
+    font-size: 0.86em;
+}
+
+section {
+    padding: 10px 0 10px;
+}
+
+section p {
+/*    color: #99a59d;*/
+    color: #e0e0d1;
+    font: bold 2.3em/1em Futura, sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+section p big {
+    display: block;
+    font-size: 1.4em;
+    line-height: 0.9em;
+}
+
+footer {
+    padding-left: 4px;
+    height: 95px;
+}
+
+footer p {
+    float: right;
+    padding-top: 24px;
+    width: 49%;
+    font-size: 16px;
+    text-align: right;
+}
+
+footer p strong {
+    display: block;
+}
+
+.agreement {
+    font-size: 10px;
+    line-height: normal;
+}
+
+.hipzone {
+    display: block;
+    width: 60px;
+    height: 62px;
+    background: url(/images/heineken/hipzone.png) no-repeat;
+    background-size: 60px 62px;
+    text-indent: -900000%;
+}
+
+
+@media (max-width:480px) {
+form button {
+margin-right: 5px;
+font-size: 10px;
+}
+}
+
+.heineken_logo {
+    float: right;
+    overflow: hidden;
+    width: 80px;
+    height: 56px;
+    background: url(/images/heineken/heineken_logo.png) no-repeat;
+    background-size: 80px 56px;
+    text-indent: -9000%;
+}
+

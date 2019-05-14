@@ -1,0 +1,103 @@
+body:before {
+    visibility: hidden;
+}
+
+form {
+    background: none ;
+    border-radius: 4px;
+    margin: 0 auto;
+    max-width: 1000px;
+    overflow: hidden;
+    padding: 25px 45px 10px;
+}
+
+footer a:link {
+    text-decoration: none;
+    font-size: 2em;
+}
+
+/*footer p {
+    padding-right: 20px;
+    float: right;
+    color: #000000 !important;
+}
+*/
+footer ul {
+    float: left;
+}
+
+footer a {
+    color: #000000;
+}
+
+
+a {
+    color: blue;
+}
+
+
+
+*::-webkit-input-placeholder {
+    color: black;
+}
+*:-moz-placeholder {
+    /* FF 4-18 */
+    color: black;
+}
+*::-moz-placeholder {
+    /* FF 19+ */
+    color: black;
+}
+*:-ms-input-placeholder {
+    /* IE 10+ */
+    color: black;
+}
+
+form input:not([type="checkbox"]):not([type="radio"]), form select, form textarea {
+    border: 2px solid #000000;
+    border-radius: 1px;
+    color: #000000;
+}
+
+#loginform {
+    margin-top: 100px;
+}
+
+#zoneinbutton {
+    margin: 0px;
+    padding: 0px;
+}
+
+#wefiterms {
+    text-align: center;
+}
+
+#wefiterms a {
+    color: blue;
+    text-align: right;
+}
+
+#wefifaq  {
+    float: left;
+}
+
+#wefipoweredbytext {
+    float: right;
+    text-align: right;
+    color: #000000 !important;
+    
+}
+
+#wefipoweredbylogo {
+    float: right;
+    display: inline-block;
+    margin: -6px 0 0 6px;
+    width: 68px;
+    height: 68px;
+    background: url(/images/v3m/wefilogo-sm.png) no-repeat !important; 
+    
+    background-size: 100%;
+    text-indent: -9000%;
+    vertical-align: middle;
+    color: #000000 !important;
+}

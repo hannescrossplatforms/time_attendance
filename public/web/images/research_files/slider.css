@@ -1,0 +1,185 @@
+/*
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.7.0
+*/
+.yui-h-slider,.yui-v-slider
+{
+    position:relative;
+}
+
+.yui-h-slider .yui-slider-thumb,.yui-v-slider .yui-slider-thumb
+{
+    position:absolute;
+    cursor:default;
+}
+
+.yui-skin-sam .yui-h-slider
+{
+    background:url(/images/frontend/bg-h.gif) no-repeat 5px 0;height:28px;width:228px;
+}
+
+.yui-skin-sam .yui-h-slider .yui-slider-thumb
+{
+    top:4px;
+}
+
+.yui-skin-sam .yui-v-slider
+{
+    background:url(/images/frontend/bg-v.gif) no-repeat 12px 0;height:228px;width:48px;
+}
+
+.adidas input#username, .adidas input#password, .adidas #registerPage fieldset input {
+margin:0;
+padding:0.1px;
+}
+
+
+div#mydiv ul
+{
+  list-style-type: none;
+  margin-left: -33px;
+ margin-left: 2px;
+}
+
+input#username, input#password, #registerPage fieldset input {
+width:150px;
+}
+
+.textfield {
+  background:#CECFDF none repeat scroll 0 0;
+  border:1px solid #0099CC;
+  height:20px;
+  margin:0;
+  padding:0.1px;
+}
+
+#login_form input:focus {
+background:#fff none repeat scroll 0 0;
+border:1px solid #CECFD5;
+color:black;
+}
+input#username, input#password, #registerPage fieldset input {
+width:150px;
+}
+
+.yui-skin-sam .yui-slider-rail-x {
+background:transparent url(/images/frontend/bg-fader-r.gif) ;
+min-height:19px;
+}
+
+/* get rid of those system borders being generated for A tags */
+a:active {
+  outline:none;
+}
+
+:focus {
+  -moz-outline-style:none;
+}
+
+.b {
+  background:url(/images/b.png);
+}
+
+ .tl {
+  background:url(/images/tl.png);
+}
+
+ .tr {
+  background:url(/images/tr.png);
+}
+
+ .bl {
+  background:url(/images/bl.png);
+}
+
+ .br {
+  background:url(/images/br.png);
+}
+
+.tooltip {
+ /* position: absolute;
+  width: 100%;*/
+  text-align: left;
+  height:163px;
+ /* padding:40px 30px 10px 30px;*/
+ margin-left: -55px;
+ margin-top: -280px;
+  font-size:9px;
+  color:#000;
+  top: 4px;
+  display:none;
+}
+
+ .popup {
+  position: relative;
+}
+
+.tooltip table {
+  margin: auto;
+  border-collapse: collapse;
+  width:62%;
+}
+
+ .body {
+  padding: 10px;
+  background: #fff;
+  width: 370px;
+}
+
+ .loading {
+  text-align: center;
+}
+
+.image {
+  text-align: center;
+}
+
+.tooltip img {
+  border: 0;
+}
+
+   
+
+ .footer {
+  border-top: 1px solid #DDDDDD;
+  padding-top: 5px;
+  margin-top: 10px;
+  text-align: right;
+}
+
+ .tl,  .tr,  .bl,  .br {
+  height: 10px;
+  width: 10px;
+  overflow: hidden;
+  padding: 0;
+}
+
+ 
+
+
+
+
+
+#slider-bg {
+    background:url(/images/frontend/bg-fader-r.gif) 5px 0 no-repeat;
+}
+
+
+#another-bg {
+    background:url(/images/frontend/bg-fader-r.gif) 5px 0 no-repeat;
+}
+  
+#wrapper
+{
+  height:100%;
+
+}
+ 
+   
+   .yui-skin-sam .yui-h-slider   {
+background:transparent url(/images/frontend/bg-fader-r.gif) no-repeat scroll 5px 0pt ;
+min-height:19px;
+} 
+    

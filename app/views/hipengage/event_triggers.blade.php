@@ -1,0 +1,520 @@
+            <div class="form-group">
+              <label>Event Name</label>
+              <div id="eventnamevalidationerror" class='validationerror'>Please specify a name for the event</div>
+
+              <input id="eventname" class="form-control no-radius" placeholder="" type="text">
+            </div>
+            <div class="form-group">
+              <label>Campaign</label>
+              <select class="form-control no-radius">
+                <option></option>
+                <option>TBD</option>
+              </select>
+            </div>
+            <br>
+              
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading"> Targeting </div>
+                  <div class="panel-body">
+
+                  <div class="form-group">
+                    <label>Brand Name</label>
+                    @if ($edit) 
+                      <input class="form-control" type="text" value="{{ $data['event']->brand->name }}" disabled >
+                    @else
+                    <select id="brandlist" name="brand_id" class="form-control no-radius">
+                        @foreach($data['brands'] as $brand)
+                          <option name="brand_id" value="{{ $brand->id }}">
+                            {{ $brand->name }}
+                          </option>
+                        @endforeach 
+                    </select>
+                    @endif
+                  </div>
+
+                    @if ($edit) 
+
+                    <label>Location Match Code</label>
+                    <input  id="locationmatchcode" name="locationmatchcode" class="form-control" type="text" 
+                            value="{{$data['event']->locationmatchcode}}" disabled >
+
+                    @else 
+
+                    <div class="form-group">
+                      <label>Country</label>
+                      <select id="countrielist" name="countrie_id" class="form-control">
+                        @foreach($data['allcountries'] as $countrie)
+                          <option value="{{ $countrie->id }}">
+                            {{ $countrie->name }}
+                          </option>
+                        @endforeach 
+                      </select>
+                      <span id="helpBlock" class="help-block">If you wish to trigger the event for all venues in a country leave all other fields below this one blank</span> 
+                    </div>
+
+                    <div class="form-group">
+                      <label>Province/State</label>
+                      <select id="provincelist" name="province_id" class="form-control no-radius" ></select>
+                      <span id="helpBlock" class="help-block">If you wish to trigger the event for all venues in a Province leave all other fields below this one blank</span>
+                    </div>
+
+                    <div class="form-group">
+                      <label>City</label>
+                      <select id="citielist" name="citie_id" class="form-control no-radius" placeholder"" >
+                        <option selected="selected"></option>
+                      </select>
+                      <span id="helpBlock" class="help-block">If you wish to trigger the event for all venues in a City leave the field below this one blank</span> 
+                    </div>
+
+                    <div class="form-group">
+                      <label>Venue</label>
+                      <select id="venuelist" name="venue_id" class="form-control no-radius" placeholder"" >
+                        <option selected="selected"></option>
+                      </select>
+                    <span id="helpBlock" class="help-block">This will trigger the event ONLY for this venue</span> 
+                    </div>
+
+                    @endif
+
+                    <div id="locationCodeDisplayed"></div>
+                    <div id="locationCodeHidden"></div>
+                    <input type="hidden" id="isp" value="1"/>
+                    <br>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+<!--             <div class="panel panel-default">
+              <div class="panel-heading">Demographic Targeting</div>
+              <div class="panel-body">
+
+                <div class="form-group">
+                  <label class="checkbox-inline"> <input id="monday" value="1" type="checkbox">Is Birthday </label>
+                </div>
+                <div class="form-group">
+                  <label>Gender</label>
+                    <select id="agegrouplist" class="form-control no-radius">
+                      <option value="">Male</option>
+                      <option value="">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label>Age Group</label>
+                    <select id="agegrouplist" class="form-control no-radius">
+                      <option value="">Under 18</option>
+                      <option value="">18-22</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label>Home Language</label>
+                    <select id="agegrouplist" class="form-control no-radius">
+                      <option value="">English</option>
+                      <option value="">Xhosa</option>
+                    </select>
+                </div>
+                 <div class="form-group">
+                  <label>Current City</label>
+                    <select id="agegrouplist" class="form-control no-radius">
+                      <option value="">Cape Town</option>
+                      <option value="">Jo'burg</option>
+                    </select>
+                </div>  
+
+                <label>Previous Responses</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a id="" class="btn btn-primary no-radius"><i class="fa fa-plus"></i> Add Response</a>  <br> <br>
+                Q: Which sports do you enjoy watching? <br>
+                A: Football <br><br>
+
+                Q: Would you ever bet on a sports game?<br>
+                A: Yes
+
+              </div>
+            </div> -->
+
+
+
+
+
+            <div class="panel panel-default">
+              <div class="panel-heading">Rule Setup</div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label>Trigger Application</label>
+
+                  @if ($edit) 
+                    <input class="form-control" type="text" value="{{$data['event']['application_code']}}" disabled >
+                  @else
+                    <select id="applicationlist"  class="form-control no-radius"></select>
+                  @endif
+
+                </div>
+
+
+                <div id="chooseapps" class="form-group">
+                  <label>Select Trigger Applications</label>
+                  <label class="checkbox-inline">
+                    <input id="" value="1" type="checkbox">
+                    WIFI </label>
+                  <label class="checkbox-inline">
+                    <input id="" value="1" type="checkbox">
+                    SURVEY </label>
+                  <label class="checkbox-inline">
+                    <input id="" value="1" type="checkbox">
+                    TRACK Beacon </label>
+                  <label class="checkbox-inline">
+                    <input id="" value="1" type="checkbox">
+                    TRACK Sensor </label>
+                </div>
+
+
+                <div id="triggerevent" class="form-group">
+                  <label>Trigger Event</label>
+
+                  @if ($edit) 
+                    <input class="form-control" type="text" value="{{$data["trigger_name"]}} " disabled >
+                  @else
+                    <select id="triggerlist" class="form-control no-radius"></select>
+                  @endif
+
+                </div>
+
+                <div class="row" id="beaconpositionsdiv">
+                  <div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading"> Beacon Specific </div>
+                      <div id="position_wildcards_validationerror" class='validationerror'>Please specify beacon positions</div>
+                      <div class="panel-body">
+                        <div class="form-group">
+                          <label>Match Beacon Position To String</label> (You can provide multiple match strings separated by spaces or '*' for all positions)
+                          <input id="position_wildcards" class="form-control no-radius" placeholder="" type="text">
+                        </div>
+                        <div id="specificbeaconpositions"></div>
+                      </div>
+                      <div class="form-inline signalstrength clear">
+                        <div class="form-group">
+                          <label>Minimum Signal Strength (1 - 100) </label>
+                          <div class="form-group">
+                            <input id="signalstrength" class="form-control no-radius" placeholder="" style="width: 50px;" type="text" value="50">
+                            <i data-original-title="" class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Minimum signal strength received from the beacon"></i>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <div id="criteriavalidationerror" class='validationerror'>Please configure at least one criteria</div>
+
+                <form class="form-inline">
+                  <div id="standardcriteriadiv">
+                    <label>Rule</label>
+                    <table class="criteriatable">
+
+                        <tr class="criteriaheading toptr">
+                          <th class="iftd cr"></th>
+                          <th class="measuretd cr">Measure</th>
+                          <th class="operatortd cr">Operator</th>
+                          <th class="valuetd cr">Value</th>
+                          <th class="spacertd cr"> </th>
+                          <th class="counttd cr">Count</th>
+                          <th class="periodtd cr">Period</th>
+                          <th class="buttontd cr"></th>
+                          
+                        </tr>
+
+                        <tr> 
+                          <td class="vspace iftd"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                        </tr>
+
+                        <tr>
+
+                          <td class="vspace" >
+                            <label class="logicLbl">IF</label>
+                          </td>
+
+                          <td class="vspace cr" >
+                            <select id="measurelist" class="form-control no-radius logicelement">
+                              <option selected="selected" value="0">--</option>
+                            </select>
+                          </td>
+
+                          <td class="vspace cr">
+                            <select id="operatorlist" class="form-control no-radius">
+                              <option selected="selected" value="0">--</option>
+                            </select>
+                          </td>
+
+                          <td class="vspace cr">
+                            <input id="value" class="form-control no-radius" placeholder="Value" style="max-width: 150px" type="text">
+                          </td>
+
+                          <td class="vspace cr"></td>
+
+                          <td class="vspace cr">
+                            <select id="numperiodslist" class="form-control no-radius"></select>
+                          </td>
+
+                          <td class="vspace cr">
+                            <select id="periodlist" class="form-control no-radius"></select>
+                          </td>
+
+                          <td class="vspace cr">
+                          <button id="addcriteria" class="btn btn-primary no-radius">Add Criteria</button>
+                          </td>
+
+                        </tr>
+
+                        <tr class="bottomtr "> 
+                          <td class="vspace iftd cr"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                          <td class="vspace cr"> </td>
+                        </tr> 
+
+                    </table>
+                  </div>
+
+
+                  <div id="hiprmcriteriadiv">
+
+                      <div id="hiprmquestiondiv"> 
+                          @if (!$edit) Choose a question: @endif
+                      </div>
+
+                      <div id="hiprmquestiondiv">
+
+                          @if ($edit) 
+                            {{$data['rmquestion']}}
+                            <input class="form-control" type="hidden" value="{{$data['rmquestion']}}" disabled hidden>
+                          @else
+                            <select id="quickielist" class="form-control no-radius logicelement"></select>
+                          @endif
+
+                      </div>
+
+
+                      <div class="rmanswersdiv" >
+                        <div id="answerlist"></div>
+                      </div>
+
+                      <div class="radio hiprmandordiv">
+                        <input type="radio" name="logicaloperator" id="logicaloperator" value="and">
+                        <b>ALL</b> of the selected answers are required to trigger the event <br>
+                        <input type="radio" name="logicaloperator" id="logicaloperator" value="or">
+                        <b>ANY</b> of the selected answers are required to trigger the event
+                      </div> 
+
+                  </div>
+
+
+
+                  <table id="criterialisttable" class="criteriatable">
+                    <tr>
+                      <td class="iftd"><td>
+                      <td class="measuretd"><td>
+                      <td class="operatortd"><td>
+                      <td class="valuetd"><td>
+                      <td class="spacertd"><td>
+                      <td class="counttd"><td>
+                      <td class="measuretd"><td>
+                    </tr>
+
+                  </table>
+
+                  <table>
+                    <tr class="bottomtr "> 
+                      <td class="vspace iftd cr"> </td>
+                      <td class="vspace cr"> </td>
+                      <td class="vspace cr"> </td>
+                      <td class="vspace cr"> </td>
+                      <td class="vspace cr"> </td>
+                      <td class="vspace cr"> </td>
+                      <td class="vspace cr"> </td>
+                    </tr> 
+                  </table>
+                </form>
+
+                <br>
+                <form class="form-inline then">
+
+                   <div class="form-group">
+                    <label class="logicLbl">THEN</label>
+                    <select id="notificationtypelist" class="form-control no-radius">
+                        <option>Notification Type</option>
+                        <option value="sms" <?php if($data['event']['notification_type_primary'] == "sms") echo "selected" ?> >Send SMS</option>
+                        <option value="email" <?php if($data['event']['notification_type_primary'] == "email") echo "selected" ?> >Send Email</option>
+                        <option value="push" <?php if($data['event']['notification_type_primary'] == "push") echo "selected" ?> >Send Push</option>
+                        <option value="mgr" <?php if($data['event']['notification_type_primary'] == "mgr") echo "selected" ?> >Send Mgr</option>
+                        <option value="api" <?php if($data['event']['notification_type_primary'] == "api") echo "selected" ?> >Send Outbound API</option>
+                      </select>
+                   </div>
+
+                   <div class="form-group">
+                      <select id="notificationlist"  class="form-control no-radius"></select> 
+                      <a data-toggle="collapse" data-target="#notificationdisplaywrapper"><img class="expandcontract" src="/img/expand.png" ></a>
+                      <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#notificationdisplaywrapper">Show</button> -->
+                      <br>
+                   </div>
+
+                </form>
+
+                <div id="notificationdisplaywrapper" class="collapse clear">
+                <div id="notificationdisplay"></div>
+                </div>
+
+
+              </div>
+            </div>
+            <br>
+            <div class="panel panel-default">
+              <div class="panel-heading">Event Restrictions</div>
+              <div class="panel-body">
+
+                <div class="form-group">
+                  <label>Schedule Dates <i data-original-title="Only send between these dates" class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title=""></i></label>
+                  <br>
+                  <div  id="eventschedule">
+                    <div class="form-group eventdaterange">
+                      {{ Form::text('date', null, 
+                      array('name' => 'from', 'type' => 'text', 'data-date-format' => "dd/mm/yyyy", '
+                        class' => 'form-control datepicker schedulecell','placeholder' => 'From Date', 'id' => 'schedulebegin')) }}
+                    </div>
+                    <div class="schto">to</div>
+                    <div class="form-group eventdaterange">
+                      {{ Form::text('date', null, 
+                      array('name' => 'to', 'type' => 'text', 'data-date-format' => "dd/mm/yyyy", 
+                        'class' => 'form-control datepicker schedulecell','placeholder' => 'To Date', 'id' => 'scheduleend')) }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group clear" >
+                  <label>Days <i data-original-title="Only send on these days" class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title=""></i></label>
+                  <br>
+                  <label class="checkbox-inline">
+                    <input id="monday" value="1" type="checkbox">
+                    Monday </label>
+                  <label class="checkbox-inline">
+                    <input id="tuesday" value="1" type="checkbox">
+                    Tuesday </label>
+                  <label class="checkbox-inline">
+                    <input id="wednesday" value="1" type="checkbox">
+                    Wednesday </label>
+                  <label class="checkbox-inline">
+                    <input id="thursday" value="1" type="checkbox">
+                    Thursday </label>
+                  <label class="checkbox-inline">
+                    <input id="friday" value="1" type="checkbox">
+                    Friday </label>
+                  <label class="checkbox-inline">
+                    <input id="saturday" value="1" type="checkbox">
+                    Saturday </label>
+                  <label class="checkbox-inline">
+                    <input id="sunday" value="1" type="checkbox">
+                    Sunday </label>
+                </div>
+                <div class="form-group">
+                  <label>Hours <i data-original-title="Only send during these hours" class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title=""></i></label>
+                  <br>
+                  <div id="timesvalidationerror" class='validationerror'>Please add store opening hours</div>
+                  <div class="form-inline">
+                    <div class="form-group">
+                      <input id="timefrom" class="time ui-timepicker-input" type="text" autocomplete="off">
+                    </div>
+                    <span> to </span>
+                    <div class="form-group">
+                      <input id="timeto" class="time ui-timepicker-input" type="text" autocomplete="off">
+                    </div>
+                    <a id="addtimes" class="btn btn-primary no-radius"><i class="fa fa-plus"></i> Add Hours</a> </div>
+                </div>
+                <div id="timeslist"></div>
+                <div class="clear vspace"></div>
+                <div class="form-group">
+                  <label>Frequency <i data-original-title="Only send maximum of" class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title=""></i></label>
+                  <br>
+
+                  <div class="form-inline">
+                    <span>Wait </span> 
+                    <div class="form-group ">
+                      <input id="frequency_count" class="form-control no-radius numericlist" placeholder="" type="number">
+                    </div>
+                    <div class="form-group">
+                      <select id="frequency_intervallist" class="form-control no-radius">
+                        <option value="day">day</option>
+                        <option value="week">week</option>
+                        <option value="month">month</option>
+                        <option value="year">year</option>
+                      </select>
+                    </div>
+                    <span> before sending another notification to the same user </span> 
+                  </div>
+
+                  <div class="form-inline frequencydiv">
+                    <span>The event can send   </span> 
+                    <div class="form-group">
+                      <input id="frequency_count1" class="form-control no-radius numericlist frequencyCountBox" placeholder="" type="number">
+                    </div>
+                    <span>notifications per</span> 
+                    <div class="form-group">
+                      <select id="frequency_intervallist1" class="form-control no-radius">
+                        <option value="day">day</option>
+                        <option value="week">week</option>
+                        <option value="month">month</option>
+                        <option value="year">year</option>
+                      </select>
+                    </div>
+                    <span>to the same user</span> 
+                  </div>
+
+                  <div class="form-inline frequencydiv">
+                    <span>Minimum interval between notifications to the same user on any given day </span> 
+                    <div class="form-group">
+                      <input id="frequency_count2" class="form-control no-radius numericlist frequencyCountBox" placeholder="" type="number">
+                    </div>
+                    <div class="form-group">
+                      <select id="frequency_intervallist2" class="form-control no-radius">
+                        <option value="mins">mins</option>
+                        <option value="hours">hours</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <label>Delay <i data-original-title="Delay Send by" class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title=""></i></label>
+                  <br>
+                  <div class="form-inline">
+                    <div class="form-group">
+                      <input id="delay" class="form-control no-radius" placeholder="" style="width: 50px;" type="text">
+                    </div>
+                    <select id="delay_interval" class="form-control no-radius">
+                      <option value="mins">mins</option>
+                      <option value="hours">hours</option>
+                    </select>
+                    <!-- <span> minutes </span>  -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+              
+

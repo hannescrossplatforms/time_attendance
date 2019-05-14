@@ -1,0 +1,203 @@
+/*
+	Description	: basic styles for jQuery Plugin "modalBox". feel free to customize this styles
+	Author		: Steffen Hollstein
+	Author URI	: http://www.steffenhollstein.de
+	Project Page: http://code.google.com/p/jquery-modalbox-plugin/
+	
+	
+	put following inline css in your html document:
+	-----------------------------------------------
+	<!--- modalbox PNG Fix / BEGIN --->
+	<!--[if lte IE 6]>
+		<style type="text/css">
+			div#modalBox div#modalBoxBody div.modalboxStyleContainerTopLeft {
+				background-image:none; 
+				filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod='crop', src='yourabsoluteimagepath/img/shadows_bg_topright.png');
+			}
+			div#modalBox div#modalBoxBody div.modalboxStyleContainerTopRight {
+				background-image:none; 
+				filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod='crop', src='yourabsoluteimagepath/img/shadows_bg_topleft.png');
+				height:1%;
+			}
+			div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomLeft {
+				background-image:none; 
+				filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod='crop', src='yourabsoluteimagepath/img/shadows_bg_bottomright.png');
+			}
+			div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomRight {
+				background-image:none; 
+				filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod='crop', src='yourabsoluteimagepath/img/shadows_bg_bottomleft.png');
+			}
+		</style>
+	<![endif]-->
+	<!--- modalbox PNG Fix / END --->
+*/
+.modalboxContent {
+  display:none;
+}
+.modalgallery {
+  display:block;
+}
+div#modalBoxFaderLayer,
+div#modalBoxAjaxLoader,
+div#modalBox,
+div#modalBox div#modalBoxBody,
+div#modalBox div#modalBoxBody div.modalBoxBodyContent,
+div#modalBox div#modalBoxBody div#modalBoxCloseButton,
+div#modalBox div#modalBoxBody #modalBoxCloseButton a.closeModalBox,
+div#modalBox div#modalBoxBody #modalBoxCloseButton a.closeModalBox span,
+div#modalBox div#modalBoxBody div.modalboxStyleContainerTopLeft,
+div#modalBox div#modalBoxBody div.modalboxStyleContainerTopRight,
+div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomLeft,
+div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomRight {/* default reset */
+  margin:0;
+  padding:0;
+}
+div#modalBoxFaderLayer {
+  display:none; 
+  position:fixed; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%; 
+  z-index:9999;
+}
+* html div#modalBoxFaderLayer {/* IE6 Fix */
+  position:absolute; 
+  top:expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop+0:document.body.scrollTop+0);
+}
+iframe.modalBoxIe6layerfix {
+  display:none;
+}
+* html iframe.modalBoxIe6layerfix {/* ie6 fix */
+  display:block;
+  position:absolute; 
+  top:0; 
+  left:0; 
+  z-index:0;
+  width:100%; 
+  height:100%; 
+  filter:mask();
+}
+div#modalBoxAjaxLoader {
+  background:transparent url(/web/images/ajax-loader.gif) 50% 40% no-repeat;
+  height:100px; 
+  padding:130px 0 0 0; 
+  text-align:center; 
+  overflow:hidden;
+}
+div#modalBox {
+  display:none; 
+  position:fixed; 
+  z-index:10000;
+  text-align:left; 
+  background-color:transparent;
+}
+* html div#modalBox {/* IE6 Fix */
+  position:absolute; 
+  top:expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop+40:document.body.scrollTop+40);
+}
+div#modalBox {
+  width:600px; /* default wide */
+}
+div#modalBox.small {
+  width:400px;
+}
+div#modalBox.medium {
+  width:500px;
+}
+div#modalBox.large {
+  width:700px;
+}
+div#modalBox div#modalBoxBody {
+  position:relative;
+}
+div#modalBox div#modalBoxBody div.modalBoxBodyContent {
+  background-color:white;
+  /* padding:20px; */
+}
+div#modalBox.emphasis div#modalBoxBody div.modalBoxBodyContent {
+  border:1px dotted red;
+}
+/*@import url("jquery.modalbox-skin-default.css");
+@import url("jquery.modalbox-skin-rounded-black.css");*/
+/* skin rounded-black - BEGIN */
+div#modalBox div#modalBoxBody div#modalBoxCloseButton {
+  position:absolute; 
+  top:8px; 
+  right:-5px; 
+  width:29px;
+}
+* html div#modalBox div#modalBoxBody div#modalBoxCloseButton {
+  right:25px;
+}
+div#modalBox div#modalBoxBody #modalBoxCloseButton a.closeModalBox,
+div#modalBox div#modalBoxBody #modalBoxCloseButton a.closeModalBox span {
+  text-decoration:none;
+  color:#f4f4f4;
+  cursor:pointer;
+}
+div#modalBox div#modalBoxBody #modalBoxCloseButton a.closeModalBox {
+  display:block;
+  height:20px;
+  background:transparent url(/web/images/frontend/closebutton_29x20.png) right center no-repeat;
+}
+div#modalBox div#modalBoxBody #modalBoxCloseButton a.closeModalBox span {
+  display:none;
+}
+div#modalBox div#modalBoxBody div.modalboxStyleContainerTopLeft,
+div#modalBox div#modalBoxBody div.modalboxStyleContainerTopRight,
+div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomLeft,
+div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomRight {
+  background-color:transparent;
+  background-position:left top;
+  background-repeat:no-repeat;
+  width:100%;
+  clear:both;
+}
+div#modalBox div#modalBoxBody div.modalboxStyleContainerTopLeft,
+div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomLeft {
+  padding:0 29px 0 0;
+}
+* html div#modalBox div#modalBoxBody div.modalboxStyleContainerTopLeft,
+* html div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomLeft {/* IE6 Fix */
+  padding:0;
+}
+* html div#modalBox div#modalBoxBody div.modalboxStyleContainerTopRight,
+* html div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomRight {/* IE6 Fix */
+  margin:0 29px 0 0;
+}
+div#modalBox div#modalBoxBody div.modalboxStyleContainerTopLeft {
+  background-image:url(/web/images/frontend/shadows_bg_topright.png);
+  background-position:right top;
+}
+div#modalBox div#modalBoxBody div.modalboxStyleContainerTopRight {
+  background-image:url(/web/images/frontend/shadows_bg_topleft.png);
+}
+div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomLeft {
+  background-image:url(/web/images/frontend/shadows_bg_bottomright.png);
+  background-position:right top;
+}
+div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomRight {
+  background-image:url(/web/images/frontend/shadows_bg_bottomleft.png);
+  background-position:left top;
+}
+div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomLeft,
+div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomRight {
+  height:29px;
+}
+div#modalBox div#modalBoxBody div.modalboxStyleContainerContent {
+  padding:59px 0 10px 39px;
+}
+* html div#modalBox div#modalBoxBody div.modalboxStyleContainerTopLeft,
+* html div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomLeft {/* IE6 Fix */
+  position:absolute;
+  right:-1px;
+  width:29px;
+}
+* html div#modalBox div#modalBoxBody div.modalboxStyleContainerTopLeft {/* IE6 Fix */
+  top:0;
+}
+* html div#modalBox div#modalBoxBody div.modalboxStyleContainerBottomLeft {/* IE6 Fix */
+  bottom:-1px;
+}
+/* skin rounded-black - END */

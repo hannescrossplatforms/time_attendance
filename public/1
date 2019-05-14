@@ -1,0 +1,35 @@
+/interface wireless security-profiles
+add authentication-types=wpa-psk,wpa2-psk eap-methods="" \
+    management-protection=allowed mode=dynamic-keys name=admin_ssid_1 \
+    supplicant-identity="" wpa-pre-shared-key=password1 wpa2-pre-shared-key=\
+    password1
+
+
+/interface wireless
+add disabled=no keepalive-frames=disabled mac-address=6E:3B:6B:FF:58:73 \
+    master-interface=wlan1 multicast-buffering=disabled name=wlan2 \
+    security-profile=admin_ssid_1 ssid=admin_ssid_1 wds-cost-range=0 \
+    wds-default-cost=0 wps-mode=disabled hide-ssid=no
+
+
+/ip pool
+add name=admin_ssid_1 ranges=10.5.51.2-10.5.51.50
+
+/ip dhcp-server
+add address-pool=admin_ssid_1 disabled=no interface=wlan2 lease-time=1h name=\
+    admin_ssid_1
+
+
+/ip address
+add address=10.5.51.1/24 interface=wlan2 network=10.5.51.0
+
+/ip dhcp-server network
+add address=10.5.51.0/24 dns-server=8.8.8.8,8.8.4.4 gateway=10.5.51.1
+
+
+/ip firewall nat
+add action=masquerade chain=srcnat src-address=10.5.51.0/24
+
+
+
+

@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>FusionCharts XT - My First Chart </title>
+        <script type="text/javascript" src="./incs/jquery.min.js"></script>
+        <script type="text/javascript" src="./incs/fusioncharts.js"></script>
+        <script type="text/javascript" src="./incs/fusioncharts.charts.js"></script>
+        <script type="text/javascript" src="./incs/fusioncharts.theme.zune.js"></script>
+
+        <style type="text/css">
+            body {
+                    margin: 0;
+                    padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+    	<div id="staff_proximity_list"></div>
+        <script type="text/javascript" src="MSData-no-animation.xml.js"></script>
+        <script type="text/javascript">
+ 			// var abc 
+var dataString; 			
+
+// dataString = $.get("json_value.txt", function(text) {
+// 	console.log(text);
+// });
+
+$.getJSON( "../json_file/json_result.json", function( data ) {
+	dataString = data;
+        
+//        get most 5 early leaving details
+                    var most_early_leaving = [];
+                    $.each(data.staff_early_leaving.slice(0,5), function(i, list) {
+                        most_early_leaving.push(list);
+                    });
+                    //get least 5 proximity details
+                    var max_length_e = data.staff_early_leaving.length; 
+                    var min_length_e = max_length_e - 5;
+                    var least_early_leaving = [];
+                    $.each(data.staff_early_leaving.slice(min_length_e,max_length_e).reverse(), function(i, list) {
+                      least_early_leaving.push(list);
+                    }); 
+                    
+                    //proximity
+                var chartProperties = {
+                      "caption": "",
+                      "xAxisName": "Name", // This whould be the full name in the format "Surname, first names"
+                      "yAxisName": "Proximity",
+                      "rotatevalues": "1",
+                      "theme": "zune",
+                      "link": "JavaScript:membergraph("+data.external_user_id+")"
+                  };
+
+                  apiChart = new FusionCharts({
+                      type: 'bar2d',
+                      renderAt: 'staff_proximity_list',
+                      width: '800',
+                      height: '1200',
+                      dataFormat: 'json',
+                      dataSource: {
+                          "chart": chartProperties,
+                          "data": data.staff_proximity
+                      }
+                  });
+                  apiChart.render();
+});
+
+		</script>
+                        
+    </body>
+</html>

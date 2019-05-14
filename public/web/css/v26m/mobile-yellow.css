@@ -1,0 +1,93 @@
+
+/*The following are for the login pages*/
+
+/*The following are for the login pages*/
+
+
+.submit2{
+
+	background-color:#fefe53;
+	border:solid 1px #bababa;
+	color:#104600;
+	text-shadow: none;
+
+}
+.submit2:hover, .submit2:active{
+	background:#feef00;
+}
+
+#tabs li a{
+	background:#fefe73;
+	color:#104600;
+        border:solid 1px #bababa;
+        text-shadow: none;
+}
+
+#tabs li a:hover, #tabs li a:active, #tabs li a.active{
+	background:#fff;
+	border:solid 1px #bababa;
+	color:#bbb548;
+}
+
+.content{
+	background:url(../images/bg_content.png) repeat-x left top #f0f1f2;
+	border:solid 1px #bababa;
+}
+
+.fill-form label{
+	color:#bbb548;
+}
+
+.fill-form .input, .fill-form .select1{
+	background:url(../images/bg_input.png) repeat-x;
+	border:solid 1px #c4c5c5;
+	border-top-color:#d7d7d7;
+	color:#7f7f7f;
+}
+
+.fill-form .submit{
+	background-color:#fefe73;
+	border:solid 1px #bababa;
+	color:#104600;
+        text-shadow: none;
+}
+
+.fill-form .submit:hover, .fill-form .submit:active{
+/*	background:#8281f7;*/
+        background:#feef00;
+}
+
+.fill-form .terms{
+	color:#919191;
+}
+
+.entry h2{
+	color:#bbb548;
+}
+
+
+
+
+
+
+
+
+/*The following are for the research pages*/
+.hz-questionbox {
+    border: 1px solid #fefe73;
+;
+}
+
+
+.ui-btn-active {
+	border: 1px solid  #000000  /*{global-active-border}*/;
+	background:  #fefe73  /*{global-active-background-color}*/;
+	color:   					#fff   /*{global-active-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(  #38CB45  /*{global-active-background-start}*/), to(  #fefe73  /*{global-active-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(  #fefe73  /*{global-active-background-start}*/,  #fefe73  /*{global-active-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(  #fefe73  /*{global-active-background-start}*/,  #fefe73  /*{global-active-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient(  #fefe73  /*{global-active-background-start}*/,  #fefe73  /*{global-active-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient(  #fefe73  /*{global-active-background-start}*/,  #fefe73  /*{global-active-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient(  #fefe73  /*{global-active-background-start}*/,  #fefe73  /*{global-active-background-end}*/);
+	  font-family: Helvetica, Arial, sans-serif   /*{global-font-family}*/;
+}

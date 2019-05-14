@@ -1,0 +1,74 @@
+deleteSvrScannerdata id = 51
+File Path YML = sensors/50:2B:73:C8:06:76.yml
+File Path VPN = sensors/50:2B:73:C8:06:76vpn
+Delete Meta Data Login = 1
+FTP connection turned passive: 1
+Delete Meta Data YML = TRUE
+Delete Meta Data VPN = TRUE
+Got chaps content: scannername pptpd d0t_3l3v3n vpnip
+
+Opened Chaps Entry Del: Resource id #14
+Deleted Scanner Meta Data
+Deleted The Sensor
+Sensor deleted In Track
+deleteSvrScannerdata id = 53
+File Path YML = sensors/50:2B:73:C8:07:AA.yml
+File Path VPN = sensors/50:2B:73:C8:07:AAvpn
+Delete Meta Data Login = 1
+FTP connection turned passive: 1
+Delete Meta Data YML = TRUE
+Delete Meta Data VPN = TRUE
+Got chaps content: scannername pptpd d0t_3l3v3n vpnip
+
+Opened Chaps Entry Del: Resource id #14
+Deleted Scanner Meta Data
+Deleted The Sensor
+Sensor deleted In Track
+deleteSvrScannerdata id = 54
+File Path YML = sensors/50:2B:73:C8:07:AA.yml
+File Path VPN = sensors/50:2B:73:C8:07:AAvpn
+Delete Meta Data Login = 1
+FTP connection turned passive: 1
+Could not Delete Scanner Meta Data
+Deleted Scanner Meta Data
+Deleted The Sensor
+Sensor deleted In Track
+deleteSvrScannerdata id = 52
+File Path YML = sensors/50:2B:73:C8:06:76.yml
+File Path VPN = sensors/50:2B:73:C8:06:76vpn
+Delete Meta Data Login = 1
+FTP connection turned passive: 1
+Delete Meta Data YML = TRUE
+Delete Meta Data VPN = TRUE
+Got chaps content: scannername pptpd d0t_3l3v3n vpnip
+
+Opened Chaps Entry Del: Resource id #14
+Deleted Scanner Meta Data
+Deleted The Sensor
+Sensor deleted In Track
+deleteSvrScannerdata id = 55
+File Path YML = sensors/50:2B:73:C8:07:AA.yml
+File Path VPN = sensors/50:2B:73:C8:07:AAvpn
+Delete Meta Data Login = 1
+FTP connection turned passive: 1
+Delete Meta Data YML = TRUE
+Delete Meta Data VPN = TRUE
+Got chaps content: scannername pptpd d0t_3l3v3n vpnip
+
+Opened Chaps Entry Del: Resource id #14
+Deleted Scanner Meta Data
+Deleted The Sensor
+Sensor deleted In Track
+deleteSvrScannerdata id = 56
+File Path YML = sensors/50:2B:73:C4:4E:25.yml
+File Path VPN = sensors/50:2B:73:C4:4E:25vpn
+Delete Meta Data Login = 1
+FTP connection turned passive: 1
+Delete Meta Data YML = TRUE
+Delete Meta Data VPN = TRUE
+Got chaps content: scannername pptpd d0t_3l3v3n vpnip
+
+Opened Chaps Entry Del: Resource id #14
+Deleted Scanner Meta Data
+Deleted The Sensor
+Sensor deleted In Track

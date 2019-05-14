@@ -1,0 +1,70 @@
+
+body.website {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMWI0ZDI2Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGUxODEzIi8+PC9yYWRpYWxHcmFkaWVudD48cmVjdCB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMwZTE4MTMiIC8+PHJlY3QgeD0iMCUiIHk9Ii0xMDcuNzU4NiUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjMxNS41MTcyJSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 183, color-stop(0%, #1b4d26), color-stop(100%, #0e1813));
+    background-image: -webkit-radial-gradient(center center, farthest-side circle, #1b4d26 0%, #0e1813 100%);
+    background-image: -moz-radial-gradient(center center, farthest-side circle, #1b4d26 0%, #0e1813 100%);
+    background-image: -ms-radial-gradient(center center, farthest-side circle, #1b4d26 0%, #0e1813 100%);
+    background-image: -o-radial-gradient(center center, farthest-side circle, #1b4d26 0%, #0e1813 100%);
+    background-image: radial-gradient(farthest-side circle at center center, #1b4d26 0%, #0e1813 100%);
+}
+
+.layout {
+    margin-bottom: -95px;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+.layout:after {
+    content: "";
+    display: block;
+    height: 95px;
+}
+
+body.website .layout .connect {
+    display: block;
+    margin: 0 auto;
+    width: 78%;
+    height: 529px;
+    background: url(/images/heineken/connect.png) no-repeat center;
+    background-size: auto 100%;
+    text-indent: -90000%;
+    position: absolute;
+    padding-right: 10%;
+}
+
+
+
+.layout > header {
+    padding: 32px 0 22px 4px;
+}
+
+body.website .layout > header {
+    padding-right: 10%;
+}
+
+.layout > header span {
+    float: right;
+    margin-left: 6px;
+    width: 33px;
+    height: 33px;
+    background: url(/images/heineken/icons.png) no-repeat;
+    background-size: 68px 33px;
+    text-indent: -9000%;
+}
+
+.layout > header span.enjoy {
+    background-position: -36px 0;
+}
+
+.heineken_logo {
+    float: right;
+    overflow: hidden;
+    width: 80px;
+    height: 56px;
+    background: url(/images/heineken/heineken_logo.png) no-repeat;
+    background-size: 80px 56px;
+    text-indent: -9000%;
+    padding-right: 10%;
+}
+

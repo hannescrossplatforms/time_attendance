@@ -1,0 +1,43 @@
+<h1>Meraki test page</h1>
+
+This simulates the call made from the Meraki AP to the splash page. 
+<br><br>
+The following parameters will be sent to the splash page:
+<br>
+
+
+
+
+
+<form action="/login/meraki">
+
+	<table>
+		<tr>
+			<td>continue_url : </td>
+			<td><input type="text" name="continue_url" value="http://www.yahoo.com"></td>
+		</tr>
+		<tr>
+			<td>login_url : </td>
+			<td><input type="text" name="login_url" value="http://www.meraki.com"></td>
+		</tr>
+		<tr>
+			<td>ap_mac : </td>
+			<td><input type="text" name="ap_mac" value="AB:CD:EF:10:21:32"></td>
+		</tr>
+		<tr>
+			<td>ap_name : </td>
+			<td><input type="text" name="ap_name" value="vida_bayside"></td>
+		</tr>
+		<tr>
+			<td>ap_tags : </td>
+			<td><input type="text" name="ap_tags" value="ap_tags_string"></td>
+		</tr>
+		<tr>
+			<td>mauth : </td>
+			<td><input type="text" name="mauth" value="mauth_string"></td>
+		</tr>
+	</table>
+
+	<input type="submit" value="Go to splash page">
+
+</form>

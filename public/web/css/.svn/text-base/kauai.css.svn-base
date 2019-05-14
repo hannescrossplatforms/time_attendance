@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+body {
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  background:url(/images/frontend/kauai.gif);
+  background-position: center top;
+}
+
+
+ 

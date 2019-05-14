@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>FusionCharts XT - My First Chart </title>
+        <script type="text/javascript" src="./incs/jquery.min.js"></script>
+        <script type="text/javascript" src="./incs/fusioncharts.js"></script>
+        <script type="text/javascript" src="./incs/fusioncharts.charts.js"></script>
+        <script type="text/javascript" src="./incs/fusioncharts.theme.zune.js"></script>
+
+        <style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+			}
+        </style>
+    </head>
+    <body>
+    	<div id="absence_graph01">FusionCharts1 will load here</div>
+		<script type="text/javascript" src="MSData-no-animation.xml.js"></script>
+		<script type="text/javascript">
+var dataString; 
+
+$.getJSON( "../json_file/json_result.json", function( data ) {
+	dataString = data;
+        var chartProperties = {
+                  "caption": "",
+                  "xAxisName": "Name", // This whould be the full name in the format "Surname, first names"
+                  "yAxisName": "Absence",
+                  "rotatevalues": "1",
+                  "theme": "zune"
+        };
+        apiChart = new FusionCharts({
+            type: 'bar2d',
+            renderAt: 'absence_graph01',
+            width: '800',
+            height: '800',
+          //  dataFormat: 'json',
+            dataSource: {
+                "chart": chartProperties,
+                "data": dataString.staff_absent
+            }
+        });
+        apiChart.render();
+        
+});
+
+		</script>
+                        
+    </body>
+</html>

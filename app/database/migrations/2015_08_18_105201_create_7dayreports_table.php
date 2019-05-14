@@ -1,0 +1,51 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class Create7dayreportsTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('7dayreports', function(Blueprint $table)
+		{
+			$table->increments('id');
+
+			$table->string('brand_name');
+
+			$table->integer('currentsessions');
+			$table->integer('previoussessions');
+			$table->integer('diffsessions');
+			
+			$table->integer('currentnewsessions');
+			$table->integer('previousnewsessions');
+			$table->integer('diffnewsessions');
+			
+			$table->integer('currentminutes');
+			$table->integer('previousminutes');
+			$table->integer('diffminutes');
+			
+			$table->integer('currentdata');
+			$table->integer('previousdata');
+			$table->integer('diffdata');
+
+			$table->timestamps();
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		//
+	}
+
+}

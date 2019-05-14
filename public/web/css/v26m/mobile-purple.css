@@ -1,0 +1,35 @@
+
+
+.submit2{
+
+	background-color:#9796fe;
+	border:solid 1px #5b59dd;
+	color:#17167e;
+	text-shadow:rgba(177, 176, 254, 1) -1px 1px 0px;
+
+}
+.submit2:hover, .submit2:active{
+	background:#8281f7;
+}
+
+
+
+/*The following are for the research pages*/
+.hz-questionbox {
+    border: 1px solid #9796FE;
+;
+}
+
+
+.ui-btn-active {
+	border: 1px solid  #000000  /*{global-active-border}*/;
+	background:  #9796FE  /*{global-active-background-color}*/;
+	color:   					#fff   /*{global-active-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(  #38CB45  /*{global-active-background-start}*/), to(  #9796FE  /*{global-active-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient(  #9796FE  /*{global-active-background-start}*/,  #9796FE  /*{global-active-background-end}*/);
+	  font-family: Helvetica, Arial, sans-serif   /*{global-font-family}*/;
+}

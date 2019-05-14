@@ -1,0 +1,42 @@
+/* the following were added by GCW */
+.merrormsg {
+    color: red;
+}
+
+p.padded {
+
+    padding-bottom: 10px;
+}
+
+button.link {
+    text-align: left;
+    background: none;
+    margin: 0;
+    padding-top: 0px;
+    padding-left: 0px;
+    border: none;
+    cursor: pointer;
+    float: left;
+    color: #ffffff;
+    font: 0.75em Arial, sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    -moz-user-select: text;
+
+    /* override all your button styles here if there are any others */
+}
+button.link span {
+    text-decoration: underline;
+}
+/*button.link:hover span,
+button.link:focus span {
+    color: black;
+}*/
+
+.terms {
+float: left;
+width:20px;
+padding-top:2px;
+}
+â€‹input[type=checkbox] { padding-top:20px; }â€‹

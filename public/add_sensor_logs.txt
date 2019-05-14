@@ -1,0 +1,900 @@
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyct2
+scanner: ct2entrance
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqdiva
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqinside
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqentrance
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqdiva
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqinside
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqentrance
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyct2
+scanner: ct2entrance
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+In Add Server
+Got Content: {"track_name":"testing","track_location":"testing8192eu","track_queue":"tracks02","mac":"50:2B:73:C8:06:76","track_min_power":"-80","track_max_power":"-10","venue_id":"1331","vpnip":"10.0.1.34","venue_location":"HIPXQLANGXXXXHOME01CPTXWCZA"}
+Decoded Content: {"track_name":"testing","track_location":"testing8192eu","track_queue":"tracks02","mac":"50:2B:73:C8:06:76","track_min_power":"-80","track_max_power":"-10","venue_id":"1331","vpnip":"10.0.1.34","venue_location":"HIPXQLANGXXXXHOME01CPTXWCZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: HomePi
+scanner: testing
+iron_mq:
+  queue: tracks02
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.72
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Object Report Saved: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 
+In Add Server
+Got Content: {"track_name":"dthome","track_location":"diningtable","track_queue":"tracks03","mac":"50:2B:73:C8:06:76","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+Decoded Content: {"track_name":"dthome","track_location":"diningtable","track_queue":"tracks03","mac":"50:2B:73:C8:06:76","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: dumy2test
+scanner: dthome
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.72
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Object Report Saved: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 
+In Add Server
+Got Content: {"track_name":"dthome2","track_location":"kitchen","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","vpnip":"10.0.1.72","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+Decoded Content: {"track_name":"dthome2","track_location":"kitchen","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","vpnip":"10.0.1.72","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+In Add Server
+Got Content: {"track_name":"dthome2","track_location":"kitchen","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","vpnip":"10.0.1.72","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+Decoded Content: {"track_name":"dthome2","track_location":"kitchen","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","vpnip":"10.0.1.72","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: dumy2test
+scanner: dthome2
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.73
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: dumy2test
+scanner: dthome2
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.73
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Object Report Saved: 
+Object Report Saved: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+In Add Server
+Got Content: {"track_name":"dthome2","track_location":"kitchen","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","vpnip":"10.0.1.72","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+Decoded Content: {"track_name":"dthome2","track_location":"kitchen","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","vpnip":"10.0.1.72","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: dumy2test
+scanner: dthome2
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.73
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Object Report Saved: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 
+In Add Server
+Got Content: {"track_name":"dthome3","track_location":"dining2","track_queue":"tracks03","mac":"50:2B:73:C4:4E:25","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","vpnip":"10.0.1.73","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+Decoded Content: {"track_name":"dthome3","track_location":"dining2","track_queue":"tracks03","mac":"50:2B:73:C4:4E:25","track_min_power":"-80","track_max_power":"-10","venue_id":"1062","vpnip":"10.0.1.73","venue_location":"HIPDUMMY2DONOTDEL01CPTXWCZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: dumy2test
+scanner: dthome3
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.74
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Object Report Saved: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqdiva
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqinside
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqentrance
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyct2
+scanner: ct2entrance
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqdiva
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqinside
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqentrance
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyct2
+scanner: ct2entrance
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqdiva
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqinside
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is true: 
+Deleted Filepath Yml: 1
+Deleted Filepath VPN: 1
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: sofacompanyhq
+scanner: hqentrance
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+In Add Server
+Got Content: {"track_name":"Billboard","track_location":"Billboard","track_queue":"tracks03","mac":"50:2B:73:C8:06:76","track_min_power":"-100","track_max_power":"-10","venue_id":"1375","venue_location":"HIPVICNTYMOLOKOBI01JNBXGTZA"}
+Decoded Content: {"track_name":"Billboard","track_location":"Billboard","track_queue":"tracks03","mac":"50:2B:73:C8:06:76","track_min_power":"-100","track_max_power":"-10","venue_id":"1375","venue_location":"HIPVICNTYMOLOKOBI01JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: mololo_billboard
+scanner: Billboard
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.72
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Object Report Saved: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 
+In Add Server
+Got Content: {"track_name":"moloko","track_location":"entrance","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1376","venue_location":"HIPVICNTYMOLOKOEN01JNBXGTZA"}
+Decoded Content: {"track_name":"moloko","track_location":"entrance","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1376","venue_location":"HIPVICNTYMOLOKOEN01JNBXGTZA"}
+In Add Server
+Got Content: {"track_name":"moloko","track_location":"entrance","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1376","venue_location":"HIPVICNTYMOLOKOEN01JNBXGTZA"}
+Decoded Content: {"track_name":"moloko","track_location":"entrance","track_queue":"tracks03","mac":"50:2B:73:C8:07:AA","track_min_power":"-80","track_max_power":"-10","venue_id":"1376","venue_location":"HIPVICNTYMOLOKOEN01JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: moloko_entrance
+scanner: moloko
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.73
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Object Report Saved: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 
+Trying to Create Config.yml: 
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"billboard_sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"billboard_sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+In Add Server
+Got Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"billboardsector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Decoded Content: {"track_name":"sector","track_location":"billboard","track_queue":"tracks03","mac":"50:2B:73:C0:24:52","track_min_power":"-80","track_max_power":"-10","venue_id":"1386","venue_location":"HIPVICNTYMOLOKOBI02JNBXGTZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+In Add Server
+Got Content: {"track_name":"hannes","track_location":"lounge","track_queue":"tracks03","mac":"C8:3A:35:C2:4A:23","track_min_power":"-80","track_max_power":"-10","venue_id":"1387","venue_location":"HIPPRETNDHANNESTE01CPTXWCZA"}
+Decoded Content: {"track_name":"hannes","track_location":"lounge","track_queue":"tracks03","mac":"C8:3A:35:C2:4A:23","track_min_power":"-80","track_max_power":"-10","venue_id":"1387","venue_location":"HIPPRETNDHANNESTE01CPTXWCZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: pretend_hannes
+scanner: hannes
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.74
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Object Report Saved: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 

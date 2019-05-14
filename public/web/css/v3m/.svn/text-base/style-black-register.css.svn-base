@@ -1,0 +1,346 @@
+@font-face {
+    font-family: 'robotoregular';
+    src: url('roboto_font/roboto-regular-webfont.eot');
+    src: url('roboto_font/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('roboto_font/roboto-regular-webfont.woff') format('woff'),
+         url('roboto_font/roboto-regular-webfont.ttf') format('truetype'),
+         url('roboto_font/roboto-regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'robotoblack';
+    src: url('roboto_font/roboto-black-webfont.eot');
+    src: url('roboto_font/roboto-black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('roboto_font/roboto-black-webfont.woff') format('woff'),
+         url('roboto_font/roboto-black-webfont.ttf') format('truetype'),
+         url('roboto_font/roboto-black-webfont.svg#robotoblack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+body:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 10px;
+    background-image:
+    -webkit-linear-gradient(left,
+    #010101, #010101 5%,
+    #de0026 5%, #de0026 10%,
+    #fbf024 10%, #fbf024 15%,
+    #8b132e 15%, #8b132e 20%,
+    #2f7fc4 20%, #2f7fc4 25%,
+    #da0069 25%, #da0069 30%,
+    #ee5923 30%, #ee5923 35%,
+    #fbf024 35%, #fbf024 40%,
+    #805021 40%, #805021 45%,
+    #147c3c 45%, #147c3c 50%,
+    #2f7fc4 50%, #2f7fc4 55%,
+    #8b132e 55%, #8b132e 60%,
+    #147a85 60%, #147a85 65%,
+    #da0069 65%, #da0069 70%,
+    #e968a0 70%, #e968a0 75%,
+    #147c3c 75%, #147c3c 80%,
+    #de0026 80%, #de0026 85%,
+    #fbf024 85%, #fbf024 90%,
+    #147a85 90%, #147a85 95%,
+    #da0069 95%, #da0069);
+
+    background-image: linear-gradient(left,
+    #010101, #010101 5%,
+    #de0026 5%, #de0026 10%,
+    #fbf024 10%, #fbf024 15%,
+    #8b132e 15%, #8b132e 20%,
+    #2f7fc4 20%, #2f7fc4 25%,
+    #da0069 25%, #da0069 30%,
+    #ee5923 30%, #ee5923 35%,
+    #fbf024 35%, #fbf024 40%,
+    #805021 40%, #805021 45%,
+    #147c3c 45%, #147c3c 50%,
+    #2f7fc4 50%, #2f7fc4 55%,
+    #8b132e 55%, #8b132e 60%,
+    #147a85 60%, #147a85 65%,
+    #da0069 65%, #da0069 70%,
+    #e968a0 70%, #e968a0 75%,
+    #147c3c 75%, #147c3c 80%,
+    #de0026 80%, #de0026 85%,
+    #fbf024 85%, #fbf024 90%,
+    #147a85 90%, #147a85 95%,
+    #da0069 95%, #da0069);
+}
+
+body {
+    padding: 80px 10% 40px;
+    background: #2B2C31;
+    color: #fff;
+    font: 18px robotoregular, sans-serif;
+    box-sizing: border-box;
+}
+
+
+a {
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+form {
+    padding-top: 0;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0 25px 45px 40px;
+    max-width: 1000px;
+    background: #201E1F;
+    border-radius: 4px;
+}
+
+form fieldset {
+    border: none;
+}
+
+form legend {
+    margin-bottom: 20px;
+    font: 36px robotoblack, sans-serif;
+}
+form ul li {
+display: inline-block;
+margin: 0 4% 25px 0;
+width: 45%;
+}
+form ul.triple {
+margin-right: -5.6%;
+}
+form ul.triple li {
+width: 28.1%;
+}
+form ul {
+    margin-right: -4%;
+	margin-bottom: 0;
+}
+
+form li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+form label {
+    display: inline-block;
+    padding-right: 3%;
+    width: 26%;
+    font-size: 18px;
+}
+
+form input:not([type="checkbox"]):not([type="radio"]),
+form select,
+form textarea {
+    padding: 0 2%;
+    width: 94%;
+    height: 46px;
+    background: none;
+    border: 2px solid #ffffff;
+    border-radius: 1px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+
+
+form select {
+	width: 99%;
+    height: 50px;
+    -webkit-appearance: none;
+    background: url(/images/v3m/dropdown2x.png) no-repeat right center;
+    background-size: 29px 5px;
+	color:#fff;
+	padding-top:5px;
+}
+select {
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+form .image {
+    position: relative;
+    left: 0;
+    margin: 0 -45px 20px;
+}
+
+form .image img {
+    display: block;
+    width: 100%;
+}
+
+form .buttons {
+    padding-top: 20px;
+    column-count: 2;
+    column-gap: 18px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 18px;
+}
+
+form .buttons button {
+    display: block;
+    margin-bottom: 18px;
+    padding: 0 1%;
+    width: 100%;
+    height: 49px;
+    background: #2F2F2F;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font: 13px robotoblack, sans-serif;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+footer {
+    padding-top: 18px;
+    font: 13px robotoblack, sans-serif;
+    text-transform: uppercase;
+}
+
+footer p {
+    float: left;
+}
+
+footer p a {
+    display: inline-block;
+    margin: -6px 0 0 6px;
+    width: 76px;
+    height: 28px;
+    background: url(/images/v3m/hipzone_logo2x.png) no-repeat;
+    background-size: 76px 28px;
+    text-indent: -9000%;
+    vertical-align: middle;
+}
+
+footer ul {
+    float: right;
+}
+
+footer li {
+    display: inline-block;
+    margin: 0 2px;
+}
+
+footer li:first-child:after {
+    content: "|";
+    margin-left: 4px;
+}
+
+footer li a {
+    text-decoration: none;
+}
+
+form select option {
+    background: #fff;
+}
+
+::-webkit-input-placeholder {
+    color: #fff;
+}
+
+::-moz-placeholder {
+    color: #fff;
+	opacity: 1;
+}
+:-moz-placeholder {
+    color: #fff;
+	opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #fff;
+}
+
+
+
+@media (max-width: 568px) {
+    body {
+        padding: 80px 5% 40px;
+    }
+
+    form {
+        padding: 18px 20px 10px;
+    }
+
+
+
+    form legend {
+        font-size: 21px;
+    }
+
+    form li {
+        margin-bottom: 0;
+    }
+
+    form label {
+        margin-left: 20px;
+        font-weight: bold;
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+    form ul li, form ul.triple li {
+margin: 0 0 28px;
+width: 95%;
+}
+form input:not([type="checkbox"]):not([type="radio"]), form select, form textarea {
+width: 98%;
+}
+    form input:not([type="checkbox"]):not([type="radio"]),
+
+    form textarea {
+        width: 95%;
+    }
+    form select {
+width: 100%;
+}
+
+
+    form .image {
+position: relative;
+left: 0;
+margin: -35px -45px 20px;
+}
+
+    form .buttons {
+        column-count: 1;
+        column-gap: 0;
+        -webkit-column-count: 1;
+        -webkit-column-gap: 0;
+    }
+
+    form .buttons button {
+        margin-bottom: 8px;
+        height: 36px;
+    }
+
+    footer {
+        text-align: center;
+    }
+
+    footer p,
+    footer ul {
+        float: none;
+        margin-bottom: 4px;
+    }
+
+
+}
+
+@media (max-width: 320px) {
+
+}

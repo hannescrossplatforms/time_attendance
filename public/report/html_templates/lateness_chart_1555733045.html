@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="favicon/favicon.ico" />
+    <title>User Admin | HipHUB</title>
+   
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen" />
+    <link href="css/bootstrap-social.css" rel="stylesheet" media="screen" />
+
+    <link href="css/datepicker.css" rel="stylesheet" media="screen" />
+    
+    <!-- Fontawesome CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+    
+    <!-- Sweet Alert CSS --> 
+    <script type="text/javascript" src="js/sweet-alert.min.js"></script>
+    
+    <link href="css/sweet-alert.css" rel="stylesheet" media="screen" />
+    
+    <!-- Google Webfont CSS -->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel='stylesheet' type='text/css' />
+
+    <!-- Custom styles for this template - These are from MADE -->
+    <link href="css/style.css" rel="stylesheet" media="screen" />
+
+    <!-- Additional ustom styles for this template - These kept separate from MADE in case MADE updates style.css-->
+    <link href="css/styleadditional.css" rel="stylesheet" media="screen" />
+
+    <link rel="stylesheet" href="css/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+
+    <link href="css/jquery.timepicker.css" type="text/css" rel="stylesheet" />
+</head>
+
+
+  <body class="hipTnA">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="css/style_pdf_preview.css" rel="stylesheet" media="screen" /> <!-- for pdf preview -->
+    <style type="text/css">
+/*    #report_period {
+        display:none;
+    }*/
+    .pdf_doc_logo { 
+        position: absolute;
+        min-height: 107px;
+        min-weight: 107px;
+        right: 6%;
+    }
+    .pdf_doc_logo img {
+        height: 102px;
+        width: 125px;
+    }
+    .csv-button {
+        display: none;
+    }
+    
+    .modstattitle {
+        background: #58A5DA;
+        height: 70px;
+        padding: 10px;
+    }
+    .modstattitle h3{
+        color: white;
+    }
+    </style>
+    <div class="container-fluid">
+        <div class="pdf_doc_logo"><img src="../img/logo_hiphub_logo.png" /></div><br><br>
+      <div class="row">
+        <div class="col-sm-9 col-md-9">
+        <div class="page-header" ><h1>Lateness</h1>
+            <span style="font-size: 15px;">Report for 2019-04-19 to 2019-04-19</span></div>
+        <div class="row"> 
+        <br/> 
+            <div class="tab-content" style="margin-top: -65px;">
+                <div class="clear">
+                <br/><br/><br/>
+
+                  <div class="col-sm-12">
+                      <div class="chart-wrapper">
+                          <div class="chart-stage">
+                              <div class="row lateness_list" >
+                                  <div class="col-sm-8" style="float: left;">                    
+                                      <div class="chart-stage">
+                                          <div id="staff_lateness_list"><img src="/var/www/hiphub/public/report/graph_images/lateness_graph01.png" width="500" height="600" /></div>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-4" style="float: left; padding:0px 0px 0px 0px;">
+                                        <!-- <div class="row">
+                                            <div class="col-md-2" style="width: 150px !important;">
+                                              <div class="venuerow">
+                                                  <div class="modStat">
+                                                      <div class="modstattitle">
+                                                          <h3>ARRIVED LATE TODAY</h3>
+                                                      </div>
+                                                      <div id="late_today" class="modStatspan">23</div>
+                                                  </div>
+                                              </div>
+                                            </div>
+                        
+                                            <div class="col-md-2" style="width: 150px !important;">
+                                              <div class="venuerow">
+                                                  <div class="modStat">
+                                                    <div class="modstattitle">
+                                                        <h3>ARRIVED LATE YESTERDAY</h3>
+                                                    </div>
+                                                    <div id="late_yesterday" class="modStatspan">34</div>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                          
+                                        </div> -->
+                                        <!-- <div class="row">
+                                            <div class="col-md-2" style="width: 150px !important;">
+                                              <div class="venuerow">
+                                                  <div class="modStat">
+                                                      <div class="modstattitle">
+                                                          <h3>LEFT EARLY TODAY</h3>
+                                                      </div>
+                                                      <div id="early_left_today" class="modStatspan">23</div>
+                                                  </div>
+                                              </div>
+                                            </div>
+                        
+                                            <div class="col-md-2" style="width: 150px !important;">
+                                              <div class="venuerow">
+                                                  <div class="modStat">
+                                                    <div class="modstattitle">
+                                                        <h3>LEFT EARLY YESTERDAY</h3>
+                                                    </div>
+                                                    <div id="early_left_yesterday" class="modStatspan">34</div>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                          
+                                        </div> -->
+                                        <br/>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="chart-stage">
+                                                <div id="most_lateness_list"><img src="/var/www/hiphub/public/report/graph_images/lateness_graph02.png" width="200" height="180" /></div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="chart-stage">
+                                                <div id="least_lateness_list"><img src="/var/www/hiphub/public/report/graph_images/lateness_graph03.png" width="200" height="180" /></div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="chart-stage">
+                                                <div id="most_early_leaving"><img src="/var/www/hiphub/public/report/graph_images/lateness_graph04.png" width="200" height="180" /></div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="chart-stage">
+                                                <div id="least_early_leaving"><img src="/var/www/hiphub/public/report/graph_images/lateness_graph05.png" width="200" height="180" /></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>
+                              
+                    </div>
+                  </div>
+                </div>
+
+
+            </div>
+            </div>
+              </div>
+
+
+          </div>
+        </div>
+      
+    
+  </body>
+
+    
+</html>
