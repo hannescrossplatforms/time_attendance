@@ -12,23 +12,23 @@
 */
 
 // Test Routes
-//Route::get('/test', array('as' => 'home', function () { 
+//Route::get('/test', array('as' => 'home', function () {
 //    return View::make('test');
 //}));
 
 // Test Routes
-Route::get('/test', array('as' => 'home', function () { 
+Route::get('/test', array('as' => 'home', function () {
     return View::make('pdfreport.absence_report');
 }));
 
 // Login Routes
-Route::get('/', array('as' => 'home', function () { 
+Route::get('/', array('as' => 'home', function () {
     $data = array();
     $data["systemstate"] = \DB::table('systemconfig')->where('name', '=', "systemstate")->first()->value;
     return View::make('login')->with('data', $data);
 }));
 
-Route::get('/support', array('as' => 'support', function () { 
+Route::get('/support', array('as' => 'support', function () {
     $data = array();
     $data['currentMenuItem'] = "Support";
     return View::make('support')->with('data', $data);
@@ -49,19 +49,19 @@ Route::post('login', function () {
         );
     // error_log("In POST login : " . print_r($user, true));
     print_r($user, true);
-        
+
         if (Auth::attempt($user)) {
             return Redirect::route('dashboard')
                 ->with('flash_notice', 'You are successfully logged in.');
         }
-        
+
         // authentication failure! lets go back to the login page
         return Redirect::route('login')
             ->with('flash_error', 'Your username/password combination was incorrect.')
             ->withInput();
 });
 
-Route::get('/login_forgotpassword', array('as' => 'login_forgotpassword', function () { 
+Route::get('/login_forgotpassword', array('as' => 'login_forgotpassword', function () {
     return View::make('login_forgotpassword');
 }));
 
@@ -70,10 +70,10 @@ Route::get('logout', array('as' => 'logout', function () {
     return Redirect::route('home')->with('flash_notice', 'You are successfully logged out.');
 }))->before('auth');
 
-Route::get('/viewreportemail', array('as' => 'sendtestemail', function () { 
+Route::get('/viewreportemail', array('as' => 'sendtestemail', function () {
     return View::make('hiptna.reportemail');
 }));
-Route::get('/sendtestemail', array('as' => 'sendtestemail', function () { 
+Route::get('/sendtestemail', array('as' => 'sendtestemail', function () {
     return View::make('testemail');
 }));
 Route::any('/lib_sendtestemail', array('uses' => 'lib\LibController@lib_sendtestemail', 'as' => 'lib_sendtestemail'));
@@ -213,7 +213,7 @@ Route::post('hipwifi_showtabletposprinters', array('uses' => 'hipwifi\HipwifiMon
 Route::get('hipwifi_showmedias/{json?}', array('uses' => 'hipwifi\HipwifiMediaController@showMedias', 'as' => 'hipwifi_showmedias'))->before('auth');
 //new page that lists all brands belonging to a user regardless of if there exist a media entry for the brand or not.
 Route::get('hipwifi_showbrandmedia', array('uses' => 'hipwifi\HipwifiMediaController@showBrands', 'as' => 'hipwifi_showbrandmedia'))->before('auth');
-//editing advert media 
+//editing advert media
 Route::get('hipwifi_editadvertmedia/{id}/{brandid}', array('uses' => 'hipwifi\HipwifiMediaController@editAdvertMedia', 'as' =>'hipwifi_editadvertmedia'))->before('auth');
 Route::post('hipwifi_editadvertmediasave', array('uses' => 'hipwifi\HipwifiMediaController@editAdvertMediaSave', 'as' =>'hipwifi_editadvertmediasave'))->before('auth');
 Route::get('hipwifi_showsinglebrandmedia/{id}', array('uses' => 'hipwifi\HipwifiMediaController@showSingleBrandMedia', 'as' => 'hipwifi_showsinglebrandmedia'))->before('auth');
@@ -337,6 +337,18 @@ Route::any('/hiptna_shownrinstancedashboard', array('uses' => 'hiptna\HiptnaCont
 Route::any('/hiptna_shownonrosterdashboard', array('uses' => 'hiptna\HiptnaController@showNonrosterDashboard', 'as' => 'hiptna_shownonrosterdashboard'))->before('auth');
 Route::any('/hiptna_showimdashboard', array('uses' => 'hiptna\HiptnaController@showImDashboard', 'as' => 'hiptna_showimdashboard'))->before('auth');
 Route::any('/hiptna_showcedashboard', array('uses' => 'hiptna\HiptnaController@showCeDashboard', 'as' => 'hiptna_showcedashboard'))->before('auth');
+Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'showDashboarddownload'))->before('auth');//download test
+Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPdfReport', 'as' => 'createPdfReport'));//auto download test
+Route::any('/autoDownloadPdf', array('uses' => 'hiptna\HiptnaController@autoDownloadPdf', 'as' => 'autoDownloadPdf'));//auto download test
+Route::any('/generatePdf', array('uses' => 'hiptna\HiptnaController@generatePdf', 'as' => 'generatePdf'));//auto download test
+
+// HipPickNPay routes //////////////////////////////////////////////////////////////
+Route::any('/hiptna_showdashboard/{instance?}', array('uses' => 'hiptna\HiptnaController@showDashboard', 'as' => 'hippnp_showdashboard'))->before('auth');
+Route::any('/hiptna_showinstancedashboard', array('uses' => 'hiptna\HiptnaController@showInstanceDashboard', 'as' => 'hippnp_showinstancedashboard'))->before('auth');
+Route::any('/hiptna_shownrinstancedashboard', array('uses' => 'hiptna\HiptnaController@showNrInstanceDashboard', 'as' => 'hippnp_shownrinstancedashboard'))->before('auth');
+Route::any('/hiptna_shownonrosterdashboard', array('uses' => 'hiptna\HiptnaController@showNonrosterDashboard', 'as' => 'hippnp_shownonrosterdashboard'))->before('auth');
+Route::any('/hiptna_showimdashboard', array('uses' => 'hiptna\HiptnaController@showImDashboard', 'as' => 'hippnp_showimdashboard'))->before('auth');
+Route::any('/hiptna_showcedashboard', array('uses' => 'hiptna\HiptnaController@showCeDashboard', 'as' => 'hippnp_showcedashboard'))->before('auth');
 Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'showDashboarddownload'))->before('auth');//download test
 Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPdfReport', 'as' => 'createPdfReport'));//auto download test
 Route::any('/autoDownloadPdf', array('uses' => 'hiptna\HiptnaController@autoDownloadPdf', 'as' => 'autoDownloadPdf'));//auto download test

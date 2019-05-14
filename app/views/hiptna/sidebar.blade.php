@@ -42,7 +42,9 @@
               <li @if ( $data['currentMenuItem'] == "Dashboard" ) class="active" @endif><a href="{{ url('hiptna_showdashboard'); }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
               <div id="instance_menus" style="display: none">
                   <ul class="subNav2">
+
                     <!-- <li><a href="{{ url('hiptna_showdashboard'); }}/IM">IM Instance @if ( Session::get('currentInstance') == "IM" ) * @endif</a></li> -->
+                    <li><a href="{{ url('hippnp_showdashboard'); }}/IM">Pick n Pay @if ( Session::get('currentInstance') == "IM" ) * @endif</a></li>
                     <li><a href="{{ url('hiptna_showdashboard'); }}/CE">CE Instance @if ( Session::get('currentInstance') == "CE" ) * @endif</a></li>
                   </ul>
               </div>
