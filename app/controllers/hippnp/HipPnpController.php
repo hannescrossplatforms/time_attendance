@@ -57,7 +57,7 @@ class HipPnpController extends \BaseController {
         // } else {
 
             Session::put('currentInstance', 'NONE');
-            return \View::make('hiptna.showmaindashboard')->with('data', $data);
+            return \View::make('hippnp.showmaindashboard')->with('data', $data);
 
         // }
     }

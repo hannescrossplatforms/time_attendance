@@ -37,24 +37,24 @@
              <input type="hidden" id="url" name="" value="{{$url}}">
 
             <div class="container-fluid">
-    
 
-     
+
+
 
     <div class="row">
 
 
-        
-    </div> 
+
+    </div>
 
     <br><br>
-    
+
 
     <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 
     <script src="{{ asset('js/jquery-2.1.4.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script> 
+    <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 
     <script src="{{ asset('js/fusioncharts.js') }}"></script>
     <script src="{{ asset('js/fusioncharts.charts.js') }}"></script>
@@ -71,12 +71,12 @@
     <script src="{{ asset('js/prefixfree.min.js') }}"></script>
 
 
-    
-            
+
+
         </div>
       </div>
     </div>
-  
+
   </body>
 
 @stop
