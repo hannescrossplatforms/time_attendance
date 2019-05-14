@@ -354,6 +354,18 @@ Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPd
 Route::any('/autoDownloadPdf', array('uses' => 'hiptna\HiptnaController@autoDownloadPdf', 'as' => 'autoDownloadPdf'));//auto download test
 Route::any('/generatePdf', array('uses' => 'hiptna\HiptnaController@generatePdf', 'as' => 'generatePdf'));//auto download test
 
+// HipBidvest routes //////////////////////////////////////////////////////////////
+Route::any('/hiptna_showdashboard/{instance?}', array('uses' => 'hiptna\HiptnaController@showDashboard', 'as' => 'hipbidvest_showdashboard'))->before('auth');
+Route::any('/hiptna_showinstancedashboard', array('uses' => 'hiptna\HiptnaController@showInstanceDashboard', 'as' => 'hipbidvest_showinstancedashboard'))->before('auth');
+Route::any('/hiptna_shownrinstancedashboard', array('uses' => 'hiptna\HiptnaController@showNrInstanceDashboard', 'as' => 'hipbidvest_shownrinstancedashboard'))->before('auth');
+Route::any('/hiptna_shownonrosterdashboard', array('uses' => 'hiptna\HiptnaController@showNonrosterDashboard', 'as' => 'hipbidvest_shownonrosterdashboard'))->before('auth');
+Route::any('/hiptna_showimdashboard', array('uses' => 'hiptna\HiptnaController@showImDashboard', 'as' => 'hipbidvest_showimdashboard'))->before('auth');
+Route::any('/hiptna_showcedashboard', array('uses' => 'hiptna\HiptnaController@showCeDashboard', 'as' => 'hipbidvest_showcedashboard'))->before('auth');
+Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'showDashboarddownload'))->before('auth');//download test
+Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPdfReport', 'as' => 'createPdfReport'));//auto download test
+Route::any('/autoDownloadPdf', array('uses' => 'hiptna\HiptnaController@autoDownloadPdf', 'as' => 'autoDownloadPdf'));//auto download test
+Route::any('/generatePdf', array('uses' => 'hiptna\HiptnaController@generatePdf', 'as' => 'generatePdf'));//auto download test
+
 // Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'hiptna_showdashboard'))->before('auth');//download test
 // Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPdfReport', 'as' => 'hiptna_showdashboard'))->before('auth');//auto download test
 Route::any('/pdftest', array('uses' => 'hiptna\HiptnaController@pdftest', 'as' => 'pdftest'));//auto download test
