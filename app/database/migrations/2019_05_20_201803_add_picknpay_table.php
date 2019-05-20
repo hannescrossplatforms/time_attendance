@@ -35,7 +35,7 @@ class AddPicknpayTable extends Migration {
             'name' => 'PickNPay',
             'store' => 'Milnerton',
             'category' => 'Food',
-            'start_time' => $dateTimeString,
+            'start_time' => $startDateTimeString,
             'end_time' => $endDateTimeString,
             'dwell_time' => "100"
         ]);
