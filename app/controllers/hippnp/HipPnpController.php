@@ -14,7 +14,7 @@ use Session;
 // use App\models\Reportrecipients
 // use BaseController;
 
-class HiptnaController extends \BaseController {
+class HipPnpController extends \BaseController {
 
 
     public function showDashboard($instance = null)
