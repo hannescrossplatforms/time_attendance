@@ -16,7 +16,7 @@ use Session;
 
 class HiptnaController extends \BaseController {
 
-
+    
     public function showDashboard($instance = null)
     {
 
@@ -49,22 +49,22 @@ class HiptnaController extends \BaseController {
         // $instance = "IM";
 
 
-        // if($instance) {
+        if($instance) {
 
-        //     Session::put('currentInstance', $instance);
-        //     if($instance == "NR01" || $instance == "NR02" ) {
-        //         return Redirect::action('hiptna\HiptnaController@showNrInstanceDashboard');
-        //     } else {
-        //         return Redirect::action('hiptna\HiptnaController@showInstanceDashboard');
-        //     }
+            Session::put('currentInstance', $instance);
+            if($instance == "NR01" || $instance == "NR02" ) {
+                return Redirect::action('hiptna\HiptnaController@showNrInstanceDashboard');
+            } else {
+                return Redirect::action('hiptna\HiptnaController@showInstanceDashboard');
+            }
+            
 
-
-        // } else {
+        } else {
 
             Session::put('currentInstance', 'NONE');
             return \View::make('hiptna.showmaindashboard')->with('data', $data);
 
-        // }
+        }
     }
 
     public function selectDashboard()
@@ -72,7 +72,7 @@ class HiptnaController extends \BaseController {
 
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
-
+        
         return \View::make('hiptna.showmaindashboard')->with('data', $data);
     }
 
@@ -96,11 +96,11 @@ class HiptnaController extends \BaseController {
         return $instance;
     }
 
-    public function getTnaInstanceSettings()
+    public function getTnaInstanceSettings() 
     {
 
         $instance = $this->getTnaInstancePrefix();
-
+        
         $settings["lateness_threshold"]         =       $instance.'lateness_threshold';
         $settings["proximity_target"]           =       $instance.'proximity_target';
         $settings["tnaproximitydistance_a"]     =       $instance.'tnaproximitydistance_a';
@@ -111,7 +111,7 @@ class HiptnaController extends \BaseController {
         $settings["tnaproximitytime_c"]         =       $instance.'tnaproximitytime_c';
         $settings["late_sms_trigger"]           =       $instance.'late_sms_trigger';
         $settings["absence_sms_trigger"]        =       $instance.'absence_sms_trigger';
-
+        
         $settings["start_time"]                 =       $instance.'start_time';
 
         return $settings;
@@ -129,7 +129,7 @@ class HiptnaController extends \BaseController {
         }
 
         return $staff_table;
-    }
+    } 
 
     public function showInstanceDashboard()
     {
@@ -146,12 +146,12 @@ class HiptnaController extends \BaseController {
         $data['staff_week'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('attendance', '=', "present")->where('instance', '=', $currentInstance )->get()->count();
         $data['staff_month'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('first day of this month')))->where('attendance', '=', "present")->where('instance', '=', $currentInstance )->get()->count();
 //        print_r($data);die("here");
-        $cons_absent = \Timeandattendance::select('date')->where('attendance', '!=', "present")->where('instance', '=', $currentInstance )->orderBy('date', 'desc')->first();
+        $cons_absent = \Timeandattendance::select('date')->where('attendance', '!=', "present")->where('instance', '=', $currentInstance )->orderBy('date', 'desc')->first();  
         $start = strtotime($cons_absent->date);
         $end = strtotime(date('Y-m-d'));
         $data['cons_absent'] = ceil(abs($end - $start) / 86400)-1;
 
-        $cons_lateness = \Timeandattendance::select('date')->where('punctuality', '>', $lateness_threshold)->where('instance', '=', $currentInstance)->orderBy('date', 'desc')->first();
+        $cons_lateness = \Timeandattendance::select('date')->where('punctuality', '>', $lateness_threshold)->where('instance', '=', $currentInstance)->orderBy('date', 'desc')->first();  
         $start = strtotime($cons_lateness->date);
         $end = strtotime(date('Y-m-d'));
         $data['cons_lateness'] = ceil(abs($end - $start) / 86400)-1;
@@ -183,8 +183,8 @@ class HiptnaController extends \BaseController {
         $data['wsproximity_graph'] = json_encode($staff_wsproximity);
         $data['report_period']      =   "Report for ".date('Y-m-d',strtotime('last monday'))." to ". date('Y-m-d');
         $data['report_name_date']   =   "day_".date('Y-m-d',strtotime('last monday'))."_".date('Y-m-d');
-
-
+        
+                 
 
 
         //echo '<pre>';
@@ -202,21 +202,21 @@ class HiptnaController extends \BaseController {
 
         $settings = $this->getTnaInstanceSettings();
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
-
+        
         $data['staff_month'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('first day of this month')))->where('instance', '=', $currentInstance )->groupBy('external_user_id')->get()->count();
 //        print_r($data);die("here");
 
-        $cons_lateness = \Timeandattendance::select('date')->where('punctuality', '>', $lateness_threshold)->where('instance', '=', $currentInstance)->orderBy('date', 'desc')->first();
+        $cons_lateness = \Timeandattendance::select('date')->where('punctuality', '>', $lateness_threshold)->where('instance', '=', $currentInstance)->orderBy('date', 'desc')->first();  
         $start = strtotime($cons_lateness->date);
         $end = strtotime(date('Y-m-d'));
         $data['cons_lateness'] = ceil(abs($end - $start) / 86400)-1;
 
         $data['category'] = \Timeandattendance::select('date as label')->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get()->toJson();
 
-
+        
         // Get Lateness Data
         $ontime_data = \Timeandattendance::select(DB::raw('COUNT(*) as count'), DB::raw('COUNT( CASE WHEN  `punctuality` <= '.$lateness_threshold.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
-
+        
 //        print_r($ontime_data); die();
         $staff_ontime = array("seriesname" => "Staff on Time", "data" => $ontime_data);
         $late_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `punctuality` > '.$lateness_threshold.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
@@ -224,11 +224,11 @@ class HiptnaController extends \BaseController {
         $lateness_graph = array($staff_ontime, $staff_late);
         $data['lateness_graph'] = json_encode($lateness_graph);
 
-
+        
         $data['report_period']      =   "Report for ".date('Y-m-d',strtotime('last monday'))." to ". date('Y-m-d');
         $data['report_name_date']   =   "day_".date('Y-m-d',strtotime('last monday'))."_".date('Y-m-d');
-
-
+        
+                 
 
 
         //echo '<pre>';
@@ -236,19 +236,19 @@ class HiptnaController extends \BaseController {
 
         return \View::make('hiptna.showdashboard')->with('data', $data);
     }
-
-
+    
+    
     public function pdftest() {
         return $this->generatePdf();
     }
-
+    
     public function generateJson( $period = '' , $currentInstance ) {
-
+        
         $venuefrom              =   '';
         $venueto                =   '';
         $filename               =   'json_result.json';
         $outputfile             =   '';
-
+        
         if( $period == 'lastday' ) {
             $period     =   'daterange';
             $venuefrom  =   date( 'Y-m-d' , strtotime( 'yesterday' ) );
@@ -262,7 +262,7 @@ class HiptnaController extends \BaseController {
             $venuefrom      =   date('Y-m-d',strtotime('first day of last month'));
             $venueto        =   date('Y-m-d',strtotime('last day of last month'));
         }
-
+        
         $json_data      =   $this->periodExceptionchartJsondata( $period , $venuefrom , $venueto , $currentInstance );
         $json_file      =   fopen(base_path().'/public/report/json_file/'.$filename , 'w');
         fwrite( $json_file , $json_data );
@@ -273,12 +273,12 @@ class HiptnaController extends \BaseController {
     /*
      * pdf report generation
      * Generating pdf report for lateness,absence,wxproximity based on current date.
-     * @param
+     * @param 
      * @return .
      */
     public function generatePdf() {
         error_log("generatePdfgeneratePdfgeneratePdfgeneratePdfgeneratePdf");
-
+        
         $day        =   date('D'); //Day Today 'Mon';//
         $date       =   date('d'); //date today '01';//
 
@@ -291,7 +291,7 @@ class HiptnaController extends \BaseController {
         } else {
             $report_period      =       array( 'lastday' );
         }
-
+        
         require app_path().'/lib/PdfReport.php';
         $pdfReport      =   new \PdfReport();
         $count          =   0;
@@ -300,50 +300,50 @@ class HiptnaController extends \BaseController {
             $currentInstance  =         "IM";
             $json_file        =       $this->generateJson( $period , $currentInstance );
             $pdfReport->generateReport( $period , $currentInstance );
-
+            
             Session::set('currentInstance', 'CE');
             $currentInstance  =         "CE";
             $json_file        =       $this->generateJson( $period , $currentInstance );
             $pdfReport->generateReport( $period , $currentInstance );
-
+            
             $count++;
         }
         return "Total number of files created ".$count*3*2;
-
+        
     }
 
         //print preview for dashboard download
     //print preview for dashboard download
     public function showDashboarddownload() {
         $input_data                 =       Input::all();
-
+        
         $data                       =       array();
         $data['currentMenuItem']    =       "Dashboard";
         $data['fusionchartElement'] =       $input_data['myPage'];
         $data['report_name_date']   =       $input_data['report_name_date'];
-
+        
         $currentInstance = Session::get('currentInstance');
         $settings = $this->getTnaInstanceSettings();
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
         $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
-
+        
         $data['staff_week']         =       \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('attendance', '=', "present")->where('instance', '=', $currentInstance )->get()->count();
         $data['staff_month']        =       \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('first day of this month')))->where('attendance', '=', "present")->where('instance', '=', $currentInstance )->get()->count();
 
-        $cons_absent = \Timeandattendance::select('date')->where('attendance', '!=', "present")->orderBy('date', 'desc')->where('instance', '=', $currentInstance )->first();
+        $cons_absent = \Timeandattendance::select('date')->where('attendance', '!=', "present")->orderBy('date', 'desc')->where('instance', '=', $currentInstance )->first();  
         $start = strtotime($cons_absent->date);
         $end = strtotime(date('Y-m-d'));
         $data['cons_absent'] = ceil(abs($end - $start) / 86400)-1;
 
-        $cons_lateness = \Timeandattendance::select('date')->where('punctuality', '>', $lateness_threshold)->where('instance', '=', $currentInstance )->orderBy('date', 'desc')->first();
+        $cons_lateness = \Timeandattendance::select('date')->where('punctuality', '>', $lateness_threshold)->where('instance', '=', $currentInstance )->orderBy('date', 'desc')->first();  
         $start = strtotime($cons_lateness->date);
         $end = strtotime(date('Y-m-d'));
         $data['cons_lateness'] = ceil(abs($end - $start) / 86400)-1;
-
+        
         $data['staff_today']    =   $this->getstafftoday();
-
+       
         if(isset($input_data['printtoken'])) {
-//////////download hiptna.showdashboard_graphview blade page as pdf ////////////////
+//////////download hiptna.showdashboard_graphview blade page as pdf ////////////////        
             $dompdf = \PDF::loadView('hiptna.showdashboard_download', $data);
 //            $pdf->set_paper(DEFAULT_PDF_PAPER_SIZE, 'portrait');
 //            $pdf->get_option('enable_css_float');
@@ -351,14 +351,14 @@ class HiptnaController extends \BaseController {
             return $dompdf->download($filename);
 //            $pdf = $dompdf->output();
 //            $file_location = base_path()."/public/fc_images/pdfreport/".$filename;
-//            file_put_contents($file_location,$pdf);
-        } else {
+//            file_put_contents($file_location,$pdf); 
+        } else { 
 ////////////view printablepage/////////////////
             $data['printButtonToken']   =   TRUE;
             return \View::make('hiptna.showdashboard_graphview', $data);
         }
     }
-
+    
     //download view page as pdf dompdf
     public function showDrilldownDownload() {
         $input_data                 =       Input::all();
@@ -369,10 +369,10 @@ class HiptnaController extends \BaseController {
         $currentInstance            =   Session::get('currentInstance');
         if($currentInstance != "")
             $currentInstance        =   $currentInstance."_";
-        else
+        else 
             $currentInstance        =   "";
-
-        if(isset($input_data['printtoken'])) {
+        
+        if(isset($input_data['printtoken'])) { 
             $dompdf = \PDF::loadView('hiptna.drilldowngraph_download', $data);
             $filename               =       $currentInstance.$input_data['graph_name']."_".$input_data['report_name'].".pdf";
             return $dompdf->download($filename);
@@ -383,7 +383,7 @@ class HiptnaController extends \BaseController {
             return \View::make('hiptna.drilldowngraph_preview', $data);
         }
     }
-
+    
     //download exception report
     public function downloadExceptionReport() {
         $input_data                 =   Input::all();
@@ -391,16 +391,16 @@ class HiptnaController extends \BaseController {
         $data['currentMenuItem']    =   "Dashboard";
         $data['fusionchartElement'] =   $input_data['myPage'];
         $data['graph_name']         =   $input_data['graph_name'];
-
+        
         $currentInstance            =   Session::get('currentInstance');
         if($currentInstance != "")
             $currentInstance        =   $currentInstance."_";
-        else
+        else 
             $currentInstance        =   "";
         if(isset($input_data['printtoken'])) {
             $dompdf = \PDF::loadView('hiptna.drilldowngraph_download', $data);
             $filename               =       $currentInstance.$input_data['graph_name']."_".$input_data['report_name'].".pdf";
-
+           
             return $dompdf->download($filename);
         } else {
             $data['report_name']        =   $input_data['report_name_date'];
@@ -415,7 +415,7 @@ class HiptnaController extends \BaseController {
 
 // Name: hiptnaStaffLookupDownload
 
-// Purpose:  To convert hiptna Staff Lookup view page to a pdf format and enable // download option
+// Purpose:  To convert hiptna Staff Lookup view page to a pdf format and enable // download option 
 // using Dom pdf
 
 // It receive html content and pdf name from the form submission, pass it to     // the download preview page and to the download page. Enable pdf download using // Dom pdf.
@@ -424,7 +424,7 @@ class HiptnaController extends \BaseController {
 
 // Last updated at 4-11-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////// 
 
 
     public function hiptnaStaffLookupDownload() {
@@ -432,9 +432,9 @@ class HiptnaController extends \BaseController {
         $data                       =       array();
         $data['currentMenuItem'] = "Dashboard";
         $data['fusionchartElement'] =  $input_data['myPageone'];
-        $data['report_name']         =   $input_data['report_name'];
+        $data['report_name']         =   $input_data['report_name'];         
 
-
+        
         if(isset($input_data['printtoken'])) {
             //return \View::make('hiptna.mc_stafflookup_download', $data);
             $dompdf = \PDF::loadView('hiptna.mc_stafflookup_download', $data);
@@ -445,29 +445,29 @@ class HiptnaController extends \BaseController {
             return $dompdf->download($filename);
 //            $pdf = $dompdf->output();
 //            $file_location = base_path()."/public/fc_images/pdfreport/".$filename;
-//            file_put_contents($file_location,$pdf);
+//            file_put_contents($file_location,$pdf); 
         } else {
-
+                    
             $data['printButtonToken']   =   TRUE;
             return \View::make('hiptna.mc_stafflookup_download_preview', $data);
         }
     }
 
 
-
-
+    
+    
     //convertSVGtoPNG
     public function convertSvgToImage() {
         $data                       =       array();
         $input_data                 =       Input::all();
-
+        
         $fusionchart_spans                  =   $input_data['fusionchartspans'];
-        $chart_svg                          =   "";
+        $chart_svg                          =   "";   
         $images                         =   array();
         $svgs                           =   array();
         $i                              =   0;
         //converting svg code to image
-        foreach($fusionchart_spans as $key => $charts) {
+        foreach($fusionchart_spans as $key => $charts) { 
             $i++;
             $chart_svg                 .=       $charts;
             $path                       =       base_path()."/public/fc_images/svg_temp/";
@@ -477,11 +477,11 @@ class HiptnaController extends \BaseController {
             fclose($svg_file);
             $svgs["img_".$key]               =   $fileName;
         }
-
+        
 
 /////////////for dev1 pdfinvestigation /////////////
             $svgpath                    =   base_path().'/public/fc_images/svg_temp/';
-            $imgpath                    =   base_path().'/public/fc_images/image_temp/';
+            $imgpath                    =   base_path().'/public/fc_images/image_temp/';            
         foreach($svgs as $key => $val) {
             //shell excution for svg to image
             $cmd                        =   'inkscape -f '.$svgpath.$val.'.svg -e '.$imgpath.$val.'.png';
@@ -489,10 +489,10 @@ class HiptnaController extends \BaseController {
             $images[$key]               =   $val.".png";
             unlink($svgpath.$val.'.svg');
         }
-
+        
         $response                       =   array('status' => "success" , 'result_img' => $images);
         print_r(json_encode($response));exit;
-
+        
     }
 
     public function showManagementConsole()
@@ -508,7 +508,7 @@ class HiptnaController extends \BaseController {
         $data = array();
         $data['currentMenuItem'] = "Settings";
         $currentInstance    =       Session::get('currentInstance');
-
+        
         $settings           =       $this->getTnaInstanceSettings();
 
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
@@ -518,7 +518,7 @@ class HiptnaController extends \BaseController {
         if( $currentInstance == "NR01" || $currentInstance == "NR02" ) {
             $data["start_time"]     = \Tnasetting::where('name', 'like', $settings["start_time"])->first()->value;
         } else {
-            $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
+            $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;        
             $data["proximity_target"] = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
             $data["tnaproximitydistance_a"] = \Tnasetting::where('name', 'like', $settings["tnaproximitydistance_a"])->first()->value;
             $data["tnaproximitytime_a"] = \Tnasetting::where('name', 'like', $settings["tnaproximitytime_a"])->first()->value;
@@ -555,7 +555,7 @@ class HiptnaController extends \BaseController {
             $tnaproximitytime_c = Input::get('tnaproximitytime_c');
             $late_sms_trigger = Input::get('late_sms_trigger');
             $absence_sms_trigger = Input::get('absence_sms_trigger');
-
+            
             \Tnasetting::where( 'name', 'like', $settings['lateness_threshold'] )->update(['value' => $lateness_threshold]);
             \Tnasetting::where( 'name', 'like', $settings['proximity_target'] )->update(['value' => $proximity_target]);
             \Tnasetting::where( 'name', 'like', $settings['tnaproximitydistance_a'] )->update(['value' => $tnaproximitydistance_a]);
@@ -578,11 +578,11 @@ class HiptnaController extends \BaseController {
     {
 
         $objData            =       json_decode(\Input::get("newrecord"));
-        $currentInstance    =       Session::get('currentInstance');
+        $currentInstance    =       Session::get('currentInstance'); 
         $objReport = new \Reportrecipients();
 
         // Shafeeque - how does this get set if it is before the variable definition? Did you test this?
-        // Have you added the IM / CE fields in the database
+        // Have you added the IM / CE fields in the database       
         if($currentInstance == 'IM')  {
             $objReport->IM = 1;
             $objReport->CE = 0;
@@ -590,8 +590,8 @@ class HiptnaController extends \BaseController {
             $objReport->CE = 1;
             $objReport->IM = 0;
         }
-
-
+        
+         
         $objReport->name = $objData->add_name;
         $objReport->email = $objData->add_email;
         $objReport->absence = $objData->add_absence;
@@ -599,11 +599,11 @@ class HiptnaController extends \BaseController {
         $objReport->ws_proximity = $objData->add_ws_proximity;
         $objReport->daily = $objData->add_daily;
         $objReport->weekly = $objData->add_weekly;
-        $objReport->monthly = $objData->add_monthly;
+        $objReport->monthly = $objData->add_monthly;                
         $objReport->save();
 
         $lastInsertedID =$objReport->id;
-
+        
         $reportJson =  \Reportrecipients::where('id',$lastInsertedID)->get();
 
         foreach ($reportJson as $value) {
@@ -643,9 +643,9 @@ class HiptnaController extends \BaseController {
                 $monthly = "";
             }
 
+            
 
-
-            $rows = '<tr>\
+            $rows = '<tr>\                    
                     <td class="tnastafftd_name"> <input id="add_name_'.$value->id.'" class="form-control no-radius" placeholder="Name"  type="text" value="'.$value->name.'"> </td>\
                     <td class="tnastafftd_email"> <input id="add_email_'.$value->id.'" class="form-control no-radius" placeholder="Email" type="text" value="'.$value->email.'"> </td>\
                     <td class="tnastafftd_absence"> <input id="add_absence_'.$value->id.'" type="checkbox" value="" '.$absence.'> <br>Absence  </td>\
@@ -659,7 +659,7 @@ class HiptnaController extends \BaseController {
                   </tr>';
             }
         $data = array('row'=>$rows);
-        print_r(json_encode($data));
+        print_r(json_encode($data));    
 
 
     }
@@ -683,9 +683,9 @@ class HiptnaController extends \BaseController {
     public function updateReportUser()
     {
         //echo "hi";
-
-        $objData = json_decode(\Input::get("newrecord"));
-
+        
+        $objData = json_decode(\Input::get("newrecord"));       
+        
         $objUpdateReport = \Reportrecipients::find($objData->update_id);
         $objUpdateReport->name = $objData->update_name;
         $objUpdateReport->email = $objData->update_email;
@@ -694,12 +694,12 @@ class HiptnaController extends \BaseController {
         $objUpdateReport->ws_proximity = $objData->update_ws_proximity;
         $objUpdateReport->daily = $objData->update_daily;
         $objUpdateReport->weekly = $objData->update_weekly;
-        $objUpdateReport->monthly = $objData->update_monthly;
+        $objUpdateReport->monthly = $objData->update_monthly;                
         $result = $objUpdateReport->save();
 
         //$queries = DB::getQueryLog();
-        if($result) {
-
+        if($result) {  
+         
             $data = array('message' => "success");
 
         } else {
@@ -707,7 +707,7 @@ class HiptnaController extends \BaseController {
             $data = array('message' => "Faild");
 
         }
-
+        
         print_r(json_encode($data));
 
     }
@@ -722,8 +722,8 @@ class HiptnaController extends \BaseController {
 
         $data = array( 'id' => $objData->id );
         print_r(json_encode($data));
-
-
+       
+        
     }
 
 
@@ -761,7 +761,7 @@ class HiptnaController extends \BaseController {
         }else{
             $staff =  new \Staff();
         }
-
+        
         $staffdata =  $staff->where('surname', 'like', $surname)
                         ->where('surname', '<>', "")
                         ->where('firstnames', 'like', $firstnames)
@@ -782,7 +782,7 @@ class HiptnaController extends \BaseController {
         }
         $maxDays=date('t');
         $currentDayOfMonth=date('j');
-
+        
         /*$staff_count = \Staff::where('external_user_id', '!=', "Vacant")->get()->count(DB::raw('DISTINCT external_user_id'));
         $total_days = $currentDayOfMonth * $staff_count;*/
         $total_days = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('first day of this month')))->where('external_user_id', '!=', "Vacant")->where('instance', '=', $currentInstance)->get()->count();
@@ -838,9 +838,9 @@ class HiptnaController extends \BaseController {
             ->where('beaconmessages.event_code', "=","HIPJAM0002")
             ->get()->first();
         } else {
-            $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
-            $staff_table = $this->getStaffTable();
-
+            $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value; 
+            $staff_table = $this->getStaffTable();  
+            
             $staff_present = \Beaconmessage::join($staff_table , $staff_table.'.external_user_id','=', 'beaconmessages.external_user_id')
             ->select(array(DB::raw('count(distinct beaconmessages.external_user_id) as unique_count')))
             ->where('beaconmessages.created_at', ">", date('Y-m-d',strtotime('today midnight')))
@@ -864,30 +864,30 @@ class HiptnaController extends \BaseController {
 
         $rosterObj          =   $this->getRosterTableObject();
         $instance           =   $this->getTnaInstancePrefix();
-
+        
         $staff_expect       =   $rosterObj->select( $instance.'roster.day_start' )
             ->where( $instance.'roster.date' , "=" , date( "Y-m-d" ))
             ->where( $instance.'roster.external_user_id' , '!=', 'vacant' )
             ->groupBy( $instance.'roster.external_user_id' )
-            ->get();
-
+            ->get(); 
+        
         $count = 0;
         if(count($staff_expect) > 0){
             foreach ($staff_expect as $value) {
-                if (preg_match('/^\d{2}:\d{2}$/', $value['day_start'])) {
+                if (preg_match('/^\d{2}:\d{2}$/', $value['day_start'])) {     
                     $count++;
                 }/* else { print_r($value['day_start']); }*/
             }
         }
         return $count;
     }
-
+    
     /*
      * Get Roster table object depends on current instance.
      */
     public function getRosterTableObject() {
         $currentInstance = Session::get('currentInstance');
-
+        
         if($currentInstance == 'IM') {
             $rosterTableObject  =    new \Imroster();
         } else if($currentInstance == 'CE') {
@@ -897,8 +897,8 @@ class HiptnaController extends \BaseController {
         }
         return $rosterTableObject;
     }
-
-
+    
+    
 
     public function getabsentstafftoday () {
 
@@ -937,7 +937,7 @@ class HiptnaController extends \BaseController {
             // return $staff_present["unique_count"];
         $staff_lateness = $this->getStaffLateByDay(date('Y-m-d',strtotime('today midnight')));
         return sizeof($staff_lateness);
-
+        
     }
 
     public function getarrivedlateyesterday() {
@@ -945,7 +945,7 @@ class HiptnaController extends \BaseController {
         $settings = $this->getTnaInstanceSettings();
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
         $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
-
+                
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"] )->first()->value;
         $absent_data = \Timeandattendance::select(array(DB::raw('COUNT( CASE WHEN  `punctuality` > '.$lateness_threshold.' THEN 0 END ) AS value')))
                 ->where('date', "=", date('Y-m-d',strtotime('yesterday')))
@@ -963,7 +963,7 @@ class HiptnaController extends \BaseController {
                 ->where('staff.external_user_id','!=', 'vacant')
                 ->where('beaconmessages.event_code', "=","HIPJAM0002")
                 ->get()->first();
-
+        
                 return $proximity_data["unique_count"];*/
                 return 0;
     }
@@ -988,7 +988,7 @@ class HiptnaController extends \BaseController {
                 ->where('date', "=", date('Y-m-d',strtotime('yesterday')))
                 ->where('instance', '=', Session::get('currentInstance'))
                 ->get()->first();
-
+        
                 return $earlyleft_data["value"];
     }
 
@@ -1023,7 +1023,7 @@ class HiptnaController extends \BaseController {
           "send_date" => "now", // YYYY-MM-DD HH:mm  OR 'now'
           "ignore_user_timezone" => true, // or false
           "content" => $content,
-          "data" => array("url"=> $destFullName),
+          "data" => array("url"=> $destFullName), 
           "devices" => array($push_hwid)
           ));
 
@@ -1032,7 +1032,7 @@ class HiptnaController extends \BaseController {
         $request = array(
           "application" => "FDDCE-9D44D",
           "auth" => "lHmQSQCaKouW8KBv8ayU2mkuCs2H4t4CeOGqGSdoE7zhpAXiPzBt1SEORBO62e0kB/jyj9vQkVOxPGzZpICV",
-          "notifications" => $notifications,
+          "notifications" => $notifications, 
           );
         $jsonData = json_encode(array("request" => $request));
         $jsonData = stripslashes($jsonData);
@@ -1040,9 +1040,9 @@ class HiptnaController extends \BaseController {
         error_log("sendPushNotification jsonData = $jsonData");
         error_log("sendPushNotification jsonData = $jsonData");
 
-        $ch = curl_init('https://cp.pushwoosh.com/json/1.3/createMessage');
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ch = curl_init('https://cp.pushwoosh.com/json/1.3/createMessage');                                                                      
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
@@ -1097,16 +1097,16 @@ class HiptnaController extends \BaseController {
             $fullpath = $assetsdir->value . 'hiptna/images/';
 
             // Get Mobile File ///////////////////////////////////////////
-            $sourceFullName = $fullpath . 'preview' . '.' . $mb_ext;
+            $sourceFullName = $fullpath . 'preview' . '.' . $mb_ext; 
             $destFullName = $fullpath . $id . '.' . $mb_ext;
 
             error_log("addMediaSave: MB : sourceFullName : $sourceFullName :::: destFullName : $destFullName");
             \File::move($sourceFullName, $destFullName);
-
+        
             $assetsserver = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
             $assetsPath = $assetsserver->value . 'hiptna/images/';
-            $assetsFullPath = $assetsPath . $id . '.' . $mb_ext;
-
+            $assetsFullPath = $assetsPath . $id . '.' . $mb_ext; 
+            
             $pushnotificationObj->image_url = $assetsFullPath;
             $pushnotificationObj->save();
 
@@ -1135,7 +1135,7 @@ class HiptnaController extends \BaseController {
         //print_r('kkkk'); die();
         $push_hwid = "";
         $content = Input::get('content');
-        $hubs = Input::get('hub_names');
+        $hubs = Input::get('hub_names'); 
         $channels = Input::get('channels');
         error_log("sendGroupNotifications : hubs : " . print_r($hubs, true));
         error_log("sendGroupNotifications : channels : " . print_r($channels, true));
@@ -1163,10 +1163,10 @@ class HiptnaController extends \BaseController {
         $pushnotificationObj->save();
 //////////////save value to instantpushes ends//////////////////
 
-
+       
         $assetsserver = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
         $assetsUrl = $assetsserver->value . 'hiptna/images/';
-        $assetsUrlFullPath = $assetsUrl . 'im_' . $image_id . '.' . $mb_ext;
+        $assetsUrlFullPath = $assetsUrl . 'im_' . $image_id . '.' . $mb_ext; 
 
         $currentInstance = Session::get('currentInstance');
         if($currentInstance == 'IM'){
@@ -1226,7 +1226,7 @@ class HiptnaController extends \BaseController {
         }else if($period == 'repthismonth'){
             $start = date('Y-m-d',strtotime('first day of this month'));
             $end = date('Y-m-d');
-            $rep_name_period    =   "month";
+            $rep_name_period    =   "month";            
         }else if($period == 'replastmonth'){
             $start = date('Y-m-d',strtotime('first day of last month'));
             $end = date('Y-m-d',strtotime('last day of last month'));
@@ -1240,7 +1240,7 @@ class HiptnaController extends \BaseController {
             $end = Input::get('end');
             $rep_name_period    =   "date";
         }
-
+        
         $settings = $this->getTnaInstanceSettings();
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
 
@@ -1290,16 +1290,16 @@ class HiptnaController extends \BaseController {
             $staff_wsproximity = array($staff_proximal, $staff_away);
             $data['wsproximity_graph'] = $staff_wsproximity;
         }
-
-
+        
+        
         $data['report_period']      =   "Report for ".$start." to ". $end;
         $data['report_name_date']   =   $rep_name_period."_".$start."_".$end;
 
 
         $json = json_encode($data);
-
+        
         print_r($json);
-
+        
     }
 
     public function isStaffMemberAbsent($staffmember, $staff_present) {
@@ -1324,7 +1324,7 @@ class HiptnaController extends \BaseController {
             array_push($data, $record);
         }
 
-        return $data;
+        return $data;        
     }
 
 
@@ -1362,7 +1362,7 @@ class HiptnaController extends \BaseController {
                 $staffmember["value"] = 1;
                 $staffmember["csvcount"] = 1;
                 array_push($staff_absent, $staffmember);
-            }
+            } 
         }
 
 
@@ -1374,11 +1374,11 @@ class HiptnaController extends \BaseController {
 
         $tna = new \Tna();
         $dt_date = new \DateTime($date);
-
+        
         $currentInstance            =   Session::get('currentInstance');
         $settings = $this->getTnaInstanceSettings();
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
-        $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
+        $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;   
 
         // $all_staff = \Staff::select( DB::raw('CONCAT(staff.surname," ",staff.firstnames) As label'), DB::raw('staff.id As value') , '*' ) ->where('staff.external_user_id','!=', 'vacant')->get()->toArray();
 
@@ -1392,7 +1392,7 @@ class HiptnaController extends \BaseController {
         }
         /*$all_staff = \Staff::where('staff.external_user_id','!=', 'vacant')->get()->toArray();*/
         $late_staff = array();
-
+        
         foreach ($all_staff as $staffmember) {
             // error_log("getStaffLateByDay : surname = " . $staffmember["surname"]);
             $chartrecord = array();
@@ -1431,8 +1431,8 @@ class HiptnaController extends \BaseController {
             usort($staff_absent1, function($a, $b) {
                 return $b['value'] - $a['value'];
             });
-            $data['staff_absent'] = $staff_absent1;
-
+            $data['staff_absent'] = $staff_absent1; 
+        
 
             // $staff_lateness = \Timeandattendance::join('staff' , 'staff.external_user_id','=', 'timeandattendance.external_user_id')->select( DB::raw('CONCAT(staff.surname," ",staff.firstnames) As label') , DB::raw(' CASE WHEN timeandattendance.punctuality >= 5 THEN Sum( timeandattendance.punctuality ) END  AS value'), 'timeandattendance.external_user_id' )->where('timeandattendance.date', ">=", date('Y-m-d',strtotime('last monday')))->where('timeandattendance.external_user_id', '!=', "Vacant")->where('timeandattendance.punctuality', '>=', '5')->groupBy('timeandattendance.external_user_id')->get()->toArray();
             $staff_lateness = $this->getStaffLateByDay(date('Y-m-d',strtotime('today midnight')));
@@ -1440,10 +1440,10 @@ class HiptnaController extends \BaseController {
             usort($staff_lateness1, function($a, $b) {
                 return $b['value'] - $a['value'];
             });
-            $data['staff_lateness'] = $staff_lateness1;
+            $data['staff_lateness'] = $staff_lateness1; 
 
             $currentInstance = Session::get('currentInstance');
-            $staff_table = $this->getStaffTable();
+            $staff_table = $this->getStaffTable();  
 
             $staff_proximity = \Timeandattendance::join($staff_table , $staff_table.'.external_user_id','=', 'timeandattendance.external_user_id')
             ->select( DB::raw('CONCAT('.$staff_table.'.surname," ",'.$staff_table.'.firstnames) As label') , DB::raw('timeandattendance.proximity AS value'), 'timeandattendance.external_user_id' )
@@ -1458,7 +1458,7 @@ class HiptnaController extends \BaseController {
             usort($staff_proximity1, function($a, $b) {
                 return $a['value'] - $b['value'];
             });
-            $data['staff_proximity'] = $staff_proximity1;
+            $data['staff_proximity'] = $staff_proximity1; 
 
 
             $staff_early_leaving = \Timeandattendance::join($staff_table , $staff_table.'.external_user_id','=', 'timeandattendance.external_user_id')->select( DB::raw('CONCAT('.$staff_table.'.surname," ",'.$staff_table.'.firstnames) As label') , DB::raw('COUNT( CASE WHEN timeandattendance.shift_end < "17:00" THEN 0 END ) AS value'), 'timeandattendance.external_user_id' )->where('timeandattendance.date', ">=", date('Y-m-d',strtotime('yesterday midnight')))->where('timeandattendance.external_user_id', '!=', "Vacant")->where('timeandattendance.attendance', '=', "present")->where('timeandattendance.instance', '=', $currentInstance )->groupBy('timeandattendance.external_user_id')->get()->toArray();
@@ -1466,28 +1466,28 @@ class HiptnaController extends \BaseController {
             usort($staff_early_leaving1, function($a, $b) {
                 return $b['value'] - $a['value'];
             });
-            $data['staff_early_leaving'] = $staff_early_leaving1;
-
+            $data['staff_early_leaving'] = $staff_early_leaving1; 
+            
             $data['report_period']      =   "Report for ".date('Y-m-d')." to ". date('Y-m-d');
             $data['report_name_date']   =   "day_".date('Y-m-d')."_".date('Y-m-d');
 
         $json = json_encode($data);
-
+        
         print_r($json);
 
     }
 
     public function set_graphdata($data)
     {
-
+        
         $result = array();
-        foreach ($data as $key => $value) {
+        foreach ($data as $key => $value) { 
             $result[$key] =$value;
             $result[$key]['link'] = "JavaScript:membergraph(".$value['external_user_id'].")";
         }
         return $result;
         /*$res_aray = array();
-        foreach ($data as $key => $value) {
+        foreach ($data as $key => $value) { 
             if(array_key_exists($value->value , $result)) {
                 $result[$value->value] .= ',' . $value->label;
             } else {
@@ -1506,26 +1506,26 @@ class HiptnaController extends \BaseController {
     }
 
     /*
-     *
+     * 
      */
     public function periodExceptionchartJsondata( $period = '' , $venuefrom = '' , $venueto = '' , $currentInstance = '' )
-    {
+    { 
         if( $currentInstance == '') {
             $currentInstance    =       Session::get('currentInstance');
-        } else {
+        } else { 
             $currentInstance    =       $currentInstance;
         }
-
+        
         $settings = $this->getTnaInstanceSettings();
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
         $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
-
+        
         $data               =       array() ;
         $start              =       '';
         $end                =       '';
         $rep_name_period    =       '';
         $return_value       =       FALSE;
-
+        
         if(!isset($period) || empty($period)) {
             $period = Input::get('period');
         } else {
@@ -1537,13 +1537,13 @@ class HiptnaController extends \BaseController {
         } else {
             $start      =   $venuefrom = Input::get('start');
         }
-
+        
         if( isset( $venueto ) && $venueto != "") {
             $end      =   $venueto;
         } else {
             $end        =   $venueto  = Input::get('end');
-        }
-
+        }        
+        
         if($period == 'rep7day'){
             $start = date('Y-m-d',strtotime('last monday'));
             $end = date('Y-m-d');
@@ -1565,7 +1565,7 @@ class HiptnaController extends \BaseController {
         }
 
 
-        $staff_table = $this->getStaffTable();
+        $staff_table = $this->getStaffTable();  
 
         $staff_absent = \Timeandattendance::join($staff_table , $staff_table.'.external_user_id','=', 'timeandattendance.external_user_id')->select( DB::raw('CONCAT('.$staff_table.'.surname," ",'.$staff_table.'.firstnames) As label') , DB::raw('COUNT( CASE WHEN timeandattendance.attendance != "present" THEN 0 END ) AS value'), 'timeandattendance.external_user_id' )->where('timeandattendance.date', ">=", $start)->where('timeandattendance.date', "<=", $end)->where('timeandattendance.external_user_id', '!=', "Vacant")->where('timeandattendance.attendance', '!=', "present")->where('timeandattendance.instance', '=', $currentInstance)->groupBy('timeandattendance.external_user_id')->get()->toArray();
 
@@ -1573,11 +1573,11 @@ class HiptnaController extends \BaseController {
         usort($staff_absent1, function($a, $b) {
             return $b['value'] - $a['value'];
         });
-        $data['staff_absent'] = $staff_absent1;
+        $data['staff_absent'] = $staff_absent1; 
 
         error_log("periodExceptionchartJsondata start : " . $start);
         error_log("periodExceptionchartJsondata lateness_threshold : " . $lateness_threshold);
-
+    
         error_log("periodExceptionchartJsondata start = $start");
         error_log("periodExceptionchartJsondata end = $end");
         error_log("periodExceptionchartJsondata lateness_threshold = $lateness_threshold");
@@ -1596,7 +1596,7 @@ class HiptnaController extends \BaseController {
         usort($staff_lateness1, function($a, $b) {
             return $b['value'] - $a['value'];
         });
-        $data['staff_lateness'] = $staff_lateness1;
+        $data['staff_lateness'] = $staff_lateness1; 
 
         $staff_proximity = \Timeandattendance::join($staff_table , $staff_table.'.external_user_id','=', 'timeandattendance.external_user_id')
         ->select( DB::raw('CONCAT('.$staff_table.'.surname," ",'.$staff_table.'.firstnames) As label') , DB::raw('COUNT( CASE WHEN timeandattendance.proximity < '.$proximity_target.' THEN 0 END ) AS value'), 'timeandattendance.external_user_id' )
@@ -1617,16 +1617,16 @@ class HiptnaController extends \BaseController {
         usort($staff_early_leaving1, function($a, $b) {
             return $b['value'] - $a['value'];
         });
-        $data['staff_early_leaving'] = $staff_early_leaving1;
+        $data['staff_early_leaving'] = $staff_early_leaving1; 
         $data['report_period']      =   "Report for " . $start . " to " . $end;
         $data['report_name_date']   =   $rep_name_period."_".$start."_".$end;
         $json = json_encode($data);
-
+        
         if($return_value == TRUE) {
             return $json;
         } else {
             print_r($json);
-        }
+        }    
     }
 
     public function memberGraph()
@@ -1654,39 +1654,39 @@ class HiptnaController extends \BaseController {
             $end = Input::get('end');
             $reportPeriod = 'Date Range';
         }
-
+        
         $settings = $this->getTnaInstanceSettings();
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
         $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
 
         $currentInstance = Session::get('currentInstance');
-        $staff_table = $this->getStaffTable();
+        $staff_table = $this->getStaffTable();  
 
         $staff_absent = \Timeandattendance::join($staff_table , $staff_table.'.external_user_id','=', 'timeandattendance.external_user_id')->select( DB::raw('CONCAT('.$staff_table.'.surname," ",'.$staff_table.'.firstnames) As name') , DB::raw(' CASE WHEN timeandattendance.attendance != "present" THEN 1 ELSE 0 END AS value'), 'timeandattendance.external_user_id', 'timeandattendance.attendance','timeandattendance.date AS label' )->where('timeandattendance.date', ">=", $start)->where('timeandattendance.date', "<=", $end)->where('timeandattendance.external_user_id', '=', $staff_id)->where('timeandattendance.instance', '=', $currentInstance )->orderBy('timeandattendance.date', 'asc')->get()->toArray();
         $staff_absent1 = $staff_absent;//$this->set_graphdata($staff_absent);
-
-        $data['staff_absent'] = $staff_absent1;
-
+        
+        $data['staff_absent'] = $staff_absent1; 
+    
 
         $staff_lateness = \Timeandattendance::join($staff_table , $staff_table.'.external_user_id','=', 'timeandattendance.external_user_id')->select( DB::raw('CONCAT('.$staff_table.'.surname," ",'.$staff_table.'.firstnames) As name') , 'timeandattendance.punctuality AS value' /*DB::raw(' CASE WHEN timeandattendance.punctuality > 5 THEN 0 ELSE timeandattendance.punctuality END AS value')*/, 'timeandattendance.external_user_id','timeandattendance.date AS label' )->where('timeandattendance.date', ">=", $start)->where('timeandattendance.date', "<=", $end)->where('timeandattendance.external_user_id', '=', $staff_id)->where('timeandattendance.instance', '=', $currentInstance )->orderBy('timeandattendance.date', 'asc')->get()->toArray();
         $staff_lateness1 = $staff_lateness;//$this->set_graphdata($staff_lateness);
-
-        $data['staff_lateness'] = $staff_lateness1;
+        
+        $data['staff_lateness'] = $staff_lateness1; 
 
 
         $staff_proximity = \Timeandattendance::join($staff_table , $staff_table.'.external_user_id','=', 'timeandattendance.external_user_id')->select( DB::raw('CONCAT('.$staff_table.'.surname," ",'.$staff_table.'.firstnames) As name') , 'timeandattendance.proximity AS value'/*DB::raw(' CASE WHEN timeandattendance.proximity < '.$proximity_target.' THEN 0 ELSE timeandattendance.proximity END AS value')*/, 'timeandattendance.external_user_id','timeandattendance.date AS label' )->where('timeandattendance.date', ">=", $start)->where('timeandattendance.date', "<=", $end)->where('timeandattendance.external_user_id', '=', $staff_id)->where('timeandattendance.instance', '=', $currentInstance )->orderBy('timeandattendance.date', 'asc')->get()->toArray();
         $staff_proximity1 = $staff_proximity;//$this->set_graphdata($staff_proximity);
-
+        
         $data['staff_proximity'] = $staff_proximity1;
 
         $data['report_date'] = $reportPeriod." ".$start."_".$end;
 
         $json = json_encode($data);
-
+        
         print_r($json);
     }
-
-
+    
+    
     public function showGraphdrilldown()
     {
 
@@ -1695,7 +1695,7 @@ class HiptnaController extends \BaseController {
 
 
         return \View::make('hiptna.graphdrilldown')->with('data', $data);
-    }
+    } 
 
     public function fileupload()
     {
@@ -1704,10 +1704,10 @@ class HiptnaController extends \BaseController {
             $file = Input::file('cfile');
             $month = Input::get('cmonth');
             $year = Input::get('cyear');
-            $email = Input::get('cemail');
+            $email = Input::get('cemail'); 
             // setting up rules
             $rules = array('cfile' => array('required', 'in:csv'));
-
+            
             $validator = Validator::make(
                 [
                     'file'      => $file,
@@ -1739,7 +1739,7 @@ class HiptnaController extends \BaseController {
                 $header = null;
                 $fp = fopen($file,"r");
                 $i = 0;
-
+                
                 $delimiter = $this->getFileDelimiter($file, 5); //Check 5 lines to determine the delimiter
                 $all_rows = $this->getFileData($fp, $delimiter, $file);// fetch all data from csv as an array
 
@@ -1747,10 +1747,10 @@ class HiptnaController extends \BaseController {
                 //echo '<pre>'; print_r($all_rows); die();
 
                 $save = $this->saveStaffRecord( $all_rows, $month, $year ); //save all records to staff table
-
+                              
                 fclose($fp);
                 if($save){
-                    $msg = "<b> successfully uploaded</b>";
+                    $msg = "<b> successfully uploaded</b>";                   
                 }else{
                     $msg = "<font color='red'><b> upload failed</b></font>";
                 }
@@ -1771,7 +1771,7 @@ class HiptnaController extends \BaseController {
             }
 
         }
-    }
+    } 
 
     function getFileDelimiter($file, $checkLines = 2){
         $file = new \SplFileObject($file);
@@ -1794,7 +1794,7 @@ class HiptnaController extends \BaseController {
                         $results[$delimiter]++;
                     } else {
                         $results[$delimiter] = 1;
-                    }
+                    }   
                 }
             }
            $i++;
@@ -1812,17 +1812,17 @@ class HiptnaController extends \BaseController {
                 $row = str_getcsv($line, $delimiter);
                 if($i != 0 ){
                     if ($header === null) {
-                        $header = array_map('trim',$row);
+                        $header = array_map('trim',$row); 
                         $header = $this->modifyHeader($header);
                         //print_r($header); die();
                         continue;
                     }
                     if( sizeof($header) == sizeof($row)) {
                         $all_rows[] = array_combine($header, $row);
-                    }
+                    } 
                 }
                 $i++;
-            } array_shift($all_rows);
+            } array_shift($all_rows); 
 
         } else if( $delimiter == ';') {
             $csvData = file_get_contents($file);
@@ -1831,18 +1831,18 @@ class HiptnaController extends \BaseController {
             foreach ($lines as $line) {
                 $all_row[] = str_getcsv($line,';');
             }
-            array_shift($all_row);
+            array_shift($all_row); 
             array_pop($all_row);
             foreach ($all_row as $row) {
                 if($i == 0 ){
-                    $header = array_map('trim',$row);
+                    $header = array_map('trim',$row); 
                     $header = $this->modifyHeader($header);
                     //echo '<pre>'; print_r($header); die();
                 }
-                else if($i != 0 ){
+                else if($i != 0 ){                         
                     //$all_rows[] = array_combine($header, array_map('trim',$row));
                     $all_rows[] = array_combine($header, $row);
-                    error_log('error',count($row));  //echo '<pre>'; print_r($all_rows); die();
+                    error_log('error',count($row));  //echo '<pre>'; print_r($all_rows); die();                     
                 }
                 $i++;
             }
@@ -1854,18 +1854,18 @@ class HiptnaController extends \BaseController {
             foreach ($lines as $line) {
                 $all_row[] = str_getcsv($line,$delimiter);
             }
-            array_shift($all_row);
+            array_shift($all_row); 
             array_pop($all_row);
             foreach ($all_row as $row) {
                 if($i == 0 ){
-                    $header = array_map('trim',$row);
+                    $header = array_map('trim',$row); 
                     $header = $this->modifyHeader($header);
                     //echo '<pre>'; print_r($header); die();
                 }
-                else if($i != 0 ){
+                else if($i != 0 ){                         
                     //$all_rows[] = array_combine($header, array_map('trim',$row));
                     $all_rows[] = array_combine($header, $row);
-                    error_log('error',count($row));  //echo '<pre>'; print_r($all_rows); die();
+                    error_log('error',count($row));  //echo '<pre>'; print_r($all_rows); die();                     
                 }
                 $i++;
             }
@@ -1891,7 +1891,7 @@ class HiptnaController extends \BaseController {
             else {
                 $words_so_far[] = $word;
             }
-
+            
         }
         return $charset;
     }
@@ -1917,7 +1917,7 @@ class HiptnaController extends \BaseController {
                 foreach ($day_array as $days) {
                     $split_data = explode("-", $value[$days]);
                     $count = count($split_data);
-
+                    
                     if($count >1 ){
                         $split_array[$days."_start"] = $split_data[0];
                         $split_array[$days."_end"] = $split_data[1];
@@ -1925,16 +1925,16 @@ class HiptnaController extends \BaseController {
                         $split_array[$days."_start"] = $value[$days];
                         $split_array[$days."_end"] = $value[$days];
                     }
-                }
+                } 
 
                 foreach ($split_array as $key => $val) {
-
+                    
                     $t = str_replace(" ","", $val);
                     if (preg_match('/^\d:\d{2}:\d{2}$/', $t)) $t = "0" . $t;
                     if (preg_match('/^\d:\d{2}$/', $t)) $t = "0" . $t;
-                    $split_array[$key] = $t;
+                    $split_array[$key] = $t;               
                 } $t = "";
-
+                
                 ////echo '<pre>';
                 //print_r($split_array); die();
                 $this->saveRosterrecord($value['EE Number'], $month, $year, $split_array);
@@ -1950,7 +1950,7 @@ class HiptnaController extends \BaseController {
                 }
                         $staffObject->firstnames = $first;
                         $staffObject->surname = $last;
-                        $staffObject->external_user_id = $this->cleanField($value['EE Number']);
+                        $staffObject->external_user_id = $this->cleanField($value['EE Number']); 
                         $staffObject->gender = $value['Gender'];
                         $staffObject->dob = date('Y-m-d', strtotime($value['Birth date']));
                         $staffObject->storetype = $value['Grading'];
@@ -1984,7 +1984,7 @@ class HiptnaController extends \BaseController {
                 }
                 /*$save = \Staff::create(['firstnames'=>$first,
                         'surname'=>$last,
-                        'external_user_id'=>$this->cleanField($value['EE Number']),
+                        'external_user_id'=>$this->cleanField($value['EE Number']), 
                         'gender'=>$value['Gender'],
                         'dob'=>date('Y-m-d', strtotime($value['Birth date'])),
                         'storetype'=>$value['Grading'],
@@ -2015,7 +2015,7 @@ class HiptnaController extends \BaseController {
 
                     ]);*/
             }
-
+        
         return $save;
     }
 
@@ -2025,14 +2025,14 @@ class HiptnaController extends \BaseController {
         /*$day_array= array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','Lunch Times','Monday1','Tuesday1','Wednesday1','Thursday1','Friday1','Saturday1','Sunday1','Lunch Times1','Monday2','Tuesday2','Wednesday2','Thursday2','Friday2','Saturday2','Sunday2','Lunch Times2','Monday3','Tuesday3','Wednesday3','Thursday3','Friday3','Saturday3','Sunday3','Lunch Times3','Monday4','Tuesday4','Wednesday4','Thursday4','Friday4','Saturday4','Sunday4','Lunch Times4');*/
         $day_array= array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','Monday1','Tuesday1','Wednesday1','Thursday1','Friday1','Saturday1','Sunday1','Monday2','Tuesday2','Wednesday2','Thursday2','Friday2','Saturday2','Sunday2','Monday3','Tuesday3','Wednesday3','Thursday3','Friday3','Saturday3','Sunday3','Monday4','Tuesday4','Wednesday4','Thursday4','Friday4','Saturday4','Sunday4');
         //$year = date("Y");
-        $day_name = date('l', strtotime("$month 1 $year"));
+        $day_name = date('l', strtotime("$month 1 $year")); 
         $date = date('Y-m-d', strtotime("$month 1 $year"));
 
         $last_date  = date('Y-m-t', strtotime("$month 1 $year"));
         $namecheck = null;
         $i = '';
-        $currentInstance = Session::get('currentInstance');
-        foreach ($day_array as $days) {
+        $currentInstance = Session::get('currentInstance'); 
+        foreach ($day_array as $days) {  
             $dayofweek = strftime("%A",strtotime($date));
             if($days == 'Lunch Times'){ $i = '';
             }else if($days == 'Lunch Times1'){ $i = 1;
@@ -2043,18 +2043,18 @@ class HiptnaController extends \BaseController {
             if($dayofweek == $days || $namecheck != null){
                 $namecheck = 1;
                 if( $date <= $last_date ){
-                    // $currentInstance = Session::get('currentInstance');
+                    // $currentInstance = Session::get('currentInstance'); 
                     if($currentInstance == 'IM'){
                         $rosterObj              =   new \Imroster();
-                        $checkdata = \Imroster::where('external_user_id', '=', $this->cleanField($EENumber) )->where('date', '=', $date )->first();
+                        $checkdata = \Imroster::where('external_user_id', '=', $this->cleanField($EENumber) )->where('date', '=', $date )->first(); 
                     }else if($currentInstance == 'CE'){
                         $rosterObj              =   new \Ceroster();
-                        $checkdata = \Ceroster::where('external_user_id', '=', $this->cleanField($EENumber) )->where('date', '=', $date )->first();
+                        $checkdata = \Ceroster::where('external_user_id', '=', $this->cleanField($EENumber) )->where('date', '=', $date )->first(); 
                     }else{
                         $rosterObj              =   new \Roster();
 
-                        $checkdata = \Roster::where('external_user_id', '=', $this->cleanField($EENumber) )->where('date', '=', $date )->first();
-                    }
+                        $checkdata = \Roster::where('external_user_id', '=', $this->cleanField($EENumber) )->where('date', '=', $date )->first(); 
+                    }   
                     /*$checkdata = \Roster::where('external_user_id', '=', $this->cleanField($EENumber) )->where('date', '=', $date )->first(); */
                     if(!empty($checkdata)) {
                         $checkdata->day_start=$split_array[$days.'_start'];
@@ -2071,22 +2071,22 @@ class HiptnaController extends \BaseController {
                                 'lunch_length'=>$this->get_time_difference(trim($split_array['Lunch Times'.$i.'_end']), trim($split_array['Lunch Times'.$i.'_start']))
                             ]);*/
                     } else {
-                        $rosterObj->external_user_id=$this->cleanField($EENumber);
+                        $rosterObj->external_user_id=$this->cleanField($EENumber); 
                         $rosterObj->date=$date;
                         $rosterObj->day_start=$split_array[$days.'_start'];
                         $rosterObj->day_end=$split_array[$days.'_end'];
                         $rosterObj->lunch_start=$split_array['Lunch Times'.$i.'_start'];
                         $rosterObj->lunch_end=$split_array['Lunch Times'.$i.'_end'];
-                        $rosterObj->lunch_length=$this->get_time_difference(trim($split_array['Lunch Times'.$i.'_end']), trim($split_array['Lunch Times'.$i.'_start']));
+                        $rosterObj->lunch_length=$this->get_time_difference(trim($split_array['Lunch Times'.$i.'_end']), trim($split_array['Lunch Times'.$i.'_start']));                    
                         $save = $rosterObj->save();
-
+                        
                     }
                     $date = date('Y-m-d',strtotime("+1 day", strtotime($date)));
                 }
             }
-
+            
         }
-
+        
     }
     // public function fileupload()
     // {
@@ -2095,7 +2095,7 @@ class HiptnaController extends \BaseController {
     //         $file = Input::file('cfile');
     //         // setting up rules
     //         $rules = array('cfile' => array('required', 'in:csv'));
-
+            
     //         $validator = Validator::make(
     //             [
     //                 'file'      => $file,
@@ -2119,22 +2119,22 @@ class HiptnaController extends \BaseController {
     //             $header = null;
     //             $fp = fopen($file,"r");
     //             $i = 0;
-
+                
     //             $csvData = file_get_contents($file);
     //             $lines = explode(PHP_EOL, $csvData);
     //             $all_rows = array();//print_r($lines); die();
     //             foreach ($lines as $line) {
     //                 $all_row[] = str_getcsv($line,';');
     //             }
-    //             array_shift($all_row);
+    //             array_shift($all_row); 
     //             array_pop($all_row);
     //             foreach ($all_row as $row) {
     //                 if($i == 0 ){
-    //                     $header = array_map('trim',$row);
+    //                     $header = array_map('trim',$row); 
     //                 }
-    //                 else if($i != 0 ){
+    //                 else if($i != 0 ){                         
     //                     $all_rows[] = array_combine($header, array_map('trim',$row));
-    //                     error_log('error',count($row));
+    //                     error_log('error',count($row));                        
     //                 }
     //                 $i++;
     //             }
@@ -2148,13 +2148,13 @@ class HiptnaController extends \BaseController {
     //                     }
     //                     if( sizeof($header) == sizeof($row)) {
     //                         $all_rows[] = array_combine($header, $row);
-    //                     }
+    //                     } 
     //                 }
     //                 $i++;
-    //             } array_shift($all_rows);*/
+    //             } array_shift($all_rows);*/ 
 
     //             $save = $this->saveStaffRecord( $all_rows );
-
+                              
     //             fclose($fp);
     //             if($save){
     //                 $msg = "<b>File successfully uploaded</b>";
@@ -2165,7 +2165,7 @@ class HiptnaController extends \BaseController {
     //         }
 
     //     }
-    // }
+    // } 
 
     // public function saveStaffRecord( $all_rows )
     // {
@@ -2180,7 +2180,7 @@ class HiptnaController extends \BaseController {
     //         foreach ($day_array as $days) {
     //             $split_data = explode("-", $value[$days]);
     //             $count = count($split_data);
-
+                
     //             if($count >1 ){
     //                 $split_array[$days."_start"] = $split_data[0];
     //                 $split_array[$days."_end"] = $split_data[1];
@@ -2188,14 +2188,14 @@ class HiptnaController extends \BaseController {
     //                 $split_array[$days."_start"] = $value[$days];
     //                 $split_array[$days."_end"] = $value[$days];
     //             }
-    //         }
+    //         } 
 
     //         foreach ($split_array as $key => $val) {
-
+                
     //             $t = str_replace(" ","", $val);
     //             if (preg_match('/^\d:\d{2}:\d{2}$/', $t)) $t = "0" . $t;
     //             if (preg_match('/^\d:\d{2}$/', $t)) $t = "0" . $t;
-    //             $split_array[$key] = $t;
+    //             $split_array[$key] = $t;               
     //         }
 
     //         //insert csv data into mysql table
@@ -2240,18 +2240,18 @@ class HiptnaController extends \BaseController {
     {
         $time1 = strtotime("1/1/1980 $time1");
         $time2 = strtotime("1/1/1980 $time2");
-
+        
         if ($time2 < $time1)
         {
             $time2 = $time2 + 86400;
         }
-
+        
         return date("H:i",($time2 - $time1));
-    }
+    } 
 
     public function csvdownload(){
 
-        //$file = '/home/anusha/public_html/hiphub/public/docs/data.csv';
+        //$file = '/home/anusha/public_html/hiphub/public/docs/data.csv';               
         $staff = Input::get();
         $period = Input::get('time');
         $start = date('Y-m-d');
@@ -2272,14 +2272,14 @@ class HiptnaController extends \BaseController {
         }else if($period == 'today'){
             return $this->csvdownloadToday($tab);
         }
-
+        
         $settings = $this->getTnaInstanceSettings();
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
         $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
 
         $measure_label = "";
 
-        $staff_table = $this->getStaffTable();
+        $staff_table = $this->getStaffTable();  
 
         //print_r($staff); die();
         if($tab == 'absent'){
@@ -2290,7 +2290,7 @@ class HiptnaController extends \BaseController {
             usort($staff_absent, function($a, $b) {
                 return $b['value'] - $a['value'];
             });
-            $data = $staff_absent;
+            $data = $staff_absent; 
         }
         if($tab == 'lateness'){
             $measure_label = "Days Late";
@@ -2300,7 +2300,7 @@ class HiptnaController extends \BaseController {
             usort($staff_lateness, function($a, $b) {
                 return $b['value'] - $a['value'];
             });
-            $data = $staff_lateness;
+            $data = $staff_lateness; 
         }
         if( $tab == 'proximity'){
             $measure_label = "Days Not Meeting WS Target";
@@ -2354,7 +2354,7 @@ class HiptnaController extends \BaseController {
             usort($staff_absent, function($a, $b) {
                 return $b['value'] - $a['value'];
             }); //print_r($staff_absent); die();
-            $data = $staff_absent;
+            $data = $staff_absent; 
         } else if( $tab == 'lateness'){
             $measure_label = "Days Late";
             $filename = 'lateness_'.date('Y-m-d');
@@ -2362,13 +2362,13 @@ class HiptnaController extends \BaseController {
             usort($staff_lateness, function($a, $b) {
                 return $b['value'] - $a['value'];
             });
-            $data = $staff_lateness;
+            $data = $staff_lateness; 
         } else if( $tab == 'proximity'){
             $measure_label = "Days Not Meeting WS Target";
             $filename = 'proximity_'.date('Y-m-d');
 
             $currentInstance = Session::get('currentInstance');
-            $staff_table = $this->getStaffTable();
+            $staff_table = $this->getStaffTable();  
 
             $staff_proximity = \Timeandattendance::join($staff_table , $staff_table.'.external_user_id','=', 'timeandattendance.external_user_id')
             ->select( DB::raw('CONCAT('.$staff_table.'.surname," ",'.$staff_table.'.firstnames) As label') , DB::raw('timeandattendance.proximity AS value'), $staff_table.'.surname', $staff_table.'.firstnames', 'timeandattendance.external_user_id', DB::raw('COUNT( CASE WHEN timeandattendance.proximity <= '.$proximity_target.' THEN 0 END ) AS csvcount') )
@@ -2382,7 +2382,7 @@ class HiptnaController extends \BaseController {
             usort($staff_proximity, function($a, $b) {
                 return $a['value'] - $b['value'];
             });
-            $data = $staff_proximity;
+            $data = $staff_proximity; 
         }
 
         $file = base_path('public/docs/'.$filename.'.csv');
@@ -2406,7 +2406,7 @@ class HiptnaController extends \BaseController {
         return Response::download($file, $filename.'.csv', $headers);
         //return Response::make(rtrim($output, "\n"), 200, $headers);
 
-        die();
+        die();       
 
     }
 
@@ -2418,7 +2418,7 @@ class HiptnaController extends \BaseController {
         $staff_id = Input::get('staff_id');
         $date = date('Y-m-d',strtotime('today midnight'));
         $dt_date = new \DateTime($date);
-
+        
         $settings = $this->getTnaInstanceSettings();
         $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
         $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
@@ -2488,7 +2488,7 @@ class HiptnaController extends \BaseController {
         }
         /*$data = \Staff::get();*/
         foreach ($data as $value) {
-
+            
             foreach ($days as $day ) {
                 $daystart = $day.'_start';
                 $t = str_replace(" ","", $value->$daystart);
@@ -2502,8 +2502,8 @@ class HiptnaController extends \BaseController {
                 if (preg_match('/^\d:\d{2}$/', $t1)) $t1 = "0" . $t1;
                 $start[$dayend] = $t1;
             }
-            //print_r($start);
-
+            //print_r($start);    
+            
             if($currentInstance == 'IM'){
                 \Imstaff::where('id', '=', $value->id )->update($start);
             }else if($currentInstance == 'CE'){
@@ -2515,7 +2515,7 @@ class HiptnaController extends \BaseController {
 
         }
         echo "sucess";
-
+        
     }
 
     public function latenessthreshold(){
