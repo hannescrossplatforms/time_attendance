@@ -10,16 +10,10 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Session;
 
-class hippnp/HipPnpController extends \BaseController {
+class HipPnpController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function showDashboard()
-	{
-		//
+	public function showDashboard($instance = null){
+
 	}
 
 	/**
