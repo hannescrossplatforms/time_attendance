@@ -13,8 +13,10 @@ use Session;
 class HippnpController extends \BaseController {
 
 	public function showDashboard($instance = null)
+    {
 
-		$data = array() ;
+
+        $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
 
         if(\Hipauth::hasAllPermissions(array("TNA_CE", "TNA_IM"))) {
@@ -58,8 +60,7 @@ class HippnpController extends \BaseController {
             return \View::make('hiptna.showmaindashboard')->with('data', $data);
 
         }
-
-	}
+    }
 
 	/**
 	 * Display a listing of the resource.
