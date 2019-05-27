@@ -343,7 +343,7 @@ Route::any('/autoDownloadPdf', array('uses' => 'hiptna\HiptnaController@autoDown
 Route::any('/generatePdf', array('uses' => 'hiptna\HiptnaController@generatePdf', 'as' => 'generatePdf'));//auto download test
 
 // HipPickNPay routes //////////////////////////////////////////////////////////////
-Route::any('/testing_controller', array('uses' => 'TestingController@index', 'as' => 'testing_controller'))
+Route::any('/testing_controller', array('uses' => 'TestingController@index', 'as' => 'testing_controller'));
 Route::any('/hippnp_showdashboard', array('uses' => 'hippnp\HippnpController@index', 'as' => 'hippnp_showdashboard'))->before('auth');
 Route::any('/hiptna_showinstancedashboard', array('uses' => 'hiptna\HiptnaController@showInstanceDashboard', 'as' => 'hippnp_showinstancedashboard'))->before('auth');
 Route::any('/hiptna_shownrinstancedashboard', array('uses' => 'hiptna\HiptnaController@showNrInstanceDashboard', 'as' => 'hippnp_shownrinstancedashboard'))->before('auth');
