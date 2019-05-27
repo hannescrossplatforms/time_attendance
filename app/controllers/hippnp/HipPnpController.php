@@ -1,6 +1,6 @@
 <?php
 
-
+// namespace hiptna;
 use DB;
 use Input;
 use Validator;
@@ -10,10 +10,14 @@ use Response;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Session;
+// use app\lib\Hipauth;
+// use App\models\Reportrecipients
+// use BaseController;
 
 class HippnpController extends \BaseController {
 
-	public function showDashboard($instance = null)
+
+    public function showDashboard($instance = null)
     {
 
 
@@ -2527,6 +2531,5 @@ class HippnpController extends \BaseController {
         $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
         echo $proximity_target;
     }
-
 
 }
