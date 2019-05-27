@@ -1,6 +1,6 @@
 <?php
 
-class HipPnpController extends \BaseController {
+class HippnpController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
