@@ -12,7 +12,12 @@ use Session;
 
 class hippnp/HipPnpController extends \BaseController {
 
-	public function showDashboard($instance = null)
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function showDashboard()
     {
 
 
