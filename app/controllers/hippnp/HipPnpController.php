@@ -10,7 +10,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Session;
 
-class HipPnpController extends \BaseController {
+class HippnpController extends \BaseController {
 
 	public function showDashboard(){
 
