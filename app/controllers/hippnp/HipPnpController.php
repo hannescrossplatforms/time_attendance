@@ -12,7 +12,7 @@ use Session;
 
 class HipPnpController extends \BaseController {
 
-	public function showDashboard($instance = null){
+	public function showDashboard(){
 
 	}
 
