@@ -16,8 +16,8 @@ class HippnpController extends \BaseController {
     {
 
 
-        // $data = array() ;
-        // $data['currentMenuItem'] = "Dashboard";
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
 
         // if(\Hipauth::hasAllPermissions(array("TNA_CE", "TNA_IM"))) {
         //     Session::put('availableInstances', "BOTH");
@@ -36,12 +36,12 @@ class HippnpController extends \BaseController {
         //     Session::put('availableInstances', "NR02");
         //     $instance = "NR02";
         // }
-        // Session::put('availableInstances', "NR01");
-        // $instance = "NR01";
-        // ANUSHA - CURRENTLY THE ABOVE WILL SET availableInstances to 'BOTH'
-        // TO TEST A SCENARIO WHERE THE USER ONLY HAS ON INSTANCE THEN COMMENT OUT THE NEXT 2 LINES
-        // Session::put('availableInstances', "IM");
-        // $instance = "IM";
+        // // Session::put('availableInstances', "NR01");
+        // // $instance = "NR01";
+        // // ANUSHA - CURRENTLY THE ABOVE WILL SET availableInstances to 'BOTH'
+        // // TO TEST A SCENARIO WHERE THE USER ONLY HAS ON INSTANCE THEN COMMENT OUT THE NEXT 2 LINES
+        // // Session::put('availableInstances', "IM");
+        // // $instance = "IM";
 
 
         // if($instance) {
@@ -51,14 +51,14 @@ class HippnpController extends \BaseController {
         //         return Redirect::action('hiptna\HiptnaController@showNrInstanceDashboard');
         //     } else {
 		// 		//Here it comes
-                return Redirect::action('hiptna\HiptnaController@showInstanceDashboard');
-            // }
+        //         return Redirect::action('hiptna\HiptnaController@showInstanceDashboard');
+        //     }
 
 
         // } else {
 
-        //     Session::put('currentInstance', 'NONE');
-        //     return \View::make('hiptna.showmaindashboard')->with('data', $data);
+            // Session::put('currentInstance', 'NONE');
+            return \View::make('hiptna.showmaindashboard')->with('data', $data);
 
         // }
     }
