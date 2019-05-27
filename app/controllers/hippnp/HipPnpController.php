@@ -46,12 +46,12 @@ class HippnpController extends \BaseController {
 
         if($instance) {
 
-            Session::put('currentInstance', $instance);
-            if($instance == "NR01" || $instance == "NR02" ) {
-                return Redirect::action('hiptna\HiptnaController@showNrInstanceDashboard');
-            } else {
+            // Session::put('currentInstance', $instance);
+            // if($instance == "NR01" || $instance == "NR02" ) {
+            //     return Redirect::action('hiptna\HiptnaController@showNrInstanceDashboard');
+            // } else {
                 return Redirect::action('hiptna\HiptnaController@showInstanceDashboard');
-            }
+            // }
 
 
         } else {
