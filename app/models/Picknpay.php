@@ -39,7 +39,7 @@ class Picknpay extends Eloquent {
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
         ->groupBy('category')
         ->get()->map(function($row){
-            $this->data->push($row['dwell_time']);
+            $data->push($row['dwell_time']);
         });
 
         return $data;
