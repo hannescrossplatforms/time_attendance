@@ -65,7 +65,7 @@ class HippnpController extends \BaseController {
         // $data['report_period']      =   "Report for ".date('Y-m-d',strtotime('last monday'))." to ". date('Y-m-d');
         // $data['report_name_date']   =   "day_".date('Y-m-d',strtotime('last monday'))."_".date('Y-m-d');
 
-        return \View::make('hiptna.showdashboard')->with('data', $data);
+        return \View::make('hippnp.showdashboard')->with('data', $data);
 
 
 
