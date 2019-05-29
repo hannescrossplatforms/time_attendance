@@ -44,58 +44,57 @@ class HippnpController extends \BaseController {
 
 	public function showInstanceDashboard()
     {
-        // Store data in the session...
-        // Session::set('currentInstance', 'IM');
-        $currentInstance = Session::get('currentInstance');
-        $data = array() ;
-        $data['currentMenuItem'] = "Dashboard";
 
-        $settings = $this->getTnaInstanceSettings();
-        $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
-        $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
+        // $currentInstance = Session::get('currentInstance');
+        // $data = array() ;
+        // $data['currentMenuItem'] = "Dashboard";
 
-        $data['staff_week'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('attendance', '=', "present")->where('instance', '=', $currentInstance )->get()->count();
-        $data['staff_month'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('first day of this month')))->where('attendance', '=', "present")->where('instance', '=', $currentInstance )->get()->count();
-//        print_r($data);die("here");
-        $cons_absent = \Timeandattendance::select('date')->where('attendance', '!=', "present")->where('instance', '=', $currentInstance )->orderBy('date', 'desc')->first();
-        $start = strtotime($cons_absent->date);
-        $end = strtotime(date('Y-m-d'));
-        $data['cons_absent'] = ceil(abs($end - $start) / 86400)-1;
+        // $settings = $this->getTnaInstanceSettings();
+        // $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
+        // $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
 
-        $cons_lateness = \Timeandattendance::select('date')->where('punctuality', '>', $lateness_threshold)->where('instance', '=', $currentInstance)->orderBy('date', 'desc')->first();
-        $start = strtotime($cons_lateness->date);
-        $end = strtotime(date('Y-m-d'));
-        $data['cons_lateness'] = ceil(abs($end - $start) / 86400)-1;
+        // $data['staff_week'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('attendance', '=', "present")->where('instance', '=', $currentInstance )->get()->count();
+        // $data['staff_month'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('first day of this month')))->where('attendance', '=', "present")->where('instance', '=', $currentInstance )->get()->count();
 
-        $data['category'] = \Timeandattendance::select('date as label')->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get()->toJson();
+        // $cons_absent = \Timeandattendance::select('date')->where('attendance', '!=', "present")->where('instance', '=', $currentInstance )->orderBy('date', 'desc')->first();
+        // $start = strtotime($cons_absent->date);
+        // $end = strtotime(date('Y-m-d'));
+        // $data['cons_absent'] = ceil(abs($end - $start) / 86400)-1;
 
-        // Get Absenteeism Data
-        $present_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `attendance` = "present" THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
-        $staff_present = array("seriesname" => "Staff At Work", "data" => $present_data);
-        $absent_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `attendance` <> "present" THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
-        $staff_absent = array("seriesname" => "Staff Not At Work", "data" => $absent_data);
-        $staff_graph = array($staff_present, $staff_absent);
-        $data['staff_graph'] = json_encode($staff_graph);
+        // $cons_lateness = \Timeandattendance::select('date')->where('punctuality', '>', $lateness_threshold)->where('instance', '=', $currentInstance)->orderBy('date', 'desc')->first();
+        // $start = strtotime($cons_lateness->date);
+        // $end = strtotime(date('Y-m-d'));
+        // $data['cons_lateness'] = ceil(abs($end - $start) / 86400)-1;
 
-        // Get Lateness Data
-        $ontime_data = \Timeandattendance::select(DB::raw('COUNT(*) as count'), DB::raw('COUNT( CASE WHEN  `punctuality` <= '.$lateness_threshold.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
-        $staff_ontime = array("seriesname" => "Staff on Time", "data" => $ontime_data);
-        $late_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `punctuality` > '.$lateness_threshold.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
-        $staff_late = array("seriesname" => "Late Staff", "data" => $late_data);
-        $lateness_graph = array($staff_ontime, $staff_late);
-        $data['lateness_graph'] = json_encode($lateness_graph);
+        // $data['category'] = \Timeandattendance::select('date as label')->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get()->toJson();
 
-        // Get Lateness Data
-        $proximal_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `proximity` >= '.$proximity_target.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
-        $staff_proximal = array("seriesname" => "Staff At Work", "data" => $proximal_data);
-        $away_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `proximity` < '.$proximity_target.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
-        $staff_away = array("seriesname" => "Staff Not At Work", "data" => $away_data);
-        $staff_wsproximity = array($staff_proximal, $staff_away);
-        $data['wsproximity_graph'] = json_encode($staff_wsproximity);
-        $data['report_period']      =   "Report for ".date('Y-m-d',strtotime('last monday'))." to ". date('Y-m-d');
-        $data['report_name_date']   =   "day_".date('Y-m-d',strtotime('last monday'))."_".date('Y-m-d');
+        // // Get Absenteeism Data
+        // $present_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `attendance` = "present" THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
+        // $staff_present = array("seriesname" => "Staff At Work", "data" => $present_data);
+        // $absent_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `attendance` <> "present" THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
+        // $staff_absent = array("seriesname" => "Staff Not At Work", "data" => $absent_data);
+        // $staff_graph = array($staff_present, $staff_absent);
+        // $data['staff_graph'] = json_encode($staff_graph);
 
-        return \View::make('hiptna.showdashboard')->with('data', $data);
+        // // Get Lateness Data
+        // $ontime_data = \Timeandattendance::select(DB::raw('COUNT(*) as count'), DB::raw('COUNT( CASE WHEN  `punctuality` <= '.$lateness_threshold.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
+        // $staff_ontime = array("seriesname" => "Staff on Time", "data" => $ontime_data);
+        // $late_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `punctuality` > '.$lateness_threshold.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
+        // $staff_late = array("seriesname" => "Late Staff", "data" => $late_data);
+        // $lateness_graph = array($staff_ontime, $staff_late);
+        // $data['lateness_graph'] = json_encode($lateness_graph);
+
+        // // Get Lateness Data
+        // $proximal_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `proximity` >= '.$proximity_target.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
+        // $staff_proximal = array("seriesname" => "Staff At Work", "data" => $proximal_data);
+        // $away_data = \Timeandattendance::select(DB::raw('COUNT( CASE WHEN  `proximity` < '.$proximity_target.' THEN 0 END ) AS value'))->where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('instance', '=', $currentInstance )->groupBy('date')->get();
+        // $staff_away = array("seriesname" => "Staff Not At Work", "data" => $away_data);
+        // $staff_wsproximity = array($staff_proximal, $staff_away);
+        // $data['wsproximity_graph'] = json_encode($staff_wsproximity);
+        // $data['report_period']      =   "Report for ".date('Y-m-d',strtotime('last monday'))." to ". date('Y-m-d');
+        // $data['report_name_date']   =   "day_".date('Y-m-d',strtotime('last monday'))."_".date('Y-m-d');
+
+        // return \View::make('hiptna.showdashboard')->with('data', $data);
     }
 
 }
