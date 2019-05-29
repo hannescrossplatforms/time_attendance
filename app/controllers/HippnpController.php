@@ -12,33 +12,33 @@ use Session;
 
 class HippnpController extends \BaseController {
 
-	public function showDashboard($instance = null)
+	public function showDashboard()
     {
 
-        $data = array() ;
-        $data['currentMenuItem'] = "Dashboard";
+        // $data = array() ;
+        // $data['currentMenuItem'] = "Dashboard";
 
-        if(\Hipauth::hasAllPermissions(array("TNA_CE", "TNA_IM"))) {
-            Session::put('availableInstances', "BOTH");
-        } else if (\Hipauth::hasAnyPermissions(array("TNA_IM"))) {
-            Session::put('availableInstances', "IM");
-            $instance = "IM";
-        } else if (\Hipauth::hasAnyPermissions(array("TNA_CE"))) {
-            Session::put('availableInstances', "CE");
-            $instance = "CE";
-        } else if (\Hipauth::hasAnyPermissions(array("NR0001","NR0002"))) {
-            Session::put('availableInstances', "NR_BOTH");
-        } else if (\Hipauth::hasAnyPermissions(array("NR0001"))) {
-            Session::put('availableInstances', "NR01");
-            $instance = "NR01";
-        } else if (\Hipauth::hasAnyPermissions(array("NR0002"))) {
-            Session::put('availableInstances', "NR02");
-            $instance = "NR02";
-        }
+        // if(\Hipauth::hasAllPermissions(array("TNA_CE", "TNA_IM"))) {
+        //     Session::put('availableInstances', "BOTH");
+        // } else if (\Hipauth::hasAnyPermissions(array("TNA_IM"))) {
+        //     Session::put('availableInstances', "IM");
+        //     $instance = "IM";
+        // } else if (\Hipauth::hasAnyPermissions(array("TNA_CE"))) {
+        //     Session::put('availableInstances', "CE");
+        //     $instance = "CE";
+        // } else if (\Hipauth::hasAnyPermissions(array("NR0001","NR0002"))) {
+        //     Session::put('availableInstances', "NR_BOTH");
+        // } else if (\Hipauth::hasAnyPermissions(array("NR0001"))) {
+        //     Session::put('availableInstances', "NR01");
+        //     $instance = "NR01";
+        // } else if (\Hipauth::hasAnyPermissions(array("NR0002"))) {
+        //     Session::put('availableInstances', "NR02");
+        //     $instance = "NR02";
+        // }
 
-        if($instance) {
+        // if($instance) {
                 return Redirect::action('HippnpController@showInstanceDashboard');
-		}
+		// }
 
 	}
 
