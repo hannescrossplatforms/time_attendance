@@ -101,7 +101,7 @@
 
 
 
-                            <!-- <div class="col-sm-6">
+                            <div class="col-sm-6">
                                 <div class="chart-wrapper">
                                     <div class="chart-title venuecolheading">Absence </div>
                                     <div class="chart-stage">
@@ -114,7 +114,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
 
 
 
