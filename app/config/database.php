@@ -106,7 +106,7 @@ return array(
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
-  
+
 		'radius_local' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
