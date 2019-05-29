@@ -30,7 +30,7 @@ class Utils extends Eloquent {
     }
 
     public static function getHiphubDbConnection() {
-        return 'hiphub';
+        return 'mysql';
     }
 
     public function getAllowedEngageBrandcodes() {
