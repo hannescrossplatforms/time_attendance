@@ -33,16 +33,16 @@ class Picknpay extends Eloquent {
         // ->select('warehouse_id', DB::raw('sum(receipt_stock.quantity) quantity'))
         // ->groupBy('warehouse_id')
         // ->get();
-        global $data = array();
+        $hannesarray = array();
 
         Picknpay::orderBy('id', 'ASC')
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
         ->groupBy('category')
         ->get()->map(function($row){
-            array_push($data, $row['dwell_time']);
+            array_push($hannesarray, $row['dwell_time']);
         });
 
-        return $data;
+        return $hannesarray;
         // return Picknpay::orderBy('id', 'ASC')->select('dwell_time', 'category')->get()->groupBy('category');
 
         // return Picknpay::orderBy('id', 'ASC')->get()->groupBy('category')->map(function($row) {
