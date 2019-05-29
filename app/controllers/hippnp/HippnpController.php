@@ -20,6 +20,7 @@ class HippnpController extends \BaseController {
 
         $data['test'] = \Picknpay::all();
         $data['customerInStoreToday'] = \Picknpay::customerInStoreToday();
+        $data['customerInStoreThisMonth'] = \Picknpay::customerInStoreThisMonth();
 
 
         return \View::make('hippnp.showdashboard')->with('data', $data);

@@ -11,10 +11,14 @@ class Picknpay extends Eloquent {
     protected $table = 'picknpay';
 
     public static function customerInStoreToday(){
-        //TODO: Where date is today
+        //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
         return Picknpay::all()->count();
     }
 
+    public static function customerInStoreThisMonth(){
+        //TODO: Where date is this month && group by customer uuid(maybe device uuid or something)
+        return Picknpay::all()->count();
+    }
 
 
     // $data['staff_week'] = json_encode(array(

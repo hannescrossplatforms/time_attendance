@@ -27,26 +27,34 @@
             @include('hippnp.sidebar')
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-                <h1 class="page-header">Time & Attendance Dashboard</h1>
-
-
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="venuecolheading">Staff Overview</div>
-                            <div class="col-md-2">
-                                <div class="venuerow">
-                                    <div class="modStat">
-                                        <div class="modstattitle">
-                                            <h3>Staff In Store Today</h3>
-                                        </div>
-                                        <div id="staff_today" class="modStatspan"><span
-                                                style="font-size: 30%;">{{$data['customerInStoreToday']}}</span></div>
+                <h1 class="page-header">Pick n Pay Dashboard</h1>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="venuecolheading">Customer Overview</div>
+                        <div class="col-md-2">
+                            <div class="venuerow">
+                                <div class="modStat">
+                                    <div class="modstattitle">
+                                        <h3>Customers In Store Today</h3>
                                     </div>
+                                    <div id="staff_today" class="modStatspan"><span
+                                            style="font-size: 30%;">{{$data['customerInStoreToday']}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="venuerow">
+                                <div class="modStat">
+                                    <div class="modstattitle">
+                                        <h3>Customers In Store This Month</h3>
+                                    </div>
+                                    <div id="staff_today" class="modStatspan"><span
+                                            style="font-size: 30%;">{{$data['customerInStoreThisMonth']}}</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                </div>
             </div>
         </div>
 </body>
