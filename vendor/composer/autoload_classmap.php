@@ -227,6 +227,7 @@ return array(
     'PdfReport' => $baseDir . '/app/lib/PdfReport.php',
     'Permission' => $baseDir . '/app/models/Permission.php',
     'Permissionrole' => $baseDir . '/app/models/Permissionrole.php',
+    'Picknpay' => $baseDir . '/app/models/Picknpay.php',
     'Positioner' => $vendorDir . '/dompdf/dompdf/include/positioner.cls.php',
     'Product' => $baseDir . '/app/models/Product.php',
     'Province' => $baseDir . '/app/models/Province.php',
