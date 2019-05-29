@@ -10,8 +10,8 @@ class Picknpay extends Eloquent {
 
     protected $table = 'picknpay';
 
-    public static function customerInStoreToday()
-    {
+    public static function customerInStoreToday(){
+        //TODO: Where date is today
         return Picknpay::all()->count();
     }
 
