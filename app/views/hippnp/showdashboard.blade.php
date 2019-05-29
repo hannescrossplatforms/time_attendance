@@ -128,34 +128,7 @@
 </body>
 
 <script>
-$(document).ready(function() {
 
-    var chartProperties = {
-        "caption": "",
-        "xAxisName": "Category",
-        "yAxisName": "Staff",
-        "paletteColors": "#0075c2,#f8b81d",
-        "rotatevalues": "1",
-        "theme": "zune"
-    };
-
-    apiChart = new FusionCharts({
-        type: 'mscolumn2d',
-        renderAt: 'staff_wrk',
-        width: '400',
-        height: '350',
-        dataFormat: 'json',
-        dataSource: {
-            "chart": chartProperties,
-            "categories": [{
-                "category": <?php echo $data['category']; ?>
-            }],
-            "dataset": <?php echo $data['staff_graph']; ?>
-
-        }
-    });
-    apiChart.render();
-});
 </script>
 
 @stop
