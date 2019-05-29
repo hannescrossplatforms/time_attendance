@@ -23,7 +23,7 @@
 
     <div class="container-fluid">
 
-    <span style="font-size: 30%;">HANNES:{{$data['staff_graph']}}</span>
+    <span style="font-size: 30%;">{{$data['staff_graph']}}</span>
         <div class="row">
             @include('hippnp.sidebar')
 

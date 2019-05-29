@@ -28,18 +28,6 @@ class Picknpay extends Eloquent {
     public static function getChartDwellTimeData(){
         //should return array
         //TODO: Pass store name in here and filter according to store.
-
-        // return $this->receipts()
-        // ->select('warehouse_id', DB::raw('sum(receipt_stock.quantity) quantity'))
-        // ->groupBy('warehouse_id')
-        // ->get();
-
-
-
-
-        // $array1 = (array) array();
-
-
         return Picknpay::orderBy('id', 'ASC')
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
         ->groupBy('category')
@@ -47,12 +35,6 @@ class Picknpay extends Eloquent {
             return $row['dwell_time'];
         });
 
-        // return $array1;
-        // return Picknpay::orderBy('id', 'ASC')->select('dwell_time', 'category')->get()->groupBy('category');
-
-        // return Picknpay::orderBy('id', 'ASC')->get()->groupBy('category')->map(function($row) {
-        //     return $row->sum('dwell_time');
-        // });
     }
 
 
