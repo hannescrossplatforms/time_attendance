@@ -44,7 +44,7 @@ class Picknpay extends Eloquent {
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
         ->groupBy('category')
         ->get()
-        ->keyBy('dwell_time');
+        ->select('dwell_time');
 
         // return $array1;
         // return Picknpay::orderBy('id', 'ASC')->select('dwell_time', 'category')->get()->groupBy('category');
