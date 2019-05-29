@@ -37,7 +37,7 @@ class HippnpController extends \BaseController {
         // }
 
         // if($instance) {
-                return Redirect::action('HippnpController@showInstanceDashboard');
+                return Redirect::action('showInstanceDashboard');
 		// }
 
 	}
