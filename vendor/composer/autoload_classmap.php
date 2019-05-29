@@ -184,7 +184,7 @@ return array(
     'Hipcriteria' => $baseDir . '/app/models/Hipcriteria.php',
     'Hipevent' => $baseDir . '/app/models/Hipevent.php',
     'HiphubSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
-    'HippnpController' => $baseDir . '/app/controllers/hippnp/HipPnpController.php',
+    'HippnpController' => $baseDir . '/app/controllers/HippnpController.php',
     'HomeController' => $baseDir . '/app/controllers/HomeController.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
     'Image_Cache' => $vendorDir . '/dompdf/dompdf/include/image_cache.cls.php',
