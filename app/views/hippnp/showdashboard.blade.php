@@ -39,8 +39,6 @@
                                     </div>
                                     <div id="staff_today" class="modStatspan">
                                         <span style="font-size: 30%;">{{$data['customerInStoreToday']}}</span>
-
-                                        <span style="font-size: 30%;">{{$data['category']}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +97,7 @@
                     <br><br>
                     <div id="fusion-chart">
                         <div class="row">
-
+                            <!-- <div id="report_period"><br><br>{{$data['report_period']}}</div> -->
 
 
 
@@ -128,7 +126,34 @@
 </body>
 
 <script>
+$(document).ready(function() {
 
+    var chartProperties = {
+        "caption": "",
+        "xAxisName": "Category",
+        "yAxisName": "Staff",
+        "paletteColors": "#0075c2,#f8b81d",
+        "rotatevalues": "1",
+        "theme": "zune"
+    };
+
+    apiChart = new FusionCharts({
+        type: 'mscolumn2d',
+        renderAt: 'staff_wrk',
+        width: '400',
+        height: '350',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": chartProperties,
+            "categories": [{
+                "category": <?php echo $data['category']; ?>
+            }],
+            "dataset": <?php echo $data['staff_graph']; ?>
+
+        }
+    });
+    apiChart.render();
+});
 </script>
 
 @stop

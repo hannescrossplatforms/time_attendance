@@ -21,8 +21,13 @@ class HippnpController extends \BaseController {
         $data['test'] = \Picknpay::all();
         $data['customerInStoreToday'] = \Picknpay::customerInStoreToday();
         $data['customerInStoreThisMonth'] = \Picknpay::customerInStoreThisMonth();
-        $data['category'] = \Picknpay::chartDwellTime();
+        $data['category'] = \Picknpay::chartCategoriesAsJson();
+        $data['staff_graph'] = \Picknpay::getChartDwellTimeData();
 
+        $data['report_period'] = 'asdf';
+
+        // $staff_graph = array($staff_present, $staff_absent);
+        // $data['staff_graph'] = $staff_graph;
 
         return \View::make('hippnp.showdashboard')->with('data', $data);
 

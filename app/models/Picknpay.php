@@ -20,16 +20,23 @@ class Picknpay extends Eloquent {
         return Picknpay::all()->count();
     }
 
-    public static function chartDwellTime(){
-        // return Picknpay::select('category as category')->toJson();
-        return Picknpay::select('category')->get()->toJson();
+    public static function chartCategoriesAsJson(){
+        //TODO: Pass store name in here and filter according to store.
+        return Picknpay::orderBy('id', 'ASC')->select('category')->get()->groupBy('category')->toJson();
+    }
 
-        // ->select(array('column1', 'column2', 'column3'))
-        // ->get();
+    public static function getChartDwellTimeData(){
+        //should return array
+        //TODO: Pass store name in here and filter according to store.
+        return Picknpay::orderBy('id', 'ASC')->get()->groupBy('category')->map(function($row) {
+            return $row->sum('dwell_time');
+        });
     }
 
 
-
+    // $num = $mystuff->groupBy('dateDay')->map(function ($row) {
+    //     return $row->sum('n');
+    // });
 
     // $data['staff_week'] = json_encode(array(
         //         "client" => array(
