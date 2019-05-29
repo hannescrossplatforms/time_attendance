@@ -1,5 +1,6 @@
 <?php
 
+namespace hippnp;
 use DB;
 use Input;
 use Validator;
