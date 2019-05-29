@@ -39,7 +39,7 @@
     </ul>
 
     <ul class="nav subNav">
-        <li @if ( $data['currentMenuItem'] == "Dashboard" ) class="active" @endif><a href="{{ url('hiptna_showdashboard'); }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <!-- <li @if ( $data['currentMenuItem'] == "Dashboard" ) class="active" @endif><a href="{{ url('hiptna_showdashboard'); }}"><i class="fa fa-dashboard"></i>Dashboard</a></li> -->
         <div id="instance_menus" style="display: none">
             <ul class="subNav2">
 
@@ -50,18 +50,18 @@
             </ul>
         </div>
         <div id="exception_manage_menus" style="display: none">
-        @if( Session::get('currentInstance') != "NR01" && Session::get('currentInstance') != "NR02" )
+        <!-- @if( Session::get('currentInstance') != "NR01" && Session::get('currentInstance') != "NR02" )
             <li @if ( $data['currentMenuItem'] == "Exception Reports" ) class="active" @endif ><a href="{{ url('hiptna_exceptionreports'); }}"><i class="fa fa-bell-o"></i>Exception Reports</a></li>
-        @endif
-        <li @if ( $data['currentMenuItem'] == "Management Console" ) class="active" @endif ><a href="{{ url('hiptna_showSettings'); }}"><i class="fa fa-desktop"></i>Management Console</a></li>
+        @endif -->
+        <!-- <li @if ( $data['currentMenuItem'] == "Management Console" ) class="active" @endif ><a href="{{ url('hiptna_showSettings'); }}"><i class="fa fa-desktop"></i>Management Console</a></li> -->
             <ul class="subNav2">
 
-            <li @if ( $data['currentMenuItem'] == "Settings" ) class="active" @endif ><a href="{{ url('hiptna_showSettings'); }}">Settings</a></li>
-            @if( Session::get('currentInstance') != "NR01" && Session::get('currentInstance') != "NR02" )
+            <!-- <li @if ( $data['currentMenuItem'] == "Settings" ) class="active" @endif ><a href="{{ url('hiptna_showSettings'); }}">Settings</a></li> -->
+            <!-- @if( Session::get('currentInstance') != "NR01" && Session::get('currentInstance') != "NR02" )
                 <li @if ( $data['currentMenuItem'] == "Staff Lookup" ) class="active" @endif ><a href="{{ url('hiptna_showStafflookup'); }}">Staff Lookup</a></li>
                 <li @if ( $data['currentMenuItem'] == "Instant Messaging" ) class="active" @endif ><a href="{{ url('hiptna_showInstantmessaging'); }}">Instant Messaging</a></li>
                 <li @if ( $data['currentMenuItem'] == "Beacon Battery Monitor" ) class="active" @endif ><a href="{{ url('hiptna_showBeaconbatterymonitor'); }}">Beacon Battery Monitor</a></li>
-            @endif
+            @endif -->
             </ul>
         </div>
 
