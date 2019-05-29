@@ -35,18 +35,18 @@ class Picknpay extends Eloquent {
         // ->get();
 
 
-        $arr = new [];
 
-        //  $data = array("title" => array(), "type" => array());
+        <?php $array1=array(); ?>
+
 
         Picknpay::orderBy('id', 'ASC')
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
         ->groupBy('category')
         ->get()->map(function($row){
-            array_push($arr, $row['dwell_time']);
+            array_push($array1, $row['dwell_time']);
         });
 
-        return $arr;
+        return $array1;
         // return Picknpay::orderBy('id', 'ASC')->select('dwell_time', 'category')->get()->groupBy('category');
 
         // return Picknpay::orderBy('id', 'ASC')->get()->groupBy('category')->map(function($row) {
