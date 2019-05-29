@@ -36,7 +36,8 @@ class Picknpay extends Eloquent {
 
 
 
-        <?php $array1=array(); ?>
+
+        $array1 = (array) null;
 
 
         Picknpay::orderBy('id', 'ASC')
