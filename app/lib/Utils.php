@@ -3,7 +3,7 @@
 
 
 class Utils extends Eloquent {
-    
+
     // MASS ASSIGNMENT -------------------------------------------------------
     // define which attributes are mass assignable (for security)
     // we only want these 3 attributes able to be filled
@@ -27,6 +27,10 @@ class Utils extends Eloquent {
         } else {
             return 'hipengage';
         }
+    }
+
+    public static function getHiphubDbConnection() {
+        return 'hiphub';
     }
 
     public function getAllowedEngageBrandcodes() {
@@ -54,7 +58,7 @@ class Utils extends Eloquent {
     	$venuecode = strtoupper($sitename);
     	$venuecode = substr ( $venuecode , 0 , 8 );
     	$pad = 8 - strlen($venuecode);
-    	for($i=1; $i<=$pad; $i++) { $venuecode = "X" . $venuecode; } 
+    	for($i=1; $i<=$pad; $i++) { $venuecode = "X" . $venuecode; }
 
     	$location = $isp_code . $brand_code . $venuecode . "XX" . $citie_code . $province_code . $countrie_code;
 
@@ -85,11 +89,11 @@ class Utils extends Eloquent {
                 $citie_code = \Citie::find($citie_id)->code;
             } else {
                 $citie_code = "XXX";
-            }       
+            }
         }
 
-        error_log("buildLocationCode province_code $province_code"); 
-        error_log("buildLocationCode province_id $province_id"); 
+        error_log("buildLocationCode province_code $province_code");
+        error_log("buildLocationCode province_id $province_id");
 
         $location = $isp_code . $brand_code . "XXXXXXXXXX" . $citie_code . $province_code . $countrie_code;
 
@@ -104,7 +108,7 @@ class Utils extends Eloquent {
         $venuecode = strtoupper($sitename);
         $venuecode = substr ( $venuecode , 0 , 8 );
         $pad = 8 - strlen($venuecode);
-        for($i=1; $i<=$pad; $i++) { $venuecode = "X" . $venuecode; } 
+        for($i=1; $i<=$pad; $i++) { $venuecode = "X" . $venuecode; }
 
         $location = $firstbit . $venuecode . $sitenumber . $endbit;
 
@@ -140,7 +144,7 @@ class Utils extends Eloquent {
         }
 
         return $firstbit . $newindexpadded . $endbit;
-                
+
     }
 
 }
