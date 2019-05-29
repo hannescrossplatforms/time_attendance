@@ -29,7 +29,19 @@ class HippnpController extends \BaseController {
 
 
 
-        $data['staff_week'] = [{"text": "Aachen, Germany - Aachen/Merzbruck (AAH)"}, {"text": "Aachen, Germany - Railway (ZIU)"}, {"text": "Aalborg, Denmark - Aalborg (AAL)"}, {"text": "Aalesund, Norway - Vigra (AES)"}, {"text": "Aarhus, Denmark - Aarhus Airport (AAR)"}, {"text": "Aarhus Limo, Denmark - Aarhus Limo (ZBU)"}, {"text": "Aasiaat, Greenland - Aasiaat (JEG)"}, {"text": "Abadan, Iran - Abadan (ABD)"}];
+        $data['staff_week'] = json_encode(array(
+            "client" => array(
+               "build" => "1.0",
+               "name" => "xxxxxx",
+               "version" => "1.0"
+            ),
+            "protocolVersion" => 4,
+            "data" => array(
+               "distributorId" => "xxxx",
+               "distributorPin" => "xxxx",
+               "locale" => "en-US"
+            )
+       ));
         // $obj = json_decode($data);
 
 
