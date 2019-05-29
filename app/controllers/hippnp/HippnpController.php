@@ -17,13 +17,12 @@ class HippnpController extends \BaseController {
     {
 
         $data = array() ;
-        $hannesarray = array();
 
         $data['test'] = \Picknpay::all();
         $data['customerInStoreToday'] = \Picknpay::customerInStoreToday();
         $data['customerInStoreThisMonth'] = \Picknpay::customerInStoreThisMonth();
         $data['category'] = \Picknpay::chartCategoriesAsJson();
-        $data['staff_graph'] = \Picknpay::getChartDwellTimeData($hannesarray);
+        $data['staff_graph'] = \Picknpay::getChartDwellTimeData($data);
 
         $data['report_period'] = 'asdf';
 

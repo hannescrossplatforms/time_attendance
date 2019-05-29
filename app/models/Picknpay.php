@@ -25,7 +25,7 @@ class Picknpay extends Eloquent {
         return Picknpay::orderBy('id', 'ASC')->select('category')->get()->groupBy('category')->toJson();
     }
 
-    public static function getChartDwellTimeData($hannesarray){
+    public static function getChartDwellTimeData($data){
         //should return array
         //TODO: Pass store name in here and filter according to store.
 
@@ -33,14 +33,13 @@ class Picknpay extends Eloquent {
         // ->select('warehouse_id', DB::raw('sum(receipt_stock.quantity) quantity'))
         // ->groupBy('warehouse_id')
         // ->get();
-        // global $hannesarray;
-        // $hannesarray = array('', '');
+        $hannesarray = array('', '');
 
         Picknpay::orderBy('id', 'ASC')
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
         ->groupBy('category')
         ->get()->map(function($row){
-            array_push($hannesarray, 'asdf');
+            array_push($data['staff_graph'], 'asdf');
         });
 
         return $hannesarray;
