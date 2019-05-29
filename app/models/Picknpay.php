@@ -20,6 +20,12 @@ class Picknpay extends Eloquent {
         return Picknpay::all()->count();
     }
 
+    public static function chartDwellTime(){
+        return Picknpay::all()->select('category as category')->toJson();
+    }
+
+
+
 
     // $data['staff_week'] = json_encode(array(
         //         "client" => array(
