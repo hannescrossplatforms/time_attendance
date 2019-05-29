@@ -28,6 +28,10 @@
             @include('hippnp.sidebar')
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+
+                <div id="" class="modStatspan">{{$data['staff_week']}}</div>
+
+
             </div>
 
 
