@@ -10,10 +10,12 @@ class Picknpay extends Eloquent {
 
     protected $table = 'picknpay';
 
-    public function customerInStoreToday()
+    public static function customerInStoreToday()
     {
         return Picknpay::all()->count();
     }
+
+
 
     // $data['staff_week'] = json_encode(array(
         //         "client" => array(
