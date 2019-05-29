@@ -26,6 +26,17 @@ class Picknpay extends Eloquent {
         return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->map(function($row) {
             return $row['category'];
         });
+
+        //SHould look like this
+        // {
+        //     "chart": chartProperties,
+        //     "categories": [{
+        //         "category": [{"label":"2019-05-27"},{"label":"2019-05-28"}]                                }],
+        //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
+        // }
+
+
+
     }
 
     public static function getChartDwellTimeData(){
