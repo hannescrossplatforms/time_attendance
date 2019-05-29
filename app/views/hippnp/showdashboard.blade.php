@@ -92,8 +92,32 @@
                                     Range</button>
                             </div>
                         </div>
+                    </div>
+                    <br><br>
+                    <div id="fusion-chart">
+                        <div class="row">
+                            <div id="report_period"><br><br>{{$data['report_period']}}</div>
 
 
+
+                            <div class="col-sm-6">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title venuecolheading">Absence </div>
+                                    <div class="chart-stage">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="chart-stage">
+                                                    <div id="staff_wrk">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
                     </div>
                 </div>
             </div>
