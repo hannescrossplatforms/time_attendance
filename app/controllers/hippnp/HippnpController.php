@@ -24,8 +24,10 @@ class HippnpController extends \BaseController {
         // $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
         // $proximity_target = \Tnasetting::where('name', 'like', $settings["proximity_target"])->first()->value;
 
-        $data['staff_week'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('attendance', '=', "present")->get()->count();
+        // $data['staff_week'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('attendance', '=', "present")->get()->count();
         $data['staff_month'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('first day of this month')))->where('attendance', '=', "present")->get()->count();
+
+        $data['staff_week'] = {"Test": "test"}
 
         // $cons_absent = \Timeandattendance::select('date')->where('attendance', '!=', "present")->where('instance', '=', $currentInstance )->orderBy('date', 'desc')->first();
         // $start = strtotime($cons_absent->date);
