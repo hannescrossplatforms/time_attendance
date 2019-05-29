@@ -13,7 +13,7 @@ use Session;
 
 class HippnpController extends \BaseController {
 
-	public function showDashboard()
+	public static function showDashboard()
     {
 
         $data = array() ;
