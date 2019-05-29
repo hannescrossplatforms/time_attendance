@@ -27,7 +27,11 @@ class HippnpController extends \BaseController {
         // $data['staff_week'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('last monday')))->where('attendance', '=', "present")->get()->count();
         $data['staff_month'] = \Timeandattendance::where('date', ">=", date('Y-m-d',strtotime('first day of this month')))->where('attendance', '=', "present")->get()->count();
 
-        $data['staff_week'] = {"Test": "test"}
+
+
+        $data['staff_week'] = [{"text": "Aachen, Germany - Aachen/Merzbruck (AAH)"}, {"text": "Aachen, Germany - Railway (ZIU)"}, {"text": "Aalborg, Denmark - Aalborg (AAL)"}, {"text": "Aalesund, Norway - Vigra (AES)"}, {"text": "Aarhus, Denmark - Aarhus Airport (AAR)"}, {"text": "Aarhus Limo, Denmark - Aarhus Limo (ZBU)"}, {"text": "Aasiaat, Greenland - Aasiaat (JEG)"}, {"text": "Abadan, Iran - Abadan (ABD)"}];
+        // $obj = json_decode($data);
+
 
         // $cons_absent = \Timeandattendance::select('date')->where('attendance', '!=', "present")->where('instance', '=', $currentInstance )->orderBy('date', 'desc')->first();
         // $start = strtotime($cons_absent->date);
