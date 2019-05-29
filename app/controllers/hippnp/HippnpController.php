@@ -19,7 +19,7 @@ class HippnpController extends \BaseController {
 		// $currentInstance = Session::get('currentInstance');
         $data = array() ;
 
-        $data["test"] = DB::table('picknpay')->get();
+        $data['test'] = DB::table('picknpay')->get();
 
 
 
