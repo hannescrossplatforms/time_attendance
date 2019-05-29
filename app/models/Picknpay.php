@@ -28,9 +28,11 @@ class Picknpay extends Eloquent {
     public static function getChartDwellTimeData(){
         //should return array
         //TODO: Pass store name in here and filter according to store.
-        return Picknpay::orderBy('id', 'ASC')->get()->groupBy('category')->map(function($row) {
-            return $row->sum('dwell_time');
-        });
+        return Picknpay::orderBy('id', 'ASC')->get()->groupBy('category');
+
+        // return Picknpay::orderBy('id', 'ASC')->get()->groupBy('category')->map(function($row) {
+        //     return $row->sum('dwell_time');
+        // });
     }
 
 
