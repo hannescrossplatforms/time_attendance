@@ -22,7 +22,10 @@ class Picknpay extends Eloquent {
 
     public static function chartDwellTime(){
         // return Picknpay::select('category as category')->toJson();
-        return Picknpay::all()->toJson();
+        return Picknpay::select('category')->get()->toJson();
+
+        // ->select(array('column1', 'column2', 'column3'))
+        // ->get();
     }
 
 
