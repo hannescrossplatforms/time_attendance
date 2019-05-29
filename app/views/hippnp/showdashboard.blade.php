@@ -99,7 +99,7 @@
                     <br><br>
                     <div id="fusion-chart">
                         <div class="row">
-                            <!-- <div id="report_period"><br><br>{{$data['report_period']}}</div> -->
+
 
 
 
