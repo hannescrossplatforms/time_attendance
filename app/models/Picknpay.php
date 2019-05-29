@@ -2,7 +2,7 @@
 
 class Picknpay extends Eloquent {
 
-    protected $connection = 'hipengage';
+    protected $connection = 'hiphub';
     public function __construct() {
     	$this->connection = \Utils::getEngageDbConnection();
 	}
