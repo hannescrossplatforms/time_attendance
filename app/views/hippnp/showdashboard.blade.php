@@ -138,7 +138,7 @@
 <script>
 $(document).ready(function() {
 
-    alert("asdf");
+    // alert("asdf");
     var chartProperties = {
         "caption": "",
         "xAxisName": "Category",
