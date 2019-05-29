@@ -54,6 +54,47 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4" style="width:30%;">
+                            <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
+                                <label>Report Period</label>
+                            </div>
+                            <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
+                                <select id="brandreportperiod" onchange="change_report_period()" class="form-control"
+                                    name="reportperiod">
+                                    <!-- <option value="">Select</option> -->
+                                    <option value="rep7day">This Week</option>
+                                    <option value="repthismonth">This month</option>
+                                    <option value="replastmonth">Last month</option>
+                                    <option value="daterange">Custom range</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--        printpreview button start-->
+                        <div id="printButton" class="col-md-4" style="width:30%; float: right;">
+                            <button type="button" class="btn btn-primary">View Printable
+                                Page</button>
+                        </div>
+                        <!--        print preview button end-->
+
+                        <div class="col-md-8" id="custom" style="display:none; width:70%;">
+                            <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
+                                <input type="text" class="form-control datepicker" name="venuefrom" id="venuefrom"
+                                    placeholder="FromDate">
+                            </div>
+                            <div class="col-md-2" style="width:25%; padding:0px 0px 0px 6px;">
+                                <input type="text" class="form-control datepicker" name="venueto" id="venueto"
+                                    placeholder="ToDate">
+                            </div>
+                            <div class="col-md-2" style="width:40%; padding:0px 0px 0px 6px;">
+                                <button type="submit" class="form-control" onclick="custom_report_period()">Submit Date
+                                    Range</button>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
         </div>
