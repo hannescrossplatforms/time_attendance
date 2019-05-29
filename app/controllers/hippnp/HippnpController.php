@@ -19,7 +19,10 @@ class HippnpController extends \BaseController {
 		// $currentInstance = Session::get('currentInstance');
         $data = array() ;
 
-        $data['test'] = DB::table('picknpay')->get();
+
+        // $staff_absent = \Timeandattendance::select( $staff_table.'.surname',$staff_table.'.firstnames' , DB::raw('COUNT( CASE WHEN timeandattendance.attendance != "present" THEN 0 END ) AS value'), 'timeandattendance.external_user_id' )->where('timeandattendance.date', ">=", $start)->where('timeandattendance.date', "<=", $end)->where('timeandattendance.external_user_id', '!=', "Vacant")->where('timeandattendance.attendance', '!=', "present")->where('timeandattendance.instance', '=', $currentInstance )->groupBy('timeandattendance.external_user_id')->get()->toArray();
+
+        $data['test'] = Timeandattendance::table('picknpay')->get().count();
 
 
 
