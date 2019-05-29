@@ -15,14 +15,14 @@ class HippnpController extends \BaseController {
 
 	public static function showDashboard()
     {
-
+        global $testArray;
         $data = array() ;
 
         $data['test'] = \Picknpay::all();
         $data['customerInStoreToday'] = \Picknpay::customerInStoreToday();
         $data['customerInStoreThisMonth'] = \Picknpay::customerInStoreThisMonth();
         $data['category'] = \Picknpay::chartCategoriesAsJson();
-        $data['staff_graph'] = \Picknpay::getChartDwellTimeData();
+        $data['staff_graph'] = \Picknpay::getChartDwellTimeData(testArray);
 
         $data['report_period'] = 'asdf';
 
