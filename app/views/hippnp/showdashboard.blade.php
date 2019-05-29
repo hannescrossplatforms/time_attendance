@@ -29,7 +29,7 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
                 <h1 class="page-header">Time & Attendance Dashboard</h1>
 
-                <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+
                     <div class="container-fluid">
                         <div class="row">
                             <div class="venuecolheading">Staff Overview</div>
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+
             </div>
         </div>
 </body>
