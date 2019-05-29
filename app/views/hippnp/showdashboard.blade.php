@@ -156,5 +156,14 @@ $(document).ready(function() {
     apiChart.render();
 });
 </script>
+<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+<script src="{{ asset('js/jquery-2.1.4.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+
+<script src="{{ asset('js/fusioncharts.js') }}"></script>
+<script src="{{ asset('js/fusioncharts.charts.js') }}"></script>
+<script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}"></script>
 
 @stop
