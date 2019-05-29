@@ -1,6 +1,6 @@
 
 <div class="col-sm-3 col-md-3 sidebar sidebarActive">
-    <!-- <div class="logo pull-left">
+    <div class="logo pull-left">
     <a href="{{ url('dashboard'); }}"><img src="img/logo_hiphub_small.png" class="img-responsive" /></a>
     </div>
     <div class="productTitle pull-left">
@@ -56,7 +56,7 @@
         </div>
 
     </ul>
-    <div class="clearfix"></div> -->
+    <div class="clearfix"></div>
 
 </div>
 

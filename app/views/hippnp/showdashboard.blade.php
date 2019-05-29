@@ -17,9 +17,9 @@
 </style>
 
 <body class="hipTnA">
-    <div id="loadingDiv" class="overlay">
+    <!-- <div id="loadingDiv" class="overlay">
         <img src="./img/loader.gif" style="width:80px;">
-    </div>
+    </div> -->
     <a id="buildtable"></a>
 
     <div class="container-fluid">
