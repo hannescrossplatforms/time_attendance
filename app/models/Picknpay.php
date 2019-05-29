@@ -12,7 +12,7 @@ class Picknpay extends Eloquent {
 
     public function customerInStoreToday()
     {
-        return self::all()->count();
+        return Picknpay::all()->count();
     }
 
     // $data['staff_week'] = json_encode(array(
