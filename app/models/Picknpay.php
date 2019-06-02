@@ -56,7 +56,8 @@ class Picknpay extends Eloquent {
             return array('label' => $row['created_at']->toDateString());
         });
 
-        return $result->unique();
+        return $result->flatten()
+        ->unique();
 
     }
 
