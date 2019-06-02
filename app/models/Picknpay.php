@@ -47,7 +47,7 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        return Picknpay::orderBy('id', 'ASC')
+        $data = Picknpay::orderBy('id', 'ASC')
         ->select('category', 'created_at')
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
@@ -55,8 +55,14 @@ class Picknpay extends Eloquent {
         ->get()->map(function($row) {
             return array('label' => $row['created_at']->toDateString());
         })
-        ->toArray()
-        ->unique();
+        ->toArray();
+
+        $uniques = array();
+        foreach ($data as $d) {
+            $uniques[$d->created_at] = $d; // Get unique country by code.
+        }
+
+        return $uniques;
 
 
 
