@@ -12,7 +12,7 @@ class Picknpay extends Eloquent {
 
     public static function customerInStoreToday($start, $end){
         //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
-        return where('date', ">=", $start)->where('date', "<=", $end)->count();
+        return Picknpay::where('date', ">=", $start)->where('date', "<=", $end)->count();
     }
 
     public static function customerInStoreThisMonth(){
