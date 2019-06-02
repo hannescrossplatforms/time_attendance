@@ -20,8 +20,8 @@ class HippnpController extends \BaseController {
         // $startDate = \Carbon\Carbon::now()->format('Y-m-d');
         // $endDate = \Carbon\Carbon::now()->format('Y-m-d');
 
-        $startDate = \Carbon\Carbon::today();
-        $endDate = \Carbon\Carbon::today();
+        $startDate = '2019-06-02 00:00:00';
+        $endDate = '2019-06-02 23:59:59';
 
         $data = array() ;
         $data['test'] = \Picknpay::all();
