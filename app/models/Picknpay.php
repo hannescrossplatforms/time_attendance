@@ -70,7 +70,7 @@ class Picknpay extends Eloquent {
 
             }
 
-            $prevDate = $row['created_at'];
+            $prevDate = $row['label'];
 
          }
 
