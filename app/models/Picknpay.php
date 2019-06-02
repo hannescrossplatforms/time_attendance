@@ -23,7 +23,7 @@ class Picknpay extends Eloquent {
     public static function chartCategoriesAsJson(){
         //TODO: Pass store name in here and filter according to store.
         // return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->toJson();
-        Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->map(function($row) {
+        return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->map(function($row) {
             return array('label' => $row['category']);
         });
 
@@ -46,8 +46,11 @@ class Picknpay extends Eloquent {
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
         ->groupBy('category')
         ->get()->map(function($row){
-            return (int)$row['dwell_time'];
+            return $row;
+            // return (int)$row['dwell_time'];
         });
+
+        // dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
 
     }
 
