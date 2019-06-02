@@ -10,9 +10,9 @@ class Picknpay extends Eloquent {
 
     protected $table = 'picknpay';
 
-    public static function customerInStoreToday(){
+    public static function customerInStoreToday($start, $end){
         //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
-        return Picknpay::all()->count();
+        return where('date', ">=", $start)->where('date', "<=", $end)->count();
     }
 
     public static function customerInStoreThisMonth(){

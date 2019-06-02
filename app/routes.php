@@ -344,6 +344,7 @@ Route::any('/generatePdf', array('uses' => 'hiptna\HiptnaController@generatePdf'
 
 // HipPickNPay routes //////////////////////////////////////////////////////////////
 Route::any('/hippnp_showdashboard', array('uses' => 'hippnp\HippnpController@showDashboard', 'as' => 'hippnp_showdashboard'))->before('auth');
+Route::get('hippnp/periodchartJsondata','hippnp\HippnpController@periodchartJsondata');
 // Route::any('/hippnp_showinstancedashboard', array('uses' => '\HippnpController@showInstanceDashboard', 'as' => 'hippnp_showinstancedashboard'))->before('auth');
 // Route::any('/hiptna_showinstancedashboard', array('uses' => 'hiptna\HiptnaController@showInstanceDashboard', 'as' => 'hippnp_showinstancedashboard'))->before('auth');
 // Route::any('/hiptna_shownrinstancedashboard', array('uses' => 'hiptna\HiptnaController@showNrInstanceDashboard', 'as' => 'hippnp_shownrinstancedashboard'))->before('auth');
