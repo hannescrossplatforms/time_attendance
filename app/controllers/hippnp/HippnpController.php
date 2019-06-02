@@ -15,6 +15,8 @@ class HippnpController extends \BaseController {
 
 	public static function showDashboard(){
 
+        $url = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
         $data = array() ;
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
