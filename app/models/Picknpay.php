@@ -56,7 +56,7 @@ class Picknpay extends Eloquent {
         ->groupBy('category')
         ->get()->map(function($row) {
             return array('label' => $row['created_at']->toDateString());
-        })->all()->unique();
+        });
 
         $array = json_decode(json_encode($data), true);
 
