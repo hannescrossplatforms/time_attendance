@@ -58,7 +58,7 @@ class Picknpay extends Eloquent {
 
         $data = $data->unique();
 
-        return $uniques;
+        return $data;
 
 
 
