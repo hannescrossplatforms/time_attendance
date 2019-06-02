@@ -16,14 +16,9 @@ class HippnpController extends \BaseController {
 	public static function showDashboard(){
 
         // 2019-06-02
-        $start = \Carbon\Carbon::now()->format('Y-m-d');
-        $end = \Carbon\Carbon::now()->format('Y-m-d');
-
-        $startDate = "$start 00.00.00";
-        $endDate = "$end 23:59:59";
 
         $data = array() ;
-        $data['customerInStoreToday'] = \Picknpay::customerInStoreToday($startDate, $endDate);
+        $data['customerInStoreToday'] = \Picknpay::customerInStoreToday();
         $data['customerInStoreThisMonth'] = \Picknpay::customerInStoreThisMonth();
         $data['category'] = \Picknpay::chartCategoriesAsJson();
         $data['staff_graph'] = \Picknpay::getChartDwellTimeData();

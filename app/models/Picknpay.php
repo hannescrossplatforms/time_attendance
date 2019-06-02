@@ -10,12 +10,19 @@ class Picknpay extends Eloquent {
 
     protected $table = 'picknpay';
 
-    public static function customerInStoreToday($start, $end){
+    public static function customerInStoreToday(){
+
+        $start = \Carbon\Carbon::now()->format('Y-m-d');
+        $end = \Carbon\Carbon::now()->format('Y-m-d');
+
+        $startDate = "$start 00.00.00";
+        $endDate = "$end 23:59:59";
+
         //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
-        return Picknpay::where('created_at', ">=", $start)->where('created_at', "<=", $end)->count();
+        return Picknpay::where('created_at', ">=", $startDate)->where('created_at', "<=", $endDate)->count();
     }
 
-    public static function customerInStoreThisMonth(){
+    public static function customerInStoreThisMonth($start, $end){
         //TODO: Where date is this month && group by customer uuid(maybe device uuid or something)
         return Picknpay::all()->count();
     }
