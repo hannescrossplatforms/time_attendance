@@ -54,12 +54,12 @@ class Picknpay extends Eloquent {
         ->groupBy('category')
         ->get()->map(function($row) {
             return array('label' => $row['created_at']->toDateString());
-        });
+        })->distinct();
 
-        $users = $data->select('created_at');
+        // $users = $data->select('created_at');
 
 
-        return $users;
+        return $data;
 
 
 
