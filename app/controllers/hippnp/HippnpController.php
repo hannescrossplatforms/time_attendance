@@ -13,8 +13,7 @@ use Session;
 
 class HippnpController extends \BaseController {
 
-	public static function showDashboard()
-    {
+	public static function showDashboard(){
 
         // 2019-06-02
         $start = \Carbon\Carbon::now()->format('Y-m-d');
@@ -24,7 +23,6 @@ class HippnpController extends \BaseController {
         $endDate = "$end 23:59:59";
 
         $data = array() ;
-        $data['test'] = \Picknpay::all();
         $data['customerInStoreToday'] = \Picknpay::customerInStoreToday($startDate, $endDate);
         $data['customerInStoreThisMonth'] = \Picknpay::customerInStoreThisMonth();
         $data['category'] = \Picknpay::chartCategoriesAsJson();
@@ -39,8 +37,8 @@ class HippnpController extends \BaseController {
 
     }
 
-    public function periodchartJsondata()
-    {
+    public function periodchartJsondata(){
+
         $data = array() ;
         $period = Input::get('period');
         $start = '';
