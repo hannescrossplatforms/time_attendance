@@ -38,6 +38,7 @@ class HippnpController extends \BaseController {
 
         $data['category'] = \Picknpay::chartCategoriesAsJson($period);
         $data['staff_graph'] = \Picknpay::getChartDwellTimeData($period);
+        $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
 
         $json = json_encode($data);
 
