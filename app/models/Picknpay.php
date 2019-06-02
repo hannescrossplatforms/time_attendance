@@ -27,9 +27,7 @@ class Picknpay extends Eloquent {
             // return $row['category'];
 
             return array(
-                'latitude' => $row['lat'],
-                'longitude' => $row['lng'],
-                'icon' => './images/' . $row['busColor'] . '.png'
+                'label' => $row['category']
             );
         });
 
