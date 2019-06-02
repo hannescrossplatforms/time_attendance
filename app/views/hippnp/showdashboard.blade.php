@@ -228,7 +228,7 @@ $.ajax({
                 }
             });
             apiChart.render();
-            alert("rendered successfully");
+
 
 
 
