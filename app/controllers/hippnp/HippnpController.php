@@ -25,8 +25,7 @@ class HippnpController extends \BaseController {
 
         $data['report_period'] = 'asdf';
 
-        // $staff_graph = array($staff_present, $staff_absent);
-        // $data['staff_graph'] = $staff_graph;
+
 
         return \View::make('hippnp.showdashboard')->with('data', $data);
 

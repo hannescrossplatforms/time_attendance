@@ -15,8 +15,15 @@ class Picknpay extends Eloquent {
         $start = \Carbon\Carbon::now()->format('Y-m-d');
         $end = \Carbon\Carbon::now()->format('Y-m-d');
 
-        $startDate = "$start 00.00.00";
-        $endDate = "$end 23:59:59";
+        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('today');
+
+        $startDate = $dateRange['startDate'];
+        $endDate = $dateRange['endDate'];
+
+        // $startDate = "$start 00.00.00";
+        // $endDate = "$end 23:59:59";
+
+
 
         //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
         return Picknpay::where('created_at', ">=", $startDate)->where('created_at', "<=", $endDate)->count();
@@ -55,6 +62,68 @@ class Picknpay extends Eloquent {
     }
 
 }
+
+    public static function getDateForPeriodAndTimeOfDay($period){
+
+        $returnValue = '';
+
+        if($period == 'today'){
+
+            $date = date('Y-m-d',strtotime('today'));
+
+            $returnValue = array('startDate' => "$date 00.00.00";
+            $returnValue = array('endDate' => "$date 23:59:59";
+            $returnValue = array('period' => "today";
+
+        }else if($period == 'rep7day'){
+
+            $start = date('Y-m-d',strtotime('last monday'));
+            $end = date('Y-m-d');
+
+            $returnValue = array('startDate' => "$start 00.00.00";
+            $returnValue = array('endDate' => "$end 23:59:59";
+            $returnValue = array('period' => "week";
+
+        }else if($period == 'repthismonth'){
+
+            $start = date('Y-m-d',strtotime('first day of this month'));
+            $end = date('Y-m-d');
+
+            $returnValue = array('startDate' => "$start 00.00.00";
+            $returnValue = array('endDate' => "$end 23:59:59";
+            $returnValue = array('period' => "month";
+
+        }else if($period == 'replastmonth'){
+
+            $start = date('Y-m-d',strtotime('first day of last month'));
+            $end = date('Y-m-d',strtotime('last day of last month'));
+
+            $returnValue = array('startDate' => "$start 00.00.00";
+            $returnValue = array('endDate' => "$end 23:59:59";
+            $returnValue = array('period' => "month";
+
+        }else if($period == 'daterange'){
+
+            $start = Input::get('start');
+            $end = Input::get('end');
+
+            $returnValue = array('startDate' => "$start 00.00.00";
+            $returnValue = array('endDate' => "$end 23:59:59";
+            $returnValue = array('period' => "date";
+
+        }else if($period == 'custom'){
+            $start = Input::get('start');
+            $end = Input::get('end');
+
+            $returnValue = array('startDate' => "$start 00.00.00";
+            $returnValue = array('endDate' => "$end 23:59:59";
+            $returnValue = array('period' => "date";
+
+        }
+
+        return $returnValue;
+
+    }
 
 //SHould look like this
         // {
