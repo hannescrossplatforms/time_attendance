@@ -47,7 +47,7 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        $prevDate = '';
+        global $prevDate = '';
 
         $data = Picknpay::orderBy('id', 'ASC')
         ->select('category', 'created_at')
