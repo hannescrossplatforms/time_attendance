@@ -97,9 +97,9 @@ class Picknpay extends Eloquent {
             $start = date('Y-m-d',strtotime('first day of last month'));
             $end = date('Y-m-d',strtotime('last day of last month'));
 
-            $returnValue = array('startDate' => "$start 00.00.00";
-            $returnValue = array('endDate' => "$end 23:59:59";
-            $returnValue = array('period' => "month";
+            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['endDate'] = "$end 23:59:59";
+            $returnValue['period'] = "month";
 
         }else if($period == 'daterange'){
 
