@@ -20,7 +20,7 @@ class HippnpController extends \BaseController {
         $start = \Carbon\Carbon::now()->format('Y-m-d');
         $end = \Carbon\Carbon::now()->format('Y-m-d');
 
-        $startDate = "$start 00.00.00"
+        $startDate = "$start 00.00.00";
         $endDate = "$end 23:59:59";
 
         $data = array() ;
