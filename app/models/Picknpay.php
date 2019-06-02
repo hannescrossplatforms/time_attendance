@@ -24,8 +24,8 @@ class Picknpay extends Eloquent {
         //TODO: Pass store name in here and filter according to store.
         // return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->toJson();
         return Picknpay::orderBy('id', 'ASC')->select('category', 'created_at')->groupBy('category')->get()->map(function($row) {
-            return $row;
-            // return array('label' => $row['category']);
+            // return $row;
+            return array('label' => $row['created_at']);
         });
 
     }
