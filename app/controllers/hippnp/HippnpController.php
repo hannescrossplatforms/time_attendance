@@ -29,8 +29,7 @@ class HippnpController extends \BaseController {
         foreach ($results as $result) {
 
             if ($prevDate != $result['label']) {
-                // array_push($test, $result);
-                array_push($data['category'], $result);
+                array_push($test, $result);
             }
             $prevDate = $result['label'];
 
