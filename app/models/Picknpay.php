@@ -27,7 +27,7 @@ class Picknpay extends Eloquent {
             return $row['category'];
 
             json_encode(array(
-                "label":"$row['category']";
+                "build" => "1.0";
             ));
         });
 
