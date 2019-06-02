@@ -54,13 +54,9 @@ class Picknpay extends Eloquent {
         ->groupBy('category')
         ->get()->map(function($row) {
             return array('label' => $row['created_at']->toDateString());
-        })
-        ->toArray();
+        });
 
-        $uniques = array();
-        foreach ($data as $d) {
-            $uniques[$d->created_at] = $d; // Get unique country by code.
-        }
+        $data = $data->unique();
 
         return $uniques;
 
