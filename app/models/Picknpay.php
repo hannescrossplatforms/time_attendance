@@ -23,7 +23,13 @@ class Picknpay extends Eloquent {
 
     public static function customerInStoreThisMonth(){
         //TODO: Where date is this month && group by customer uuid(maybe device uuid or something)
-        return Picknpay::all()->count();
+
+        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
+
+        $startDate = $dateRange['startDate'];
+        $endDate = $dateRange['endDate'];
+
+        return Picknpay::where('created_at', ">=", $startDate)->where('created_at', "<=", $endDate)->count();
     }
 
     public static function chartCategoriesAsJson(){
