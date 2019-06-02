@@ -103,7 +103,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Total dwell time per category </div>
+                                    <div class="chart-title venuecolheading">Total dwell time per section</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -142,7 +142,7 @@ $(document).ready(function() {
     var chartProperties = {
         "caption": "",
         "xAxisName": "Section",
-        "yAxisName": "Total dwell time",
+        "yAxisName": "Total dwell time (minutes)",
         "paletteColors": "#0075c2,#f8b81d",
         "rotatevalues": "1",
         "theme": "zune"
