@@ -16,9 +16,9 @@ class HippnpController extends \BaseController {
 	public static function showDashboard()
     {
 
-        // 2019-06-02
-        $startDate = Carbon::now()->format('Y-m-d');
-        $endDate = Carbon::now()->format('Y-m-d');
+
+        $startDate = \Carbon\Carbon::now()->format('Y-m-d');
+        $endDate = \Carbon\Carbon::now()->format('Y-m-d');
 
         $data = array() ;
         $data['test'] = \Picknpay::all();
