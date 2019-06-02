@@ -58,10 +58,23 @@ class Picknpay extends Eloquent {
             return array('label' => $row['created_at']->toDateString());
         });
 
-        $array = json_decode(json_encode($data), true);
+        $prevDate = '';
 
-        return $array;
+        foreach( $data as $row ) {
 
+
+            if ($prevDate == $row['created_at']){
+
+            }
+            else {
+
+            }
+
+            $prevDate = $row['created_at'];
+
+         }
+
+         return $data;
 
 
 
