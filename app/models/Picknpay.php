@@ -48,6 +48,13 @@ class Picknpay extends Eloquent {
         ->get()->map(function($row){
             return $row;
             // return (int)$row['dwell_time'];
+            return array('seriesname' => $row['category'],
+            'data' => array(
+                    "value" => $row['dwell_time']
+                ));
+
+
+            // "dataset": [{"category":"Food","dwell_time":"100"}]
         });
 
         // dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
