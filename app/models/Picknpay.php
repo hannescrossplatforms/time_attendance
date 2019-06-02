@@ -63,7 +63,7 @@ class Picknpay extends Eloquent {
         foreach( $data as $row ) {
 
 
-            if ($prevDate == $row['created_at']){
+            if ($prevDate == $row['label']){
 
             }
             else {
