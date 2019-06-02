@@ -60,17 +60,19 @@ class Picknpay extends Eloquent {
 
         $prevDate = '';
 
-        foreach( $data as $row ) {
+        foreach($data as $key=>$value) {
 
 
-            if ($prevDate == $row['label']){
+
+
+            if ($prevDate == $data[$key]['label']){
 
             }
             else {
 
             }
 
-            $prevDate = $row['label'];
+            $prevDate = $data[$key]['label'];
 
          }
 
