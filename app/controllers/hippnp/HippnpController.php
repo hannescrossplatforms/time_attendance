@@ -21,15 +21,15 @@ class HippnpController extends \BaseController {
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
 
+        $test = array('name'=>'Others');
 
-        $test = array();
         $prevDate = '';
         $results = \Picknpay::chartCategoriesAsJson('rep7day');
 
         foreach ($results as $result) {
 
             if ($prevDate != $result['label']) {
-                $test->push($result);
+                array_push($test, $result);
             }
             $prevDate = $result['label'];
 
