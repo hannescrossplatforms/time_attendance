@@ -118,6 +118,21 @@
                                 </div>
                             </div>
 
+                            <div class="col-sm-6">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title venuecolheading">Total dwell time per section</div>
+                                    <div class="chart-stage">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="chart-stage">
+                                                    <div id="staff_wrk_avg">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
 
                         </div>
@@ -169,6 +184,33 @@ $(document).ready(function() {
     apiChart.render();
 });
 
+var chartProperties = {
+        "caption": "",
+        "xAxisName": "Section",
+        "yAxisName": "Average dwell time (minutes)",
+        "paletteColors": "#0075c2,#f8b81d",
+        "rotatevalues": "1",
+        "theme": "zune"
+    };
+
+    apiChart = new FusionCharts({
+        type: 'mscolumn2d',
+        renderAt: 'staff_wrk_avg',
+        width: '400',
+        height: '350',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": chartProperties,
+            "categories": [{
+                "category": <?php echo $data['category_avg']; ?>
+            }],
+            "dataset": <?php echo $data['staff_graph']; ?>
+
+        }
+    });
+    apiChart.render();
+});
+
 
 
 function change_report_period(){
@@ -212,22 +254,48 @@ $.ajax({
                 "theme": "zune"
             };
 
-            apiChart = new FusionCharts({
-                type: 'mscolumn2d',
-                renderAt: 'staff_wrk',
-                width: '400',
-                height: '350',
-                dataFormat: 'json',
-                dataSource: {
-                    "chart": chartProperties,
-                    "categories": [{
-                        "category": <?php echo $data['category']; ?>
-                    }],
-                    "dataset": <?php echo $data['staff_graph']; ?>
+        apiChart = new FusionCharts({
+            type: 'mscolumn2d',
+            renderAt: 'staff_wrk',
+            width: '400',
+            height: '350',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": chartProperties,
+                "categories": [{
+                    "category": <?php echo $data['category']; ?>
+                }],
+                "dataset": <?php echo $data['staff_graph']; ?>
 
-                }
-            });
-            apiChart.render();
+            }
+        });
+        apiChart.render();
+
+        var chartProperties = {
+                "caption": "",
+                "xAxisName": "Section",
+                "yAxisName": "Average dwell time (minutes)",
+                "paletteColors": "#0075c2,#f8b81d",
+                "rotatevalues": "1",
+                "theme": "zune"
+            };
+
+        apiChart = new FusionCharts({
+            type: 'mscolumn2d',
+            renderAt: 'staff_wrk_avg',
+            width: '400',
+            height: '350',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": chartProperties,
+                "categories": [{
+                    "category": <?php echo $data['category_avg']; ?>
+                }],
+                "dataset": <?php echo $data['staff_graph_avg']; ?>
+
+            }
+        });
+        apiChart.render();
 
 
 

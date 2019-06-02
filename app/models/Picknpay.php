@@ -47,8 +47,6 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-
-
         $data = Picknpay::orderBy('id', 'ASC')
         ->select('category', 'created_at')
         ->where('created_at', ">=", $startDate)
@@ -66,7 +64,7 @@ class Picknpay extends Eloquent {
 
     }
 
-    public static function getChartDwellTimeData($period){
+    public static function getChartTotalDwellTimeData($period){
         //TODO: Pass store name in here and filter according to store.
 
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($period);
@@ -76,6 +74,30 @@ class Picknpay extends Eloquent {
 
         return Picknpay::orderBy('id', 'ASC')
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
+        ->where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
+        ->groupBy('category')
+        ->get()->map(function($row){
+
+            return array('seriesname' => $row['category'],
+            'data' => array(
+                    "value" => (int)((int)$row['dwell_time'] / 60)
+                ));
+
+        });
+
+    }
+
+    public static function getChartAverageDwellTimeData($period){
+        //TODO: Pass store name in here and filter according to store.
+
+        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($period);
+
+        $startDate = $dateRange['startDate'];
+        $endDate = $dateRange['endDate'];
+
+        return Picknpay::orderBy('id', 'ASC')
+        ->select('category', DB::raw('avg(dwell_time) dwell_time'))
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('category')
