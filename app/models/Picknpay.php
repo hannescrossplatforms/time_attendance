@@ -24,18 +24,9 @@ class Picknpay extends Eloquent {
         //TODO: Pass store name in here and filter according to store.
         // return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->toJson();
         return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->map(function($row) {
-            return array('label' => $row['category']);
+            return $row;
+            // return array('label' => $row['category']);
         });
-
-        //SHould look like this
-        // {
-        //     "chart": chartProperties,
-        //     "categories": [{
-        //         "category": [{"label":"2019-05-27"},{"label":"2019-05-28"}]                                }],
-        //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
-        // }
-
-
 
     }
 
@@ -46,40 +37,22 @@ class Picknpay extends Eloquent {
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
         ->groupBy('category')
         ->get()->map(function($row){
-            // return $row;
-            // return (int)$row['dwell_time'];
+
             return array('seriesname' => $row['category'],
             'data' => array(
                     "value" => $row['dwell_time']
                 ));
 
-
-            // "dataset": [{"category":"Food","dwell_time":"100"}]
         });
-
-        // dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
 
     }
 
-
-    // $num = $mystuff->groupBy('dateDay')->map(function ($row) {
-    //     return $row->sum('n');
-    // });
-
-    // $data['staff_week'] = json_encode(array(
-        //         "client" => array(
-        //            "build" => "1.0",
-        //            "name" => "xxxxxx",
-        //            "version" => "1.0"
-        //         ),
-        //         "protocolVersion" => 4,
-        //         "data" => array(
-        //            "distributorId" => "xxxx",
-        //            "distributorPin" => "xxxx",
-        //            "locale" => "en-US"
-        //         )
-        //    ));
-
-
-
 }
+
+//SHould look like this
+        // {
+        //     "chart": chartProperties,
+        //     "categories": [{
+        //         "category": [{"label":"2019-05-27"},{"label":"2019-05-28"}]                                }],
+        //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
+        // }
