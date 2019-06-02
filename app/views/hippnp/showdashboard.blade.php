@@ -191,7 +191,7 @@ function renderCharts(time,start,end){
 
 $.ajax({
 
-        url: pathname+'hiptna/periodchartJsondata',
+    url: pathname+'hiptna/periodchartJsondata',
         type: 'get',
         dataType: 'json',
         data : { 'period':time,'start':start,'end':end },
