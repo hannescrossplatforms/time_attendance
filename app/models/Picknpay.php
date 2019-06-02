@@ -97,7 +97,7 @@ class Picknpay extends Eloquent {
         $endDate = $dateRange['endDate'];
 
         return Picknpay::orderBy('id', 'ASC')
-        ->select('category', DB::raw('avg(dwell_time) dwell_time'))
+        ->select('category', DB::raw('avg(CAST(dwell_time AS UNSIGNED)) dwell_time'))
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('category')
