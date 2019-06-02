@@ -52,10 +52,9 @@ class Picknpay extends Eloquent {
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('category')
-        ->groupBy('created_at')
         ->get()->map(function($row) {
             return array('label' => $row['created_at']->toDateString());
-        });
+        }).unique();
 
     }
 
