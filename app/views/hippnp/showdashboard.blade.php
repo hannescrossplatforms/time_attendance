@@ -138,7 +138,6 @@
 <script>
 $(document).ready(function() {
 
-    // alert("asdf");
     var chartProperties = {
         "caption": "",
         "xAxisName": "Section",
@@ -191,263 +190,293 @@ function renderCharts(time,start,end){
 
 $.ajax({
 
-    url: pathname+'hiptna/periodchartJsondata',
+    url: pathname+'hippnp/periodchartJsondata',
         type: 'get',
         dataType: 'json',
         data : { 'period':time,'start':start,'end':end },
         success: function(data) {
 
-            $("#report_period").html(data.report_period);
-            $("#report_name_date").val(data.report_name_date);
+            // $("#report_period").html(data.report_period);
+            // $("#report_name_date").val(data.report_name_date);
 
-            if(data.currentInstance == 'NR01' || data.currentInstance == 'NR02' ){
+        var chartProperties = {
+                "caption": "",
+                "xAxisName": "Section",
+                "yAxisName": "Total dwell time (minutes)",
+                "paletteColors": "#0075c2,#f8b81d",
+                "rotatevalues": "1",
+                "theme": "zune"
+            };
 
-                //-------------- Staff On Time -------------
-                var chartProperties = {
-                    "caption": "",
-                    "xAxisName": "Date",
-                    "yAxisName": "Staff",
-                    "paletteColors" : "#0075c2,#f8b81d",
-                    "rotatevalues": "1",
-                    "theme": "zune",
-                    "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#lateness'
-                };
+            apiChart = new FusionCharts({
+                type: 'mscolumn2d',
+                renderAt: 'staff_wrk',
+                width: '400',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "categories": [{
+                        "category": <?php echo $data['category']; ?>
+                    }],
+                    "dataset": <?php echo $data['staff_graph']; ?>
 
-                apiChart = new FusionCharts({
-                    type: 'msline',
-                    renderAt: 'staff_ontime_trend',
-                    width: '400',
-                    height: '350',
-                    dataFormat: 'json',
-                    dataSource: {
-                        "chart": chartProperties,
-                        "categories": [
-                            {
-                                "category": data.category
-                            }
-                        ],
-                        "dataset": data.lateness_graph
-                        //"data": data.ontime_graph
-
-                    }
-                });
-                apiChart.render();
-
-                var chartProperties = {
-                    "caption": "",
-                    "xAxisName": "Date",
-                    "yAxisName": "Staff",
-                    "paletteColors" : "#0075c2,#f8b81d",
-                    "rotatevalues": "1",
-                    "theme": "zune",
-                    "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#lateness'
-                };
-
-                apiChart = new FusionCharts({
-                    type: 'mscolumn2d',
-                    renderAt: 'staff_ontime',
-                    width: '400',
-                    height: '350',
-                    dataFormat: 'json',
-                    dataSource: {
-                        "chart": chartProperties,
-                        "categories": [
-                            {
-                                "category": data.category
-                            }
-                        ],
-                        "dataset": data.lateness_graph
-                        //"data": data.ontime_graph
-
-                    }
-                });
-                apiChart.render();
-
-            } else {
-                //----------------staff at work-----------
-                var chartProperties = {
-                    "caption": "",
-                    "xAxisName": "Date",
-                    "yAxisName": "Staff",
-                    "paletteColors" : "#0075c2,#f8b81d",
-                    "rotatevalues": "1",
-                    "theme": "zune",
-                    "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#absence'
-                };
-
-                apiChart = new FusionCharts({
-                    type: 'msline',
-                    renderAt: 'staff_wrk_trend',
-                    width: '400',
-                    height: '350',
-                    dataFormat: 'json',
-                    dataSource: {
-                        "chart": chartProperties,
-                        "categories": [
-                            {
-                                "category": data.category
-                            }
-                        ],
-                        "dataset": data.staff_graph
-                        //"data": data.staff_graph
-
-                    }
-                });
-                apiChart.render();
-
-                var chartProperties = {
-                    "caption": "",
-                    "xAxisName": "Date",
-                    "yAxisName": "Staff",
-                    "paletteColors" : "#0075c2,#f8b81d",
-                    "rotatevalues": "1",
-                    "theme": "zune",
-                    "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#absence'
-                };
-
-                apiChart = new FusionCharts({
-                    type: 'mscolumn2d',
-                    renderAt: 'staff_wrk',
-                    width: '400',
-                    height: '350',
-                    dataFormat: 'json',
-                    dataSource: {
-                        "chart": chartProperties,
-                        "categories": [
-                            {
-                                "category": data.category
-                            }
-                        ],
-                        "dataset": data.staff_graph
-                        //"data": data.staff_graph
-
-                    }
-                });
-                apiChart.render();
-
-                //-------------- Staff On Time -------------
-                var chartProperties = {
-                    "caption": "",
-                    "xAxisName": "Date",
-                    "yAxisName": "Staff",
-                    "paletteColors" : "#0075c2,#f8b81d",
-                    "rotatevalues": "1",
-                    "theme": "zune",
-                    "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#lateness'
-                };
-
-                apiChart = new FusionCharts({
-                    type: 'msline',
-                    renderAt: 'staff_ontime_trend',
-                    width: '400',
-                    height: '350',
-                    dataFormat: 'json',
-                    dataSource: {
-                        "chart": chartProperties,
-                        "categories": [
-                            {
-                                "category": data.category
-                            }
-                        ],
-                        "dataset": data.lateness_graph
-                        //"data": data.ontime_graph
-
-                    }
-                });
-                apiChart.render();
-
-                var chartProperties = {
-                    "caption": "",
-                    "xAxisName": "Date",
-                    "yAxisName": "Staff",
-                    "paletteColors" : "#0075c2,#f8b81d",
-                    "rotatevalues": "1",
-                    "theme": "zune",
-                    "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#lateness'
-                };
-
-                apiChart = new FusionCharts({
-                    type: 'mscolumn2d',
-                    renderAt: 'staff_ontime',
-                    width: '400',
-                    height: '350',
-                    dataFormat: 'json',
-                    dataSource: {
-                        "chart": chartProperties,
-                        "categories": [
-                            {
-                                "category": data.category
-                            }
-                        ],
-                        "dataset": data.lateness_graph
-                        //"data": data.ontime_graph
-
-                    }
-                });
-                apiChart.render();
+                }
+            });
+            apiChart.render();
+            alert("rendered successfully");
 
 
-                //-------------- Staff Meeting WS Proximity Target -------------
-                var chartProperties = {
-                    "caption": "",
-                    "xAxisName": "Date",
-                    "yAxisName": "Staff",
-                    "paletteColors" : "#0075c2,#f8b81d",
-                    "rotatevalues": "1",
-                    "theme": "zune",
-                    "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#wsproximity'
-                };
 
-                apiChart = new FusionCharts({
-                    type: 'msline',
-                    renderAt: 'staff_proximity_trend',
-                    width: '400',
-                    height: '350',
-                    dataFormat: 'json',
-                    dataSource: {
-                        "chart": chartProperties,
-                        "categories": [
-                            {
-                                "category": data.category
-                            }
-                        ],
-                        "dataset": data.wsproximity_graph
-                        //"data": data.proximity_graph
 
-                    }
-                });
-                apiChart.render();
+            // if(data.currentInstance == 'NR01' || data.currentInstance == 'NR02' ){
 
-                var chartProperties = {
-                    "caption": "",
-                    "xAxisName": "Date",
-                    "yAxisName": "Staff",
-                    "paletteColors" : "#0075c2,#f8b81d",
-                    "rotatevalues": "1",
-                    "theme": "zune",
-                    "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#wsproximity'
-                };
+            //     //-------------- Staff On Time -------------
+            //     var chartProperties = {
+            //         "caption": "",
+            //         "xAxisName": "Date",
+            //         "yAxisName": "Staff",
+            //         "paletteColors" : "#0075c2,#f8b81d",
+            //         "rotatevalues": "1",
+            //         "theme": "zune",
+            //         "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#lateness'
+            //     };
 
-                apiChart = new FusionCharts({
-                    type: 'mscolumn2d',
-                    renderAt: 'staff_proximity',
-                    width: '400',
-                    height: '350',
-                    dataFormat: 'json',
-                    dataSource: {
-                        "chart": chartProperties,
-                        "categories": [
-                            {
-                                "category": data.category
-                            }
-                        ],
-                        "dataset": data.wsproximity_graph
-                        //"data": data.proximity_graph
+            //     apiChart = new FusionCharts({
+            //         type: 'msline',
+            //         renderAt: 'staff_ontime_trend',
+            //         width: '400',
+            //         height: '350',
+            //         dataFormat: 'json',
+            //         dataSource: {
+            //             "chart": chartProperties,
+            //             "categories": [
+            //                 {
+            //                     "category": data.category
+            //                 }
+            //             ],
+            //             "dataset": data.lateness_graph
+            //             //"data": data.ontime_graph
 
-                    }
-                });
-                apiChart.render();
-            }
+            //         }
+            //     });
+            //     apiChart.render();
+
+            //     var chartProperties = {
+            //         "caption": "",
+            //         "xAxisName": "Date",
+            //         "yAxisName": "Staff",
+            //         "paletteColors" : "#0075c2,#f8b81d",
+            //         "rotatevalues": "1",
+            //         "theme": "zune",
+            //         "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#lateness'
+            //     };
+
+            //     apiChart = new FusionCharts({
+            //         type: 'mscolumn2d',
+            //         renderAt: 'staff_ontime',
+            //         width: '400',
+            //         height: '350',
+            //         dataFormat: 'json',
+            //         dataSource: {
+            //             "chart": chartProperties,
+            //             "categories": [
+            //                 {
+            //                     "category": data.category
+            //                 }
+            //             ],
+            //             "dataset": data.lateness_graph
+            //             //"data": data.ontime_graph
+
+            //         }
+            //     });
+            //     apiChart.render();
+
+            // } else {
+            //     //----------------staff at work-----------
+            //     var chartProperties = {
+            //         "caption": "",
+            //         "xAxisName": "Date",
+            //         "yAxisName": "Staff",
+            //         "paletteColors" : "#0075c2,#f8b81d",
+            //         "rotatevalues": "1",
+            //         "theme": "zune",
+            //         "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#absence'
+            //     };
+
+            //     apiChart = new FusionCharts({
+            //         type: 'msline',
+            //         renderAt: 'staff_wrk_trend',
+            //         width: '400',
+            //         height: '350',
+            //         dataFormat: 'json',
+            //         dataSource: {
+            //             "chart": chartProperties,
+            //             "categories": [
+            //                 {
+            //                     "category": data.category
+            //                 }
+            //             ],
+            //             "dataset": data.staff_graph
+            //             //"data": data.staff_graph
+
+            //         }
+            //     });
+            //     apiChart.render();
+
+            //     var chartProperties = {
+            //         "caption": "",
+            //         "xAxisName": "Date",
+            //         "yAxisName": "Staff",
+            //         "paletteColors" : "#0075c2,#f8b81d",
+            //         "rotatevalues": "1",
+            //         "theme": "zune",
+            //         "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#absence'
+            //     };
+
+            //     apiChart = new FusionCharts({
+            //         type: 'mscolumn2d',
+            //         renderAt: 'staff_wrk',
+            //         width: '400',
+            //         height: '350',
+            //         dataFormat: 'json',
+            //         dataSource: {
+            //             "chart": chartProperties,
+            //             "categories": [
+            //                 {
+            //                     "category": data.category
+            //                 }
+            //             ],
+            //             "dataset": data.staff_graph
+            //             //"data": data.staff_graph
+
+            //         }
+            //     });
+            //     apiChart.render();
+
+            //     //-------------- Staff On Time -------------
+            //     var chartProperties = {
+            //         "caption": "",
+            //         "xAxisName": "Date",
+            //         "yAxisName": "Staff",
+            //         "paletteColors" : "#0075c2,#f8b81d",
+            //         "rotatevalues": "1",
+            //         "theme": "zune",
+            //         "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#lateness'
+            //     };
+
+            //     apiChart = new FusionCharts({
+            //         type: 'msline',
+            //         renderAt: 'staff_ontime_trend',
+            //         width: '400',
+            //         height: '350',
+            //         dataFormat: 'json',
+            //         dataSource: {
+            //             "chart": chartProperties,
+            //             "categories": [
+            //                 {
+            //                     "category": data.category
+            //                 }
+            //             ],
+            //             "dataset": data.lateness_graph
+            //             //"data": data.ontime_graph
+
+            //         }
+            //     });
+            //     apiChart.render();
+
+            //     var chartProperties = {
+            //         "caption": "",
+            //         "xAxisName": "Date",
+            //         "yAxisName": "Staff",
+            //         "paletteColors" : "#0075c2,#f8b81d",
+            //         "rotatevalues": "1",
+            //         "theme": "zune",
+            //         "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#lateness'
+            //     };
+
+            //     apiChart = new FusionCharts({
+            //         type: 'mscolumn2d',
+            //         renderAt: 'staff_ontime',
+            //         width: '400',
+            //         height: '350',
+            //         dataFormat: 'json',
+            //         dataSource: {
+            //             "chart": chartProperties,
+            //             "categories": [
+            //                 {
+            //                     "category": data.category
+            //                 }
+            //             ],
+            //             "dataset": data.lateness_graph
+            //             //"data": data.ontime_graph
+
+            //         }
+            //     });
+            //     apiChart.render();
+
+
+            //     //-------------- Staff Meeting WS Proximity Target -------------
+            //     var chartProperties = {
+            //         "caption": "",
+            //         "xAxisName": "Date",
+            //         "yAxisName": "Staff",
+            //         "paletteColors" : "#0075c2,#f8b81d",
+            //         "rotatevalues": "1",
+            //         "theme": "zune",
+            //         "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#wsproximity'
+            //     };
+
+            //     apiChart = new FusionCharts({
+            //         type: 'msline',
+            //         renderAt: 'staff_proximity_trend',
+            //         width: '400',
+            //         height: '350',
+            //         dataFormat: 'json',
+            //         dataSource: {
+            //             "chart": chartProperties,
+            //             "categories": [
+            //                 {
+            //                     "category": data.category
+            //                 }
+            //             ],
+            //             "dataset": data.wsproximity_graph
+            //             //"data": data.proximity_graph
+
+            //         }
+            //     });
+            //     apiChart.render();
+
+            //     var chartProperties = {
+            //         "caption": "",
+            //         "xAxisName": "Date",
+            //         "yAxisName": "Staff",
+            //         "paletteColors" : "#0075c2,#f8b81d",
+            //         "rotatevalues": "1",
+            //         "theme": "zune",
+            //         "clickURL": pathname+'hiptna_showgraphdrilldown?period='+time+'&start='+start+'&end='+end+'#wsproximity'
+            //     };
+
+            //     apiChart = new FusionCharts({
+            //         type: 'mscolumn2d',
+            //         renderAt: 'staff_proximity',
+            //         width: '400',
+            //         height: '350',
+            //         dataFormat: 'json',
+            //         dataSource: {
+            //             "chart": chartProperties,
+            //             "categories": [
+            //                 {
+            //                     "category": data.category
+            //                 }
+            //             ],
+            //             "dataset": data.wsproximity_graph
+            //             //"data": data.proximity_graph
+
+            //         }
+            //     });
+            //     apiChart.render();
+            // }
         }
     });
 }

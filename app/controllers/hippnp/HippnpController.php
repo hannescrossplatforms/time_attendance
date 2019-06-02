@@ -31,30 +31,42 @@ class HippnpController extends \BaseController {
 
         $data = array() ;
         $period = Input::get('period');
-        $start = '';
-        $end = '';
+        // $start = '';
+        // $end = '';
 
-        if($period == 'rep7day'){
-            $start = date('Y-m-d',strtotime('last monday'));
-            $end = date('Y-m-d');
-            $rep_name_period    =   "week";
-        }else if($period == 'repthismonth'){
-            $start = date('Y-m-d',strtotime('first day of this month'));
-            $end = date('Y-m-d');
-            $rep_name_period    =   "month";
-        }else if($period == 'replastmonth'){
-            $start = date('Y-m-d',strtotime('first day of last month'));
-            $end = date('Y-m-d',strtotime('last day of last month'));
-            $rep_name_period    =   "month";
-        }else if($period == 'daterange'){
-            $start = Input::get('start');
-            $end = Input::get('end');
-            $rep_name_period    =   "date";
-        }else if($period == 'custom'){
-            $start = Input::get('start');
-            $end = Input::get('end');
-            $rep_name_period    =   "date";
-        }
+        // if($period == 'rep7day'){
+        //     $start = date('Y-m-d',strtotime('last monday'));
+        //     $end = date('Y-m-d');
+        //     $rep_name_period    =   "week";
+        // }else if($period == 'repthismonth'){
+        //     $start = date('Y-m-d',strtotime('first day of this month'));
+        //     $end = date('Y-m-d');
+        //     $rep_name_period    =   "month";
+        // }else if($period == 'replastmonth'){
+        //     $start = date('Y-m-d',strtotime('first day of last month'));
+        //     $end = date('Y-m-d',strtotime('last day of last month'));
+        //     $rep_name_period    =   "month";
+        // }else if($period == 'daterange'){
+        //     $start = Input::get('start');
+        //     $end = Input::get('end');
+        //     $rep_name_period    =   "date";
+        // }else if($period == 'custom'){
+        //     $start = Input::get('start');
+        //     $end = Input::get('end');
+        //     $rep_name_period    =   "date";
+        // }
+
+        $data['category'] = \Picknpay::chartCategoriesAsJson($period);
+        $data['staff_graph'] = \Picknpay::getChartDwellTimeData($period);
+
+        // $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
+        // $data['staff_graph'] = \Picknpay::getChartDwellTimeData('rep7day');
+
+        // $data['category'] = \Timeandattendance::select('date as label')->where('date', ">=", $start)->where('date', "<=", $end)->where('instance', '=', Session::get('currentInstance'))->groupBy('date')->get()->toArray();
+
+        //     $staff_graph = array($staff_present, $staff_absent);
+        //     $data['staff_graph'] = $staff_graph;
+
 
         // $settings = $this->getTnaInstanceSettings();
         // $lateness_threshold = \Tnasetting::where('name', 'like', $settings["lateness_threshold"])->first()->value;
@@ -107,8 +119,8 @@ class HippnpController extends \BaseController {
         // }
 
 
-        $data['report_period']      =   "Report for ".$start." to ". $end;
-        $data['report_name_date']   =   $rep_name_period."_".$start."_".$end;
+        // $data['report_period']      =   "Report for ".$start." to ". $end;
+        // $data['report_name_date']   =   $rep_name_period."_".$start."_".$end;
 
 
         $json = json_encode($data);
