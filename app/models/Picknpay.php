@@ -48,7 +48,7 @@ class Picknpay extends Eloquent {
         $endDate = $dateRange['endDate'];
 
         $data = Picknpay::orderBy('id', 'ASC')
-        ->select('category', 'created_at')
+        ->selectRaw("category, DATE FORMAT(created_at, '%Y %m %e') created_at")
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('category')
