@@ -36,7 +36,7 @@ class HippnpController extends \BaseController {
 
         // }
 
-        $data['category'] = $test;
+        // $data['category'] = $test;
         $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
         $data['staff_graph'] = \Picknpay::getChartDwellTimeData('rep7day');
 
