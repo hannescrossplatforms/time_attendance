@@ -165,6 +165,29 @@ $(document).ready(function() {
     });
     apiChart.render();
 });
+
+
+
+function change_report_period(){
+    debugger;
+    var time = $("#brandreportperiod").val();
+    if(time == 'daterange') {
+        $('#custom').show();
+    } else {
+        $('#custom').hide();
+        renderCharts(time,'','')
+    }
+}
+
+function custom_report_period(){
+    var from = $('#venuefrom').val();
+    var to = $('#venueto').val();
+
+    renderCharts('daterange',from,to)
+}
+
+
+
 </script>
 
 
