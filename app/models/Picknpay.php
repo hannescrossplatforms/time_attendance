@@ -78,18 +78,19 @@ class Picknpay extends Eloquent {
             $start = date('Y-m-d',strtotime('last monday'));
             $end = date('Y-m-d');
 
-            $returnValue = array('startDate' => "$start 00.00.00";
-            $returnValue = array('endDate' => "$end 23:59:59";
-            $returnValue = array('period' => "week";
+
+            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['endDate'] = "$end 23:59:59";
+            $returnValue['period'] = "week";
 
         }else if($period == 'repthismonth'){
 
             $start = date('Y-m-d',strtotime('first day of this month'));
             $end = date('Y-m-d');
 
-            $returnValue = array('startDate' => "$start 00.00.00";
-            $returnValue = array('endDate' => "$end 23:59:59";
-            $returnValue = array('period' => "month";
+            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['endDate'] = "$end 23:59:59";
+            $returnValue['period'] = "month";
 
         }else if($period == 'replastmonth'){
 
@@ -105,17 +106,17 @@ class Picknpay extends Eloquent {
             $start = Input::get('start');
             $end = Input::get('end');
 
-            $returnValue = array('startDate' => "$start 00.00.00";
-            $returnValue = array('endDate' => "$end 23:59:59";
-            $returnValue = array('period' => "date";
+            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['endDate'] = "$end 23:59:59";
+            $returnValue['period'] = "date";
 
         }else if($period == 'custom'){
             $start = Input::get('start');
             $end = Input::get('end');
 
-            $returnValue = array('startDate' => "$start 00.00.00";
-            $returnValue = array('endDate' => "$end 23:59:59";
-            $returnValue = array('period' => "date";
+            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['endDate'] = "$end 23:59:59";
+            $returnValue['period'] = "date";
 
         }
 
