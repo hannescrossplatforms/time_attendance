@@ -58,7 +58,11 @@ class Picknpay extends Eloquent {
             return array('label' => $row['created_at']->toDateString());
         })->toBase();
 
-         return $data;
+        $array = json_decode( $data, TRUE );
+        $array = array_values( array_unique( $array, SORT_REGULAR ) );
+        $result = json_encode( $array );
+
+         return $result;
 
     }
 

@@ -21,29 +21,12 @@ class HippnpController extends \BaseController {
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
 
-        // $test = array('name'=>'Others');
-
-        // $prevDate = '';
-        // $results = \Picknpay::chartCategoriesAsJson('rep7day');
-
-        // foreach ($results as $result) {
-
-        //     if ($prevDate != $result['label']) {
-        //         array_push($test, $result);
-        //     }
-        //     $prevDate = $result['label'];
 
 
-        // }
 
-        // $data['category'] = $test;
 
-        $array = json_decode( \Picknpay::chartCategoriesAsJson('rep7day'), TRUE );
-        $array = array_values( array_unique( $array, SORT_REGULAR ) );
-        $result = json_encode( $array );
-
-        $data['category'] = $result;
-        // $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
+        // $data['category'] = $result;
+        $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
         $data['staff_graph'] = \Picknpay::getChartDwellTimeData('rep7day');
 
         $data['report_period'] = 'rep7day';
