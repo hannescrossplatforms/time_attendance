@@ -63,13 +63,13 @@ class Picknpay extends Eloquent {
 
     public static function getDateForPeriodAndTimeOfDay($period){
 
-        $returnValue = '';
+        $returnValue = array();
 
         if($period == 'today'){
 
             $date = date('Y-m-d',strtotime('today'));
 
-            $returnValue = array('startDate' => "$date 00.00.00";
+            $returnValue['startDate'] => "$date 00.00.00";
             $returnValue = array('endDate' => "$date 23:59:59";
             $returnValue = array('period' => "today";
 
