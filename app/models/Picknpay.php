@@ -25,7 +25,7 @@ class Picknpay extends Eloquent {
         // return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->toJson();
         return Picknpay::orderBy('id', 'ASC')->select('category', 'created_at')->groupBy('category')->get()->map(function($row) {
             // return $row;
-            return array('label' => $row['created_at']->toDateTimeString());
+            return array('label' => $row['created_at']->toDateString());
         });
 
     }
