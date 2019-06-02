@@ -103,7 +103,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Absence </div>
+                                    <div class="chart-title venuecolheading">Total dwell time per category </div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -141,8 +141,8 @@ $(document).ready(function() {
     // alert("asdf");
     var chartProperties = {
         "caption": "",
-        "xAxisName": "Category",
-        "yAxisName": "Staff",
+        "xAxisName": "Section",
+        "yAxisName": "Total dwell time",
         "paletteColors": "#0075c2,#f8b81d",
         "rotatevalues": "1",
         "theme": "zune"
