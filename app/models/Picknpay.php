@@ -50,30 +50,13 @@ class Picknpay extends Eloquent {
 
 
         $data = Picknpay::orderBy('id', 'ASC')
-        ->select('category', 'created_at')
+        ->select('created_at')
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('category')
         ->get()->map(function($row) {
             return array('label' => $row['created_at']->toDateString());
         })->toArray();
-
-        $prevDate = '';
-        $results = array();
-
-
-        foreach(array_reverse($data) as $key=>$value) {
-
-            if ($prevDate == $data[$key]['label']){
-
-            }
-            else {
-                $results->push($data[$key]);
-            }
-
-            $prevDate = $data[$key]['label'];
-
-         }
 
          return $data;
 
