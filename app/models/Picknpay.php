@@ -60,7 +60,7 @@ class Picknpay extends Eloquent {
 
         $array = json_decode(json_encode($data), true);
 
-        return $array();
+        return $array;
 
 
 
