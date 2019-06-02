@@ -121,7 +121,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Total dwell time per section</div>
+                                    <div class="chart-title venuecolheading">Average dwell time per section</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
