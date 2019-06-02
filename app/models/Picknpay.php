@@ -18,35 +18,57 @@ class Picknpay extends Eloquent {
         $endDate = $dateRange['endDate'];
 
         //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
-        return Picknpay::where('created_at', ">=", $startDate)->where('created_at', "<=", $endDate)->count();
+        return Picknpay::where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
+        ->count();
+
     }
 
     public static function customerInStoreThisMonth(){
-        //TODO: Where date is this month && group by customer uuid(maybe device uuid or something)
+
 
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
 
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        return Picknpay::where('created_at', ">=", $startDate)->where('created_at', "<=", $endDate)->count();
+        //TODO: Where date is this month && group by customer uuid(maybe device uuid or something)
+        return Picknpay::where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
+        ->count();
+
     }
 
-    public static function chartCategoriesAsJson(){
+    public static function chartCategoriesAsJson($period){
         //TODO: Pass store name in here and filter according to store.
-        // return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->toJson();
-        return Picknpay::orderBy('id', 'ASC')->select('category', 'created_at')->groupBy('category')->get()->map(function($row) {
-            // return $row;
+
+        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($period);
+
+        $startDate = $dateRange['startDate'];
+        $endDate = $dateRange['endDate'];
+
+        return Picknpay::orderBy('id', 'ASC')
+        ->select('category', 'created_at')
+        ->where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
+        ->groupBy('category')->get()->map(function($row) {
             return array('label' => $row['created_at']->toDateString());
         });
 
     }
 
-    public static function getChartDwellTimeData(){
-        //should return array
+    public static function getChartDwellTimeData($period){
         //TODO: Pass store name in here and filter according to store.
+
+        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($period);
+
+        $startDate = $dateRange['startDate'];
+        $endDate = $dateRange['endDate'];
+
         return Picknpay::orderBy('id', 'ASC')
         ->select('category', DB::raw('sum(dwell_time) dwell_time'))
+        ->where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
         ->groupBy('category')
         ->get()->map(function($row){
 
