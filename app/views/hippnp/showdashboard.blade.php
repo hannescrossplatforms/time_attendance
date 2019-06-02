@@ -158,31 +158,6 @@ $(document).ready(function() {
 
     pathname = $('#url').val();
 
-    var chartProperties = {
-        "caption": "",
-        "xAxisName": "Section",
-        "yAxisName": "Total dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d",
-        "rotatevalues": "1",
-        "theme": "zune"
-    };
-
-    apiChart = new FusionCharts({
-        type: 'mscolumn2d',
-        renderAt: 'staff_wrk',
-        width: '400',
-        height: '350',
-        dataFormat: 'json',
-        dataSource: {
-            "chart": chartProperties,
-            "categories": [{
-                "category": <?php echo $data['category']; ?>
-            }],
-            "dataset": <?php echo $data['staff_graph']; ?>
-
-        }
-    });
-    apiChart.render();
 
 
     var chartProperties = {
@@ -250,34 +225,7 @@ function renderCharts(time, start, end) {
         },
         success: function(data) {
 
-            // $("#report_period").html(data.report_period);
-            // $("#report_name_date").val(data.report_name_date);
 
-            // var chartProperties = {
-            //     "caption": "",
-            //     "xAxisName": "Section",
-            //     "yAxisName": "Total dwell time (minutes)",
-            //     "paletteColors": "#0075c2,#f8b81d",
-            //     "rotatevalues": "1",
-            //     "theme": "zune"
-            // };
-
-            // apiChart = new FusionCharts({
-            //     type: 'mscolumn2d',
-            //     renderAt: 'staff_wrk',
-            //     width: '400',
-            //     height: '350',
-            //     dataFormat: 'json',
-            //     dataSource: {
-            //         "chart": chartProperties,
-            //         "categories": [{
-            //             "category": <?php echo $data['category']; ?>
-            //         }],
-            //         "dataset": <?php echo $data['staff_graph']; ?>
-
-            //     }
-            // });
-            // apiChart.render();
 
             var chartProperties = {
                 "caption": "",
