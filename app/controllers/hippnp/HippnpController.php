@@ -17,12 +17,11 @@ class HippnpController extends \BaseController {
     {
 
         // 2019-06-02
-        // $startDate = \Carbon\Carbon::now()->format('Y-m-d');
-        // $endDate = \Carbon\Carbon::now()->format('Y-m-d');
+        $start = \Carbon\Carbon::now()->format('Y-m-d');
+        $end = \Carbon\Carbon::now()->format('Y-m-d');
 
-        $startDate = '2019-06-02 00:00:00';
-        // $endDate = '2019-06-02 23:59:59';
-        $endDate = '2019-06-02 00:00:00';
+        $startDate = "$start 00.00.00"
+        $endDate = "$end 23:59:59";
 
         $data = array() ;
         $data['test'] = \Picknpay::all();
