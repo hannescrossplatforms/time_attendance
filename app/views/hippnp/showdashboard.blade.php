@@ -38,7 +38,7 @@
                                         <h3>Customers In Store Today</h3>
                                     </div>
                                     <div id="staff_today" class="modStatspan">
-                                        <span style="font-size: 30%;">{{$data['customerInStoreToday']}}</span>
+                                        <span style="font-size: 30%;">{{$data['customer_in_store_today']}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                         <h3>Customers In Store This Month</h3>
                                     </div>
                                     <div id="staff_today" class="modStatspan"><span
-                                            style="font-size: 30%;">{{$data['customerInStoreThisMonth']}}</span></div>
+                                            style="font-size: 30%;">{{$data['customer_in_store_this_month']}}</span></div>
                                 </div>
                             </div>
                         </div>
