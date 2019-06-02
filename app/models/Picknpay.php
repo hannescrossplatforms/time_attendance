@@ -61,8 +61,6 @@ class Picknpay extends Eloquent {
 
     }
 
-}
-
     public static function getDateForPeriodAndTimeOfDay($period){
 
         $returnValue = '';
@@ -124,6 +122,10 @@ class Picknpay extends Eloquent {
         return $returnValue;
 
     }
+
+}
+
+
 
 //SHould look like this
         // {
