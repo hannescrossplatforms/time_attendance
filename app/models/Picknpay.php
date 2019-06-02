@@ -40,7 +40,8 @@ class Picknpay extends Eloquent {
 
             return array('seriesname' => $row['category'],
             'data' => array(
-                    "value" => gmdate("H:i:s", ((int)$row['dwell_time']))
+                    "value" => ((int)$row['dwell_time'] / 60),
+                    "label" => gmdate("H:i:s", ((int)$row['dwell_time']))
                 ));
 
         });
