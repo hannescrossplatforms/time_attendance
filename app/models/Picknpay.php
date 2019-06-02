@@ -12,18 +12,10 @@ class Picknpay extends Eloquent {
 
     public static function customerInStoreToday(){
 
-        $start = \Carbon\Carbon::now()->format('Y-m-d');
-        $end = \Carbon\Carbon::now()->format('Y-m-d');
-
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('today');
 
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
-
-        // $startDate = "$start 00.00.00";
-        // $endDate = "$end 23:59:59";
-
-
 
         //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
         return Picknpay::where('created_at', ">=", $startDate)->where('created_at', "<=", $endDate)->count();
