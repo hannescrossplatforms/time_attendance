@@ -42,7 +42,8 @@ class HippnpController extends \BaseController {
         $array = array_values( array_unique( $array, SORT_REGULAR ) );
         $result = json_encode( $array );
 
-        $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
+        $data['category'] = $result;
+        // $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
         $data['staff_graph'] = \Picknpay::getChartDwellTimeData('rep7day');
 
         $data['report_period'] = 'rep7day';
