@@ -25,6 +25,10 @@ class Picknpay extends Eloquent {
         // return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->toJson();
         return Picknpay::orderBy('id', 'ASC')->select('category')->groupBy('category')->get()->map(function($row) {
             return $row['category'];
+
+            json_encode(array(
+                "label":$row['category'];
+            ))
         });
 
         //SHould look like this
