@@ -59,14 +59,16 @@ class Picknpay extends Eloquent {
         })->toArray();
 
         $prevDate = '';
+        $results = [];
+
 
         foreach(array_reverse($data) as $key=>$value) {
 
-
-
-
             if ($prevDate == $data[$key]['label']){
-                $data->pull($key);
+
+            }
+            else {
+                $results->push($data[$key]);
             }
 
             $prevDate = $data[$key]['label'];
