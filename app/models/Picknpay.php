@@ -50,7 +50,7 @@ class Picknpay extends Eloquent {
 
 
         $data = Picknpay::orderBy('id', 'ASC')
-        ->select('created_at')
+        ->select('category', 'created_at')
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('category')
@@ -59,8 +59,6 @@ class Picknpay extends Eloquent {
         });
 
          return $data;
-
-
 
     }
 

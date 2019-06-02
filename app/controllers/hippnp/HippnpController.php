@@ -20,7 +20,24 @@ class HippnpController extends \BaseController {
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
-        $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
+
+
+        $test = array();
+        $prevDate = '';
+        $results = \Picknpay::chartCategoriesAsJson('rep7day');
+
+        foreach ($results as $result) {
+
+            if ($prevDate != $result['label']) {
+                $test->push($result);
+            }
+            $prevDate = $result['label'];
+
+
+        }
+
+        $data['category'] = $test;
+        // $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
         $data['staff_graph'] = \Picknpay::getChartDwellTimeData('rep7day');
 
         $data['report_period'] = 'rep7day';
