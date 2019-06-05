@@ -76,20 +76,32 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        $data = Picknpay::orderBy('id', 'ASC')
-        ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"), DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
-        ->where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->groupBy('category', 'created_at')
-        ->get();
+        // $rows = Picknpay::orderBy('id', 'ASC')
+        // ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"), DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
+        // ->where('created_at', ">=", $startDate)
+        // ->where('created_at', "<=", $endDate)
+        // ->groupBy('category', 'created_at')
+        // ->get();
 
-        $test = collect();
+        $rows = Picknpay::all();
+        $collection = collect();
 
-        $data->map(function($row){
-                $test->push($row);
-            });
+        foreach($rows as $row){
+          $data = Picknpay::where('category' '==' 'Games')->get();
 
-        return $test;
+          $collection->put($row->test , $data);
+        }
+
+        return $collection;
+
+
+        // $test = collect();
+
+        // $data->map(function($row){
+        //         $test->push($row);
+        //     });
+
+        // return $test;
 
 
         // "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
