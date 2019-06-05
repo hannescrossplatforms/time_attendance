@@ -44,7 +44,7 @@ class Picknpay extends Eloquent {
     }
 
     public static function hannesTestCategoriesInner($category){
-        return Picknpay::where('category', '=', 'Food');
+        return Picknpay::where('category', '=', 'Food')->get();
     }
 
     public static function chartCategoriesAsJson($period, $renderViaAjax){
