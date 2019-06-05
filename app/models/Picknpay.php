@@ -83,19 +83,16 @@ class Picknpay extends Eloquent {
         ->groupBy('category', 'created_at')
         ->get();
 
-        $test = $data->groupBy('category');
+        $test = collect();
 
-
-        // foreach($array as $item) {
-
-        //     $categories->put('category', $item['category']);
-        // }
+        $data->map(function($row){
+                $test->push($row);
+            });
 
         return $test;
-        // $array = array_values( array_unique( $array, SORT_REGULAR ) );
 
-        // "dataset": [{"seriesname":"food","data":[{"value":"100"},{"value":"0"}, {"value":"0"}},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
 
+        // "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
     }
 
     public static function getChartAverageDwellTimeData($period){
