@@ -87,7 +87,7 @@ class Picknpay extends Eloquent {
         $collection = collect();
 
         foreach($rows as $row){
-          $data = Picknpay::where('category' '==' 'Games')->get();
+          $data = Picknpay::where('category', '==', 'Games')->get();
 
           $collection->put($row->test , $data);
         }
