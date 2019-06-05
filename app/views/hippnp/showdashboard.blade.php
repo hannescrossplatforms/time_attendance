@@ -257,7 +257,6 @@ function renderCharts(time, start, end) {
                 "rotatevalues": "1",
                 "theme": "zune"
             };
-
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
                 renderAt: 'staff_wrk',
@@ -267,7 +266,8 @@ function renderCharts(time, start, end) {
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
-                        "category": data['category']
+
+                        "category": data['category'].substring(1, data['category'].length-1);
                     }],
                     "dataset": data['staff_graph']
                 }
@@ -327,3 +327,6 @@ function renderCharts(time, start, end) {
         }
     });
     apiChart.render(); -->
+
+    <!-- data["category"]
+"[{"label":"2019-06-05"},{"label":"2019-06-02"}]" -->
