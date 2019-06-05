@@ -49,6 +49,8 @@ class Picknpay extends Eloquent {
 
         $data = Picknpay::orderBy('id', 'ASC')
         ->select('category', 'created_at')
+        ->where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
         ->groupBy('category')
         ->get()->map(function($row) {
             return array('label' => $row['created_at']->toDateString());
@@ -72,6 +74,8 @@ class Picknpay extends Eloquent {
 
         return Picknpay::orderBy('id', 'ASC')
         ->select('category', DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
+        ->where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
         ->groupBy('category')
         ->get()->map(function($row){
 
@@ -116,8 +120,8 @@ class Picknpay extends Eloquent {
 
             $date = date('Y-m-d',strtotime('today'));
 
-            $returnValue['startDate'] = "$date 00.00.00";
-            $returnValue['endDate'] = "$date 23:59:59";
+            $returnValue['startDate'] = strtotime("$date 00.00.00");
+            $returnValue['endDate'] = strtotime("$date 23:59:59");
             $returnValue['period'] = "today";
 
         }else if($period == 'rep7day'){
