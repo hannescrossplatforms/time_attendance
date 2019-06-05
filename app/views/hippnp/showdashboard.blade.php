@@ -243,9 +243,7 @@ function renderCharts(time, start, end) {
         type: 'get',
         dataType: 'json',
         data: {
-            'period': time,
-            'start': start,
-            'end': end
+            'period': time
         },
         success: function(data) {
 
