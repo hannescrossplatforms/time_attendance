@@ -141,6 +141,7 @@ class Picknpay extends Eloquent {
             $startDate = $dateRange['startDate'];
             $endDate = $dateRange['endDate'];
 
+
             $returnValue['startDate'] = "$start 00.00.00";
             $returnValue['endDate'] = "$end 23:59:59";
             $returnValue['period'] = "month";
