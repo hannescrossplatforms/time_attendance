@@ -273,7 +273,7 @@ function renderCharts(time, start, end) {
                 }
             });
             apiChart.render();
-            debugger;
+
             var chartProperties = {
                 "caption": "",
                 "xAxisName": "Section",
@@ -312,3 +312,18 @@ function renderCharts(time, start, end) {
 
 
 @stop
+
+<!-- apiChart = new FusionCharts({
+        type: 'mscolumn2d',
+        renderAt: 'staff_wrk',
+        width: '400',
+        height: '350',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": chartProperties,
+            "categories": [{
+                "category": [{"label":"2019-06-05"}]            }],
+            "dataset": [{"seriesname":"Food","data":{"value":1}}]
+        }
+    });
+    apiChart.render(); -->
