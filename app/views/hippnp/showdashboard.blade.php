@@ -291,9 +291,7 @@ function renderCharts(time, start, end) {
                 dataFormat: 'json',
                 dataSource: {
                     "chart": chartProperties,
-                    "categories": [{
-                        "category": data['category_avg']
-                    }],
+                    "categories": [],
                     "dataset": data['staff_graph_avg']
 
                 }
