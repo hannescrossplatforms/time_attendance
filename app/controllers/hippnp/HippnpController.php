@@ -40,7 +40,7 @@ class HippnpController extends \BaseController {
         // $data['staff_graph'] = \Picknpay::getChartDwellTimeData($period);
         // $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
 
-        // $json = json_encode($data);
+
 
 
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
@@ -52,7 +52,7 @@ class HippnpController extends \BaseController {
         $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData('rep7day');
 
         $data['report_period'] = 'rep7day';
-
+        $json = json_encode($data);
 
 
     }
