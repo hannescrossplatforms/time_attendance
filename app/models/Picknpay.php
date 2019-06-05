@@ -76,19 +76,27 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        return Picknpay::orderBy('id', 'ASC')
-        ->select('category', 'created_at', DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
+        $data = Picknpay::orderBy('id', 'ASC')
+        ->select('category', 'DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at', DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('category', 'created_at')
-        ->get()->map(function($row){
+        ->get();
 
-            return array('seriesname' => $row['category'],
-            'data' => array(
-                    "value" => (int)((int)$row['dwell_time'] / 60)
-                ));
 
-        });
+        $categories = array();
+
+        $array = json_decode( $data, TRUE );
+
+        foreach($array as $item) {
+            $categories->push($item['category']);
+
+        }
+
+        return $categories;
+        // $array = array_values( array_unique( $array, SORT_REGULAR ) );
+
+        // "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
 
     }
 
@@ -192,3 +200,19 @@ class Picknpay extends Eloquent {
         // }
 
         // category: "[{"label":"2019-06-05"},{"label":"2019-06-02"}]"
+
+
+
+        // return Picknpay::orderBy('id', 'ASC')
+        // ->select('category', 'DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at', DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
+        // ->where('created_at', ">=", $startDate)
+        // ->where('created_at', "<=", $endDate)
+        // ->groupBy('category', 'created_at')
+        // ->get()->map(function($row){
+
+        //     return array('seriesname' => $row['category'],
+        //     'data' => array(
+        //             "value" => (int)((int)$row['dwell_time'] / 60)
+        //         ));
+
+        // });
