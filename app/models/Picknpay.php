@@ -88,10 +88,13 @@ class Picknpay extends Eloquent {
 
         $array = json_decode( $data, TRUE );
 
-        foreach($array as $item) {
+        $categories = $array->map(function($row){
+                return $row['category']
+            });
+        // foreach($array as $item) {
 
-            $categories->put('category', $item['category']);
-        }
+        //     $categories->put('category', $item['category']);
+        // }
 
         return $categories;
         // $array = array_values( array_unique( $array, SORT_REGULAR ) );
