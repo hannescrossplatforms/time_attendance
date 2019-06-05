@@ -33,20 +33,15 @@ class HippnpController extends \BaseController {
 
     public function periodchartJsondata(){
 
-        $test = array() ;
+        $data = array() ;
         $period = Input::get('period');
 
-        $test['category'] = \Picknpay::chartCategoriesAsJson($period, true);
-        $test['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
-        $test['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
-
-        $test['report_period'] = $period;
-        $test['hannes_test'] = \Picknpay::getDateForPeriodAndTimeOfDay($period);
-
-        $json = json_encode($test);
-
+        $data['category'] = \Picknpay::chartCategoriesAsJson($period, true);
+        $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
+        $data['category_avg'] = \Picknpay::chartCategoriesAsJson('rep7day', false);
+        $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
+        $json = json_encode($data);
         print_r($json);
-
 
     }
 
