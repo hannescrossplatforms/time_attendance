@@ -304,12 +304,12 @@ function renderCharts(time, start, end) {
             });
             apiChart.render();
 
-        }.fail(function(jqXHR, textStatus, error) {
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
             debugger;
-            // $('#editor-content-container').html(jqXHR.responseText);
-            // $('#editor-container').modal('show');
-        });
-
+            alert("Status: " + textStatus);
+            alert("Error: " + errorThrown);
+        }
     });
 }
 </script>
