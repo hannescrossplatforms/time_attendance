@@ -41,7 +41,7 @@ class HippnpController extends \BaseController {
 
 
         $data['testing'] = \Picknpay::hannesTestCategories();
-
+        $data['asdfasdfasdf'] = $data['testing'][0]['category'];
 
         foreach ($data['testing'] as $value) {
             $data['asdf'] = \Picknpay::hannesTestCategoriesInner($value['category']);
