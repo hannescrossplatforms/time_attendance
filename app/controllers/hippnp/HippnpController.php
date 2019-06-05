@@ -22,7 +22,7 @@ class HippnpController extends \BaseController {
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
         $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day', false);
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData('rep7day');
-        $data['category_avg'] = \Picknpay::chartCategoriesAsJson('rep7day');
+        $data['category_avg'] = \Picknpay::chartCategoriesAsJson('rep7day', false);
         $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData('rep7day');
 
         $data['report_period'] = 'rep7day';
