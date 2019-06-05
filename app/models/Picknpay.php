@@ -136,11 +136,8 @@ class Picknpay extends Eloquent {
 
         }else if($period == 'repthismonth'){
 
-            $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
-
-            $startDate = $dateRange['startDate'];
-            $endDate = $dateRange['endDate'];
-
+            $start = date('Y-m-d',strtotime('first day of this month'));
+            $end = date('Y-m-d');
 
             $returnValue['startDate'] = "$start 00.00.00";
             $returnValue['endDate'] = "$end 23:59:59";
