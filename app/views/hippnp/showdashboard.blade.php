@@ -304,7 +304,12 @@ function renderCharts(time, start, end) {
             });
             apiChart.render();
 
-        }
+        }.fail(function(jqXHR, textStatus, error) {
+            debugger;
+            // $('#editor-content-container').html(jqXHR.responseText);
+            // $('#editor-container').modal('show');
+        });
+
     });
 }
 </script>
