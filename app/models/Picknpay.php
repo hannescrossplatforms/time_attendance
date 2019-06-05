@@ -18,9 +18,7 @@ class Picknpay extends Eloquent {
         $endDate = $dateRange['endDate'];
 
         //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
-        return Picknpay::where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->count();
+        return Picknpay::->count();
 
     }
 
