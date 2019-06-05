@@ -84,12 +84,11 @@ class Picknpay extends Eloquent {
         ->get();
 
 
-        $categories = array();
 
         $array = json_decode( $data, TRUE );
 
         $categories = $array->map(function($row){
-                return $row['category']
+                return $row['category'];
             });
         // foreach($array as $item) {
 
