@@ -81,25 +81,20 @@ class Picknpay extends Eloquent {
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('category', 'created_at')
-        ->get()
-        ->toBase();
+        ->get();
+
+        $test = $data->groupBy('category');
 
 
-
-        $array = json_decode( $data, TRUE );
-
-        $array = $array->map(function($row){
-                return $row['category'];
-            });
         // foreach($array as $item) {
 
         //     $categories->put('category', $item['category']);
         // }
 
-        return $categories;
+        return $test;
         // $array = array_values( array_unique( $array, SORT_REGULAR ) );
 
-        // "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
+        // "dataset": [{"seriesname":"food","data":[{"value":"100"},{"value":"0"}, {"value":"0"}},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
 
     }
 
