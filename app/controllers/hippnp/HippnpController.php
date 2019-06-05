@@ -53,7 +53,7 @@ class HippnpController extends \BaseController {
 
         // $data['report_period'] = 'rep7day';
 
-        $json = json_encode($data);
+        $json = json_encode($period);
 
         print_r($json);
 
