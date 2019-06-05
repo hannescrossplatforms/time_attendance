@@ -257,6 +257,7 @@ function renderCharts(time, start, end) {
                 "rotatevalues": "1",
                 "theme": "zune"
             };
+
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
                 renderAt: 'staff_wrk',
@@ -266,8 +267,7 @@ function renderCharts(time, start, end) {
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
-
-                        "category": data['category'].substring(1, data['category'].length-1);
+                        "category": data['category'].substring(1, data['category'].length-1)
                     }],
                     "dataset": data['staff_graph']
                 }
