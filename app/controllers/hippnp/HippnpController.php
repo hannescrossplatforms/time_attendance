@@ -33,25 +33,25 @@ class HippnpController extends \BaseController {
 
     public function periodchartJsondata(){
 
-        // $data = array() ;
-        // $period = Input::get('period');
-
-        // $data['category'] = \Picknpay::chartCategoriesAsJson($period);
-        // $data['staff_graph'] = \Picknpay::getChartDwellTimeData($period);
-        // $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
-
-
-
         $data = array() ;
-        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
-        $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
-        $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
-        $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData('rep7day');
-        $data['category_avg'] = \Picknpay::chartCategoriesAsJson('rep7day');
-        $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData('rep7day');
+        $period = Input::get('period');
 
-        $data['report_period'] = 'rep7day';
+        $data['category'] = \Picknpay::chartCategoriesAsJson($period);
+        $data['staff_graph'] = \Picknpay::getChartDwellTimeData($period);
+        $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
+
+
+
+        // $data = array() ;
+        // $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+        // $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
+        // $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
+        // $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day');
+        // $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData('rep7day');
+        // $data['category_avg'] = \Picknpay::chartCategoriesAsJson('rep7day');
+        // $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData('rep7day');
+
+        // $data['report_period'] = 'rep7day';
 
         $json = json_encode($data);
 
