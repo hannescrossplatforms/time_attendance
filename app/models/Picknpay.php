@@ -40,8 +40,12 @@ class Picknpay extends Eloquent {
     }
 
     public static function hannesTestCategories(){
-
         return Picknpay::distinct()->get(['created_at']);
+    }
+
+    public static function hannesTestCategoriesInner($category){
+        return Picknpay::all()
+        ->where('category', '==', $category)
     }
 
     public static function chartCategoriesAsJson($period, $renderViaAjax){
