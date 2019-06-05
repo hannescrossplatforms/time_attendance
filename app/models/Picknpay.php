@@ -137,7 +137,7 @@ class Picknpay extends Eloquent {
         }else if($period == 'repthismonth'){
 
             $start = date('Y-m-d',strtotime('first day of this month'));
-            $end = date('Y-m-d');
+            $end = date('Y-m-d',strtotime('today'));
 
             $returnValue['startDate'] = "$start 00.00.00";
             $returnValue['endDate'] = "$end 23:59:59";
