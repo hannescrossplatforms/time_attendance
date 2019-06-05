@@ -292,9 +292,9 @@ function renderCharts(time, start, end) {
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
-                        "category": <?php echo $data['category_avg']; ?>
+                        "category": <?php echo data['category_avg']; ?>
                     }],
-                    "dataset": <?php echo $data['staff_graph_avg']; ?>
+                    "dataset": <?php echo data['staff_graph_avg']; ?>
 
                 }
             });

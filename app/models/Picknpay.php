@@ -39,7 +39,7 @@ class Picknpay extends Eloquent {
 
     }
 
-    public static function chartCategoriesAsJson($period, $renderJson){
+    public static function chartCategoriesAsJson($period, $renderViaAjax){
         //TODO: Pass store name in here and filter according to store.
 
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($period);
@@ -58,16 +58,13 @@ class Picknpay extends Eloquent {
 
         $array = json_decode( $data, TRUE );
         $array = array_values( array_unique( $array, SORT_REGULAR ) );
-        if ($renderJson) {
+        if ($renderViaAjax) {
             return $array;
         }
         else {
             $result = json_encode( $array );
             return $result;
         }
-
-
-        //  return $result;
 
     }
 
