@@ -249,7 +249,6 @@ function renderCharts(time, start, end) {
 
             // $("#report_period").html(data.report_period);
             // $("#report_name_date").val(data.report_name_date);
-            debugger;
             var chartProperties = {
                 "caption": "",
                 "xAxisName": "Section",
@@ -275,7 +274,7 @@ function renderCharts(time, start, end) {
                 }
             });
             apiChart.render();
-
+            debugger;
             var chartProperties = {
                 "caption": "",
                 "xAxisName": "Section",
