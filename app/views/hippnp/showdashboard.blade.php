@@ -267,7 +267,7 @@ function renderCharts(time, start, end) {
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
-                        "category": [{"label":"2019-06-05"},{"label":"2019-06-02"}]
+                        "category": data['category']
                     }],
                     "dataset": data['staff_graph']
                 }
