@@ -45,9 +45,16 @@ class HippnpController extends \BaseController {
 
         $json = json_encode($data);
 
-        print_r($json);
+        // print_r($json);
 
 
     }
 
 }
+
+
+
+// Last month
+// endDate: "2019-05-31 23:59:59"
+// period: "month"
+// startDate: "2019-05-01 00.00.00"
