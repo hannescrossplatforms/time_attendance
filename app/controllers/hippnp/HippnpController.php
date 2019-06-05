@@ -33,7 +33,7 @@ class HippnpController extends \BaseController {
 
     public function periodchartJsondata(){
 
-        $data = array() ;
+        // $data = array() ;
         // $period = Input::get('period');
 
         // $data['category'] = \Picknpay::chartCategoriesAsJson($period);
@@ -42,7 +42,7 @@ class HippnpController extends \BaseController {
 
 
 
-
+        $data = array() ;
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
@@ -52,7 +52,10 @@ class HippnpController extends \BaseController {
         $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData('rep7day');
 
         $data['report_period'] = 'rep7day';
+
         $json = json_encode($data);
+
+        print_r($json);
 
 
     }
