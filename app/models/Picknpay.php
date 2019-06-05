@@ -58,9 +58,9 @@ class Picknpay extends Eloquent {
 
         $array = json_decode( $data, TRUE );
         $array = array_values( array_unique( $array, SORT_REGULAR ) );
-        // $result = json_encode( $array );
+        $result = json_encode( $array );
 
-         return $array;
+         return $result;
 
     }
 
