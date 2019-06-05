@@ -136,13 +136,11 @@ class Picknpay extends Eloquent {
 
         }else if($period == 'repthismonth'){
 
-            $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
+            $start = date('Y-m-d',strtotime('first day of this month'));
+            $end = date('Y-m-d',strtotime('today'));
 
-            $start = $dateRange['startDate'];
-            $end = $dateRange['endDate'];
-
-            $returnValue['startDate'] = $start;
-            $returnValue['endDate'] = $end;
+            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['endDate'] = "$end 23:59:59";
             $returnValue['period'] = "month";
 
         }else if($period == 'replastmonth'){
