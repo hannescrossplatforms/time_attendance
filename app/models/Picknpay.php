@@ -81,30 +81,22 @@ class Picknpay extends Eloquent {
         // ->where('created_at', ">=", $startDate)
         // ->where('created_at', "<=", $endDate)
         // ->groupBy('category', 'created_at')
-        // ->get();
+        // ->get()->map(function($row){
 
-        $rows = Picknpay::all();
-        $collection = collect();
+        //     return array('seriesname' => $row['category'],
+        //     'data' => array(
+        //             "value" => (int)((int)$row['dwell_time'] / 60)
+        //         ));
 
-        foreach($rows as $row){
-          $data = Picknpay::where('category', '==', 'Games')->get();
+        // });
 
-          $collection->put($row->test , $data);
-        }
+        return = Picknpay::orderBy('id', 'ASC')
+        ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"), DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
+        ->where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
+        ->groupBy('category', 'created_at')
+        ->get();
 
-        return $collection;
-
-
-        // $test = collect();
-
-        // $data->map(function($row){
-        //         $test->push($row);
-        //     });
-
-        // return $test;
-
-
-        // "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
     }
 
     public static function getChartAverageDwellTimeData($period){
