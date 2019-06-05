@@ -40,13 +40,8 @@ class HippnpController extends \BaseController {
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
 
 
-        $test = \Picknpay::getChartTotalDwellTimeData($period);
+        $data['testing'] = \Picknpay::hannesTestCategories();
 
-        $arraayyyy = array();
-
-        foreach ($test as $row) {
-            $arraayyyy->push($row);
-            }
 
 
         $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);

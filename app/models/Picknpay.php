@@ -39,6 +39,13 @@ class Picknpay extends Eloquent {
 
     }
 
+    public static function hannesTestCategories(){
+
+
+        return Picknpay::all('created_at', ">=", $startDate)
+        ->distinct('created_at');
+    }
+
     public static function chartCategoriesAsJson($period, $renderViaAjax){
         //TODO: Pass store name in here and filter according to store.
 
