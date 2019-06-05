@@ -45,7 +45,7 @@ class HippnpController extends \BaseController {
 
         $json = json_encode($data);
 
-        // print_r($json);
+        print_r($json);
 
 
     }
