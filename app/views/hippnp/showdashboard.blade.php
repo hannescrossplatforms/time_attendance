@@ -218,7 +218,6 @@ $(document).ready(function() {
 
 
 function change_report_period() {
-    debugger;
     var time = $("#brandreportperiod").val();
     if (time == 'daterange') {
         $('#custom').show();
