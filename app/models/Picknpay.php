@@ -72,8 +72,6 @@ class Picknpay extends Eloquent {
 
         return Picknpay::orderBy('id', 'ASC')
         ->select('category', DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
-        ->where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
         ->groupBy('category')
         ->get()->map(function($row){
 
