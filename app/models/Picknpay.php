@@ -141,8 +141,8 @@ class Picknpay extends Eloquent {
             $start = $dateRange['startDate'];
             $end = $dateRange['endDate'];
 
-            $returnValue['startDate'] = "$start 00.00.00";
-            $returnValue['endDate'] = "$end 23:59:59";
+            $returnValue['startDate'] = $start;
+            $returnValue['endDate'] = $end;
             $returnValue['period'] = "month";
 
         }else if($period == 'replastmonth'){
