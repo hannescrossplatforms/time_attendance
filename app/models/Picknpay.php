@@ -41,8 +41,7 @@ class Picknpay extends Eloquent {
 
     public static function hannesTestCategories(){
 
-
-        return Picknpay::all('created_at', ">=", $startDate)
+        return Picknpay::all()
         ->distinct('created_at');
     }
 
