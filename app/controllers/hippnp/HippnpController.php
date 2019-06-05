@@ -38,6 +38,17 @@ class HippnpController extends \BaseController {
 
         $data['category'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
+
+
+        $test = \Picknpay::getChartTotalDwellTimeData($period);
+
+        $arraayyyy = array();
+
+        foreach ($test as $row) {
+            $arraayyyy->push($row);
+            }
+
+
         $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
         $json = json_encode($data);
@@ -48,8 +59,9 @@ class HippnpController extends \BaseController {
 }
 
 
-
-// Last month
-// endDate: "2019-05-31 23:59:59"
-// period: "month"
-// startDate: "2019-05-01 00.00.00"
+// dataSource: {
+//     "chart": chartProperties,
+//     "categories": [{
+//         "category": [{"label":"2019-06-03"},{"label":"2019-06-04"}]                                }],
+//     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
+// }
