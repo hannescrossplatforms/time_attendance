@@ -48,19 +48,6 @@ class HippnpController extends \BaseController {
         $data['total_dwell_time_chart_results'] = array();
         foreach ($data['total_dwell_time_chart_categories'] as $category ) {
             $response = \Picknpay::hannesTestCategoriesInner($category['label']);
-            ->map(function($row) {
-
-
-
-
-
-
-
-
-
-
-            });
-
 
             $obj[] = [
                 'seriesname' => $category,
