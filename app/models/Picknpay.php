@@ -65,8 +65,23 @@ class Picknpay extends Eloquent {
         //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
     }
 
-    public static function hannesTestCategoriesInner($category){
-        return Picknpay::where('category', '=', $category)->get();
+    public static function hannesTestCategoriesInner($date){
+
+        // {label: "2019-06-02"}
+        // {label: "2019-06-05"}
+        // {label: "2019-06-05"}
+
+        // ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"), DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
+
+
+
+        return Picknpay::select(DB::raw('sum(CAST(dwell_time AS UNSIGNED)) value'))
+        ->where('created_at', '=', $date)
+        ->groupBy('category', 'created_at')
+        ->orderBy('created_at')
+        ->get();
+
+        // return Picknpay::where('category', '=', $category)->get();
     }
 
     public static function chartCategoriesAsJson($period, $renderViaAjax){
