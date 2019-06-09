@@ -79,7 +79,7 @@ class Picknpay extends Eloquent {
 
         // return $date;
 
-        return $date;
+        // return $date;
 
 
         return Picknpay::select(DB::raw('sum(CAST(dwell_time AS UNSIGNED)) as value'))
