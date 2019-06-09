@@ -52,7 +52,8 @@ class HippnpController extends \BaseController {
             $obj[] = [
                 'seriesname' => $category,
                 'data' => $response->map(function($row) {
-                    return json(['value' => "$row"]);
+                    $val = $row['value'];
+                    return json(['value' => $val]);
                 })
             ];
 
