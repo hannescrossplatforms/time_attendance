@@ -39,7 +39,7 @@ class HippnpController extends \BaseController {
         $data['category'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
 
-        $looper = 0;
+
 
         $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
         $data['total_dwell_time_chart_categories'] = $data['total_dwell_time_chart_data']->map(function($row) {
@@ -47,6 +47,7 @@ class HippnpController extends \BaseController {
         });
 
         $data['total_dwell_time_chart_results'] = array();
+        $data['test_dates'] = array();
         foreach ($data['total_dwell_time_chart_categories'] as $category ) { //2 categories(dates)
             $looper = $looper + 1;
 
@@ -56,7 +57,8 @@ class HippnpController extends \BaseController {
                 'data' => $response
             ];
             array_push($data['total_dwell_time_chart_results'],$obj);
-            $data['looper'] = $looper;
+            array_push($data['test_dates'],$category);
+
         }
 
         $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);
