@@ -61,7 +61,7 @@ class HippnpController extends \BaseController {
 
 
 
-                array_push($data['total_dwell_time_chart_results'],$response['value']);
+                array_push($data['total_dwell_time_chart_results'],$response);
           }
 
 
