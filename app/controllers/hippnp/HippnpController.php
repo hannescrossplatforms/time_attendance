@@ -48,9 +48,37 @@ class HippnpController extends \BaseController {
         $data['total_dwell_time_chart_results'] = array();
         foreach ($data['total_dwell_time_chart_categories'] as $category ) {
             $response = \Picknpay::hannesTestCategoriesInner($category['label']);
-            // ->map(function($row) {
-            //     return array('value' => $row['value']);
-            // });
+            ->map(function($row) {
+
+
+
+
+
+
+
+
+
+
+            });
+
+
+            $obj[] = [
+                'seriesname' => $category,
+                'data' => $response->map(function($row) {
+                    return ['value' => $row['value']];
+                });
+            ];
+
+            // // {"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"} push this into the next line
+
+            //   {created_at: "2019-06-02 10:32:00", category: "Games"}
+            //   {created_at: "2019-06-05 10:32:00", category: "Food"}
+            //   {created_at: "2019-06-05 10:32:00", category: "Games"}
+
+
+
+        array_push($data['total_dwell_time_chart_results'],$obj);
+
 
 
              // "category": [{"label":"2019-05-27"},{"label":"2019-05-28"}]                                }],
@@ -61,11 +89,22 @@ class HippnpController extends \BaseController {
 
 
 
-                array_push($data['total_dwell_time_chart_results'],$response);
+
           }
 
 
+ //   $obj[] = [
+        //     'seriesname' => $category,
+        //     'data' => 'test'
+        // ];
+        // // {"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"} push this into the next line
 
+        //   {created_at: "2019-06-02 10:32:00", category: "Games"}
+        //   {created_at: "2019-06-05 10:32:00", category: "Food"}
+        //   {created_at: "2019-06-05 10:32:00", category: "Games"}
+
+
+        // $data['chart_data']
 
         // $data['asdfasdfasdf'] = $data['testing'][0]['category'];
 
