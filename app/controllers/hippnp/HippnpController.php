@@ -49,7 +49,7 @@ class HippnpController extends \BaseController {
         foreach ($data['total_dwell_time_chart_categories'] as $category ) {
 
                 // $data['total_dwell_time_chart_results'] = \Picknpay::hannesTestCategoriesInner($category);
-                array_push($data['total_dwell_time_chart_results'],\Picknpay::hannesTestCategoriesInner($category);)
+                array_push($data['total_dwell_time_chart_results'],\Picknpay::hannesTestCategoriesInner($category));
           }
 
 
