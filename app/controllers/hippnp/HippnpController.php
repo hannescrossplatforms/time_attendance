@@ -52,7 +52,17 @@ class HippnpController extends \BaseController {
             //     return array('value' => $row['value']);
             // });
 
-                array_push($data['total_dwell_time_chart_results'],$response);
+
+             // "category": [{"label":"2019-05-27"},{"label":"2019-05-28"}]                                }],
+    //     //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
+    // }[{category: "Food", created_at: "2019-06-05 10:32:00", value: "100", test: "2019-06-05"}
+    // {category: "Games", created_at: "2019-06-05 10:32:00", value: "300", test: "2019-06-05"}]
+
+                $obj = {"seriesname":"Staff At Work"};
+
+                // {"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"} push this into the next line
+
+                array_push($data['total_dwell_time_chart_results'],$response['value']);
           }
 
 

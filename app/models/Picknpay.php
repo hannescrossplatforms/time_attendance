@@ -65,33 +65,8 @@ class Picknpay extends Eloquent {
         //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
     }
 
-    public static function hannesTestCategoriesInner($date){
-
-        // {label: "2019-06-02"}
-        // {label: "2019-06-05"}
-        // {label: "2019-06-05"}
-
-        // ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"), DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
-
-        // return Picknpay::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as created_at")
-        // ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') = $date 00:00:00"))
-        // ->get();
-
-        // return $date;
-
-        // return $date;
-        // "SELECT * from test where 'id = '12'"
-
+    public static function hannesTestCategoriesInner($date) {
         return DB::select(DB::raw("SELECT category, created_at, sum(CAST(dwell_time AS UNSIGNED)) AS value, DATE_FORMAT(created_at, '%Y-%m-%d') AS test FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '$date' GROUP BY category, created_at ORDER BY created_at"));
-
-
-        // return Picknpay::select(DB::raw('sum(CAST(dwell_time AS UNSIGNED)) as value'))
-        // ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '=', '$date')
-        // ->groupBy('category', 'created_at')
-        // ->orderBy('created_at')
-        // ->get();
-
-        // return Picknpay::where('category', '=', $category)->get();
     }
 
     public static function chartCategoriesAsJson($period, $renderViaAjax){
