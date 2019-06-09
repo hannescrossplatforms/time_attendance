@@ -63,18 +63,7 @@ class HippnpController extends \BaseController {
 
                 array_push($data['total_dwell_time_chart_results'],$response['value']);
           }
-        //   $obj[] = [
-        //     'seriesname' => $category,
-        //     'data' => 'test'
-        // ];
-        // // {"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"} push this into the next line
 
-        //   {created_at: "2019-06-02 10:32:00", category: "Games"}
-        //   {created_at: "2019-06-05 10:32:00", category: "Food"}
-        //   {created_at: "2019-06-05 10:32:00", category: "Games"}
-
-
-        // $data['chart_data']
 
 
 
