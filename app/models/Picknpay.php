@@ -79,11 +79,11 @@ class Picknpay extends Eloquent {
 
         // return $date;
 
-        $newDate = "$date";
+        return $date;
 
 
         return Picknpay::select(DB::raw('sum(CAST(dwell_time AS UNSIGNED)) as value'))
-        ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')", '=', $newDate))
+        ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')", '=', $date))
         ->groupBy('category', 'created_at')
         ->orderBy('created_at')
         ->get();
