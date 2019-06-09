@@ -47,64 +47,15 @@ class HippnpController extends \BaseController {
 
         $data['total_dwell_time_chart_results'] = array();
         foreach ($data['total_dwell_time_chart_categories'] as $category ) {
+
             $response = \Picknpay::hannesTestCategoriesInner($category['label']);
-
-            // $innerObj =
-
-
-
             $obj[] = [
                 'seriesname' => $category,
                 'data' => $response
             ];
+            array_push($data['total_dwell_time_chart_results'],$obj);
 
-            // // {"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"} push this into the next line
-
-            //   {created_at: "2019-06-02 10:32:00", category: "Games"}
-            //   {created_at: "2019-06-05 10:32:00", category: "Food"}
-            //   {created_at: "2019-06-05 10:32:00", category: "Games"}
-
-
-
-        array_push($data['total_dwell_time_chart_results'],$obj);
-
-
-
-             // "category": [{"label":"2019-05-27"},{"label":"2019-05-28"}]                                }],
-    //     //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
-    // }[{category: "Food", created_at: "2019-06-05 10:32:00", value: "100", test: "2019-06-05"}
-    // {category: "Games", created_at: "2019-06-05 10:32:00", value: "300", test: "2019-06-05"}]
-
-
-
-
-
-          }
-
-
- //   $obj[] = [
-        //     'seriesname' => $category,
-        //     'data' => 'test'
-        // ];
-        // // {"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"} push this into the next line
-
-        //   {created_at: "2019-06-02 10:32:00", category: "Games"}
-        //   {created_at: "2019-06-05 10:32:00", category: "Food"}
-        //   {created_at: "2019-06-05 10:32:00", category: "Games"}
-
-
-        // $data['chart_data']
-
-        // $data['asdfasdfasdf'] = $data['testing'][0]['category'];
-
-        // foreach ($data['testing'] as $value) {
-        //     $data['asdf'] = \Picknpay::hannesTestCategoriesInner($value['category']);
-        // }
-        // select distinct categories
-
-        //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
-
-
+        }
 
         $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
