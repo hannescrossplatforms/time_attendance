@@ -267,9 +267,9 @@ function renderCharts(time, start, end) {
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
-                        "category": data['category']
+                        "category": data['total_dwell_time_chart_categories']
                     }],
-                    "dataset": data['staff_graph']
+                    "dataset": data['total_dwell_time_chart_results']
                 }
             });
             apiChart.render();
