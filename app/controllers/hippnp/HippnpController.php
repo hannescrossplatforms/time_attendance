@@ -50,23 +50,13 @@ class HippnpController extends \BaseController {
             $response = \Picknpay::hannesTestCategoriesInner($category['label']);
 
             // $innerObj =
-            $innerObj[] = [];
 
 
 
-            foreach ($response as $item) {
-                array_push($innerObj['hannes'], $item['val']);
-                // json(['value' => $val]);
-            }
-
-
-            // $obj[] = [
-            //     'seriesname' => $category,
-            //     'data' => $response->map(function($row) {
-            //         $val = $row['value'];
-            //         return json(['value' => $val]);
-            //     })
-            // ];
+            $obj[] = [
+                'seriesname' => $category,
+                'data' => $response
+            ];
 
             // // {"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"} push this into the next line
 
@@ -76,7 +66,7 @@ class HippnpController extends \BaseController {
 
 
 
-        array_push($data['total_dwell_time_chart_results'],$innerObj);
+        array_push($data['total_dwell_time_chart_results'],$obj);
 
 
 
