@@ -33,7 +33,7 @@ class HippnpController extends \BaseController {
 
     public function periodchartJsondata(){
 
-        $data = array() ;
+        $data = array();
         $period = Input::get('period');
 
         $data['category'] = \Picknpay::chartCategoriesAsJson($period, true);
@@ -47,9 +47,9 @@ class HippnpController extends \BaseController {
 
 
         foreach ($data['total_dwell_time_chart_categories'] as $category ) {
-
+            $data['total_dwell_time_chart_results'] = array();
                 // $data['total_dwell_time_chart_results'] = \Picknpay::hannesTestCategoriesInner($category);
-                // array_push($data['total_dwell_time_chart_results'],$category);
+                array_push($data['total_dwell_time_chart_results'],$category);
           }
 
 
