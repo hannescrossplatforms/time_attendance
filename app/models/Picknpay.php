@@ -40,7 +40,10 @@ class Picknpay extends Eloquent {
     }
 
     public static function hannesTestCategories(){
-        return Picknpay::distinct()->get(['created_at', 'category']);
+        return Picknpay::distinct()
+        ->where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
+        ->get(['created_at', 'category']);
     }
 
     public static function hannesTestCategoriesInner($category){
@@ -197,7 +200,10 @@ class Picknpay extends Eloquent {
 }
 
 
-
+// https://stackoverflow.com/questions/33828769/add-new-element-in-laravel-collection-object
+// https://stackoverflow.com/questions/33828769/add-new-element-in-laravel-collection-object
+// https://stackoverflow.com/questions/43271110/laravel-eloquent-foreach-not-working
+// https://scotch.io/tutorials/laravel-collections-php-arrays-on-steroids
 //SHould look like this
         // {
         //     "chart": chartProperties,

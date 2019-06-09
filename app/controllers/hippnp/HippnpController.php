@@ -46,6 +46,9 @@ class HippnpController extends \BaseController {
         foreach ($data['testing'] as $value) {
             $data['asdf'] = \Picknpay::hannesTestCategoriesInner($value['category']);
         }
+        // select distinct categories
+
+        //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
 
 
 
