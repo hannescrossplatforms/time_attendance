@@ -53,7 +53,7 @@ class HippnpController extends \BaseController {
                 'seriesname' => $category,
                 'data' => $response->map(function($row) {
                     return json(['value' => "$row"]);
-                });
+                })
             ];
 
             // // {"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"} push this into the next line
