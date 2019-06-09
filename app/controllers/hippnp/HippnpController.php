@@ -41,6 +41,16 @@ class HippnpController extends \BaseController {
 
 
         $data['testing'] = \Picknpay::hannesTestCategories();
+
+
+
+        $data['chart_categories'] = $data['testing']->map(function($row) {
+            return array('label' => $row['created_at']->toDateString());
+        });
+
+
+
+
         $data['asdfasdfasdf'] = $data['testing'][0]['category'];
 
         foreach ($data['testing'] as $value) {

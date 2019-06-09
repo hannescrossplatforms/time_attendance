@@ -41,6 +41,8 @@ class Picknpay extends Eloquent {
 
     public static function hannesTestCategories(){
 
+
+
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
@@ -48,7 +50,19 @@ class Picknpay extends Eloquent {
         return Picknpay::distinct()
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
+        ->orderBy('created_at', 'ASC')
         ->get(['created_at', 'category']);
+
+        //Returns
+
+        // {created_at: "2019-06-05 10:32:00", category: "Food"}
+        // {created_at: "2019-06-05 10:32:00", category: "Games"}
+        // {created_at: "2019-06-02 10:32:00", category: "Games"}
+
+
+
+        // "category": [{"label":"2019-05-27"},{"label":"2019-05-28"}]                                }],
+        //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
     }
 
     public static function hannesTestCategoriesInner($category){
