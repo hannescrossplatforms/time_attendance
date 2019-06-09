@@ -55,7 +55,7 @@ class HippnpController extends \BaseController {
 
 
             foreach ($response as $item) {
-                array_push($innerObj['hannes'], $val);
+                array_push($innerObj['hannes'], $item['val']);
                 // json(['value' => $val]);
             }
 
