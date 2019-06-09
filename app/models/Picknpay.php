@@ -40,6 +40,11 @@ class Picknpay extends Eloquent {
     }
 
     public static function hannesTestCategories(){
+
+        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
+        $startDate = $dateRange['startDate'];
+        $endDate = $dateRange['endDate'];
+
         return Picknpay::distinct()
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
