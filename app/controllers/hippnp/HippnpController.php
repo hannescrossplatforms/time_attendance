@@ -52,7 +52,7 @@ class HippnpController extends \BaseController {
 
         $data['first_level_data'] = \Picknpay::firstLevelData()->map(function($row) {
             return array('label' => $row['created_att'])
-        })
+        });
 
 // "categories": [{
         //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
