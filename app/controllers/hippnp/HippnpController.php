@@ -39,7 +39,7 @@ class HippnpController extends \BaseController {
     }
 
     public function periodchartJsondata(){
-
+        $mibum = array();
         $data = array();
         $period = Input::get('period');
 
@@ -56,7 +56,7 @@ class HippnpController extends \BaseController {
 
         foreach ( $data['first_level_data'] as $row ) {
             $var = $row['label'];
-            array_push([],$data['second_level_data'],\Picknpay::secondLevelData($var));
+            array_push($mibum,$data['second_level_data'],\Picknpay::secondLevelData($var));
 
         }
 
