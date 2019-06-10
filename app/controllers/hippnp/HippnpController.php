@@ -63,14 +63,14 @@ class HippnpController extends \BaseController {
                 // $staff_graph = array_push({value: $staff_graph, });
 
 
-                $data['ffs'] = $cat->category;
-                $data['ffssss'] = $date['created_att'];
+                // $data['ffs'] = $cat->category;
+                // $data['ffssss'] = $date['created_att'];
 
-                // $obj[] = [
-                //     'seriesname' => $category,
-                //     'data' => \Picknpay::fetchCategoryPerDate($date['created_att'], $category)
-                // ];
-                // $my_asshole = array_push($my_asshole, $obj);
+                $obj[] = [
+                    'seriesname' => $category,
+                    'data' => \Picknpay::fetchCategoryPerDate($date['created_att'], $cat->category)
+                ];
+                $my_asshole = array_push($my_asshole, $obj);
 
 
 
