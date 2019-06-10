@@ -50,7 +50,8 @@ class HippnpController extends \BaseController {
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
 
         $dates = \Picknpay::firstLevelData();
-        foreach ( $dates in $date ) {
+
+        foreach ( $dates as $date ) {
 
             if (self.$dates_series == null) {
                 $dates_series = array();
