@@ -75,7 +75,7 @@ class HippnpController extends \BaseController {
 
             // foreach ( $categories as $cat ) {
 
-                $categoryName = $cat->category;
+                // $categoryName = $cat->category;
 
                 $my_asshole = array();
 
