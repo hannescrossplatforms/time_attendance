@@ -46,62 +46,27 @@ class HippnpController extends \BaseController {
         $data['category'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
 
-        $looper = 0;
+
 
         $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
 
-        $parentObjects = \Picknpay::hannesTestCategories();
+        $data['first_level_data'] = \Picknpay::firstLevelData();
 
 
-        $dates = \Picknpay::getDatess();
+
+        // $parentObjects = \Picknpay::hannesTestCategories();
+
+//
+        // $dates = \Picknpay::getDatess();
         // $dataArray = array();
         // $dataArray['asdf'] = array();
 
 
 
-        $data['test'] = $dates;
-        $data['test2'] = $dates->map(function($row) {
-            array_push($data['asdf'],\Picknpay::getDataForDate($row['created_att']));
-        });
-
-
-        // $obj[] = [
-        //     'category' => $categoryNewDate,
-        //     'data' => $categoryNewData
-        // ];
-
-
-
-
-
-        // $data['aitog'] = $parentObjects->map(function($row) {
-
-        //     $returnData = array();
-        //     $categoryNewDate = '';
-        //     $categoryNewData = array();
-
-        //     if($row['created_at'] != $categoryNewDate) {
-
-        //         if ($categoryNewDate != ''){
-        //             $obj[] = [
-        //                 'category' => $categoryNewDate,
-        //                 'data' => $categoryNewData
-        //             ];
-        //             array_push($returnData,$obj);
-        //             $categoryNewData = array();
-        //         }
-
-        //         $categoryNewDate = $row['created_at'];
-        //         array_push($categoryNewData,$row['category']);
-
-        //     }
-        //     else {
-        //         array_push($categoryNewData,$row['category']);
-        //     }
-        //     return $returnData;
+        // $data['test'] = $dates;
+        // $data['test2'] = $dates->map(function($row) {
+        //     array_push($data['asdf'],\Picknpay::getDataForDate($row['created_att']));
         // });
-
-
 
 
 
@@ -131,8 +96,9 @@ class HippnpController extends \BaseController {
 
             // "categories": [{
             //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
-            // "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
-            //"dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
+            // "dataset": [{"seriesname":"2019-06-03","data":[{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
+
+
         }
 
         $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);

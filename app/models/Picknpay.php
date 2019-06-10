@@ -24,6 +24,18 @@ class Picknpay extends Eloquent {
 
     }
 
+    public static function firstLevelData(){
+
+        return Picknpay::orderBy('created_at', 'ASC')
+        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->get();
+
+    }
+
+
+
+
     public static function customerInStoreThisMonth(){
 
 
