@@ -101,18 +101,18 @@ class HippnpController extends \BaseController {
                 $dataForCategoryDates = \Picknpay::suckmydonkeydick($current_date);
                 $data['dataForCategoryDates'] = $dataForCategoryDates;
 
-                // foreach ( $dataForCategoryDates as $catdate ) {
-                // // $dataForCategoryDates->map(function($row) {
-                //     $obj[] = [
-                //             'seriesname' => $catdate->$category,
-                //             'data' => $catdate->$value
-                //         ];
-                //     };
-                // // $obj[] = [
-                // //     'seriesname' => $categoryName,
-                // //     'data' => $dataForCategoryDates
-                // // ];
-                // array_push($my_asshole, $obj);
+                foreach ( $dataForCategoryDates as $catdate ) {
+                // $dataForCategoryDates->map(function($row) {
+                    $obj[] = [
+                            'seriesname' => $catdate->category,
+                            'data' => $catdate->value
+                        ];
+                    };
+                // $obj[] = [
+                //     'seriesname' => $categoryName,
+                //     'data' => $dataForCategoryDates
+                // ];
+                array_push($my_asshole, $obj);
 
 
 
