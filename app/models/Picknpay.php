@@ -41,6 +41,11 @@ class Picknpay extends Eloquent {
 
     public static function getDatess(){
 
+        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
+
+        $startDate = $dateRange['startDate'];
+        $endDate = $dateRange['endDate'];
+
         return Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
         ->where('created_at', ">=", $startDate)
