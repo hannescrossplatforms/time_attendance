@@ -60,7 +60,7 @@ class HippnpController extends \BaseController {
 
             $response = \Picknpay::hannesTestCategoriesInner($row);
             $obj[] = [
-                'seriesname' => $row['created_at'],
+                'seriesname' => $row['created_att'],
                 'data' => $response
             ];
             array_push($data['total_dwell_time_chart_results'],$obj);

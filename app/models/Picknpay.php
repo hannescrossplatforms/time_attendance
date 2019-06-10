@@ -49,7 +49,7 @@ class Picknpay extends Eloquent {
 
 
         return Picknpay::orderBy('created_at', 'ASC')
-        ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"))
+        ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
