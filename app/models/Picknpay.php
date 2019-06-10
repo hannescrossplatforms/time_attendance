@@ -45,7 +45,7 @@ class Picknpay extends Eloquent {
     }
 
     public static function fetchCategoryPerDate($dates, $category){
-        $formatted_dates = .implode(",",$dates->map(function($date) {
+        $formatted_dates = implode(",",$dates->map(function($date) {
             return [$date['label']];
         })
         ->toArray());
