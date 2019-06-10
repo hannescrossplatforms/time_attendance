@@ -51,7 +51,7 @@ class HippnpController extends \BaseController {
 
         $dates = \Picknpay::firstLevelData()
         ->map(function($row) {
-                return = ['label' => $row['created_att']];
+                return ['label' => $row['created_att']];
             });
 
 
