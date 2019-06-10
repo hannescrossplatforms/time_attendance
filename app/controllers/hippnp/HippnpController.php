@@ -116,6 +116,8 @@ class HippnpController extends \BaseController {
 
         };
 
+        $data['complete'] = $complete_object;
+
         $data['mypenis'] = $dates_series;
         $data['myasshole'] = $my_asshole;
         $data['first_level_data'] = $dates;
