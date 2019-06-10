@@ -53,7 +53,7 @@ class HippnpController extends \BaseController {
 
         foreach ( $dates as $date ) {
 
-            if (self.$dates_series == null) {
+            if ($dates_series == null) {
                 $dates_series = array();
             }
             $dates_series = array_push($dates_series, $date['created_att']);
