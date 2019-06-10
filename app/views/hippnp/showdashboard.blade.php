@@ -176,9 +176,9 @@ $(document).ready(function() {
         dataSource: {
             "chart": chartProperties,
             "categories": [{
-                "category": <?php echo $data['total_dwell_time_chart_categories']; ?>
+                "category": <?php echo $data['category']; ?>
             }],
-            "dataset": <?php echo $data['total_dwell_time_chart_results']; ?>
+            "dataset": <?php echo $data['staff_graph']; ?>
 
         }
     });
