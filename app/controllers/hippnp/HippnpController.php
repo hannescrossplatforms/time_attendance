@@ -79,27 +79,27 @@ class HippnpController extends \BaseController {
 
         $data['total_dwell_time_chart_results'] = array();
 
-        foreach ($data['total_dwell_time_chart_data'] as $row ) { //2 categories(dates)
-            $looper = $looper + 1;
+        // foreach ($data['total_dwell_time_chart_data'] as $row ) { //2 categories(dates)
+        //     $looper = $looper + 1;
 
 
-            $response = \Picknpay::hannesTestCategoriesInner($row);
+        //     $response = \Picknpay::hannesTestCategoriesInner($row);
 
-            $data['meh'] = $response;
-            $obj[] = [
-                'seriesname' => $row['created_att'],
-                'data' => $response
-            ];
-            array_push($data['total_dwell_time_chart_results'],$obj);
-            // array_push($data['test_dates'],$looper);
-            // array_push($data['test_dates'],$category);
+        //     $data['meh'] = $response;
+        //     $obj[] = [
+        //         'seriesname' => $row['created_att'],
+        //         'data' => $response
+        //     ];
+        //     array_push($data['total_dwell_time_chart_results'],$obj);
+        //     // array_push($data['test_dates'],$looper);
+        //     // array_push($data['test_dates'],$category);
 
-            // "categories": [{
-            //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
-            // "dataset": [{"seriesname":"2019-06-03","data":[{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
+        //     // "categories": [{
+        //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
+        //     // "dataset": [{"seriesname":"2019-06-03","data":[{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
 
 
-        }
+        // }
 
         $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
