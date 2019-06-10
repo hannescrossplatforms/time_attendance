@@ -52,7 +52,7 @@ class HippnpController extends \BaseController {
         $dates = \Picknpay::firstLevelData();
 
         foreach ( $dates as $date ) {
-
+            $my_asshole = array();
             // if ($dates_series == null) {
             //     $dates_series = array();
             // }
