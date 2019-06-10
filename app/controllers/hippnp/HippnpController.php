@@ -56,7 +56,7 @@ class HippnpController extends \BaseController {
             if ($dates_series == null) {
                 $dates_series = array();
             }
-            $dates_series = array_push($dates_series, $date['created_att']);
+            // $dates_series = array_push($dates_series, $date['created_att']);
             // foreach ( $categories as $category ) {
             //     // $staff_graph = array_push({value: $staff_graph, });
             //     $obj[] = [
@@ -69,6 +69,7 @@ class HippnpController extends \BaseController {
 
             // }
             $data['asdf'] = $categories;
+            // $data['asdfasdf'] = $categories;
         // });
         };
 
