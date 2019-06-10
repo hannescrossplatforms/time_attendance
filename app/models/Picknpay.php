@@ -49,16 +49,16 @@ class Picknpay extends Eloquent {
 
 
         return Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"))
+        ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"))
         ->where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
-        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->groupBy('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->get();
 
     }
 
-    public static function hannesTestCategoriesInner($date) {
-        return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED)) AS value FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '$date' GROUP BY category, created_at ORDER BY created_at"));
+    public static function hannesTestCategoriesInner($row) {
+        return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED)) AS value FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '$row['created_at']' AND category = $row['category'] GROUP BY category ORDER BY created_at"));
     }
 
     public static function chartCategoriesAsJson($period, $renderViaAjax){
