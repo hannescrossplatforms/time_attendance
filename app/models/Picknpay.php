@@ -50,6 +50,10 @@ class Picknpay extends Eloquent {
 
     }
 
+    public static function suckmydonkeydick($date) {
+        return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value, category FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') = '$date' GROUP BY category, DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));
+    }
+
 
 
 
