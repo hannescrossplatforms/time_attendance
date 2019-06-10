@@ -40,7 +40,7 @@ class Picknpay extends Eloquent {
     }
 
     public static function fetchCategories(){
-        return DB::select(DB::raw("SELECT DISTINCT category FROM picknpay"));
+        return DB::select(DB::raw("SELECT category FROM picknpay"));
 
     }
 
