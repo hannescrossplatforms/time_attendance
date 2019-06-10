@@ -50,6 +50,9 @@ class HippnpController extends \BaseController {
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
 
         \Picknpay::firstLevelData()->map(function($row) {
+            if ($dates_series == null) {
+                $dates_series = array();
+            }
             $dates_series = array_push($dates_series, $row['created_att']);
             foreach ( $categories as $category ) {
                 // $staff_graph = array_push({value: $staff_graph, });
