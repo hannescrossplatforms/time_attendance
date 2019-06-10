@@ -103,7 +103,7 @@ class HippnpController extends \BaseController {
                         return [
                             'seriesname' => $row->category,
                             'data' => $row->value
-                        ]
+                        ];
                     });
                 // $obj[] = [
                 //     'seriesname' => $categoryName,
