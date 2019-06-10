@@ -72,7 +72,8 @@ class HippnpController extends \BaseController {
             // $dates_series = array_push($dates_series, $date['created_att']);
 
             foreach ( $dates as $date ) {
-            foreach ( $categories as $cat ) {
+
+            // foreach ( $categories as $cat ) {
 
                 $categoryName = $cat->category;
 
@@ -96,9 +97,10 @@ class HippnpController extends \BaseController {
 
                 // $data['ffs'] = $cat->category;
                 // $data['ffssss'] = $date['created_att'];
+                $dataForCategoryDates = DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') = '$date['label']' GROUP BY category, DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));
                 $obj[] = [
                     'seriesname' => $categoryName,
-                    'data' => \Picknpay::fetchCategoryPerDate($date['label'], $cat->category)
+                    'data' => $dataForCategoryDates
                 ];
                 array_push($my_asshole, $obj);
 
@@ -106,7 +108,7 @@ class HippnpController extends \BaseController {
 
 
 
-            }
+            // }
         // }
 
 
