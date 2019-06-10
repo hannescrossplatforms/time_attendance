@@ -49,6 +49,10 @@ class HippnpController extends \BaseController {
         $data['category'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
 
+        $asddates = \Picknpay::firstLevelData()
+        ->map(function($row) {
+                return [$row['created_att']];
+            });
         $dates = \Picknpay::firstLevelData()
         ->map(function($row) {
                 return ['label' => $row['created_att']];
@@ -87,7 +91,7 @@ class HippnpController extends \BaseController {
 
                 $obj[] = [
                     'seriesname' => $cat->category,
-                    'data' => \Picknpay::fetchCategoryPerDate($dates, $cat->category)
+                    'data' => \Picknpay::fetchCategoryPerDate($asddates, $cat->category)
                 ];
                 // $data['correctlyInst'] = $obj;
                 array_push($my_asshole, $obj);
