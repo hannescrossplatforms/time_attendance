@@ -61,7 +61,7 @@ class HippnpController extends \BaseController {
                 // $staff_graph = array_push({value: $staff_graph, });
 
 
-                $data['ffs'] = $category;
+                $data['ffs'] = $category['category'];
                 $data['ffssss'] = $date['created_att'];
 
                 // $obj[] = [
