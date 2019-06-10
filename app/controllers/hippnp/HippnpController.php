@@ -49,14 +49,18 @@ class HippnpController extends \BaseController {
         $data['category'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
 
-        $dates = \Picknpay::firstLevelData();
+        $dates = \Picknpay::firstLevelData()
+        ->map(function($row) {
+                return $row['created_att'];
+            });
+
 
 
 
             // if ($dates_series == null) {
             //     $dates_series = array();
             // }
-            $dates_series = array_push($dates_series, $date['created_att']);
+            // $dates_series = array_push($dates_series, $date['created_att']);
 
 
             foreach ( $categories as $cat ) {
@@ -84,7 +88,7 @@ class HippnpController extends \BaseController {
 
         $data['mypenis'] = $dates_series;
         $data['myasshole'] = $my_asshole;
-        $data['first_level_data'] = $dates_series;
+        $data['first_level_data'] = $dates;
 
         $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
 
