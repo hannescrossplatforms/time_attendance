@@ -60,6 +60,9 @@ class HippnpController extends \BaseController {
                 return ['label' => $row['created_att']];
             });
 
+            $data_array = array();
+            $complete_object = array();
+
 
 
 
@@ -68,10 +71,13 @@ class HippnpController extends \BaseController {
             // }
             // $dates_series = array_push($dates_series, $date['created_att']);
 
+
             foreach ( $categories as $cat ) {
 
+                $categoryName = $cat->category;
 
-
+                $my_asshole = array();
+            foreach ( $dates as $date ) {
 
 
             // foreach ( $dates as $date ) {
@@ -84,26 +90,28 @@ class HippnpController extends \BaseController {
 
 
                 // foreach ( $dates as $date ) {
-                $my_asshole = array();
+                // $my_asshole = array();
                 // $staff_graph = array_push({value: $staff_graph, });
 
 
                 // $data['ffs'] = $cat->category;
                 // $data['ffssss'] = $date['created_att'];
-
-                $obj[] = [
-                    'seriesname' => $cat->category,
-                    'data' => \Picknpay::fetchCategoryPerDate($asddates, $cat->category)
-                ];
-                // $data['correctlyInst'] = $obj;
-                array_push($my_asshole, $obj);
-                // $my_asshole = array_push($my_asshole, $obj);
+                array_push($my_asshole, \Picknpay::fetchCategoryPerDate($date, $cat->category));
 
 
 
-            // }
+
+
+            }
         // }
+        $obj[] = [
+            'seriesname' => $categoryName,
+            'data' => $my_asshole
+        ];
 
+        // $data['correctlyInst'] = $obj;
+        array_push($complete_object, $obj);
+        // $my_asshole = array_push($my_asshole, $obj);
 
 
         };
