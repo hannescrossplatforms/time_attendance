@@ -39,35 +39,71 @@ class HippnpController extends \BaseController {
     }
 
     public function periodchartJsondata(){
-        $mibum = array();
+        $staff_graph = array();
+        $dates_series = array();
+        $my_asshole = array();
         $data = array();
         $period = Input::get('period');
+        $categories = \Picknpay::fetchCategories();
 
         $data['category'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
 
+        \Picknpay::firstLevelData()->map(function($row) {
+            $dates_series = array_push($dates_series, $row['created_att'])
 
+            foreach ($categories as $category) {
+                // $staff_graph = array_push({value: $staff_graph, });
+                $obj[] = [
+                    'seriesname' => $category,
+                    'data' => \Picknpay::fetchCategoryPerDate($row['created_att'], $category)
+                ];
+                $my_asshole = array_push($my_asshole, $obj);
+
+
+
+            }
+        });
+
+        $data['mypenis'] = $dates_series;
+        $data['myasshole'] = $my_asshole;
+        $data['first_level_data'] =
 
         $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
 
-        $data['first_level_data'] = \Picknpay::firstLevelData()->map(function($row) {
-            return array('label' => $row['created_att']);
-        });
+        // $data['first_level_data'] = \Picknpay::firstLevelData()->map(function($row) {
+        //     return array('label' => $row['created_att']);
+        // });
 
-        foreach ( $data['first_level_data'] as $row ) {
-            $var = $row['label'];
-            array_push($mibum,\Picknpay::secondLevelData($var));
+        // foreach ( $data['first_level_data'] as $row ) {
+        //     $var = $row['label'];
 
-        }
-
-        $data['mibum'] = $mibum;
+        //     $response = \Picknpay::secondLevelData($var);
 
 
+
+        //     $response->map(function($row) {
+        //         $seriesName = $row['category'];
+
+        //     });
+
+
+        //     $response
+        //     array_push($mibum,\Picknpay::secondLevelData($var));
+
+        // }
+
+        // $data['mibum'] = $mibum;
+
+
+
+    // 0: {category: "Food", value: "100"}
+    // 1: {category: "Games", value: "160"}
 
 
 // "categories": [{
         //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
-        //     // "dataset": [{"seriesname":"2019-06-03","data":[{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
+        //     // "dataset": [{"seriesname":"2019-06-03","data":[{"food":"0"},{"games":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
 
 
         // $parentObjects = \Picknpay::hannesTestCategories();
