@@ -269,7 +269,7 @@ function renderCharts(time, start, end) {
                     "categories": [{
                         "category": data['first_level_data']
                     }],
-                    "dataset": data['myasshole']
+                    "dataset": data['complete']
                 }
             });
 
