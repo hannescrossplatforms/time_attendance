@@ -58,7 +58,9 @@ class Picknpay extends Eloquent {
     }
 
     public static function hannesTestCategoriesInner($row) {
-        return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED)) AS value FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '$row['created_at']' AND category = $row['category'] GROUP BY category ORDER BY created_at"));
+        $createdAt = $row['created_at'];
+        $category = $row['category'];
+        return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED)) AS value FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = $createdAt AND category = $category GROUP BY category ORDER BY created_at"));
     }
 
     public static function chartCategoriesAsJson($period, $renderViaAjax){
