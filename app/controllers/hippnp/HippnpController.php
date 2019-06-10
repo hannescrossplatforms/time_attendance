@@ -50,7 +50,7 @@ class HippnpController extends \BaseController {
 
         $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
         $data['total_dwell_time_chart_categories'] = $data['total_dwell_time_chart_data']->map(function($row) {
-            return array('category' => $row['created_at']->toDateString());
+            return array('category' => $row['created_at']);
         });
 
         $data['total_dwell_time_chart_results'] = array();
