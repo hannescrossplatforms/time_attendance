@@ -83,6 +83,7 @@ class HippnpController extends \BaseController {
                         return ['value' => $row['value']];
                         // return ('value' => $row['value']);
                     });
+                    $data['shit'] = $response;
                     // foreach ($responses as $response) {
                     //     $dataArray = array_push($dataArray, $response->value);
                     // }
