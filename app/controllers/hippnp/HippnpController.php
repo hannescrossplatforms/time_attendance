@@ -60,7 +60,7 @@ class HippnpController extends \BaseController {
 
 
             foreach ( $categories as $cat ) {
-                foreach ( $dates as $date ) {
+                // foreach ( $dates as $date ) {
                 $my_asshole = array();
                 // $staff_graph = array_push({value: $staff_graph, });
 
@@ -78,7 +78,7 @@ class HippnpController extends \BaseController {
 
 
 
-            }
+            // }
         // });
         };
 
