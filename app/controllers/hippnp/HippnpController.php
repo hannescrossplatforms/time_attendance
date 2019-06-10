@@ -56,7 +56,7 @@ class HippnpController extends \BaseController {
 
         foreach ( $data['first_level_data'] as $row ) {
             $var = $row['label'];
-            array_push($mibum,$data['second_level_data'],\Picknpay::secondLevelData($var));
+            array_push($mibum,\Picknpay::secondLevelData($var));
 
         }
 
