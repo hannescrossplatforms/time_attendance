@@ -54,6 +54,16 @@ class HippnpController extends \BaseController {
             return array('label' => $row['created_att']);
         });
 
+        foreach ( $data['first_level_data'] as $row ) {
+            $var = $row['label'];
+            array_push($data['second_level_data'],\Picknpay::secondLevelData($var));
+        }
+
+
+
+
+
+
 // "categories": [{
         //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
         //     // "dataset": [{"seriesname":"2019-06-03","data":[{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
