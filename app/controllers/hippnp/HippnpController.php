@@ -99,10 +99,16 @@ class HippnpController extends \BaseController {
                 // $data['ffssss'] = $date['created_att'];
                 $current_date = $date['label'];
                 $dataForCategoryDates = DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') = '$current_date' GROUP BY category, DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));
-                $obj[] = [
-                    'seriesname' => $categoryName,
-                    'data' => $dataForCategoryDates
-                ];
+                ->map(function($row) {
+                        return [
+                            'seriesname' => $row->category,
+                            'data' => $row->value
+                        ]
+                    });
+                // $obj[] = [
+                //     'seriesname' => $categoryName,
+                //     'data' => $dataForCategoryDates
+                // ];
                 array_push($my_asshole, $obj);
 
 
