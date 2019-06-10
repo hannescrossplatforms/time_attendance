@@ -48,7 +48,52 @@ class HippnpController extends \BaseController {
 
         $looper = 0;
 
-        $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
+        // $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
+
+        $parentObjects = \Picknpay::hannesTestCategories();
+
+        $date = '';
+
+        $loopArray = array();
+        $loopArray['categories'] = array();
+        $loopArray['data'] = array();
+
+
+
+        $data['aitog'] = $parentObjects->map(function($row) {
+
+            $returnData = array();
+            $categoryNewDate = '';
+            $categoryNewData = array();
+
+            if($row['created_at'] != $categoryNewDate) {
+
+                if ($categoryNewDate != ''){
+                    $obj[] = [
+                        'category' => $categoryNewDate,
+                        'data' => $categoryNewData
+                    ];
+                    array_push($returnData,$obj);
+                    $categoryNewData = array();
+                }
+
+                $categoryNewDate = $row['created_at'];
+                array_push($categoryNewData,$row['category']);
+
+            }
+            else {
+                array_push($categoryNewData,$row['category']);
+            }
+            return $returnData;
+        });
+
+
+
+
+
+
+
+
         $data['total_dwell_time_chart_categories'] = $data['total_dwell_time_chart_data']->map(function($row) {
             return array('category' => $row['created_at']);
         });
