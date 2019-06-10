@@ -70,64 +70,94 @@ class HippnpController extends \BaseController {
             //     $dates_series = array();
             // }
             // $dates_series = array_push($dates_series, $date['created_att']);
+            $hcategories = \Picknpay::fetchCategories()
 
-            foreach ( $dates as $date ) {
+            foreach ($hcategories as $category) {
+                $categoryName = $category->category;
+                $dataArray = array();
 
-            // foreach ( $categories as $cat ) {
+                foreach ( $dates as $date ) {
+                    // dataArray
+                    $response = \Picknpay::fetchCategoryPerDate($data['created_att'], $categoryName);
+                    $dataArray = array_push($dataArray, $response->value);
 
-                // $categoryName = $cat->category;
+                }
 
-                $my_asshole = array();
+                $obj[] = [
+                    'seriesname' => $categoryName,
+                    'data' => $dataArray
+                ];
 
+            }
 
-
-            // foreach ( $dates as $date ) {
-            // foreach($categories as $key=>$cat) {
-
-
-                // foreach($array as $key=>$value) {
-                //     // do stuff
-                // }
-
-
-                // foreach ( $dates as $date ) {
-                // $my_asshole = array();
-                // $staff_graph = array_push({value: $staff_graph, });
+            //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
+        //     // "dataset": [{"seriesname":"Games","data":[{"value":"0"},{"games":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
 
 
-                // $data['ffs'] = $cat->category;
-                // $data['ffssss'] = $date['created_att'];
-                $current_date = $date['label'];
-                $dataForCategoryDates = \Picknpay::suckmydonkeydick($current_date);
-                $data['dataForCategoryDates'] = $dataForCategoryDates;
+        //     foreach ( $dates as $date ) {
 
-                foreach ( $dataForCategoryDates as $catdate ) {
-                // $dataForCategoryDates->map(function($row) {
-                    $obj[] = [
-                            'seriesname' => $catdate->category,
-                            'data' => $catdate->value
-                        ];
-                    };
-                // $obj[] = [
-                //     'seriesname' => $categoryName,
-                //     'data' => $dataForCategoryDates
-                // ];
-                array_push($my_asshole, $obj);
+        //     // foreach ( $categories as $cat ) {
+
+        //         // $categoryName = $cat->category;
+
+        //         $my_asshole = array();
 
 
 
+        //     // foreach ( $dates as $date ) {
+        //     // foreach($categories as $key=>$cat) {
 
 
-            // }
-        // }
+        //         // foreach($array as $key=>$value) {
+        //         //     // do stuff
+        //         // }
 
 
-        // $data['correctlyInst'] = $obj;
-        // array_push($complete_object, $obj);
-        // $my_asshole = array_push($my_asshole, $obj);
+        //         // foreach ( $dates as $date ) {
+        //         // $my_asshole = array();
+        //         // $staff_graph = array_push({value: $staff_graph, });
 
 
-        };
+        //         // $data['ffs'] = $cat->category;
+        //         // $data['ffssss'] = $date['created_att'];
+        //         $current_date = $date['label'];
+        //         $dataForCategoryDates = \Picknpay::suckmydonkeydick($current_date);
+        //         $data['dataForCategoryDates'] = $dataForCategoryDates;
+
+
+        //         $seriesName = "Games";
+        //         $asdf = array();
+        //         foreach ( $dataForCategoryDates as $catdate ) {
+        //         // $dataForCategoryDates->map(function($row) {
+
+
+
+
+        //             $obj[] = [
+        //                     'seriesname' => $catdate->category,
+        //                     'data' => $catdate->value
+        //                 ];
+        //             };
+        //         // $obj[] = [
+        //         //     'seriesname' => $categoryName,
+        //         //     'data' => $dataForCategoryDates
+        //         // ];
+        //         array_push($my_asshole, $obj);
+
+
+
+
+
+        //     // }
+        // // }
+
+
+        // // $data['correctlyInst'] = $obj;
+        // // array_push($complete_object, $obj);
+        // // $my_asshole = array_push($my_asshole, $obj);
+
+
+        // };
 
         $data['complete'] = $my_asshole;
 
@@ -169,7 +199,7 @@ class HippnpController extends \BaseController {
 
 // "categories": [{
         //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
-        //     // "dataset": [{"seriesname":"2019-06-03","data":[{"food":"0"},{"games":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
+        //     // "dataset": [{"seriesname":"Games","data":[{"value":"0"},{"games":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
 
 
         // $parentObjects = \Picknpay::hannesTestCategories();
