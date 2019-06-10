@@ -97,7 +97,8 @@ class HippnpController extends \BaseController {
 
                 // $data['ffs'] = $cat->category;
                 // $data['ffssss'] = $date['created_att'];
-                $dataForCategoryDates = DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') = '$date['label']' GROUP BY category, DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));
+                $current_date = $date['label'];
+                $dataForCategoryDates = DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') = '$current_date' GROUP BY category, DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));
                 $obj[] = [
                     'seriesname' => $categoryName,
                     'data' => $dataForCategoryDates
