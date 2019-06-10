@@ -53,7 +53,7 @@ class HippnpController extends \BaseController {
         $parentObjects = \Picknpay::hannesTestCategories();
 
 
-        $dates = \Picknpay::getDates();
+        $dates = \Picknpay::getDatess();
         $dataArray = array();
 
 
