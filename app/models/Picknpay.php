@@ -45,7 +45,7 @@ class Picknpay extends Eloquent {
     }
 
     public static function fetchCategoryPerDate($dates, $category){
-        $formatted_dates = implode(",",$date);
+        $formatted_dates = implode(",",$dates);
         return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') IN ($formatted_dates) AND category = '$category' GROUP BY DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));
 
     }
