@@ -99,7 +99,7 @@ class HippnpController extends \BaseController {
                 // $data['ffssss'] = $date['created_att'];
                 $current_date = $date['label'];
                 $dataForCategoryDates = \Picknpay::suckmydonkeydick($current_date);
-                $data['dataForCategoryDates'] = $dataForCategoryDates
+                $data['dataForCategoryDates'] = $dataForCategoryDates;
 
                 // foreach ( $dataForCategoryDates as $catdate ) {
                 // // $dataForCategoryDates->map(function($row) {
