@@ -60,7 +60,7 @@ class HippnpController extends \BaseController {
 
         $data['test'] = $dates;
         $data['test2'] = $dates->map(function($row) {
-            array_push($dataArray,\Picknpay::getDataForDate($row['created_att']));
+            array_push($dataArray['asdf'],\Picknpay::getDataForDate($row['created_att']));
         });
 
 
