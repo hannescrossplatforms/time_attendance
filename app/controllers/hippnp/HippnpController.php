@@ -60,7 +60,7 @@ class HippnpController extends \BaseController {
 
         }
 
-
+        $data['mibum'] = $mibum;
 
 
 
