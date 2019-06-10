@@ -50,8 +50,13 @@ class HippnpController extends \BaseController {
 
         $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
 
-        $data['first_level_data'] = \Picknpay::firstLevelData();
+        $data['first_level_data'] = \Picknpay::firstLevelData()->map(function($row) {
+            return array('label' => $row['created_att'])
+        })
 
+// "categories": [{
+        //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
+        //     // "dataset": [{"seriesname":"2019-06-03","data":[{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
 
 
         // $parentObjects = \Picknpay::hannesTestCategories();

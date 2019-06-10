@@ -267,7 +267,7 @@ function renderCharts(time, start, end) {
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
-                        "category": data['total_dwell_time_chart_categories']
+                        "category": data['first_level_data']
                     }],
                     "dataset": data['total_dwell_time_chart_results']
                 }
