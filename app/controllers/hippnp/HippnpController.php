@@ -48,7 +48,7 @@ class HippnpController extends \BaseController {
 
         $looper = 0;
 
-        // $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
+        $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
 
         $parentObjects = \Picknpay::hannesTestCategories();
 
