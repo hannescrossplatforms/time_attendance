@@ -101,8 +101,8 @@ class HippnpController extends \BaseController {
                 $dataForCategoryDates = DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value, category FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') = '$current_date' GROUP BY category, DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));
                 ->map(function($row) {
                         return [
-                            'seriesname' => $row->category,
-                            'data' => $row->value
+                            'seriesname' => $row['category'],
+                            'data' => $row['value']
                         ]
                     });
                 // $obj[] = [
