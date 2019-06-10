@@ -64,8 +64,8 @@ class HippnpController extends \BaseController {
                 'data' => $response
             ];
             array_push($data['total_dwell_time_chart_results'],$obj);
-            array_push($data['test_dates'],$looper);
-            array_push($data['test_dates'],$category);
+            // array_push($data['test_dates'],$looper);
+            // array_push($data['test_dates'],$category);
 
             // "categories": [{
             //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
