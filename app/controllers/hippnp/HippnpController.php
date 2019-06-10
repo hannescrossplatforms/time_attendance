@@ -90,7 +90,7 @@ class HippnpController extends \BaseController {
 
 
             // }
-        });
+        }
         };
 
         $data['mypenis'] = $dates_series;
