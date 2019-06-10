@@ -70,7 +70,7 @@ class HippnpController extends \BaseController {
             //     $dates_series = array();
             // }
             // $dates_series = array_push($dates_series, $date['created_att']);
-            $hcategories = \Picknpay::fetchCategories()
+            $hcategories = \Picknpay::fetchCategories();
 
             foreach ($hcategories as $category) {
                 $categoryName = $category->category;
