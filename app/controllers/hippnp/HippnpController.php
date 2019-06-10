@@ -68,7 +68,7 @@ class HippnpController extends \BaseController {
 
 
             // }
-            $data['asdf'] = $category;
+            $data['asdf'] = $categories;
         // });
         };
 
