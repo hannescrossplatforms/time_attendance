@@ -62,8 +62,9 @@ class HippnpController extends \BaseController {
             // }
             // $dates_series = array_push($dates_series, $date['created_att']);
 
-            foreach($categories as $key=>$cat) {
-            // foreach ( $categories as $cat ) {
+            foreach ( $dates as $date ) {
+            // foreach($categories as $key=>$cat) {
+            foreach ( $categories as $cat ) {
 
                 // foreach($array as $key=>$value) {
                 //     // do stuff
@@ -80,7 +81,7 @@ class HippnpController extends \BaseController {
 
                 $obj[] = [
                     'seriesname' => $cat->category,
-                    'data' => \Picknpay::fetchCategoryPerDate($dates[$key], $cat->category)
+                    'data' => \Picknpay::fetchCategoryPerDate($date, $cat->category)
                 ];
                 // $data['correctlyInst'] = $obj;
                 array_push($my_asshole, $obj);
@@ -89,7 +90,7 @@ class HippnpController extends \BaseController {
 
 
             // }
-        // });
+        });
         };
 
         $data['mypenis'] = $dates_series;
