@@ -272,6 +272,13 @@ function renderCharts(time, start, end) {
                     "dataset": data['total_dwell_time_chart_results']
                 }
             });
+
+// "categories": [{
+            //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
+            // "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
+
+
+
             apiChart.render();
 
             var chartProperties = {
