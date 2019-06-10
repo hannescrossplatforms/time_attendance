@@ -57,11 +57,17 @@ class HippnpController extends \BaseController {
             //     $dates_series = array();
             // }
             // $dates_series = array_push($dates_series, $date['created_att']);
+
+            $categories = $categories->map(function($row) {
+                return $row['category'];
+            });
+
+
             foreach ( $categories as $cat ) {
                 // $staff_graph = array_push({value: $staff_graph, });
 
 
-                $data['ffs'] = $cat.category;
+                $data['ffs'] = $cat;
                 $data['ffssss'] = $date['created_att'];
 
                 // $obj[] = [
