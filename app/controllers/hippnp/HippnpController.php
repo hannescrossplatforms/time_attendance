@@ -70,7 +70,8 @@ class HippnpController extends \BaseController {
                     'seriesname' => $cat->category,
                     'data' => \Picknpay::fetchCategoryPerDate($date['created_att'], $cat->category)
                 ];
-                $my_asshole = array_push($my_asshole, $obj);
+                $data['correctlyInst'] = $obj;
+                // $my_asshole = array_push($my_asshole, $obj);
 
 
 
