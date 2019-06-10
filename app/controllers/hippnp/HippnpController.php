@@ -55,6 +55,7 @@ class HippnpController extends \BaseController {
 
         $dates = \Picknpay::getDatess();
         $dataArray = array();
+        $dataArray['asdf'] = array();
 
 
 
