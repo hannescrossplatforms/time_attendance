@@ -58,7 +58,7 @@ class HippnpController extends \BaseController {
             // }
             // $dates_series = array_push($dates_series, $date['created_att']);
 
-            $categories = $categories->map(function($row) {
+            $categories->map(function($row) {
                 return $row['category'];
             });
 
