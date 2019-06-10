@@ -99,10 +99,10 @@ class HippnpController extends \BaseController {
                 // $data['ffssss'] = $date['created_att'];
                 $current_date = $date['label'];
                 $dataForCategoryDates = \Picknpay::suckmydonkeydick($current_date);
-                $dataForCategoryDates->map(function($row) {
+                $dataForCategoryDates->map(function($row) use ($category, $value) {
                         return [
-                            'seriesname' => $row->category,
-                            'data' => $row->value
+                            'seriesname' => $category,
+                            'data' => $value
                         ];
                     });
                 // $obj[] = [
