@@ -39,6 +39,28 @@ class Picknpay extends Eloquent {
 
     }
 
+    public static function getDates(){
+
+        return Picknpay::orderBy('created_at', 'ASC')
+        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
+        ->where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->orderBy('created_at')
+        ->get();
+
+    }
+
+    public static function getDataForDate($date){
+        return Picknpay::orderBy('created_at', 'ASC')
+        ->select('category')
+        ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') = $date"))
+        ->groupBy('category')
+        ->orderBy('created_at')
+        ->get();
+    }
+
+
     public static function hannesTestCategories(){
 
 

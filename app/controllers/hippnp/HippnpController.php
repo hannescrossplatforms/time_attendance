@@ -52,40 +52,53 @@ class HippnpController extends \BaseController {
 
         $parentObjects = \Picknpay::hannesTestCategories();
 
-        $date = '';
 
-        $loopArray = array();
-        $loopArray['categories'] = array();
-        $loopArray['data'] = array();
+        $dates = \Picknpay::getDates();
+        $dataArray = array();
 
 
 
-        $data['aitog'] = $parentObjects->map(function($row) {
-
-            $returnData = array();
-            $categoryNewDate = '';
-            $categoryNewData = array();
-
-            if($row['created_at'] != $categoryNewDate) {
-
-                if ($categoryNewDate != ''){
-                    $obj[] = [
-                        'category' => $categoryNewDate,
-                        'data' => $categoryNewData
-                    ];
-                    array_push($returnData,$obj);
-                    $categoryNewData = array();
-                }
-
-                $categoryNewDate = $row['created_at'];
-                array_push($categoryNewData,$row['category']);
-
-            }
-            else {
-                array_push($categoryNewData,$row['category']);
-            }
-            return $returnData;
+        $data['test'] = $dates;
+        $data['test2'] = $dates->map(function($row) {
+            array_push($dataArray,\Picknpay::getDataForDate($row['created_att']));
         });
+
+
+        // $obj[] = [
+        //     'category' => $categoryNewDate,
+        //     'data' => $categoryNewData
+        // ];
+
+
+
+
+
+        // $data['aitog'] = $parentObjects->map(function($row) {
+
+        //     $returnData = array();
+        //     $categoryNewDate = '';
+        //     $categoryNewData = array();
+
+        //     if($row['created_at'] != $categoryNewDate) {
+
+        //         if ($categoryNewDate != ''){
+        //             $obj[] = [
+        //                 'category' => $categoryNewDate,
+        //                 'data' => $categoryNewData
+        //             ];
+        //             array_push($returnData,$obj);
+        //             $categoryNewData = array();
+        //         }
+
+        //         $categoryNewDate = $row['created_at'];
+        //         array_push($categoryNewData,$row['category']);
+
+        //     }
+        //     else {
+        //         array_push($categoryNewData,$row['category']);
+        //     }
+        //     return $returnData;
+        // });
 
 
 
