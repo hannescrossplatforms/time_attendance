@@ -82,8 +82,8 @@ class HippnpController extends \BaseController {
 
                     $response = \Picknpay::fetchCategoryPerDate($date['label'], $categoryName);
                     if (count($response) == 0) {
-                        $false_array = array();
-                        array_push($dataArray, [['value' => '0']]));
+                        $false_array = array(['value' => '0']);
+                        array_push($dataArray, false_array);
                     } else {
                         array_push($dataArray, $response);
                     }
