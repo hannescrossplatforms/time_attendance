@@ -81,12 +81,14 @@ class HippnpController extends \BaseController {
 
 
                     $response = \Picknpay::fetchCategoryPerDate($date['label'], $categoryName);
-                    array_push($dataArray, $response);
 
-                    // $response
-                    // ->map(function($row) {
-                    //     return ['value' => $row['value']];
-                    // });
+
+                    $response
+                    ->map(function($row) {
+                        return ['value' => $row['value'] == '' || $row['value'] == null ? 0 : $row['value'] ];
+                    });
+
+                    array_push($dataArray, $response);
 
                     // foreach ($responses as $response) {
                     //     $dataArray = array_push($dataArray, $response->value);
