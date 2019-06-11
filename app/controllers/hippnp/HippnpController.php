@@ -170,7 +170,7 @@ class HippnpController extends \BaseController {
 
         // };
 
-        $data['complete'] = $my_asshole;
+        $data['complete'] = $my_asshole[1];
 
         $data['mypenis'] = $dates_series;
         $data['myasshole'] = $my_asshole;
