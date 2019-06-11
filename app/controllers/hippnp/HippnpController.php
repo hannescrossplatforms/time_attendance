@@ -78,7 +78,7 @@ class HippnpController extends \BaseController {
 
                 foreach ( $dates as $date ) {
 
-                    $loopTimes = $loopTimes + 1;
+
 
                     $response = \Picknpay::fetchCategoryPerDate($date['label'], $categoryName);
 
