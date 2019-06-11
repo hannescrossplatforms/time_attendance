@@ -81,14 +81,18 @@ class HippnpController extends \BaseController {
 
 
                     $response = \Picknpay::fetchCategoryPerDate($date['label'], $categoryName);
+                    if ($response == null) {
+                        array_push($dataArray, ['value' => 0]);
+                    } else {
+                        array_push($dataArray, $response);
+                    }
 
-                    $data['erection'] = $response;
-                    $response
-                    ->map(function($row) {
-                        return ['value' => $row['value'] == '' || $row['value'] == null ? 0 : $row['value'] ];
-                    });
 
-                    array_push($dataArray, $response);
+
+                    // $response
+                    // ->map(function($row) {
+                    //     return ['value' => $row['value']];
+                    // });
 
                     // foreach ($responses as $response) {
                     //     $dataArray = array_push($dataArray, $response->value);
@@ -172,7 +176,7 @@ class HippnpController extends \BaseController {
 
         // };
 
-        $data['complete'] = $my_asshole[count($my_asshole) - 1];
+        $data['complete'] = $my_asshole[count($my_asshole.length - 1];
 
         $data['mypenis'] = $dates_series;
         $data['myasshole'] = $my_asshole;
