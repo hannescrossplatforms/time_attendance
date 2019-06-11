@@ -81,6 +81,7 @@ class HippnpController extends \BaseController {
 
 
                     $response = \Picknpay::fetchCategoryPerDate($date['label'], $categoryName);
+                    array_push($dataArray, $response);
 
                     // $response
                     // ->map(function($row) {
@@ -95,7 +96,7 @@ class HippnpController extends \BaseController {
 
                 $obj[] = [
                     'seriesname' => $categoryName,
-                    'data' => $response
+                    'data' => $dataArray
                 ];
                 array_push($my_asshole, $obj);
             }
