@@ -71,7 +71,7 @@ class HippnpController extends \BaseController {
             // }
             // $dates_series = array_push($dates_series, $date['created_att']);
             $hcategories = \Picknpay::fetchCategories();
-            $loopTimes = 0;
+
             foreach ($hcategories as $category) {
                 $categoryName = $category->category;
                 $dataArray = array();
@@ -79,12 +79,13 @@ class HippnpController extends \BaseController {
                 foreach ( $dates as $date ) {
 
                     $loopTimes = $loopTimes + 1;
-                    $data['asdf'] = $loopTimes;
+
                     $response = \Picknpay::fetchCategoryPerDate($date['label'], $categoryName);
-                    $response
-                    ->map(function($row) {
-                        return ['value' => $row['value']];
-                    });
+
+                    // $response
+                    // ->map(function($row) {
+                    //     return ['value' => $row['value']];
+                    // });
 
                     // foreach ($responses as $response) {
                     //     $dataArray = array_push($dataArray, $response->value);
