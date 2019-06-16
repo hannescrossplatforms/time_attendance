@@ -78,7 +78,7 @@ class HippnpController extends \BaseController {
 
         $data['category_list'] = $dates;
 
-        if count($finalChartObject > 0) {
+        if (count($finalChartObject) > 0) {
             $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
         }
         else {
