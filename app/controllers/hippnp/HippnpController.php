@@ -82,7 +82,7 @@ class HippnpController extends \BaseController {
             $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
         }
         else {
-            $data['category_list_data'] = $finalChartObject[0];
+            $data['category_list_data'] = null;
         }
 
 
