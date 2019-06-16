@@ -44,8 +44,8 @@ class HippnpController extends \BaseController {
         $finalChartObject = array();
 
         $period = Input::get('period');
-        $allCategories = \Picknpay::fetchAllCategories();
-        $dates = \Picknpay::datesToFetchChartDataFor()
+        $allCategories = \Picknpay::fetchAllCategories($period);
+        $dates = \Picknpay::datesToFetchChartDataFor($period)
         ->map(function($row) {
             //TODO: See if you can just use created_at
                 return ['label' => $row['created_att']];
@@ -79,20 +79,6 @@ class HippnpController extends \BaseController {
         $data['category_list'] = $dates;
         $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
 
-
-
-
-
-
-
-
-
-
-        // $data['total_dwell_time_chart_categories'] = $data['total_dwell_time_chart_data']->map(function($row) {
-        //     return array('category' => $row['created_at']);
-        // });
-
-        // $data['total_dwell_time_chart_results'] = array();
         $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
         $json = json_encode($data);
