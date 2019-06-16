@@ -63,7 +63,7 @@ class HippnpController extends \BaseController {
             $data['category_list_data'] = json_encode($finalChartObject[count($finalChartObject)- 1]);
         }
         else {
-            $data['category_list_data'] = [];
+            $data['category_list_data'] = json_encode([]);
         }
 
         $obj = null;
@@ -98,7 +98,7 @@ class HippnpController extends \BaseController {
             $data['category_list_data_average'] = json_encode($finalAverageChartObject[count($finalAverageChartObject)- 1]);
         }
         else {
-            $data['category_list_data_average'] = [];
+            $data['category_list_data_average'] = json_encode([]);
         }
 
         $obj = null;
