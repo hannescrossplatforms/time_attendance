@@ -10,7 +10,16 @@ class Picknpay extends Eloquent {
 
     protected $table = 'picknpay';
 
-    public static function datesToFetchChartDataFor($date){
+    public static function datesToFetchChartDataFor($date, $startDate, $endDate){
+
+        if ($startDate == null && $endDate == null) {
+
+            $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
+
+            $startDate = $dateRange['startDate'];
+            $endDate = $dateRange['endDate'];
+
+        }
 
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
 
@@ -25,12 +34,16 @@ class Picknpay extends Eloquent {
         ->get();
     }
 
-    public static function fetchAllCategories($date){
+    public static function fetchAllCategories($date, $startDate, $endDate){
 
-        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
+        if ($startDate == null && $endDate == null) {
 
-        $startDate = $dateRange['startDate'];
-        $endDate = $dateRange['endDate'];
+            $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
+
+            $startDate = $dateRange['startDate'];
+            $endDate = $dateRange['endDate'];
+
+        }
 
         return DB::select(DB::raw("SELECT DISTINCT category FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'"));
     }
