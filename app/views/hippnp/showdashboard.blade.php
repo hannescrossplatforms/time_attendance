@@ -176,7 +176,7 @@ $(document).ready(function() {
         dataSource: {
             "chart": chartProperties,
             "categories": [{
-                "category": <?php echo $data['category']; ?>
+                "category": <?php echo $data['category_list']; ?>
             }],
             "dataset": <?php echo $data['staff_graph']; ?>
 
