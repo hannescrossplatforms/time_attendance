@@ -48,36 +48,37 @@ class HippnpController extends \BaseController {
 
         $finalChartObject = array();
 
-        foreach ($allCategories as $category) {
-            $categoryName = $category->category;
-            $dataArray = array();
+        // foreach ($allCategories as $category) {
+        //     $categoryName = $category->category;
+        //     $dataArray = array();
 
-            foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "SUM");
-                if (count($response) == 0) {
-                    $empty_array = array(['value' => '0']);
-                    array_push($dataArray, $empty_array);
-                } else {
-                    array_push($dataArray, $response);
-                }
+        //     foreach ( $dates as $date ) {
+        //         $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "SUM");
+        //         if (count($response) == 0) {
+        //             $empty_array = array(['value' => '0']);
+        //             array_push($dataArray, $empty_array);
+        //         } else {
+        //             array_push($dataArray, $response);
+        //         }
 
-            }
+        //     }
 
-            $obj[] = [
-                'seriesname' => $categoryName,
-                'data' => $dataArray
-            ];
-            array_push($finalChartObject, $obj);
-        };
+        //     $obj[] = [
+        //         'seriesname' => $categoryName,
+        //         'data' => $dataArray
+        //     ];
+        //     array_push($finalChartObject, $obj);
+        // };
 
-        if (count($finalChartObject) > 0) {
-            $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
-        }
-        else {
-            $data['category_list_data'] = null;
-        }
+        // if (count($finalChartObject) > 0) {
+        //     $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
+        // }
+        // else {
+        //     $data['category_list_data'] = null;
+        // }
+        //TODO REMOVE
+        $data['category_list_data'] = null;
 
-        $data['allcategoriesone'] = $dates;
 
         // Average of all categories
 
@@ -112,7 +113,6 @@ class HippnpController extends \BaseController {
             $data['category_list_data_average'] = null;
         }
 
-        $data['allcategoriestwo'] = $dates;
 
         $json = json_encode($data);
 
