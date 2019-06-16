@@ -62,7 +62,7 @@ class HippnpController extends \BaseController {
                 }
 
             }
-            $obj = null;
+
             $obj[] = [
                 'seriesname' => $categoryName,
                 'data' => $dataArray
@@ -76,9 +76,8 @@ class HippnpController extends \BaseController {
         else {
             $data['category_list_data'] = null;
         }
-        //TODO REMOVE
 
-        // $obj = null;
+        $obj = null;
 
         // Average of all categories
 
@@ -113,6 +112,7 @@ class HippnpController extends \BaseController {
             $data['category_list_data_average'] = null;
         }
 
+        $obj = null;
 
         $json = json_encode($data);
 
