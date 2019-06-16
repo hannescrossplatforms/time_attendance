@@ -68,7 +68,7 @@ class HippnpController extends \BaseController {
                 'data' => $dataArray
             ];
             array_push($finalChartObject, $obj);
-        }
+        };
 
         if (count($finalChartObject) > 0) {
             $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
@@ -101,7 +101,7 @@ class HippnpController extends \BaseController {
                 'data' => $dataArrayAvg
             ];
             array_push($finalAverageChartObject, $obj);
-        }
+        };
 
         if (count($finalAverageChartObject) > 0) {
             $data['category_list_data_average'] = $finalAverageChartObject[count($finalAverageChartObject)- 1];
