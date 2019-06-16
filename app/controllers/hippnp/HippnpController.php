@@ -15,7 +15,7 @@ class HippnpController extends \BaseController {
 
 	public static function showDashboard(){
 
-        $period = 'rep7day'
+        $period = 'rep7day';
         $data = array() ;
 
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
