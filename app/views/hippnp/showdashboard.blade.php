@@ -157,7 +157,7 @@
 $(document).ready(function() {
 
     pathname = $('#url').val();
-    debugger;
+
     var chartProperties = {
         "caption": "",
         "xAxisName": "Section",
@@ -303,9 +303,7 @@ function renderCharts(time, start, end) {
 
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            debugger;
-            alert("Status: " + textStatus);
-            alert("Error: " + errorThrown);
+
         }
     });
 }
