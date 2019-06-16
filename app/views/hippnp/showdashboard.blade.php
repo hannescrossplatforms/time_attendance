@@ -267,9 +267,9 @@ function renderCharts(time, start, end) {
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
-                        "category": data['first_level_data']
+                        "category": data['category_list']
                     }],
-                    "dataset": data['complete']
+                    "dataset": data['category_list_data']
                 }
             });
 

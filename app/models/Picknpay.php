@@ -10,6 +10,29 @@ class Picknpay extends Eloquent {
 
     protected $table = 'picknpay';
 
+    public static function datesToFetchChartDataFor(){
+        return Picknpay::orderBy('created_at', 'ASC')
+        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->get();
+    }
+
+    public static function fetchAllCategories(){
+        return DB::select(DB::raw("SELECT DISTINCT category FROM picknpay"));
+    }
+
+    public static function fetchDwellTimeDataForCategoryWithDate($date, $category){
+        return Picknpay::orderBy('created_at', 'ASC')
+        ->select(DB::raw("IFNULL(sum(CAST(dwell_time AS UNSIGNED)), 0) AS value"))
+        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
+        ->whereraw("category = '$category'")
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->get();
+    }
+
+
+
     public static function customerInStoreToday(){
 
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('today');
@@ -24,14 +47,14 @@ class Picknpay extends Eloquent {
 
     }
 
-    public static function firstLevelData(){
+    // public static function firstLevelData(){
 
-        return Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
-        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        ->get();
+    //     return Picknpay::orderBy('created_at', 'ASC')
+    //     ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
+    //     ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+    //     ->get();
 
-    }
+    // }
 
     public static function secondLevelData($date){
 
@@ -39,27 +62,9 @@ class Picknpay extends Eloquent {
         return DB::select(DB::raw("SELECT category, sum(CAST(dwell_time AS UNSIGNED))AS value FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d')='$date' GROUP BY category,DATE_FORMAT(created_at,'%Y-%m-%d')"));
     }
 
-    public static function fetchCategories(){
-        return DB::select(DB::raw("SELECT DISTINCT category FROM picknpay"));
-
-    }
-
-    public static function fetchCategoryPerDate($date, $category){
-        // $formatted_dates = implode("','",$dates);
-        // return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') = '$date' AND category = '$category' GROUP BY DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));
-
-        // DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value
-
-        return Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("IFNULL(sum(CAST(dwell_time AS UNSIGNED)), 0) AS value"))
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
-        ->whereraw("category = '$category'")
-        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        ->get();
 
 
-    }
+
 
     public static function suckmydonkeydick($date) {
         return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value, category FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') = '$date' GROUP BY category, DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));

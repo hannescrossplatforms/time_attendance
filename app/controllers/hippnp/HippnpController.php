@@ -39,200 +39,49 @@ class HippnpController extends \BaseController {
     }
 
     public function periodchartJsondata(){
-        $staff_graph = array();
-        $dates_series = array();
-        $my_asshole = array();
+
         $data = array();
+        $finalChartObject = array();
+
         $period = Input::get('period');
-        $categories = \Picknpay::fetchCategories();
-
-        $data['category'] = \Picknpay::chartCategoriesAsJson($period, true);
-        $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData($period);
-
-        $asddates = \Picknpay::firstLevelData()
+        $allCategories = \Picknpay::fetchAllCategories();
+        $dates = \Picknpay::datesToFetchChartDataFor()
         ->map(function($row) {
-                $thing = $row['created_att'];
-                return "$thing";
-            })
-            ->toArray();
-        $dates = \Picknpay::firstLevelData()
-        ->map(function($row) {
+            //TODO: See if you can just use created_at
                 return ['label' => $row['created_att']];
             });
 
-            $data_array = array();
-            $complete_object = array();
 
 
+        foreach ($allCategories as $category) {
+            $categoryName = $category->category;
+            $dataArray = array();
 
+            foreach ( $dates as $date ) {
 
-            // if ($dates_series == null) {
-            //     $dates_series = array();
-            // }
-            // $dates_series = array_push($dates_series, $date['created_att']);
-            $hcategories = \Picknpay::fetchCategories();
-
-            foreach ($hcategories as $category) {
-                $categoryName = $category->category;
-                $dataArray = array();
-
-                foreach ( $dates as $date ) {
-
-
-
-                    $response = \Picknpay::fetchCategoryPerDate($date['label'], $categoryName);
-                    if (count($response) == 0) {
-                        $false_array = array(['value' => '0']);
-                        array_push($dataArray, $false_array);
-                    } else {
-                        array_push($dataArray, $response);
-                    }
-
-
-
-                    // $response
-                    // ->map(function($row) {
-                    //     return ['value' => $row['value']];
-                    // });
-
-                    // foreach ($responses as $response) {
-                    //     $dataArray = array_push($dataArray, $response->value);
-                    // }
-
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName);
+                if (count($response) == 0) {
+                    $false_array = array(['value' => '0']);
+                    array_push($dataArray, $false_array);
+                } else {
+                    array_push($dataArray, $response);
                 }
 
-                $obj[] = [
-                    'seriesname' => $categoryName,
-                    'data' => $dataArray
-                ];
-                array_push($my_asshole, $obj);
             }
 
-            //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
-        //     // "dataset": [{"seriesname":"Games","data":[{"value":"0"},{"games":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
+            $obj[] = [
+                'seriesname' => $categoryName,
+                'data' => $dataArray
+            ];
+            array_push($finalChartObject, $obj);
+        }
 
-
-        //     foreach ( $dates as $date ) {
-
-        //     // foreach ( $categories as $cat ) {
-
-        //         // $categoryName = $cat->category;
-
-        //         $my_asshole = array();
-
-
-
-        //     // foreach ( $dates as $date ) {
-        //     // foreach($categories as $key=>$cat) {
-
-
-        //         // foreach($array as $key=>$value) {
-        //         //     // do stuff
-        //         // }
-
-
-        //         // foreach ( $dates as $date ) {
-        //         // $my_asshole = array();
-        //         // $staff_graph = array_push({value: $staff_graph, });
-
-
-        //         // $data['ffs'] = $cat->category;
-        //         // $data['ffssss'] = $date['created_att'];
-        //         $current_date = $date['label'];
-        //         $dataForCategoryDates = \Picknpay::suckmydonkeydick($current_date);
-        //         $data['dataForCategoryDates'] = $dataForCategoryDates;
-
-
-        //         $seriesName = "Games";
-        //         $asdf = array();
-        //         foreach ( $dataForCategoryDates as $catdate ) {
-        //         // $dataForCategoryDates->map(function($row) {
+        $data['category_list'] = $dates;
+        $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
 
 
 
 
-        //             $obj[] = [
-        //                     'seriesname' => $catdate->category,
-        //                     'data' => $catdate->value
-        //                 ];
-        //             };
-        //         // $obj[] = [
-        //         //     'seriesname' => $categoryName,
-        //         //     'data' => $dataForCategoryDates
-        //         // ];
-        //         array_push($my_asshole, $obj);
-
-
-
-
-
-        //     // }
-        // // }
-
-
-        // // $data['correctlyInst'] = $obj;
-        // // array_push($complete_object, $obj);
-        // // $my_asshole = array_push($my_asshole, $obj);
-
-
-        // };
-
-        $data['complete'] = $my_asshole[count($my_asshole)- 1];
-
-        $data['mypenis'] = $dates_series;
-        $data['myasshole'] = $my_asshole;
-        $data['first_level_data'] = $dates;
-
-        $data['total_dwell_time_chart_data'] = \Picknpay::hannesTestCategories();
-
-        // $data['first_level_data'] = \Picknpay::firstLevelData()->map(function($row) {
-        //     return array('label' => $row['created_att']);
-        // });
-
-        // foreach ( $data['first_level_data'] as $row ) {
-        //     $var = $row['label'];
-
-        //     $response = \Picknpay::secondLevelData($var);
-
-
-
-        //     $response->map(function($row) {
-        //         $seriesName = $row['category'];
-
-        //     });
-
-
-        //     $response
-        //     array_push($mibum,\Picknpay::secondLevelData($var));
-
-        // }
-
-        // $data['mibum'] = $mibum;
-
-
-
-    // 0: {category: "Food", value: "100"}
-    // 1: {category: "Games", value: "160"}
-
-
-// "categories": [{
-        //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
-        //     // "dataset": [{"seriesname":"Games","data":[{"value":"0"},{"games":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
-
-
-        // $parentObjects = \Picknpay::hannesTestCategories();
-
-//
-        // $dates = \Picknpay::getDatess();
-        // $dataArray = array();
-        // $dataArray['asdf'] = array();
-
-
-
-        // $data['test'] = $dates;
-        // $data['test2'] = $dates->map(function($row) {
-        //     array_push($data['asdf'],\Picknpay::getDataForDate($row['created_att']));
-        // });
 
 
 
@@ -244,32 +93,10 @@ class HippnpController extends \BaseController {
         });
 
         $data['total_dwell_time_chart_results'] = array();
-
-        // foreach ($data['total_dwell_time_chart_data'] as $row ) { //2 categories(dates)
-        //     $looper = $looper + 1;
-
-
-        //     $response = \Picknpay::hannesTestCategoriesInner($row);
-
-        //     $data['meh'] = $response;
-        //     $obj[] = [
-        //         'seriesname' => $row['created_att'],
-        //         'data' => $response
-        //     ];
-        //     array_push($data['total_dwell_time_chart_results'],$obj);
-        //     // array_push($data['test_dates'],$looper);
-        //     // array_push($data['test_dates'],$category);
-
-        //     // "categories": [{
-        //     //     "category": [{"label":"2019-06-03"},{"label":"2019-06-04"},{"label":"2019-06-05"},{"label":"2019-06-06"},{"label":"2019-06-07"},{"label":"2019-06-08"},{"label":"2019-06-09"}]                                }],
-        //     // "dataset": [{"seriesname":"2019-06-03","data":[{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"},{"value":"0"}]},{"seriesname":"2019-06-03","data":[{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"},{"value":"1"}]}]
-
-
-        // }
-
         $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
         $json = json_encode($data);
+
         print_r($json);
 
     }
