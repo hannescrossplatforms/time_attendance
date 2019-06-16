@@ -205,7 +205,7 @@ $(document).ready(function() {
             "categories": [{
                 "category": <?php echo $data['category_avg']; ?>
             }],
-            "dataset": <?php echo $data['staff_graph_avg']; ?>
+            "dataset": <?php echo $data['category_list_data_average']; ?>
 
         }
     });
