@@ -37,6 +37,7 @@ class HippnpController extends \BaseController {
 
         $period = Input::get('period');
         $allCategories = \Picknpay::fetchAllCategories($period);
+        $allCategoriesAvg = \Picknpay::fetchAllCategories($period);
         $dates = \Picknpay::datesToFetchChartDataFor($period)
         ->map(function($row) {
                 return ['label' => $row['created_att']];
@@ -81,7 +82,7 @@ class HippnpController extends \BaseController {
 
         $finalAverageChartObject = array();
 
-        foreach ($allCategories as $category) {
+        foreach ($allCategoriesAvg as $category) {
             $categoryName = $category->category;
             $dataArray = array();
 
