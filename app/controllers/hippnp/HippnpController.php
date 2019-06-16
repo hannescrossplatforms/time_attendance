@@ -162,7 +162,7 @@ class HippnpController extends \BaseController {
             $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
         }
         else {
-            $data['category_list_data'] = null;
+            $data['category_list_data'] = [];
         }
 
         $obj = null;
@@ -197,7 +197,7 @@ class HippnpController extends \BaseController {
             $data['category_list_data_average'] = $finalAverageChartObject[count($finalAverageChartObject)- 1];
         }
         else {
-            $data['category_list_data_average'] = null;
+            $data['category_list_data_average'] = [];
         }
 
         $obj = null;
