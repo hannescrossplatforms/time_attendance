@@ -124,7 +124,11 @@ class HippnpController extends \BaseController {
 
         $json = json_encode($data);
 
-        print_r($json);
+
+        if ($timePeriod == 'empty') {
+            print_r($json);
+        }
+
 
     }
 
