@@ -178,7 +178,7 @@ $(document).ready(function() {
             "categories": [{
                 "category": <?php echo $data['category_list']; ?>
             }],
-            "dataset": <?php echo $data['staff_graph']; ?>
+            "dataset": <?php echo $data['category_list_data']; ?>
 
         }
     });
@@ -203,9 +203,9 @@ $(document).ready(function() {
         dataSource: {
             "chart": chartProperties,
             "categories": [{
-                "category": <?php echo $data['category_avg']; ?>
+                "category": <?php echo $data['category_list']; ?>
             }],
-            "dataset": <?php echo $data['staff_graph_avg']; ?>
+            "dataset": <?php echo $data['category_list_data_average']; ?>
 
         }
     });
