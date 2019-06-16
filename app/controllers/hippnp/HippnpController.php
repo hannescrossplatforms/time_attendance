@@ -27,13 +27,6 @@ class HippnpController extends \BaseController {
 
         $data['report_period'] = 'rep7day';
 
-
-
-
-
-
-
-
         return \View::make('hippnp.showdashboard')->with('data', $data);
 
     }
@@ -41,26 +34,31 @@ class HippnpController extends \BaseController {
     public function periodchartJsondata(){
 
         $data = array();
-        $finalChartObject = array();
 
         $period = Input::get('period');
         $allCategories = \Picknpay::fetchAllCategories($period);
         $dates = \Picknpay::datesToFetchChartDataFor($period)
+
+        $data['category_list'] = $dates;
+
         ->map(function($row) {
-            //TODO: See if you can just use created_at
                 return ['label' => $row['created_att']];
             });
+
+        // Sum of all categories
+
+        $finalChartObject = array();
 
         foreach ($allCategories as $category) {
             $categoryName = $category->category;
             $dataArray = array();
 
             foreach ( $dates as $date ) {
-
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName);
+                // avg
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "SUM");
                 if (count($response) == 0) {
-                    $false_array = array(['value' => '0']);
-                    array_push($dataArray, $false_array);
+                    $empty_array = array(['value' => '0']);
+                    array_push($dataArray, $empty_array);
                 } else {
                     array_push($dataArray, $response);
                 }
@@ -74,8 +72,6 @@ class HippnpController extends \BaseController {
             array_push($finalChartObject, $obj);
         }
 
-        $data['category_list'] = $dates;
-
         if (count($finalChartObject) > 0) {
             $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
         }
@@ -83,9 +79,40 @@ class HippnpController extends \BaseController {
             $data['category_list_data'] = null;
         }
 
+        // Average of all categories
 
-        $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);
-        $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
+        $finalAverageChartObject = array(); = array();
+
+        foreach ($allCategories as $category) {
+            $categoryName = $category->category;
+            $dataArray = array();
+
+            foreach ( $dates as $date ) {
+                // avg
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "AVG");
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0']);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    array_push($dataArray, $response);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $categoryName,
+                'data' => $dataArray
+            ];
+            array_push($finalAverageChartObject, $obj);
+        }
+
+        if (count($finalAverageChartObject) > 0) {
+            $data['category_list_data_average'] = $finalAverageChartObject[count($finalAverageChartObject)- 1];
+        }
+        else {
+            $data['category_list_data_average'] = null;
+        }
+
         $json = json_encode($data);
 
         print_r($json);
@@ -93,11 +120,3 @@ class HippnpController extends \BaseController {
     }
 
 }
-
-
-// dataSource: {
-//     "chart": chartProperties,
-//     "categories": [{
-//         "category": [{"label":"2019-06-03"},{"label":"2019-06-04"}]                                }],
-//     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
-// }
