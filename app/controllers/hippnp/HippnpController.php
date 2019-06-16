@@ -77,7 +77,14 @@ class HippnpController extends \BaseController {
         }
 
         $data['category_list'] = $dates;
-        $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
+
+        if count($finalChartObject > 0) {
+            $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
+        }
+        else {
+            $data['category_list_data'] = $finalChartObject[0];
+        }
+
 
         $data['category_avg'] = \Picknpay::chartCategoriesAsJson($period, true);
         $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData($period);
