@@ -17,7 +17,7 @@ class HippnpController extends \BaseController {
 
         $period = 'rep7day';
         $data = array() ;
-
+        $data['report_period'] = 'rep7day';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
@@ -104,7 +104,7 @@ class HippnpController extends \BaseController {
         $obj = null;
 
 
-        $data['report_period'] = 'rep7day';
+
 
         return \View::make('hippnp.showdashboard')->with('data', $data);
 
