@@ -94,7 +94,7 @@ class Picknpay extends Eloquent {
 
             $date = date('Y-m-d',strtotime('today'));
 
-            $returnValue['startDate'] = "$date 00.00.00";
+            $returnValue['startDate'] = "$date 00.00.01";
             $returnValue['endDate'] = "$date 23:59:59";
             $returnValue['period'] = "today";
 
@@ -104,7 +104,7 @@ class Picknpay extends Eloquent {
             $end = date('Y-m-d');
 
 
-            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['startDate'] = "$start 00.00.01";
             $returnValue['endDate'] = "$end 23:59:59";
             $returnValue['period'] = "week";
 
@@ -113,7 +113,7 @@ class Picknpay extends Eloquent {
             $start = date('Y-m-d',strtotime('first day of this month'));
             $end = date('Y-m-d',strtotime('today'));
 
-            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['startDate'] = "$start 00.00.01";
             $returnValue['endDate'] = "$end 23:59:59";
             $returnValue['period'] = "month";
 
@@ -122,7 +122,7 @@ class Picknpay extends Eloquent {
             $start = date('Y-m-d',strtotime('first day of last month'));
             $end = date('Y-m-d',strtotime('last day of last month'));
 
-            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['startDate'] = "$start 00.00.01";
             $returnValue['endDate'] = "$end 23:59:59";
             $returnValue['period'] = "month";
 
@@ -131,7 +131,7 @@ class Picknpay extends Eloquent {
             $start = Input::get('start');
             $end = Input::get('end');
 
-            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['startDate'] = "$start 00.00.01";
             $returnValue['endDate'] = "$end 23:59:59";
             $returnValue['period'] = "date";
 
@@ -139,7 +139,7 @@ class Picknpay extends Eloquent {
             $start = Input::get('start');
             $end = Input::get('end');
 
-            $returnValue['startDate'] = "$start 00.00.00";
+            $returnValue['startDate'] = "$start 00.00.01";
             $returnValue['endDate'] = "$end 23:59:59";
             $returnValue['period'] = "date";
 
