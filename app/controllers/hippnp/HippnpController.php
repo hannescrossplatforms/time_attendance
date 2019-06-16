@@ -48,10 +48,8 @@ class HippnpController extends \BaseController {
         $dates = \Picknpay::datesToFetchChartDataFor($period)
         ->map(function($row) {
             //TODO: See if you can just use created_at
-                return ['label' => $row['created_att']];
+                return ['label' => $row['created_at']];
             });
-
-
 
         foreach ($allCategories as $category) {
             $categoryName = $category->category;
