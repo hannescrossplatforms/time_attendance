@@ -21,7 +21,7 @@ class HippnpController extends \BaseController {
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
 
-        $this->periodchartJsondata('rep7day');
+        $this->periodchartJsondata('rep7day', $data);
 
 
         $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day', false);
@@ -35,7 +35,7 @@ class HippnpController extends \BaseController {
 
     }
 
-    public function periodchartJsondata($timePeriod = 'empty'){
+    public function periodchartJsondata($timePeriod = 'empty', $data = null){
 
         if ($timePeriod == 'empty') {
             $period = Input::get('period');
