@@ -178,7 +178,7 @@ $(document).ready(function() {
             "categories": [{
                 "category": <?php echo $data['category_list']; ?>
             }],
-            "dataset": <?php echo $data['staff_graph']; ?>
+            "dataset": <?php echo $data['category_list_data']; ?>
 
         }
     });
