@@ -78,12 +78,12 @@ class HippnpController extends \BaseController {
         }
         //TODO REMOVE
 
-        $categoryName = null;
+        // $categoryName = null;
         // $dataArray = null;
         // $response = null;
         // $empty_array = null;
-        // $obj = null;
-        $finalChartObject = null;
+        $obj = null;
+        // $finalChartObject = null;
 
         // Average of all categories
 
