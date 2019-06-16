@@ -37,7 +37,7 @@ class HippnpController extends \BaseController {
 
         $period = Input::get('period');
         $allCategories = \Picknpay::fetchAllCategories($period);
-        $dates = \Picknpay::datesToFetchChartDataFor($period)
+        $dates = \Picknpay::datesToFetchChartDataFor($period);
 
         $data['category_list'] = $dates;
 
