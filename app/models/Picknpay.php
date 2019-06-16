@@ -45,8 +45,6 @@ class Picknpay extends Eloquent {
         ->get();
     }
 
-
-
     public static function customerInStoreToday(){
 
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('today');
@@ -61,35 +59,7 @@ class Picknpay extends Eloquent {
 
     }
 
-    // public static function firstLevelData(){
-
-    //     return Picknpay::orderBy('created_at', 'ASC')
-    //     ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
-    //     ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-    //     ->get();
-
-    // }
-
-    public static function secondLevelData($date){
-
-
-        return DB::select(DB::raw("SELECT category, sum(CAST(dwell_time AS UNSIGNED))AS value FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d')='$date' GROUP BY category,DATE_FORMAT(created_at,'%Y-%m-%d')"));
-    }
-
-
-
-
-
-    public static function suckmydonkeydick($date) {
-        return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED))AS value, category FROM picknpay WHERE DATE_FORMAT(created_at,'%Y-%m-%d') = '$date' GROUP BY category, DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY DATE_FORMAT(created_at,'%Y-%m-%d')"));
-    }
-
-
-
-
-
     public static function customerInStoreThisMonth(){
-
 
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
 
@@ -100,142 +70,6 @@ class Picknpay extends Eloquent {
         return Picknpay::where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->count();
-
-    }
-
-    public static function getDatess(){
-
-        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
-
-        $startDate = $dateRange['startDate'];
-        $endDate = $dateRange['endDate'];
-
-        return Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
-        ->where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        ->orderBy('created_at')
-        ->get();
-
-    }
-
-    public static function getDataForDate($date){
-        return Picknpay::orderBy('created_at', 'ASC')
-        ->select('category')
-        ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') = $date"))
-        ->groupBy('category')
-        ->orderBy('created_at')
-        ->get();
-    }
-
-
-    public static function hannesTestCategories(){
-
-
-
-        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('repthismonth');
-        $startDate = $dateRange['startDate'];
-        $endDate = $dateRange['endDate'];
-
-
-        return Picknpay::orderBy('created_at', 'ASC')
-        ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
-        ->where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->groupBy('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        ->orderBy('created_at')
-        ->get();
-
-    }
-
-    public static function hannesTestCategoriesInner($row) {
-        $createdAt = $row['created_att'];
-        $category = $row['category'];
-        return DB::select(DB::raw("SELECT sum(CAST(dwell_time AS UNSIGNED)) AS value FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '$createdAt' AND category = '$category' GROUP BY category ORDER BY created_at"));
-    }
-
-    public static function chartCategoriesAsJson($period, $renderViaAjax){
-        //TODO: Pass store name in here and filter according to store.
-
-        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($period);
-
-        $startDate = $dateRange['startDate'];
-        $endDate = $dateRange['endDate'];
-
-        $data = Picknpay::orderBy('id', 'ASC')
-        ->select('category', 'created_at')
-        ->where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->groupBy('category')
-        ->get()->map(function($row) {
-            return array('label' => $row['created_at']->toDateString());
-        })->toBase();
-
-        $array = json_decode( $data, TRUE );
-        $array = array_values( array_unique( $array, SORT_REGULAR ) );
-        if ($renderViaAjax) {
-            return $array;
-        }
-        else {
-            $result = json_encode( $array );
-            return $result;
-        }
-
-    }
-
-    public static function getChartTotalDwellTimeData($period){
-        //TODO: Pass store name in here and filter according to store.
-
-        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($period);
-
-        $startDate = $dateRange['startDate'];
-        $endDate = $dateRange['endDate'];
-
-        // $rows = Picknpay::orderBy('id', 'ASC')
-        // ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"), DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
-        // ->where('created_at', ">=", $startDate)
-        // ->where('created_at', "<=", $endDate)
-        // ->groupBy('category', 'created_at')
-        // ->get()->map(function($row){
-
-        //     return array('seriesname' => $row['category'],
-        //     'data' => array(
-        //             "value" => (int)((int)$row['dwell_time'] / 60)
-        //         ));
-
-        // });
-
-        return Picknpay::orderBy('id', 'ASC')
-        ->select('category', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at"), DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
-        ->where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->groupBy('category', 'created_at')
-        ->get();
-
-    }
-
-    public static function getChartAverageDwellTimeData($period){
-        //TODO: Pass store name in here and filter according to store.
-
-        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($period);
-
-        $startDate = $dateRange['startDate'];
-        $endDate = $dateRange['endDate'];
-
-        return Picknpay::orderBy('id', 'ASC')
-        ->select('category', DB::raw('avg(CAST(dwell_time AS UNSIGNED)) dwell_time'))
-        ->where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->groupBy('category')
-        ->get()->map(function($row){
-
-            return array('seriesname' => $row['category'],
-            'data' => array(
-                    "value" => (int)((int)$row['dwell_time'] / 60)
-                ));
-
-        });
 
     }
 

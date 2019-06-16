@@ -22,9 +22,8 @@ class HippnpController extends \BaseController {
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
 
+        //Get all categories for charts to render
 
-
-//////////
         $allCategories = \Picknpay::fetchAllCategories($period);
         $dates = \Picknpay::datesToFetchChartDataFor($period)
         ->map(function($row) {
@@ -65,7 +64,6 @@ class HippnpController extends \BaseController {
         else {
             $data['category_list_data'] = json_encode([]);
         }
-
         $obj = null;
 
         // Average of all categories
@@ -100,11 +98,7 @@ class HippnpController extends \BaseController {
         else {
             $data['category_list_data_average'] = json_encode([]);
         }
-
         $obj = null;
-
-
-
 
         return \View::make('hippnp.showdashboard')->with('data', $data);
 
