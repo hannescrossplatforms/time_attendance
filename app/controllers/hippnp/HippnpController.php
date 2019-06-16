@@ -109,6 +109,13 @@ class HippnpController extends \BaseController {
         $data = array();
 
         $period = Input::get('period');
+        $start = Input::get('start');
+        $end = Input::get('end');
+
+        if ($start != null && $end != null){
+
+        }
+
         $allCategories = \Picknpay::fetchAllCategories($period);
         $dates = \Picknpay::datesToFetchChartDataFor($period)
         ->map(function($row) {

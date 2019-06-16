@@ -243,7 +243,7 @@ function custom_report_period() {
     var from = $('#venuefrom').val();
     var to = $('#venueto').val();
 
-    renderCharts('daterange', from, to)
+    renderCharts('daterange', from, to);
 }
 
 function renderCharts(time, start, end) {
@@ -255,7 +255,9 @@ function renderCharts(time, start, end) {
         type: 'get',
         dataType: 'json',
         data: {
-            'period': time
+            'period': time,
+            'start': start,
+            'end': end
         },
         success: function(data) {
 
