@@ -37,7 +37,6 @@ class HippnpController extends \BaseController {
 
         $period = Input::get('period');
         $allCategories = \Picknpay::fetchAllCategories($period);
-        $allCategoriesAvg = \Picknpay::fetchAllCategories($period);
         $dates = \Picknpay::datesToFetchChartDataFor($period)
         ->map(function($row) {
                 return ['label' => $row['created_att']];
@@ -82,24 +81,24 @@ class HippnpController extends \BaseController {
 
         $finalAverageChartObject = array();
 
-        foreach ($allCategoriesAvg as $category) {
+        foreach ($allCategories as $category) {
             $categoryName = $category->category;
-            $dataArray = array();
+            $dataArrayAvg = array();
 
             foreach ( $dates as $date ) {
                 $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "AVG");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
-                    array_push($dataArray, $empty_array);
+                    array_push($dataArrayAvg, $empty_array);
                 } else {
-                    array_push($dataArray, $response);
+                    array_push($dataArrayAvg, $response);
                 }
 
             }
 
             $obj[] = [
                 'seriesname' => $categoryName,
-                'data' => $dataArray
+                'data' => $dataArrayAvg
             ];
             array_push($finalAverageChartObject, $obj);
         }
