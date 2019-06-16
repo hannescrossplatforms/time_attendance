@@ -16,15 +16,15 @@ class HippnpController extends \BaseController {
 	public static function showDashboard(){
 
         $period = 'rep7day';
+        $data['report_period'] = $period;
         $data = array() ;
 
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
 
+        //Get categories for charts to render
 
-
-//////////
         $allCategories = \Picknpay::fetchAllCategories($period);
         $dates = \Picknpay::datesToFetchChartDataFor($period)
         ->map(function($row) {
@@ -102,18 +102,6 @@ class HippnpController extends \BaseController {
         }
 
         $obj = null;
-
-        // $json = json_encode($data);
-
-/////////
-
-
-        $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day', false);
-        $data['staff_graph'] = \Picknpay::getChartTotalDwellTimeData('rep7day');
-        $data['category_avg'] = \Picknpay::chartCategoriesAsJson('rep7day', false);
-        $data['staff_graph_avg'] = \Picknpay::getChartAverageDwellTimeData('rep7day');
-
-        $data['report_period'] = 'rep7day';
 
         return \View::make('hippnp.showdashboard')->with('data', $data);
 
