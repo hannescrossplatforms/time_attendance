@@ -82,7 +82,7 @@ class HippnpController extends \BaseController {
         // $dataArray = null;
         // $response = null;
         // $empty_array = null;
-        $obj = null;
+        // $obj = null;
         $finalChartObject = null;
 
         // Average of all categories
