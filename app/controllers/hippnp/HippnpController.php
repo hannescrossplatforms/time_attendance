@@ -53,7 +53,6 @@ class HippnpController extends \BaseController {
             $dataArray = array();
 
             foreach ( $dates as $date ) {
-                // avg
                 $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "SUM");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
@@ -80,14 +79,13 @@ class HippnpController extends \BaseController {
 
         // Average of all categories
 
-        $finalAverageChartObject = array(); = array();
+        $finalAverageChartObject = array();
 
         foreach ($allCategories as $category) {
             $categoryName = $category->category;
             $dataArray = array();
 
             foreach ( $dates as $date ) {
-                // avg
                 $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "AVG");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
