@@ -80,7 +80,7 @@ class HippnpController extends \BaseController {
 
         $categoryName = null;
         // $dataArray = null;
-        $response = null;
+        // $response = null;
         $empty_array = null;
         $obj = null;
         $finalChartObject = null;
