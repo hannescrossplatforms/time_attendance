@@ -153,7 +153,19 @@
 <script src="{{ asset('js/fusioncharts.charts.js') }}"></script>
 <script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}"></script>
 
+<script type="text/javascript">
+    $("#venuefrom, #venueto").datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: "right bottom"
+    });
+    $("#venuefrom, #venueto").datepicker("setDate", new Date());
+</script>
+
+
 <script>
+
+
 $(document).ready(function() {
 
     pathname = $('#url').val();
@@ -247,8 +259,6 @@ function renderCharts(time, start, end) {
         },
         success: function(data) {
 
-            // $("#report_period").html(data.report_period);
-            // $("#report_name_date").val(data.report_name_date);
             var chartProperties = {
                 "caption": "",
                 "xAxisName": "Section",
@@ -311,21 +321,3 @@ function renderCharts(time, start, end) {
 
 
 @stop
-
-<!-- apiChart = new FusionCharts({
-        type: 'mscolumn2d',
-        renderAt: 'staff_wrk',
-        width: '400',
-        height: '350',
-        dataFormat: 'json',
-        dataSource: {
-            "chart": chartProperties,
-            "categories": [{
-                "category": [{"label":"2019-06-05"}]            }],
-            "dataset": [{"seriesname":"Food","data":{"value":1}}]
-        }
-    });
-    apiChart.render(); -->
-
-    <!-- data["category"]
-"[{"label":"2019-06-05"},{"label":"2019-06-02"}]" -->
