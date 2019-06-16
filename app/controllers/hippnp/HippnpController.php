@@ -13,7 +13,7 @@ use Session;
 
 class HippnpController extends \BaseController {
 
-	public static function showDashboard(){
+	public function showDashboard(){
 
         $data = array() ;
 
@@ -22,7 +22,7 @@ class HippnpController extends \BaseController {
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
 
 
-        HippnpController::periodchartJsondata('rep7day');
+        // HippnpController::periodchartJsondata('rep7day');
 
 
         $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day', false);
