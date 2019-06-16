@@ -79,7 +79,7 @@ class HippnpController extends \BaseController {
         //TODO REMOVE
 
         $categoryName = null;
-        $dataArray = null;
+        // $dataArray = null;
         $response = null;
         $empty_array = null;
         $obj = null;
