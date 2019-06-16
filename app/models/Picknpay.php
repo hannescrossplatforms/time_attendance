@@ -18,9 +18,7 @@ class Picknpay extends Eloquent {
         $endDate = $dateRange['endDate'];
 
         return Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
+        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'"))
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->get();
     }
@@ -32,9 +30,7 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        return DB::select(DB::raw("SELECT DISTINCT category FROM picknpay"))
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'");
+        return DB::select(DB::raw("SELECT DISTINCT category FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'"));
     }
 
     public static function fetchDwellTimeDataForCategoryWithDate($date, $category){
