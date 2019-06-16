@@ -24,8 +24,8 @@ class HippnpController extends \BaseController {
 
         //Get all categories for charts to render
 
-        $allCategories = \Picknpay::fetchAllCategories($period);
-        $dates = \Picknpay::datesToFetchChartDataFor($period)
+        $allCategories = \Picknpay::fetchAllCategories($period, null, null);
+        $dates = \Picknpay::datesToFetchChartDataFor($period, null, null)
         ->map(function($row) {
                 return ['label' => $row['created_att']];
             });
@@ -120,8 +120,8 @@ class HippnpController extends \BaseController {
                 });
         }
         else {
-            $allCategories = \Picknpay::fetchAllCategories($period, null, null);
-            $dates = \Picknpay::datesToFetchChartDataFor($period, null, null)
+            $allCategories = \Picknpay::fetchAllCategories($period, $start, $start);
+            $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
                 });
