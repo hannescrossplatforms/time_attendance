@@ -77,7 +77,7 @@ class HippnpController extends \BaseController {
             $data['category_list_data'] = null;
         }
 
-        $data['allcategoriesone'] = $allCategories;
+        $data['allcategoriesone'] = $dates;
 
         // Average of all categories
 
@@ -112,7 +112,7 @@ class HippnpController extends \BaseController {
             $data['category_list_data_average'] = null;
         }
 
-        $data['allcategoriestwo'] = $allCategories;
+        $data['allcategoriestwo'] = $dates;
 
         $json = json_encode($data);
 
