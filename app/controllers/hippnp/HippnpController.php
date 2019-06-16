@@ -35,7 +35,7 @@ class HippnpController extends \BaseController {
 
     }
 
-    public function periodchartJsondata($timePeriod = 'empty', $data = null){
+    public function periodchartJsondata($timePeriod = 'empty', $data){
 
         if ($timePeriod == 'empty') {
             $period = Input::get('period');
