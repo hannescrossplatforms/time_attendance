@@ -60,7 +60,7 @@ class HippnpController extends \BaseController {
         };
 
         if (count($finalChartObject) > 0) {
-            $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
+            $data['category_list_data'] = json_encode($finalChartObject[count($finalChartObject)- 1]);
         }
         else {
             $data['category_list_data'] = null;
@@ -95,7 +95,7 @@ class HippnpController extends \BaseController {
         };
 
         if (count($finalAverageChartObject) > 0) {
-            $data['category_list_data_average'] = $finalAverageChartObject[count($finalAverageChartObject)- 1];
+            $data['category_list_data_average'] = json_encode($finalAverageChartObject[count($finalAverageChartObject)- 1]);
         }
         else {
             $data['category_list_data_average'] = null;

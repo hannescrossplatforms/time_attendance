@@ -176,9 +176,9 @@ $(document).ready(function() {
         dataSource: {
             "chart": chartProperties,
             "categories": [{
-                "category": <?php var_dump($data['category_list']); ?>
+                "category": <?php echo $data['category_list']; ?>
             }],
-            "dataset": <?php var_dump($data['category_list_data']); ?>
+            "dataset": <?php echo $data['category_list_data']; ?>
 
         }
     });
