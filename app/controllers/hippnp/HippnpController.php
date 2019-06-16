@@ -21,8 +21,7 @@ class HippnpController extends \BaseController {
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
 
-
-        self.periodchartJsondata('rep7day');
+        $this->periodchartJsondata('rep7day');
 
 
         $data['category'] = \Picknpay::chartCategoriesAsJson('rep7day', false);
