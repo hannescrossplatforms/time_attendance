@@ -39,8 +39,8 @@
             </ul>
 
           <ul class="nav subNav">
-              <li @if ( $data['currentMenuItem'] == "Dashboard" ) class="active" @endif><a href="{{ url('hiptna_showdashboard'); }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-              <div id="instance_menus" style="display: none">
+              <li @if ( $data['currentMenuItem'] == "Dashboard" ) class="active" @endif><a href="{{ url('hippnp_showdashboard'); }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+              <div id="instance_menus">
                   <ul class="subNav2">
 
                     <li><a href="{{ url('hippnp_showdashboard'); }}">Pick n Pay </a></li>
