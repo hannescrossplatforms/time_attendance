@@ -105,7 +105,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Total dwell time per section</div>
+                                    <div class="chart-title venuecolheading">Total dwell time per category</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -120,7 +120,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Average dwell time per section</div>
+                                    <div class="chart-title venuecolheading">Average dwell time per category</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -173,7 +173,7 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Category",
         "yAxisName": "Total dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d",
+        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -200,7 +200,7 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Category",
         "yAxisName": "Average dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d",
+        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -264,7 +264,7 @@ function renderCharts(time, start, end) {
                 "caption": "",
                 "xAxisName": "Category",
                 "yAxisName": "Total dwell time (minutes)",
-                "paletteColors": "#0075c2,#f8b81d",
+                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
@@ -290,7 +290,7 @@ function renderCharts(time, start, end) {
                 "caption": "",
                 "xAxisName": "Category",
                 "yAxisName": "Average dwell time (minutes)",
-                "paletteColors": "#0075c2,#f8b81d",
+                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
