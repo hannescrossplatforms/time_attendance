@@ -27,12 +27,12 @@
             @include('hippnp.sidebar')
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-                <h1 class="page-header">Pick n Pay Dashboard</h1>
+                <h1 class="page-header">Pick n Pay Category Management</h1>
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="venuecolheading">Customer Overview</div>
+                        <div class="venuecolheading">Staff Overview</div>
                         <div class="col-md-2">
                             <div class="venuerow">
                                 <div class="modStat">
