@@ -150,34 +150,3 @@ class Picknpay extends Eloquent {
     }
 
 }
-
-
-// https://stackoverflow.com/questions/33828769/add-new-element-in-laravel-collection-object
-// https://stackoverflow.com/questions/33828769/add-new-element-in-laravel-collection-object
-// https://stackoverflow.com/questions/43271110/laravel-eloquent-foreach-not-working
-// https://scotch.io/tutorials/laravel-collections-php-arrays-on-steroids
-//SHould look like this
-        // {
-        //     "chart": chartProperties,
-        //     "categories": [{
-        //         "category": [{"label":"2019-05-27"},{"label":"2019-05-28"}]                                }],
-        //     "dataset": [{"seriesname":"Staff At Work","data":[{"value":"0"},{"value":"0"}]},{"seriesname":"Staff Not At Work","data":[{"value":"1"},{"value":"1"}]}]
-        // }
-
-        // category: "[{"label":"2019-06-05"},{"label":"2019-06-02"}]"
-
-
-
-        // return Picknpay::orderBy('id', 'ASC')
-        // ->select('category', 'DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at', DB::raw('sum(CAST(dwell_time AS UNSIGNED)) dwell_time'))
-        // ->where('created_at', ">=", $startDate)
-        // ->where('created_at', "<=", $endDate)
-        // ->groupBy('category', 'created_at')
-        // ->get()->map(function($row){
-
-        //     return array('seriesname' => $row['category'],
-        //     'data' => array(
-        //             "value" => (int)((int)$row['dwell_time'] / 60)
-        //         ));
-
-        // });
