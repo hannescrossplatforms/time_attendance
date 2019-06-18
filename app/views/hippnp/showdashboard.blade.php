@@ -37,7 +37,7 @@
                             <div class="venuerow">
                                 <div class="modStat">
                                     <div class="modstattitle">
-                                        <h3>Customers In Store Today</h3>
+                                        <h3>Staff In Store Today</h3>
                                     </div>
                                     <div id="staff_today" class="modStatspan">
                                         <span style="font-size: 30%;">{{$data['customer_in_store_today']}}</span>
@@ -49,7 +49,7 @@
                             <div class="venuerow">
                                 <div class="modStat">
                                     <div class="modstattitle">
-                                        <h3>Customers In Store This Month</h3>
+                                        <h3>Staff In Store This Month</h3>
                                     </div>
                                     <div id="staff_today" class="modStatspan"><span
                                             style="font-size: 30%;">{{$data['customer_in_store_this_month']}}</span>
@@ -171,7 +171,7 @@ $(document).ready(function() {
 
     var chartProperties = {
         "caption": "",
-        "xAxisName": "Section",
+        "xAxisName": "Category",
         "yAxisName": "Total dwell time (minutes)",
         "paletteColors": "#0075c2,#f8b81d",
         "rotatevalues": "1",
@@ -198,7 +198,7 @@ $(document).ready(function() {
 
     var chartProperties = {
         "caption": "",
-        "xAxisName": "Section",
+        "xAxisName": "Category",
         "yAxisName": "Average dwell time (minutes)",
         "paletteColors": "#0075c2,#f8b81d",
         "rotatevalues": "1",
@@ -262,7 +262,7 @@ function renderCharts(time, start, end) {
 
             var chartProperties = {
                 "caption": "",
-                "xAxisName": "Section",
+                "xAxisName": "Category",
                 "yAxisName": "Total dwell time (minutes)",
                 "paletteColors": "#0075c2,#f8b81d",
                 "rotatevalues": "1",
@@ -288,7 +288,7 @@ function renderCharts(time, start, end) {
 
             var chartProperties = {
                 "caption": "",
-                "xAxisName": "Section",
+                "xAxisName": "Category",
                 "yAxisName": "Average dwell time (minutes)",
                 "paletteColors": "#0075c2,#f8b81d",
                 "rotatevalues": "1",
