@@ -17,6 +17,7 @@ class HippnpController extends \BaseController {
 
         $period = 'rep7day';
         $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
         $data['report_period'] = 'rep7day';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
