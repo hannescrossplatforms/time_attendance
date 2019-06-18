@@ -5,6 +5,7 @@
     </div>
     <div class="productTitle pull-left">
         <h2><strong>T&A</strong></h2>
+        <h1>Test</h1>
     </div>
     <div class="clearfix"></div>
     <ul class="nav nav-sidebar nav-products">
