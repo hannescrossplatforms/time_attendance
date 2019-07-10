@@ -27,7 +27,7 @@
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-
+                <a class="btn btn-default btn-sm" href="test">Remove</a>
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
@@ -40,7 +40,7 @@
                             <td>{{ $category->store_id }}</td>
                             <td>{{ $category->name }}</td>
                             <td>
-                            <a class="btn btn-default btn-sm" href="test">Manage categories</a>
+                            <a class="btn btn-default btn-sm" href="test">Remove</a>
                             </td>
                         </tr>
                         @endforeach
