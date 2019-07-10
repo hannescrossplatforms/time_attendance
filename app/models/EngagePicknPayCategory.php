@@ -3,7 +3,7 @@
 class EngagePicknPayCategory extends Eloquent {
 
     protected $connection = 'hipengage';
-    // protected $table = 'pnp_category';
+    protected $table = 'pnp_category';
 
     public function __construct() {
         $this->connection = \Utils::getEngageDbConnection();
