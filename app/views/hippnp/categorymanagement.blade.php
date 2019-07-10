@@ -40,7 +40,7 @@
                             <td>{{ $venue->id }}</td>
                             <td>{{ $venue->sitename }}</td>
                             <td>
-                            <a class="btn btn-default btn-sm" href="test">edit</a>
+                            <a class="btn btn-default btn-sm" href="test">Manage categories</a>
                             </td>
                         </tr>
                         @endforeach
