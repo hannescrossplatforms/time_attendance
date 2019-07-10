@@ -32,6 +32,11 @@
 
                 <div class="container-fluid">
 
+
+                    <h1>
+                    <?php $data['venues']; ?>
+                    </h1>
+
                     <?php foreach($data['venues'] as $key=>$value): ?>
                     <tr>
                         <td>
