@@ -212,7 +212,7 @@ class HippnpController extends \BaseController {
     public static function picknpayCategoryManagement(){
 
         $picknpayBrand = \Brand::where('name', '=', 'PicknPay')->firstOrFail();
-        $venues = $picknpayBrand->venues();
+        $venues = $picknpayBrand->venues()->toArray();
 
 
         // $period = Input::get('period');
