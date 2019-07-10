@@ -227,7 +227,7 @@ class HippnpController extends \BaseController {
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        // $data['test'] = $request->route('id');
+        $data['test'] = $id;
 
         return \View::make('hippnp.storecategorylist')->with('data', $data);
 
