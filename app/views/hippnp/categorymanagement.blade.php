@@ -34,7 +34,7 @@
 
 
                     <h1>
-                    {{$data['brand']->name}}
+                    {{ $data['brand']->venues[0]->name }}
                     </h1>
 
                     <?php foreach($data['venues'] as $key=>$value): ?>
