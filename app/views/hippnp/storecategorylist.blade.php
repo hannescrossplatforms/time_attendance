@@ -35,22 +35,15 @@
                             <th>Venu Name</th>
                             <th>Actions</th>
                         </tr>
+                        @foreach ($data['engageCategories'] as $category)
                         <tr>
-                            <td>1</td>
-                            <td>{{$data['test']}}</td>
+                            <td>{{ $category->store_id }}</td>
+                            <td>{{ $category->name }}</td>
                             <td>
                             <a class="btn btn-default btn-sm" href="test">Manage categories</a>
                             </td>
                         </tr>
-                        <!-- @foreach ($data['venues'] as $venue)
-                        <tr>
-                            <td>{{ $venue->id }}</td>
-                            <td>{{ $venue->sitename }}</td>
-                            <td>
-                            <a class="btn btn-default btn-sm" href="test">Manage categories</a>
-                            </td>
-                        </tr>
-                        @endforeach -->
+                        @endforeach
 
                         </table>
                     </div>
