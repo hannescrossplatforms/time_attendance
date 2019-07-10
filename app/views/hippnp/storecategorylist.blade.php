@@ -27,7 +27,7 @@
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-                    <h3>{{$data['json']}}</h3>
+
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
