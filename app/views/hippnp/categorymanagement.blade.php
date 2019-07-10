@@ -34,7 +34,7 @@
 
 
                     <h1>
-                    $data
+                    {{$data}}
                     </h1>
 
                     <?php foreach($data['venues'] as $key=>$value): ?>
