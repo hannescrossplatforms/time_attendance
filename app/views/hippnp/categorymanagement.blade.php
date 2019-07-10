@@ -31,7 +31,16 @@
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-                    <h1>Test</h1>
+
+                    <?php foreach($data['venues'] as $key=>$value): ?>
+                    <tr>
+                        <td>
+                            <h1>
+                                <?php $value->name; ?>
+                            </h1>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
