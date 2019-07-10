@@ -10,15 +10,4 @@ class EngagePicknPayCategory extends Eloquent {
         $this->table = $table;
     }
 
-    // public function categories($id) {
-
-    //     return $this->belongsto('\EngagePicknPayCategory', 'store_id');
-    // }
-
-    // public function categories() {
-    //     return $this->hasMany('\PnpCategory', 'venueposition_id', 'id');
-    // }
 }
-
-
-// $beacon = \Beacon::where('venueposition_id', '=', $venueposition->id)->first();

@@ -11,6 +11,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Session;
 
+
 class HippnpController extends \BaseController {
 
 	public static function showDashboard(){
@@ -233,7 +234,10 @@ class HippnpController extends \BaseController {
 
         // $engageConnection = new \EngagePicknPayCategory();
         // $engageCategories = $engageConnection->getCategories($id);
-        $engageCategories = \DB::connection('hipengage')->table("pnp_category")->get();
+        $engageCategories = \EngagePicknPayCategory::get();
+
+
+        // $engageCategories = \DB::connection('hipengage')->table("pnp_category")->get();
         $data['engageCategories'] = $engageCategories;
 
         // $data['json'] = $id;
