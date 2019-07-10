@@ -229,7 +229,7 @@ class HippnpController extends \BaseController {
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-
+        $data['store_id'] = $id;
         $engageCategories = \EngagePicknPayCategory::where('store_id', '=', $id)->get();
 
         $data['engageCategories'] = $engageCategories;
@@ -242,7 +242,7 @@ class HippnpController extends \BaseController {
 
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
-        $data['store_id'] = $id;
+
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 
         return \View::make('hippnp.addcategory')->with('data', $data);
