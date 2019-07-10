@@ -33,8 +33,12 @@
                 <div class="container-fluid">
 
 
+                @foreach ($data['venues'] as $venue)
+                    <p>This is user {{ $venue->id }}</p>
+                @endforeach
+
                     <h1>
-                    {{ $data['venues'][0]->name }}
+                        {{ $data['brand']->name }}
                     </h1>
 
                     <?php foreach($data['venues'] as $key=>$value): ?>
