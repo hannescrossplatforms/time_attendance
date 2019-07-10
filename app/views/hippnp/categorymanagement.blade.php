@@ -40,7 +40,7 @@
                             <td>{{ $venue->id }}</td>
                             <td>{{ $venue->sitename }}</td>
                             <td>
-                            <a class="btn btn-default btn-sm" href="{{ url('hippnp/picknpay_manage_store_categories')/ + $venue->id }}">Manage categories</a>
+                            <a class="btn btn-default btn-sm" href="{{ 'hippnp/picknpay_manage_store_categories/$venue->id }}">Manage categories</a>
 
                             <!-- <a href="{{ url('hipjam_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n'; -->
                             </td>
