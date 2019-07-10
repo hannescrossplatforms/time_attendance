@@ -13,9 +13,6 @@
     padding-left: 53%;
     padding-top: 20%;
 }
-/* table, th, td {
-  border: 1px solid black;
-} */
 </style>
 
 <body class="hipTnA">
@@ -43,6 +40,7 @@
                             <td>{{ $venue->id }}</td>
                             <td>{{ $venue->sitename }}</td>
                             <td>
+                            <a class="btn btn-default btn-sm" href="{{ url('hiprm_editbrand'); }}/{{ $brand->id }}">edit</a>
                             </td>
                         </tr>
                         @endforeach
