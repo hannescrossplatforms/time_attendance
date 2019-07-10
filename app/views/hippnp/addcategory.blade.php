@@ -23,6 +23,9 @@
 
     <div class="container-fluid">
         <div class="row">
+
+            @include('hippnp.sidebar')
+
             <form role="form" id="category-form" method="post"
                     action=" {{ url('hippnp/save_category'); }}">
                 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
