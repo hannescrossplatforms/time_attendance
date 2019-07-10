@@ -27,7 +27,7 @@
                     action=" {{ url('hippnp/save_category'); }}">
                 <div class="container-fluid">
                     <div class="row">
-                        @include('admin.sidebar')
+                        @include('hippnp.sidebar')
                         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
                             <h1 class="page-header">Add Category</h1>
                             <!-- To look at errors look at the addvenue.blade file -->
