@@ -231,12 +231,12 @@ class HippnpController extends \BaseController {
         //TODO: Query the categories where store_id on the other table
         // 1390
 
-        $engageConnection = new \EngagePicknPayCategory();
-        $engageCategories = $engageConnection->getCategories($id);
-
+        // $engageConnection = new \EngagePicknPayCategory();
+        // $engageCategories = $engageConnection->getCategories($id);
+        $engageCategories = \DB::connection('hipengage')->table("pnp_category")->get();
         $data['engageCategories'] = $engageCategories;
 
-        $data['json'] = $id;
+        // $data['json'] = $id;
 
         return \View::make('hippnp.storecategorylist')->with('data', $data);
 
