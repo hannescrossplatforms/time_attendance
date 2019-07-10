@@ -232,7 +232,7 @@ class HippnpController extends \BaseController {
         //TODO: Query the categories where store_id on the other table
         // 1390
 
-        $engageCategories = \EngagePicknPayCategory::where('store_id', '=', $id)();
+        $engageCategories = \EngagePicknPayCategory::where('store_id', '=', $id);
 
 
         // $engageCategories = \DB::connection('hipengage')->table("pnp_category")->get();
