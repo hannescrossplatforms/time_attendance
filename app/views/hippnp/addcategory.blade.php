@@ -15,7 +15,7 @@
                         </div>
                         <br>
                         <button id="submitform" class="btn btn-primary">Submit</button>
-                        <a href="picknpay_manage_store_categories/<?php echo $venue->id;?>" class="btn btn-default">Cancel</a>
+                        <a href="picknpay_manage_store_categories/<?php echo $data['store_id'];?>" class="btn btn-default">Cancel</a>
                         <br>
                     </div>
                 </div>
