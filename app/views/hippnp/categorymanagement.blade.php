@@ -13,16 +13,12 @@
     padding-left: 53%;
     padding-top: 20%;
 }
-table, th, td {
+/* table, th, td {
   border: 1px solid black;
-}
+} */
 </style>
 
 <body class="hipTnA">
-    <!-- <div id="loadingDiv" class="overlay">
-        <img src="./img/loader.gif" style="width:80px;">
-    </div> -->
-    <a id="buildtable"></a>
 
     <div class="container-fluid">
         <div class="row">
@@ -34,18 +30,30 @@ table, th, td {
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-                    <table style="width:100%">
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
                         <tr>
                             <th>Venu ID</th>
                             <th>Venu Name</th>
+                            <th>Actions</th>
                         </tr>
                         @foreach ($data['venues'] as $venue)
                         <tr>
                             <td>{{ $venue->id }}</td>
                             <td>{{ $venue->sitename }}</td>
+                            <td>
+                            </td>
                         </tr>
                         @endforeach
-                    </table>
+
+                        </table>
+                    </div>
+
+
+                    <!-- <table style="width:100%">
+
+                    </table> -->
                 </div>
             </div>
         </div>
