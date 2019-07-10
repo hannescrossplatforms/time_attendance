@@ -209,4 +209,14 @@ class HippnpController extends \BaseController {
 
     }
 
+    public static function picknpayCategoryManagement(){
+
+        // $period = Input::get('period');
+        // $start = Input::get('start');
+        // $end = Input::get('end');
+
+        return \View::make('hippnp.categorymanagement.blade');
+        // return \View::make('hippnp.categorymanagement.blade')->with('data', $data);
+    }
+
 }
