@@ -282,7 +282,7 @@ class AdminController extends \BaseController {
 
         error_log("admin_showvenues");
 
-        $data = array(); =
+        $data = array();
         $data['currentMenuItem'] = "Venue Management";
         // $venues = \Venue::all();
         $venue = new \Venue();
