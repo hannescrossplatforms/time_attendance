@@ -47,7 +47,7 @@
                             <td>{{ $category->name }}</td>
                             <td>
 
-                            <a href="hippnp/picknpay_manage_store_categories/remove_category/<?php echo $category->id;?>/<?php echo $data['store_id'];?>" class="btn btn-default">Remoce</a>
+                            <a href="hippnp/picknpay_manage_store_categories/remove_category/<?php echo $category->id;?>/<?php echo $data['store_id'];?>" class="btn btn-default">Remove</a>
                             </td>
                         </tr>
                         @endforeach
