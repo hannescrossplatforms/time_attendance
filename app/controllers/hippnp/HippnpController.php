@@ -259,7 +259,7 @@ class HippnpController extends \BaseController {
         $engageCategory->save();
 
 
-        return \Redirect::to("/hippnp/picknpay_manage_store_categories/1390");
+        return \Redirect::to("/hippnp/picknpay_manage_store_categories/$storeID");
 
     }
 
