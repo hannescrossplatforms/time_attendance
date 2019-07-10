@@ -40,7 +40,7 @@
                             <td>{{ $venue->id }}</td>
                             <td>{{ $venue->sitename }}</td>
                             <td>
-                            <a href="hippnp/picknpay_manage_store_categories/<?php echo $venue->id;?>" class="btn btn-default btn-sm">Manage categories</a>
+                            <a href="picknpay_manage_store_categories/<?php echo $venue->id;?>" class="btn btn-default btn-sm">Manage categories</a>
                             </td>
                         </tr>
                         @endforeach
