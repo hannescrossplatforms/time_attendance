@@ -215,7 +215,16 @@ class HippnpController extends \BaseController {
         // $start = Input::get('start');
         // $end = Input::get('end');
 
-        return \View::make('hippnp.categorymanagement');
+        // $period = 'rep7day';
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        // $data['report_period'] = 'rep7day';
+        // $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+        // $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
+        // $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
+
+
+        return \View::make('hippnp.categorymanagement')->with('data', $data);
         // return \View::make('hippnp.categorymanagement.blade')->with('data', $data);
     }
 
