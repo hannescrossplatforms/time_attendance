@@ -13,6 +13,9 @@
     padding-left: 53%;
     padding-top: 20%;
 }
+table, th, td {
+  border: 1px solid black;
+}
 </style>
 
 <body class="hipTnA">
@@ -31,7 +34,7 @@
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-                    <table>
+                    <table style="width:100%">
                         <tr>
                             <th>Venu ID</th>
                             <th>Venu Name</th>
