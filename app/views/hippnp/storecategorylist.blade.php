@@ -47,10 +47,9 @@
                             <td>{{ $category->name }}</td>
                             <td>
                             <a href="test">Remove</a>
-                            <!-- <a href="{{ route('/hippnp/picknpay_manage_store_categories/remove_category', ['id' => $category->id, 'store_id' => $data['store_id']]) }}">Remove</a> -->
 
-                            <!-- <a href="/hippnp/picknpay_manage_store_categories/remove_category, ['id' => <?php echo $category->id;?>, 'store_id' => <?php echo $data['store_id'];?>]" class="btn btn-default">Remove</a> -->
-                            <!-- <a href="/hippnp/picknpay_manage_store_categories/remove_category/<?php echo $category->id;?>/<?php echo $data['store_id'];?>" class="btn btn-default">Remove</a> -->
+
+
                             </td>
                         </tr>
                         @endforeach
