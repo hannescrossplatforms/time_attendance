@@ -34,7 +34,7 @@
 
 
                     <h1>
-                    <?php $data['venues']; ?>
+                    <?php $data['brand']; ?>
                     </h1>
 
                     <?php foreach($data['venues'] as $key=>$value): ?>

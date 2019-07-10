@@ -223,6 +223,7 @@ class HippnpController extends \BaseController {
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['venues'] = $venues;
+        $data['brand'] = $picknpayBrand;
 
 
         return \View::make('hippnp.categorymanagement')->with('data', $data);
