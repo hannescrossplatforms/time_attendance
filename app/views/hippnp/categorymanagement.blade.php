@@ -31,26 +31,18 @@
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-
-
-                @foreach ($data['venues'] as $venue)
-                    <p>This is user {{ $venue->id }}</p>
-                @endforeach
-
-                    <h1>
-                        <!-- {{ $data['venues'][0]->id }} -->
-                    </h1>
-
-                    <?php foreach($data['venues'] as $key=>$value): ?>
-                    <tr>
-                        <td>
-                            <h1>
-                                TEST
-
-                            </h1>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
+                    <table>
+                        <tr>
+                            <th>Venu ID</th>
+                            <th>Venu Name</th>
+                        </tr>
+                        @foreach ($data['venues'] as $venue)
+                        <tr>
+                            <td>{{ $venue->id }}</td>
+                            <td>{{ $venue->sitename }}</td>
+                        </tr>
+                        @endforeach
+                    </table>
                 </div>
             </div>
         </div>
