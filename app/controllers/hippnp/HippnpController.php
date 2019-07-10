@@ -227,15 +227,14 @@ class HippnpController extends \BaseController {
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        $data['test'] = $id;
+
+        //TODO: Query the categories where store_id on the other table
+        // 1390
+
+        $engageCategories = \EngagePicknPayCategory::getCategories($id);
+        $data['engageCategories'] = $engageCategories;
 
         return \View::make('hippnp.storecategorylist')->with('data', $data);
-
-        // $period = Input::get('period');
-        // $start = Input::get('start');
-        // $end = Input::get('end');
-
-
 
     }
 
