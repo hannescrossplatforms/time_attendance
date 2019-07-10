@@ -7,7 +7,6 @@ class EngagePicknPayCategory extends Eloquent {
 
     public function __construct() {
         $this->connection = \Utils::getEngageDbConnection();
-        $this->table = $table;
     }
 
 }
