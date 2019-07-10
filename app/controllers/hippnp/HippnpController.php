@@ -258,7 +258,7 @@ class HippnpController extends \BaseController {
         $engageCategory->name = $categoryName;
         $engageCategory->save();
 
-        $url = 'picknpay_manage_store_categories/' + $storeID;
+        $url = '/picknpay_manage_store_categories/' + $storeID;
 
         return \Redirect::to($url);
 
