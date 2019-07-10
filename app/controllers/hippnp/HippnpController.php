@@ -250,8 +250,16 @@ class HippnpController extends \BaseController {
 
     public static function saveCategoryToStore(){
 
-        $engageCategory = new \BrEngagePicknPayCategory();
+        $storeID = \Input::get('store_id');
+        $categoryName = \Input::get('category_name');
 
+        $engageCategory = new \EngagePicknPayCategory();
+        $engageCategory->store_id = $storeID;
+        $engageCategory->name = $categoryName;
+        $engageCategory->save();
+
+        $url = "picknpay_manage_store_categories/" + $storeID;
+        return \Redirect::to($url)->withErrors($validator)->withInput();
     }
 
 }
