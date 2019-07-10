@@ -223,11 +223,11 @@ class HippnpController extends \BaseController {
         return \View::make('hippnp.categorymanagement')->with('data', $data);
     }
 
-    public static function picknpayStoreCategoryManagement(Request $request){
+    public static function picknpayStoreCategoryManagement($id){
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        $data['test'] = $request->route('id');
+        // $data['test'] = $request->route('id');
 
         return \View::make('hippnp.storecategorylist')->with('data', $data);
 
