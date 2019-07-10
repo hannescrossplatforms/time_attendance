@@ -36,7 +36,7 @@
                             {{ Form::hidden('store_id', $data['store_id']) }}
                             <div class="form-group">
                                 <label>Category name*</label>
-                                <select name="category_name" class="form-control no-radius" required></select>
+                                <input type="text" class="form-control" size="6" placeholder="Category name" name="category_name" required>
                             </div>
                             <br>
                             <button id="submitform" class="btn btn-primary">Submit</button>
