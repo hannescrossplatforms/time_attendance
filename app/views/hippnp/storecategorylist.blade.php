@@ -35,25 +35,25 @@
                             <th>Venu Name</th>
                             <th>Actions</th>
                         </tr>
-                        @foreach ($data['venues'] as $venue)
+                        <tr>
+                            <td>1</td>
+                            <td>test</td>
+                            <td>
+                            <a class="btn btn-default btn-sm" href="test">Manage categories</a>
+                            </td>
+                        </tr>
+                        <!-- @foreach ($data['venues'] as $venue)
                         <tr>
                             <td>{{ $venue->id }}</td>
                             <td>{{ $venue->sitename }}</td>
                             <td>
-                            <a class="btn btn-default btn-sm" href="{{ url('hippnp/picknpay_manage_store_categories')/ + $venue->id }}">Manage categories</a>
-
-                            <!-- <a href="{{ url('hipjam_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n'; -->
+                            <a class="btn btn-default btn-sm" href="test">Manage categories</a>
                             </td>
                         </tr>
-                        @endforeach
+                        @endforeach -->
 
                         </table>
                     </div>
-
-
-                    <!-- <table style="width:100%">
-
-                    </table> -->
                 </div>
             </div>
         </div>

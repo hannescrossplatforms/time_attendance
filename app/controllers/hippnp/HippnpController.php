@@ -214,19 +214,26 @@ class HippnpController extends \BaseController {
         $picknpayBrand = \Brand::where('name', '=', 'PicknPay')->firstOrFail();
         $venues = $picknpayBrand->venues()->get();
 
-
-        // $period = Input::get('period');
-        // $start = Input::get('start');
-        // $end = Input::get('end');
-
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['venues'] = $venues;
         $data['brand'] = $picknpayBrand;
 
-
         return \View::make('hippnp.categorymanagement')->with('data', $data);
+    }
+
+    public static function picknpayStoreCategoryManagement(){
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+        // $period = Input::get('period');
+        // $start = Input::get('start');
+        // $end = Input::get('end');
+
+
+
     }
 
 }
