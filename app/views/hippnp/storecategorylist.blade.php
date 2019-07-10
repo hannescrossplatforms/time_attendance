@@ -31,7 +31,9 @@
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-                <a class="btn-add-category btn btn-default btn-sm" href="add_category/<?php echo $data['store_id'];?>">Add Category</a>
+
+
+                <a class="btn-add-category btn btn-default btn-sm" href="test">Add Category</a>
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
