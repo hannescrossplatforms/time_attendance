@@ -37,7 +37,8 @@
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>{{$data['test']}}</td>
+                            <td>1asdf</td>
+                            <!-- <td>{{$data['test']}}</td> -->
                             <td>
                             <a class="btn btn-default btn-sm" href="test">Manage categories</a>
                             </td>
