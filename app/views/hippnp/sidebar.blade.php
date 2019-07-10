@@ -49,6 +49,9 @@
                     <li><a href="{{ url('hiptna_showdashboard'); }}/CE">CE Instance @if ( Session::get('currentInstance') == "CE" ) * @endif</a></li>
                   </ul>
               </div>
+              <div id="picknpay_settings">
+                <li class="active" @endif ><a href="{{ url('hiptna_exceptionreports'); }}"><i class="fa fa-bell-o"></i>Category Management</a></li>
+              </div>
               <div id="exception_manage_menus" style="display: none">
                 @if( Session::get('currentInstance') != "NR01" && Session::get('currentInstance') != "NR02" )
                     <li @if ( $data['currentMenuItem'] == "Exception Reports" ) class="active" @endif ><a href="{{ url('hiptna_exceptionreports'); }}"><i class="fa fa-bell-o"></i>Exception Reports</a></li>
