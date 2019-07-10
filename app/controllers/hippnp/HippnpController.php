@@ -236,6 +236,8 @@ class HippnpController extends \BaseController {
 
         $data['engageCategories'] = $engageCategories;
 
+        $data['json'] = $data->toJson();
+
         return \View::make('hippnp.storecategorylist')->with('data', $data);
 
     }
