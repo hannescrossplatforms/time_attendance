@@ -225,22 +225,32 @@ class HippnpController extends \BaseController {
     }
 
     public static function picknpayStoreCategoryManagement($id){
+
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 
-        //TODO: Query the categories where store_id on the other table
-        // 1390
-
         $engageCategories = \EngagePicknPayCategory::where('store_id', '=', $id)->get();
 
-
-        // $engageCategories = \DB::connection('hipengage')->table("pnp_category")->get();
         $data['engageCategories'] = $engageCategories;
 
-        // $data['json'] = $id;
-
         return \View::make('hippnp.storecategorylist')->with('data', $data);
+
+    }
+
+    public static function addCategoryToStore($id) {
+
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        $data['store_id'] = $id;
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+        return \View::make('hippnp.addcategory')->with('data', $data);
+    }
+
+    public static function saveCategoryToStore(){
+
+        $engageCategory = new \BrEngagePicknPayCategory();
 
     }
 
