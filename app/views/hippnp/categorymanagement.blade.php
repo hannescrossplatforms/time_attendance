@@ -36,7 +36,8 @@
                     <tr>
                         <td>
                             <h1>
-                                <?php $value->name; ?>
+                                TEST
+
                             </h1>
                         </td>
                     </tr>
