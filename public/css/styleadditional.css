@@ -240,7 +240,13 @@
 }
 
 .modstattitle {
-  background-color: green;
+  background-color: #ffcc29;
+  height: 60px;
+  padding: 10px;
+}
+
+.modstattitlepnp {
+  background-color: #6aa4d5;
   height: 60px;
   padding: 10px;
 }
