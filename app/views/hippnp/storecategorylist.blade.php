@@ -46,14 +46,7 @@
                             <td>{{ $category->store_id }}</td>
                             <td>{{ $category->name }}</td>
                             <td>
-
-
-
-
                             <a href="{{route('hippnp_remove_category', ['id' => $category->id, 'store_id' => $category->store_id ])}}">Remove</a>
-
-
-
                             </td>
                         </tr>
                         @endforeach
