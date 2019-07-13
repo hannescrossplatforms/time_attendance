@@ -274,16 +274,6 @@ class HippnpController extends \BaseController {
         return \Redirect::to("/hippnp/picknpay_manage_store_categories/$findStoreID");
     }
 
-    // public static function removeCategoryFromStore($id, $storeId){
-
-    //     $input = Route::current()->getParameter('store_id');
-
-    //     $json = json_encode($input);
-
-    //     print_r($json);
-
-    // }
-
 }
 
 
