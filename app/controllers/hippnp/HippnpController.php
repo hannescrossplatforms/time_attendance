@@ -268,7 +268,7 @@ class HippnpController extends \BaseController {
         // $engageCategory->delete();
 
 
-        $input = Route::current()->getParameter('id');
+        $input = Route::current()->getParameter('store_id');
 
         $json = json_encode($input);
 
