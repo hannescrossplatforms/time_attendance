@@ -49,8 +49,8 @@
 
 
 
+                            <td><a href="route('hippnp_remove_category', ['id' => $category->id, 'store_id' => $category-store_id ])}}">Remove</a></td>
 
-                            <a href="{{route('/hippnp_remove_category', ['id' => <?php echo $category->id;?>, 'store_id' => <?php echo $category->store_id;?> ])}}">Remove</a>
 
 
 
