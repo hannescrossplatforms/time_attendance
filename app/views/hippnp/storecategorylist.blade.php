@@ -47,7 +47,7 @@
                             <td>{{ $category->name }}</td>
                             <td>
 
-                            <a class="btn-add-category btn btn-default btn-sm" href="{{route('hippnp_remove_category', ['id' => $category->id, 'store_id' => $category->store_id ])}}">Remove</a>
+                            <a class="btn btn-default btn-sm" href="{{route('hippnp_remove_category', ['id' => $category->id, 'store_id' => $category->store_id ])}}">Remove</a>
                             </td>
                         </tr>
                         @endforeach
