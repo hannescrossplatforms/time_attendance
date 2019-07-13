@@ -264,10 +264,10 @@ class HippnpController extends \BaseController {
     }
 
     public static function removeCategoryFromStore($id, $storeId){
-        $engageCategory = \EngagePicknPayCategory::find($id);
-        $engageCategory->delete();
+        // $engageCategory = \EngagePicknPayCategory::find($id);
+        // $engageCategory->delete();
 
-        $input = \Input::all();
+        // $input = \Input::all();
 
         $json = json_encode($input);
 
