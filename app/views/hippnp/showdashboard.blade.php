@@ -36,7 +36,7 @@
                         <div class="col-md-2">
                             <div class="venuerow">
                                 <div class="modStat">
-                                    <div class="modstattitle">
+                                    <div class="modstattitlepnp">
                                         <h3>Staff In Store Today</h3>
                                     </div>
                                     <div id="staff_today" class="modStatspan">
@@ -48,7 +48,7 @@
                         <div class="col-md-2">
                             <div class="venuerow">
                                 <div class="modStat">
-                                    <div class="modstattitle">
+                                    <div class="modstattitlepnp">
                                         <h3>Staff In Store This Month</h3>
                                     </div>
                                     <div id="staff_today" class="modStatspan"><span
