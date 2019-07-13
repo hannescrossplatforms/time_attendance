@@ -267,7 +267,8 @@ class HippnpController extends \BaseController {
         // $engageCategory = \EngagePicknPayCategory::find($id);
         // $engageCategory->delete();
 
-        $input = \Input::all();
+
+        $input = Route::current()->getParameter('id');
 
         $json = json_encode($input);
 
