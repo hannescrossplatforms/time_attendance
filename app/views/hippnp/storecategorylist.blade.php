@@ -50,7 +50,7 @@
 
 
 
-                            <a href="{{route('hippnp_remove_category', ['id' => 1, 'store_id' => 2 ])}}">Remove</a>
+                            <a href="{{route('hippnp_remove_category', ['id' => $category->id, 'store_id' => $category->store_id ])}}">Remove</a>
 
 
 
