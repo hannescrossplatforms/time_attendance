@@ -48,7 +48,7 @@
                             <td>
 
 
-                            <!-- Route::get('hippnp/picknpay_manage_store_categories/remove_category/{id}/{store_id}','hippnp\HippnpController@removeCategoryFromStore'); -->
+
 
                             <a href="{{route('hippnp_remove_category', ['id' => 1, 'store_id' => 2 ]}}">Remove</a>
 
