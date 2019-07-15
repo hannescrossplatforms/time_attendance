@@ -3,7 +3,8 @@
 class Picknpay extends Eloquent {
 
 
-    protected $connection = 'hiphub';
+    protected $connection = 'hipengage';
+    protected $table = 'picknpay';
     public function __construct() {
     	$this->connection = \Utils::getHiphubDbConnection();
 	}
