@@ -46,7 +46,7 @@ class Picknpay extends Eloquent {
 
         }
 
-        return DB::select(DB::raw("SELECT DISTINCT category FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'"));
+        return DB::select(DB::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'"));
     }
 
     public static function fetchDwellTimeDataForCategoryWithDate($date, $category, $verb){
