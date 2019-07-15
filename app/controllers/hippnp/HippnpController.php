@@ -129,86 +129,84 @@ class HippnpController extends \BaseController {
                 });
         }
 
-        print_r($json);
-
         // $data['test'] = \Picknpay::test();
 
 
-        // $data['category_list'] = $dates;
+        $data['category_list'] = $dates;
 
-        // // Sum of all categories
+        // Sum of all categories
 
-        // $finalChartObject = array();
+        $finalChartObject = array();
 
-        // foreach ($allCategories as $category) {
-        //     $categoryName = $category->id;
-        //     $dataArray = array();
+        foreach ($allCategories as $category) {
+            $categoryName = $category->id;
+            $dataArray = array();
 
-        //     foreach ( $dates as $date ) {
-        //         $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "SUM");
-        //         if (count($response) == 0) {
-        //             $empty_array = array(['value' => '0']);
-        //             array_push($dataArray, $empty_array);
-        //         } else {
-        //             array_push($dataArray, $response);
-        //         }
+            foreach ( $dates as $date ) {
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "SUM");
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0']);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    array_push($dataArray, $response);
+                }
 
-        //     }
+            }
 
-        //     $obj[] = [
-        //         'seriesname' => $categoryName,
-        //         'data' => $dataArray
-        //     ];
-        //     array_push($finalChartObject, $obj);
-        // };
+            $obj[] = [
+                'seriesname' => $categoryName,
+                'data' => $dataArray
+            ];
+            array_push($finalChartObject, $obj);
+        };
 
-        // if (count($finalChartObject) > 0) {
-        //     $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
-        // }
-        // else {
-        //     $data['category_list_data'] = [];
-        // }
+        if (count($finalChartObject) > 0) {
+            $data['category_list_data'] = $finalChartObject[count($finalChartObject)- 1];
+        }
+        else {
+            $data['category_list_data'] = [];
+        }
 
-        // $obj = null;
+        $obj = null;
 
-        // // Average of all categories
+        // Average of all categories
 
-        // $finalAverageChartObject = array();
+        $finalAverageChartObject = array();
 
-        // foreach ($allCategories as $category) {
-        //     $categoryName = $category->id;
-        //     $dataArrayAvg = array();
+        foreach ($allCategories as $category) {
+            $categoryName = $category->id;
+            $dataArrayAvg = array();
 
-        //     foreach ( $dates as $date ) {
-        //         $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "AVG");
-        //         if (count($response) == 0) {
-        //             $empty_array = array(['value' => '0']);
-        //             array_push($dataArrayAvg, $empty_array);
-        //         } else {
-        //             array_push($dataArrayAvg, $response);
-        //         }
+            foreach ( $dates as $date ) {
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "AVG");
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0']);
+                    array_push($dataArrayAvg, $empty_array);
+                } else {
+                    array_push($dataArrayAvg, $response);
+                }
 
-        //     }
+            }
 
-        //     $obj[] = [
-        //         'seriesname' => $categoryName,
-        //         'data' => $dataArrayAvg
-        //     ];
-        //     array_push($finalAverageChartObject, $obj);
-        // };
+            $obj[] = [
+                'seriesname' => $categoryName,
+                'data' => $dataArrayAvg
+            ];
+            array_push($finalAverageChartObject, $obj);
+        };
 
-        // if (count($finalAverageChartObject) > 0) {
-        //     $data['category_list_data_average'] = $finalAverageChartObject[count($finalAverageChartObject)- 1];
-        // }
-        // else {
-        //     $data['category_list_data_average'] = [];
-        // }
+        if (count($finalAverageChartObject) > 0) {
+            $data['category_list_data_average'] = $finalAverageChartObject[count($finalAverageChartObject)- 1];
+        }
+        else {
+            $data['category_list_data_average'] = [];
+        }
 
-        // $obj = null;
+        $obj = null;
 
-        // $json = json_encode($data);
+        $json = json_encode($data);
 
-        // print_r($json);
+        print_r($json);
 
     }
 
