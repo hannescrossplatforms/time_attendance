@@ -134,7 +134,7 @@ class HippnpController extends \BaseController {
         $data['TallCategories:'] = $allCategories;
         $data['Tdates:'] = $dates;
 
-        // $data['test'] = \Picknpay::test();
+        $data['Ttest'] = \Picknpay::test();
 
 
         $data['category_list'] = $dates;
