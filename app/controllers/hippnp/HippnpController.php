@@ -130,7 +130,7 @@ class HippnpController extends \BaseController {
         }
 
         //REMOVE THIS:
-        $data['TallCategoriesSTARTANDEND:'] = \Picknpay::getDateForPeriodAndTimeOfDay($date);
+        $data['TallCategoriesSTARTANDEND:'] = json_encode(\Picknpay::getDateForPeriodAndTimeOfDay($date));
         $data['TallCategories:'] = $allCategories;
         $data['Tdates:'] = $dates;
 
