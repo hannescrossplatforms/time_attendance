@@ -130,6 +130,7 @@ return array(
     'DropTrackEnabledFromVenuesTable' => $baseDir . '/app/database/migrations/2017_08_18_084457_drop_track_enabled_from_venues_table.php',
     'Emailnotification' => $baseDir . '/app/models/Emailnotification.php',
     'Encoding_Map' => $vendorDir . '/phenx/php-font-lib/classes/Encoding_Map.php',
+    'EngagePicknPayCategory' => $baseDir . '/app/models/EngagePicknPayCategory.php',
     'Engagebrand' => $baseDir . '/app/models/Engagebrand.php',
     'Eventschedule' => $baseDir . '/app/models/Eventschedule.php',
     'Eventtime' => $baseDir . '/app/models/Eventtime.php',
