@@ -89,7 +89,8 @@ class Picknpay extends Eloquent {
     }
 
     public static function test(){
-        return EngagePicknPayCategory::table('pnp_category')->select(DB::raw("SELECT *"));
+        // return EngagePicknPayCategory::select(DB::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'"));
+        return DB::connection('hipengage')->raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'");
         // return EngagePicknPayCategory::all();
     }
 
