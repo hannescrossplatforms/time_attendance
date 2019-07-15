@@ -45,8 +45,8 @@ class Picknpay extends Eloquent {
             $endDate = $dateRange['endDate'];
 
         }
-
-        return EngagePicknPayCategory::select(DB::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'"));
+        // return EngagePicknPayCategory::raw("SELECT * FROM pnp_category")->get();
+        return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
 
     }
 
