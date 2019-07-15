@@ -6,10 +6,10 @@ class Picknpay extends Eloquent {
     protected $connection = 'hipengage';
     protected $table = 'picknpay';
     public function __construct() {
-    	$this->connection = \Utils::getHiphubDbConnection();
+    	// $this->connection = \Utils::getHiphubDbConnection();
 	}
 
-    protected $table = 'picknpay';
+    // protected $table = 'picknpay';
 
     public static function datesToFetchChartDataFor($date, $startDate, $endDate){
 
