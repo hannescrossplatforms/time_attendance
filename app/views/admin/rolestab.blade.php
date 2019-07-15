@@ -62,7 +62,7 @@
                 // data: "newrecord="+dataJson,
                 //async: false,
                 success:  function(objResult){
-                  alert(objResult);
+                  debugger;
                   role = objResult;
                   renderRoleRows();
 
