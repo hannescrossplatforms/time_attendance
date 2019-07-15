@@ -89,7 +89,7 @@ class Picknpay extends Eloquent {
     }
 
     public static function test(){
-        return EngagePicknPayCategory::select(DB::raw("SELECT * FROM pnp_category"));
+        return EngagePicknPayCategory::table('pnp_category')->select(DB::raw("SELECT *"));
         // return EngagePicknPayCategory::all();
     }
 
