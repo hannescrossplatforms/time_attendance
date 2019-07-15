@@ -39,7 +39,7 @@ class HippnpController extends \BaseController {
         $finalChartObject = array();
 
         foreach ($allCategories as $category) {
-            $categoryName = $category->category;
+            $categoryName = $category->id;
             $dataArray = array();
 
             foreach ( $dates as $date ) {
@@ -73,7 +73,7 @@ class HippnpController extends \BaseController {
         $finalAverageChartObject = array();
 
         foreach ($allCategories as $category) {
-            $categoryName = $category->category;
+            $categoryName = $category->id;
             $dataArrayAvg = array();
 
             foreach ( $dates as $date ) {
@@ -139,7 +139,7 @@ class HippnpController extends \BaseController {
         $finalChartObject = array();
 
         foreach ($allCategories as $category) {
-            $categoryName = $category->category;
+            $categoryName = $category->id;
             $dataArray = array();
 
             foreach ( $dates as $date ) {
@@ -174,7 +174,7 @@ class HippnpController extends \BaseController {
         $finalAverageChartObject = array();
 
         foreach ($allCategories as $category) {
-            $categoryName = $category->category;
+            $categoryName = $category->id;
             $dataArrayAvg = array();
 
             foreach ( $dates as $date ) {
