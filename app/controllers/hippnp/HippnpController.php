@@ -130,7 +130,7 @@ class HippnpController extends \BaseController {
         }
 
         //REMOVE THIS:
-        $data['TallCategoriesSTART:'] = $allCategories;
+        // $data['TallCategoriesSTART:'] = $allCategories;
         $data['TallCategories:'] = $allCategories;
         $data['Tdates:'] = $dates;
 
