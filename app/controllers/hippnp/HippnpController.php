@@ -120,6 +120,7 @@ class HippnpController extends \BaseController {
             ->map(function($row) {
                     return ['label' => $row['created_att']];
                 });
+            $data['TallCategories:'] = $allCategories;
         }
         else {
             $allCategories = \Picknpay::fetchAllCategories($period, $start, $start);
@@ -127,11 +128,12 @@ class HippnpController extends \BaseController {
             ->map(function($row) {
                     return ['label' => $row['created_att']];
                 });
+            $data['TallCategories:'] = $allCategories;
         }
 
         //REMOVE THIS:
         // $data['TallCategoriesSTART:'] = $allCategories;
-        $data['TallCategories:'] = $allCategories;
+
         $data['Tdates:'] = $dates;
 
         $data['Ttest'] = \Picknpay::test();
