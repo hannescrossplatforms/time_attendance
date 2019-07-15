@@ -1,6 +1,6 @@
 @extends('layout')
 
-<?php 
+<?php
 error_log("Edit is " . $data["edit"]);
 
 $edit = $data["edit"] ;
@@ -20,7 +20,7 @@ $edit = $data["edit"] ;
             @if ($errors->has())
               <div class="alert alert-danger">
                   @foreach ($errors->all() as $error)
-                      {{ $error }}<br>        
+                      {{ $error }}<br>
                   @endforeach
               </div>
             @endif
@@ -28,7 +28,7 @@ $edit = $data["edit"] ;
                   action=" @if ($edit) {{ url('admin_editbrand'); }} @else {{ url('admin_addbrand'); }} @endif ">
               @if ($edit) {{ Form::hidden('id', $data['brand']->id) }} @endif
               @if ($edit) {{ Form::hidden('oldbrandcode', $data['brand']->code) }} @endif
-              @if (!$edit) 
+              @if (!$edit)
               <div class="form-group">
                 <label>ISP*</label>
                 <select id="isplist" name="isp_id" class="form-control">
@@ -36,7 +36,7 @@ $edit = $data["edit"] ;
                     <option value="{{ $isp->id }}">
                       {{ $isp->name }} ({{ $isp->code }})
                     </option>
-                  @endforeach 
+                  @endforeach
                 </select>
               </div>
               @endif
@@ -44,13 +44,13 @@ $edit = $data["edit"] ;
 
 
                 <label for="exampleInputEmail1">Brand Name</label>
-                <input type="text" class="form-control" id="" placeholder="" 
-                        name="name" 
+                <input type="text" class="form-control" id="" placeholder=""
+                        name="name"
                         value="@if(Input::old('name')){{Input::old('name')}}@else{{$data['brand']->name;}}@endif">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Brand Code</label>
-                <input type="text" class="form-control" id="" size="6" placeholder="" name="code" 
+                <input type="text" class="form-control" id="" size="6" placeholder="" name="code"
                        value="@if(Input::old('code')){{Input::old('code')}}@else{{$data['brand']->code;}}@endif">
               </div>
               <div class="form-group">
@@ -61,10 +61,10 @@ $edit = $data["edit"] ;
                       @if ($edit) @if ($data['brand']->countrie_id == $countrie->id)  selected  @endif @endif>
                       {{ $countrie->name }}
                     </option>
-                  @endforeach 
+                  @endforeach
                 </select>
               </div>
-              
+
               <div class="form-group">
                 <label>Products Enabled</label>
                 <div class="checkbox">
@@ -82,18 +82,21 @@ $edit = $data["edit"] ;
                   <div class="appcheckboxes">
                     <input type="checkbox" name="hipengage" @if ($edit) {{$data['brand']->hipengage;}} @endif> ENGAGE
                   </div>
+                  <div class="appcheckboxes">
+                    <input type="checkbox" name="hiptna" @if ($edit) {{$data['brand']->hiptna;}} @endif> TNA
+                  </div>
                 </label>
               </div>
             </div>
-            
+
             <button class="btn btn-primary">Submit</button>
             <a href="{{ url('admin_showbrands'); }}" class="btn btn-default">Cancel</a>
-            </form>          
+            </form>
         </div>
       </div>
     </div>
 
-  
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -102,7 +105,7 @@ $edit = $data["edit"] ;
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/prefixfree.min.js"></script>
-    
+
     <script>
 
 
@@ -121,7 +124,7 @@ $edit = $data["edit"] ;
         swal("Deleted!", "Brand has been deleted!", "success");
       });
     });
-	    	
+
     </script>
 
   </body>
