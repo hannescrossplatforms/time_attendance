@@ -20,7 +20,7 @@ class HiptnaController extends \BaseController {
     public function showDashboard($instance = null)
     {
 
-
+        // @if (\User::hasProduct("HipTnA") || \User::hasAccess("superadmin"))
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
 
@@ -40,6 +40,9 @@ class HiptnaController extends \BaseController {
         } else if (\Hipauth::hasAnyPermissions(array("NR0002"))) {
             Session::put('availableInstances', "NR02");
             $instance = "NR02";
+        } else if (\Hipauth::hasAnyPermissions(array("PNP_ACCESS"))) {
+            Session::put('availableInstances', "PNP_ACCESS");
+            $instance = "PNP_ACCESS";
         }
         // Session::put('availableInstances', "NR01");
         // $instance = "NR01";
@@ -54,6 +57,8 @@ class HiptnaController extends \BaseController {
             Session::put('currentInstance', $instance);
             if($instance == "NR01" || $instance == "NR02" ) {
                 return Redirect::action('hiptna\HiptnaController@showNrInstanceDashboard');
+            } else if ($instance == "PNP_ACCESS") {
+                Redirect::action('hippnp\HippnpController@showDashboard');
             } else {
                 return Redirect::action('hiptna\HiptnaController@showInstanceDashboard');
             }
