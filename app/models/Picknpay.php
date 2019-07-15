@@ -4,9 +4,12 @@ use \EngagePicknPayCategory;
 
 class Picknpay extends Eloquent {
 
+    protected $connection = 'hipengage';
+    protected $table = 'pnp_category';
 
-    protected $connection = "hipengage";
-    protected $table = "picknpay";
+    public function __construct() {
+        $this->connection = \Utils::getEngageDbConnection();
+    }
 
     public static function datesToFetchChartDataFor($date, $startDate, $endDate){
 
