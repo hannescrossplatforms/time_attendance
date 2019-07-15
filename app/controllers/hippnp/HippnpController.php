@@ -129,6 +129,11 @@ class HippnpController extends \BaseController {
                 });
         }
 
+        //REMOVE THIS:
+
+        $data['TallCategories:'] = $allCategories;
+        $data['Tdates:'] = $dates;
+
         // $data['test'] = \Picknpay::test();
 
 
