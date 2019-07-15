@@ -5,7 +5,7 @@ use \EngagePicknPayCategory;
 class Picknpay extends Eloquent {
 
     protected $connection = 'hipengage';
-    protected $table = 'pnp_category';
+    protected $table = 'picknpay';
 
     public function __construct() {
         $this->connection = \Utils::getEngageDbConnection();
