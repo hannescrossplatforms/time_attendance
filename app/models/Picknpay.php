@@ -89,7 +89,8 @@ class Picknpay extends Eloquent {
     }
 
     public static function test(){
-        return EngagePicknPayCategory::all();
+        return EngagePicknPayCategory::select(DB::raw("SELECT * FROM pnp_category"));
+        // return EngagePicknPayCategory::all();
     }
 
     public static function getDateForPeriodAndTimeOfDay($period){
