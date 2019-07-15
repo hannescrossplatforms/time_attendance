@@ -62,8 +62,9 @@
                 // data: "newrecord="+dataJson,
                 //async: false,
                 success:  function(objResult){
-                  role = objResult
-                  renderRoleRows()
+                  alert(objResult);
+                  role = objResult;
+                  renderRoleRows();
 
                 }
             });
