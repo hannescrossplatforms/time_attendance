@@ -33,6 +33,7 @@ class HippnpController extends \BaseController {
             });
 
         $data['category_list'] = $dates;
+        $data['test'] = \Picknpay::test();
 
         // Sum of all categories
 
