@@ -63,7 +63,6 @@ class HiptnaController extends \BaseController {
                 return Redirect::action('hiptna\HiptnaController@showInstanceDashboard');
             }
 
-
         } else {
 
             Session::put('currentInstance', 'NONE');

@@ -1,14 +1,17 @@
 <?php
 
+use \EngagePicknPayCategory;
+
 class Picknpay extends Eloquent {
 
 
-    protected $connection = 'hiphub';
-    public function __construct() {
-    	$this->connection = \Utils::getHiphubDbConnection();
-	}
-
+    protected $connection = 'hipengage';
     protected $table = 'picknpay';
+    public function __construct() {
+        // $this->connection = \Utils::getHiphubDbConnection();
+    }
+
+    // protected $table = 'picknpay';
 
     public static function datesToFetchChartDataFor($date, $startDate, $endDate){
 
@@ -45,7 +48,7 @@ class Picknpay extends Eloquent {
 
         }
 
-        return DB::select(DB::raw("SELECT DISTINCT category FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'"));
+        return EngagePicknPayCategory::select(DB::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'"));
     }
 
     public static function fetchDwellTimeDataForCategoryWithDate($date, $category, $verb){
