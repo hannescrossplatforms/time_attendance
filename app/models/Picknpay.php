@@ -28,10 +28,10 @@ class Picknpay extends Eloquent {
         $endDate = $dateRange['endDate'];
 
         return Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
+        ->select(Picknpay::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
-        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->groupBy(Picknpay::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->get();
     }
 
