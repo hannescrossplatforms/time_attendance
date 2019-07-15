@@ -54,7 +54,10 @@
     $(function() {
         var roleproduct;
         showRoleAvailableProducts();
-        $.ajax({
+
+
+        setTimeout(function() {
+          $.ajax({
                 type: "POST",
                 dataType: 'json',
                 //contentType: "application/json",
@@ -68,6 +71,8 @@
 
                 }
             });
+        }, 3000);
+
         $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
          });
 
