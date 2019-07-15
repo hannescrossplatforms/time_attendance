@@ -167,6 +167,8 @@
 
 $(document).ready(function() {
 
+    debugger;
+
     pathname = $('#url').val();
 
     var chartProperties = {
