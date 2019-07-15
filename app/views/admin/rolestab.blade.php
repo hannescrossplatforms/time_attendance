@@ -85,7 +85,7 @@
         rows = rows + '<tr>\
                 <td>' + rolevalue["name"] + '</td>\
                 <td>' + rolevalue["description"] + '</td> <td>';
-
+                    debugger;
                     $.each(roleproduct,function(roleproductindex,roleproductvalue) {
                         if(roleproductvalue['id'] == rolevalue['product_id']){
                             product_name = roleproductvalue["name"];
@@ -115,6 +115,7 @@
             url:"{{ url('admin_getAvailableProducts/');}}",
             success:function(resultObj)
             {
+              debugger;
                 roleproduct= resultObj,
                 options = '<option selected="selected">Product Code</option>';
 
