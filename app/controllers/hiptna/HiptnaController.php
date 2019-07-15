@@ -58,7 +58,7 @@ class HiptnaController extends \BaseController {
             if($instance == "NR01" || $instance == "NR02" ) {
                 return Redirect::action('hiptna\HiptnaController@showNrInstanceDashboard');
             } else if ($instance == "PNP_ACCESS") {
-                Redirect::action('hippnp\HippnpController@showDashboard');
+                return Redirect::action('hippnp\HippnpController@showDashboard');
             } else {
                 return Redirect::action('hiptna\HiptnaController@showInstanceDashboard');
             }
