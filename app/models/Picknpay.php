@@ -15,24 +15,24 @@ class Picknpay extends Eloquent {
 
         if ($startDate == null && $endDate == null) {
 
-            $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
+            return $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
 
-            $startDate = $dateRange['startDate'];
-            $endDate = $dateRange['endDate'];
+            // $startDate = $dateRange['startDate'];
+            // $endDate = $dateRange['endDate'];
 
         }
 
-        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
+        // $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
 
-        $startDate = $dateRange['startDate'];
-        $endDate = $dateRange['endDate'];
+        // $startDate = $dateRange['startDate'];
+        // $endDate = $dateRange['endDate'];
 
-        return Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
-        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        ->get();
+        // return Picknpay::orderBy('created_at', 'ASC')
+        // ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
+        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
+        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
+        // ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        // ->get();
     }
 
     public static function fetchAllCategories($date, $startDate, $endDate){
