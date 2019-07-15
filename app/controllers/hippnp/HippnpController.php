@@ -129,14 +129,6 @@ class HippnpController extends \BaseController {
                 });
         }
 
-        //REMOVE THIS:
-        // $data['TallCategoriesSTART:'] = $allCategories;
-        $data['TallCategories:'] = $allCategories;
-        $data['Tdates:'] = $dates;
-
-        $data['Ttest'] = \Picknpay::test();
-
-
         $data['category_list'] = $dates;
 
         // Sum of all categories
