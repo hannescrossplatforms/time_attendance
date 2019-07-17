@@ -34,6 +34,8 @@
                             <th>Beacon UUID</th>
                             <th>Beacon Minor</th>
                             <th>Beacon Major</th>
+                            <th>Store name</th>
+                            <th>Category name</th>
                             <th>Actions</th>
                         </tr>
                         @foreach ($data['beacons'] as $beacon)
@@ -41,6 +43,8 @@
                             <td>{{ $beacon->beacon_uuid }}</td>
                             <td>{{ $beacon->beacon_minor }}</td>
                             <td>{{ $beacon->beacon_major }}</td>
+                            <td>{{ $beacon->store_name }}</td>
+                            <td>{{ $beacon->category_name }}</td>
                             <td>
                             <a href="picknpay_manage_store_categories/<?php echo $beacon->id;?>" class="btn btn-default btn-sm">Manage categories</a>
                             </td>
