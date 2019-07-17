@@ -42,7 +42,7 @@
                             <td>{{ $beacon->beacon_minor }}</td>
                             <td>{{ $beacon->beacon_major }}</td>
                             <td>
-                            <a href="picknpay_manage_store_categories/<?php echo $venue->id;?>" class="btn btn-default btn-sm">Manage categories</a>
+                            <a href="picknpay_manage_store_categories/<?php echo $beacon->id;?>" class="btn btn-default btn-sm">Manage categories</a>
                             </td>
                         </tr>
                         @endforeach
