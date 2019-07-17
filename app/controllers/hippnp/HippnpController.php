@@ -285,21 +285,30 @@ class HippnpController extends \BaseController {
     public static function saveBeacon(){
 
         $data = array();
-        $categories = \Picknpay::fetchAllCategoriesWithoutDateFilter();
+        $storeID = \Input::get('store_id');
+        $categoryID = \Input::get('category_id');
+        $beaconUUID = \Input::get('beacon_uuid');
+        $beaconMinor = \Input::get('beacon_minor');
+        $beaconMajor = \Input::get('beacon_major');
 
-        // stores
-        // categories
+        //Get store
+        $store = \Venue::find($storeID);
+        $beaconStoreName = $store->sitename;
 
-        // $storeID = \Input::get('store_id');
-        // $categoryName = \Input::get('category_name');
+        //Get category
 
-        // $engageCategory = new \EngagePicknPayCategory();
-        // $engageCategory->store_id = $storeID;
-        // $engageCategory->name = $categoryName;
-        // $engageCategory->save();
+        $engageCategory = \EngagePicknPayCategory::find($categoryID);
+        $categoryName = $engageCategory->name;
 
-
-        // return \Redirect::to("/hippnp/picknpay_manage_store_categories/$storeID");
+        $engageBeacon = new \EngagePicknPayBeacon();
+        $engageBeacon->beacon_uuid = $beaconUUID;
+        $engageBeacon->beacon_minor = $beaconMinor;
+        $engageBeacon->beacon_major = $beaconMajor;
+        $engageBeacon->store_id = $storeID;
+        $engageBeacon->category_id = $categoryID;
+        $engageBeacon->store_name = $beaconStoreName;
+        $engageBeacon->category_name = $categoryName;
+        $engageBeacon->save();
 
         return \Redirect::to("/hippnp/picknpay_beacon_management");
     }

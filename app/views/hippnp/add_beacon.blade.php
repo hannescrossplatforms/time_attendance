@@ -37,8 +37,20 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Beacon Minor*</label>
+                                <input type="text" class="form-control" size="6" placeholder="Beacon Minor" name="beacon_minor" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Beacon Major*</label>
+                                <input type="text" class="form-control" size="6" placeholder="Beacon Major" name="beacon_major" required>
+                            </div>
+
+
+
+                            <div class="form-group">
                                 <label>Store*</label>
-                                <select id="isplist" name="isp_id" class="form-control">
+                                <select id="isplist" name="store_id" class="form-control" required>
                                 @foreach($data['brands'] as $store)
                                     <option value="{{ $store->id }}">
                                     {{ $store->sitename }}
@@ -49,7 +61,7 @@
 
                             <div class="form-group">
                                 <label>Category*</label>
-                                <select id="isplist" name="isp_id" class="form-control">
+                                <select id="isplist" name="category_id" class="form-control" required>
                                 @foreach($data['categories'] as $category)
                                     <option value="{{ $category->id }}">
                                     {{ $category->name }}
