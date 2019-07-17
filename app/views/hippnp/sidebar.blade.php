@@ -51,7 +51,7 @@
               </div>
               <div id="picknpay_settings">
                 <li><a href="{{ url('hippnp/picknpay_category_management'); }}"><i class="fa fa-gears"></i>Category Management</a></li>
-                <li><a href="{{ url('hippnp/picknpay_category_management'); }}"><i class="fa fa-gears"></i>Beacon Management</a></li>
+                <li><a href="{{ url('hippnp/picknpay_beacon_management'); }}"><i class="fa fa-gears"></i>Beacon Management</a></li>
               </div>
               <div id="exception_manage_menus" style="display: none">
                 @if( Session::get('currentInstance') != "NR01" && Session::get('currentInstance') != "NR02" )

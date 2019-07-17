@@ -11,6 +11,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Session;
 use Route;
+use \EngagePicknPayBeacon;
 
 class HippnpController extends \BaseController {
 
@@ -217,6 +218,22 @@ class HippnpController extends \BaseController {
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['venues'] = $venues;
         $data['brand'] = $picknpayBrand;
+
+        return \View::make('hippnp.categorymanagement')->with('data', $data);
+    }
+
+    public static function picknpayBeaconManagement(){
+
+
+        $beacons = EngagePicknPayBeacon::all();
+
+        // $picknpayBrand = \Brand::where('name', '=', 'PicknPay')->firstOrFail();
+        // $venues = $picknpayBrand->venues()->get();
+
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+        $data['beacons'] = $beacons;
 
         return \View::make('hippnp.categorymanagement')->with('data', $data);
     }
