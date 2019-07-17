@@ -275,6 +275,23 @@ class HippnpController extends \BaseController {
 
     }
 
+    public static function saveBeacon(){
+
+
+        // $storeID = \Input::get('store_id');
+        // $categoryName = \Input::get('category_name');
+
+        // $engageCategory = new \EngagePicknPayCategory();
+        // $engageCategory->store_id = $storeID;
+        // $engageCategory->name = $categoryName;
+        // $engageCategory->save();
+
+
+        // return \Redirect::to("/hippnp/picknpay_manage_store_categories/$storeID");
+
+        return \Redirect::to("/hippnp/picknpay_beacon_management");
+    }
+
     public static function addCategoryToStore($id) {
 
         $data = array() ;

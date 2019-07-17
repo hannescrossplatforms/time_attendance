@@ -351,6 +351,7 @@ Route::get('hippnp/picknpay_manage_store_categories/{id}','hippnp\HippnpControll
 Route::get('hippnp/picknpay_manage_store_categories/add_category/{id}','hippnp\HippnpController@addCategoryToStore');
 Route::get('/hippnp/picknpay_manage_store_categories/remove_category/{id}/{store_id}', array('uses' => 'hippnp\HippnpController@removeCategoryFromStore', 'as' => 'hippnp_remove_category'))->before('auth');
 Route::post('hippnp/save_category','hippnp\HippnpController@saveCategoryToStore');
+Route::post('hippnp/save_beacon','hippnp\HippnpController@saveBeacon');
 Route::get('hippnp/picknpay_delete_beacon/{id}', 'hippnp\HippnpController@deleteBeacon');
 Route::get('hippnp/picknpay_add_beacon', 'hippnp\HippnpController@addBeacon');
 // Route::any('/hippnp_showinstancedashboard', array('uses' => '\HippnpController@showInstanceDashboard', 'as' => 'hippnp_showinstancedashboard'))->before('auth');
