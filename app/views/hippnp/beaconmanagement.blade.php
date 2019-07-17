@@ -13,6 +13,10 @@
     padding-left: 53%;
     padding-top: 20%;
 }
+.btn-add-beacon{
+    float:right;
+    margin-bottom:20px;
+}
 </style>
 
 <body class="hipTnA">
@@ -27,7 +31,7 @@
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-
+                <a class="btn-add-beacon btn btn-default btn-sm" href="add_beacon">Add Beacon</a>
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
