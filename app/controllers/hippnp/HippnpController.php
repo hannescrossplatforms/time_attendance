@@ -235,7 +235,7 @@ class HippnpController extends \BaseController {
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['beacons'] = $beacons;
 
-        return \View::make('hippnp.categorymanagement')->with('data', $data);
+        return \View::make('hippnp.beaconmanagement')->with('data', $data);
     }
 
     public static function picknpayStoreCategoryManagement($id){
