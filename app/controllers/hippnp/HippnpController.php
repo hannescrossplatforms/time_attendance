@@ -240,7 +240,7 @@ class HippnpController extends \BaseController {
 
     public static function picknpayStoreCategoryManagement($id){
 
-        $data = array() ;
+        $data = array();
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['store_id'] = $id;
@@ -249,6 +249,19 @@ class HippnpController extends \BaseController {
         $data['engageCategories'] = $engageCategories;
 
         return \View::make('hippnp.storecategorylist')->with('data', $data);
+
+    }
+
+    public static function deleteBeacon($id) {
+
+        $data = array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+        $beacon = \EngagePicknPayBeacon::find($id);
+        $beacon->delete();
+
+        return \Redirect::to("/hippnp/picknpay_beacon_management");
 
     }
 

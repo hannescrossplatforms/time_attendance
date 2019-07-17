@@ -50,7 +50,7 @@
                             <td>{{ $beacon->store_name }}</td>
                             <td>{{ $beacon->category_name }}</td>
                             <td>
-                            <a href="picknpay_manage_store_categories/<?php echo $beacon->id;?>" class="btn btn-default btn-sm">Manage categories</a>
+                            <a href="picknpay_delete_beacon/<?php echo $beacon->id;?>" class="btn btn-default btn-sm">Delete beacon</a>
                             </td>
                         </tr>
                         @endforeach
