@@ -255,6 +255,8 @@ class HippnpController extends \BaseController {
     public static function addBeacon(){
 
         $data = array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 
         return \View::make('hippnp.add_beacon')->with('data', $data);
 
