@@ -31,7 +31,7 @@
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-                <a class="btn-add-beacon btn btn-default btn-sm" href="add_beacon">Add Beacon</a>
+                <a class="btn-add-beacon btn btn-default btn-sm" href="picknpay_add_beacon">Add Beacon</a>
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>

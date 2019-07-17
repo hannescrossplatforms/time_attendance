@@ -252,6 +252,14 @@ class HippnpController extends \BaseController {
 
     }
 
+    public static function addBeacon(){
+
+        $data = array();
+
+        return \View::make('hippnp.add_beacon')->with('data', $data);
+
+    }
+
     public static function deleteBeacon($id) {
 
         $data = array();
