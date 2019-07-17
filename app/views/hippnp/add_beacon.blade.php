@@ -35,6 +35,30 @@
                                 <label>Beacon UUID*</label>
                                 <input type="text" class="form-control" size="6" placeholder="Beacon UUID" name="beacon_uuid" required>
                             </div>
+
+                            <div class="form-group">
+                                <label>Store*</label>
+                                <select id="isplist" name="isp_id" class="form-control">
+                                @foreach($data['brands'] as $store)
+                                    <option value="{{ $store->id }}">
+                                    {{ $store->name }}
+                                    </option>
+                                @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Category*</label>
+                                <select id="isplist" name="isp_id" class="form-control">
+                                @foreach($data['categories'] as $category)
+                                    <option value="{{ $category->id }}">
+                                    {{ $category->name }}
+                                    </option>
+                                @endforeach
+                                </select>
+                            </div>
+
+
                             <br>
                             <button id="submitform" class="btn btn-primary">Submit</button>
                             <a href="/hippnp/picknpay_beacon_management" class="btn btn-default">Cancel</a>

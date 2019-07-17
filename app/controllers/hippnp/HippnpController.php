@@ -254,9 +254,16 @@ class HippnpController extends \BaseController {
 
     public static function addBeacon(){
 
+
+        $categories = \Picknpay::fetchAllCategoriesWithoutDateFilter();
+        $picknpayBrand = \Brand::where('name', '=', 'PicknPay')->firstOrFail();
+        $venues = $picknpayBrand->venues()->get();
+
         $data = array();
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+        $data['categories'] = $categories;
+        $data['brands'] = $venues;
 
         return \View::make('hippnp.add_beacon')->with('data', $data);
 
@@ -277,6 +284,11 @@ class HippnpController extends \BaseController {
 
     public static function saveBeacon(){
 
+        $data = array();
+        $categories = \Picknpay::fetchAllCategoriesWithoutDateFilter();
+
+        // stores
+        // categories
 
         // $storeID = \Input::get('store_id');
         // $categoryName = \Input::get('category_name');

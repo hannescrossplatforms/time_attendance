@@ -50,6 +50,10 @@ class Picknpay extends Eloquent {
 
     }
 
+    public static function fetchAllCategoriesWithoutDateFilter(){
+        return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
+    }
+
     public static function fetchDwellTimeDataForCategoryWithDate($date, $category, $verb){
         return Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("IFNULL($verb(CAST(dwell_time AS UNSIGNED)), 0) AS value"))
