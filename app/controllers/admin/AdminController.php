@@ -146,8 +146,11 @@ class AdminController extends \BaseController {
         if($data['brand']->hiprm) $data['brand']->hiprm = "checked";
         if($data['brand']->hipjam) $data['brand']->hipjam = "checked";
         if($data['brand']->hipengage) $data['brand']->hipengage = "checked";
+        //Hannes todo: Add the hiptna to the brands table. Map it and on save make sure it works.
+        if($data['brand']->hiptna) $data['brand']->hiptna = "checked";
         if($data['brand']->userdatabtn) $data['brand']->userdatabtn = "checked";
         if($data['brand']->logindatabtn) $data['brand']->logindatabtn = "checked";
+
 
         $countries = \Countrie::All();
         $data['allcountries'] = $countries;
