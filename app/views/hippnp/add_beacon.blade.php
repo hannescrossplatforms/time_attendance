@@ -41,7 +41,7 @@
                                 <select id="isplist" name="isp_id" class="form-control">
                                 @foreach($data['brands'] as $store)
                                     <option value="{{ $store->id }}">
-                                    {{ $store->name }}
+                                    {{ $store->sitename }}
                                     </option>
                                 @endforeach
                                 </select>
