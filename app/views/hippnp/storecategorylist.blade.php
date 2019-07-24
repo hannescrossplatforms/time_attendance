@@ -43,7 +43,7 @@
                         </tr>
                         @foreach ($data['engageCategories'] as $category)
                         <tr>
-                            <td>{{ $category->store_id }}</td>
+                            <td>test</td>
                             <td>{{ $category->name }}</td>
                             <td>
 
