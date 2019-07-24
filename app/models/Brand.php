@@ -5,7 +5,7 @@ class Brand extends Eloquent {
 
 
     protected $dates = ['deleted_at'];
-    
+
     // MASS ASSIGNMENT -------------------------------------------------------
     // define which attributes are mass assignable (for security)
     // we only want these 3 attributes able to be filled
@@ -81,7 +81,7 @@ class Brand extends Eloquent {
         } else {
             ////////////// Add the data based limits /////////////////
             $OctectsLimit = $limit * 1024 * 1024;
-            
+
             $record = array( "groupname" => $groupname, "attribute" => "Max-Octets", "op" => ":=", "value" => $OctectsLimit );
             \DB::connection($connection)->table("radgroupcheck")->insert($record);
 
@@ -166,10 +166,10 @@ class Brand extends Eloquent {
         $user =  \Auth::user();
 
         if (\User::hasAccess("superadmin")) {
-            $allowedbrands = \Brand::All();  
+            $allowedbrands = \Brand::All();
         } else {
             error_log("getBrands : NOT superadmin");
-            $allowedbrands = $user->brands;  
+            $allowedbrands = $user->brands;
             // error_log("getBrands for user : allowedbrands " . print_r($allowedbrands[0][0], true));
         }
 
@@ -194,10 +194,10 @@ class Brand extends Eloquent {
         $user =  \Auth::user();
 
         if (\User::hasAccess("superadmin")) {
-            $allowedbrands = \Brand::All();  
+            $allowedbrands = \Brand::All();
         } else {
             error_log("getBrands : NOT superadmin");
-            $allowedbrands = $user->brands;  
+            $allowedbrands = $user->brands;
         }
 
         $allowedbrand_ids = array();
@@ -205,13 +205,28 @@ class Brand extends Eloquent {
             array_push($allowedbrand_ids, $allowedbrand['id']);
         }
 
-        $brands = \DB::table('brands')
+        // hipwifi and tna
+        $brands = null;
+
+        if($productname == "hipwifi and tna") {
+
+            $brands = \DB::table('brands')
                 ->select("*")
-                ->where($productname, '=', 1)
+                ->whereraw('hipwifi = 1 OR hiptna = 1')
                 ->whereIn('id', $allowedbrand_ids)
                 ->whereNull('deleted_at')
                 ->orderBy('name')
                 ->get();
+        }
+        else {
+            $brands = \DB::table('brands')
+            ->select("*")
+            ->where($productname, '=', 1)
+            ->whereIn('id', $allowedbrand_ids)
+            ->whereNull('deleted_at')
+            ->orderBy('name')
+            ->get();
+        }
 
         return $brands;
     }
@@ -224,7 +239,7 @@ class Brand extends Eloquent {
 
             $brands =  \DB::table('brands')
                     ->join('brand_user', 'brands.id', '=', 'brand_user.brand_id')
-                    ->select("brands.*") 
+                    ->select("brands.*")
                     ->where('brand_user.user_id', '=', $user_id)
                     ->where('brands.hipengage', '=', 1)
                     ->whereNull('deleted_at')
@@ -250,7 +265,7 @@ class Brand extends Eloquent {
         } else {
 
             $query = \Brand::join('brand_user', 'brands.id', '=', 'brand_user.brand_id')
-                    ->select("brands.*") 
+                    ->select("brands.*")
                     ->where('brand_user.user_id', '=', $user_id)
                     ->whereNull('deleted_at')
                     ->where('brands.hipwifi', '=', 1);
@@ -283,7 +298,7 @@ class Brand extends Eloquent {
         } else {
 
             $query = \Brand::join('brand_user', 'brands.id', '=', 'brand_user.brand_id')
-                    ->select("brands.*") 
+                    ->select("brands.*")
                     ->where('brand_user.user_id', '=', $user_id)
                     ->whereNull('deleted_at')
                     ->where('brands.hipjam', '=', 1);
@@ -301,7 +316,7 @@ class Brand extends Eloquent {
 
         return $brands;
     }
-      
+
 
     public function getBrandsForUser($user_id) {
 
@@ -311,7 +326,7 @@ class Brand extends Eloquent {
         } else {
 
             $brands = \Brand::join('brand_user', 'brands.id', '=', 'brand_user.brand_id')
-                    ->select("brands.*") 
+                    ->select("brands.*")
                     ->where('brand_user.user_id', '=', $user_id)
                     ->whereNull('deleted_at')
                     ->orderBy('brands.name','ASC')
@@ -332,7 +347,7 @@ class Brand extends Eloquent {
       }
 
       return $brandcodes;
-      
+
     }
 
     public function importBrandsFromRadius($remotedb_id) {

@@ -344,7 +344,7 @@ class AdminController extends \BaseController {
         $data['allisps'] = $isps;
 
         $brand = new \Brand();
-        $data['brands'] = $brand->getBrandsForProduct('hipwifi');
+        $data['brands'] = $brand->getBrandsForProduct('hipwifi and tna');
 
         $data['ap_active_checked'] = "checked";
         $data['ap_inactive_checked'] = "";
