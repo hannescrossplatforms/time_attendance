@@ -334,15 +334,14 @@ class HippnpController extends \BaseController {
 
     }
 
-    public static function removeCategoryFromStore($id, $storeId){
+    public static function removeCategoryFromStore($id){
 
         $findID = Route::current()->getParameter('id');
-        $findStoreID = Route::current()->getParameter('store_id');
 
         $engageCategory = \EngagePicknPayCategory::find($findID);
         $engageCategory->delete();
 
-        return \Redirect::to("/hippnp/picknpay_manage_store_categories/$findStoreID");
+        return \Redirect::to("/hippnp/picknpay_manage_store_categories");
     }
 
     public static function getStoreCategories($id) {
