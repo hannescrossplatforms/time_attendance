@@ -37,13 +37,11 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
-                            <th>Venu ID</th>
-                            <th>Venu Name</th>
+                            <th>Category Name</th>
                             <th>Actions</th>
                         </tr>
                         @foreach ($data['engageCategories'] as $category)
                         <tr>
-                            <td>test</td>
                             <td>{{ $category->name }}</td>
                             <td>
 
