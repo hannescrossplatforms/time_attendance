@@ -238,13 +238,13 @@ class HippnpController extends \BaseController {
         return \View::make('hippnp.beaconmanagement')->with('data', $data);
     }
 
-    public static function picknpayStoreCategoryManagement($id){
+    public static function picknpayStoreCategoryManagement(){
 
         $data = array();
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['store_id'] = $id;
-        $engageCategories = \EngagePicknPayCategory::where('store_id', '=', $id)->get();
+        $engageCategories = \EngagePicknPayCategory::all();
 
         $data['engageCategories'] = $engageCategories;
 
