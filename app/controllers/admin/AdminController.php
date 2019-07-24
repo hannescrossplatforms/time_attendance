@@ -266,6 +266,7 @@ class AdminController extends \BaseController {
         if(\Input::get('hiprm') == "on") { $brand->hiprm = 1; } else { $brand->hiprm = 0; }
         if(\Input::get('hipjam') == "on") { $brand->hipjam = 1; } else { $brand->hipjam = 0; }
         if(\Input::get('hipengage') == "on") { $brand->hipengage = 1; } else { $brand->hipengage = 0; }
+        if(\Input::get('hiptna') == "on") { $brand->hiptna = 1; } else { $brand->hiptna = 0; }
         if(\Input::get('userdatabtn') == "on") { $brand->userdatabtn = 1; } else { $brand->userdatabtn = 0; }
         if(\Input::get('logindatabtn') == "on") { $brand->logindatabtn = 1; } else { $brand->logindatabtn = 0; }
 
