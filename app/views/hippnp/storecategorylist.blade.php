@@ -33,7 +33,7 @@
                 <div class="container-fluid">
 
 
-                <a class="btn-add-category btn btn-default btn-sm" href="add_category">Add Category</a>
+                <a class="btn-add-category btn btn-default btn-sm" href="/hippnp/picknpay_manage_store_categories/add_category">Add Category</a>
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
