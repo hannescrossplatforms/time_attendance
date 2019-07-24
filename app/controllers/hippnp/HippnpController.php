@@ -349,6 +349,14 @@ class HippnpController extends \BaseController {
         return \Redirect::to("/hippnp/picknpay_manage_store_categories/$findStoreID");
     }
 
+    public static function getStoreCategories($id) {
+
+        $storeCategories = \EngagePicknPayCategory::where('store_id', '=', $id)->get();
+        $json = json_encode($storeCategories);
+        print_r($json);
+
+    }
+
 }
 
 

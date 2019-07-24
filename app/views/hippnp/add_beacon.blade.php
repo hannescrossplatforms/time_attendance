@@ -46,11 +46,9 @@
                                 <input type="text" class="form-control" size="6" placeholder="Beacon Major" name="beacon_major" required>
                             </div>
 
-
-
                             <div class="form-group">
                                 <label>Store*</label>
-                                <select id="isplist" name="store_id" class="form-control" required>
+                                <select id="store_select" name="store_id" onchange="get_categories_for_store()" class="form-control" required>
                                 @foreach($data['brands'] as $store)
                                     <option value="{{ $store->id }}">
                                     {{ $store->sitename }}
@@ -83,5 +81,32 @@
         </div>
 </body>
 
+
+<script>
+
+
+function get_categories_for_store() {
+
+    var store_id = $("#store_select").val();
+
+    $.ajax({
+        url: pathname + 'hippnp/storeCategories/' + store_id,
+        type: 'get',
+        dataType: 'json',
+        data: {
+            'id': store_id
+        },
+        success: function(data) {
+            debugger;
+           alert(data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+        }
+    });
+
+}
+
+</script>
 
 @stop

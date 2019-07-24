@@ -354,16 +354,8 @@ Route::post('hippnp/save_category','hippnp\HippnpController@saveCategoryToStore'
 Route::post('hippnp/save_beacon','hippnp\HippnpController@saveBeacon');
 Route::get('hippnp/picknpay_delete_beacon/{id}', 'hippnp\HippnpController@deleteBeacon');
 Route::get('hippnp/picknpay_add_beacon', 'hippnp\HippnpController@addBeacon');
-// Route::any('/hippnp_showinstancedashboard', array('uses' => '\HippnpController@showInstanceDashboard', 'as' => 'hippnp_showinstancedashboard'))->before('auth');
-// Route::any('/hiptna_showinstancedashboard', array('uses' => 'hiptna\HiptnaController@showInstanceDashboard', 'as' => 'hippnp_showinstancedashboard'))->before('auth');
-// Route::any('/hiptna_shownrinstancedashboard', array('uses' => 'hiptna\HiptnaController@showNrInstanceDashboard', 'as' => 'hippnp_shownrinstancedashboard'))->before('auth');
-// Route::any('/hiptna_shownonrosterdashboard', array('uses' => 'hiptna\HiptnaController@showNonrosterDashboard', 'as' => 'hippnp_shownonrosterdashboard'))->before('auth');
-// Route::any('/hiptna_showimdashboard', array('uses' => 'hiptna\HiptnaController@showImDashboard', 'as' => 'hippnp_showimdashboard'))->before('auth');
-// Route::any('/hiptna_showcedashboard', array('uses' => 'hiptna\HiptnaController@showCeDashboard', 'as' => 'hippnp_showcedashboard'))->before('auth');
-// Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'showDashboarddownload'))->before('auth');//download test
-// Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPdfReport', 'as' => 'createPdfReport'));//auto download test
-// Route::any('/autoDownloadPdf', array('uses' => 'hiptna\HiptnaController@autoDownloadPdf', 'as' => 'autoDownloadPdf'));//auto download test
-// Route::any('/generatePdf', array('uses' => 'hiptna\HiptnaController@generatePdf', 'as' => 'generatePdf'));//auto download test
+Route::get('hippnp/storeCategories/{id}','hippnp\HippnpController@getStoreCategories');
+
 
 // HipBidvest routes //////////////////////////////////////////////////////////////
 // Route::any('/hiptna_showdashboard/{instance?}', array('uses' => 'hiptna\HiptnaController@showDashboard', 'as' => 'hipbidvest_showdashboard'))->before('auth');
