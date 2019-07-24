@@ -348,8 +348,7 @@ Route::get('hippnp/periodchartJsondata','hippnp\HippnpController@periodchartJson
 Route::get('hippnp/picknpay_category_management','hippnp\HippnpController@picknpayCategoryManagement');
 Route::get('hippnp/picknpay_beacon_management','hippnp\HippnpController@picknpayBeaconManagement');
 Route::get('/hippnp/picknpay_manage_store_categories','hippnp\HippnpController@picknpayStoreCategoryManagement');
-// Route::get('hippnp/picknpay_manage_store_categories/{id}','hippnp\HippnpController@picknpayStoreCategoryManagement');
-Route::get('hippnp/picknpay_manage_store_categories/add_category/{id}','hippnp\HippnpController@addCategoryToStore');
+Route::get('hippnp/picknpay_manage_store_categories/add_category','hippnp\HippnpController@addCategoryToStore');
 Route::get('/hippnp/picknpay_manage_store_categories/remove_category/{id}/{store_id}', array('uses' => 'hippnp\HippnpController@removeCategoryFromStore', 'as' => 'hippnp_remove_category'))->before('auth');
 Route::post('hippnp/save_category','hippnp\HippnpController@saveCategoryToStore');
 Route::post('hippnp/save_beacon','hippnp\HippnpController@saveBeacon');
