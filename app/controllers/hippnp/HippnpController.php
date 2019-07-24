@@ -243,7 +243,6 @@ class HippnpController extends \BaseController {
         $data = array();
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        $data['store_id'] = $id;
         $engageCategories = \EngagePicknPayCategory::all();
 
         $data['engageCategories'] = $engageCategories;
