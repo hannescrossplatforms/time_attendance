@@ -12,7 +12,10 @@ class AddTnaToBrands extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::table('brands', function ($t) {
+			$t->boolean('hiptna')->default(0);
+			$t->boolean('hiptna_activated')->default(0);
+		});
 	}
 
 	/**
