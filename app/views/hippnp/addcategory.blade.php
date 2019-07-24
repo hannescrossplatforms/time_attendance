@@ -33,14 +33,13 @@
                     <!-- To look at errors look at the addvenue.blade file -->
                     <div class="row">
                         <div class="col-md-12">
-                            {{ Form::hidden('store_id', $data['store_id']) }}
                             <div class="form-group">
                                 <label>Category name*</label>
                                 <input type="text" class="form-control" size="6" placeholder="Category name" name="category_name" required>
                             </div>
                             <br>
                             <button id="submitform" class="btn btn-primary">Submit</button>
-                            <a href="/hippnp/picknpay_manage_store_categories/<?php echo $data['store_id'];?>" class="btn btn-default">Cancel</a>
+                            <a href="/hippnp/picknpay_manage_store_categories" class="btn btn-default">Cancel</a>
                             <br>
                         </div>
                     </div>
