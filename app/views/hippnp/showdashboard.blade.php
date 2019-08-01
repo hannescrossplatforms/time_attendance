@@ -317,7 +317,7 @@ $(document).ready(function() {
         }
     });
     apiChart.render();
-    alert(<?php echo $data['hannes_test']; ?>);
+
 });
 
 function change_report_period() {
@@ -425,6 +425,34 @@ function renderCharts(time, start, end) {
                         "category": data['category_list']
                     }],
                     "dataset": data['category_list_data_visits']
+
+                }
+            });
+            apiChart.render();
+
+            // Number of visits per store
+
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Category",
+                "yAxisName": "Number of visits per store",
+                "paletteColors": "#0075c2,#f8b81d,#3CB371",
+                "rotatevalues": "1",
+                "theme": "zune"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'mscolumn2d',
+                renderAt: 'staff_visits_per_store',
+                width: '400',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "categories": [{
+                        "category": <?php echo $data['category_list']; ?>
+                    }],
+                    "dataset": <?php echo $data['category_list_data_visits_store']; ?>
 
                 }
             });

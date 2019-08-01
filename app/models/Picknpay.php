@@ -51,21 +51,6 @@ class Picknpay extends Eloquent {
 
     }
 
-    public static function fetchAllStores($date, $startDate, $endDate){
-
-        if ($startDate == null && $endDate == null) {
-
-            $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
-
-            $startDate = $dateRange['startDate'];
-            $endDate = $dateRange['endDate'];
-
-        }
-
-        return EngagePicknPay::raw("SELECT DISTINCT store as store, store_id as store_id FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
-
-    }
-
     public static function fetchAllCategoriesWithoutDateFilter(){
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
     }

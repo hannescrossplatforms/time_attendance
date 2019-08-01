@@ -151,8 +151,6 @@ class HippnpController extends \BaseController {
         $finalVisitsStoreChartObject = array();
         $allStores = \EngagePicknpay::fetchAllStores($period, null, null);
 
-        $meh = \EngagePicknpay::fetchAllStores($period, null, null);
-
         foreach ($allStores as $store) {
             $storeName = $store->store;
             $storeId = $store->store_id;
@@ -182,10 +180,8 @@ class HippnpController extends \BaseController {
         else {
             $data['category_list_data_visits_store'] = json_encode([]);
         }
-        $data['hannes_test'] = count($meh);
-        $obj = null;
-        // category_list_data_visits_store
 
+        $obj = null;
 
         return \View::make('hippnp.showdashboard')->with('data', $data);
 
@@ -321,6 +317,43 @@ class HippnpController extends \BaseController {
         else {
             $data['category_list_data_visits'] = [];
         }
+        $obj = null;
+
+        //Number of visits per store
+
+        $finalVisitsStoreChartObject = array();
+        $allStores = \EngagePicknpay::fetchAllStores($period, null, null);
+
+        foreach ($allStores as $store) {
+            $storeName = $store->store;
+            $storeId = $store->store_id;
+            $dataArrayVisitsStore = array();
+
+            foreach ( $dates as $date ) {
+                $response = \Picknpay::fetchDwellVisitsForStoreWithDate($date['label'], $storeId);
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0']);
+                    array_push($dataArrayVisitsStore, $empty_array);
+                } else {
+                    array_push($dataArrayVisitsStore, $response);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $storeName,
+                'data' => $dataArrayVisitsStore
+            ];
+            array_push($finalVisitsStoreChartObject, $obj);
+        };
+
+        if (count($finalVisitsStoreChartObject) > 0) {
+            $data['category_list_data_visits_store'] = $finalVisitsStoreChartObject[count($finalVisitsStoreChartObject)- 1];
+        }
+        else {
+            $data['category_list_data_visits_store'] = [];
+        }
+
         $obj = null;
 
 
