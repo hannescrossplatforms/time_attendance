@@ -150,6 +150,7 @@ class HippnpController extends \BaseController {
 
         $finalVisitsStoreChartObject = array();
         $allStores = \EngagePicknpay::fetchAllStores($period, null, null);
+        $meh = \EngagePicknpay::fetchAllStores($period, null, null);
 
         foreach ($allStores as $store) {
             $storeName = $store->store;
@@ -180,7 +181,7 @@ class HippnpController extends \BaseController {
         else {
             $data['category_list_data_visits_store'] = json_encode([]);
         }
-        $data['hannes_test'] = count($allStores);
+        $data['hannes_test'] = count($meh);
         $obj = null;
         // category_list_data_visits_store
 
