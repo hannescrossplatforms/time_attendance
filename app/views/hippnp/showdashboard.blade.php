@@ -351,7 +351,7 @@ function renderCharts(time, start, end) {
             'end': end
         },
         success: function(data) {
-            debugger;
+
             var chartProperties = {
                 "caption": "",
                 "xAxisName": "Category",
