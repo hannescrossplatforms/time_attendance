@@ -168,7 +168,7 @@ class HippnpController extends \BaseController {
             }
 
             $obj[] = [
-                'seriesname' => $categoryName,
+                'seriesname' => $storeName,
                 'data' => $dataArrayVisitsStore
             ];
             array_push($finalVisitsStoreChartObject, $obj);
