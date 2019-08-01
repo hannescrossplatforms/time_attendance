@@ -69,8 +69,6 @@ class Picknpay extends Eloquent {
         ->select(DB::raw("COUNT(*) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
         ->whereraw("category_id = '$category'")
-        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->get();
     }
 

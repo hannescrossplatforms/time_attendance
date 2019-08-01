@@ -125,16 +125,16 @@ class HippnpController extends \BaseController {
                 $response = \Picknpay::fetchDwellVisitsForCategoryWithDate($date['label'], $categoryId);
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
-                    array_push($dataArrayAvg, $empty_array);
+                    array_push($dataArrayVisits, $empty_array);
                 } else {
-                    array_push($dataArrayAvg, $response);
+                    array_push($dataArrayVisits, $response);
                 }
 
             }
 
             $obj[] = [
                 'seriesname' => $categoryName,
-                'data' => $dataArrayAvg
+                'data' => $dataArrayVisits
             ];
             array_push($finalVisitsChartObject, $obj);
         };
