@@ -139,18 +139,15 @@
                     </div>
 
                     <div class="row">
-                            <!-- <div id="report_period"><br><br>{{$data['report_period']}}</div> -->
-
-
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Total dwell time per category</div>
+                                    <div class="chart-title venuecolheading">Number of visits per category</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="chart-stage">
-                                                    <div id="staff_wrk">Loading...</div>
+                                                    <div id="staff_visits_per_category">Loading...</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,12 +258,33 @@ $(document).ready(function() {
         }
     });
     apiChart.render();
+
+    var chartProperties = {
+        "caption": "",
+        "xAxisName": "Category",
+        "yAxisName": "Number of visits",
+        "paletteColors": "#0075c2,#f8b81d,#3CB371",
+        "rotatevalues": "1",
+        "theme": "zune"
+    };
+
+    apiChart = new FusionCharts({
+        type: 'mscolumn2d',
+        renderAt: 'staff_visits_per_category',
+        width: '400',
+        height: '350',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": chartProperties,
+            "categories": [{
+                "category": <?php echo $data['category_list']; ?>
+            }],
+            "dataset": <?php echo $data['category_list_number_of_visits']; ?>
+
+        }
+    });
+    apiChart.render();
 });
-
-
-
-
-
 
 function change_report_period() {
     var time = $("#brandreportperiod").val();

@@ -9,4 +9,8 @@ class EngagePicknPayCategory extends Eloquent {
         $this->connection = \Utils::getEngageDbConnection();
     }
 
+    public static function getCategoryWithID($id){
+        return EngagePicknPayCategory::find($id)->name;
+    }
+
 }
