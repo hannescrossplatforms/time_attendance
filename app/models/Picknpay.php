@@ -64,6 +64,16 @@ class Picknpay extends Eloquent {
         ->get();
     }
 
+    public static function fetchDwellVisitsForCategoryWithDate($date, $category, $verb){
+        return Picknpay::orderBy('created_at', 'ASC')
+        ->select(DB::raw("COUNT(*) AS value"))
+        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
+        ->whereraw("category_id = '$category'")
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->get();
+    }
+
     public static function customerInStoreToday(){
 
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('today');
