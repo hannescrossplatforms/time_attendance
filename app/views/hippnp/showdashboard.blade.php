@@ -390,7 +390,7 @@ function renderCharts(time, start, end) {
                     "categories": [{
                         "category": data['category_list']
                     }],
-                    "dataset": data['staff_visits_per_category']
+                    "dataset": data['category_list_data_visits']
 
                 }
             });
