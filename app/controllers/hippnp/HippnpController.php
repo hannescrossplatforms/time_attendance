@@ -43,12 +43,12 @@ class HippnpController extends \BaseController {
 
             //Hannes hier:
             $categoryName = \EngagePicknPayCategory::getCategoryWithID($category->id);
+            $categoryId = $category->id;
 
-            // $categoryName = $category->id;
             $dataArray = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "SUM");
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "SUM");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArray, $empty_array);
