@@ -154,6 +154,7 @@ class HippnpController extends \BaseController {
         $meh = \EngagePicknpay::fetchAllStores($period, null, null);
 
         foreach ($allStores as $store) {
+            $data['hannes_test'] = $storeName;
             $storeName = $store->store;
             $storeId = $store->store_id;
             $dataArrayVisitsStore = array();
@@ -182,7 +183,7 @@ class HippnpController extends \BaseController {
         else {
             $data['category_list_data_visits_store'] = json_encode([]);
         }
-        $data['hannes_test'] = $storeName;
+
         $obj = null;
         // category_list_data_visits_store
 
