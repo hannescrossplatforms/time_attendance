@@ -1,6 +1,7 @@
 <?php
 
 use \EngagePicknPayCategory;
+use \EngagePicknPay;
 
 class Picknpay extends Eloquent {
 
@@ -50,6 +51,21 @@ class Picknpay extends Eloquent {
 
     }
 
+    public static function fetchAllStores($date, $startDate, $endDate){
+
+        if ($startDate == null && $endDate == null) {
+
+            $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
+
+            $startDate = $dateRange['startDate'];
+            $endDate = $dateRange['endDate'];
+
+        }
+
+        return EngagePicknPay::raw("SELECT DISTINCT store, store_id FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
+
+    }
+
     public static function fetchAllCategoriesWithoutDateFilter(){
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
     }
@@ -69,6 +85,14 @@ class Picknpay extends Eloquent {
         ->select(DB::raw("COUNT(*) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
         ->whereraw("category_id = '$category'")
+        ->get();
+    }
+
+    public static function fetchDwellVisitsForStoreWithDate($date, $storeId){
+        return Picknpay::orderBy('created_at', 'ASC')
+        ->select(DB::raw("COUNT(*) AS value"))
+        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
+        ->whereraw("store_id = '$category'")
         ->get();
     }
 

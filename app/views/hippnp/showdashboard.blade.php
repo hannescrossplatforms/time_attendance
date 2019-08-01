@@ -157,12 +157,12 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Average dwell time per category</div>
+                                    <div class="chart-title venuecolheading">Number of visits per store</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="chart-stage">
-                                                    <div id="staff_wrk_avg">Loading...</div>
+                                                    <div id="staff_visits_per_store">Loading...</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -206,6 +206,8 @@ $(document).ready(function() {
 
     pathname = $('#url').val();
 
+    // Total dwell time
+
     var chartProperties = {
         "caption": "",
         "xAxisName": "Category",
@@ -232,6 +234,7 @@ $(document).ready(function() {
     });
     apiChart.render();
 
+    // Average dwell time
 
     var chartProperties = {
         "caption": "",
@@ -259,10 +262,12 @@ $(document).ready(function() {
     });
     apiChart.render();
 
+    // Number of visits per category
+
     var chartProperties = {
         "caption": "",
         "xAxisName": "Category",
-        "yAxisName": "Number of visits",
+        "yAxisName": "Number of visits per category",
         "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
@@ -284,6 +289,35 @@ $(document).ready(function() {
         }
     });
     apiChart.render();
+
+    // Number of visits per store
+
+    var chartProperties = {
+        "caption": "",
+        "xAxisName": "Category",
+        "yAxisName": "Number of visits per store",
+        "paletteColors": "#0075c2,#f8b81d,#3CB371",
+        "rotatevalues": "1",
+        "theme": "zune"
+    };
+
+    apiChart = new FusionCharts({
+        type: 'mscolumn2d',
+        renderAt: 'staff_visits_per_store',
+        width: '400',
+        height: '350',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": chartProperties,
+            "categories": [{
+                "category": <?php echo $data['category_list']; ?>
+            }],
+            "dataset": <?php echo $data['category_list_data_visits_store']; ?>
+
+        }
+    });
+    apiChart.render();
+
 });
 
 function change_report_period() {
