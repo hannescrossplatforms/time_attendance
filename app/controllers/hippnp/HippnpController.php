@@ -182,7 +182,7 @@ class HippnpController extends \BaseController {
         else {
             $data['category_list_data_visits_store'] = json_encode([]);
         }
-        $data['hannes_test'] = count($storeName);
+        $data['hannes_test'] = $storeName;
         $obj = null;
         // category_list_data_visits_store
 
