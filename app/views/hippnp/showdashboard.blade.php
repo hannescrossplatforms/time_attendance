@@ -452,7 +452,7 @@ function renderCharts(time, start, end) {
                     "categories": [{
                         "category": $data['category_list'];
                     }],
-                    "dataset": $data['category_list_data_visits_store'];
+                    "dataset": $data['category_list_data_visits_store']; ?>
 
                 }
             });
