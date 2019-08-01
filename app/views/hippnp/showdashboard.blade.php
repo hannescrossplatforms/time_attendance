@@ -337,15 +337,6 @@ function custom_report_period() {
     renderCharts('daterange', from, to);
 }
 
-function getRandomColor() {
-    var chars = '0123456789ABCDEF'.split('');
-    var hex = '#';
-    for (var i = 0; i < 6; i++) {
-        hex += chars[Math.floor(Math.random() * 16)];
-    }
-    return hex;
- }
-
 function renderCharts(time, start, end) {
 
 
@@ -366,7 +357,7 @@ function renderCharts(time, start, end) {
                 "caption": "",
                 "xAxisName": "Category",
                 "yAxisName": "Total dwell time (minutes)",
-                "paletteColors": "" + getRandomColor() + "," getRandomColor() + "",
+                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
