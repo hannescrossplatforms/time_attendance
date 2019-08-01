@@ -149,7 +149,7 @@ class HippnpController extends \BaseController {
         //Number of visits per store
 
         $finalVisitsStoreChartObject = array();
-        $allStores = \Picknpay::fetchAllStores($period, null, null);
+        $allStores = \EngagePicknpay::fetchAllStores($period, null, null);
 
         foreach ($allStores as $store) {
             $storeName = $store->store;
