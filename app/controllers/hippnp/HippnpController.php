@@ -151,7 +151,7 @@ class HippnpController extends \BaseController {
         $finalVisitsStoreChartObject = array();
         $allStores = \EngagePicknpay::fetchAllStores($period, null, null);
 
-        $meh = "SELECT DISTINCT store, store_id FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' GROUP BY store, store_id"
+        $meh = \EngagePicknpay::fetchAllStores($period, null, null);
 
         foreach ($allStores as $store) {
             $storeName = $store->store;
