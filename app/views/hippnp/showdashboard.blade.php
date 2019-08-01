@@ -436,7 +436,6 @@ function renderCharts(time, start, end) {
                 "caption": "",
                 "xAxisName": "Category",
                 "yAxisName": "Number of visits per store",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
