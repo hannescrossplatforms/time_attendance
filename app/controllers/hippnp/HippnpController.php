@@ -276,10 +276,10 @@ class HippnpController extends \BaseController {
         };
 
         if (count($finalVisitsChartObject) > 0) {
-            $data['category_list_data_visits'] = json_encode($finalVisitsChartObject[count($finalVisitsChartObject)- 1]);
+            $data['category_list_data_visits'] = $finalVisitsChartObject[count($finalVisitsChartObject)- 1];
         }
         else {
-            $data['category_list_data_visits'] = json_encode([]);
+            $data['category_list_data_visits'] = [];
         }
         $obj = null;
 
