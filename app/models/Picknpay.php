@@ -92,7 +92,7 @@ class Picknpay extends Eloquent {
         return Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("COUNT(*) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
-        ->whereraw("store_id = '$category'")
+        ->whereraw("store_id = '$storeId'")
         ->get();
     }
 
