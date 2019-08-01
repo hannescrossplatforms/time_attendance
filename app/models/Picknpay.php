@@ -62,7 +62,7 @@ class Picknpay extends Eloquent {
 
         }
 
-        return EngagePicknPay::raw("SELECT DISTINCT name FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
+        return EngagePicknPay::raw("SELECT DISTINCT store as store, store_id as store_id FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
 
     }
 
