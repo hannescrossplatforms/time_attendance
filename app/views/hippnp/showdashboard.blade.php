@@ -381,7 +381,7 @@ function renderCharts(time, start, end) {
 
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
-                renderAt: 'staff_wrk_avg',
+                renderAt: 'staff_visits_per_category',
                 width: '400',
                 height: '350',
                 dataFormat: 'json',
