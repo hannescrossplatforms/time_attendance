@@ -450,9 +450,9 @@ function renderCharts(time, start, end) {
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
-                        "category": $data['category_list']
+                        "category": data['category_list']
                     }],
-                    "dataset": $data['category_list_data_visits_store']
+                    "dataset": data['category_list_data_visits_store']
 
                 }
             });
