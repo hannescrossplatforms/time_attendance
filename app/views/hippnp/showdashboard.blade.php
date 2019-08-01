@@ -317,7 +317,7 @@ $(document).ready(function() {
         }
     });
     apiChart.render();
-    alert($data['hannes_test']);
+    alert(<?php echo $data['hannes_test']; ?>);
 });
 
 function change_report_period() {
