@@ -112,8 +112,6 @@ class HippnpController extends \BaseController {
 
         //Number of visits per category
 
-
-
         $finalVisitsChartObject = array();
 
         foreach ($allCategories as $category) {
@@ -249,6 +247,42 @@ class HippnpController extends \BaseController {
         }
 
         $obj = null;
+
+        //Number of visits per category
+
+        $finalVisitsChartObject = array();
+
+        foreach ($allCategories as $category) {
+            $categoryName = \EngagePicknPayCategory::getCategoryWithID($category->id);
+            $categoryId = $category->id;
+            $dataArrayVisits = array();
+
+            foreach ( $dates as $date ) {
+                $response = \Picknpay::fetchDwellVisitsForCategoryWithDate($date['label'], $categoryId);
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0']);
+                    array_push($dataArrayVisits, $empty_array);
+                } else {
+                    array_push($dataArrayVisits, $response);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $categoryName,
+                'data' => $dataArrayVisits
+            ];
+            array_push($finalVisitsChartObject, $obj);
+        };
+
+        if (count($finalVisitsChartObject) > 0) {
+            $data['category_list_data_visits'] = json_encode($finalVisitsChartObject[count($finalVisitsChartObject)- 1]);
+        }
+        else {
+            $data['category_list_data_visits'] = json_encode([]);
+        }
+        $obj = null;
+
 
         $json = json_encode($data);
 
