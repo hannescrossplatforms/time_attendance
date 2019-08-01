@@ -259,7 +259,31 @@ $(document).ready(function() {
     });
     apiChart.render();
 
+    var chartProperties = {
+        "caption": "",
+        "xAxisName": "Category",
+        "yAxisName": "Number of visits",
+        "paletteColors": "#0075c2,#f8b81d,#3CB371",
+        "rotatevalues": "1",
+        "theme": "zune"
+    };
 
+    apiChart = new FusionCharts({
+        type: 'mscolumn2d',
+        renderAt: 'staff_visits_per_category',
+        width: '400',
+        height: '350',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": chartProperties,
+            "categories": [{
+                "category": <?php echo $data['category_list']; ?>
+            }],
+            "dataset": <?php echo $data['category_list_number_of_visits']; ?>
+
+        }
+    });
+    apiChart.render();
 });
 
 function change_report_period() {

@@ -41,7 +41,6 @@ class HippnpController extends \BaseController {
 
         foreach ($allCategories as $category) {
 
-            //Hannes hier:
             $categoryName = \EngagePicknPayCategory::getCategoryWithID($category->id);
             $categoryId = $category->id;
 
@@ -78,11 +77,14 @@ class HippnpController extends \BaseController {
         $finalAverageChartObject = array();
 
         foreach ($allCategories as $category) {
-            $categoryName = $category->id;
+
+            $categoryName = \EngagePicknPayCategory::getCategoryWithID($category->id);
+            $categoryId = $category->id;
+
             $dataArrayAvg = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "AVG");
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "AVG");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArrayAvg, $empty_array);
@@ -185,11 +187,12 @@ class HippnpController extends \BaseController {
         $finalChartObject = array();
 
         foreach ($allCategories as $category) {
-            $categoryName = $category->id;
+            $categoryName = \EngagePicknPayCategory::getCategoryWithID($category->id);
+            $categoryId = $category->id;
             $dataArray = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "SUM");
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "SUM");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArray, $empty_array);
@@ -220,11 +223,12 @@ class HippnpController extends \BaseController {
         $finalAverageChartObject = array();
 
         foreach ($allCategories as $category) {
-            $categoryName = $category->id;
+            $categoryName = \EngagePicknPayCategory::getCategoryWithID($category->id);
+            $categoryId = $category->id;
             $dataArrayAvg = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryName, "AVG");
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "AVG");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArrayAvg, $empty_array);
