@@ -56,28 +56,43 @@ class Picknpay extends Eloquent {
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
     }
 
-    public static function fetchDwellTimeDataForCategoryWithDate($date, $category, $verb){
+    public static function fetchDwellTimeDataForCategoryWithDate($date, $categoryId, $storeId, $provinceId, $verb){
         return Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("IFNULL($verb(CAST(dwell_time AS UNSIGNED)), 0) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
-        ->whereraw("category_id = '$category'")
+        ->whereraw("category_id = '$categoryId'")
+        if ($storeId != ""){
+            ->whereraw("store_id = '$storeId'")
+        }
+        if ($provinceId != "") {
+            ->whereraw("province_id = '$provinceId'")
+        }
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->get();
     }
 
-    public static function fetchDwellVisitsForCategoryWithDate($date, $category){
+    public static function fetchDwellVisitsForCategoryWithDate($date, $categoryId, $storeId, $provinceId){
         return Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("COUNT(*) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
-        ->whereraw("category_id = '$category'")
+        ->whereraw("category_id = '$categoryId'")
+        if ($storeId != ""){
+            ->whereraw("store_id = '$storeId'")
+        }
+        if ($provinceId != "") {
+            ->whereraw("province_id = '$provinceId'")
+        }
         ->get();
     }
 
-    public static function fetchDwellVisitsForStoreWithDate($date, $storeId){
+    public static function fetchDwellVisitsForStoreWithDate($date, $storeId, $provinceId){
         return Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("COUNT(*) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
+        if ($provinceId != ""){
+            ->whereraw("province_id = '$provinceId'")
+        }
         ->whereraw("store_id = '$storeId'")
         ->get();
     }

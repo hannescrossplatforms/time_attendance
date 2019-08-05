@@ -239,7 +239,7 @@ class HippnpController extends \BaseController {
             $dataArray = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "SUM");
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, $storeId, $provinceId, "SUM");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArray, $empty_array);
@@ -275,7 +275,7 @@ class HippnpController extends \BaseController {
             $dataArrayAvg = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "AVG");
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, $storeId, $provinceId, "AVG");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArrayAvg, $empty_array);
@@ -311,7 +311,7 @@ class HippnpController extends \BaseController {
             $dataArrayVisits = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellVisitsForCategoryWithDate($date['label'], $categoryId);
+                $response = \Picknpay::fetchDwellVisitsForCategoryWithDate($date['label'], $categoryId, $storeId, $provinceId);
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArrayVisits, $empty_array);
@@ -347,7 +347,7 @@ class HippnpController extends \BaseController {
             $dataArrayVisitsStore = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellVisitsForStoreWithDate($date['label'], $storeId);
+                $response = \Picknpay::fetchDwellVisitsForStoreWithDate($date['label'], $storeId, $provinceId);
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArrayVisitsStore, $empty_array);

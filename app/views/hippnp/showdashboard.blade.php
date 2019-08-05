@@ -120,26 +120,6 @@
                     <div class="row">
                         <div class="col-md-4" style="width:30%;">
                             <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
-                                <label>Category</label>
-                            </div>
-                            <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandcategory" onchange="change_report_period()" class="form-control"
-                                    name="brandcategory">
-                                    <option value="">Select</option>
-                                    @foreach($data['all_categories'] as $category)
-                                    <option value="{{ $category->id }}">
-                                    {{ $category->name }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <br>
-                    <div class="row">
-                        <div class="col-md-4" style="width:30%;">
-                            <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
                                 <label>Province</label>
                             </div>
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
