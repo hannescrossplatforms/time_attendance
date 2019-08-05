@@ -78,14 +78,16 @@ class Picknpay extends Eloquent {
         return Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("COUNT(*) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
-        ->whereraw("category_id = '$categoryId'")
-        if ($storeId != ""){
-            ->whereraw("store_id = '$storeId'")
+        ->whereraw("category_id = '$categoryId'");
+
+        if($storeId != "") {
+            $query = $query->whereraw("store_id = '$storeId'");
         }
-        if ($provinceId != "") {
-            ->whereraw("province_id = '$provinceId'")
+        if($provinceId != "") {
+            $query = $query->whereraw("province_id = '$provinceId'");
         }
-        ->get();
+        return $query->get();
+
     }
 
     public static function fetchDwellVisitsForStoreWithDate($date, $storeId, $provinceId){
