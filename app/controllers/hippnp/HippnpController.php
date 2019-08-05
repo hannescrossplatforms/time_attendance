@@ -208,6 +208,10 @@ class HippnpController extends \BaseController {
         $start = Input::get('start');
         $end = Input::get('end');
 
+        $categoryId = Input::get('category_id');
+        $storeId = Input::get('store_id');
+        $provinceId = Input::get('province_id');
+
         if ($start != null && $end != null){
             $allCategories = \Picknpay::fetchAllCategories($period, $start, $end);
             $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $end)
@@ -462,6 +466,9 @@ class HippnpController extends \BaseController {
         $store = \Venue::find($storeID);
         $beaconStoreName = $store->sitename;
 
+        //Get venue
+        $province = \Picknpay::fetchStoreForVenue($store);
+
         //Get category
 
         $engageCategory = \EngagePicknPayCategory::find($categoryID);
@@ -475,6 +482,8 @@ class HippnpController extends \BaseController {
         $engageBeacon->category_id = $categoryID;
         $engageBeacon->store_name = $beaconStoreName;
         $engageBeacon->category_name = $categoryName;
+        $engageBeacon->province_id = $province->id;
+        $engageBeacon->province_name = $province->name;
         $engageBeacon->save();
 
         return \Redirect::to("/hippnp/picknpay_beacon_management");

@@ -380,17 +380,18 @@ $(document).ready(function() {
 });
 
 function change_report_period() {
+
     var time = $("#brandreportperiod").val();
+
     var category = $("#brandcategory").val();
     var store = $("#brandstore").val();
     var province = $("#brandprovince").val();
-    alert(category);
 
     if (time == 'daterange') {
         $('#custom').show();
     } else {
         $('#custom').hide();
-        renderCharts(time, '', '')
+        renderCharts(time, '', '', category, store, province);
     }
 }
 
@@ -398,10 +399,14 @@ function custom_report_period() {
     var from = $('#venuefrom').val();
     var to = $('#venueto').val();
 
-    renderCharts('daterange', from, to);
+    var category = $("#brandcategory").val();
+    var store = $("#brandstore").val();
+    var province = $("#brandprovince").val();
+
+    renderCharts('daterange', from, to, category, store, province);
 }
 
-function renderCharts(time, start, end) {
+function renderCharts(time, start, end, category, store, province) {
 
 
 
@@ -413,7 +418,10 @@ function renderCharts(time, start, end) {
         data: {
             'period': time,
             'start': start,
-            'end': end
+            'end': end,
+            'category_id': category,
+            'store_id': store,
+            'province_id': province
         },
         success: function(data) {
 
