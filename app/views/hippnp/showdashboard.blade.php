@@ -105,10 +105,11 @@
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                                 <select id="brandcateogory" onchange="change_report_period()" class="form-control"
                                     name="brandcateogory">
-                                    <option value="rep7day">This Week</option>
-                                    <option value="repthismonth">This month</option>
-                                    <option value="replastmonth">Last month</option>
-                                    <option value="daterange">Custom range</option>
+                                    @foreach($data['all_stores'] as $store)
+                                    <option value="{{ $store->id }}">
+                                    {{ $store->sitename }}
+                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
