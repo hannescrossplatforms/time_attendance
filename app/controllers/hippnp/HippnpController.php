@@ -133,7 +133,7 @@ class HippnpController extends \BaseController {
             $dataArrayVisits = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellVisitsForCategoryWithDate($date['label'], $categoryId);
+                $response = \Picknpay::fetchDwellVisitsForCategoryWithDate($date['label'], $categoryId, "", "");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArrayVisits, $empty_array);
