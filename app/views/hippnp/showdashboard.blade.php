@@ -123,8 +123,8 @@
                                 <label>Category</label>
                             </div>
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandcateogory" onchange="change_report_period()" class="form-control"
-                                    name="brandcateogory">
+                                <select id="brandcategory" onchange="change_report_period()" class="form-control"
+                                    name="brandcategory">
                                     <option>Select</option>
                                     @foreach($data['all_categories'] as $category)
                                     <option value="{{ $category->id }}">
