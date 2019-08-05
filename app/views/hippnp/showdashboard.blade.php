@@ -105,7 +105,7 @@
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                                 <select id="brandstore" onchange="change_report_period()" class="form-control"
                                     name="brandstore">
-                                    <option>Select</option>
+                                    <option value="">Select</option>
                                     @foreach($data['all_stores'] as $store)
                                     <option value="{{ $store->id }}">
                                     {{ $store->sitename }}
@@ -125,7 +125,7 @@
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                                 <select id="brandcategory" onchange="change_report_period()" class="form-control"
                                     name="brandcategory">
-                                    <option>Select</option>
+                                    <option value="">Select</option>
                                     @foreach($data['all_categories'] as $category)
                                     <option value="{{ $category->id }}">
                                     {{ $category->name }}
@@ -145,7 +145,7 @@
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                                 <select id="brandprovince" onchange="change_report_period()" class="form-control"
                                     name="brandprovince">
-                                    <option>Select</option>
+                                    <option value="">Select</option>
                                     @foreach($data['all_provinces'] as $province)
                                     <option value="{{ $province->id }}">
                                     {{ $province->name }}
