@@ -333,7 +333,7 @@ $(document).ready(function() {
 
     var chartProperties = {
         "caption": "",
-        "xAxisName": "Category",
+        "xAxisName": "Store",
         "yAxisName": "Number of visits per store",
         "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
@@ -487,7 +487,7 @@ function renderCharts(time, start, end, category, store, province) {
 
             var chartProperties = {
                 "caption": "",
-                "xAxisName": "Category",
+                "xAxisName": "Store",
                 "yAxisName": "Number of visits per store",
                 "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
