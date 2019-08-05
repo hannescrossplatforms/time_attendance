@@ -65,11 +65,11 @@ class Picknpay extends Eloquent {
         ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
 
         if($storeId != "") {
-            $query = $query->whereraw("store_id = '$storeId'")
-        };
+            $query = $query->whereraw("store_id = '$storeId'");
+        }
         if($provinceId != "") {
-            $query = $query->whereraw("province_id = '$provinceId'")
-        };
+            $query = $query->whereraw("province_id = '$provinceId'");
+        }
         return $query->get();
 
     }
