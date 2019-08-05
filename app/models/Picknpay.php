@@ -75,7 +75,7 @@ class Picknpay extends Eloquent {
     }
 
     public static function fetchDwellVisitsForCategoryWithDate($date, $categoryId, $storeId, $provinceId){
-        return Picknpay::orderBy('created_at', 'ASC')
+        $query = Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("COUNT(*) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
         ->whereraw("category_id = '$categoryId'");
@@ -91,14 +91,15 @@ class Picknpay extends Eloquent {
     }
 
     public static function fetchDwellVisitsForStoreWithDate($date, $storeId, $provinceId){
-        return Picknpay::orderBy('created_at', 'ASC')
+        $query = Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("COUNT(*) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
+        ->whereraw("store_id = '$storeId'");
+
         if ($provinceId != ""){
-            ->whereraw("province_id = '$provinceId'")
+            $query = $query->whereraw("province_id = '$provinceId'");
         }
-        ->whereraw("store_id = '$storeId'")
-        ->get();
+        return $query->get();
     }
 
     public static function customerInStoreToday(){
