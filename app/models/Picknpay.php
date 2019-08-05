@@ -62,7 +62,7 @@ class Picknpay extends Eloquent {
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
         ->whereraw("category_id = '$categoryId'")
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
 
         if($storeId != "") {
             $query = $query->whereraw("store_id = '$storeId'")
