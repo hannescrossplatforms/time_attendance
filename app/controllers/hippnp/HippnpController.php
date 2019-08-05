@@ -60,7 +60,7 @@ class HippnpController extends \BaseController {
             $dataArray = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "SUM");
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "", "", "SUM");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArray, $empty_array);
@@ -97,7 +97,7 @@ class HippnpController extends \BaseController {
             $dataArrayAvg = array();
 
             foreach ( $dates as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "AVG");
+                $response = \Picknpay::fetchDwellTimeDataForCategoryWithDate($date['label'], $categoryId, "", "", "AVG");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArrayAvg, $empty_array);
