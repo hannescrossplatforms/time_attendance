@@ -2,6 +2,7 @@
 
 use \EngagePicknPayCategory;
 use \EngagePicknPay;
+use \Brand;
 
 class Picknpay extends Eloquent {
 
@@ -107,6 +108,15 @@ class Picknpay extends Eloquent {
         ->where('created_at', "<=", $endDate)
         ->count();
 
+    }
+
+    public static function fetchAllStores(){
+        $picknpayBrand = \Brand::where('name', '=', 'PicknPay')->firstOrFail();
+        return $picknpayBrand->venues()->get();
+    }
+
+    public static function fetchStoreForVenue($venue){
+        return $province = \Province::find($venue->province_id);
     }
 
     public static function getDateForPeriodAndTimeOfDay($period){

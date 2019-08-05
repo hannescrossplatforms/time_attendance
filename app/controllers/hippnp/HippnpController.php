@@ -28,6 +28,19 @@ class HippnpController extends \BaseController {
         //Get all categories for charts to render
 
         $allCategories = \Picknpay::fetchAllCategories($period, null, null);
+        $allStores = \Picknpay::fetchAllStores($period, null, null);
+
+        $allProvinces = array();
+        foreach ($allStores as $store) {
+            $province = \Picknpay::fetchStoreForVenue($store);
+            array_push($allProvinces, $province);
+        }
+
+        $data['all_categories'] = $allCategories;
+        $data['all_stores'] = $allStores;
+        $data['all_provinces'] = $allProvinces;
+
+
         $dates = \Picknpay::datesToFetchChartDataFor($period, null, null)
         ->map(function($row) {
                 return ['label' => $row['created_att']];
