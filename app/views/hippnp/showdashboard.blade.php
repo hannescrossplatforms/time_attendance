@@ -103,8 +103,8 @@
                                 <label>Store</label>
                             </div>
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandcateogory" onchange="change_report_period()" class="form-control"
-                                    name="brandcateogory">
+                                <select id="brandstore" onchange="change_report_period()" class="form-control"
+                                    name="brandstore">
                                     <option>Select</option>
                                     @foreach($data['all_stores'] as $store)
                                     <option value="{{ $store->id }}">
@@ -143,8 +143,8 @@
                                 <label>Province</label>
                             </div>
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandcateogory" onchange="change_report_period()" class="form-control"
-                                    name="brandcateogory">
+                                <select id="brandprovince" onchange="change_report_period()" class="form-control"
+                                    name="brandprovince">
                                     <option>Select</option>
                                     @foreach($data['all_provinces'] as $province)
                                     <option value="{{ $province->id }}">
@@ -381,6 +381,11 @@ $(document).ready(function() {
 
 function change_report_period() {
     var time = $("#brandreportperiod").val();
+    var category = $("#brandcategory").val();
+    var store = $("#brandstore").val();
+    var province = $("#brandprovince").val();
+    alert(category);
+
     if (time == 'daterange') {
         $('#custom').show();
     } else {
