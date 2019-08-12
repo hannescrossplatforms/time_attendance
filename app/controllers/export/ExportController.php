@@ -31,8 +31,8 @@ class ExportController extends Controller {
 
 
         $venue = new \Venue();
-        $search = isset($_GET['search']) ? $_GET['search'] : null;
-        $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", $search);
+        // $search = isset($_GET['search']) ? $_GET['search'] : null;
+        $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", null);
         $data['status'] = [];
 
         foreach ($data['venues'] as $item) {
