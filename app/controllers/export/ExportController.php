@@ -9,7 +9,7 @@ use Response;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Session;
 use Route;
-use Illuminate\Http\Request;
+use \Illuminate\Http\Request;
 
 class ExportController extends \BaseController {
 
