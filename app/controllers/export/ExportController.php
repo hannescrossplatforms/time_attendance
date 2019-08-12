@@ -17,7 +17,7 @@ class ExportController extends \BaseController {
 	public static function exportVicinityAsJSON(){
 
 
-        $authorization = $request->header('Authorization', null);
+        $authorization = $this->request->headers->get('Authorization');
 
 
         $data = array();
