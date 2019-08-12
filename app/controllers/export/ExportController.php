@@ -20,7 +20,9 @@ class ExportController extends Controller {
 
 
 
-        $authorization = \Request::all();
+        $authorization = \Request::authorization();
+        // 328149511491BC7764417BB3D29C8
+
 
         $data = array();
         $vicinity = \Brand::where('name', '=', 'VICINITY')->firstOrFail();
