@@ -34,7 +34,7 @@ class ExportController extends Controller {
             $sensor = new \Sensor();
             $venue = new \Venue();
 
-            $data['venuesasdf'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", null, $user);
+
 
 
 
@@ -50,6 +50,7 @@ class ExportController extends Controller {
             $data['vicinity']['isp'] = $vicinity->isp;
             $data['vicinity']['country'] = $vicinity->countrie;
             $data['user'] = $user;
+            $data['venuesasdf'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", null, $user);
 
             $json = json_encode($data);
 
