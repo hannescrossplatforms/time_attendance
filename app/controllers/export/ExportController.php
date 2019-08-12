@@ -20,25 +20,19 @@ class ExportController extends Controller {
 
         if($authorization != "m2kiy7j6BwnMTzLm4pxwN2tjcHaxLaA0pjB0VfELSDVkIfawym27TPozVMDg")
         {
+
             $resp[] = [
                 'status' => "403",
                 'message' => "Unauthorized"
             ];
 
             print_r($resp);
+
         }
         else {
 
             $user = \User::where('remember_token', '=', $authorization)->firstOrFail();
-
-            $sensor = new \Sensor();
             $venue = new \Venue();
-
-
-
-
-
-
 
             $data = array();
             $vicinity = \Brand::where('name', '=', 'VICINITY')->firstOrFail();
@@ -49,30 +43,14 @@ class ExportController extends Controller {
             $data['vicinity']['venues'] = $vicinity->venues;
             $data['vicinity']['isp'] = $vicinity->isp;
             $data['vicinity']['country'] = $vicinity->countrie;
-            $data['user'] = $user;
             $data['venuesasdf'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", null, $user);
 
             $json = json_encode($data);
 
             print_r($json);
-        }
 
+        }
 
     }
 
-
 }
-
-
-
-// @foreach($data['venues'] as $venue)
-// <tr>
-//     <td id="venue{{$venue->id}}" idval="{{$venue->id}}" class="sensorlist">{{$venue->sitename}}
-//         <ol id="sensors{{$venue->id}}"></ol>
-//     </td>
-//     <td id="status{{$venue->id}}" class="venuelist-{{$data['status'][$venue->id]}}" idval="{{$venue->id}}">
-//         {{$data['status'][$venue->id]}}
-//     </td>
-
-// </tr>
-// @endforeach
