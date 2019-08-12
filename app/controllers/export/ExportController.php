@@ -20,7 +20,8 @@ class ExportController extends Controller {
 
 
 
-        $authorization = \Request::authorization();
+        $request = \Request::all();
+        $authorization = $authorization->authorization;
         // 328149511491BC7764417BB3D29C8
 
 
