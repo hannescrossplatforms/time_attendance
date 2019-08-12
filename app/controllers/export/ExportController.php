@@ -16,7 +16,9 @@ class ExportController extends \BaseController {
 
 	public static function exportVicinityAsJSON(){
 
-        // brand where vicinity
+
+        $authorization = $request->header('Authorization', null);
+
 
         $data = array();
         $vicinity = \Brand::where('name', '=', 'VICINITY')->firstOrFail();
@@ -27,13 +29,7 @@ class ExportController extends \BaseController {
         $data['vicinity']['venues'] = $vicinity->venues;
         $data['vicinity']['isp'] = $vicinity->isp;
         $data['vicinity']['country'] = $vicinity->countrie;
-
-
-
-
-
-
-        // $allCategories = \Picknpay::fetchAllCategories($period, $start, $end);
+        $data['header'] = $authorization;
 
         $json = json_encode($data);
 
