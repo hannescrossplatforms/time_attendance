@@ -16,8 +16,8 @@ class ExportController extends \BaseController {
 	public function exportVicinityAsJSON(Request $request){
 
         // $authorization = \Input::all();
-        $authorization = $request->all();
-
+        // $authorization = $request->all();
+        $authorization = app('request')->header('Authorization');
 
         $data = array();
         $vicinity = \Brand::where('name', '=', 'VICINITY')->firstOrFail();
