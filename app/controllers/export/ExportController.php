@@ -1,6 +1,5 @@
 <?php
 
-namespace hippnp;
 use DB;
 use Input;
 use Validator;
@@ -11,7 +10,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Session;
 use Route;
-use \EngagePicknPayBeacon;
+
 
 class ExportController extends \BaseController {
 
