@@ -22,6 +22,11 @@ class ExportController extends \BaseController {
         $vicinity = \Brand::where('name', '=', 'VICINITY')->firstOrFail();
 
         $data['vicinity'] = $vicinity;
+        $data['vicinity']['users'] = $vicinity->users;
+
+
+        // $data['mime'] = $this->uploadMime->type;
+
 
 
 
