@@ -20,7 +20,7 @@ class ExportController extends Controller {
 
         if($authorization != "328149511491BC7764417BB3D29C8")
         {
-            return response()->json(null, 403);
+            print_r({"403 unauthorized"});
         }
         else {
             $data = array();
