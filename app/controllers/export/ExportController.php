@@ -7,17 +7,16 @@ use DateTime;
 use Illuminate\Support\Facades\Redirect;
 use Response;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\Request;
 use Session;
 use Route;
-
+use Illuminate\Http\Request;
 
 class ExportController extends \BaseController {
 
-	public function exportVicinityAsJSON(Request $request){
+	public static function exportVicinityAsJSON(Request $request){
 
-
-        $authorization = $request->headers->get('Authorization');
+        $authorization = \Input::all();
+        // $authorization = $request->headers->get('Authorization');
 
 
         $data = array();
