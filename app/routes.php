@@ -370,6 +370,9 @@ Route::get('hipbidvest/bidvest_delete_beacon/{id}', 'hipbidvest\HipbidvestContro
 Route::get('hipbidvest/bidvest_add_beacon', 'hipbidvest\HipbidvestController@addBeacon');
 Route::get('hipbidvest/storeCategories/{id}','hipbidvest\HipbidvestController@getStoreCategories');
 
+//Export controller routes ///////////////////////////////////////////////////////////
+Route::any('/vicinity_to_json', 'ExportController@exportVicinityAsJSON', 'as' => 'export_vicinity_data_to_json');
+
 // Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'hiptna_showdashboard'))->before('auth');//download test
 // Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPdfReport', 'as' => 'hiptna_showdashboard'))->before('auth');//auto download test
 Route::any('/pdftest', array('uses' => 'hiptna\HiptnaController@pdftest', 'as' => 'pdftest'));//auto download test
