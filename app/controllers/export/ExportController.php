@@ -34,8 +34,7 @@ class ExportController extends Controller {
             $sensor = new \Sensor();
             $venue = new \Venue();
 
-            $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", null, $user);
-            $data['status'] = [];
+            $data['venuesasdf'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", null, $user);
 
 
 
