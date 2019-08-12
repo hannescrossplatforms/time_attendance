@@ -9,14 +9,14 @@ use Response;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Session;
 use Route;
-use Request;
+use Illuminate\Http\Request;
 
 class ExportController extends \BaseController {
 
-	public function exportVicinityAsJSON(){
+	public function exportVicinityAsJSON(Request $request){
 
         // $authorization = \Input::all();
-        $authorization = Request::header('Authorization');
+        $authorization = $request->all();
 
 
         $data = array();
