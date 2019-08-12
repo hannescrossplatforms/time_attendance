@@ -20,7 +20,12 @@ class ExportController extends Controller {
 
         if($authorization != "328149511491BC7764417BB3D29C8")
         {
-            print_r(["status": "403 unauthorized"]);
+            $resp[] = [
+                'status' => "403",
+                'message' => "Unauthorized"
+            ];
+
+            print_r($resp);
         }
         else {
             $data = array();
