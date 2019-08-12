@@ -11,7 +11,7 @@ use Session;
 use Route;
 use Illuminate\Http\Request;
 
-class ExportController extends \BaseController {
+class ExportController extends Controller {
 
 	public function exportVicinityAsJSON(Request $request){
 
