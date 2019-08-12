@@ -18,7 +18,7 @@ class ExportController extends Controller {
         $request = \Request::all();
         $authorization = $request['Authorization'];
 
-        if($authorization != "328149511491BC7764417BB3D29C8")
+        if($authorization != "m2kiy7j6BwnMTzLm4pxwN2tjcHaxLaA0pjB0VfELSDVkIfawym27TPozVMDg")
         {
             $resp[] = [
                 'status' => "403",
@@ -29,13 +29,13 @@ class ExportController extends Controller {
         }
         else {
 
+            $user = \User::where('remember_token', '=', 'm2kiy7j6BwnMTzLm4pxwN2tjcHaxLaA0pjB0VfELSDVkIfawym27TPozVMDg')->firstOrFail();
+            // $search = isset($_GET['search']) ? $_GET['search'] : null;
+            // $sensor = new \Sensor();
+            // $venue = new \Venue();
 
-            $search = isset($_GET['search']) ? $_GET['search'] : null;
-            $sensor = new \Sensor();
-            $venue = new \Venue();
-
-            $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", $search);
-            $data['status'] = [];
+            // $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", $search);
+            // $data['status'] = [];
 
 
 
@@ -50,7 +50,7 @@ class ExportController extends Controller {
             $data['vicinity']['venues'] = $vicinity->venues;
             $data['vicinity']['isp'] = $vicinity->isp;
             $data['vicinity']['country'] = $vicinity->countrie;
-            $data['header'] = $authorization;
+            $data['user'] = $user;
 
             $json = json_encode($data);
 
