@@ -64,6 +64,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         
     }
 
+    public static function isVicinity() {
+        $user = Auth::user();
+        $brands = $user->brands;
+        foreach($brands as $brand) {
+            error_log("isVicinity : brand name " . $brand->name);    
+            if ($brand->name == "VICINITY") {
+                return true;
+            }   
+        }
+        return false;
+    }
+
     public static function hasProduct($product_name) {
 
         $user = Auth::user();

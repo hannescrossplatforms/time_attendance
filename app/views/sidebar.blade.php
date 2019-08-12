@@ -1,6 +1,6 @@
 
 
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-sm-3 col-md-2 sidebar" @if ( \User::isVicinity() ) style="background" @endif>
           <div class="logo">
             <a href="{{ url('dashboard'); }}">{{ HTML::image('/img/logo_hiphub.png', 'a ', array('class' => 'img-responsive')) }}</a>
           </div>
