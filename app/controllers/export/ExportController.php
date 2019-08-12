@@ -28,6 +28,8 @@ class ExportController extends \BaseController {
         // $allCategories = \Picknpay::fetchAllCategories($period, $start, $end);
 
         $json = json_encode($data);
+
+        print_r($json);
     }
 
 
