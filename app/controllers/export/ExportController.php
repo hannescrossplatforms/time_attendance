@@ -23,9 +23,12 @@ class ExportController extends \BaseController {
 
         $data['vicinity'] = $vicinity;
         $data['vicinity']['users'] = $vicinity->users;
+        $data['vicinity']['media'] = $vicinity->medias;
+        $data['vicinity']['venues'] = $vicinity->venues;
+        $data['vicinity']['isp'] = $vicinity->isp;
+        $data['vicinity']['country'] = $vicinity->countrie;
 
 
-        // $data['mime'] = $this->uploadMime->type;
 
 
 
