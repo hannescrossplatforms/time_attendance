@@ -11,7 +11,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
 	use UserTrait, RemindableTrait;
 
     protected $dates = ['deleted_at'];
-    
+
 	protected $fillable = array('location');
 
 	/**
@@ -63,16 +63,19 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
 
     }
 
-    public function getVenuesForUser($productname = null, $showall = null, $device_type = null, $brand_id = null, $active_status = null, $search=null) {
-        
+    public function getVenuesForUser($productname = null, $showall = null, $device_type = null, $brand_id = null, $active_status = null, $search=null, $userPassed=null) {
+
         error_log("getVenuesForUser : productname = $productname");
         error_log("getVenuesForUser : active_status = $active_status");
 
         $user = Auth::user();
-        if(!$device_type) $device_type = "%"; 
+        if (!$user){
+            $user = $userPassed;
+        }
+        if(!$device_type) $device_type = "%";
 
         $query = \Venue::join('brands', 'venues.brand_id', '=', 'brands.id')
-                ->select(array("venues.*")) 
+                ->select(array("venues.*"))
                 ->orderBy('venues.sitename','ASC');
 
         if($productname) {
@@ -87,21 +90,21 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
                 $activated_operator = "<="; // a bit of a hack, but this just makes sure that all rows are returned
             }
 
-            if($productname == "hipwifi") { 
+            if($productname == "hipwifi") {
                 $query->where('brands.wifi_activated', "=", 1);
                 $query->where('venues.wifi_activated', $activated_operator, 1);
-            } else if($productname == "hiprm") { 
+            } else if($productname == "hiprm") {
                 $query->where('brands.rm_activated', "=", 1);
                 $query->where('venues.rm_activated', $activated_operator, 1);
-            } else if($productname == "hipjam") { 
+            } else if($productname == "hipjam") {
                 error_log("getVenuesForUser : jam_activated = $activated_operator");
                 $query->where('brands.jam_activated', "=", 1);
                 $query->where('venues.jam_activated', $activated_operator, 1);
                 if ($search){
                     $query->where("venues.sitename", "like", '%'.$search.'%');
                 }
-                
-            } else if($productname == "hipengage") { 
+
+            } else if($productname == "hipengage") {
                 $query->where('brands.engage_activated', "=", 1);
                 $query->where('venues.engage_activated', $activated_operator, 1);
             }
@@ -124,9 +127,9 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
             $query->where("track_enabled" , "=", 1);
         }
         */
-        
+
         $venues = $query->get();
-        
+
         if($user->level_code == "superadmin") {
             //dd($venues);
             return $venues;
@@ -136,18 +139,18 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
         // if($productname == "hipjam") {
         //     return $venues;
         // }
-                   
+
         $brands = $user->brands;
         $brand_ids = array();
         foreach($brands as $brand) {
-            error_log("getVenuesForUser : brand name " . $brand->name);    
-            array_push($brand_ids, $brand->id);   
+            error_log("getVenuesForUser : brand name " . $brand->name);
+            array_push($brand_ids, $brand->id);
         }
-        
+
         $filteredVenues = array();
         foreach($venues as $venue) {
             if(in_array($venue->brand_id, $brand_ids)) {
-                error_log("getVenuesForUser : venue name " . $venue->name);    
+                error_log("getVenuesForUser : venue name " . $venue->name);
                 array_push($filteredVenues, $venue);
             }
         }
@@ -249,7 +252,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
         }
         error_log("constructRadiusVenueRecord : 20 : connect_btn_colour = $connect_btn_colour");
         error_log("constructRadiusVenueRecord : 20 : zone_txt_colour = $zone_txt_colour");
-   
+
 
         $record = array(
                 "sitename" => $venue->sitename,
@@ -279,7 +282,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
                 "address" => $venue->address,
                 "contact" => $venue->contact
             );
-        
+
         error_log("constructRadiusVenueRecord : 30");
         return $record;
     }
@@ -318,7 +321,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
     public function insertVenueInHiprm($venue) {
 
         error_log("insertVenueInHiprm 01 : sitename = " . $venue->sitename);
-        
+
         $media = \Advertmedia::where('location', 'like', $venue->medialocation)->first();
 
         error_log("insertVenueInHiprm 02 : ");
@@ -327,12 +330,12 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
             $medianame = $media->medianame;
             error_log("insertVenueInHiprm type = " . $media->type);
             // $media = $this->setHiprmMediaDefaults($venue);
-        } 
+        }
 
         error_log("insertVenueInHiprm 10 : medianame = $medianame");
 
         $record = $this->constructHiprmVenueRecord($medianame, $venue);
-        
+
         error_log("insertVenueInHiprm 20 : sitename = " . $venue->sitename);
 
         \DB::connection("hiprm_db")->table("venues")->insert($record);
@@ -346,7 +349,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
 
         if(!$media) {
             $media = $this->setHiprmMediaDefaults($venue);
-        } 
+        }
 
         $record = $this->constructHiprmVenueRecord($media, $venue);
         \DB::connection("hiprm_db")
@@ -479,7 +482,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
                 "mb_ext" => "n/a",
                 "uru" => "n/a",
             );
-        
+
         return $record;
     }
 
@@ -507,7 +510,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
         if(!$media) {
             error_log("insertVenueInRadius medialocation = " . $venue->medialocation);
             $media = $this->setMediaDefaults($venue);
-        } 
+        }
 
         $record = $this->constructRadiusVenueRecord($media, $venue);
 
@@ -523,7 +526,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
 
         if(!$media) {
             $media = $this->setMediaDefaults($venue);
-        } 
+        }
 
         $record = $this->constructRadiusVenueRecord($media, $venue);
         \DB::connection($connection)
@@ -544,7 +547,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function synchToRadius($remotedb_id) {
-    	
+
     	$remodtedb = \DB::table('remotedbs')->select("*")->where('id', '=', $remotedb_id)->first();
     	$connection = $remodtedb->dbconnection;
 
@@ -600,24 +603,24 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface {
 	        if($citie_code == "PTA") $citie_code = "PTY";
 
 	        $citie = \DB::table('cities')->select("*")->where('code', 'like', $citie_code)->first();
-	        if ($citie) { 
-	        	$citie_id = $citie->id; 
+	        if ($citie) {
+	        	$citie_id = $citie->id;
 	        	$province_id = $citie->province_id;
-	        } else { 
-	        	$citie_id = 0; 
+	        } else {
+	        	$citie_id = 0;
 	        	$province_id = 0;
 	        };
 
 	        $province = \DB::table('provinces')->select("*")->where('id', '=', $province_id)->first();
-	        if ($province) { 
-	        	$countrie_id = $province->countrie_id; 
-	        	$province_code = $province->code; 
-	        } else { 
-	        	$countrie_id = 0; 
+	        if ($province) {
+	        	$countrie_id = $province->countrie_id;
+	        	$province_code = $province->code;
+	        } else {
+	        	$countrie_id = 0;
 	        };
 
 	        if($citie_id == 0 || $province_id == 0 || $countrie_id == 0 || $brand_id == 0) {
- 
+
 	        	array_push($messages, $oldlocation . " not added");
 	        	error_log("exception : " + $site->sitename + " : $oldlocation : citie_id = $citie_id :: province_id = $province_id :: countrie_id = $countrie_id :: brand_id = $brand_id " );
 	        } else {

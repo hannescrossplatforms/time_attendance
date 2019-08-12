@@ -29,13 +29,13 @@ class ExportController extends Controller {
         }
         else {
 
-            $user = \User::where('remember_token', '=', 'm2kiy7j6BwnMTzLm4pxwN2tjcHaxLaA0pjB0VfELSDVkIfawym27TPozVMDg')->firstOrFail();
-            // $search = isset($_GET['search']) ? $_GET['search'] : null;
-            // $sensor = new \Sensor();
-            // $venue = new \Venue();
+            $user = \User::where('remember_token', '=', $authorization)->firstOrFail();
 
-            // $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", $search);
-            // $data['status'] = [];
+            $sensor = new \Sensor();
+            $venue = new \Venue();
+
+            $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", $search);
+            $data['status'] = [];
 
 
 

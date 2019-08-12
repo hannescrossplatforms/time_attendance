@@ -27,7 +27,7 @@ class HipjamController extends \BaseController {
         $venue = new \Venue();
         // $venues = $venue->getVenuesForUser('hipjam', 1);
         $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
-        
+
 
         foreach($venues as $venue) {
             if($venue->ap_active == 0) {
@@ -77,7 +77,7 @@ class HipjamController extends \BaseController {
         $brand = new \Brand();
         $jambrands = $brand->getJamBrandsForUser(\Auth::user()->id, "active");
 
-        $data['brandsStruct'] = $jambrands;    
+        $data['brandsStruct'] = $jambrands;
         $brandsJason = json_encode($jambrands);
         $data['brandsJason'] = $brandsJason;
 
@@ -157,10 +157,10 @@ class HipjamController extends \BaseController {
 
     private function getActivateRules() {
         return array(
-                'min_engaged_length'          => 'required',  
-                'max_engaged_length'          => 'required', 
-                'max_session_length'       => 'required',  
-                'min_session_length'       => 'required',  
+                'min_engaged_length'          => 'required',
+                'max_engaged_length'          => 'required',
+                'max_session_length'       => 'required',
+                'min_session_length'       => 'required',
             );
     }
 
@@ -192,12 +192,12 @@ class HipjamController extends \BaseController {
 
     //     $messages = $this->getErrorActivateMessages();
     //     $rules = $this->getActivateRules();
-    //     $validator = \Validator::make($input, $rules, $messages); 
+    //     $validator = \Validator::make($input, $rules, $messages);
     //     if ($validator->fails()) {
     //         $messages = $validator->messages();
     //         return \Redirect::to('hipjam_activatebrand/' . $input["id"])->withErrors($validator)->withInput();
 
-    //     } else {  
+    //     } else {
     //         $this->commonBrandSave($input, $brand);
     //         return \Redirect::route('hipjam_showbrands');
     //     }
@@ -213,15 +213,15 @@ class HipjamController extends \BaseController {
         $id = \Input::get('id');
         $brand = \Brand::find($id);
         $input = \Input::all();
-        
+
         $messages = $this->getErrorActivateMessages();
         $rules = $this->getActivateRules();
-        $validator = \Validator::make($input, $rules, $messages); 
+        $validator = \Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             $messages = $validator->messages();
             return \Redirect::to('hipjam_activatebrand/' . $input["id"])->withErrors($validator)->withInput();
 
-        } else {  
+        } else {
             // Save in hiphub DB
             $brand->min_engaged_length = $input["min_engaged_length"];
             $brand->max_engaged_length = $input["max_engaged_length"];
@@ -233,7 +233,7 @@ class HipjamController extends \BaseController {
             // Update in Track DB
             if(!$is_activation) $this->updateActivatedVenuesInTrack($input, $brand);
             return \Redirect::route('hipjam_showbrands');
-        } 
+        }
     }
 
     // END BRAND /////////////////////////////////////////////////////////////
@@ -530,7 +530,7 @@ class HipjamController extends \BaseController {
 
 
         // $data['timezoneselect'] = \View::make('partials.timezoneselect');
-        
+
 
 
         /*$server =  \Sensor::where("venue_id", "like", $data['venue']["id"])->where("code", "like", 'server_track')->orderBy('id', 'DESC')->get();*/
@@ -674,12 +674,12 @@ public function activateVenue($id)
         error_log("saveVenueInTrackDb 10");
         \DB::connection('track')->table("venues")->where('id', '=', $venue->id)->delete();
         error_log("saveVenueInTrackDb 20");
-        \DB::connection('track')->table("venues")->insert($record);       
+        \DB::connection('track')->table("venues")->insert($record);
         error_log("saveVenueInTrackDb 30");
     }
 
 
-    //update the track server name and id 
+    //update the track server name and id
     public function editVenueServer()
     {
         error_log("editVenueServer 10");
@@ -694,7 +694,7 @@ public function activateVenue($id)
         $venue->timezone = $objData->timezone;
         $result = $venue->save();
 
-        // Update the venues table on the server 
+        // Update the venues table on the server
         $this->saveVenueInTrackDb($venue);
 
         print_r($result); // For some reason the success condition in the javascript will only fir if I do this. Not quite sure why.
@@ -707,7 +707,7 @@ public function activateVenue($id)
 
         $objData   = json_decode(\Input::get("newrecord"));
         $objReport =\Sensor::where('id',$objData->updateNum)->first();
-         
+
         //$objReport->name = $objData->add_name;
         //$objReport->code = $objData->sensor_id;
         //$objReport->mac = $objData->sensor_mac;
@@ -718,16 +718,16 @@ public function activateVenue($id)
 
         if($save){
             $lastInsertedID =$objData->updateNum; //$objReport->id;
-            
+
             $reportJson =  \Sensor::where('id',$lastInsertedID)->get();
             foreach ($reportJson as $value) {
 
                 $rows = '<tr id="rowCount'.$value->id.'"><td class="sensor_name"> <div id="add_name'.$value->id.'" class="form-control no-radius" >'.$value->name.'</div> </td><td class="sensor_location"> <div id="sensor_location'.$value->id.'" class="form-control no-radius" >'.$value->location.'</div> </td><td class="sensor_mac"> <div id="sensor_mac'.$value->id.'" class="form-control no-radius" >'.$value->mac.'</div> </td><td class="x_cordinate"> <input id="x_cordinate'.$value->id.'" name="x_cordinate" class="form-control no-radius" value="'.$value->xcoord.'" placeholder="X Cordinate" type="text" readonly> </td><td class="y_cordinate"> <input id="y_cordinate'.$value->id.'" name="y_cordinate" value="'.$value->ycoord.'" class="form-control no-radius" placeholder="Y Cordinate" type="text" readonly> </td><td><a onclick="setxyImage('.$value->id.')"  class="btn btn-default btn-delete btn-sm">Set XY</a><a id="addreportuser" onclick="updateRow('.$value->id.');" class="btn btn-default btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeRow('.$value->id.');" class="btn btn-default btn-delete btn-sm" >Delete</a></td></tr> ';
-                
+
             }
         }
         $data = array('row'=>$rows);
-        print_r(json_encode($data));    
+        print_r(json_encode($data));
 
 
     }
@@ -747,10 +747,10 @@ public function activateVenue($id)
 
         // Build record. Also need to add:
         // | service_version | string
-        // | type            | string 
-        // | meraki          | integer   
-        // | meraki_secret   | string 
-        // | power_offset    | integer 
+        // | type            | string
+        // | meraki          | integer
+        // | meraki_secret   | string
+        // | power_offset    | integer
         $record = array(
             "id" => $scannerObj->id,
             "venue_id" => $scannerObj->venue_id,
@@ -783,18 +783,21 @@ public function activateVenue($id)
 
 
      public function monitorSensors(){
+
+
+
         $search = isset($_GET['search']) ? $_GET['search'] : null;
         $data = array();
         $sensor = new \Sensor();
         $data['currentMenuItem'] = "Sensor Monitoring";
         $venue = new \Venue();
-        
+
         $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", $search);
         $data['status'] = [];
         //dd(count($data['details']['sensors']));
         //$brandnames = array();
         foreach ($data['venues'] as $item) {
-            
+
             $sensors = \Sensor::where("venue_id", "=", $item->id)->where("status","=", "Offline")->get();
 
             if(count($sensors) > 0){
@@ -804,7 +807,7 @@ public function activateVenue($id)
                 $data['status'][$item->id] = "Online";
             }
         }
-        
+
         return \View::make('hipjam.showmonitoring')->with('data', $data);
 
     }
@@ -817,7 +820,7 @@ public function activateVenue($id)
     }
 
 
-   
+
 
     public function addChapSecretEntry($scannername, $vpnip) {
         $txt = "Adding the Chap Secret Entry";
@@ -847,9 +850,9 @@ public function activateVenue($id)
         //fwrite($chapsecret, $second);
         //fclose($chapsecret);
 
-        
+
         // $chapsecret2 = fopen('/home/mikrotik/deployment/templates/sensors/chapsecret', 'r');
-        
+
         // if(ftp_fput($connect, 'chap-secrets', $chapsecret2, FTP_BINARY)){
 
         //     $txt = "Put back the FTP chap secret: ";
@@ -868,9 +871,9 @@ public function activateVenue($id)
         ftp_chdir($connect, "/etc/ppp/");
         $path = '/home/mikrotik/deployment/templates/sensors/updatechapsecret';  //create an empty file
         $path2 = '/home/mikrotik/deployment/templates/sensors/updatechapsecret2';
-        $updatechapsecret = fopen($path, 'w');                                                     // open the empty file and assign it to an handler 
+        $updatechapsecret = fopen($path, 'w');                                                     // open the empty file and assign it to an handler
         ftp_fget($connect, $updatechapsecret, 'chap-secrets', FTP_BINARY);             // get the chap-secret file from the vpn server and put in the empty path created
-        $file = file_get_contents($path);                                                                  // get the content of the file which now contains the server chap-secret entry        
+        $file = file_get_contents($path);                                                                  // get the content of the file which now contains the server chap-secret entry
         $update = str_replace($oldscannername, $newscannername, $file);              // replace the old scanner name in the entry with the new scanner name
         $updatechapsecret2 = fopen($path2, 'w');
         fwrite($updatechapsecret2, $update);                                                          // now copy the modify entry into the initially created file and overwrite it
@@ -884,11 +887,11 @@ public function activateVenue($id)
 
 
     public function createConfigYml ($objReport, $update, $oldmac) {
-        
+
         $txt = "Trying to Create Config.yml: ";
         $myfile = file_put_contents('add_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
         //This function creates the config.yml and batmanvpn files and then places it on the vpn server from where a sensor will fetch it.
-        
+
         $venue = new \Venue();
         $vpnip = new \Vpnip();
         $connect = ftp_connect('vpn.hipzone.co.za');
@@ -903,7 +906,7 @@ public function activateVenue($id)
         if ($update == true){
             $txt = "Update is true: ";
             $myfile = file_put_contents('add_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
-            //dd($oldmac); 
+            //dd($oldmac);
             $filepathyml = "sensors/" . $oldmac . ".yml";
             $filepathvpn = "sensors/" . $oldmac . "vpn";
             $delete = ftp_delete($connect, $filepathyml);
@@ -913,7 +916,7 @@ public function activateVenue($id)
             $txt = "Deleted Filepath VPN: ". $delete;
             $myfile = file_put_contents('add_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
             //dd($delete);
-            
+
         }else{
             $txt = "Update is false: ";
             $myfile = file_put_contents('add_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
@@ -932,11 +935,11 @@ public function activateVenue($id)
         $myfile = file_put_contents('add_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
         file_put_contents($tempconfigyml, $third);
         $createdconfigyml =  fopen($tempconfigyml, 'r');
-       
+
         //
         $txt = "Modify the batmanvpn file: ";
         $myfile = file_put_contents('add_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
-        $batmanvpn = file_get_contents('/home/mikrotik/deployment/templates/sensors/batmanvpn'); 
+        $batmanvpn = file_get_contents('/home/mikrotik/deployment/templates/sensors/batmanvpn');
         $modbatmanvpn = str_replace("scannername", $objReport->name, $batmanvpn);
         file_put_contents($tempbatman, $modbatmanvpn);
         $createdbatmanvpn=  fopen($tempbatman, 'r');
@@ -1084,7 +1087,7 @@ public function activateVenue($id)
             $txt = "Could not create config.yml: ".$e->getMessage();
             $myfile = file_put_contents('add_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
         }
-       
+
         $objReport->save();
         $txt = "Object Report Saved: ";
         $myfile = file_put_contents('add_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
@@ -1097,7 +1100,7 @@ public function activateVenue($id)
 
         $txt = "Set the VPN IP: ";
         $myfile = file_put_contents('add_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
-        
+
         $reportJson =  \Sensor::where('id',$lastInsertedID)->get();
         foreach ($reportJson as $value) {
 
@@ -1124,11 +1127,11 @@ public function activateVenue($id)
                           </td>
 
                           <td width="17%">
-                          <a onclick="updateServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a> 
+                          <a onclick="updateServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a>
                           </td></tr> ';
         }
         $data = array('row'=>$rows);
-        print_r(json_encode($data));    
+        print_r(json_encode($data));
 
     }
 
@@ -1138,7 +1141,7 @@ public function activateVenue($id)
         $objData   = json_decode(\Input::get("newrecord"));
         $objDataArray = (Array) $objData; //used for the validation piece
         $objReport =\Sensor::where('id',$objData->updateNum)->first();
-        $oldmac = $objReport->mac; 
+        $oldmac = $objReport->mac;
         $oldscannername = $objReport->name;
         $rules_mac_diff = array(
            'track_name'  => 'required|alpha_num',
@@ -1198,7 +1201,7 @@ public function activateVenue($id)
         if($save){
             $this->updateInsertSensorInTrack($objReport);
             $lastInsertedID =$objData->updateNum; //$objReport->id;
-            
+
             $reportJson =  \Sensor::where('id',$lastInsertedID)->get();
             foreach ($reportJson as $value) {
 
@@ -1221,12 +1224,12 @@ public function activateVenue($id)
                             <input id="track_max_power'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Max Power" value="'.$value->max_power.'">
                           </td>
                           <td width="17%">
-                          <a onclick="updateServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a> 
+                          <a onclick="updateServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a>
                           </td></tr> ';
             }
         }
         $data = array('row'=>$rows);
-        print_r(json_encode($data));    
+        print_r(json_encode($data));
 
 
     }
@@ -1245,16 +1248,16 @@ public function activateVenue($id)
         } catch (\Exception $e) {
             $txt = "Could not Delete Scanner Meta Data";
             $myfile = file_put_contents('delete_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
-    
+
         }
         $txt = "Deleted Scanner Meta Data";
-        $myfile = file_put_contents('delete_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);        
+        $myfile = file_put_contents('delete_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
         $delete = $objData->delete();
         $txt = "Deleted The Sensor";
         $myfile = file_put_contents('delete_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
         $vpnip = new \Vpnip();
-        
+
 
         if($delete){
 
@@ -1268,7 +1271,7 @@ public function activateVenue($id)
         $myfile = file_put_contents('delete_sensor_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
         $data = array('msg'=>$msg);
-        print_r(json_encode($data));    
+        print_r(json_encode($data));
 
     }
 
@@ -1403,7 +1406,7 @@ public function activateVenue($id)
         $data['currentMenuItem'] = "Dashboard";
         $data['apisitename'] = $name;
         $data['apivenueid'] = $json;
-        $venue = \DB::table('venues')->select("sitename","location","track_slug")->where('id', '=', $json)->first(); 
+        $venue = \DB::table('venues')->select("sitename","location","track_slug")->where('id', '=', $json)->first();
         $data['venue'] = $venue->sitename;
         $data['track_slugname'] = $venue->track_slug;
         //$data['location'] = $venue->location;
@@ -1517,10 +1520,10 @@ public function activateVenue($id)
             #$testdata = $period."_test_data";
             #$json = $this->$testdata();//file_get_contents($json_url);
             #END TESTDATA
-            
+
             $json = file_get_contents($json_url);
             error_log("heatmapJsondata json = $json");
-            $jsonarray = json_decode($json, true); 
+            $jsonarray = json_decode($json, true);
 
             // $name = $jsonarray['scanners'][0]['location'];
             $count = $jsonarray['total']['total'];
@@ -1536,13 +1539,13 @@ public function activateVenue($id)
 
         }
 
-        // create array 
+        // create array
         $returnArray = array("max"=>$max, "data"=>$mapData);
         $retrnJson = json_encode($returnArray);
         $retrnJson = str_replace('"', '', $retrnJson);
         error_log("heatmapJsondata : retrnJson = $retrnJson");
 
-        // $retrn =   "{max: 100, data: [{x:300,y:100,count:1000},{x:290,y:400,count:20},{x:30,y:2000,count:80},{x:10,y:100,count:10},{x:200,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";  
+        // $retrn =   "{max: 100, data: [{x:300,y:100,count:1000},{x:290,y:400,count:20},{x:30,y:2000,count:80},{x:10,y:100,count:10},{x:200,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";
 
         return \Response::json($returnArray);
         // print_r($retrn);  // die();
@@ -1706,12 +1709,12 @@ public function activateVenue($id)
             "coordinates" => null,
             "timezone" => "Africa/Johannesburg",
             "scanners" => [
-              
+
                 "id" => "sparalgoa01",
                 "updated_at" => "2018-03-08T11:36:12.000+02:00",
                 "location" => "Entrance",
                 "type" => null
-              
+
             ],
             "period" => [
               "start" => "2018-02-01T00:00:00.000+02:00",
@@ -2085,7 +2088,7 @@ public function activateVenue($id)
             error_log("heatmapJsondata json_url = $json_url");
             $json = file_get_contents($json_url);
             error_log("heatmapJsondata json = $json");
-            $jsonarray = json_decode($json, true); 
+            $jsonarray = json_decode($json, true);
 
             // $name = $jsonarray['scanners'][0]['location'];
             $count = $jsonarray['total']['total'];
@@ -2101,13 +2104,13 @@ public function activateVenue($id)
 
         }
 
-        // create array 
+        // create array
         $returnArray = array("max"=>$max, "data"=>$mapData);
         $retrnJson = json_encode($returnArray);
         $retrnJson = str_replace('"', '', $retrnJson);
         error_log("heatmapJsondata : retrnJson = $retrnJson");
 
-        // $retrn =   "{max: 100, data: [{x:300,y:100,count:1000},{x:290,y:400,count:20},{x:30,y:2000,count:80},{x:10,y:100,count:10},{x:200,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";  
+        // $retrn =   "{max: 100, data: [{x:300,y:100,count:1000},{x:290,y:400,count:20},{x:30,y:2000,count:80},{x:10,y:100,count:10},{x:200,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";
 
         return \Response::json($returnArray);
         // print_r($retrn);  // die();
@@ -2115,7 +2118,7 @@ public function activateVenue($id)
     }
 
     public function heatmapJsondata_()
-    {       
+    {
         $period = Input::get('period');
         $scanner_type = Input::get('scanner_type');
         $venue = Input::get('venue');
@@ -2536,7 +2539,7 @@ public function activateVenue($id)
         $resultarray = array();
 
         $heatmapdata  = array();
-        for ($i=1; $i <= 24; $i++) { 
+        for ($i=1; $i <= 24; $i++) {
 
             $big = 0;
             foreach ($apiarray as $scanner) {
@@ -2545,7 +2548,7 @@ public function activateVenue($id)
                 $resultarray[$i]['scanner'] = $scanner['name'];
 
                 $hours = $scanner['total']['trends']['hours'];
-                
+
                 foreach ($hours as $hour) {
                     if($hour['hour'] == ($i-1) ){
                         $resultarray[$i]['count'] = $hour['total'];
@@ -2557,7 +2560,7 @@ public function activateVenue($id)
                 $heatmapdata[$i]['data'][]  = array('x'=>$scanner["xcoord"],'y'=>$scanner["ycoord"],'count'=>$resultarray[$i]['count']);
             }
             $heatmapdata[$i]['max'] = $big;
-            
+
         }
 
         $attTemp = json_encode($heatmapdata[14]); //just showing a single hour(14 th) details
@@ -2565,9 +2568,9 @@ public function activateVenue($id)
 
         $retrn =  array('heatmap'=>$attTemp, 'cordinates'=>$scanners );
         print_r(json_encode($retrn));  die();
-        
-        
-        
+
+
+
     }
 
     //fetch sensors coordinates to preview floorplan image
@@ -2581,17 +2584,17 @@ public function activateVenue($id)
 
     //fetching data to create zonal tab view
     public function zonalJsondata()
-    {       
+    {
         $period = Input::get('period');
         $scanner_type = Input::get('scanner_type');
         $venue = Input::get('venue');
         $domain = Input::get('domain');
-        
-        
+
+
         /*$apiserver = \DB::table('systemconfig')->select("*")->where('name', '=', "track_api_server")->first();*/
         if($period != 'custom'){
-            /*$sensers_url = $apiserver->value.$venue."?period=".$period."&min_session=5&max_session=60"; */  
-            $sensers_url = "http://".$domain."/aggregate/".$venue."?period=".$period."&min_session=5&max_session=60";         
+            /*$sensers_url = $apiserver->value.$venue."?period=".$period."&min_session=5&max_session=60"; */
+            $sensers_url = "http://".$domain."/aggregate/".$venue."?period=".$period."&min_session=5&max_session=60";
         } else {
             /*$sensers_url = $apiserver->value.$venue."?period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'&min_session=5&max_session=60";*/
             $sensers_url = "http://".$domain."/venues/".$venue."?period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'&min_session=5&max_session=60";
@@ -2630,7 +2633,7 @@ public function activateVenue($id)
             $numscanners = 2;
             if(sizeof($scanners) > 2) $numscanners =  sizeof($scanners) - 1;
             $dwelltime = round($jsonarray['total']['average_session'] / $numscanners, 1);
-            
+
             $rows = $rows . '
                     <tr>
                       <td> ' . $i  . '</td>
@@ -2647,10 +2650,10 @@ public function activateVenue($id)
                 </table>';
 
         $table = $beginTable . $rows . $endTable;
-        
-        
+
+
         print_r($table);
-        
+
     }
 
     public function getWindowconversion(){
@@ -2664,7 +2667,7 @@ public function activateVenue($id)
         $endDate = date('Y-m-d');
         $period = 'custom';
         $getdata1 = "period=now";
-        
+
         /*$apiserver = \DB::table('systemconfig')->select("*")->where('name', '=', "track_api_server")->first();*/
         /*$json_url1 = $apiserver->value.$venue."?min_session=5&max_session=60&".trim($getdata1);*/
         $json_url1 = "http://".$domain."/aggregate/".$venue."?min_session=5&max_session=60&".trim($getdata1);
@@ -2680,7 +2683,7 @@ public function activateVenue($id)
         $json3 = json_encode (json_decode ("{}"));
         if($select_period == 'daterange'){
             $getdata3 = "period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'";
-            
+
             /*$json_url3 = $apiserver->value.$venue."?min_session=5&max_session=60".trim($getdata3);*/
             $json_url3 = "http://".$domain."/venues/".$venue."?min_session=5&max_session=60".trim($getdata3);
             /*$json_url3 = "http://mrp.doteleven.co/venues/mrp0381?".trim($getdata3);*/
@@ -2739,7 +2742,7 @@ public function activateVenue($id)
         $json_url = $apiserver->value.$venue."?period=".$period."&min_session=5&max_session=60&start=".$start."&end=".$end;*/
         $json_url = "http://".$domain."/aggregate/".$venue."/custom/".$start."/".$end."/?min_session=".$min_session."&max_session=".$max_session;
         /*$json_url = "http://cpt-mysql-slave.hipjam.net:9299/aggregate/".$venue."?period=".$period."&min_session=5&max_session=60&start=".$start."&end=".$end;*/
-        
+
         $json = file_get_contents($json_url);
 
         print_r($json);
