@@ -17,6 +17,9 @@ class ExportController extends Controller {
 
         // $authorization = \Input::all();
         // $authorization = $request->all();
+
+
+
         $authorization = \Request::getContent();
 
         $data = array();
