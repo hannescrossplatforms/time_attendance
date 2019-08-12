@@ -13,11 +13,11 @@ use Illuminate\Http\Request;
 
 class ExportController extends Controller {
 
-	public function exportVicinityAsJSON(Request $request){
+	public function exportVicinityAsJSON(){
 
         // $authorization = \Input::all();
         // $authorization = $request->all();
-        $authorization = app('request')->header('Authorization');
+        $authorization = \Request::getContent();
 
         $data = array();
         $vicinity = \Brand::where('name', '=', 'VICINITY')->firstOrFail();
