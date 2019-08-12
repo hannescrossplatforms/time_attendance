@@ -43,7 +43,7 @@ class ExportController extends Controller {
             $data['vicinity']['venues'] = $vicinity->venues;
             $data['vicinity']['isp'] = $vicinity->isp;
             $data['vicinity']['country'] = $vicinity->countrie;
-            $data['venuesasdf'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", null, $user);
+            $data['vicinity']['sensor_data'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", null, $user);
 
             $json = json_encode($data);
 
