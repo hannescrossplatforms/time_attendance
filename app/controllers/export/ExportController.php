@@ -30,22 +30,12 @@ class ExportController extends Controller {
         else {
 
 
-        $venue = new \Venue();
-        // $search = isset($_GET['search']) ? $_GET['search'] : null;
-        $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", null);
-        $data['status'] = [];
+            $search = isset($_GET['search']) ? $_GET['search'] : null;
+            $sensor = new \Sensor();
+            $venue = new \Venue();
 
-        foreach ($data['venues'] as $item) {
-
-            $sensors = \Sensor::where("venue_id", "=", $item->id)->where("status","=", "Offline")->get();
-
-            if(count($sensors) > 0){
-                $data['status'][$item->id] = "Offline";
-            }
-            else{
-                $data['status'][$item->id] = "Online";
-            }
-        }
+            $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", $search);
+            $data['status'] = [];
 
 
 
