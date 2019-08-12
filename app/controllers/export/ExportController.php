@@ -13,10 +13,10 @@ use Illuminate\Http\Request;
 
 class ExportController extends \BaseController {
 
-	public static function exportVicinityAsJSON(){
+	public static function exportVicinityAsJSON(Request $request){
 
-        $authorization = \Input::all();
-        // $authorization = $request->headers->get('Authorization');
+        // $authorization = \Input::all();
+        $authorization = $request;
 
 
         $data = array();
