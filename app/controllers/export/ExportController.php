@@ -28,6 +28,29 @@ class ExportController extends Controller {
             print_r($resp);
         }
         else {
+
+
+        $venue = new \Venue();
+
+        $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active", $search);
+        $data['status'] = [];
+
+        foreach ($data['venues'] as $item) {
+
+            $sensors = \Sensor::where("venue_id", "=", $item->id)->where("status","=", "Offline")->get();
+
+            if(count($sensors) > 0){
+                $data['status'][$item->id] = "Offline";
+            }
+            else{
+                $data['status'][$item->id] = "Online";
+            }
+        }
+
+
+
+
+
             $data = array();
             $vicinity = \Brand::where('name', '=', 'VICINITY')->firstOrFail();
 
@@ -51,3 +74,15 @@ class ExportController extends Controller {
 }
 
 
+
+// @foreach($data['venues'] as $venue)
+// <tr>
+//     <td id="venue{{$venue->id}}" idval="{{$venue->id}}" class="sensorlist">{{$venue->sitename}}
+//         <ol id="sensors{{$venue->id}}"></ol>
+//     </td>
+//     <td id="status{{$venue->id}}" class="venuelist-{{$data['status'][$venue->id]}}" idval="{{$venue->id}}">
+//         {{$data['status'][$venue->id]}}
+//     </td>
+
+// </tr>
+// @endforeach
