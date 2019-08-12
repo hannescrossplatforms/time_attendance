@@ -359,15 +359,15 @@ Route::get('hippnp/storeCategories/{id}','hippnp\HippnpController@getStoreCatego
 // HipBidvest routes //////////////////////////////////////////////////////////////
 Route::any('/hipbidvest_showdashboard', array('uses' => 'hipbidvest\HipbidvestController@showDashboard', 'as' => 'hipbidvest_showdashboard'))->before('auth');
 Route::get('hipbidvest/periodchartJsondata','hipbidvest\HipbidvestController@periodchartJsondata');
-Route::get('hipbidvest/picknpay_category_management','hipbidvest\HipbidvestController@picknpayCategoryManagement');
-Route::get('hipbidvest/picknpay_beacon_management','hipbidvest\HipbidvestController@picknpayBeaconManagement');
-Route::get('/hipbidvest/picknpay_manage_store_categories','hipbidvest\HipbidvestController@picknpayStoreCategoryManagement');
-Route::get('hipbidvest/picknpay_manage_store_categories/add_category','hipbidvest\HipbidvestController@addCategoryToStore');
-Route::get('/hipbidvest/picknpay_manage_store_categories/remove_category/{id}', array('uses' => 'hipbidvest\HipbidvestController@removeCategoryFromStore', 'as' => 'hipbidvest_remove_category'))->before('auth');
+Route::get('hipbidvest/bidvest_category_management','hipbidvest\HipbidvestController@bidvestCategoryManagement');
+Route::get('hipbidvest/bidvest_beacon_management','hipbidvest\HipbidvestController@bidvestBeaconManagement');
+Route::get('/hipbidvest/bidvest_manage_store_categories','hipbidvest\HipbidvestController@bidvestStoreCategoryManagement');
+Route::get('hipbidvest/bidvest_manage_store_categories/add_category','hipbidvest\HipbidvestController@addCategoryToStore');
+Route::get('/hipbidvest/bidvest_manage_store_categories/remove_category/{id}', array('uses' => 'hipbidvest\HipbidvestController@removeCategoryFromStore', 'as' => 'hipbidvest_remove_category'))->before('auth');
 Route::post('hipbidvest/save_category','hipbidvest\HipbidvestController@saveCategoryToStore');
 Route::post('hipbidvest/save_beacon','hipbidvest\HipbidvestController@saveBeacon');
-Route::get('hipbidvest/picknpay_delete_beacon/{id}', 'hipbidvest\HipbidvestController@deleteBeacon');
-Route::get('hipbidvest/picknpay_add_beacon', 'hipbidvest\HipbidvestController@addBeacon');
+Route::get('hipbidvest/bidvest_delete_beacon/{id}', 'hipbidvest\HipbidvestController@deleteBeacon');
+Route::get('hipbidvest/bidvest_add_beacon', 'hipbidvest\HipbidvestController@addBeacon');
 Route::get('hipbidvest/storeCategories/{id}','hipbidvest\HipbidvestController@getStoreCategories');
 
 // Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'hiptna_showdashboard'))->before('auth');//download test
