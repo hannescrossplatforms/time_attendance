@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class ExportController extends \BaseController {
 
-	public static function exportVicinityAsJSON(Request $request){
+	public static function exportVicinityAsJSON(){
 
         $authorization = \Input::all();
         // $authorization = $request->headers->get('Authorization');
