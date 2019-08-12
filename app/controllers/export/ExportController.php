@@ -13,10 +13,10 @@ use Request;
 
 class ExportController extends \BaseController {
 
-	public function exportVicinityAsJSON(Request $request){
+	public function exportVicinityAsJSON(){
 
         // $authorization = \Input::all();
-        $authorization = $request;
+        $authorization = Request::header('Authorization');
 
 
         $data = array();
