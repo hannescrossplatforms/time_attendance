@@ -356,20 +356,19 @@ Route::get('hippnp/picknpay_delete_beacon/{id}', 'hippnp\HippnpController@delete
 Route::get('hippnp/picknpay_add_beacon', 'hippnp\HippnpController@addBeacon');
 Route::get('hippnp/storeCategories/{id}','hippnp\HippnpController@getStoreCategories');
 
-
-
-
 // HipBidvest routes //////////////////////////////////////////////////////////////
-// Route::any('/hiptna_showdashboard/{instance?}', array('uses' => 'hiptna\HiptnaController@showDashboard', 'as' => 'hipbidvest_showdashboard'))->before('auth');
-// Route::any('/hiptna_showinstancedashboard', array('uses' => 'hiptna\HiptnaController@showInstanceDashboard', 'as' => 'hipbidvest_showinstancedashboard'))->before('auth');
-// Route::any('/hiptna_shownrinstancedashboard', array('uses' => 'hiptna\HiptnaController@showNrInstanceDashboard', 'as' => 'hipbidvest_shownrinstancedashboard'))->before('auth');
-// Route::any('/hiptna_shownonrosterdashboard', array('uses' => 'hiptna\HiptnaController@showNonrosterDashboard', 'as' => 'hipbidvest_shownonrosterdashboard'))->before('auth');
-// Route::any('/hiptna_showimdashboard', array('uses' => 'hiptna\HiptnaController@showImDashboard', 'as' => 'hipbidvest_showimdashboard'))->before('auth');
-// Route::any('/hiptna_showcedashboard', array('uses' => 'hiptna\HiptnaController@showCeDashboard', 'as' => 'hipbidvest_showcedashboard'))->before('auth');
-// Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'showDashboarddownload'))->before('auth');//download test
-// Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPdfReport', 'as' => 'createPdfReport'));//auto download test
-// Route::any('/autoDownloadPdf', array('uses' => 'hiptna\HiptnaController@autoDownloadPdf', 'as' => 'autoDownloadPdf'));//auto download test
-// Route::any('/generatePdf', array('uses' => 'hiptna\HiptnaController@generatePdf', 'as' => 'generatePdf'));//auto download test
+Route::any('/hipbidvest_showdashboard', array('uses' => 'hipbidvest\HipbidvestController@showDashboard', 'as' => 'hipbidvest_showdashboard'))->before('auth');
+Route::get('hipbidvest/periodchartJsondata','hipbidvest\HipbidvestController@periodchartJsondata');
+Route::get('hipbidvest/picknpay_category_management','hipbidvest\HipbidvestController@picknpayCategoryManagement');
+Route::get('hipbidvest/picknpay_beacon_management','hipbidvest\HipbidvestController@picknpayBeaconManagement');
+Route::get('/hipbidvest/picknpay_manage_store_categories','hipbidvest\HipbidvestController@picknpayStoreCategoryManagement');
+Route::get('hipbidvest/picknpay_manage_store_categories/add_category','hipbidvest\HipbidvestController@addCategoryToStore');
+Route::get('/hipbidvest/picknpay_manage_store_categories/remove_category/{id}', array('uses' => 'hipbidvest\HipbidvestController@removeCategoryFromStore', 'as' => 'hipbidvest_remove_category'))->before('auth');
+Route::post('hipbidvest/save_category','hipbidvest\HipbidvestController@saveCategoryToStore');
+Route::post('hipbidvest/save_beacon','hipbidvest\HipbidvestController@saveBeacon');
+Route::get('hipbidvest/picknpay_delete_beacon/{id}', 'hipbidvest\HipbidvestController@deleteBeacon');
+Route::get('hipbidvest/picknpay_add_beacon', 'hipbidvest\HipbidvestController@addBeacon');
+Route::get('hipbidvest/storeCategories/{id}','hipbidvest\HipbidvestController@getStoreCategories');
 
 // Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'hiptna_showdashboard'))->before('auth');//download test
 // Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPdfReport', 'as' => 'hiptna_showdashboard'))->before('auth');//auto download test
