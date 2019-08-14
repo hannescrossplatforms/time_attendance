@@ -27,7 +27,7 @@ class HipbidvestController extends \BaseController {
 
         //Get all categories for charts to render
 
-        $allCategories = \Bidvest::fetchAllCategories($period, null, null);
+        $allCategories = \Bidvest::fetchAllCategories($period, null, null, null);
         $allStores = \Bidvest::fetchAllStores($period, null, null);
         $allCategoriesForFilter = \Bidvest::fetchAllCategoriesForFilter();
         $data['all_categories_for_filter'] = $allCategoriesForFilter;
