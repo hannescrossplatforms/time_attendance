@@ -49,7 +49,7 @@ class Picknpay extends Eloquent {
         }
 
         // if ($categoryID != '' && $categoryID != null) {
-            return EngagePicknPayCategory::where('id', "=", $categoryID);
+            return EngagePicknPayCategory::where('id', "=", $categoryID)->get();
             // return EngagePicknPayCategory::raw("SELECT name FROM pnp_category WHERE id = '$categoryID'")->get();
             // return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID'")->get();
         // }
