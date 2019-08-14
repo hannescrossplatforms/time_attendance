@@ -30,7 +30,6 @@ class HippnpController extends \BaseController {
         $allCategories = \Picknpay::fetchAllCategories($period, null, null, null);
         $allStores = \Picknpay::fetchAllStores($period, null, null);
         $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter();
-
         $data['all_categories_for_filter'] = $allCategoriesForFilter;
 
         $allProvinces = array();
@@ -233,9 +232,7 @@ class HippnpController extends \BaseController {
             });
         }
 
-        $data['hannestest'] = $allCategories;
         $data['all_categories'] = $allCategories;
-        $data['all_categories_for_filter'] = $allCategoriesForFilter;
         $data['category_list'] = $dates;
 
         // Sum of all categories

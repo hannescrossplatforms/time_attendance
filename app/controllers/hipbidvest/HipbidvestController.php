@@ -29,6 +29,8 @@ class HipbidvestController extends \BaseController {
 
         $allCategories = \Bidvest::fetchAllCategories($period, null, null);
         $allStores = \Bidvest::fetchAllStores($period, null, null);
+        $allCategoriesForFilter = \Bidvest::fetchAllCategoriesForFilter();
+        $data['all_categories_for_filter'] = $allCategoriesForFilter;
 
         $allProvinces = array();
         foreach ($allStores as $store) {
@@ -212,21 +214,25 @@ class HipbidvestController extends \BaseController {
         $storeId = Input::get('store_id');
         $provinceId = Input::get('province_id');
 
+        $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter();
+        $data['all_categories_for_filter'] = $allCategoriesForFilter;
+
         if ($start != null && $end != null){
-            $allCategories = \Bidvest::fetchAllCategories($period, $start, $end);
+            $allCategories = \Bidvest::fetchAllCategories($period, $start, $end, $categoryId);
             $dates = \Bidvest::datesToFetchChartDataFor($period, $start, $end)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
                 });
         }
         else {
-            $allCategories = \Bidvest::fetchAllCategories($period, $start, $start);
+            $allCategories = \Bidvest::fetchAllCategories($period, $start, $start, $categoryId);
             $dates = \Bidvest::datesToFetchChartDataFor($period, $start, $start)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
                 });
         }
 
+        $data['all_categories'] = $allCategories;
         $data['category_list'] = $dates;
 
         // Sum of all categories

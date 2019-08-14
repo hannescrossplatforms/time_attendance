@@ -37,7 +37,7 @@ class Bidvest extends Eloquent {
         ->get();
     }
 
-    public static function fetchAllCategories($date, $startDate, $endDate){
+    public static function fetchAllCategories($date, $startDate, $endDate, $categoryID){
 
         if ($startDate == null && $endDate == null) {
 
@@ -48,8 +48,24 @@ class Bidvest extends Eloquent {
 
         }
 
-        return EngageBidvestCategory::raw("SELECT DISTINCT name FROM bidvest_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
+        if ($categoryID != '' && $categoryID != null) {
 
+            $query = EngageBidvestCategory::raw("SELECT DISTINCT name FROM bidvest_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID'");
+            if($categoryID != "" && $categoryID != null && $categoryID != '') {
+                $query = $query->where('id', "=", $categoryID);
+            }
+
+            return $query->get();
+
+        }
+        else {
+            return EngageBidvestCategory::raw("SELECT DISTINCT name FROM bidvest_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
+        }
+
+    }
+
+    public static function fetchAllCategoriesForFilter(){
+        return EngageBidvestCategory::raw("SELECT DISTINCT name FROM bidvest_category")->get();
     }
 
     public static function fetchAllCategoriesWithoutDateFilter(){
