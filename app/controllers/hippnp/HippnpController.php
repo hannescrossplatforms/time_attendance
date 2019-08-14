@@ -27,7 +27,7 @@ class HippnpController extends \BaseController {
 
         //Get all categories for charts to render
 
-        $allCategories = \Picknpay::fetchAllCategories($period, null, null, '27');
+        $allCategories = \Picknpay::fetchAllCategories($period, null, null, null);
         $allStores = \Picknpay::fetchAllStores($period, null, null);
 
         $allProvinces = array();
@@ -227,7 +227,7 @@ class HippnpController extends \BaseController {
             });
         }
 
-        $data['hannestest'] = $categoryId;
+        $data['hannestest'] = $allCategories;
         $data['all_categories'] = $allCategories;
         $data['category_list'] = $dates;
 
