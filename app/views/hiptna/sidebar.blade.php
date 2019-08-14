@@ -43,7 +43,12 @@
               <div id="instance_menus" style="display: none">
                   <ul class="subNav2">
 
+
+
+                  @if(Session::get('availableInstances') == "PNP_ACCESS")
                     <li><a href="{{ url('hippnp_showdashboard'); }}">Pick n Pay </a></li>
+                  @endif
+
                     <li><a href="{{ url('hipbidvest_showdashboard'); }}">Bidvest </a></li>
 
                     <li><a href="{{ url('hiptna_showdashboard'); }}/IM">IM Instance @if ( Session::get('currentInstance') == "IM" ) * @endif</a></li>
