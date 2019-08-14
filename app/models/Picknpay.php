@@ -37,7 +37,7 @@ class Picknpay extends Eloquent {
         ->get();
     }
 
-    public static function fetchAllCategories($date, $startDate, $endDate){
+    public static function fetchAllCategories($date, $startDate, $endDate, $categoryID){
 
         if ($startDate == null && $endDate == null) {
 
@@ -48,7 +48,14 @@ class Picknpay extends Eloquent {
 
         }
 
-        return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
+        if ($categoryID != '') {
+            return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID'")->get();
+        }
+        else {
+            return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
+        }
+
+
 
     }
 
