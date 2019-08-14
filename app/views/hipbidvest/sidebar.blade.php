@@ -42,11 +42,7 @@
               <li @if ( $data['currentMenuItem'] == "Dashboard" ) class="active" @endif><a href="{{ url('hipbidvest_showdashboard'); }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
               <div id="instance_menus">
                   <ul class="subNav2">
-
                     <li><a href="{{ url('hipbidvest_showdashboard'); }}">Bidvest </a></li>
-                    <!-- <li><a href="{{ url('hipbidvest_showdashboard'); }}/IM">Bidvest @if ( Session::get('currentInstance') == "IM" ) * @endif</a></li> -->
-                    <li><a href="{{ url('hiptna_showdashboard'); }}/IM">IM Instance @if ( Session::get('currentInstance') == "IM" ) * @endif</a></li>
-                    <li><a href="{{ url('hiptna_showdashboard'); }}/CE">CE Instance @if ( Session::get('currentInstance') == "CE" ) * @endif</a></li>
                   </ul>
               </div>
               <div id="bidvest_settings">
