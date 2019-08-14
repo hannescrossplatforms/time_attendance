@@ -141,6 +141,7 @@ return array(
     'Engagebrand' => $baseDir . '/app/models/Engagebrand.php',
     'Eventschedule' => $baseDir . '/app/models/Eventschedule.php',
     'Eventtime' => $baseDir . '/app/models/Eventtime.php',
+    'ExportController' => $baseDir . '/app/controllers/export/ExportController.php',
     'Fixed_Positioner' => $vendorDir . '/dompdf/dompdf/include/fixed_positioner.cls.php',
     'FlagsForProductActivationInBrands' => $baseDir . '/app/database/migrations/2017_08_11_064056_flags_for_product_activation_in_brands.php',
     'FlagsForProductActivationInVenues' => $baseDir . '/app/database/migrations/2017_08_15_075855_flags_for_product_activation_in_venues.php',
