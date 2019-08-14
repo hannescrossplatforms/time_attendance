@@ -31,6 +31,8 @@ class HippnpController extends \BaseController {
         $allStores = \Picknpay::fetchAllStores($period, null, null);
         $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter();
 
+        $data['all_categories_for_filter'] = $allCategoriesForFilter;
+
         $allProvinces = array();
         foreach ($allStores as $store) {
             $province = \Picknpay::fetchStoreForVenue($store);
@@ -214,6 +216,7 @@ class HippnpController extends \BaseController {
         $provinceId = Input::get('province_id');
 
         $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter();
+        $data['all_categories_for_filter'] = $allCategoriesForFilter;
 
         if ($start != null && $end != null){
             $allCategories = \Picknpay::fetchAllCategories($period, $start, $end, $categoryId);
