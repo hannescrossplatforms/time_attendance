@@ -898,3 +898,41 @@ Added Chap secret Entry
 Object Report Saved: 
 Updated Insert sensor in Track: 
 Set the VPN IP: 
+In Add Server
+Got Content: {"track_name":"mattdan","track_location":"anywhwhere","track_queue":"tracks03","mac":"AA:BB:CC:CC:11:DD","track_min_power":"-80","track_max_power":"-10","venue_id":"1395","venue_location":"HIPVICNTYXMATTDAN01CPTXWCZA"}
+Decoded Content: {"track_name":"mattdan","track_location":"anywhwhere","track_queue":"tracks03","mac":"AA:BB:CC:CC:11:DD","track_min_power":"-80","track_max_power":"-10","venue_id":"1395","venue_location":"HIPVICNTYXMATTDAN01CPTXWCZA"}
+Validated message content: 
+Ready for creating config.yml
+Trying to Create Config.yml: 
+Connected and Loged in: 
+Got tmp config and tmp batman: 
+Update is false: 
+Got the existing config file: ---
+venue: venuename
+scanner: scannername
+iron_mq:
+  queue: queuename
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Got Obj Report Content: ---
+venue: nosense
+scanner: mattdan
+iron_mq:
+  queue: tracks03
+  token: AfTaseMBWBAZ9NqkR4LgiOSNRk0
+  project_id: 5294ec184a1b130009000032
+
+Modify the batmanvpn file: 
+Modified!! the batmanvpn file: 
+Got the IP: 10.0.1.75
+Adding the Chap Secret Entry
+Got existing Chap Secret Entry: scannername pptpd d0t_3l3v3n vpnip
+
+Logged into VPN FTP?: 1
+FTP pasv AND FTP chdir: /etc/ppp/
+Added Chap secret Entry Success!!.
+Added Chap secret Entry
+Object Report Saved: 
+Updated Insert sensor in Track: 
+Set the VPN IP: 
