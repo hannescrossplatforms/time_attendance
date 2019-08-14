@@ -399,6 +399,7 @@ class HippnpController extends \BaseController {
 
         $data['testStart'] = "$startd 00.00.00";
         $data['testEnd'] = "$endd 23:59:59";
+        $data['testPeriod'] = $period;
 
         //
 
