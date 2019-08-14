@@ -213,20 +213,21 @@ class HippnpController extends \BaseController {
         $provinceId = Input::get('province_id');
 
         if ($start != null && $end != null){
-            $allCategories = \Picknpay::fetchAllCategories($period, $start, $end);
+            $allCategories = \Picknpay::fetchAllCategories($period, $start, $end, $categoryId);
             $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $end)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
                 });
         }
         else {
-            $allCategories = \Picknpay::fetchAllCategories($period, $start, $start);
+            $allCategories = \Picknpay::fetchAllCategories($period, $start, $start, $categoryId);
             $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
             });
         }
 
+        $data['hannestest'] = $categoryId;
         $data['all_categories'] = $allCategories;
         $data['category_list'] = $dates;
 
