@@ -409,8 +409,6 @@ function custom_report_period() {
 
 function renderCharts(time, start, end, category, store, province) {
 
-    debugger;
-
     $.ajax({
 
         url: pathname + 'hippnp/periodchartJsondata',
