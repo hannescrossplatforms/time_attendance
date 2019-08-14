@@ -37,7 +37,7 @@ class Picknpay extends Eloquent {
         ->get();
     }
 
-    public static function fetchAllCategories($date, $startDate, $endDate, $categoryID){
+    public static function fetchAllCategories($date, $startDate, $endDate, $categoryID = '27'){
 
         if ($startDate == null && $endDate == null) {
 
