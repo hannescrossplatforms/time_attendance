@@ -143,8 +143,8 @@
                                 <label>Category</label>
                             </div>
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandprovince" onchange="change_report_period()" class="form-control"
-                                    name="brandprovince">
+                                <select id="brandcategory" onchange="change_report_period()" class="form-control"
+                                    name="brandcategory">
                                     <option value="">Select</option>
                                     @foreach($data['all_categories'] as $category)
                                     <option value="{{ $category->id }}">
@@ -409,7 +409,7 @@ function custom_report_period() {
 
 function renderCharts(time, start, end, category, store, province) {
 
-
+    debugger;
 
     $.ajax({
 
