@@ -44,10 +44,10 @@
                   <ul class="subNav2">
 
                     <li><a href="{{ url('hippnp_showdashboard'); }}">Pick n Pay </a></li>
-                    <li><a href="{{ url('hipbidvest_showdashboard'); }}">Bidvest </a></li>
+                    <!-- <li><a href="{{ url('hipbidvest_showdashboard'); }}">Bidvest </a></li> -->
 
-                    <li><a href="{{ url('hiptna_showdashboard'); }}/IM">IM Instance @if ( Session::get('currentInstance') == "IM" ) * @endif</a></li>
-                    <li><a href="{{ url('hiptna_showdashboard'); }}/CE">CE Instance @if ( Session::get('currentInstance') == "CE" ) * @endif</a></li>
+                    <!-- <li><a href="{{ url('hiptna_showdashboard'); }}/IM">IM Instance @if ( Session::get('currentInstance') == "IM" ) * @endif</a></li> -->
+                    <!-- <li><a href="{{ url('hiptna_showdashboard'); }}/CE">CE Instance @if ( Session::get('currentInstance') == "CE" ) * @endif</a></li> -->
                   </ul>
               </div>
               <div id="picknpay_settings">
