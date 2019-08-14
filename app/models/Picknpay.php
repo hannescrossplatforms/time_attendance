@@ -37,7 +37,7 @@ class Picknpay extends Eloquent {
         ->get();
     }
 
-    public static function fetchAllCategories($date, $startDate, $endDate, $categoryID = '27'){
+    public static function fetchAllCategories($date, $startDate, $endDate, $categoryID){
 
         if ($startDate == null && $endDate == null) {
 
@@ -59,6 +59,10 @@ class Picknpay extends Eloquent {
 
 
 
+    }
+
+    public static function fetchAllCategoriesForFilter(){
+        return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
     }
 
     public static function fetchAllCategoriesWithoutDateFilter(){

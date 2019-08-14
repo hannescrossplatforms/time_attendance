@@ -212,6 +212,8 @@ class HippnpController extends \BaseController {
         $storeId = Input::get('store_id');
         $provinceId = Input::get('province_id');
 
+        $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter();
+
         if ($start != null && $end != null){
             $allCategories = \Picknpay::fetchAllCategories($period, $start, $end, $categoryId);
             $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $end)
@@ -229,6 +231,7 @@ class HippnpController extends \BaseController {
 
         $data['hannestest'] = $allCategories;
         $data['all_categories'] = $allCategories;
+        $data['all_categories_for_filter'] = $allCategoriesForFilter;
         $data['category_list'] = $dates;
 
         // Sum of all categories
