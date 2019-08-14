@@ -203,8 +203,8 @@ class HippnpController extends \BaseController {
         $endd = date('Y-m-d',strtotime('today'));
 
 
-        $data['testStart'] = "$start 00.00.00";
-        $data['testEnd'] = "$end 23:59:59";
+        $data['testStart'] = "$startd 00.00.00";
+        $data['testEnd'] = "$endd 23:59:59";
 
         //
 
@@ -397,8 +397,8 @@ class HippnpController extends \BaseController {
         $endd = date('Y-m-d',strtotime('today'));
 
 
-        $data['testStart'] = "$start 00.00.00";
-        $data['testEnd'] = "$end 23:59:59";
+        $data['testStart'] = "$startd 00.00.00";
+        $data['testEnd'] = "$endd 23:59:59";
 
         //
 
