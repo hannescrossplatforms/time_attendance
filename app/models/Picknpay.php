@@ -76,7 +76,7 @@ class Picknpay extends Eloquent {
 
     public static function fetchDwellTimeDataForCategoryWithDate($date, $categoryId, $storeId, $provinceId, $verb){
         $query = Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("IFNULL($verb(CAST(dwell_time AS UNSIGNED)), 0) AS value"))
+        ->select(DB::raw("IFNULL($verb(CAST(dwell_time AS UNSIGNED)/60), 0) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
         ->whereraw("category_id = '$categoryId'")
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
