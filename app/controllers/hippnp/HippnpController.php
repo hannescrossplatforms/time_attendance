@@ -199,7 +199,7 @@ class HippnpController extends \BaseController {
         $obj = null;
 
         //Tests:
-        $startd = date('Y-m-d',strtotime('last monday'));
+        $startd = date('Y-m-d',strtotime('last sunday'));
         $endd = date('Y-m-d',strtotime('today'));
 
 
@@ -393,7 +393,7 @@ class HippnpController extends \BaseController {
 
 
         //Tests:
-        $startd = date('Y-m-d',strtotime('last monday'));
+        $startd = date('Y-m-d',strtotime('last sunday'));
         $endd = date('Y-m-d',strtotime('today'));
 
 
