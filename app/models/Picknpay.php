@@ -172,7 +172,7 @@ class Picknpay extends Eloquent {
         }else if($period == 'rep7day'){
 
             $start = date('Y-m-d',strtotime('last monday'));
-            $end = date('Y-m-d', strtotime('today'));
+            $end = date('Y-m-d',strtotime('today'));
 
 
             $returnValue['startDate'] = "$start 00.00.00";

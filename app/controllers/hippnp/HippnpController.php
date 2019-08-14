@@ -198,6 +198,18 @@ class HippnpController extends \BaseController {
 
         $obj = null;
 
+        //Tests:
+        $startd = date('Y-m-d',strtotime('last monday'));
+        $endd = date('Y-m-d',strtotime('today'));
+
+
+        $data['testStart'] = "$start 00.00.00";
+        $data['testEnd'] = "$end 23:59:59";
+
+        //
+
+
+
         return \View::make('hippnp.showdashboard')->with('data', $data);
 
     }
@@ -379,6 +391,16 @@ class HippnpController extends \BaseController {
 
         $obj = null;
 
+
+        //Tests:
+        $startd = date('Y-m-d',strtotime('last monday'));
+        $endd = date('Y-m-d',strtotime('today'));
+
+
+        $data['testStart'] = "$start 00.00.00";
+        $data['testEnd'] = "$end 23:59:59";
+
+        //
 
         $json = json_encode($data);
 
