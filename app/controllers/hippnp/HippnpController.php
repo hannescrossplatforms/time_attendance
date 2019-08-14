@@ -224,9 +224,10 @@ class HippnpController extends \BaseController {
             $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
-                });
+            });
         }
 
+        $data['all_categories'] = $allCategories;
         $data['category_list'] = $dates;
 
         // Sum of all categories

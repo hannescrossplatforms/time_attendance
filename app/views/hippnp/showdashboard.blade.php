@@ -135,6 +135,26 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-4" style="width:30%;">
+                            <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
+                                <label>Category</label>
+                            </div>
+                            <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
+                                <select id="brandprovince" onchange="change_report_period()" class="form-control"
+                                    name="brandprovince">
+                                    <option value="">Select</option>
+                                    @foreach($data['all_categories'] as $category)
+                                    <option value="{{ $category->id }}">
+                                    {{ $category->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <br><br>
                     <div id="fusion-chart">
                         <div class="row">
