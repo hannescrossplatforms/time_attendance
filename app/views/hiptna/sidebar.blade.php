@@ -45,7 +45,7 @@
 
 
 
-                  @if(Session::get('availableInstances') == "PNP_ACCESS")
+                  @if(Session::get('currentInstance') == "PNP_ACCESS")
                     <li><a href="{{ url('hippnp_showdashboard'); }}">Pick n Pay </a></li>
                   @endif
 
