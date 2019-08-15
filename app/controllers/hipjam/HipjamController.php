@@ -868,8 +868,8 @@ public function activateVenue($id)
         $configyml = file_get_contents('/home/mikrotik/deployment/templates/sensors/configyml');
         $first = str_replace("venuename", $track_slug, $configyml);
 
-        $second = str_replace("wifi_ssid", $venueObj->track_ssid, $first);
-        $third = str_replace("wifi_password", $venueObj->track_password, $second);
+        $second = str_replace("wifissid", $venueObj->track_ssid, $first);
+        $third = str_replace("wifipassword", $venueObj->track_password, $second);
 
         $fourth = str_replace("queuename", $objReport->queue, $third);
         $dest = "sensors/".$objReport->mac . ".yml";

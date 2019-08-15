@@ -373,6 +373,7 @@ Route::get('hipbidvest/storeCategories/{id}','hipbidvest\HipbidvestController@ge
 
 //Export controller routes ///////////////////////////////////////////////////////////
 Route::get('/vicinity_to_json', array('uses' => 'ExportController@exportVicinityAsJSON', 'as' => 'export_vicinity_data_to_json'));
+Route::get('/vicinity/venues', array('uses' => 'ExportController@venues', 'as' => 'vicinity_venues'));
 
 // Route::any('/myPageDownload', array('uses' => 'hiptna\HiptnaController@showDashboarddownload', 'as' => 'hiptna_showdashboard'))->before('auth');//download test
 // Route::any('/createPdfReport', array('uses' => 'hiptna\HiptnaController@createPdfReport', 'as' => 'hiptna_showdashboard'))->before('auth');//auto download test

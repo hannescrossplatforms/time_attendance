@@ -143,6 +143,9 @@
               padding-left: 120px;
             }
           }
+          .modstattitle {
+            background-color: #9DD1ED;
+          }
           
         </style>
         @endif
