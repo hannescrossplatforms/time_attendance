@@ -120,6 +120,8 @@ $("#add_item_to_checklist").on("click", function(){
     var title = $("#new_item_title").val();
     var description = $("#new_item_description").val();
 
+    debugger;
+
     if (title != '' && description != '') {
 
         var store_id = $("#venue_select").val();
