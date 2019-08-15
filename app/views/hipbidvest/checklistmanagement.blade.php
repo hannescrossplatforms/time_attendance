@@ -95,12 +95,10 @@ function get_rooms_for_store() {
             'id': store_id
         },
         success: function(data) {
-            debugger;
-           alert(data);
 
            var $dropdown = $("#room_select");
             $.each(result, function() {
-                // $dropdown.append($("<option />").val(this.ImageFolderID).text(this.Name));
+                $dropdown.append($("<option />").val(data.id).text(data.name));
             });
 
 
@@ -117,3 +115,12 @@ function get_rooms_for_store() {
 </script>
 
 @stop
+
+<!-- :
+created_at: "2019-08-15 08:42:14"
+id: "5"
+name: "asdf"
+store_id: "1393"
+store_name: "Bidvest Bidvest"
+updated_at: "2019-08-15 08:42:14"
+__proto__:  -->
