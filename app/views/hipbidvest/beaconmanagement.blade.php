@@ -39,7 +39,7 @@
                             <th>Beacon Minor</th>
                             <th>Beacon Major</th>
                             <th>Store name</th>
-                            <th>Category name</th>
+                            <th>Room name</th>
                             <th>Actions</th>
                         </tr>
                         @foreach ($data['beacons'] as $beacon)
