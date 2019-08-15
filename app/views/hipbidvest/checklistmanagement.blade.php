@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="row">
-                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_manage_default_checklist">Manage default checklist</a>
+                    <a class="btn-manage-default-checklist btn btn-sm btn-primary" href="bidvest_manage_default_checklist">Manage default checklist</a>
                 </div>
 
                 <div id="add_item_row" class="row hidden">
@@ -76,7 +76,7 @@
 
                         <br>
                         <button id="submitform" class="btn btn-primary">Submit</button>
-                        <a href="/hipbidvest/bidvest_manage_default_checklist" class="btn btn-default">Cancel</a>
+
                         <br>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="row">
-                    <a id="assign_default_checklist_to_room" class="btn-manage-default-checklist btn btn-default btn-sm hidden">Assign default checklist to room</a>
+                    <a id="assign_default_checklist_to_room" class="btn-manage-default-checklist btn btn-primary btn-sm hidden">Assign default checklist to room</a>
                 </div>
 
 
