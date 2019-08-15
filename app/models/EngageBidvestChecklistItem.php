@@ -15,9 +15,9 @@ class EngageBidvestChecklistItem extends Eloquent {
 
 
     public static function getChecklistItemsForRoom($roomID){
-        $time = strtotime('0000-00-00 00:00:00');
+
         return EngageBidvestChecklistItem::orderBy('created_at', 'ASC')
-        ->whereraw("day_for_checklist_item = '$time'")
+        ->whereNull('day_for_checklist_item')
         ->whereraw("room_id = '$roomID'")
         ->get();
 
