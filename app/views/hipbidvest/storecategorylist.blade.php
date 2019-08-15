@@ -37,6 +37,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
+                            <th>Venue Name</th>
                             <th>Room Name</th>
                             <th>Actions</th>
                         </tr>

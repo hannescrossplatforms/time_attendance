@@ -523,19 +523,17 @@ class HipbidvestController extends \BaseController {
 
     public static function saveCategoryToStore(){
 
-
-        //HANNES TODO HERE:
-
         $categoryName = \Input::get('category_name');
         $venueID = \Input::get('venue_id');
 
+        $venue = \Venue::find($venueID);
 
         $engageCategory = new \EngageBidvestCategory();
         $engageCategory->name = $categoryName;
         $engageCategory->store_id = $venueID;
+        $engageCategory->store_name = $venue->sitename;
 
         $engageCategory->save();
-
 
         return \Redirect::to("/hipbidvest/bidvest_manage_store_categories");
 
