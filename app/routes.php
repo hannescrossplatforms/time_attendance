@@ -378,7 +378,7 @@ Route::get('hipbidvest/bidvest_delete_checklist_item/{id}','hipbidvest\Hipbidves
 
 Route::post('/hipbidvest/bidvest_assign_default_checklist_items','hipbidvest\HipbidvestController@assignDefaultChecklistItems');
 Route::post('/hipbidvest/bidvest_get_checklist_items','hipbidvest\HipbidvestController@getChecklistItems');
-Route::post('hipbidvest/bidvest_delete_assigned_checklist_item','hipbidvest\HipbidvestController@deleteAssignedChecklistItem');
+Route::post('/hipbidvest/bidvest_delete_assigned_checklist_item','hipbidvest\HipbidvestController@deleteAssignedChecklistItem');
 
 
 //Export controller routes ///////////////////////////////////////////////////////////
