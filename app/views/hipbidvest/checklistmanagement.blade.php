@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="row">
-                    <a class="btn-manage-default-checklist btn btn-default btn-sm hidden" href="bidvest_manage_default_checklist">Manage default checklist</a>
+                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_manage_default_checklist">Manage default checklist</a>
                 </div>
                 <br>
                 <div class="row">
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="row">
-                    <a id="assign_default_checklist_to_room" class="btn-manage-default-checklist btn btn-default btn-sm">Assign default checklist to room</a>
+                    <a id="assign_default_checklist_to_room" class="btn-manage-default-checklist btn btn-default btn-sm hidden">Assign default checklist to room</a>
                 </div>
 
 
