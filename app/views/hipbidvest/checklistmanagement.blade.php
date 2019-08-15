@@ -23,7 +23,7 @@
             @include('hipbidvest.sidebar')
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-                <h1 class="page-header">Add Beacon</h1>
+                <h1 class="page-header">Bidvest Checklist Management</h1>
                 <!-- To look at errors look at the addvenue.blade file -->
                 <div class="row">
                     <div class="col-md-12">
@@ -32,7 +32,7 @@
 
                         <div class="form-group">
                             <label>Venue*</label>
-                            <select id="venue_select" name="venue_id" onchange="get_categories_for_store()" class="form-control" required>
+                            <select id="venue_select" name="venue_id" onchange="get_rooms_for_store()" class="form-control" required>
                             <option value="">Select</option>
                             @foreach($data['venues'] as $venue)
                                 <option value="{{ $venue->id }}">
@@ -56,5 +56,31 @@
     </div>
 </body>
 
+<script>
+
+
+function get_rooms_for_store() {
+
+    var store_id = $("#store_select").val();
+
+    $.ajax({
+        url: pathname + 'hipbidvest/storeCategories/' + store_id,
+        type: 'get',
+        dataType: 'json',
+        data: {
+            'id': store_id
+        },
+        success: function(data) {
+            debugger;
+           alert(data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+        }
+    });
+
+}
+
+</script>
 
 @stop
