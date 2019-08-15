@@ -49,6 +49,7 @@
                             <div class="form-group">
                                 <label>Store*</label>
                                 <select id="store_select" name="store_id" onchange="get_categories_for_store()" class="form-control" required>
+                                <option value="">Select</option>
                                 @foreach($data['brands'] as $store)
                                     <option value="{{ $store->id }}">
                                     {{ $store->sitename }}
@@ -57,9 +58,9 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            <div id="#select_room_container" class="form-group hidden">
                                 <label>Category*</label>
-                                <select id="isplist" name="category_id" class="form-control" required>
+                                <select id="room_select" name="category_id" class="form-control" required>
                                 @foreach($data['categories'] as $category)
                                     <option value="{{ $category->id }}">
                                     {{ $category->name }}
@@ -94,21 +95,37 @@ function get_categories_for_store() {
     let pathname = $('#url').val();
     var store_id = $("#store_select").val();
 
-    $.ajax({
-        url: pathname + 'hipbidvest/storeCategories/' + store_id,
-        type: 'get',
-        dataType: 'json',
-        data: {
-            'id': store_id
-        },
-        success: function(data) {
-            debugger;
-           alert(data);
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
+    $textValue = $("#store_select option:selected").text();
 
-        }
-    });
+    if ($textValue != "Select"){
+        $.ajax({
+            url: pathname + 'hipbidvest/storeCategories/' + store_id,
+            type: 'get',
+            dataType: 'json',
+            data: {
+                'id': store_id
+            },
+            success: function(data) {
+
+                $("#select_room_container").removeClass("hidden");
+                var $dropdown = $("#room_select");
+
+                $dropdown.empty();
+                $dropdown.append($("<option />").val('').text("Select"));
+                result.forEach((obj) => {
+                    $dropdown.append($("<option />").val(obj.id).text(obj.name));
+                });
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+    else {
+        $("#select_room_container").addClass('hidden');
+    }
+
+
 
 }
 
