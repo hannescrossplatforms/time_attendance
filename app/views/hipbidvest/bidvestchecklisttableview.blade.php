@@ -33,8 +33,8 @@ $(".table_view_item").on('click', function(){
             type: 'post',
             dataType: 'html',
             data: {
-                'room_id': listRoomID,
-                'item_id': itemID
+                'room_id': $listRoomID,
+                'item_id': $itemID
             },
             success: function(result) {
                 $("#table-container").html(result);
