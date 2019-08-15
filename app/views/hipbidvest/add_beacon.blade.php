@@ -98,7 +98,6 @@ function get_categories_for_store() {
     $textValue = $("#store_select option:selected").text();
 
     if ($textValue != "Select"){
-        debugger;
         $.ajax({
             url: pathname + 'hipbidvest/storeCategories/' + store_id,
             type: 'get',
