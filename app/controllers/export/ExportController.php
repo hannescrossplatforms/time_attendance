@@ -21,9 +21,8 @@ class ExportController extends Controller {
             $venue_json = array();
             // Validate the API key
             $request = \Request::all();
-            if (!$this->authenticateRequest($request['Authorization'])){
+            if (!$this->authenticateRequest($request['Authorization']))
                 return $this->unauthorizedResponse();
-            }
             // Get all Vicinity venues
             $venues = \Brand::where('name', '=', 'VICINITY')->firstOrFail()->venues;
             // Loop through each venue
@@ -38,7 +37,29 @@ class ExportController extends Controller {
              return $this->successResponse($data);
         }
         catch (Exception $e) {
-            // If something happened render plain text of the error
+            // If something happened render default error JSON with exception message
+            return $this->errorResponse($e->getMessage());
+        }
+    }
+
+    public function rollup($id, $from, $to) {
+        try {
+            // Set data variables
+            $data = array();
+            // Validate the API key
+            $request = \Request::all();
+            if (!$this->authenticateRequest($request['Authorization']))
+                return $this->unauthorizedResponse();
+            // Validate the id
+            $venue = \Venue::where('id', '=', $id)->first();
+            if (!$venue)
+                return $this->notFoundResponse('Venue with id '.$id.' not found');
+            // http://tracks03.hipzone.co.za/aggregate/1376/custom/2019-08-01/2019-08-31
+            $data['data'] = json_decode(file_get_contents('http://tracks03.hipzone.co.za/aggregate/'.$id.'/custom/'.$from.'/'.$to));
+            return $this->successResponse($data);
+        }
+        catch (Exception $e) {
+            // If something happened render default error JSON with exception message
             return $this->errorResponse($e->getMessage());
         }
     }
@@ -48,13 +69,17 @@ class ExportController extends Controller {
     public function authenticateRequest($key) {
         $user = \User::where('remember_token', '=', $key)->first();
         if ($user) {
-            $vicinity_brands = $user->brands()->where('id','=', 165)->count();
-            if ($vicinity_brands != 0)
+            $vicinity_brands = $user->brands()->where('brands.id','=', 165)->count();
+            if ($vicinity_brands != 0) 
                 return true;
-            else
+            else 
                 return false;
-        } else
+        } else 
             return false;
+    }
+
+    public function validateParameters($params) {
+
     }
 
     /* #endregion */
@@ -72,6 +97,14 @@ class ExportController extends Controller {
         $error['code'] = 403;
         $error['status'] = 'failed';
         $error['message'] = 'API key is missing or is not authorized to access this data';
+        return $this->respondJSON($error);
+    }
+
+    public function notFoundResponse($message) {
+        $error = array();
+        $error['code'] = 404;
+        $error['status'] = 'not_found';
+        $error['message'] = $message;
         return $this->respondJSON($error);
     }
 
