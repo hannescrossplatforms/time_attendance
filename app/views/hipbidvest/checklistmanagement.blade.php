@@ -82,10 +82,10 @@
                 </div>
 
 
-                <h3>Checklist</h3>
+
                 <br>
                 <div class="row">
-
+                <h3>Checklist</h3>
                     <div id="table-container" class="table-responsive">
 
                     </div>
