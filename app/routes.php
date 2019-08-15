@@ -371,6 +371,9 @@ Route::get('hipbidvest/bidvest_delete_beacon/{id}', 'hipbidvest\HipbidvestContro
 Route::get('hipbidvest/bidvest_add_beacon', 'hipbidvest\HipbidvestController@addBeacon');
 Route::get('hipbidvest/storeCategories/{id}','hipbidvest\HipbidvestController@getStoreCategories');
 
+Route::get('/hipbidvest/bidvest_manage_default_checklist','hipbidvest\HipbidvestController@bidvestDefaultCheckListManagement');
+
+
 //Export controller routes ///////////////////////////////////////////////////////////
 Route::get('/vicinity/venues', array('uses' => 'ExportController@venues', 'as' => 'vicinity_venues'));
 Route::get('/vicinity/venues/{id}/rollup/{from}/{to}', array('uses' => 'ExportController@rollup', 'as' => 'vicinity_rollup'));

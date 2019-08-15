@@ -1,0 +1,61 @@
+@extends('layout')
+
+@section('content')
+<style type="text/css">
+.overlay {
+    background: rgba(129, 119, 119, 0.5) none no-repeat scroll 0% 0%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 1px;
+    z-index: 1019;
+    padding-left: 53%;
+    padding-top: 20%;
+}
+</style>
+
+<body class="hipTnA">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            @include('hipbidvest.sidebar')
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+                <h1 class="page-header">Bidvest Default Checklist Management</h1>
+
+
+                <div class="row">
+                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_manage_default_checklist">Add checklist item</a>
+                </div>
+                <br>
+                <div class="row">
+
+
+
+
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                        </table>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@stop
