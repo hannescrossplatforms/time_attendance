@@ -374,7 +374,7 @@ Route::get('hipbidvest/storeCategories/{id}','hipbidvest\HipbidvestController@ge
 Route::get('/hipbidvest/bidvest_manage_default_checklist','hipbidvest\HipbidvestController@bidvestDefaultCheckListManagement');
 Route::get('/hipbidvest/bidvest_add_default_checklist_item','hipbidvest\HipbidvestController@bidvestAddItemToDefaultChecklist');
 Route::post('hipbidvest/save_default_checklist_item','hipbidvest\HipbidvestController@saveDefaultChecklistItem');
-Route::post('hipbidvest/bidvest_delete_checklist_item','hipbidvest\HipbidvestController@deleteDefaultChecklistItem');
+Route::get('hipbidvest/bidvest_delete_checklist_item','hipbidvest\HipbidvestController@deleteDefaultChecklistItem');
 
 //Export controller routes ///////////////////////////////////////////////////////////
 Route::get('/vicinity/venues', array('uses' => 'ExportController@venues', 'as' => 'vicinity_venues'));
