@@ -669,6 +669,29 @@ class HipbidvestController extends \BaseController {
         return \View::make('hipbidvest.bidvestchecklisttableview')->with('data', $data);
     }
 
+    public static function addChceklistItemToRoom(){
+
+        $roomID = Input::get('item_id');
+        $title = Input::get('title');
+        $description = Input::get('description');
+
+        $item = new \EngageBidvestChecklistItem();
+
+        $item->title = $title;
+        $item->description = $description;
+        $item->room_id = $roomID;
+
+        $item->save();
+
+        $data = array();
+
+        $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);
+        $data['checklistItems'] = $allChecklistItems;
+
+        return \View::make('hipbidvest.bidvestchecklisttableview')->with('data', $data);
+
+    }
+
 }
 
 

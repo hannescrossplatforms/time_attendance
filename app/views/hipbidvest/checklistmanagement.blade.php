@@ -70,12 +70,12 @@
 
                         <div class="form-group">
                             <label>Title*</label>
-                            <input type="text" class="form-control" size="6" placeholder="Item title" name="item_title" required>
+                            <input id="new_item_title" type="text" class="form-control" size="6" placeholder="Item title" name="item_title" required>
                         </div>
 
                         <div class="form-group">
                             <label>Description*</label>
-                            <input type="text" class="form-control" size="6" placeholder="Item description" name="item_description" required>
+                            <input id="new_item_description" type="text" class="form-control" size="6" placeholder="Item description" name="item_description" required>
                         </div>
 
 
@@ -113,6 +113,43 @@
     <script src="/js/jquery.timepicker.min.js"></script>
 
 <script>
+
+$("#add_item_to_checklist").on("click", function(){
+
+    var room_id = $("#room_select").val();
+    var title = $("#new_item_title").val();
+    var description = $("#new_item_description").val();
+
+    if (title != '' && description != '') {
+
+        var store_id = $("#venue_select").val();
+        var room_id = $("#room_select").val();
+
+        $.ajax({
+            url: pathname + 'hipbidvest/add_new_item_to_room',
+            type: 'post',
+            dataType: 'html',
+            data: {
+                'room_id': room_id,
+                'title': title,
+                'description': description
+            },
+            success: function(result) {
+                $("#table-container").html(result);
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+
+    }
+    else {
+        alert('Please enter title and description when adding an item.');
+    }
+
+
+});
 
 $("#assign_default_checklist_to_room").on("click", function(){
 
