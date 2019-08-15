@@ -89,6 +89,8 @@ function get_rooms_for_store() {
 
     $textValue = $("#venue_select option:selected").text();
     if ($textValue == "Select") {
+        var $dropdown = $("#room_select");
+        $dropdown.empty();
         $("#select_room_container").addClass("hidden");
     }
 
