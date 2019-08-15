@@ -85,7 +85,7 @@ function get_rooms_for_store() {
 
     pathname = $('#url').val();
 
-    var store_id = $("#store_select").val();
+    var store_id = $("#venue_select").val();
 
     $.ajax({
         url: pathname + 'hipbidvest/storeCategories/' + store_id,
