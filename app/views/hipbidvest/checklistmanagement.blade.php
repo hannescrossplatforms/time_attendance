@@ -46,7 +46,7 @@
 
                         <div class="form-group">
                             <label>Select Room</label>
-                            <select id="room_select" name="room_id" onchange="get_rooms_for_store()" class="form-control hidden" required>
+                            <select id="room_select" name="room_id" onchange="get_rooms_for_store()" class="form-control" required>
                             <option value="">Select</option>
 
                             </select>
