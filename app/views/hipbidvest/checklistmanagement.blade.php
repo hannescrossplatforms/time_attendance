@@ -59,6 +59,30 @@
                 <div class="row">
                     <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_manage_default_checklist">Manage default checklist</a>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label>Title*</label>
+                            <input type="text" class="form-control" size="6" placeholder="Item title" name="item_title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description*</label>
+                            <input type="text" class="form-control" size="6" placeholder="Item description" name="item_description" required>
+                        </div>
+
+
+                        <br>
+                        <button id="submitform" class="btn btn-primary">Submit</button>
+                        <a href="/hipbidvest/bidvest_manage_default_checklist" class="btn btn-default">Cancel</a>
+                        <br>
+                    </div>
+                </div>
+
+
+
                 <br>
                 <div class="row">
 
