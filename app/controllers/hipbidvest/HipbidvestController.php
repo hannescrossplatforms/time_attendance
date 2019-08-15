@@ -617,9 +617,9 @@ class HipbidvestController extends \BaseController {
 
         $data = array();
 
-        $storeRooms = \EngageBidvestCategory::firstOrFail();
-        $json = json_encode($storeRooms);
-        print_r($json);
+        // $storeRooms = \EngageBidvestCategory::firstOrFail();
+        // $json = json_encode($storeRooms);
+        // print_r($json);
 
         // $itemTitle = \Input::get('item_title');
         // $itemDescription = \Input::get('item_description');
