@@ -141,7 +141,7 @@
                     <div class="row">
                         <div class="col-md-4" style="width:30%;">
                             <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
-                                <label>Category</label>
+                                <label>Room</label>
                             </div>
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                                 <select id="brandcategory" onchange="change_report_period()" class="form-control"
@@ -166,7 +166,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Total dwell time per category</div>
+                                    <div class="chart-title venuecolheading">Total dwell time per room</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -181,7 +181,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Average dwell time per category</div>
+                                    <div class="chart-title venuecolheading">Average dwell time per room</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -203,7 +203,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Number of visits per category</div>
+                                    <div class="chart-title venuecolheading">Number of visits per room</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -271,7 +271,7 @@ $(document).ready(function() {
 
     var chartProperties = {
         "caption": "",
-        "xAxisName": "Category",
+        "xAxisName": "Room",
         "yAxisName": "Total dwell time (minutes)",
         "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
@@ -299,7 +299,7 @@ $(document).ready(function() {
 
     var chartProperties = {
         "caption": "",
-        "xAxisName": "Category",
+        "xAxisName": "Room",
         "yAxisName": "Average dwell time (minutes)",
         "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
@@ -327,7 +327,7 @@ $(document).ready(function() {
 
     var chartProperties = {
         "caption": "",
-        "xAxisName": "Category",
+        "xAxisName": "Room",
         "yAxisName": "Number of visits per category",
         "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
@@ -429,7 +429,7 @@ function renderCharts(time, start, end, category, store, province) {
 
             var chartProperties = {
                 "caption": "",
-                "xAxisName": "Category",
+                "xAxisName": "Room",
                 "yAxisName": "Total dwell time (minutes)",
                 "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
@@ -455,7 +455,7 @@ function renderCharts(time, start, end, category, store, province) {
 
             var chartProperties = {
                 "caption": "",
-                "xAxisName": "Category",
+                "xAxisName": "Room",
                 "yAxisName": "Average dwell time (minutes)",
                 "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
@@ -481,7 +481,7 @@ function renderCharts(time, start, end, category, store, province) {
 
             var chartProperties = {
                 "caption": "",
-                "xAxisName": "Category",
+                "xAxisName": "Room",
                 "yAxisName": "Number of visits",
                 "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
