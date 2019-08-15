@@ -405,8 +405,7 @@ class HipbidvestController extends \BaseController {
         $data = array();
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        $data['venues'] = $venues;
-        $data['brand'] = $bidvestBrand;
+
 
         return \View::make('hipbidvest.checklistmanagement')->with('data', $data);
 
