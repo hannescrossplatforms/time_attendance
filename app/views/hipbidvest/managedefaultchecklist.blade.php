@@ -56,6 +56,18 @@
                             <th>Description</th>
                             <th>Actions</th>
                         </tr>
+
+                        @foreach ($data['defaultChecklistItems'] as $checklistItem)
+                        <tr>
+                            <td>{{ $checklistItem->title }}</td>
+                            <td>{{ $checklistItem->description }}</td>
+                            <td>
+                            <a href="bidvest_delete_checklist_item/<?php echo $checklistItem->id;?>" class="btn btn-default btn-sm">Delete checklist item</a>
+                            </td>
+                        </tr>
+                        @endforeach
+
+
                         </table>
                     </div>
 

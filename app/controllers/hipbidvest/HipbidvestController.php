@@ -565,6 +565,9 @@ class HipbidvestController extends \BaseController {
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 
 
+        $defaultChecklistItems = \EngageBidvestDefaultChecklist::all();
+        $data['defaultChecklistItems'] = $defaultChecklistItems;
+
         return \View::make('hipbidvest.managedefaultchecklist')->with('data', $data);
 
     }
@@ -592,6 +595,20 @@ class HipbidvestController extends \BaseController {
 
         return \Redirect::to("/hipbidvest/bidvest_manage_default_checklist");
 
+
+
+    }
+
+    public static function deleteDefaultChecklistItem($id){
+
+        $data = array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+        $beacon = \EngageBidvestDefaultChecklist::find($id);
+        $beacon->delete();
+
+        return \Redirect::to("/hipbidvest/bidvest_manage_default_checklist");
 
 
     }
