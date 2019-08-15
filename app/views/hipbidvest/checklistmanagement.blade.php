@@ -182,7 +182,7 @@ function show_assign_button_and_get_initial_data(){
 
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-
+            debugger;
         }
     });
 

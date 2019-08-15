@@ -647,6 +647,7 @@ class HipbidvestController extends \BaseController {
         $data['checklistItems'] = $allChecklistItems;
 
         return \View::make('hipbidvest.bidvestchecklisttableview')->with('data', $data);
+
     }
 
 }
