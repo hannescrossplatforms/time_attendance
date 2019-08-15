@@ -164,27 +164,29 @@ function show_assign_button_and_get_initial_data(){
     }
     else {
         $("#assign_default_checklist_to_room").removeClass('hidden');
+
+        var store_id = $("#venue_select").val();
+        var room_id = $("#room_select").val();
+        debugger;
+        $.ajax({
+        url: pathname + 'hipbidvest/bidvest_get_checklist_items',
+            type: 'post',
+            dataType: 'html',
+            data: {
+                'store_id': store_id,
+                'room_id': room_id
+            },
+            success: function(result) {
+                $("#table-container").html(result);
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                debugger;
+            }
+        });
+
+
     }
-
-    var store_id = $("#venue_select").val();
-    var room_id = $("#room_select").val();
-
-    $.ajax({
-    url: pathname + 'hipbidvest/bidvest_get_checklist_items',
-        type: 'post',
-        dataType: 'html',
-        data: {
-            'store_id': store_id,
-            'room_id': room_id
-        },
-        success: function(result) {
-            $("#table-container").html(result);
-
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            debugger;
-        }
-    });
 
 }
 
