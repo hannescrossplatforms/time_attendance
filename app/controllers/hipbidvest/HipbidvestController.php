@@ -387,17 +387,25 @@ class HipbidvestController extends \BaseController {
     }
 
     public static function bidvestCategoryManagement(){
-        //HANNES TODO: Bidvest not pkcknpay
+
         $bidvestBrand = \Brand::where('name', '=', 'Bidvest')->firstOrFail();
         $venues = $bidvestBrand->venues()->get();
 
-        $data = array() ;
+        $data = array();
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['venues'] = $venues;
         $data['brand'] = $bidvestBrand;
 
         return \View::make('hipbidvest.categorymanagement')->with('data', $data);
+    }
+
+    public static function bidvestRoomManagement(){
+
+        $data = array();
+
+        return \View::make('hipbidvest.checklistmanagement')->with('data', $data);
+
     }
 
     public static function bidvestBeaconManagement(){
