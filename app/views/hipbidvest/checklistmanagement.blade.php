@@ -49,18 +49,31 @@
                             </select>
                         </div>
 
-
-
-
-
-
-
-
-
-
-
                     </div>
                 </div>
+
+                <div class="row">
+                <div class="table-responsive">
+                        <table class="table table-striped">
+                        <tr>
+                            <th>Beacon UUID</th>
+                            <th>Beacon Minor</th>
+                            <th>Beacon Major</th>
+                            <th>Store name</th>
+                            <th>Category name</th>
+                            <th>Actions</th>
+                        </tr>
+
+
+                        </table>
+                    </div>
+
+
+
+
+
+                </div>
+
             </div>
 
 
@@ -124,12 +137,3 @@ function get_rooms_for_store() {
 </script>
 
 @stop
-
-<!-- :
-created_at: "2019-08-15 08:42:14"
-id: "5"
-name: "asdf"
-store_id: "1393"
-store_name: "Bidvest Bidvest"
-updated_at: "2019-08-15 08:42:14"
-__proto__:  -->
