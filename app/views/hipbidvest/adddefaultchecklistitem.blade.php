@@ -24,7 +24,7 @@
             @include('hipbidvest.sidebar')
 
             <form role="form" id="category-form" method="post"
-                    action=" {{ url('hipbidvest/save_beacon'); }}">
+                    action=" {{ url('hipbidvest/save_default_checklist_item'); }}">
                 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
                     <h1 class="page-header">Add Default Checklist Item</h1>
                     <!-- To look at errors look at the addvenue.blade file -->
@@ -33,12 +33,12 @@
 
                             <div class="form-group">
                                 <label>Title*</label>
-                                <input type="text" class="form-control" size="6" placeholder="Beacon UUID" name="beacon_uuid" required>
+                                <input type="text" class="form-control" size="6" placeholder="Item title" name="item_title" required>
                             </div>
 
                             <div class="form-group">
                                 <label>Description*</label>
-                                <input type="text" class="form-control" size="6" placeholder="Beacon Minor" name="beacon_minor" required>
+                                <input type="text" class="form-control" size="6" placeholder="Item description" name="item_description" required>
                             </div>
 
 

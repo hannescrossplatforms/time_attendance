@@ -577,6 +577,24 @@ class HipbidvestController extends \BaseController {
         return \View::make('hipbidvest.adddefaultchecklistitem')->with('data', $data);
     }
 
+    public static function saveDefaultChecklistItem(){
+
+        $data = array();
+        $itemTitle = \Input::get('item_title');
+        $itemDescription = \Input::get('item_description');
+
+        $checklistItem = new \EngageBidvestDefaultChecklist();
+        $checklistItem->title = $itemTitle;
+        $checklistItem->description = $itemDescription;
+
+        $checklistItem->save();
+
+        return \Redirect::to("/hipbidvest/bidvest_manage_default_checklist");
+
+
+
+    }
+
 }
 
 
