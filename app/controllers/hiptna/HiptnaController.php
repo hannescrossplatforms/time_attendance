@@ -44,6 +44,10 @@ class HiptnaController extends \BaseController {
             Session::put('availableInstances', "PNP_ACCESS");
             $instance = "PNP_ACCESS";
         }
+        else if (\Hipauth::hasAnyPermissions(array("BIDVEST_ACCESS"))) {
+            Session::put('availableInstances', "BIDVEST_ACCESS");
+            $instance = "VIDVEST_ACCESS";
+        }
         // Session::put('availableInstances', "NR01");
         // $instance = "NR01";
         // ANUSHA - CURRENTLY THE ABOVE WILL SET availableInstances to 'BOTH'
@@ -59,6 +63,8 @@ class HiptnaController extends \BaseController {
                 return Redirect::action('hiptna\HiptnaController@showNrInstanceDashboard');
             } else if ($instance == "PNP_ACCESS") {
                 return Redirect::action('hippnp\HippnpController@showDashboard');
+            } else if ($instance == "BIDVEST_ACCESS") {
+                return Redirect::action('hipbidvest\HipbidvestController@showDashboard');
             } else {
                 return Redirect::action('hiptna\HiptnaController@showInstanceDashboard');
             }
