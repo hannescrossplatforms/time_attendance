@@ -32,7 +32,12 @@
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
                 <h1 class="page-header">Bidvest Checklist Management</h1>
-                <!-- To look at errors look at the addvenue.blade file -->
+
+                <div class="row">
+                    <a class="btn-manage-default-checklist btn btn-sm btn-primary" href="bidvest_manage_default_checklist">Manage default checklist</a>
+                </div>
+
+
                 <div class="row">
                     <div class="col-md-12">
                         <input type="hidden" id="url" name="" value={{$data['url']}}>
@@ -57,10 +62,6 @@
                         </div>
 
                     </div>
-                </div>
-
-                <div class="row">
-                    <a class="btn-manage-default-checklist btn btn-sm btn-primary" href="bidvest_manage_default_checklist">Manage default checklist</a>
                 </div>
 
                 <div id="add_item_row" class="row hidden">
@@ -141,6 +142,7 @@ function get_rooms_for_store() {
 
     $("#table-container").html(null);
     $("#assign_default_checklist_to_room").addClass('hidden');
+    $("#add_item_row").addClass('hidden');
 
     pathname = $('#url').val();
 
