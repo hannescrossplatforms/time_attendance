@@ -33,6 +33,7 @@
                         <div class="form-group">
                             <label>Venue*</label>
                             <select id="venue_select" name="venue_id" onchange="get_categories_for_store()" class="form-control" required>
+                            <option value="">Select</option>
                             @foreach($data['venues'] as $venue)
                                 <option value="{{ $venue->id }}">
                                 {{ $venue->sitename }}
