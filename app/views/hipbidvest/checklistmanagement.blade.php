@@ -138,8 +138,8 @@ $("#add_item_to_checklist").on("click", function(){
             },
             success: function(result) {
                 $("#table-container").html(result);
-                $("#new_item_title").val() = '';
-                $("#new_item_description").val() = '';
+                $("#new_item_title").val('');
+                $("#new_item_description").val('');
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
 
