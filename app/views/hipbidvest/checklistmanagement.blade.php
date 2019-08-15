@@ -28,7 +28,7 @@
                 <!-- To look at errors look at the addvenue.blade file -->
                 <div class="row">
                     <div class="col-md-12">
-
+                        <input type="hidden" id="url" name="" value={{$data['url']}}>
                         <div class="form-group">
                             <label>Select Venue</label>
                             <select id="venue_select" name="venue_id" onchange="get_rooms_for_store()" class="form-control" required>
@@ -82,6 +82,8 @@
 
 
 function get_rooms_for_store() {
+
+    pathname = $('#url').val();
 
     var store_id = $("#store_select").val();
 
