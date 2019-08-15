@@ -106,7 +106,7 @@ $("#assign_default_checklist_to_room").on("click", function(){
             'room_id': room_id
         },
         success: function(result) {
-
+            debugger;
             alert(result);
 
         },
