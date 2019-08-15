@@ -684,6 +684,7 @@ class HipbidvestController extends \BaseController {
         $item->save();
 
         $data = array();
+        $data['room_id'] = $roomID;
 
         $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);
         $data['checklistItems'] = $allChecklistItems;
