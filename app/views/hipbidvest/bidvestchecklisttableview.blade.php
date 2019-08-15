@@ -1,4 +1,5 @@
 <table class="table table-striped">
+<h3>Checklist</h3>
     <input type="hidden" id="list_room_id" name="" value={{$data['room_id']}}>
     <tr>
         <th>Title</th>
