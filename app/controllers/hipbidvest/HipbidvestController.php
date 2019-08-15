@@ -510,6 +510,14 @@ class HipbidvestController extends \BaseController {
     public static function addCategoryToStore() {
 
         $data = array() ;
+
+
+        $storeRooms = \EngageBidvestCategory::where('store_id', '=', $id)->get();
+
+        $bidvestBrand = \Brand::where('name', '=', 'Bidvest')->firstOrFail();
+        $venues = $bidvestBrand->venues()->get();
+
+        $data['venues'] = $venues;
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 

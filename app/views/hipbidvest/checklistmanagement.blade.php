@@ -14,9 +14,6 @@
     padding-top: 20%;
 }
 
-.hidden{
-    /* display:none; */
-}
 </style>
 
 <body class="hipTnA">
@@ -92,6 +89,15 @@ function get_rooms_for_store() {
         success: function(data) {
             debugger;
            alert(data);
+
+           var $dropdown = $("#room_select");
+            $.each(result, function() {
+                // $dropdown.append($("<option />").val(this.ImageFolderID).text(this.Name));
+            });
+
+
+
+
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
 
