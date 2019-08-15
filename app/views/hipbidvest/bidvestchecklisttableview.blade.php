@@ -24,13 +24,25 @@
 
 $(".table_view_item").on('click', function(){
 
-    $test = $(this);
-
-    debugger;
     $listRoomID = $("#list_room_id").val();
-    alert($listRoomID);
-    $itemID = $(e).prop("itemID");
-    alert($itemID);
+    $itemID = $(this).attr("itemID");
+
+    $.ajax({
+        url: pathname + 'hipbidvest/bidvest_get_checklist_items',
+            type: 'post',
+            dataType: 'html',
+            data: {
+                'store_id': store_id,
+                'room_id': room_id
+            },
+            success: function(result) {
+                $("#table-container").html(result);
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
 
 
 });

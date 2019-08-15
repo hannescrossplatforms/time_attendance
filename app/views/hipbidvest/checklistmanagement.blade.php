@@ -167,7 +167,7 @@ function show_assign_button_and_get_initial_data(){
         var room_id = $("#room_select").val();
 
         $.ajax({
-        url: pathname + 'hipbidvest/bidvest_get_checklist_items',
+        url: pathname + 'hipbidvest/bidvest_delete_assigned_checklist_item',
             type: 'post',
             dataType: 'html',
             data: {
