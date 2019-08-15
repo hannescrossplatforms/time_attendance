@@ -167,7 +167,7 @@ function show_assign_button_and_get_initial_data(){
 
         var store_id = $("#venue_select").val();
         var room_id = $("#room_select").val();
-        debugger;
+
         $.ajax({
         url: pathname + 'hipbidvest/bidvest_get_checklist_items',
             type: 'post',
@@ -181,7 +181,7 @@ function show_assign_button_and_get_initial_data(){
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                debugger;
+
             }
         });
 
