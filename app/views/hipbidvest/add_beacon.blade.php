@@ -58,7 +58,7 @@
                                 </select>
                             </div>
 
-                            <div id="#select_room_container" class="form-group hidden">
+                            <div id="select_room_container" class="form-group hidden">
                                 <label>Category*</label>
                                 <select id="room_select" name="category_id" class="form-control" required>
                                 @foreach($data['categories'] as $category)
