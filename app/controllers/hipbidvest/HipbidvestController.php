@@ -409,6 +409,8 @@ class HipbidvestController extends \BaseController {
         $picknpayBrand = \Brand::where('name', '=', 'Bidvest')->firstOrFail();
         $venues = $picknpayBrand->venues()->get();
 
+        $data['venues'] = $venues;
+
         return \View::make('hipbidvest.checklistmanagement')->with('data', $data);
 
     }
