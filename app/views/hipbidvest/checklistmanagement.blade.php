@@ -94,7 +94,7 @@ function get_rooms_for_store() {
         data: {
             'id': store_id
         },
-        success: function(data) {
+        success: function(result) {
 
            var $dropdown = $("#room_select");
             $.each(result, function() {
