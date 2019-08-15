@@ -40,6 +40,7 @@
 
           <ul class="nav subNav">
               <li @if ( $data['currentMenuItem'] == "Dashboard" ) class="active" @endif><a href="{{ url('hipbidvest_showdashboard'); }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+
               <div id="instance_menus">
                   <ul class="subNav2">
                     <li><a href="{{ url('hipbidvest_showdashboard'); }}">Bidvest </a></li>
@@ -49,6 +50,21 @@
                 <li><a href="{{ url('hipbidvest/bidvest_manage_store_categories'); }}"><i class="fa fa-gears"></i>Category Management</a></li>
                 <li><a href="{{ url('hipbidvest/bidvest_beacon_management'); }}"><i class="fa fa-gears"></i>Beacon Management</a></li>
               </div>
+
+              @if (\User::hasAccess("superadmin"))
+                <div id="instance_menus">
+                    <ul class="subNav2">
+
+                      <li><a href="{{ url('hippnp_showdashboard'); }}">Pick n Pay </a></li>
+
+                    </ul>
+                </div>
+                <div id="picknpay_settings">
+                  <li><a href="{{ url('hippnp/picknpay_manage_store_categories'); }}"><i class="fa fa-gears"></i>Category Management</a></li>
+                  <li><a href="{{ url('hippnp/picknpay_beacon_management'); }}"><i class="fa fa-gears"></i>Beacon Management</a></li>
+                </div>
+              @endif
+
               <div id="exception_manage_menus" style="display: none">
                 @if( Session::get('currentInstance') != "NR01" && Session::get('currentInstance') != "NR02" )
                     <li @if ( $data['currentMenuItem'] == "Exception Reports" ) class="active" @endif ><a href="{{ url('hiptna_exceptionreports'); }}"><i class="fa fa-bell-o"></i>Exception Reports</a></li>
