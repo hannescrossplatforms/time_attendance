@@ -33,11 +33,11 @@
                 <div class="container-fluid">
 
 
-                <a class="btn-add-category btn btn-default btn-sm" href="/hipbidvest/bidvest_manage_store_categories/add_category">Add Category</a>
+                <a class="btn-add-category btn btn-default btn-sm" href="/hipbidvest/bidvest_manage_store_categories/add_category">Add Room</a>
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
-                            <th>Category Name</th>
+                            <th>Room Name</th>
                             <th>Actions</th>
                         </tr>
                         @foreach ($data['engageCategories'] as $category)
