@@ -22,7 +22,7 @@
         <div class="row">
 
             @include('hipbidvest.sidebar')
-
+            <input type="hidden" id="url" name="" value={{$data['url']}}>
             <form role="form" id="category-form" method="post"
                     action=" {{ url('hipbidvest/save_beacon'); }}">
                 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
@@ -91,6 +91,7 @@
 
 function get_categories_for_store() {
 
+    let pathname = $('#url').val();
     var store_id = $("#store_select").val();
 
     $.ajax({
