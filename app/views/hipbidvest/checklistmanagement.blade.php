@@ -100,7 +100,7 @@ $("#assign_default_checklist_to_room").on("click", function(){
     $.ajax({
         url: pathname + 'hipbidvest/bidvest_assign_default_checklist_items',
         type: 'post',
-        dataType: 'json',
+        dataType: 'html',
         data: {
             'store_id': store_id,
             'room_id': room_id
