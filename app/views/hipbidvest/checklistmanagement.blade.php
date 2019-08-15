@@ -62,11 +62,6 @@
                 <br>
                 <div class="row">
 
-
-
-
-
-
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
@@ -77,12 +72,13 @@
                         </table>
                     </div>
 
-
-
-
-
-
                 </div>
+
+                <div class="row">
+                    <a id="assign_default_checklist_to_room" class="btn-manage-default-checklist btn btn-default btn-sm">Assign default checklist to room</a>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -96,6 +92,9 @@
 
 <script>
 
+$("#assign_default_checklist_to_room").on("click", function(){
+    alert("hier");
+});
 
 function get_rooms_for_store() {
 
