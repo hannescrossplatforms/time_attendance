@@ -118,6 +118,8 @@ $("#assign_default_checklist_to_room").on("click", function(){
 
 function get_rooms_for_store() {
 
+    $("#table-container").html(null);
+
     pathname = $('#url').val();
 
     var store_id = $("#venue_select").val();
@@ -139,7 +141,7 @@ function get_rooms_for_store() {
             'id': store_id
         },
         success: function(result) {
-            $("#table-container").html(null);
+
             $("#select_room_container").removeClass("hidden");
             var $dropdown = $("#room_select");
 
