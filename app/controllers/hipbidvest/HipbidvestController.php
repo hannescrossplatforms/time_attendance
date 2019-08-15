@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Session;
 use Route;
 use \EngageBidvestBeacon;
+use \EngageBidvestDefaultChecklist;
 
 class HipbidvestController extends \BaseController {
 
