@@ -400,7 +400,7 @@ class HipbidvestController extends \BaseController {
         return \View::make('hipbidvest.categorymanagement')->with('data', $data);
     }
 
-    public static function bidvestRoomManagement(){
+    public static function bidvestChecklistManagement(){
 
         $data = array();
 
