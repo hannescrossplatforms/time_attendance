@@ -59,7 +59,7 @@
                             </div>
 
                             <div id="select_room_container" class="form-group hidden">
-                                <label>Category*</label>
+                                <label>Room*</label>
                                 <select id="room_select" name="category_id" class="form-control" required>
                                 @foreach($data['categories'] as $category)
                                     <option value="{{ $category->id }}">
