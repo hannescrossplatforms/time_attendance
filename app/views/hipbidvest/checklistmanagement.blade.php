@@ -57,8 +57,11 @@
                 </div>
 
                 <div class="row">
-                <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_add_beacon">Manage default checklist</a>
+                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_add_beacon">Manage default checklist</a>
+                </div>
                 <br>
+                <div class="row">
+
                 <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
