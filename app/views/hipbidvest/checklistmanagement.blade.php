@@ -63,13 +63,7 @@
                 <div class="row">
 
                     <div id="table-container" class="table-responsive">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Actions</th>
-                            </tr>
-                        </table>
+
                     </div>
 
                 </div>
