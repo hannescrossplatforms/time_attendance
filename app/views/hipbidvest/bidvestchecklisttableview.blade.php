@@ -28,7 +28,7 @@ $(".table_view_item").on('click', function(){
     $itemID = $(this).attr("itemID");
 
     $.ajax({
-        url: pathname + 'hipbidvest/bidvest_get_checklist_items',
+        url: pathname + 'hipbidvest/bidvest_delete_assigned_checklist_item',
             type: 'post',
             dataType: 'html',
             data: {
@@ -43,7 +43,6 @@ $(".table_view_item").on('click', function(){
 
             }
         });
-
 
 });
 </script>
