@@ -135,6 +135,8 @@ return array(
     'EngageBidvest' => $baseDir . '/app/models/EngageBidvest.php',
     'EngageBidvestBeacon' => $baseDir . '/app/models/EngageBidvestBeacon.php',
     'EngageBidvestCategory' => $baseDir . '/app/models/EngageBidvestCategory.php',
+    'EngageBidvestChecklistItem' => $baseDir . '/app/models/EngageBidvestChecklistItem.php',
+    'EngageBidvestDefaultChecklist' => $baseDir . '/app/models/EngageBidvestDefaultChecklist.php',
     'EngagePicknPay' => $baseDir . '/app/models/EngagePicknpay.php',
     'EngagePicknPayBeacon' => $baseDir . '/app/models/EngagePicknPayBeacon.php',
     'EngagePicknPayCategory' => $baseDir . '/app/models/EngagePicknPayCategory.php',

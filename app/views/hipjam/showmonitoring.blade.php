@@ -40,8 +40,8 @@
                                 <td id="venue{{$venue->id}}" idval="{{$venue->id}}" class="sensorlist">{{$venue->sitename}} 
                                     <ol id="sensors{{$venue->id}}"></ol>
                                 </td>
-                                <td id="status{{$venue->id}}" class="venuelist-{{$data['status'][$venue->id]}}" idval="{{$venue->id}}">
-                                    {{$data['status'][$venue->id]}}
+                                <td id="status{{$venue->id}}" class="" idval="{{$venue->id}}">
+                                    
                                 </td>
                                                                         
                             </tr>
@@ -52,7 +52,7 @@
 
                 <div class="table-responsive clear" id="gridview">
                         @foreach($data['venues'] as $venue)
-                            <div class="venuegrid-{{$data['status'][$venue->id]}}">
+                            <div class="venuegrid-{{$venue->id}}">
                                     <span id="venuegrid{{$venue->id}}" idval="{{$venue->id}}">{{$venue->sitename}}</span>
                                     <ol id="sensors{{$venue->id}}"></ol>
                             </div>
