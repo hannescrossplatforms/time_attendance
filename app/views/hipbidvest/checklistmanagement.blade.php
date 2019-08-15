@@ -41,9 +41,9 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div id="select_room_container" class="form-group hidden">
                             <label>Select Room</label>
-                            <select id="room_select" name="room_id" onchange="" class="form-control hidden" required>
+                            <select id="room_select" name="room_id" onchange="" class="form-control" required>
                             <option value="">Select</option>
 
                             </select>
@@ -96,18 +96,15 @@ function get_rooms_for_store() {
         },
         success: function(result) {
 
-           var $dropdown = $("#room_select");
+            $("#select_room_container").removeClass("hidden");
+            var $dropdown = $("#room_select");
 
-           $dropdown.removeClass( "hidden" );
 
-           $dropdown.empty();
-           $dropdown.append($("<option />").val('').text("Select"));
-           result.forEach((obj) => {
+            $dropdown.empty();
+            $dropdown.append($("<option />").val('').text("Select"));
+            result.forEach((obj) => {
                 $dropdown.append($("<option />").val(obj.id).text(obj.name));
             });
-
-
-
 
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
