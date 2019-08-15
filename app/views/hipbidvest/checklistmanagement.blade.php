@@ -47,7 +47,7 @@
 
                         <div id="select_room_container" class="form-group hidden">
                             <label>Select Room</label>
-                            <select id="room_select" name="room_id" onchange="" class="form-control" required>
+                            <select id="room_select" name="room_id" onchange="show_assign_button()" class="form-control" required>
                             <option value="">Select</option>
 
                             </select>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="row">
-                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_manage_default_checklist">Manage default checklist</a>
+                    <a class="btn-manage-default-checklist btn btn-default btn-sm hidden" href="bidvest_manage_default_checklist">Manage default checklist</a>
                 </div>
                 <br>
                 <div class="row">
@@ -133,6 +133,18 @@ function get_rooms_for_store() {
 
         }
     });
+
+}
+
+function show_assign_button(){
+
+    $textValue = $("#room_select option:selected").text();
+    if ($textValue == "Select") {
+        $("#assign_default_checklist_to_room").addClass('hidden');
+    }
+    else {
+        $("#assign_default_checklist_to_room").removeClass('hidden');
+    }
 
 }
 
