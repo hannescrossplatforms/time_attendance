@@ -97,8 +97,8 @@ function get_rooms_for_store() {
         success: function(result) {
 
            var $dropdown = $("#room_select");
-            $.each(result, function() {
-                $dropdown.append($("<option />").val(result.id).text(result.name));
+           result.forEach((obj) => {
+                $dropdown.append($("<option />").val(obj.id).text(obj.name));
             });
 
 
