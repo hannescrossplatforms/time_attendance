@@ -139,7 +139,7 @@ function get_rooms_for_store() {
             'id': store_id
         },
         success: function(result) {
-
+            $("#table-container").html(null);
             $("#select_room_container").removeClass("hidden");
             var $dropdown = $("#room_select");
 
