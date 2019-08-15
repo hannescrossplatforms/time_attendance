@@ -60,7 +60,7 @@
                     <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_manage_default_checklist">Manage default checklist</a>
                 </div>
 
-                <div class="row">
+                <div id="add_item_row" class="row hidden">
                     <div class="col-md-12">
 
                         <div class="form-group">
@@ -182,10 +182,12 @@ function show_assign_button_and_get_initial_data(){
     $textValue = $("#room_select option:selected").text();
     if ($textValue == "Select") {
         $("#assign_default_checklist_to_room").addClass('hidden');
+        $("#add_item_row").addClass('hidden');
         $("#table-container").html(null);
     }
     else {
         $("#assign_default_checklist_to_room").removeClass('hidden');
+        $("#add_item_row").removeClass('hidden');
 
         var store_id = $("#venue_select").val();
         var room_id = $("#room_select").val();
