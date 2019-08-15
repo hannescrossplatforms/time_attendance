@@ -19,3 +19,17 @@
     </tr>
 
 </table>
+
+<script>
+
+$(".table_view_item").on('click', function(e){
+
+    debugger;
+    $listRoomID = $("#list_room_id").val();
+    alert($listRoomID);
+    $itemID = $(e).prop("itemID");
+    alert($itemID);
+
+
+});
+</script>
