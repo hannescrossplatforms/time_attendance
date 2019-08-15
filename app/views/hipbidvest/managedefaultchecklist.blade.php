@@ -28,8 +28,8 @@
             @include('hipbidvest.sidebar')
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-                <h1 class="page-header">Bidvest Checklist Management</h1>
-                <!-- To look at errors look at the addvenue.blade file -->
+                <h1 class="page-header">Bidvest Default Checklist Management</h1>
+
                 <div class="row">
                     <div class="col-md-12">
                         <input type="hidden" id="url" name="" value={{$data['url']}}>
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="row">
-                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_manage_default_checklist">Manage default checklist</a>
+                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_add_default_checklist_item">Add checklist item</a>
                 </div>
                 <br>
                 <div class="row">

@@ -372,6 +372,7 @@ Route::get('hipbidvest/bidvest_add_beacon', 'hipbidvest\HipbidvestController@add
 Route::get('hipbidvest/storeCategories/{id}','hipbidvest\HipbidvestController@getStoreCategories');
 
 Route::get('/hipbidvest/bidvest_manage_default_checklist','hipbidvest\HipbidvestController@bidvestDefaultCheckListManagement');
+Route::get('/hipbidvest/bidvest_add_default_checklist_item','hipbidvest\HipbidvestController@bidvestAddItemToDefaultChecklist');
 
 
 //Export controller routes ///////////////////////////////////////////////////////////

@@ -568,6 +568,15 @@ class HipbidvestController extends \BaseController {
 
     }
 
+    public static function bidvestAddItemToDefaultChecklist(){
+        $data = array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+
+        return \View::make('hipbidvest.adddefaultchecklistitem')->with('data', $data);
+    }
+
 }
 
 
