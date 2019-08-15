@@ -671,7 +671,7 @@ class HipbidvestController extends \BaseController {
 
     public static function addChceklistItemToRoom(){
 
-        $roomID = Input::get('item_id');
+        $roomID = Input::get('room_id');
         $title = Input::get('title');
         $description = Input::get('description');
 
