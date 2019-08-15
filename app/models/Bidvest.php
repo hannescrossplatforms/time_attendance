@@ -74,7 +74,7 @@ class Bidvest extends Eloquent {
 
     public static function fetchDwellTimeDataForCategoryWithDate($date, $categoryId, $storeId, $provinceId, $verb){
         $query = Bidvest::orderBy('created_at', 'ASC')
-        ->select(DB::raw("IFNULL($verb(CAST(dwell_time AS UNSIGNED)), 0) AS value"))
+        ->select(DB::raw("IFNULL($verb(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
         ->whereraw("category_id = '$categoryId'")
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
@@ -169,8 +169,8 @@ class Bidvest extends Eloquent {
 
         }else if($period == 'rep7day'){
 
-            $start = date('Y-m-d',strtotime('last monday'));
-            $end = date('Y-m-d');
+            $start = date('Y-m-d',strtotime('last sunday'));
+            $end = date('Y-m-d',strtotime('today'));
 
 
             $returnValue['startDate'] = "$start 00.00.00";
