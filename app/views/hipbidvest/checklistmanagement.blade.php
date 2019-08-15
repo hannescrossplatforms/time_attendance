@@ -62,7 +62,7 @@
                 <br>
                 <div class="row">
 
-                    <div class="table-responsive table-container">
+                    <div id="table-container" class="table-responsive">
                         <table class="table table-striped">
                             <tr>
                                 <th>Title</th>
@@ -106,8 +106,7 @@ $("#assign_default_checklist_to_room").on("click", function(){
             'room_id': room_id
         },
         success: function(result) {
-            debugger;
-            alert(result);
+            $("#table-container").val(result);
 
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
