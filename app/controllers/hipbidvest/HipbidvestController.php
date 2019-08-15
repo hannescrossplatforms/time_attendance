@@ -541,8 +541,8 @@ class HipbidvestController extends \BaseController {
 
     public static function getStoreCategories($id) {
 
-        $storeCategories = \EngageBidvestCategory::where('store_id', '=', $id)->get();
-        $json = json_encode($storeCategories);
+        $storeRooms = \EngageBidvestCategory::where('store_id', '=', $id)->get();
+        $json = json_encode($storeRooms);
         print_r($json);
 
     }

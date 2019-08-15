@@ -13,6 +13,10 @@
     padding-left: 53%;
     padding-top: 20%;
 }
+
+.hidden{
+    /* display:none; */
+}
 </style>
 
 <body class="hipTnA">
@@ -28,10 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
 
-
-
                         <div class="form-group">
-                            <label>Venue*</label>
+                            <label>Select Venue</label>
                             <select id="venue_select" name="venue_id" onchange="get_rooms_for_store()" class="form-control" required>
                             <option value="">Select</option>
                             @foreach($data['venues'] as $venue)
@@ -41,6 +43,23 @@
                             @endforeach
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label>Select Room</label>
+                            <select id="room_select" name="room_id" onchange="get_rooms_for_store()" class="form-control hidden" required>
+                            <option value="">Select</option>
+
+                            </select>
+                        </div>
+
+
+
+
+
+
+
+
+
 
 
                     </div>
