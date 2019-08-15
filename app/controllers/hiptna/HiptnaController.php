@@ -43,10 +43,9 @@ class HiptnaController extends \BaseController {
         } else if (\Hipauth::hasAnyPermissions(array("PNP_ACCESS"))) {
             Session::put('availableInstances', "PNP_ACCESS");
             $instance = "PNP_ACCESS";
-        }
-        else if (\Hipauth::hasAnyPermissions(array("BIDVEST_ACCESS"))) {
+        } else if (\Hipauth::hasAnyPermissions(array("BIDVEST_ACCESS"))) {
             Session::put('availableInstances', "BIDVEST_ACCESS");
-            $instance = "VIDVEST_ACCESS";
+            $instance = "BIDVEST_ACCESS";
         }
         // Session::put('availableInstances', "NR01");
         // $instance = "NR01";
