@@ -56,11 +56,8 @@
                 <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
-                            <th>Beacon UUID</th>
-                            <th>Beacon Minor</th>
-                            <th>Beacon Major</th>
-                            <th>Store name</th>
-                            <th>Category name</th>
+                            <th>Title</th>
+                            <th>Description</th>
                             <th>Actions</th>
                         </tr>
 
