@@ -637,12 +637,16 @@ class HipbidvestController extends \BaseController {
         $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);
         $data['checklistItems'] = $allChecklistItems;
 
-
         return \View::make('hipbidvest.bidvestchecklisttableview')->with('data', $data);
 
+    }
 
+    public static function getChecklistItems(){
 
+        $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);
+        $data['checklistItems'] = $allChecklistItems;
 
+        return \View::make('hipbidvest.bidvestchecklisttableview')->with('data', $data);
     }
 
 }

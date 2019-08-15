@@ -47,7 +47,7 @@
 
                         <div id="select_room_container" class="form-group hidden">
                             <label>Select Room</label>
-                            <select id="room_select" name="room_id" onchange="show_assign_button()" class="form-control" required>
+                            <select id="room_select" name="room_id" onchange="show_assign_button_and_get_initial_data()" class="form-control" required>
                             <option value="">Select</option>
 
                             </select>
@@ -110,14 +110,9 @@ $("#assign_default_checklist_to_room").on("click", function(){
 
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert("error");
+
         }
     });
-
-
-
-
-
 
 });
 
@@ -161,7 +156,7 @@ function get_rooms_for_store() {
 
 }
 
-function show_assign_button(){
+function show_assign_button_and_get_initial_data(){
 
     $textValue = $("#room_select option:selected").text();
     if ($textValue == "Select") {
@@ -170,6 +165,26 @@ function show_assign_button(){
     else {
         $("#assign_default_checklist_to_room").removeClass('hidden');
     }
+
+    var store_id = $("#venue_select").val();
+    var room_id = $("#room_select").val();
+
+    $.ajax({
+    url: pathname + 'hipbidvest/bidvest_get_checklist_items',
+        type: 'post',
+        dataType: 'html',
+        data: {
+            'store_id': store_id,
+            'room_id': room_id
+        },
+        success: function(result) {
+            $("#table-container").html(result);
+
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+        }
+    });
 
 }
 

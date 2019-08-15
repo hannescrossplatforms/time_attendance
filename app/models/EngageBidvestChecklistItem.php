@@ -9,11 +9,6 @@ class EngageBidvestChecklistItem extends Eloquent {
         $this->connection = \Utils::getEngageDbConnection();
     }
 
-
-
-
-
-
     public static function getChecklistItemsForRoom($roomID){
 
         return EngageBidvestChecklistItem::orderBy('created_at', 'ASC')
