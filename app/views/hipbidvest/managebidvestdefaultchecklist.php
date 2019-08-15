@@ -13,6 +13,11 @@
     padding-left: 53%;
     padding-top: 20%;
 }
+
+.btn-manage-default-checklist{
+    float: right;
+}
+
 </style>
 
 <body class="hipTnA">
@@ -23,11 +28,18 @@
             @include('hipbidvest.sidebar')
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-                <h1 class="page-header">Bidvest Default Checklist Management</h1>
+                <h1 class="page-header">Bidvest Checklist Management</h1>
+                <!-- To look at errors look at the addvenue.blade file -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="hidden" id="url" name="" value={{$data['url']}}>
 
+
+                    </div>
+                </div>
 
                 <div class="row">
-                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_manage_default_checklist">Add checklist item</a>
+                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_manage_default_checklist">Manage default checklist</a>
                 </div>
                 <br>
                 <div class="row">
@@ -57,5 +69,17 @@
         </div>
     </div>
 </body>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/prefixfree.min.js"></script>
+    <script src="/js/jquery.timepicker.min.js"></script>
+
+<script>
+
+
+
+</script>
 
 @stop
