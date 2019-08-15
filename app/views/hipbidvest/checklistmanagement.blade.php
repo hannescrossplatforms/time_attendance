@@ -75,14 +75,14 @@
 
 
                         <br>
-                        <button id="submitform" class="btn btn-primary">Submit</button>
+                        <button id="submitform" class="btn btn-primary">Add item to checklist</button>
 
                         <br>
                     </div>
                 </div>
 
 
-
+                <h3>Checklist</h3>
                 <br>
                 <div class="row">
 
