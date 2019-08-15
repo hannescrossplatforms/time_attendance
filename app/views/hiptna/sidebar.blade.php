@@ -43,11 +43,11 @@
               <div id="instance_menus" style="display: none">
                   <ul class="subNav2">
 
+                  <h1><?php Session::get('currentInstance') ?></h1>
+                  <!-- <li><a href="{{ url('hipbidvest_showdashboard'); }}">Session::get('currentInstance') == "PNP_ACCESS" </a></li> -->
 
-
-                  @if(Session::get('currentInstance') == "PNP_ACCESS")
                     <li><a href="{{ url('hippnp_showdashboard'); }}">Pick n Pay </a></li>
-                  @endif
+
 
                     <li><a href="{{ url('hipbidvest_showdashboard'); }}">Bidvest </a></li>
 
