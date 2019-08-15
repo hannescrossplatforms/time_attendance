@@ -62,7 +62,7 @@
                 <br>
                 <div class="row">
 
-                    <div class="table-responsive">
+                    <div class="table-responsive table-container">
                         <table class="table table-striped">
                         <tr>
                             <th>Title</th>
@@ -93,7 +93,33 @@
 <script>
 
 $("#assign_default_checklist_to_room").on("click", function(){
-    alert("hier");
+
+    var store_id = $("#venue_select").val();
+    var room_id = $("#room_select").val();
+
+    $.ajax({
+        url: pathname + 'hipbidvest/bidvest_assign_default_checklist_items',
+        type: 'post',
+        dataType: 'json',
+        data: {
+            'store_id': store_id,
+            'room_id': room_id
+        },
+        success: function(result) {
+
+            alert(result);
+
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("error");
+        }
+    });
+
+
+
+
+
+
 });
 
 function get_rooms_for_store() {

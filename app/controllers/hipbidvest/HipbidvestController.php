@@ -613,6 +613,20 @@ class HipbidvestController extends \BaseController {
 
     }
 
+    public static function assignDefaultChecklistItems(){
+
+
+        $storeRooms = \EngageBidvestCategory::firstOrFail();
+        $json = json_encode($storeRooms);
+        print_r($json);
+
+
+        // $itemTitle = \Input::get('item_title');
+        // $itemDescription = \Input::get('item_description');
+
+
+    }
+
 }
 
 
