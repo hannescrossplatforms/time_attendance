@@ -23,7 +23,7 @@
             @include('hipbidvest.sidebar')
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-                <h1 class="page-header">Bidvest Category Management</h1>
+                <h1 class="page-header">Bidvest Room Management</h1>
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
@@ -40,7 +40,7 @@
                             <td>{{ $venue->id }}</td>
                             <td>{{ $venue->sitename }}</td>
                             <td>
-                            <a href="bidvest_manage_store_categories/<?php echo $venue->id;?>" class="btn btn-default btn-sm">Manage categories</a>
+                            <a href="bidvest_manage_store_categories/<?php echo $venue->id;?>" class="btn btn-default btn-sm">Manage rooms</a>
                             </td>
                         </tr>
                         @endforeach
