@@ -24,7 +24,7 @@
 
 $(".table_view_item").on('click', function(){
 
-    debugger;
+    // debugger;
     $listRoomID = $("#list_room_id").val();
     $itemID = $(this).attr("itemID");
 
