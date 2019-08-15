@@ -643,6 +643,8 @@ class HipbidvestController extends \BaseController {
 
     public static function getChecklistItems(){
 
+        $roomID = Input::get('room_id');
+
         $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);
         $data['checklistItems'] = $allChecklistItems;
 
