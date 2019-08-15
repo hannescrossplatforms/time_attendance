@@ -406,6 +406,8 @@ class HipbidvestController extends \BaseController {
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 
+        $picknpayBrand = \Brand::where('name', '=', 'Bidvest')->firstOrFail();
+        $venues = $picknpayBrand->venues()->get();
 
         return \View::make('hipbidvest.checklistmanagement')->with('data', $data);
 

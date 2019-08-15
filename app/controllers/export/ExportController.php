@@ -48,17 +48,12 @@ class ExportController extends Controller {
     public function authenticateRequest($key) {
         $user = \User::where('remember_token', '=', $key)->first();
         if ($user) {
-<<<<<<< Updated upstream
             $vicinity_brands = $user->brands()->where('id','=', 165)->count();
-            if ($vicinity_brands != 0) 
-=======
-            $has_vicinity_brand = $user->brands->pluck('brands.id');
-            if ($has_vicinity_brand) 
->>>>>>> Stashed changes
+            if ($vicinity_brands != 0)
                 return true;
-            else 
+            else
                 return false;
-        } else 
+        } else
             return false;
     }
 
