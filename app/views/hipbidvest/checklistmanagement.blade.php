@@ -110,6 +110,17 @@ $("#assign_default_checklist_to_room").on("click", function(){
 
 });
 
+$(".table_view_item").on('click', function(e){
+
+    debugger;
+    $listRoomID = $("#list_room_id").val();
+    alert($listRoomID);
+    $itemID = $(e).prop("itemID");
+    alert($itemID);
+
+
+});
+
 function get_rooms_for_store() {
 
     $("#table-container").html(null);

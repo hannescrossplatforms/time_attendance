@@ -1,4 +1,5 @@
 <table class="table table-striped">
+    <input type="hidden" id="list_room_id" name="" value={{$data['room_id']}}>
     <tr>
         <th>Title</th>
         <th>Description</th>
@@ -11,7 +12,7 @@
         <td>{{ $checklistItem->title }}</td>
         <td>{{ $checklistItem->description }}</td>
         <td>
-        <a href="bidvest_delete_checklist_item/<?php echo $checklistItem->id;?>" class="btn btn-default btn-sm">Delete checklist item</a>
+        <a itemID="<?php echo $checklistItem->id;?>" class="btn btn-default btn-sm table_view_item">Delete checklist item</a>
         </td>
     </tr>
     @endforeach

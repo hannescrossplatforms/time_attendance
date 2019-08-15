@@ -619,6 +619,7 @@ class HipbidvestController extends \BaseController {
         $roomID = Input::get('room_id');
 
         $data = array();
+        $data['room_id'] = $roomID;
         $defaultChecklistItems = \EngageBidvestDefaultChecklist::all();
         $data['defaultChecklistItems'] = $defaultChecklistItems;
 
@@ -647,9 +648,25 @@ class HipbidvestController extends \BaseController {
 
         $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);
         $data['checklistItems'] = $allChecklistItems;
+        $data['room_id'] = $roomID;
 
         return \View::make('hipbidvest.bidvestchecklisttableview')->with('data', $data);
 
+    }
+
+    public static function deleteAssignedChecklistItem() {
+
+        $itemID = Input::get('item_id');
+        $roomID = Input::get('room_id');
+
+        $checkListItem = \EngageBidvestChecklistItem::find($itemID);
+        $checkListItem->delete();
+
+        $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);
+        $data['checklistItems'] = $allChecklistItems;
+        $data['room_id'] = $roomID;
+
+        return \View::make('hipbidvest.bidvestchecklisttableview')->with('data', $data);
     }
 
 }
