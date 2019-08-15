@@ -23,26 +23,36 @@
             @include('hipbidvest.sidebar')
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-                <h1 class="page-header">Bidvest Checklist Management</h1>
-                <input type="hidden" id="url" name="" value={{$data['url']}}>
+                <h1 class="page-header">Add Beacon</h1>
+                <!-- To look at errors look at the addvenue.blade file -->
+                <div class="row">
+                    <div class="col-md-12">
 
-                <div class="container-fluid">
 
-                    <h1>Test</h1>
 
-                    @foreach ($data['venues'] as $venue)
-                        <tr>
-                            <td>{{ $venue->id }}</td>
-                            <td>{{ $venue->sitename }}</td>
-                            <td>
-                            <a href="picknpay_manage_store_categories/<?php echo $venue->id;?>" class="btn btn-default btn-sm">Manage categories</a>
-                            </td>
-                        </tr>
-                        @endforeach
+                        <div class="form-group">
+                            <label>Venue*</label>
+                            <select id="venue_select" name="venue_id" onchange="get_categories_for_store()" class="form-control" required>
+                            @foreach($data['venues'] as $venue)
+                                <option value="{{ $venue->id }}">
+                                {{ $venue->sitename }}
+                                </option>
+                            @endforeach
+                            </select>
+                        </div>
 
+
+                    </div>
                 </div>
             </div>
+
+
+
+
+
+
         </div>
+    </div>
 </body>
 
 
