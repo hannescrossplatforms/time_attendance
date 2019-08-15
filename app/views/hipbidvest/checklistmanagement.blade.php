@@ -65,6 +65,7 @@
                 </div>
 
                 <div id="add_item_row" class="row hidden">
+                <h3>Add item</h3>
                     <div class="col-md-12">
 
                         <div class="form-group">
