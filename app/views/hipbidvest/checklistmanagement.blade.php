@@ -30,6 +30,16 @@
 
                     <h1>Test</h1>
 
+                    @foreach ($data['venues'] as $venue)
+                        <tr>
+                            <td>{{ $venue->id }}</td>
+                            <td>{{ $venue->sitename }}</td>
+                            <td>
+                            <a href="picknpay_manage_store_categories/<?php echo $venue->id;?>" class="btn btn-default btn-sm">Manage categories</a>
+                            </td>
+                        </tr>
+                        @endforeach
+
                 </div>
             </div>
         </div>
