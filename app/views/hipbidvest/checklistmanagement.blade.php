@@ -64,11 +64,11 @@
 
                     <div class="table-responsive table-container">
                         <table class="table table-striped">
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
                         </table>
                     </div>
 

@@ -13,6 +13,7 @@ use Session;
 use Route;
 use \EngageBidvestBeacon;
 use \EngageBidvestDefaultChecklist;
+use \EngageBidvestChecklistItem;
 
 class HipbidvestController extends \BaseController {
 
@@ -615,14 +616,26 @@ class HipbidvestController extends \BaseController {
 
     public static function assignDefaultChecklistItems(){
 
-        $data = array();
-        $data['test'] = 1;
-        // $storeRooms = \EngageBidvestCategory::firstOrFail();
-        // $json = json_encode($storeRooms);
-        // print_r($json);
+        $roomID = Input::get('room_id');
 
-        // $itemTitle = \Input::get('item_title');
-        // $itemDescription = \Input::get('item_description');
+        $data = array();
+        $defaultChecklistItems = \EngageBidvestDefaultChecklist::all();
+        $data['defaultChecklistItems'] = $defaultChecklistItems;
+
+        foreach ($defaultChecklistItems as $defaultChecklistItem) {
+
+            $item = new \EngageBidvestChecklistItem();
+
+            $item->title = $defaultChecklistItem->title;
+            $item->description = $defaultChecklistItem->description;
+            $item->room_id = $roomID;
+
+            $item->save();
+
+        }
+
+        $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);
+        $data['checklistItems'] = $allChecklistItems;
 
 
         return \View::make('hipbidvest.bidvestchecklisttableview')->with('data', $data);
