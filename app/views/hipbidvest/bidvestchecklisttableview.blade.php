@@ -22,7 +22,9 @@
 
 <script>
 
-$(".table_view_item").on('click', function(e){
+$(".table_view_item").on('click', function(){
+
+    $test = $(this);
 
     debugger;
     $listRoomID = $("#list_room_id").val();
