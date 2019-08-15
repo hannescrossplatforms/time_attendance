@@ -43,7 +43,7 @@
 
                         <div class="form-group">
                             <label>Select Room</label>
-                            <select id="room_select" name="room_id" onchange="" class="form-control" required>
+                            <select id="room_select" name="room_id" onchange="" class="form-control hidden" required>
                             <option value="">Select</option>
 
                             </select>
@@ -98,8 +98,10 @@ function get_rooms_for_store() {
 
            var $dropdown = $("#room_select");
 
-            $dropdown.empty();
-            $dropdown.append($("<option />").val('').text("Select"));
+           $dropdown.removeClass( "hidden" );
+
+           $dropdown.empty();
+           $dropdown.append($("<option />").val('').text("Select"));
            result.forEach((obj) => {
                 $dropdown.append($("<option />").val(obj.id).text(obj.name));
             });
