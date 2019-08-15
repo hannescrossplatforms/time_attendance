@@ -98,7 +98,7 @@ function get_rooms_for_store() {
 
             $("#select_room_container").removeClass("hidden");
             var $dropdown = $("#room_select");
-
+            alert($dropdown.val());
 
             $dropdown.empty();
             $dropdown.append($("<option />").val('').text("Select"));
