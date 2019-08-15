@@ -49,8 +49,8 @@
 
 
                             <div class="form-group">
-                                <label>Category name*</label>
-                                <input type="text" class="form-control" size="6" placeholder="Category name" name="category_name" required>
+                                <label>Room name*</label>
+                                <input type="text" class="form-control" size="6" placeholder="Room name" name="category_name" required>
                             </div>
                             <br>
                             <button id="submitform" class="btn btn-primary">Submit</button>
