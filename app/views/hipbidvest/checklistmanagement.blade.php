@@ -127,6 +127,7 @@ function get_rooms_for_store() {
         var $dropdown = $("#room_select");
         $dropdown.empty();
         $("#select_room_container").addClass("hidden");
+        $("#table-container").html(null);
     }
 
 
@@ -161,6 +162,7 @@ function show_assign_button_and_get_initial_data(){
     $textValue = $("#room_select option:selected").text();
     if ($textValue == "Select") {
         $("#assign_default_checklist_to_room").addClass('hidden');
+        $("#table-container").html(null);
     }
     else {
         $("#assign_default_checklist_to_room").removeClass('hidden');
