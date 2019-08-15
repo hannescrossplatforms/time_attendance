@@ -43,6 +43,7 @@
                         </tr>
                         @foreach ($data['engageCategories'] as $category)
                         <tr>
+                            <td>{{ $category->store_name }}</td>
                             <td>{{ $category->name }}</td>
                             <td>
                             <a class="btn btn-default btn-sm" href="{{route('hipbidvest_remove_category', ['id' => $category->id])}}">Remove</a>
