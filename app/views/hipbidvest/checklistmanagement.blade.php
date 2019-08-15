@@ -111,7 +111,7 @@ $("#assign_default_checklist_to_room").on("click", function(){
 
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert("error");
+
         }
     });
 
