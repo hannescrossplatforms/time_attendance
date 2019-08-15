@@ -43,6 +43,14 @@
               <div id="instance_menus" style="display: none">
                   <ul class="subNav2">
 
+                  <h1><?php Session::get('currentInstance') ?> test</h1>
+                  <!-- <li><a href="{{ url('hipbidvest_showdashboard'); }}">Session::get('currentInstance') == "PNP_ACCESS" </a></li> -->
+
+                  @if \User::hasAccess("superadmin"))
+                  Yes
+                  @endif
+
+
                     <li><a href="{{ url('hippnp_showdashboard'); }}">Pick n Pay </a></li>
                     <li><a href="{{ url('hipbidvest_showdashboard'); }}">Bidvest </a></li>
 
