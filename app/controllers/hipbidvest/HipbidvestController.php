@@ -564,7 +564,7 @@ class HipbidvestController extends \BaseController {
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 
 
-        return \View::make('hipbidvest.managebidvestdefaultchecklist')->with('data', $data);
+        return \View::make('hipbidvest.managedefaultchecklist')->with('data', $data);
 
     }
 
