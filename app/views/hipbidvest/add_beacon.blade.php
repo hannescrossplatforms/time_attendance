@@ -106,7 +106,7 @@ function get_categories_for_store() {
             data: {
                 'id': store_id
             },
-            success: function(data) {
+            success: function(result) {
 
                 $("#select_room_container").removeClass("hidden");
                 var $dropdown = $("#room_select");
