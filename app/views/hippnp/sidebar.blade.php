@@ -62,7 +62,7 @@
                     </ul>
                 </div>
                 <div id="bidvest_settings">
-                  <li><a href="{{ url('hipbidvest/bidvest_manage_store_categories'); }}"><i class="fa fa-gears"></i>Category Management</a></li>
+                  <li><a href="{{ url('hipbidvest/bidvest_manage_store_categories'); }}"><i class="fa fa-gears"></i>Room Management</a></li>
                   <li><a href="{{ url('hipbidvest/bidvest_beacon_management'); }}"><i class="fa fa-gears"></i>Beacon Management</a></li>
                 </div>
               @endif
