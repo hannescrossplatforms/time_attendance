@@ -43,12 +43,6 @@
                 </div>
                 <br>
                 <div class="row">
-
-
-
-
-
-
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
@@ -56,7 +50,6 @@
                             <th>Description</th>
                             <th>Actions</th>
                         </tr>
-
                         @foreach ($data['defaultChecklistItems'] as $checklistItem)
                         <tr>
                             <td>{{ $checklistItem->title }}</td>
@@ -66,16 +59,12 @@
                             </td>
                         </tr>
                         @endforeach
-
-
                         </table>
                     </div>
 
-
-
-
-
-
+                </div>
+                <div class="row">
+                    <a class="btn-manage-default-checklist btn btn-default btn-sm" href="bidvest_checklist_management">Back to checklist management</a>
                 </div>
             </div>
         </div>
