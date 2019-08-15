@@ -87,6 +87,12 @@ function get_rooms_for_store() {
 
     var store_id = $("#venue_select").val();
 
+    $textValue = $("#venue_select option:selected").text();
+    if ($textValue == "Select") {
+        $("#select_room_container").addClass("hidden");
+    }
+
+
     $.ajax({
         url: pathname + 'hipbidvest/storeCategories/' + store_id,
         type: 'get',
@@ -98,9 +104,6 @@ function get_rooms_for_store() {
 
             $("#select_room_container").removeClass("hidden");
             var $dropdown = $("#room_select");
-            alert($("#venue_select option:selected").text());
-
-
 
             $dropdown.empty();
             $dropdown.append($("<option />").val('').text("Select"));
