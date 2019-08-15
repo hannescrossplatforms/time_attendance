@@ -47,12 +47,14 @@
                   <!-- <li><a href="{{ url('hipbidvest_showdashboard'); }}">Session::get('currentInstance') == "PNP_ACCESS" </a></li> -->
 
                   @if (\User::hasAccess("superadmin"))
-                  Yes
-                  @endif
-
-
                     <li><a href="{{ url('hippnp_showdashboard'); }}">Pick n Pay </a></li>
                     <li><a href="{{ url('hipbidvest_showdashboard'); }}">Bidvest </a></li>
+                  @endif
+
+                  @if((\Hipauth::hasAnyPermissions(array("PNP_ACCESS"))))
+                  yes
+                  @endif
+
 
                     <li><a href="{{ url('hiptna_showdashboard'); }}/IM">IM Instance @if ( Session::get('currentInstance') == "IM" ) * @endif</a></li>
                     <li><a href="{{ url('hiptna_showdashboard'); }}/CE">CE Instance @if ( Session::get('currentInstance') == "CE" ) * @endif</a></li>
