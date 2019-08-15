@@ -46,7 +46,7 @@
                   <h1><?php Session::get('currentInstance') ?> test</h1>
                   <!-- <li><a href="{{ url('hipbidvest_showdashboard'); }}">Session::get('currentInstance') == "PNP_ACCESS" </a></li> -->
 
-                  @if \User::hasAccess("superadmin"))
+                  @if (\User::hasAccess("superadmin"))
                   Yes
                   @endif
 
