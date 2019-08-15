@@ -17,6 +17,9 @@
 .btn-manage-default-checklist{
     float: right;
 }
+#add_item_to_checklist{
+    float: right;
+}
 
 </style>
 
@@ -75,7 +78,7 @@
 
 
                         <br>
-                        <button id="submitform" class="btn btn-primary">Add item to checklist</button>
+                        <button id="add_item_to_checklist" class="btn btn-primary">Add item to checklist</button>
 
                         <br>
                     </div>
@@ -137,6 +140,7 @@ $("#assign_default_checklist_to_room").on("click", function(){
 function get_rooms_for_store() {
 
     $("#table-container").html(null);
+    $("#assign_default_checklist_to_room").addClass('hidden');
 
     pathname = $('#url').val();
 
