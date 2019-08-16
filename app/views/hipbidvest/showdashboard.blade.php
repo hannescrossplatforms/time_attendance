@@ -37,7 +37,7 @@
                             <div class="venuerow">
                                 <div class="modStat">
                                     <div class="modstattitlebidvest">
-                                        <h3>Staff In Store Today</h3>
+                                        <h3>Staff In Hospital Today</h3>
                                     </div>
                                     <div id="staff_today" class="modStatspan">
                                         <span style="font-size: 30%;">{{$data['customer_in_store_today']}}</span>
@@ -49,7 +49,7 @@
                             <div class="venuerow">
                                 <div class="modStat">
                                     <div class="modstattitlebidvest">
-                                        <h3>Staff In Store This Month</h3>
+                                        <h3>Staff In Hospital This Month</h3>
                                     </div>
                                     <div id="staff_today" class="modStatspan"><span
                                             style="font-size: 30%;">{{$data['customer_in_store_this_month']}}</span>
@@ -100,7 +100,7 @@
                     <div class="row">
                         <div class="col-md-4" style="width:30%;">
                             <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
-                                <label>Store</label>
+                                <label>Hospital</label>
                             </div>
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                                 <select id="brandstore" onchange="change_report_period()" class="form-control"
@@ -218,7 +218,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Number of visits per store</div>
+                                    <div class="chart-title venuecolheading">Number of visits per hospital</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -355,8 +355,8 @@ $(document).ready(function() {
 
     var chartProperties = {
         "caption": "",
-        "xAxisName": "Store",
-        "yAxisName": "Number of visits per store",
+        "xAxisName": "Hospital",
+        "yAxisName": "Number of visits per hospital",
         "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
@@ -509,8 +509,8 @@ function renderCharts(time, start, end, category, store, province) {
 
             var chartProperties = {
                 "caption": "",
-                "xAxisName": "Store",
-                "yAxisName": "Number of visits per store",
+                "xAxisName": "Hospital",
+                "yAxisName": "Number of visits per hospital",
                 "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
