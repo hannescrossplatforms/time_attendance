@@ -127,16 +127,15 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        return Picknpay::where('creaaated_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->count();
-
-        // $query = Picknpay::where('created_at', ">=", $startDate)
+        // return Picknpay::where('created_at', ">=", $startDate)
         // ->where('created_at', "<=", $endDate)
-        // ->groupBy('staff_id')
         // ->count();
 
-        // return count($query);
+        $query = Picknpay::where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
+        ->groupBy('staff_id');
+
+        return count($query);
 
     }
 
