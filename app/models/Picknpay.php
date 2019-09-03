@@ -153,7 +153,7 @@ class Picknpay extends Eloquent {
         ->groupBy('staff_id')
         ->count();
 
-        return $query::count();
+        return count($query);
 
         // return Picknpay::select( Picknpay::raw("SELECT count(*) AS aggregate FROM ( SELECT * FROM picknpay GROUP BY `staff_id`) AS `a`") );
 
