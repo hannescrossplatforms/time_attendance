@@ -131,7 +131,7 @@ class Picknpay extends Eloquent {
         // ->where('created_at', "<=", $endDate)
         // ->count();
 
-        $query = Picknpay::where('creataaasdffdsaed_at', ">=", $startDate)
+        $query = Picknpay::where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->groupBy('staff_id')
         ->get();
