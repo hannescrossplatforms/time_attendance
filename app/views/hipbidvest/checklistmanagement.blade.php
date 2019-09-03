@@ -222,7 +222,7 @@ function get_rooms_for_store() {
 }
 
 function show_assign_button_and_get_initial_data(){
-
+    debugger;
     $textValue = $("#room_select option:selected").text();
     if ($textValue == "Select") {
         $("#assign_default_checklist_to_room").addClass('hidden');
