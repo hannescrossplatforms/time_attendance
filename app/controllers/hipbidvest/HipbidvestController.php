@@ -600,6 +600,8 @@ class HipbidvestController extends \BaseController {
 
         $checklistItem->save();
 
+        $checklistItemToday->save();
+
         return \Redirect::to("/hipbidvest/bidvest_manage_default_checklist");
 
 
