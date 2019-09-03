@@ -14,6 +14,7 @@ use Route;
 use \EngageBidvestBeacon;
 use \EngageBidvestDefaultChecklist;
 use \EngageBidvestChecklistItem;
+use Carbon\Carbon;
 
 class HipbidvestController extends \BaseController {
 
@@ -686,7 +687,7 @@ class HipbidvestController extends \BaseController {
         $checklistItemToday->title = $title;
         $checklistItemToday->description = $description;
         $checklistItemToday->room_id = $roomID;
-        $checklistItemToday->date_for_checklist_item = Carbon\Carbon::now();
+        $checklistItemToday->date_for_checklist_item = Carbon::now();
 
         $checklistItemToday->save();
 
