@@ -142,14 +142,14 @@ class Picknpay extends Eloquent {
         // ->whereraw("category_id = '$categoryId'");
 
 
-        // $query = Picknpay::query()->fromSub(function ($query) {
-        //     $query->where('created_at', "<=", $endDate)
-        //     ->where('created_at', ">=", $startDate)
-        //     ->groupBy('staff_id')
-        // }, 'a')->count();
+        return Picknpay::query()->fromSub(function ($query) {
+            $query->where('created_at', "<=", $endDate)
+            ->where('created_at', ">=", $startDate)
+            ->groupBy('staff_id');
+        }, 'a')->count();
 
 
-        return Picknpay::select( Picknpay::raw("SELECT count(*) AS aggregate FROM ( SELECT * FROM picknpay GROUP BY `staff_id`) AS `a`") );
+        // return Picknpay::select( Picknpay::raw("SELECT count(*) AS aggregate FROM ( SELECT * FROM picknpay GROUP BY `staff_id`) AS `a`") );
 
 
         // $sub = Picknpay::where('created_at', "<=", $endDate)
