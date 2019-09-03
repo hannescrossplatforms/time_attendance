@@ -638,6 +638,8 @@ class HipbidvestController extends \BaseController {
             $itemNew->room_id = $roomID;
             $itemNew->day_for_checklist_item = Carbon::now();
 
+            $itemNew->save();
+
             $item->save();
 
         }
