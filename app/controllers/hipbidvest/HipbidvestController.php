@@ -445,7 +445,6 @@ class HipbidvestController extends \BaseController {
 
     public static function addBeacon(){
 
-
         $categories = \Bidvest::fetchAllCategoriesWithoutDateFilter();
         $bidvestBrand = \Brand::where('name', '=', 'Bidvest')->firstOrFail();
         $venues = $bidvestBrand->venues()->get();
@@ -591,6 +590,13 @@ class HipbidvestController extends \BaseController {
         $checklistItem = new \EngageBidvestDefaultChecklist();
         $checklistItem->title = $itemTitle;
         $checklistItem->description = $itemDescription;
+
+        $checklistItem->save();
+
+        $checklistItemToday = new \EngageBidvestDefaultChecklist();
+        $checklistItemToday->title = $itemTitle;
+        $checklistItemToday->description = $itemDescription;
+        $checklistItemToday->date_for_checklist_item = \Carbon::now();
 
         $checklistItem->save();
 
