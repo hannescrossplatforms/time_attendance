@@ -136,19 +136,32 @@ class Picknpay extends Eloquent {
         // ->count();
 
 
-        // return Picknpay::query()->fromSub(function ($query) {
+        // $query = Picknpay::orderBy('created_at', 'ASC')
+        // ->select(DB::raw("COUNT(*) AS value"))
+        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
+        // ->whereraw("category_id = '$categoryId'");
+
+        $query = Picknpay::where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
+        ->groupBy('staff_id');
+
+        $query = $query->count();
+
+        return $query;
+
+        // $query = Picknpay::query()->fromSub(function ($query) {
         //     $query->where('created_at', "<=", $endDate)
         //     ->where('created_at', ">=", $startDate)
         //     ->groupBy('staff_id')
         // }, 'a')->count();
 
-        $sub = Picknpay::where('created_at', "<=", $endDate)
-        ->where('created_at', ">=", $startDate)
-        ->groupBy('staff_id');
+        // $sub = Picknpay::where('created_at', "<=", $endDate)
+        // ->where('created_at', ">=", $startDate)
+        // ->groupBy('staff_id');
 
-        return $count = DB::table( Picknpay::raw("({$sub->toSql()}) as sub") )
-        ->mergeBindings($sub->getQuery()) // you need to get underlying Query Builder
-        ->count();
+        // return $count = DB::table( Picknpay::raw("({$sub->toSql()}) as sub") )
+        // ->mergeBindings($sub->getQuery()) // you need to get underlying Query Builder
+        // ->count();
 
 
     }
