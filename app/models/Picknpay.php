@@ -149,7 +149,7 @@ class Picknpay extends Eloquent {
         // }, 'a')->count();
 
 
-        return DB::select( Picknpay::raw("SELECT count(*) AS aggregate FROM ( SELECT * FROM picknpay GROUP BY `staff_id`) AS `a`") );
+        return Picknpay::select( Picknpay::raw("SELECT count(*) AS aggregate FROM ( SELECT * FROM picknpay GROUP BY `staff_id`) AS `a`") );
 
 
         // $sub = Picknpay::where('created_at', "<=", $endDate)
