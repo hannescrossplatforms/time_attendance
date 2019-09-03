@@ -593,15 +593,6 @@ class HipbidvestController extends \BaseController {
 
         $checklistItem->save();
 
-        $checklistItemToday = new \EngageBidvestDefaultChecklist();
-        $checklistItemToday->title = $itemTitle;
-        $checklistItemToday->description = $itemDescription;
-        $checklistItemToday->date_for_checklist_item = \Carbon::now();
-
-        $checklistItem->save();
-
-        $checklistItemToday->save();
-
         return \Redirect::to("/hipbidvest/bidvest_manage_default_checklist");
 
 
@@ -690,6 +681,14 @@ class HipbidvestController extends \BaseController {
         $item->room_id = $roomID;
 
         $item->save();
+
+        $checklistItemToday = new \EngageBidvestDefaultChecklist();
+        $checklistItemToday->title = $title;
+        $checklistItemToday->description = $description;
+        $checklistItemToday->room_id = $roomID;
+        $checklistItemToday->date_for_checklist_item = \Carbon::now();
+
+        $checklistItemToday->save();
 
         $data = array();
         $data['room_id'] = $roomID;
