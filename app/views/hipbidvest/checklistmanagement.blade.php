@@ -156,7 +156,7 @@ $("#assign_default_checklist_to_room").on("click", function(){
 
     var store_id = $("#venue_select").val();
     var room_id = $("#room_select").val();
-
+    debugger;
     $.ajax({
         url: pathname + 'hipbidvest/bidvest_assign_default_checklist_items',
         type: 'post',
