@@ -122,15 +122,27 @@ class Picknpay extends Eloquent {
 
     public static function customerInStoreToday(){
 
+        // ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('today');
 
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
         //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
-        return Picknpay::where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->count();
+        // return Picknpay::where('created_at', ">=", $startDate)
+        // ->where('created_at', "<=", $endDate)
+        // ->groupBy('staff_id')
+        // ->count();
+
+
+        return Picknpay::query()->fromSub(function ($query) {
+            $query->where('created_at', "<=", $endDate)
+            ->where('created_at', ">=", $startDate)
+            ->groupBy('staff_id')
+        }, 'a')->count();
+
+
 
     }
 
