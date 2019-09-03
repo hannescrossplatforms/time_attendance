@@ -630,7 +630,13 @@ class HipbidvestController extends \BaseController {
             $item->title = $defaultChecklistItem->title;
             $item->description = $defaultChecklistItem->description;
             $item->room_id = $roomID;
-            $item->day_for_checklist_item = Carbon::now();
+
+            $itemNew = new \EngageBidvestChecklistItem();
+
+            $itemNew->title = $defaultChecklistItem->title;
+            $itemNew->description = $defaultChecklistItem->description;
+            $itemNew->room_id = $roomID;
+            $itemNew->day_for_checklist_item = Carbon::now();
 
             $item->save();
 
