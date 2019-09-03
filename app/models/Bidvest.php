@@ -125,10 +125,12 @@ class Bidvest extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
-        return Bidvest::where('created_at', ">=", $startDate)
+        $query = Bidvest::where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
-        ->count();
+        ->groupBy('staff_id')
+        ->get();
+
+        return count($query);
 
     }
 
@@ -139,10 +141,12 @@ class Bidvest extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        //TODO: Where date is this month && group by customer uuid(maybe device uuid or something)
-        return Bidvest::where('created_at', ">=", $startDate)
+        $query = Bidvest::where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
-        ->count();
+        ->groupBy('staff_id')
+        ->get();
+
+        return count($query);
 
     }
 
