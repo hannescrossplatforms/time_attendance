@@ -687,7 +687,7 @@ class HipbidvestController extends \BaseController {
         $checklistItemToday->title = $title;
         $checklistItemToday->description = $description;
         $checklistItemToday->room_id = $roomID;
-        $checklistItemToday->date_for_checklist_item = Carbon::now();
+        $checklistItemToday->day_for_checklist_item = Carbon::now();
 
         $checklistItemToday->save();
 
