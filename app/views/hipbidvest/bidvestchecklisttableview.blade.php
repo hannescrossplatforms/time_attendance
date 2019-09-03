@@ -23,6 +23,8 @@
 
 <script>
 
+debugger;
+
 $(".table_view_item").on('click', function(){
 
     $listRoomID = $("#list_room_id").val();
