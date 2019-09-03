@@ -127,7 +127,7 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        return Picknpay::where('created_at', ">=", $startDate)
+        return Picknpay::where('created_at', ">2=", $startDate)
         ->where('created_at', "<=", $endDate)
         ->count();
 
