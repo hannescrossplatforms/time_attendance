@@ -683,7 +683,7 @@ class HipbidvestController extends \BaseController {
 
         $item->save();
 
-        $checklistItemToday = new \EngageBidvestDefaultChecklist();
+        $checklistItemToday = new \EngageBidvestChecklistItem();
         $checklistItemToday->title = $title;
         $checklistItemToday->description = $description;
         $checklistItemToday->room_id = $roomID;
