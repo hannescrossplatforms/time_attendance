@@ -122,31 +122,10 @@ class Picknpay extends Eloquent {
 
     public static function customerInStoreToday(){
 
-        // ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-
         $dateRange = Picknpay::getDateForPeriodAndTimeOfDay('today');
 
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
-
-        //TODO: Where date is today && group by customer uuid(maybe device uuid or something)
-        // return Picknpay::where('created_at', ">=", $startDate)
-        // ->where('created_at', "<=", $endDate)
-        // ->groupBy('staff_id')
-        // ->count();
-
-
-        // $query = Picknpay::orderBy('created_at', 'ASC')
-        // ->select(DB::raw("COUNT(*) AS value"))
-        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
-        // ->whereraw("category_id = '$categoryId'");
-
-
-        // return Picknpay::query()->fromSub(function ($query) {
-        //     $query->where('created_at', "<=", $endDate)
-        //     ->where('created_at', ">=", $startDate)
-        //     ->groupBy('staff_id');
-        // }, 'a')->count();
 
         $query = Picknpay::where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
@@ -154,18 +133,6 @@ class Picknpay extends Eloquent {
         ->count();
 
         return count($query);
-
-        // return Picknpay::select( Picknpay::raw("SELECT count(*) AS aggregate FROM ( SELECT * FROM picknpay GROUP BY `staff_id`) AS `a`") );
-
-
-        // $sub = Picknpay::where('created_at', "<=", $endDate)
-        // ->where('created_at', ">=", $startDate)
-        // ->groupBy('staff_id');
-
-        // return $count = DB::table( Picknpay::raw("({$sub->toSql()}) as sub") )
-        // ->mergeBindings($sub->getQuery()) // you need to get underlying Query Builder
-        // ->count();
-
 
     }
 
@@ -176,10 +143,12 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        //TODO: Where date is this month && group by customer uuid(maybe device uuid or something)
-        return Picknpay::where('created_at', ">=", $startDate)
+        r$query = Picknpay::where('created_at', ">=", $startDate)
         ->where('created_at', "<=", $endDate)
+        ->groupBy('staff_id')
         ->count();
+
+        return count($query);
 
     }
 
