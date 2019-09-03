@@ -136,12 +136,19 @@ class Picknpay extends Eloquent {
         // ->count();
 
 
-        return Picknpay::query()->fromSub(function ($query) {
-            $query->where('created_at', "<=", $endDate)
-            ->where('created_at', ">=", $startDate)
-            ->groupBy('staff_id')
-        }, 'a')->count();
+        // return Picknpay::query()->fromSub(function ($query) {
+        //     $query->where('created_at', "<=", $endDate)
+        //     ->where('created_at', ">=", $startDate)
+        //     ->groupBy('staff_id')
+        // }, 'a')->count();
 
+        $sub = Picknpay->where('created_at', "<=", $endDate)
+        ->where('created_at', ">=", $startDate)
+        ->groupBy('staff_id');
+
+        return $count = DB::table( Picknpay::raw("({$sub->toSql()}) as sub") )
+        ->mergeBindings($sub->getQuery()) // you need to get underlying Query Builder
+        ->count();
 
 
     }
