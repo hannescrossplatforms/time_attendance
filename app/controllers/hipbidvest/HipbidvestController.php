@@ -694,7 +694,6 @@ class HipbidvestController extends \BaseController {
             $newCheckListItem->delete();
         }
 
-
         // 3. Fetch all checklist items to return.
 
         $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);

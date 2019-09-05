@@ -156,7 +156,7 @@ $("#assign_default_checklist_to_room").on("click", function(){
 
     var store_id = $("#venue_select").val();
     var room_id = $("#room_select").val();
-    debugger;
+
     $.ajax({
         url: pathname + 'hipbidvest/bidvest_assign_default_checklist_items',
         type: 'post',
@@ -222,7 +222,7 @@ function get_rooms_for_store() {
 }
 
 function show_assign_button_and_get_initial_data(){
-    debugger;
+
     $textValue = $("#room_select option:selected").text();
     if ($textValue == "Select") {
         $("#assign_default_checklist_to_room").addClass('hidden');

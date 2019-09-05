@@ -97,7 +97,6 @@ function get_categories_for_store() {
             'id': store_id
         },
         success: function(data) {
-            debugger;
            alert(data);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
