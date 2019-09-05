@@ -668,14 +668,28 @@ class HipbidvestController extends \BaseController {
         $itemID = Input::get('item_id');
         $roomID = Input::get('room_id');
 
+        // 1. Delete checklist item (the one that has null for day_for_checklist_item).
+
         $checkListItem = \EngageBidvestChecklistItem::find($itemID);
+
+        $listItemTitle = $checkListItem->title;
+
         $checkListItem->delete();
+
+        // 2. Delete checklist item for today.
+
+        $newCheckListItem = \EngageBidvestChecklistItem::where("title", "like", $listItemTitle)
+        ->where("day_for_checklist_item", "=", Carbon::today())
+        ->delete();
+
+        // 3. Fetch all checklist items to return.
 
         $allChecklistItems = \EngageBidvestChecklistItem::getChecklistItemsForRoom($roomID);
         $data['checklistItems'] = $allChecklistItems;
         $data['room_id'] = $roomID;
 
         return \View::make('hipbidvest.bidvestchecklisttableview')->with('data', $data);
+
     }
 
     public static function addChceklistItemToRoom(){
