@@ -679,7 +679,7 @@ class HipbidvestController extends \BaseController {
         // 2. Delete checklist item for today.
 
         $newCheckListItem = \EngageBidvestChecklistItem::where("title", "like", $listItemTitle)
-        ->whereDate('day_for_checklist_item', Carbon::today())
+        ->whereDate('day_for_checklist_item', '=', \DB::raw('CURDATE()'))
         ->firstOrFail();
 
         if($newCheckListItem != null) {
