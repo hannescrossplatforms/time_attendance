@@ -14,6 +14,7 @@ use Route;
 use \EngageBidvestBeacon;
 use \EngageBidvestDefaultChecklist;
 use \EngageBidvestChecklistItem;
+use \Bidvest;
 use Carbon\Carbon;
 
 class HipbidvestController extends \BaseController {
@@ -678,8 +679,15 @@ class HipbidvestController extends \BaseController {
 
         // 2. Delete checklist item for today.
 
+
+        $dateRange = Bidvest::getDateForPeriodAndTimeOfDay('today');
+
+        $startDate = $dateRange['startDate'];
+        $endDate = $dateRange['endDate'];
+
         $newCheckListItem = \EngageBidvestChecklistItem::where("title", "like", $listItemTitle)
-        ->whereDate('day_for_checklist_item', 'IS', \DB::raw('CURDATE()'))
+        ->where('day_for_checklist_item', ">=", $startDate)
+        ->where('day_for_checklist_item', "<=", $endDate)
         ->firstOrFail();
 
         if($newCheckListItem != null) {
