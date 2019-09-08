@@ -37,6 +37,27 @@ class Picknpay extends Eloquent {
         ->get();
     }
 
+
+    public static function test($date, $startDate, $endDate){
+
+        if ($startDate == null && $endDate == null) {
+
+            $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
+
+            $startDate = $dateRange['startDate'];
+            $endDate = $dateRange['endDate'];
+
+        }
+
+        $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
+
+        $startDate = $dateRange['startDate'];
+        $endDate = $dateRange['endDate'];
+
+        return $dateRange;
+
+    }
+
     public static function fetchAllCategories($date, $startDate, $endDate, $categoryID){
 
         if ($startDate == null && $endDate == null) {

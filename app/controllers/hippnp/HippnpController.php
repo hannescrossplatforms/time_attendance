@@ -244,6 +244,8 @@ class HippnpController extends \BaseController {
             });
         }
 
+        $data['test'] = \Picknpay::test($period, $start, $start);
+
         $data['all_categories'] = $allCategories;
         $data['category_list'] = $dates;
 
