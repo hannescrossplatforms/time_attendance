@@ -47,7 +47,7 @@ class HippnpController extends \BaseController {
 
             foreach ( $datesForAllStaff as $date ) {
 
-                $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $stafId, $storeId, $provinceId, "SUM");
+                $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $stafId, "", "", "SUM");
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0']);
                     array_push($dataArray, $empty_array);
