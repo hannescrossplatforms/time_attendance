@@ -229,6 +229,7 @@ class HippnpController extends \BaseController {
         $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter();
         $data['all_categories_for_filter'] = $allCategoriesForFilter;
 
+
         if ($start != null && $end != null){
             $allCategories = \Picknpay::fetchAllCategories($period, $start, $end, $categoryId);
             $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $end)
@@ -244,11 +245,69 @@ class HippnpController extends \BaseController {
             });
         }
 
-        $data['test'] = \Picknpay::test($period, $start, $start);
-        $data['testa'] = $allCategories;
+
 
         $data['all_categories'] = $allCategories;
         $data['category_list'] = $dates;
+
+
+
+
+        ////////////////////
+
+        // Sum of all categories
+
+        $finalChartObjectStaff = array();
+
+        $allStaff = \Picknpay::fetchAllStaff($period, $start, $end, $categoryId);
+        $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
+            ->map(function($row) {
+                    return ['label' => $row['created_att']];
+            });
+
+        $data['all_staff'] = $allStaff;
+        $data['staff_list'] = $datesForAllStaff; //////////TOP ONE
+
+        foreach ($allStaff as $staff) {
+            $staffName = \EngagePicknPayStaff::getStaffWithID($staff->id);
+            $stafId = $staff->id;
+            $dataArray = array();
+
+            foreach ( $datesForAllStaff as $date ) {
+                $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $categoryId, $storeId, $provinceId, "SUM");
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0']);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    array_push($dataArray, $response);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $staffName,
+                'data' => $dataArray
+            ];
+
+            array_push($finalChartObjectStaff, $obj);
+
+        };
+
+        if (count($finalChartObjectStaff) > 0) {
+            $data['staff_list_data'] = $finalChartObjectStaff[count($finalChartObjectStaff)- 1];
+        }
+        else {
+            $data['staff_list_data'] = []; ////DATASET
+        }
+
+        $obj = null;
+
+
+        /////////////////
+
+
+
+
 
         // Sum of all categories
 

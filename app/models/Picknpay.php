@@ -36,12 +36,6 @@ class Picknpay extends Eloquent {
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->get();
 
-        // return Picknpay::orderBy('created_at', 'ASC')
-        // ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
-        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
-        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
-        // ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        // ->get();
     }
 
 
@@ -98,6 +92,27 @@ class Picknpay extends Eloquent {
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
     }
 
+    public static function fetchAllStaffForFilter(){
+        return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_staff")->get();
+    }
+
+    public static function fetchAllStaff($date, $startDate, $endDate){
+
+        if ($startDate == null && $endDate == null) {
+
+            $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
+
+            $startDate = $dateRange['startDate'];
+            $endDate = $dateRange['endDate'];
+
+        }
+        //Was like this, change back to this if problems exist
+        // return EngagePicknPayStaff::raw("SELECT DISTINCT name FROM pnp_staff WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
+
+        return EngagePicknPayStaff::raw("SELECT DISTINCT name FROM pnp_staff")->get();
+
+    }
+
     public static function fetchAllCategoriesWithoutDateFilter(){
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
     }
@@ -107,6 +122,24 @@ class Picknpay extends Eloquent {
         ->select(DB::raw("IFNULL($verb(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
         ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
         ->whereraw("category_id = '$categoryId'")
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
+
+        if($storeId != "") {
+            $query = $query->whereraw("store_id = '$storeId'");
+        }
+        if($provinceId != "") {
+            $query = $query->whereraw("province_id = '$provinceId'");
+        }
+        return $query->get();
+
+    }
+
+    public static function fetchDwellTimeDataForStaffWithDate($date, $staffID, $storeId, $provinceId, $verb){
+        $query = Picknpay::orderBy('created_at', 'ASC')
+        ->select(DB::raw("IFNULL($verb(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
+        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
+        ->whereraw("staff_id = '$staffID'")
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
 

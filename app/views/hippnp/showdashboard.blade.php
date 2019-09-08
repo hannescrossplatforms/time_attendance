@@ -236,12 +236,12 @@
 
                         <div class="col-sm-6">
                             <div class="chart-wrapper">
-                                <div class="chart-title venuecolheading">Number of visits per category</div>
+                                <div class="chart-title venuecolheading">Staff activity</div>
                                 <div class="chart-stage">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="chart-stage">
-                                                <div id="staff_visits_per_category">Loading...</div>
+                                                <div id="staff_activity">Loading...</div>
                                             </div>
                                         </div>
                                     </div>
@@ -390,6 +390,34 @@ $(document).ready(function() {
                 "category": <?php echo $data['category_list']; ?>
             }],
             "dataset": <?php echo $data['category_list_data_visits_store']; ?>
+
+        }
+    });
+    apiChart.render();
+
+    //Staff graph
+
+    var chartProperties = {
+        "caption": "",
+        "xAxisName": "Staff Activity",
+        "yAxisName": "Total dwell time (minutes)",
+        "paletteColors": "#0075c2,#f8b81d,#3CB371",
+        "rotatevalues": "1",
+        "theme": "zune"
+    };
+
+    apiChart = new FusionCharts({
+        type: 'mscolumn2d',
+        renderAt: 'staff_activity',
+        width: '400',
+        height: '350',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": chartProperties,
+            "categories": [{
+                "category": <?php echo $data['staff_list']; ?>
+            }],
+            "dataset": <?php echo $data['staff_list_data']; ?>
 
         }
     });
