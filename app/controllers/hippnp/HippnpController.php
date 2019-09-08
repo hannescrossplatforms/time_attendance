@@ -43,7 +43,7 @@ class HippnpController extends \BaseController {
         foreach ($allStaff as $staff) {
 
             $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->staff_id);
-            $stafId = $staff->id;
+            $stafId = $staffObj->id;
             $staffName = $staffObj->name;
             $dataArray = array();
 
