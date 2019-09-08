@@ -25,6 +25,60 @@ class HippnpController extends \BaseController {
         $data['customer_in_store_today'] = \Picknpay::customerInStoreToday();
         $data['customer_in_store_this_month'] = \Picknpay::customerInStoreThisMonth();
 
+
+        /////////
+
+
+        $finalChartObjectStaff = array();
+
+        $allStaff = \Picknpay::fetchAllStaff($period, $start, $end, $categoryId);
+        $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
+            ->map(function($row) {
+                    return ['label' => $row['created_att']];
+            });
+
+        $data['all_staff'] = $allStaff;
+        $data['staff_list'] = $datesForAllStaff; //////////TOP ONE
+
+        foreach ($allStaff as $staff) {
+            $staffName = \EngagePicknPayStaff::getStaffWithID($staff->id);
+            $stafId = $staff->id;
+            $dataArray = array();
+
+            foreach ( $datesForAllStaff as $date ) {
+                $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $categoryId, $storeId, $provinceId, "SUM");
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0']);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    array_push($dataArray, $response);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $staffName,
+                'data' => $dataArray
+            ];
+
+            array_push($finalChartObjectStaff, $obj);
+
+        };
+
+        if (count($finalChartObjectStaff) > 0) {
+            $data['staff_list_data'] = $finalChartObjectStaff[count($finalChartObjectStaff)- 1];
+        }
+        else {
+            $data['staff_list_data'] = []; ////DATASET
+        }
+
+        $obj = null;
+
+
+        /////////
+
+
+
         //Get all categories for charts to render
 
         $allCategories = \Picknpay::fetchAllCategories($period, null, null, null);
