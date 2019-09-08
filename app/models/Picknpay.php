@@ -29,12 +29,26 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
+
+        // $query = Bidvest::where('created_at', ">=", $startDate)
+        // ->where('created_at', "<=", $endDate)
+        // ->groupBy('staff_id')
+        // ->get();
+
+
         return Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
+        ->where('created_at', ">=", $startDate)
+        ->where('created_at', "<=", $endDate)
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->get();
+
+        // return Picknpay::orderBy('created_at', 'ASC')
+        // ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
+        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
+        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
+        // ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        // ->get();
     }
 
 
