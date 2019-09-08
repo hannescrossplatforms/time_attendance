@@ -424,6 +424,7 @@ function renderCharts(time, start, end, category, store, province) {
         },
         success: function(data) {
 
+        debugger;
             var chartProperties = {
                 "caption": "",
                 "xAxisName": "Category",
