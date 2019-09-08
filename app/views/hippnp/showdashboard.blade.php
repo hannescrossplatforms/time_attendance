@@ -595,9 +595,9 @@ function renderCharts(time, start, end, category, store, province) {
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
-                        "category": data['staff_list'];
+                        "category": data['staff_list']
                     }],
-                    "dataset": data['staff_list_data'];
+                    "dataset": data['staff_list_data']
 
                 }
             });
