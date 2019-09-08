@@ -10,7 +10,7 @@ class EngagePicknPayStaff extends Eloquent {
     }
 
     public static function getStaffWithID($id){
-        return EngagePicknPayStaff::find($id)->name;
+        return EngagePicknPayStaff::find($id);
     }
 
 }
