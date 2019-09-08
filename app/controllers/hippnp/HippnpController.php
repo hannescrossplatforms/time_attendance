@@ -41,8 +41,10 @@ class HippnpController extends \BaseController {
         $data['staff_list'] = $datesForAllStaff; //////////TOP ONE
 
         foreach ($allStaff as $staff) {
-            $staffName = \EngagePicknPayStaff::getStaffWithID($staff->id);
+
+            $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->staff_id);
             $stafId = $staff->id;
+            $staffName = $staffObj->name;
             $dataArray = array();
 
             foreach ( $datesForAllStaff as $date ) {
