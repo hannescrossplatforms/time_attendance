@@ -230,11 +230,27 @@
                             </div>
                         </div>
 
-                        <!-- </div> -->
+                    </div>
 
+                    <div class="row">
 
+                        <div class="col-sm-6">
+                            <div class="chart-wrapper">
+                                <div class="chart-title venuecolheading">Number of visits per category</div>
+                                <div class="chart-stage">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="chart-stage">
+                                                <div id="staff_visits_per_category">Loading...</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
+
                 </div>
             </div>
         </div>
