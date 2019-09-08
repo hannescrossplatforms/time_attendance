@@ -66,7 +66,7 @@
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                                 <select id="brandreportperiod" onchange="change_report_period()" class="form-control"
                                     name="reportperiod">
-                                    <!-- <option value="">Select</option> -->
+                                    <option value="today">Today</option>
                                     <option value="rep7day">This Week</option>
                                     <option value="repthismonth">This month</option>
                                     <option value="replastmonth">Last month</option>
