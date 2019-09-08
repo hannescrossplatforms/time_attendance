@@ -115,12 +115,6 @@ class Picknpay extends Eloquent {
         ->where('created_at', ">=", $startDate)
         ->get();
 
-        // ->where('created_at', "<=", $endDate)
-
-        // return Picknpay::raw("SELECT DISTINCT staff_id FROM picknpay")->get();
-
-        // return EngagePicknPayStaff::raw("SELECT DISTINCT name FROM pnp_staff")->get();
-
     }
 
     public static function fetchAllCategoriesWithoutDateFilter(){

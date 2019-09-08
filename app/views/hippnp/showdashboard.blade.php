@@ -577,6 +577,37 @@ function renderCharts(time, start, end, category, store, province) {
             apiChart.render();
 
 
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Staff Activity",
+                "yAxisName": "Total dwell time (minutes)",
+                "paletteColors": "#0075c2,#f8b81d,#3CB371",
+                "rotatevalues": "1",
+                "theme": "zune"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'mscolumn2d',
+                renderAt: 'staff_activity',
+                width: '400',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "categories": [{
+                        "category": data['staff_list'];
+                    }],
+                    "dataset": data['staff_list_data'];
+
+                }
+            });
+            apiChart.render();
+
+
+
+
+
+
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
 
