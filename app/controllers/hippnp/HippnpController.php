@@ -17,7 +17,7 @@ class HippnpController extends \BaseController {
 
 	public static function showDashboard(){
 
-        $period = 'rep7day';
+        $period = 'today';
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['report_period'] = 'rep7day';
