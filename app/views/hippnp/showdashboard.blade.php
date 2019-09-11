@@ -452,7 +452,7 @@ function custom_report_period() {
     renderCharts('daterange', from, to, category, store, province);
 }
 
-var dataa = null;
+var staffActivityData = null;
 
 function renderCharts(time, start, end, category, store, province) {
 
@@ -471,7 +471,6 @@ function renderCharts(time, start, end, category, store, province) {
         },
         success: function(data) {
 
-        debugger;
             var chartProperties = {
                 "caption": "",
                 "xAxisName": "Category",
@@ -588,7 +587,7 @@ function renderCharts(time, start, end, category, store, province) {
                 "theme": "zune"
             };
 
-            dataa = data['staff_list_data'];
+            staffActivityData = data['staff_list_data'];
 
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
@@ -607,9 +606,9 @@ function renderCharts(time, start, end, category, store, province) {
                 },
                 events: {
                     "dataPlotClick": function (eventObj, dataObj) {
-                        let test = this.dataaa;
+                        let object = staffActivityData[dataObj.dataIndex];
 
-                    console.log(dataObj.categoryLabel);
+                        debugger;
                     }
                 }
             });
