@@ -452,6 +452,8 @@ function custom_report_period() {
     renderCharts('daterange', from, to, category, store, province);
 }
 
+var dataa = null;
+
 function renderCharts(time, start, end, category, store, province) {
 
     $.ajax({
@@ -586,7 +588,7 @@ function renderCharts(time, start, end, category, store, province) {
                 "theme": "zune"
             };
 
-            let dataaa = data['staff_list_data'];
+            dataa = data['staff_list_data'];
 
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
