@@ -13,4 +13,9 @@ class EngagePicknPayStaff extends Eloquent {
         return EngagePicknPayStaff::find($id);
     }
 
+    public static function getStaffAsArrayWithID($id){
+        return EngagePicknPayStaff::where('id', '=', $id)
+        ->get();
+    }
+
 }
