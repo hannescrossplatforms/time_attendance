@@ -323,10 +323,10 @@ class HippnpController extends \BaseController {
         };
 
         if (count($finalChartObjectStaff) > 0) {
-            $data['staff_list_data'] = $finalChartObjectStaff[count($finalChartObjectStaff)- 1];
+            $data['staff_list_data'] = json_encode($finalChartObjectStaff[count($finalChartObjectStaff)- 1]);
         }
         else {
-            $data['staff_list_data'] = []; ////DATASET
+            $data['staff_list_data'] = json_encode([]); ////DATASET
         }
 
         $obj = null;
