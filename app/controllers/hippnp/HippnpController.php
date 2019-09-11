@@ -338,7 +338,9 @@ class HippnpController extends \BaseController {
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
                     array_push($dataArray, $empty_array);
                 } else {
-                    array_push($dataArray, $response);
+
+                    $objectArr = array(['value' => $response->value, 'id' => $stafId]);
+                    array_push($dataArray, $objectArr);
                 }
 
             }
