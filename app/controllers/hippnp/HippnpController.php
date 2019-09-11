@@ -334,7 +334,7 @@ class HippnpController extends \BaseController {
 
 
 
-        $json = json_encode($data);
+        $json = json_encode($allStaff);
         print_r($json);
 
 
