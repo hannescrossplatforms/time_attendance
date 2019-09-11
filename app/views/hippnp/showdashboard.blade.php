@@ -605,6 +605,8 @@ function renderCharts(time, start, end, category, store, province) {
                 },
                 events: {
                     "dataPlotClick": function (eventObj, dataObj) {
+                        let test = this.dataaa;
+
                     console.log(dataObj.categoryLabel);
                     }
                 }
