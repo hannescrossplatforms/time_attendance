@@ -273,15 +273,18 @@ class HippnpController extends \BaseController {
 
     public function periodchartJsondataStaff($id){
 
-        $stuff = \Request::getContent();
+        $period = 'today';
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        $data['report_period'] = 'rep7day';
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 
-        $data = array();
-        $data['id'] = $id;
 
+        return \View::make('hippnp.showstaffdata')->with('data', $data);
 
-        $json = json_encode($data);
+        // $json = json_encode($data);
 
-        print_r($json);
+        // print_r($json);
     }
 
     public function periodchartJsondata(){
