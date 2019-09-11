@@ -611,6 +611,8 @@ function renderCharts(time, start, end, category, store, province) {
                         let staffMemeberID = parseInt(id);
 
                         let test = window.localtion;
+                        // http://hiphub.hipzone.co.za/hippnp_showdashboard
+                        window.location.replace("hippnp/periodchartJsondataStaff")
 
                         debugger;
 
