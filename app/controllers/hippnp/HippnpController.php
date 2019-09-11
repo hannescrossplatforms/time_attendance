@@ -334,6 +334,8 @@ class HippnpController extends \BaseController {
 
 
 
+        $json = json_encode($data);
+        print_r($json);
 
 
 
@@ -346,8 +348,7 @@ class HippnpController extends \BaseController {
 
 
 
-
-        return \View::make('hippnp.showstaffdata')->with('data', $data);
+        // return \View::make('hippnp.showstaffdata')->with('data', $data);
 
     }
 
