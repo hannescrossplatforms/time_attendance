@@ -319,7 +319,7 @@ class HippnpController extends \BaseController {
         $allStaff = \Picknpay::fetchAllStaff($period, $start, $end);
         $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
             ->map(function($row) {
-                    return ['label' => $row['created_att'], 'eventId' => 1];
+                    return ['label' => $row['created_att'], 'id' => "1"];
             });
 
         $data['all_staff'] = $allStaff;
@@ -335,7 +335,7 @@ class HippnpController extends \BaseController {
             foreach ( $datesForAllStaff as $date ) {
                 $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $stafId, $storeId, $provinceId, "SUM");
                 if (count($response) == 0) {
-                    $empty_array = array(['value' => '0', 'link' => 1]);
+                    $empty_array = array(['value' => '0', 'id' => "1"]);
                     array_push($dataArray, $empty_array);
                 } else {
                     array_push($dataArray, $response);
@@ -346,7 +346,7 @@ class HippnpController extends \BaseController {
             $obj[] = [
                 'seriesname' => $staffName,
                 'data' => $dataArray,
-                'eventId' => 1
+                'id' => "1"
             ];
 
             array_push($finalChartObjectStaff, $obj);
