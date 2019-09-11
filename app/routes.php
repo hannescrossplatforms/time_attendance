@@ -355,7 +355,7 @@ Route::post('hippnp/save_beacon','hippnp\HippnpController@saveBeacon');
 Route::get('hippnp/picknpay_delete_beacon/{id}', 'hippnp\HippnpController@deleteBeacon');
 Route::get('hippnp/picknpay_add_beacon', 'hippnp\HippnpController@addBeacon');
 Route::get('hippnp/storeCategories/{id}','hippnp\HippnpController@getStoreCategories');
-Route::get('hippnp/periodchartJsondataStaff','hippnp\HippnpController@periodchartJsondataStaff');
+Route::get('hippnp/periodchartJsondataStaff/{id}','hippnp\HippnpController@periodchartJsondataStaff');
 
 // HipBidvest routes //////////////////////////////////////////////////////////////
 Route::any('/hipbidvest_showdashboard', array('uses' => 'hipbidvest\HipbidvestController@showDashboard', 'as' => 'hipbidvest_showdashboard'))->before('auth');
