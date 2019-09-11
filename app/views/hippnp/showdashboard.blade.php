@@ -599,6 +599,10 @@ function renderCharts(time, start, end, category, store, province) {
                     }],
                     "dataset": data['staff_list_data']
 
+                },
+                events: {
+                    "dataPlotClick": function (eventObj, dataObj) {
+                    console.log(dataObj.categoryLabel);
                 }
             });
             apiChart.render();
