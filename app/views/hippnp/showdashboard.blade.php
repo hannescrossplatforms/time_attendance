@@ -610,9 +610,7 @@ function renderCharts(time, start, end, category, store, province) {
                         let id = object.data[dataObj.dataIndex][0].id;
                         let staffMemeberID = parseInt(id);
 
-                        let test = window.localtion;
-                        // http://hiphub.hipzone.co.za/hippnp_showdashboard
-                        window.location.replace("hippnp/periodchartJsondataStaff")
+                        window.location.replace("hippnp/periodchartJsondataStaff/" + staffMemeberID);
 
                         debugger;
 
