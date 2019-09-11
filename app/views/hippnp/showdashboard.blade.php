@@ -603,6 +603,7 @@ function renderCharts(time, start, end, category, store, province) {
                 events: {
                     "dataPlotClick": function (eventObj, dataObj) {
                     console.log(dataObj.categoryLabel);
+                    }
                 }
             });
             apiChart.render();
