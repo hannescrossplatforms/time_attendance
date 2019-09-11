@@ -611,27 +611,10 @@ function renderCharts(time, start, end, category, store, province) {
                         let staffMemeberID = parseInt(id);
 
                         let test = window.localtion;
-                        // window.location.replace(url)
 
-                        // $.ajax({
+                        debugger;
 
-                        //     url: pathname + 'hippnp/periodchartJsondataStaff',
-                        //     type: 'get',
-                        //     dataType: 'json',
-                        //     data: {
-                        //         'period': time,
-                        //         'start': start,
-                        //         'end': end,
-                        //         'staff_id': category
-                        //     },
-                        //     success: function(data) {
-                        //         debugger;
-                        //     },
-                        //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        //         debugger;
-                        //     }
-
-                        // }
+                    }
                 }
             });
             apiChart.render();
