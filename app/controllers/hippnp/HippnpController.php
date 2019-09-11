@@ -345,7 +345,8 @@ class HippnpController extends \BaseController {
 
             $obj[] = [
                 'seriesname' => $staffName,
-                'data' => $dataArray
+                'data' => $dataArray,
+                'id' => 1
             ];
 
             array_push($finalChartObjectStaff, $obj);
