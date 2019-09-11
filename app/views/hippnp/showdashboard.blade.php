@@ -607,7 +607,7 @@ function renderCharts(time, start, end, category, store, province) {
                 events: {
                     "dataPlotClick": function (eventObj, dataObj) {
                         let object = staffActivityData[dataObj.datasetIndex];
-                        let innerObject = object.data[dataObject.dataIndex];
+                        let innerObject = object.data[dataObj.dataIndex];
 
 
                         debugger;
