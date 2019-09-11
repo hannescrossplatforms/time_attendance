@@ -586,12 +586,15 @@ function renderCharts(time, start, end, category, store, province) {
                 "theme": "zune"
             };
 
+            let dataaa = data['staff_list_data']
+
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
                 renderAt: 'staff_activity',
                 width: '400',
                 height: '350',
                 dataFormat: 'json',
+                entityDef: data['entity_dev'],
                 dataSource: {
                     "chart": chartProperties,
                     "categories": [{
