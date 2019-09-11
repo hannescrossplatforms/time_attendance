@@ -1,13 +1,15 @@
 <?php
 
 namespace hipjam;
+
 use Input;
 //use app\lib\Heatmap;
 use Session;
 
 // use BaseController;
 
-class HipjamController extends \BaseController {
+class HipjamController extends \BaseController
+{
 
     /////////////////////// Venues /////////////////////////
     public function showDashboard($json = null)
@@ -27,15 +29,15 @@ class HipjamController extends \BaseController {
         $venue = new \Venue();
         // $venues = $venue->getVenuesForUser('hipjam', 1);
         $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
-        
 
-        foreach($venues as $venue) {
-            if($venue->ap_active == 0) {
+
+        foreach ($venues as $venue) {
+            if ($venue->ap_active == 0) {
                 $venue["status"] = '<span style="color:red">Inactive</span>';
             } else {
                 $venue["status"] = '<span style="color:green">Active</span>';
             }
-            if($venue->server) {
+            if ($venue->server) {
                 $venue["hostname"] = $venue->server->hostname;
             } else {
                 $venue["hostname"] = "Server No longer exists";
@@ -43,8 +45,8 @@ class HipjamController extends \BaseController {
             //$sitename = strtolower($venue["sitename"]);
             //$sitename = str_replace(" ","-",$sitename);
             /*$venue["apisitename"] = $venue["track_venue_id"] != '' ? $venue["track_venue_id"] : 'no_venue' ;*/
-            $venue["apisitename"] = $venue["track_server_location"] != '' ? $venue["track_server_location"] : 'no_venue' ;
-            $venue["track_slugname"] = $venue["track_slug"] != '' ? $venue["track_slug"] : 'no_venue' ;
+            $venue["apisitename"] = $venue["track_server_location"] != '' ? $venue["track_server_location"] : 'no_venue';
+            $venue["track_slugname"] = $venue["track_slug"] != '' ? $venue["track_slug"] : 'no_venue';
             // $venue["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $venue["sitename"]);
         }
 
@@ -52,14 +54,12 @@ class HipjamController extends \BaseController {
 
         $data['currentMenuItem'] = "Dashboard";
 
-        if($json) {
-            error_log("showDashboard : returning json" );
+        if ($json) {
+            error_log("showDashboard : returning json");
             return \Response::json($data['venuesJson']);
-
         } else {
-            error_log("showDashboard : returning NON json" );
+            error_log("showDashboard : returning NON json");
             return \View::make('hipjam.showdashboardlist')->with('data', $data);
-
         }
     }
 
@@ -77,16 +77,15 @@ class HipjamController extends \BaseController {
         $brand = new \Brand();
         $jambrands = $brand->getJamBrandsForUser(\Auth::user()->id, "active");
 
-        $data['brandsStruct'] = $jambrands;    
+        $data['brandsStruct'] = $jambrands;
         $brandsJason = json_encode($jambrands);
         $data['brandsJason'] = $brandsJason;
 
         $data['brands'] = $jambrands;
 
-        if($json) {
-            error_log("showDashboard : returning json" );
+        if ($json) {
+            error_log("showDashboard : returning json");
             return \Response::json($brandsJason);
-
         } else {
             return \View::make('hipjam.showbrands')->with('data', $data);
         }
@@ -146,62 +145,36 @@ class HipjamController extends \BaseController {
         return \View::make('hipjam.addbrand')->with('data', $data);
     }
 
-    private function getErrorActivateMessages() {
+    private function getErrorActivateMessages()
+    {
         return array(
-                'min_engaged_length.required' => 'The engaged customer time is required',
-                'max_engaged_length.required' => 'The engaged customer time is required',
-                'min_session_length.required' => 'The session time is required',
-                'max_session_length.required' => 'The session time is required',
-            );
+            'min_engaged_length.required' => 'The engaged customer time is required',
+            'max_engaged_length.required' => 'The engaged customer time is required',
+            'min_session_length.required' => 'The session time is required',
+            'max_session_length.required' => 'The session time is required',
+        );
     }
 
-    private function getActivateRules() {
+    private function getActivateRules()
+    {
         return array(
-                'min_engaged_length'          => 'required',  
-                'max_engaged_length'          => 'required', 
-                'max_session_length'       => 'required',  
-                'min_session_length'       => 'required',  
-            );
+            'min_engaged_length'          => 'required',
+            'max_engaged_length'          => 'required',
+            'max_session_length'       => 'required',
+            'min_session_length'       => 'required',
+        );
     }
 
-    public function updateActivatedVenuesInTrack($input, $brand) {
+    public function updateActivatedVenuesInTrack($input, $brand)
+    {
 
         $venueObj = new \Venue();
         $venues = $venueObj->getVenuesForUser('hipjam', 1, null, $brand->id, "active");
         foreach ($venues as $venue) {
             error_log("updateActivatedVenuesInTrack venue name " . $venue->sitename);
-            $this->saveVenueInTrackDb ($venue);
+            $this->saveVenueInTrackDb($venue);
         }
-
     }
-
-    // public function commonBrandSave($input, $brand) {
-    //     $brand->min_session_length = $input["min_session_length"];
-    //     $brand->min_engaged_length = $input["min_engaged_length"];
-    //     $brand->jam_activated = 1;
-    //     $brand->save();
-    // }
-
-    // public function activateBrandSave()
-    // {
-    //     error_log('Hipjam activateBrandSave');
-    //     $is_activation = \Input::get('is_activation');
-    //     $id = \Input::get('id');
-    //     $brand = \Brand::find($id);
-    //     $input = \Input::all();
-
-    //     $messages = $this->getErrorActivateMessages();
-    //     $rules = $this->getActivateRules();
-    //     $validator = \Validator::make($input, $rules, $messages); 
-    //     if ($validator->fails()) {
-    //         $messages = $validator->messages();
-    //         return \Redirect::to('hipjam_activatebrand/' . $input["id"])->withErrors($validator)->withInput();
-
-    //     } else {  
-    //         $this->commonBrandSave($input, $brand);
-    //         return \Redirect::route('hipjam_showbrands');
-    //     }
-    // }
 
     public function editBrandSave()
     {
@@ -213,15 +186,14 @@ class HipjamController extends \BaseController {
         $id = \Input::get('id');
         $brand = \Brand::find($id);
         $input = \Input::all();
-        
+
         $messages = $this->getErrorActivateMessages();
         $rules = $this->getActivateRules();
-        $validator = \Validator::make($input, $rules, $messages); 
+        $validator = \Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             $messages = $validator->messages();
             return \Redirect::to('hipjam_activatebrand/' . $input["id"])->withErrors($validator)->withInput();
-
-        } else {  
+        } else {
             // Save in hiphub DB
             $brand->min_engaged_length = $input["min_engaged_length"];
             $brand->max_engaged_length = $input["max_engaged_length"];
@@ -231,9 +203,9 @@ class HipjamController extends \BaseController {
             $brand->save();
 
             // Update in Track DB
-            if(!$is_activation) $this->updateActivatedVenuesInTrack($input, $brand);
+            if (!$is_activation) $this->updateActivatedVenuesInTrack($input, $brand);
             return \Redirect::route('hipjam_showbrands');
-        } 
+        }
     }
 
     // END BRAND /////////////////////////////////////////////////////////////
@@ -283,15 +255,16 @@ class HipjamController extends \BaseController {
         $venue = new \Venue();
 
         // $venues = $venue->getVenuesForUser('hipjam', 1);
+
         $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
 
-        foreach($venues as $venue) {
-            if($venue->ap_active == 0) {
+        foreach ($venues as $venue) {
+            if ($venue->ap_active == 0) {
                 $venue["status"] = '<span style="color:red">Inactive</span>';
             } else {
                 $venue["status"] = '<span style="color:green">Active</span>';
             }
-            if($venue->server) {
+            if ($venue->server) {
                 $venue["hostname"] = $venue->server->hostname;
             } else {
                 $venue["hostname"] = "Server No longer exists";
@@ -304,16 +277,15 @@ class HipjamController extends \BaseController {
         $data['currentMenuItem'] = "Venue Management";
 
         $data['user'] = $venue->getUserData();
+        $data['is_vicinity'] = \User::isVicinity();
         //print_r($data['user']); die();
 
-        if($json) {
-            error_log("showDashboard : returning json" );
+        if ($json) {
+            error_log("showDashboard : returning json");
             return \Response::json($data['venuesJson']);
-
         } else {
-            error_log("showDashboard : returning NON json" );
+            error_log("showDashboard : returning NON json");
             return \View::make('hipjam.showvenues')->with('data', $data);
-
         }
 
 
@@ -325,22 +297,100 @@ class HipjamController extends \BaseController {
     {
         $data = array();
         $venue = new \Venue();
+        // $venues = null;
+
         $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "inactive");
+
         $venuesJason = json_encode($venues);
-        error_log("getInactiveVenues jam venues = $venues");
+        // error_log("getInactiveVenues jam venues = $venues");
 
         return \Response::json($venuesJason);
     }
 
-    // public function addVenue()
-    // {
-    //     $data = array();
-    //     $data['edit'] = false;
-    //     $data['currentMenuItem'] = "Venue Management";
-    //
-    //
-    //     return \View::make('hipjam.addvenue')->with('data', $data);
-    // }
+    // ----------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------
+    // ############################################ VICINITY AMENDS #############################################
+    // ----------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------
+
+    public function vicinityVenue($id)
+    {
+        $data = array();
+        $data['currentMenuItem'] = "Venue Management";
+        $data['edit'] = true;
+        $data['is_activation'] = false;
+        $edit = true;
+        $vpnip = new \Vpnip;
+        //$data['vpnips']  = $vpnip->getVpnips();
+        $data['venue'] = \Venue::find($id);
+        $data['old_sitename'] = $data['venue']["sitename"];
+        $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
+        foreach ($data['venue'] as $key => $value) {
+            error_log("TTT : $key => $value");
+        };
+
+        $assetsdir = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
+        $destinationPath = $assetsdir->value . 'track/images';
+        $data['previewurl'] = $destinationPath;
+
+        $sensors =  \Sensor::where("venue_id", "like", $data['venue']["id"])->orderBy('id', 'DESC')->get();
+        $data['sensors'] = $sensors;
+
+        $data['timezoneselect'] = $this->getTimezoneSelect($data['venue']['timezone']);
+
+        $venue = new \Venue();
+        $data['user'] = $venue->getUserData();
+        $data['billboards'] = \Venue::where('track_type', '=', "billboard")->get();
+        $sanitized_sitename = preg_replace("/[^a-zA-Z]+/", "", \Venue::find($id)->sitename);
+        $data['sensor_name'] = substr($sanitized_sitename, 0, 15).$sensors->count();
+        return \View::make('hipjam.vicinityvenue')->with('data', $data);
+    }
+
+    public function updateVicinityVenue()
+    {
+        $form_data = json_decode(\Input::get("data"));
+        $venue =  \Venue::find($form_data->id);
+        $venue->jam_activated = 1;
+
+        $venue->track_slug = $form_data->track_slug; // Track Venue ID
+        $venue->track_type = $form_data->track_type; // Billboard / Retail
+
+        $venue->track_server_location = $form_data->track_server_location; // Vicinity Server ID
+
+        $venue->track_ssid = $form_data->track_ssid; // Track WiFi SSID
+        $venue->track_password = $form_data->track_password; // Track WiFi Password
+
+        $venue->latitude = $form_data->latitude; // Venue Latitude (GPS co-ord)
+        $venue->longitude = $form_data->longitude; // Venue Longitude (GPS co-ord)
+
+        $venue->timezone = $form_data->timezone; // Time Zone
+        $result = $venue->save();
+
+        // Sync new venue data with TRACK
+        $this->saveVenueInTrackDb($venue);
+
+        print_r($result);
+    }
+
+    public function vicinitySettings()
+    {
+        // 1 & 45
+        $data = array();
+        $brand = \Brand::where('id', 165)->first();
+        $users = $brand->users;
+        $data["users"] = $users;
+        $data['currentMenuItem'] = "Settings";
+
+
+
+        return \View::make('hipjam.vicinitysettings')->with('data', $data);
+    }
+
+    // ----------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------
+    // ############################################ VICINITY AMENDS #############################################
+    // ----------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------
 
     public function addVenue()
     {
@@ -394,20 +444,20 @@ class HipjamController extends \BaseController {
         $timefrom = \Input::get('timefrom');
         $timeto = \Input::get('timeto');
 
-        error_log( "addVenueSave : timefrom = $timefrom ======= timeto = $timeto");
+        error_log("addVenueSave : timefrom = $timefrom ======= timeto = $timeto");
 
         $sitename_exists = \Venue::where("sitename", "like", $sitename)->first();
-        if(! is_null($sitename_exists)) {
+        if (!is_null($sitename_exists)) {
             $sitename_exists->forceDelete();
         }
         $macaddress_exists = \Venue::where("macaddress", "like", $macaddress)->first();
-        if(! is_null($macaddress_exists)) {
+        if (!is_null($macaddress_exists)) {
             $macaddress_exists->forceDelete();
         }
 
         $ssid = \Input::get('ssid');
         error_log("editVenueSave : 111 ssid : $ssid");
-        if( !$ssid || $ssid == "") {
+        if (!$ssid || $ssid == "") {
             $ssid = \Brand::find($brand_id)->ssid;
         } else {
             $ssid = \Input::get('ssid');
@@ -423,7 +473,6 @@ class HipjamController extends \BaseController {
             $messages = $validator->messages();
 
             return \Redirect::to('hipjam_addvenue')->withErrors($validator)->withInput();
-
         } else {
             $utils = new \Utils();
 
@@ -467,36 +516,26 @@ class HipjamController extends \BaseController {
             $venue = $venue->refreshMediaLocation($venue);
             $venue->insertVenueInRadius($venue, $remotedb_id);
 
-           // Update the AP
-           if($input['device_type'] == "Mikrotik") {
-               $mikrotik = new \Mikrotik();
-               $mikrotik->addVenue($venue);
-           }
-
+            // Update the AP
+            if ($input['device_type'] == "Mikrotik") {
+                $mikrotik = new \Mikrotik();
+                $mikrotik->addVenue($venue);
+            }
         }
 
         return \Redirect::route('hipjam_showvenues');
     }
 
-    // public function editVenue($id)
-    // {
-    //     $data = array();
-    //     $data['edit'] = true;
-    //     $data['currentMenuItem'] = "Venue Management";
-    //
-    //
-    //     return \View::make('hipjam.addvenue')->with('data', $data);
-    // }
-
-    public function getTimezoneSelect($venuetimezone) {
+    public function getTimezoneSelect($venuetimezone)
+    {
         $utils = new \Utils();
         $timezoneArray = $utils->getTimeZonesArray();
         $timezoneSelect = "";
-        if(!$venuetimezone || $venuetimezone == "") $venuetimezone = "Africa/Johannesburg";
+        if (!$venuetimezone || $venuetimezone == "") $venuetimezone = "Africa/Johannesburg";
 
-        foreach($timezoneArray as $timezone)  {
+        foreach ($timezoneArray as $timezone) {
             $selected_html = "";
-            if($timezone == $venuetimezone) $selected_html =  'selected';
+            if ($timezone == $venuetimezone) $selected_html =  'selected';
             $timezoneSelect = $timezoneSelect . '<option value="' . $timezone . '" ' . $selected_html . '>' . $timezone . "</option>";
         }
 
@@ -514,7 +553,9 @@ class HipjamController extends \BaseController {
         $data['venue'] = \Venue::find($id);
         $data['old_sitename'] = $data['venue']["sitename"];
         $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
-        foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
+        foreach ($data['venue'] as $key => $value) {
+            error_log("TTT : $key => $value");
+        };
 
         $assetsdir = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
         $destinationPath = $assetsdir->value . 'track/images';
@@ -530,7 +571,7 @@ class HipjamController extends \BaseController {
 
 
         // $data['timezoneselect'] = \View::make('partials.timezoneselect');
-        
+
 
 
         /*$server =  \Sensor::where("venue_id", "like", $data['venue']["id"])->where("code", "like", 'server_track')->orderBy('id', 'DESC')->get();*/
@@ -565,7 +606,7 @@ class HipjamController extends \BaseController {
         return \View::make('hipjam.addvenue')->with('data', $data);
     }
 
-public function activateVenue($id)
+    public function activateVenue($id)
     {
         $data = array();
         $data['currentMenuItem'] = "Venue Management";
@@ -575,7 +616,9 @@ public function activateVenue($id)
         $data['venue'] = \Venue::find($id);
         $data['old_sitename'] = $data['venue']["sitename"];
         $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
-        foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
+        foreach ($data['venue'] as $key => $value) {
+            error_log("TTT : $key => $value");
+        };
 
         $assetsdir = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
         $destinationPath = $assetsdir->value . 'track/images';
@@ -653,8 +696,9 @@ public function activateVenue($id)
         return \Redirect::route('hipjam_showvenues');
     }
 
-    public function saveVenueInTrackDb ($venue){
-         // Get the connection
+    public function saveVenueInTrackDb($venue)
+    {
+        // Get the connection
         $brand = \Brand::find($venue->brand_id);
         \Config::set('database.connections.track.host', $venue->track_server_location);
         \DB::purge('track');
@@ -670,11 +714,11 @@ public function activateVenue($id)
             "max_session_length" => $brand->max_session_length,
             "created_at" =>  \Carbon\Carbon::now(),
             "updated_at" => \Carbon\Carbon::now(),
-            );
+        );
         error_log("saveVenueInTrackDb 10");
         \DB::connection('track')->table("venues")->where('id', '=', $venue->id)->delete();
         error_log("saveVenueInTrackDb 20");
-        \DB::connection('track')->table("venues")->insert($record);       
+        \DB::connection('track')->table("venues")->insert($record);
         error_log("saveVenueInTrackDb 30");
     }
 
@@ -706,8 +750,8 @@ public function activateVenue($id)
     {
 
         $objData   = json_decode(\Input::get("newrecord"));
-        $objReport =\Sensor::where('id',$objData->updateNum)->first();
-         
+        $objReport = \Sensor::where('id', $objData->updateNum)->first();
+
         //$objReport->name = $objData->add_name;
         //$objReport->code = $objData->sensor_id;
         //$objReport->mac = $objData->sensor_mac;
@@ -716,25 +760,23 @@ public function activateVenue($id)
         $objReport->ycoord = $objData->y_cordinate;
         $save = $objReport->save();
 
-        if($save){
-            $lastInsertedID =$objData->updateNum; //$objReport->id;
-            
-            $reportJson =  \Sensor::where('id',$lastInsertedID)->get();
+        if ($save) {
+            $lastInsertedID = $objData->updateNum; //$objReport->id;
+
+            $reportJson =  \Sensor::where('id', $lastInsertedID)->get();
             foreach ($reportJson as $value) {
 
-                $rows = '<tr id="rowCount'.$value->id.'"><td class="sensor_name"> <div id="add_name'.$value->id.'" class="form-control no-radius" >'.$value->name.'</div> </td><td class="sensor_location"> <div id="sensor_location'.$value->id.'" class="form-control no-radius" >'.$value->location.'</div> </td><td class="sensor_mac"> <div id="sensor_mac'.$value->id.'" class="form-control no-radius" >'.$value->mac.'</div> </td><td class="x_cordinate"> <input id="x_cordinate'.$value->id.'" name="x_cordinate" class="form-control no-radius" value="'.$value->xcoord.'" placeholder="X Cordinate" type="text" readonly> </td><td class="y_cordinate"> <input id="y_cordinate'.$value->id.'" name="y_cordinate" value="'.$value->ycoord.'" class="form-control no-radius" placeholder="Y Cordinate" type="text" readonly> </td><td><a onclick="setxyImage('.$value->id.')"  class="btn btn-default btn-delete btn-sm">Set XY</a><a id="addreportuser" onclick="updateRow('.$value->id.');" class="btn btn-default btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeRow('.$value->id.');" class="btn btn-default btn-delete btn-sm" >Delete</a></td></tr> ';
-                
+                $rows = '<tr id="rowCount' . $value->id . '"><td class="sensor_name"> <div id="add_name' . $value->id . '" class="form-control no-radius" >' . $value->name . '</div> </td><td class="sensor_location"> <div id="sensor_location' . $value->id . '" class="form-control no-radius" >' . $value->location . '</div> </td><td class="sensor_mac"> <div id="sensor_mac' . $value->id . '" class="form-control no-radius" >' . $value->mac . '</div> </td><td class="x_cordinate"> <input id="x_cordinate' . $value->id . '" name="x_cordinate" class="form-control no-radius" value="' . $value->xcoord . '" placeholder="X Cordinate" type="text" readonly> </td><td class="y_cordinate"> <input id="y_cordinate' . $value->id . '" name="y_cordinate" value="' . $value->ycoord . '" class="form-control no-radius" placeholder="Y Cordinate" type="text" readonly> </td><td><a onclick="setxyImage(' . $value->id . ')"  class="btn btn-default btn-delete btn-sm">Set XY</a><a id="addreportuser" onclick="updateRow(' . $value->id . ');" class="btn btn-default btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeRow(' . $value->id . ');" class="btn btn-default btn-delete btn-sm" >Delete</a></td></tr> ';
             }
         }
-        $data = array('row'=>$rows);
-        print_r(json_encode($data));    
-
-
+        $data = array('row' => $rows);
+        print_r(json_encode($data));
     }
 
-    public function updateInsertSensorInTrack($scannerObj) {
+    public function updateInsertSensorInTrack($scannerObj)
+    {
 
-                // Add scanner details to track db
+        // Add scanner details to track db
         $track_server_location = \Venue::find($scannerObj->venue_id)->track_server_location;
         error_log("addSvrScannerdata : track_server_location = $track_server_location");
         error_log("addSvrScannerdata : id = " . $scannerObj->id);
@@ -762,13 +804,13 @@ public function activateVenue($id)
             "queue" => $scannerObj->queue,
             "min_power" => $scannerObj->min_power,
             "max_power" => $scannerObj->max_power
-            );
+        );
         \DB::connection('track')->table("scanners")->where('id', '=', $scannerObj->id)->delete();
         \DB::connection('track')->table("scanners")->insert($record);
-
     }
 
-    public function deleteSensorInTrack($scannerObj) {
+    public function deleteSensorInTrack($scannerObj)
+    {
 
         $track_server_location = \Venue::find($scannerObj->venue_id)->track_server_location;
         error_log("deleteSensorInTrack : track_server_location = $track_server_location");
@@ -782,7 +824,8 @@ public function activateVenue($id)
     }
 
 
-     public function monitorSensors(){
+    public function monitorSensors()
+    {
         $data = array();
         $sensor = new \Sensor();
         $data['currentMenuItem'] = "Sensor Monitoring";
@@ -790,39 +833,41 @@ public function activateVenue($id)
         $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active");
         //dd(count($data['details']['sensors']));
         //$brandnames = array();
-        
+
         return \View::make('hipjam.showmonitoring')->with('data', $data);
-
     }
 
-    public function getVenueSensors(){
-             $input = json_decode(\Input::get("sentData"));
-             $sensor = new \Sensor();
-             $sensordata = $sensor->getSensorsForVenue($input);
-             return $sensordata;
+    public function getVenueSensors()
+    {
+        $input = json_decode(\Input::get("sentData"));
+        $sensor = new \Sensor();
+        $sensordata = $sensor->getSensorsForVenue($input);
+        return $sensordata;
     }
 
 
-   
 
-    public function addChapSecretEntry($scannername, $vpnip) {
-        $chapsecentry= file_get_contents('/home/mikrotik/deployment/templates/sensors/chapsecentry');
-        $first = str_replace("scannername", $scannername, $chapsecentry);
-        $second = str_replace("vpnip", $vpnip, $first);
-        $connect = ftp_connect('vpn.hipzone.co.za');
-        $login  = ftp_login($connect, "sensor", "s3ns0r");
-        ftp_pasv($connect, true);
-        ftp_chdir($connect, "/etc/ppp/");
-        $chapsecret = fopen('/home/mikrotik/deployment/templates/sensors/chapsecret', 'a');
-        ftp_fget($connect, $chapsecret, 'chap-secrets', FTP_BINARY);
-        fwrite($chapsecret, $second);
-        fclose($chapsecret);
-        $chapsecret2 = fopen('/home/mikrotik/deployment/templates/sensors/chapsecret', 'r');
-        ftp_fput($connect, 'chap-secrets', $chapsecret2, FTP_BINARY);
-        unlink('/home/mikrotik/deployment/templates/sensors/chapsecret');
-    }
+    // DEPRECATED
+    // public function addChapSecretEntry($scannername, $vpnip)
+    // {
+    //     $chapsecentry = file_get_contents('/home/mikrotik/deployment/templates/sensors/chapsecentry');
+    //     $first = str_replace("scannername", $scannername, $chapsecentry);
+    //     $second = str_replace("vpnip", $vpnip, $first);
+    //     $connect = ftp_connect('vpn.hipzone.co.za');
+    //     $login  = ftp_login($connect, "sensor", "s3ns0r");
+    //     ftp_pasv($connect, true);
+    //     ftp_chdir($connect, "/etc/ppp/");
+    //     $chapsecret = fopen('/home/mikrotik/deployment/templates/sensors/chapsecret', 'a');
+    //     ftp_fget($connect, $chapsecret, 'chap-secrets', FTP_BINARY);
+    //     fwrite($chapsecret, $second);
+    //     fclose($chapsecret);
+    //     $chapsecret2 = fopen('/home/mikrotik/deployment/templates/sensors/chapsecret', 'r');
+    //     ftp_fput($connect, 'chap-secrets', $chapsecret2, FTP_BINARY);
+    //     unlink('/home/mikrotik/deployment/templates/sensors/chapsecret');
+    // }
 
-    public function updateChapSecretEntry($oldscannername, $newscannername){
+    public function updateChapSecretEntry($oldscannername, $newscannername)
+    {
         $connect = ftp_connect('vpn.hipzone.co.za');
         $login  = ftp_login($connect, "sensor", "s3ns0r");
         ftp_pasv($connect, true);
@@ -844,24 +889,25 @@ public function activateVenue($id)
     }
 
 
-    public function createConfigYml ($objReport, $update, $oldmac) {
+    public function createConfigYml($objReport, $update, $oldmac)
+    {
         //This function creates the config.yml and batmanvpn files and then places it on the vpn server from where a sensor will fetch it.
         $venue = new \Venue();
         $vpnip = new \Vpnip();
         $connect = ftp_connect('vpn.hipzone.co.za');
         $login  = ftp_login($connect, "sensor", "s3ns0r");
         ftp_pasv($connect, true);  //add this function if behind firewall.
-        $tempconfigyml = "/home/mikrotik/deployment/templates/sensors/".$objReport->mac . "tempyml";
-        $tempbatman = "/home/mikrotik/deployment/templates/sensors/". $objReport->mac . "tempbatman";
-        
-        if ($update == true){
+        $tempconfigyml = "/home/mikrotik/deployment/templates/sensors/" . $objReport->mac . "tempyml";
+        $tempbatman = "/home/mikrotik/deployment/templates/sensors/" . $objReport->mac . "tempbatman";
+
+        if ($update == true) {
             //dd($oldmac); 
             $filepathyml = "sensors/" . $oldmac . ".yml";
             $filepathvpn = "sensors/" . $oldmac . "vpn";
             $delete = ftp_delete($connect, $filepathyml);
             $delete = ftp_delete($connect, $filepathvpn);
             //dd($delete);
-            
+
         }
         $venueObj = $venue->find($objReport->venue_id);
         $track_slug = $venueObj->track_slug;
@@ -872,31 +918,46 @@ public function activateVenue($id)
         $third = str_replace("wifipassword", $venueObj->track_password, $second);
 
         $fourth = str_replace("queuename", $objReport->queue, $third);
-        $dest = "sensors/".$objReport->mac . ".yml";
+        $dest = "sensors/" . $objReport->mac . ".yml";
         file_put_contents($tempconfigyml, $fourth);
         $createdconfigyml =  fopen($tempconfigyml, 'r');
-       
+
         //modify the batmanvpn file;
-        $batmanvpn = file_get_contents('/home/mikrotik/deployment/templates/sensors/batmanvpn'); 
+        $batmanvpn = file_get_contents('/home/mikrotik/deployment/templates/sensors/batmanvpn');
         $modbatmanvpn = str_replace("scannername", $objReport->name, $batmanvpn);
         file_put_contents($tempbatman, $modbatmanvpn);
-        $createdbatmanvpn=  fopen($tempbatman, 'r');
-        $destbatman = "sensors/".$objReport->mac . "vpn";
+        $createdbatmanvpn =  fopen($tempbatman, 'r');
+        $destbatman = "sensors/" . $objReport->mac . "vpn";
         ftp_fput($connect, $dest, $createdconfigyml, FTP_BINARY);
         ftp_fput($connect, $destbatman, $createdbatmanvpn, FTP_BINARY);
+
+    
+
         ftp_close($connect);
         unlink($tempconfigyml);
         unlink($tempbatman);
-         //dd($third);
+        //dd($third);
 
         //The below line calls the function that creates the chap-secret entry for the sensor on the vpn server.
-        if(!$update){
-        $vpnipaddress = $vpnip->getIpAddress($objReport->vpnip_id);
-        $this->addChapSecretEntry($objReport->name, $vpnipaddress);
-        }
+        // if (!$update) {
+        //     $vpnipaddress = $vpnip->getIpAddress($objReport->vpnip_id);
+        //     $this->addChapSecretEntry($objReport->name, $vpnipaddress);
+        // }
+
     }
 
-     public function deleteScannerMeta ($scannerObj) {
+    public function executeKeyGeneration($track_slug)
+    {
+        $server = "vpn.hipzone.co.za";
+        $username = "sensor";
+        $port = "1759";
+        $command = 'sh /home/sensor/ftp/openvpn/create_keys.bash ' . $track_slug;
+        $cmd_string = "ssh -p " . $port . " " . $username . "@" . $server . " " . $command;
+        exec($cmd_string, $output);
+    }
+
+    public function deleteScannerMeta($scannerObj)
+    {
         $macaddress = $scannerObj->mac;
         $filepathyml = "sensors/" . $macaddress . ".yml";
         $filepathvpn = "sensors/" . $macaddress . "vpn";
@@ -905,7 +966,7 @@ public function activateVenue($id)
         ftp_pasv($connect, true);
         $deleteyml = ftp_delete($connect, $filepathyml);
         $deletevpn = ftp_delete($connect, $filepathvpn);
-        $chapsecentry= file_get_contents('/home/mikrotik/deployment/templates/sensors/chapsecentry');
+        $chapsecentry = file_get_contents('/home/mikrotik/deployment/templates/sensors/chapsecentry');
         $first = str_replace("scannername", $scannerObj->name, $chapsecentry);
         $second = str_replace("vpnip", $scannerObj->vpnip->ip_address, $first);
         $del = fopen('/home/mikrotik/deployment/templates/sensors/chapsecentrydel', 'w');
@@ -927,13 +988,13 @@ public function activateVenue($id)
         unlink('/home/mikrotik/deployment/templates/sensors/chap-secretsdel2');
         $vpnip = new \Vpnip();
         $vpnip->unsetVpnip($scannerObj->id, $scannerObj->vpnip_id);
-     }
+    }
 
 
     public function addSvrScannerdata()
     {
         $objData   = json_decode(\Input::get("newrecord"));
-        $objDataArray = (Array) $objData; //used for the validation piece
+        $objDataArray = (array) $objData; //used for the validation piece
         $objReport = new \Sensor();
         $vpnip = new \Vpnip();
         $vpnip = $vpnip->getVpnip();
@@ -942,24 +1003,26 @@ public function activateVenue($id)
         $track_slug = $venueObj->track_slug;*/
 
         $rules = array(
-           'track_name'  => 'required|alpha_num',
-           'mac'    => 'required|macaddress_format|unique:sensors,mac',
-           'track_min_power' => 'required|integer',
-           'track_max_power' => 'required|integer',
+            'track_name'  => 'required|alpha_num',
+            'mac'    => 'required|macaddress_format|unique:sensors,mac',
+            'track_min_power' => 'required|integer',
+            'track_max_power' => 'required|integer',
         );
 
         $messages = array(
-             'track_name.alpha_num' => 'Please enter name having alphabets and numbers only',
-             'mac.macadress_format' => 'Please enter a correct mac-address',
-             'mac.macadress_format' => 'This mac-address has been used',
-             'track_min_power.integer' => 'Please enter a number for min power',
-             'track_max_power.integer' => 'Please enter a number for max power',
-            );
-        $validator = \Validator::make($objDataArray, $rules, $messages);
-        if($validator->fails()){
-            $message = array('msg' =>$validator->messages(), 'status' => '422');
-             return $message;
-       }
+            'track_name.alpha_num' => 'Please enter name having alphabets and numbers only',
+            'mac.macadress_format' => 'Please enter a correct mac-address',
+            'mac.macadress_format' => 'This mac-address has been used',
+            'track_min_power.integer' => 'Please enter a number for min power',
+            'track_max_power.integer' => 'Please enter a number for max power',
+        );
+// ADDBACKIN
+        // $validator = \Validator::make($objDataArray, $rules, $messages);
+        // if ($validator->fails()) {
+        //     $message = array('msg' => $validator->messages(), 'status' => '422');
+        //     return $message;
+        // }
+
         $objReport->name = $objData->track_name;
         //$objReport->code = 'server_track';
         $objReport->location = $objData->track_location;
@@ -970,98 +1033,106 @@ public function activateVenue($id)
         $objReport->max_power = $objData->track_max_power;
         $objReport->venue_id = $objData->venue_id;
         $objReport->venue_location = $objData->venue_location;
-        
-       $this->createConfigYml($objReport, $update = false, $oldmac = null);
-    
+
+        $this->createConfigYml($objReport, $update = false, $oldmac = null);
+
         $objReport->save();
 
         $this->updateInsertSensorInTrack($objReport);
 
 
-        $lastInsertedID =$objReport->id;
+        $lastInsertedID = $objReport->id;
         $vpnip->setVpnip($objReport->id, $objReport->vpnip_id);
 
-        
-        $reportJson =  \Sensor::where('id',$lastInsertedID)->get();
+
+        $reportJson =  \Sensor::where('id', $lastInsertedID)->get();
         foreach ($reportJson as $value) {
 
-            $rows = '<tr id="row'.$value->id.'"><td>
-                        <input id="track_name'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Name" value="'.$value->name.'">
+            $rows = '<tr id="row' . $value->id . '"><td>
+                        <input id="track_name' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Name" value="' . $value->name . '">
                           </td>
                           <td>
-                            <input id="track_location'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Location" value="'.$value->location.'">
+                            <input id="track_location' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Location" value="' . $value->location . '">
                           </td>
                           <td>
-                            <input id="sensor_mac'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Mac Address" value="'.$value->mac.'">
+                            <input id="sensor_mac' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Mac Address" value="' . $value->mac . '">
                           </td>
                           <td>
-                            <input id="track_queue'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Queue" value="'.$value->queue.'">
+                            <input id="track_queue' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Queue" value="' . $value->queue . '">
                           </td>
                           <td>
-                            <input id="track_min_power'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Min Power" value="'.$value->min_power.'">
+                            <input id="track_min_power' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Min Power" value="' . $value->min_power . '">
                           </td>
                           <td>
-                            <input id="track_max_power'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Max Power" value="'.$value->max_power.'">
+                            <input id="track_max_power' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Max Power" value="' . $value->max_power . '">
                           </td>
                           <td>
-                            <input id="sensor_vpnip'.$value->id.'" class="form-control no-radius" readonly=readonly type="text" required autocomplete="off" placeholder="Max Power" value="'.$value->vpnip->ip_address.'">
+                            <input id="sensor_vpnip' . $value->id . '" class="form-control no-radius" readonly=readonly type="text" required autocomplete="off" placeholder="Max Power" value="' . $value->vpnip->ip_address . '">
                           </td>
 
                           <td width="17%">
-                          <a onclick="updateServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a> 
+                          <a onclick="updateServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a> 
                           </td></tr> ';
         }
-        $data = array('row'=>$rows);
-        print_r(json_encode($data));    
+        $data = array('row' => $rows);
 
+
+        $command = 'ssh  -v -i /var/www/.ssh/id_rsa root@vpn.hipzone.co.za -p 1759 "create_keys ' . $objReport->name . '" 2>&1';
+        // $command = 'pwd';
+        $output = shell_exec($command);
+    
+        // shell_exec($command);
+
+        // print_r(json_encode($data));
+        print_r($output);
     }
 
     public function updateSvrScannerdata()
     {
 
         $objData   = json_decode(\Input::get("newrecord"));
-        $objDataArray = (Array) $objData; //used for the validation piece
-        $objReport =\Sensor::where('id',$objData->updateNum)->first();
-        $oldmac = $objReport->mac; 
+        $objDataArray = (array) $objData; //used for the validation piece
+        $objReport = \Sensor::where('id', $objData->updateNum)->first();
+        $oldmac = $objReport->mac;
         $oldscannername = $objReport->name;
         $rules_mac_diff = array(
-           'track_name'  => 'required|alpha_num',
-           'mac'    => 'required|macaddress_format|unique:sensors,mac',
-           'track_min_power' => 'required|integer',
-           'track_max_power' => 'required|integer',
+            'track_name'  => 'required|alpha_num',
+            'mac'    => 'required|macaddress_format|unique:sensors,mac',
+            'track_min_power' => 'required|integer',
+            'track_max_power' => 'required|integer',
         );
 
         $messages_mac_diff = array(
-             'track_name.alpha_num' => 'Please enter name having alphabets and numbers only',
-             'mac.macadress_format' => 'Please enter a correct mac-address',
-             'mac.unique' => 'This mac-address has been used',
-             'mac.required' => 'Please enter a valid mac-address',
-             'track_min_power.integer' => 'Please enter a number for min power',
-             'track_max_power.integer' => 'Please enter a number for max power',
-            );
+            'track_name.alpha_num' => 'Please enter name having alphabets and numbers only',
+            'mac.macadress_format' => 'Please enter a correct mac-address',
+            'mac.unique' => 'This mac-address has been used',
+            'mac.required' => 'Please enter a valid mac-address',
+            'track_min_power.integer' => 'Please enter a number for min power',
+            'track_max_power.integer' => 'Please enter a number for max power',
+        );
 
         $rules_mac_same = array(
-           'track_name'  => 'required|alpha_num',
-           'track_min_power' => 'required|integer',
-           'track_max_power' => 'required|integer',
+            'track_name'  => 'required|alpha_num',
+            'track_min_power' => 'required|integer',
+            'track_max_power' => 'required|integer',
         );
 
         $messages_mac_same = array(
-             'track_name.alpha_num' => 'Please enter name having alphabets and numbers only',
-             'mac.macadress_format' => 'Please enter a correct mac-address',
-             'track_min_power.integer' => 'Please enter a number for min power',
-             'track_max_power.integer' => 'Please enter a number for max power',
-            );
+            'track_name.alpha_num' => 'Please enter name having alphabets and numbers only',
+            'mac.macadress_format' => 'Please enter a correct mac-address',
+            'track_min_power.integer' => 'Please enter a number for min power',
+            'track_max_power.integer' => 'Please enter a number for max power',
+        );
 
-        if($oldmac == $objData->mac){
+        if ($oldmac == $objData->mac) {
             $validator = \Validator::make($objDataArray, $rules_mac_same, $messages_mac_same);
-        } else{
+        } else {
             $validator = \Validator::make($objDataArray, $rules_mac_diff, $messages_mac_diff);
         }
-        if($validator->fails()){
-            $message = array('msg' =>$validator->messages(), 'status' => '422');
-             return $message;
-       }
+        if ($validator->fails()) {
+            $message = array('msg' => $validator->messages(), 'status' => '422');
+            return $message;
+        }
         $objReport->name = $objData->track_name;
         //$objReport->code = 'server_track';
         $objReport->location = $objData->track_location;
@@ -1073,46 +1144,44 @@ public function activateVenue($id)
         $objReport->venue_location = $objData->venue_location;
 
         $this->createConfigYml($objReport, $update = true, $oldmac);
-        if ($oldscannername != $objData->track_name){
-            $this->updateChapSecretEntry($oldscannername, $objReport->name);
-        }
+        // if ($oldscannername != $objData->track_name) {
+        //     $this->updateChapSecretEntry($oldscannername, $objReport->name);
+        // }
         $save = $objReport->save();
 
 
-        if($save){
+        if ($save) {
             $this->updateInsertSensorInTrack($objReport);
-            $lastInsertedID =$objData->updateNum; //$objReport->id;
-            
-            $reportJson =  \Sensor::where('id',$lastInsertedID)->get();
+            $lastInsertedID = $objData->updateNum; //$objReport->id;
+
+            $reportJson =  \Sensor::where('id', $lastInsertedID)->get();
             foreach ($reportJson as $value) {
 
-                $rows = '<tr id="row'.$value->id.'"><td>
-                            <input id="track_name'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Name" value="'.$value->name.'">
+                $rows = '<tr id="row' . $value->id . '"><td>
+                            <input id="track_name' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Name" value="' . $value->name . '">
                           </td>
                           <td>
-                            <input id="track_location'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Location" value="'.$value->location.'">
+                            <input id="track_location' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Location" value="' . $value->location . '">
                           </td>
                           <td>
-                            <input id="sensor_mac'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Mac Address" value="">
+                            <input id="sensor_mac' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Mac Address" value="">
                           </td>
                           <td>
-                            <input id="track_queue'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Queue" value="'.$value->queue.'">
+                            <input id="track_queue' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Queue" value="' . $value->queue . '">
                           </td>
                           <td>
-                            <input id="track_min_power'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Min Power" value="'.$value->min_power.'">
+                            <input id="track_min_power' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Min Power" value="' . $value->min_power . '">
                           </td>
                           <td>
-                            <input id="track_max_power'.$value->id.'" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Max Power" value="'.$value->max_power.'">
+                            <input id="track_max_power' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Max Power" value="' . $value->max_power . '">
                           </td>
                           <td width="17%">
-                          <a onclick="updateServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow('.$value->id.');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a> 
+                          <a onclick="updateServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a> 
                           </td></tr> ';
             }
         }
-        $data = array('row'=>$rows);
-        print_r(json_encode($data));    
-
-
+        $data = array('row' => $rows);
+        print_r(json_encode($data));
     }
 
     public function deleteSvrScannerdata()
@@ -1123,9 +1192,9 @@ public function activateVenue($id)
         $this->deleteScannerMeta($objData);
         $delete = $objData->delete();
         $vpnip = new \Vpnip();
-        
 
-        if($delete){
+
+        if ($delete) {
 
             $this->deleteSensorInTrack($objData);
             // Delete from track
@@ -1134,9 +1203,8 @@ public function activateVenue($id)
             $msg = 'not';
         }
 
-        $data = array('msg'=>$msg);
-        print_r(json_encode($data));    
-
+        $data = array('msg' => $msg);
+        print_r(json_encode($data));
     }
 
     public function showProspects()
@@ -1170,7 +1238,8 @@ public function activateVenue($id)
 
 
 
-    public function testApi() {
+    public function testApi()
+    {
 
         $data = array();
 
@@ -1187,7 +1256,7 @@ public function activateVenue($id)
         ));
         error_log("HipjamController : HipjamController : 15");
 
-        $data['getresponse'] = curl_exec($ch);// json_encode(curl_exec($ch));
+        $data['getresponse'] = curl_exec($ch); // json_encode(curl_exec($ch));
         error_log("HipjamController : HipjamController : 20 " . $data['getresponse']);
 
 
@@ -1238,7 +1307,7 @@ public function activateVenue($id)
         $brand_id = $venue->brand_id;
         $remotedb_id = \Brand::find($brand_id)->remotedb_id;
 
-        if($venue) {
+        if ($venue) {
             $venue->delete();
             $venue->deleteVenueInRadius($venue, $remotedb_id);
             $mikrotik = new \Mikrotik();
@@ -1249,7 +1318,7 @@ public function activateVenue($id)
     }
 
 
-    public function viewVenue($json = null,$name = null)
+    public function viewVenue($json = null, $name = null)
     {
         /*$data = array();
         //$data['edit'] = false;
@@ -1270,13 +1339,13 @@ public function activateVenue($id)
         $data['currentMenuItem'] = "Dashboard";
         $data['apisitename'] = $name;
         $data['apivenueid'] = $json;
-        $venue = \DB::table('venues')->select("sitename","location","track_slug")->where('id', '=', $json)->first(); 
+        $venue = \DB::table('venues')->select("sitename", "location", "track_slug")->where('id', '=', $json)->first();
         $data['venue'] = $venue->sitename;
         $data['track_slugname'] = $venue->track_slug;
         //$data['location'] = $venue->location;
 
         $assetsdiry = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
-        $data['fullpathimage'] = $assetsdiry->value.'track/images/'.$venue->location.'.jpg';
+        $data['fullpathimage'] = $assetsdiry->value . 'track/images/' . $venue->location . '.jpg';
         // $venues = \Venue::all();
         /*$venue = new \Venue();
         $venues = $venue->getVenuesForUser('hipjam', 1);//print_r($venues); die();
@@ -1302,10 +1371,10 @@ public function activateVenue($id)
             return \Response::json($data['venuesJson']);
 
         } else {*/
-            error_log("showDashboard : returning NON json" );
-            //return \View::make('hipjam.showvenues')->with('data', $data);
-            return \View::make('hipjam.viewvenue')->with('data', $data);
-            //return \Redirect::route('hipjam_showdashboard', ['json' => 1]);
+        error_log("showDashboard : returning NON json");
+        //return \View::make('hipjam.showvenues')->with('data', $data);
+        return \View::make('hipjam.viewvenue')->with('data', $data);
+        //return \Redirect::route('hipjam_showdashboard', ['json' => 1]);
 
         /*}*/
     }
@@ -1317,19 +1386,19 @@ public function activateVenue($id)
         $scanner_type = Input::get('scanner_type');
         $venue = Input::get('venue');
         $domain = Input::get('domain');
-        $brand_id = \Venue::where('track_slug', '=' , $venue)->first()->brand_id;
-        $venue_id = \Venue::where('track_slug', '=' , $venue)->first()->id;
+        $brand_id = \Venue::where('track_slug', '=', $venue)->first()->brand_id;
+        $venue_id = \Venue::where('track_slug', '=', $venue)->first()->id;
         $min_session = \Brand::find($brand_id)->min_session_length;
         $max_session = \Brand::find($brand_id)->max_session_length;
 
-        $json_url = "http://".$domain."/aggregate/".$venue_id."?period=".$period . "&max_session=" . $max_session . "&min_session=" . $min_session;
+        $json_url = "http://" . $domain . "/aggregate/" . $venue_id . "?period=" . $period . "&max_session=" . $max_session . "&min_session=" . $min_session;
         error_log("chartJsondata : json_url = $json_url");
         $json = file_get_contents($json_url);
 
         print_r($json);
-
     }
-    public function heatmapJsondata(){
+    public function heatmapJsondata()
+    {
         $period = Input::get('period');
         $scanner_type = Input::get('scanner_type');
         $domain = Input::get('domain');
@@ -1337,7 +1406,7 @@ public function activateVenue($id)
         //$scanners = \Heatmap::getHeatmapscanners();//getting number of scanners and their co-ordinates from lib Heatmap. we can edit the values directly at any point with each background image of heatmap .
         $venue = Input::get('venue');
         $venue_id = Input::get('venue_id');
-        $brand_id = \Venue::where('id', '=' , $venue_id)->first()->brand_id;
+        $brand_id = \Venue::where('id', '=', $venue_id)->first()->brand_id;
         $min_session = \Brand::find($brand_id)->min_session_length;
         $max_session = \Brand::find($brand_id)->max_session_length;
         error_log("heatmapJsondata min_session = $min_session");
@@ -1371,10 +1440,10 @@ public function activateVenue($id)
             // Make call to the Track server using $venue, $scanner->name, $period, $domain
 
 
-            if($period != 'custom'){
-                $json_url = "http://".$domain."/aggregate/".$venue."?period=".$period."&min_session=" . $min_session . "&max_session=" . $max_session . "&scanner=".$scanner['name'];
+            if ($period != 'custom') {
+                $json_url = "http://" . $domain . "/aggregate/" . $venue . "?period=" . $period . "&min_session=" . $min_session . "&max_session=" . $max_session . "&scanner=" . $scanner['name'];
             } else {
-                $json_url = "http://".$domain."/venues/".$venue."?period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'&min_session=" . $min_session . "&max_session=" . $max_session . "&scanner=".$scanner['name'];
+                $json_url = "http://" . $domain . "/venues/" . $venue . "?period=custom&start='" . Input::get('start') . "'&end='" . Input::get('end') . "'&min_session=" . $min_session . "&max_session=" . $max_session . "&scanner=" . $scanner['name'];
             }
 
             // $json_url = "http://tracks03.hipzone.co.za/aggregate/1270?period=this_month&scanner=30";
@@ -1384,27 +1453,26 @@ public function activateVenue($id)
             #$testdata = $period."_test_data";
             #$json = $this->$testdata();//file_get_contents($json_url);
             #END TESTDATA
-            
+
             $json = file_get_contents($json_url);
             error_log("heatmapJsondata json = $json");
-            $jsonarray = json_decode($json, true); 
+            $jsonarray = json_decode($json, true);
 
             // $name = $jsonarray['scanners'][0]['location'];
             $count = $jsonarray['total']['total'];
             $x = $scanner["xcoord"];
             $y = $scanner["ycoord"];
-            if($count > $max) $max = $count;
+            if ($count > $max) $max = $count;
             foreach ($jsonarray['total']['trends']['hours'] as $key => $value) {
-                if ($value['hour']==$hour) {
-                    $scannerMapRecord = array("hr"=>$value['hour'], "x"=>$x, "y"=>$y, "count"=>$value['average_session']);
+                if ($value['hour'] == $hour) {
+                    $scannerMapRecord = array("hr" => $value['hour'], "x" => $x, "y" => $y, "count" => $value['average_session']);
                     array_push($mapData, $scannerMapRecord);
                 }
             }
-
         }
 
         // create array 
-        $returnArray = array("max"=>$max, "data"=>$mapData);
+        $returnArray = array("max" => $max, "data" => $mapData);
         $retrnJson = json_encode($returnArray);
         $retrnJson = str_replace('"', '', $retrnJson);
         error_log("heatmapJsondata : retrnJson = $retrnJson");
@@ -1414,7 +1482,8 @@ public function activateVenue($id)
         return \Response::json($returnArray);
         // print_r($retrn);  // die();
     }
-    public function today_test_data(){
+    public function today_test_data()
+    {
         $result = [
             "id" => "Spar_Algoa",
             "name" => "Spar Algoa01",
@@ -1423,148 +1492,149 @@ public function activateVenue($id)
             "coordinates" => null,
             "timezone" => "Africa/Johannesburg",
             "scanners" => [
-              [
-                "id" => "sparalgoa01",
-                "updated_at" => "2018-03-08T23 =>58 =>53.000+02 =>00",
-                "location" => "Entrance",
-                "type" => null
-              ]
+                [
+                    "id" => "sparalgoa01",
+                    "updated_at" => "2018-03-08T23 =>58 =>53.000+02 =>00",
+                    "location" => "Entrance",
+                    "type" => null
+                ]
             ],
             "period" => [
-              "start" => "2018-03-08T00 =>00 =>00.000+02 =>00",
-              "end" => "2018-03-09T00 =>00 =>00.000+02 =>00"
+                "start" => "2018-03-08T00 =>00 =>00.000+02 =>00",
+                "end" => "2018-03-09T00 =>00 =>00.000+02 =>00"
             ],
             "total" => [
-              "total" => 94,
-              "new" => 7,
-              "average_session" => 13,
-              "engaged_customers" => null,
-              "window_conversion" => 13,
-              "previous_period" => [
-                "total" => 121,
-                "new" => 12,
-                "average_session" => 12,
+                "total" => 94,
+                "new" => 7,
+                "average_session" => 13,
                 "engaged_customers" => null,
-                "window_conversion" => 12,
-                "change" => [
-                  "total" => -27,
-                  "new" => -5,
-                  "average_session" => 1,
-                  "engaged_customers" => 0,
-                  "window_conversion" => 1
+                "window_conversion" => 13,
+                "previous_period" => [
+                    "total" => 121,
+                    "new" => 12,
+                    "average_session" => 12,
+                    "engaged_customers" => null,
+                    "window_conversion" => 12,
+                    "change" => [
+                        "total" => -27,
+                        "new" => -5,
+                        "average_session" => 1,
+                        "engaged_customers" => 0,
+                        "window_conversion" => 1
+                    ]
+                ],
+                "trends" => [
+                    "hours" => [
+                        [
+                            "hour" => 3,
+                            "total" => 1,
+                            "new" => 0,
+                            "average_session" => 2
+                        ],
+                        [
+                            "hour" => 4,
+                            "total" => 2,
+                            "new" => 0,
+                            "average_session" => 100
+                        ],
+                        [
+                            "hour" => 5,
+                            "total" => 5,
+                            "new" => 0,
+                            "average_session" => 6
+                        ],
+                        [
+                            "hour" => 6,
+                            "total" => 8,
+                            "new" => 0,
+                            "average_session" => 1
+                        ],
+                        [
+                            "hour" => 7,
+                            "total" => 7,
+                            "new" => 1,
+                            "average_session" => 100
+                        ],
+                        [
+                            "hour" => 8,
+                            "total" => 8,
+                            "new" => 1,
+                            "average_session" => 12
+                        ],
+                        [
+                            "hour" => 9,
+                            "total" => 5,
+                            "new" => 1,
+                            "average_session" => 23
+                        ],
+                        [
+                            "hour" => 10,
+                            "total" => 6,
+                            "new" => 0,
+                            "average_session" => 7
+                        ],
+                        [
+                            "hour" => 11,
+                            "total" => 6,
+                            "new" => 0,
+                            "average_session" => 14
+                        ],
+                        [
+                            "hour" => 12,
+                            "total" => 10,
+                            "new" => 1,
+                            "average_session" => 15
+                        ],
+                        [
+                            "hour" => 13,
+                            "total" => 4,
+                            "new" => 0,
+                            "average_session" => 12
+                        ],
+                        [
+                            "hour" => 14,
+                            "total" => 9,
+                            "new" => 0,
+                            "average_session" => 11
+                        ],
+                        [
+                            "hour" => 15,
+                            "total" => 17,
+                            "new" => 0,
+                            "average_session" => 11
+                        ],
+                        [
+                            "hour" => 16,
+                            "total" => 10,
+                            "new" => 1,
+                            "average_session" => 13
+                        ],
+                        [
+                            "hour" => 17,
+                            "total" => 12,
+                            "new" => 1,
+                            "average_session" => 250
+                        ],
+                        [
+                            "hour" => 18,
+                            "total" => 8,
+                            "new" => 0,
+                            "average_session" => 8
+                        ],
+                        [
+                            "hour" => 19,
+                            "total" => 2,
+                            "new" => 1,
+                            "average_session" => 12
+                        ]
+                    ]
                 ]
-              ],
-              "trends" => [
-                "hours" => [
-                  [
-                    "hour" => 3,
-                    "total" => 1,
-                    "new" => 0,
-                    "average_session" => 2
-                  ],
-                  [
-                    "hour" => 4,
-                    "total" => 2,
-                    "new" => 0,
-                    "average_session" => 100
-                  ],
-                  [
-                    "hour" => 5,
-                    "total" => 5,
-                    "new" => 0,
-                    "average_session" => 6
-                  ],
-                  [
-                    "hour" => 6,
-                    "total" => 8,
-                    "new" => 0,
-                    "average_session" => 1
-                  ],
-                  [
-                    "hour" => 7,
-                    "total" => 7,
-                    "new" => 1,
-                    "average_session" => 100
-                  ],
-                  [
-                    "hour" => 8,
-                    "total" => 8,
-                    "new" => 1,
-                    "average_session" => 12
-                  ],
-                  [
-                    "hour" => 9,
-                    "total" => 5,
-                    "new" => 1,
-                    "average_session" => 23
-                  ],
-                  [
-                    "hour" => 10,
-                    "total" => 6,
-                    "new" => 0,
-                    "average_session" => 7
-                  ],
-                  [
-                    "hour" => 11,
-                    "total" => 6,
-                    "new" => 0,
-                    "average_session" => 14
-                  ],
-                  [
-                    "hour" => 12,
-                    "total" => 10,
-                    "new" => 1,
-                    "average_session" => 15
-                  ],
-                  [
-                    "hour" => 13,
-                    "total" => 4,
-                    "new" => 0,
-                    "average_session" => 12
-                  ],
-                  [
-                    "hour" => 14,
-                    "total" => 9,
-                    "new" => 0,
-                    "average_session" => 11
-                  ],
-                  [
-                    "hour" => 15,
-                    "total" => 17,
-                    "new" => 0,
-                    "average_session" => 11
-                  ],
-                  [
-                    "hour" => 16,
-                    "total" => 10,
-                    "new" => 1,
-                    "average_session" => 13
-                  ],
-                  [
-                    "hour" => 17,
-                    "total" => 12,
-                    "new" => 1,
-                    "average_session" => 250
-                  ],
-                  [
-                    "hour" => 18,
-                    "total" => 8,
-                    "new" => 0,
-                    "average_session" => 8
-                  ],
-                  [
-                    "hour" => 19,
-                    "total" => 2,
-                    "new" => 1,
-                    "average_session" => 12
-                  ]
-                ]
-              ]
             ]
-                  ];
-          return json_encode($result);
+        ];
+        return json_encode($result);
     }
-    public function month_test_data(){
+    public function month_test_data()
+    {
         $result = [
             "id" => "Spar_Algoa",
             "name" => "Spar Algoa01",
@@ -1573,339 +1643,340 @@ public function activateVenue($id)
             "coordinates" => null,
             "timezone" => "Africa/Johannesburg",
             "scanners" => [
-              
+
                 "id" => "sparalgoa01",
                 "updated_at" => "2018-03-08T11:36:12.000+02:00",
                 "location" => "Entrance",
                 "type" => null
-              
+
             ],
             "period" => [
-              "start" => "2018-02-01T00:00:00.000+02:00",
-              "end" => "2018-03-01T00:00:00.000+02:00"
+                "start" => "2018-02-01T00:00:00.000+02:00",
+                "end" => "2018-03-01T00:00:00.000+02:00"
             ],
             "total" => [
-              "total" => 1120,
-              "new" => 305,
-              "average_session" => 15,
-              "engaged_customers" => null,
-              "window_conversion" => 9,
-              "previous_period" => [
-                "total" => 11,
-                "new" => 0,
-                "average_session" => 53,
+                "total" => 1120,
+                "new" => 305,
+                "average_session" => 15,
                 "engaged_customers" => null,
-                "window_conversion" => 52,
-                "change" => [
-                  "total" => 1109,
-                  "new" => 305,
-                  "average_session" => -38,
-                  "engaged_customers" => 0,
-                  "window_conversion" => -43
-                ]
-            ],
-              "trends" => [
-                "hours" => [
-                  [
-                    "hour" => 0,
-                    "total" => 2,
+                "window_conversion" => 9,
+                "previous_period" => [
+                    "total" => 11,
                     "new" => 0,
-                    "average_session" => 110
-                  ],
-                  [
-                    "hour" => 1,
-                    "total" => 2,
-                    "new" => 0,
-                    "average_session" => 35
-                  ],
-                  [
-                    "hour" => 2,
-                    "total" => 3,
-                    "new" => 0,
-                    "average_session" => 1
-                  ],
-                  [
-                    "hour" => 3,
-                    "total" => 7,
-                    "new" => 1,
-                    "average_session" => 59
-                  ],
-                  [
-                    "hour" => 4,
-                    "total" => 31,
-                    "new" => 3,
-                    "average_session" => 18
-                  ],
-                  [
-                    "hour" => 5,
-                    "total" => 46,
-                    "new" => 5,
-                    "average_session" => 21
-                  ],
-                  [
-                    "hour" => 6,
-                    "total" => 79,
-                    "new" => 20,
-                    "average_session" => 23
-                  ],
-                  [
-                    "hour" => 7,
-                    "total" => 86,
-                    "new" => 15,
-                    "average_session" => 18
-                  ],
-                  [
-                    "hour" => 8,
-                    "total" => 111,
-                    "new" => 14,
-                    "average_session" => 16
-                  ],
-                  [
-                    "hour" => 9,
-                    "total" => 118,
-                    "new" => 18,
-                    "average_session" => 14
-                  ],
-                  [
-                    "hour" => 10,
-                    "total" => 95,
-                    "new" => 21,
-                    "average_session" => 15
-                  ],
-                  [
-                    "hour" => 11,
-                    "total" => 121,
-                    "new" => 25,
-                    "average_session" => 10
-                  ],
-                  [
-                    "hour" => 12,
-                    "total" => 99,
-                    "new" => 23,
-                    "average_session" => 17
-                  ],
-                  [
-                    "hour" => 13,
-                    "total" => 122,
-                    "new" => 22,
-                    "average_session" => 15
-                  ],
-                  [
-                    "hour" => 14,
-                    "total" => 152,
-                    "new" => 23,
-                    "average_session" => 10
-                  ],
-                  [
-                    "hour" => 15,
-                    "total" => 193,
-                    "new" => 37,
-                    "average_session" => 9
-                  ],
-                  [
-                    "hour" => 16,
-                    "total" => 141,
-                    "new" => 38,
-                    "average_session" => 7
-                  ],
-                  [
-                    "hour" => 17,
-                    "total" => 108,
-                    "new" => 20,
-                    "average_session" => 250
-                  ],
-                  [
-                    "hour" => 18,
-                    "total" => 71,
-                    "new" => 17,
-                    "average_session" => 15
-                  ],
-                  [
-                    "hour" => 19,
-                    "total" => 29,
-                    "new" => 3,
-                    "average_session" => 310
-                  ],
-                  [
-                    "hour" => 20,
-                    "total" => 3,
-                    "new" => 0,
-                    "average_session" => 67
-                  ],
-                  [
-                    "hour" => 21,
-                    "total" => 2,
-                    "new" => 0,
-                    "average_session" => 510
-                  ],
-                  [
-                    "hour" => 22,
-                    "total" => 1,
-                    "new" => 0,
-                    "average_session" => 68
-                  ],
-                  [
-                    "hour" => 23,
-                    "total" => 2,
-                    "new" => 0,
-                    "average_session" => 55
-                  ]
+                    "average_session" => 53,
+                    "engaged_customers" => null,
+                    "window_conversion" => 52,
+                    "change" => [
+                        "total" => 1109,
+                        "new" => 305,
+                        "average_session" => -38,
+                        "engaged_customers" => 0,
+                        "window_conversion" => -43
+                    ]
                 ],
-                "dates" => [
-                  [
-                    "date" => "2018-02-12",
-                    "total" => 55,
-                    "new" => 9,
-                    "average_session" => 13
-                  ],
-                  [
-                    "date" => "2018-02-13",
-                    "total" => 95,
-                    "new" => 30,
-                    "average_session" => 13
-                  ],
-                  [
-                    "date" => "2018-02-14",
-                    "total" => 87,
-                    "new" => 18,
-                    "average_session" => 19
-                  ],
-                  [
-                    "date" => "2018-02-15",
-                    "total" => 97,
-                    "new" => 19,
-                    "average_session" => 18
-                  ],
-                  [
-                    "date" => "2018-02-16",
-                    "total" => 102,
-                    "new" => 11,
-                    "average_session" => 18
-                  ],
-                  [
-                    "date" => "2018-02-17",
-                    "total" => 101,
-                    "new" => 21,
-                    "average_session" => 11
-                  ],
-                  [
-                    "date" => "2018-02-18",
-                    "total" => 79,
-                    "new" => 8,
-                    "average_session" => 11
-                  ],
-                  [
-                    "date" => "2018-02-19",
-                    "total" => 70,
-                    "new" => 13,
-                    "average_session" => 21
-                  ],
-                  [
-                    "date" => "2018-02-20",
-                    "total" => 80,
-                    "new" => 10,
-                    "average_session" => 13
-                  ],
-                  [
-                    "date" => "2018-02-21",
-                    "total" => 90,
-                    "new" => 16,
-                    "average_session" => 19
-                  ],
-                  [
-                    "date" => "2018-02-22",
-                    "total" => 78,
-                    "new" => 12,
-                    "average_session" => 16
-                  ],
-                  [
-                    "date" => "2018-02-23",
-                    "total" => 133,
-                    "new" => 30,
-                    "average_session" => 9
-                  ],
-                  [
-                    "date" => "2018-02-24",
-                    "total" => 124,
-                    "new" => 29,
-                    "average_session" => 11
-                  ],
-                  [
-                    "date" => "2018-02-25",
-                    "total" => 88,
-                    "new" => 26,
-                    "average_session" => 12
-                  ],
-                  [
-                    "date" => "2018-02-26",
-                    "total" => 96,
-                    "new" => 16,
-                    "average_session" => 18
-                  ],
-                  [
-                    "date" => "2018-02-27",
-                    "total" => 126,
-                    "new" => 19,
-                    "average_session" => 20
-                  ],
-                  [
-                    "date" => "2018-02-28",
-                    "total" => 126,
-                    "new" => 18,
-                    "average_session" => 12
-                  ]
-                ],
-                "weekdays" => [
-                  [
-                    "weekday" => "Friday",
-                    "total" => 220,
-                    "new" => 41,
-                    "average_session" => 13
-                  ],
-                  [
-                    "weekday" => "Monday",
-                    "total" => 197,
-                    "new" => 38,
-                    "average_session" => 18
-                  ],
-                  [
-                    "weekday" => "Saturday",
-                    "total" => 216,
-                    "new" => 50,
-                    "average_session" => 11
-                  ],
-                  [
-                    "weekday" => "Sunday",
-                    "total" => 163,
-                    "new" => 34,
-                    "average_session" => 12
-                  ],
-                  [
-                    "weekday" => "Thursday",
-                    "total" => 162,
-                    "new" => 31,
-                    "average_session" => 17
-                  ],
-                  [
-                    "weekday" => "Tuesday",
-                    "total" => 271,
-                    "new" => 59,
-                    "average_session" => 16
-                  ],
-                  [
-                    "weekday" => "Wednesday",
-                    "total" => 268,
-                    "new" => 52,
-                    "average_session" => 16
-                  ]
+                "trends" => [
+                    "hours" => [
+                        [
+                            "hour" => 0,
+                            "total" => 2,
+                            "new" => 0,
+                            "average_session" => 110
+                        ],
+                        [
+                            "hour" => 1,
+                            "total" => 2,
+                            "new" => 0,
+                            "average_session" => 35
+                        ],
+                        [
+                            "hour" => 2,
+                            "total" => 3,
+                            "new" => 0,
+                            "average_session" => 1
+                        ],
+                        [
+                            "hour" => 3,
+                            "total" => 7,
+                            "new" => 1,
+                            "average_session" => 59
+                        ],
+                        [
+                            "hour" => 4,
+                            "total" => 31,
+                            "new" => 3,
+                            "average_session" => 18
+                        ],
+                        [
+                            "hour" => 5,
+                            "total" => 46,
+                            "new" => 5,
+                            "average_session" => 21
+                        ],
+                        [
+                            "hour" => 6,
+                            "total" => 79,
+                            "new" => 20,
+                            "average_session" => 23
+                        ],
+                        [
+                            "hour" => 7,
+                            "total" => 86,
+                            "new" => 15,
+                            "average_session" => 18
+                        ],
+                        [
+                            "hour" => 8,
+                            "total" => 111,
+                            "new" => 14,
+                            "average_session" => 16
+                        ],
+                        [
+                            "hour" => 9,
+                            "total" => 118,
+                            "new" => 18,
+                            "average_session" => 14
+                        ],
+                        [
+                            "hour" => 10,
+                            "total" => 95,
+                            "new" => 21,
+                            "average_session" => 15
+                        ],
+                        [
+                            "hour" => 11,
+                            "total" => 121,
+                            "new" => 25,
+                            "average_session" => 10
+                        ],
+                        [
+                            "hour" => 12,
+                            "total" => 99,
+                            "new" => 23,
+                            "average_session" => 17
+                        ],
+                        [
+                            "hour" => 13,
+                            "total" => 122,
+                            "new" => 22,
+                            "average_session" => 15
+                        ],
+                        [
+                            "hour" => 14,
+                            "total" => 152,
+                            "new" => 23,
+                            "average_session" => 10
+                        ],
+                        [
+                            "hour" => 15,
+                            "total" => 193,
+                            "new" => 37,
+                            "average_session" => 9
+                        ],
+                        [
+                            "hour" => 16,
+                            "total" => 141,
+                            "new" => 38,
+                            "average_session" => 7
+                        ],
+                        [
+                            "hour" => 17,
+                            "total" => 108,
+                            "new" => 20,
+                            "average_session" => 250
+                        ],
+                        [
+                            "hour" => 18,
+                            "total" => 71,
+                            "new" => 17,
+                            "average_session" => 15
+                        ],
+                        [
+                            "hour" => 19,
+                            "total" => 29,
+                            "new" => 3,
+                            "average_session" => 310
+                        ],
+                        [
+                            "hour" => 20,
+                            "total" => 3,
+                            "new" => 0,
+                            "average_session" => 67
+                        ],
+                        [
+                            "hour" => 21,
+                            "total" => 2,
+                            "new" => 0,
+                            "average_session" => 510
+                        ],
+                        [
+                            "hour" => 22,
+                            "total" => 1,
+                            "new" => 0,
+                            "average_session" => 68
+                        ],
+                        [
+                            "hour" => 23,
+                            "total" => 2,
+                            "new" => 0,
+                            "average_session" => 55
+                        ]
+                    ],
+                    "dates" => [
+                        [
+                            "date" => "2018-02-12",
+                            "total" => 55,
+                            "new" => 9,
+                            "average_session" => 13
+                        ],
+                        [
+                            "date" => "2018-02-13",
+                            "total" => 95,
+                            "new" => 30,
+                            "average_session" => 13
+                        ],
+                        [
+                            "date" => "2018-02-14",
+                            "total" => 87,
+                            "new" => 18,
+                            "average_session" => 19
+                        ],
+                        [
+                            "date" => "2018-02-15",
+                            "total" => 97,
+                            "new" => 19,
+                            "average_session" => 18
+                        ],
+                        [
+                            "date" => "2018-02-16",
+                            "total" => 102,
+                            "new" => 11,
+                            "average_session" => 18
+                        ],
+                        [
+                            "date" => "2018-02-17",
+                            "total" => 101,
+                            "new" => 21,
+                            "average_session" => 11
+                        ],
+                        [
+                            "date" => "2018-02-18",
+                            "total" => 79,
+                            "new" => 8,
+                            "average_session" => 11
+                        ],
+                        [
+                            "date" => "2018-02-19",
+                            "total" => 70,
+                            "new" => 13,
+                            "average_session" => 21
+                        ],
+                        [
+                            "date" => "2018-02-20",
+                            "total" => 80,
+                            "new" => 10,
+                            "average_session" => 13
+                        ],
+                        [
+                            "date" => "2018-02-21",
+                            "total" => 90,
+                            "new" => 16,
+                            "average_session" => 19
+                        ],
+                        [
+                            "date" => "2018-02-22",
+                            "total" => 78,
+                            "new" => 12,
+                            "average_session" => 16
+                        ],
+                        [
+                            "date" => "2018-02-23",
+                            "total" => 133,
+                            "new" => 30,
+                            "average_session" => 9
+                        ],
+                        [
+                            "date" => "2018-02-24",
+                            "total" => 124,
+                            "new" => 29,
+                            "average_session" => 11
+                        ],
+                        [
+                            "date" => "2018-02-25",
+                            "total" => 88,
+                            "new" => 26,
+                            "average_session" => 12
+                        ],
+                        [
+                            "date" => "2018-02-26",
+                            "total" => 96,
+                            "new" => 16,
+                            "average_session" => 18
+                        ],
+                        [
+                            "date" => "2018-02-27",
+                            "total" => 126,
+                            "new" => 19,
+                            "average_session" => 20
+                        ],
+                        [
+                            "date" => "2018-02-28",
+                            "total" => 126,
+                            "new" => 18,
+                            "average_session" => 12
+                        ]
+                    ],
+                    "weekdays" => [
+                        [
+                            "weekday" => "Friday",
+                            "total" => 220,
+                            "new" => 41,
+                            "average_session" => 13
+                        ],
+                        [
+                            "weekday" => "Monday",
+                            "total" => 197,
+                            "new" => 38,
+                            "average_session" => 18
+                        ],
+                        [
+                            "weekday" => "Saturday",
+                            "total" => 216,
+                            "new" => 50,
+                            "average_session" => 11
+                        ],
+                        [
+                            "weekday" => "Sunday",
+                            "total" => 163,
+                            "new" => 34,
+                            "average_session" => 12
+                        ],
+                        [
+                            "weekday" => "Thursday",
+                            "total" => 162,
+                            "new" => 31,
+                            "average_session" => 17
+                        ],
+                        [
+                            "weekday" => "Tuesday",
+                            "total" => 271,
+                            "new" => 59,
+                            "average_session" => 16
+                        ],
+                        [
+                            "weekday" => "Wednesday",
+                            "total" => 268,
+                            "new" => 52,
+                            "average_session" => 16
+                        ]
+                    ]
                 ]
-              ]
             ]
         ];
         return json_encode($result);
     }
     //fetching data to create heatmap
-    public function heatmapJsondata__() {
+    public function heatmapJsondata__()
+    {
 
 
         $period = Input::get('period');
@@ -1925,13 +1996,13 @@ public function activateVenue($id)
         $venue = 1270;
 
         $scanners = array();
-        array_push($scanners, array("id"=>28, "xcoord"=>28, "ycoord"=>100));
-        array_push($scanners, array("id"=>29, "xcoord"=>100, "ycoord"=>100));
-        array_push($scanners, array("id"=>30, "xcoord"=>50, "ycoord"=>300));
-        array_push($scanners, array("id"=>31, "xcoord"=>200, "ycoord"=>100));
-        array_push($scanners, array("id"=>32, "xcoord"=>150, "ycoord"=>150));
-        array_push($scanners, array("id"=>33, "xcoord"=>800, "ycoord"=>400));
-        array_push($scanners, array("id"=>34, "xcoord"=>375, "ycoord"=>375));
+        array_push($scanners, array("id" => 28, "xcoord" => 28, "ycoord" => 100));
+        array_push($scanners, array("id" => 29, "xcoord" => 100, "ycoord" => 100));
+        array_push($scanners, array("id" => 30, "xcoord" => 50, "ycoord" => 300));
+        array_push($scanners, array("id" => 31, "xcoord" => 200, "ycoord" => 100));
+        array_push($scanners, array("id" => 32, "xcoord" => 150, "ycoord" => 150));
+        array_push($scanners, array("id" => 33, "xcoord" => 800, "ycoord" => 400));
+        array_push($scanners, array("id" => 34, "xcoord" => 375, "ycoord" => 375));
 
         // TEST DATA END
 
@@ -1941,34 +2012,33 @@ public function activateVenue($id)
             // Make call to the Track server using $venue, $scanner->name, $period, $domain
 
 
-            if($period != 'custom'){
-                $json_url = "http://".$domain."/aggregate/".$venue."?period=".$period."&min_session=5&max_session=60&scanner=".$scanner['id'];
+            if ($period != 'custom') {
+                $json_url = "http://" . $domain . "/aggregate/" . $venue . "?period=" . $period . "&min_session=5&max_session=60&scanner=" . $scanner['id'];
             } else {
-                $json_url = "http://".$domain."/venues/".$venue."?period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'&min_session=5&max_session=60&scanner=".$scanner['id'];
+                $json_url = "http://" . $domain . "/venues/" . $venue . "?period=custom&start='" . Input::get('start') . "'&end='" . Input::get('end') . "'&min_session=5&max_session=60&scanner=" . $scanner['id'];
             }
 
             // $json_url = "http://tracks03.hipzone.co.za/aggregate/1270?period=this_month&scanner=30";
             error_log("heatmapJsondata json_url = $json_url");
             $json = file_get_contents($json_url);
             error_log("heatmapJsondata json = $json");
-            $jsonarray = json_decode($json, true); 
+            $jsonarray = json_decode($json, true);
 
             // $name = $jsonarray['scanners'][0]['location'];
             $count = $jsonarray['total']['total'];
             error_log("heatmapJsondata count = $count");
 
-            if($count > $max) $max = $count;
+            if ($count > $max) $max = $count;
 
             // // create a $scannerMapRecord record:
             $x = $scanner["xcoord"];
             $y = $scanner["ycoord"];
-            $scannerMapRecord = array("x"=>$x, "y"=>$y, "count"=>$count);
+            $scannerMapRecord = array("x" => $x, "y" => $y, "count" => $count);
             array_push($mapData, $scannerMapRecord);
-
         }
 
         // create array 
-        $returnArray = array("max"=>$max, "data"=>$mapData);
+        $returnArray = array("max" => $max, "data" => $mapData);
         $retrnJson = json_encode($returnArray);
         $retrnJson = str_replace('"', '', $retrnJson);
         error_log("heatmapJsondata : retrnJson = $retrnJson");
@@ -1981,7 +2051,7 @@ public function activateVenue($id)
     }
 
     public function heatmapJsondata_()
-    {       
+    {
         $period = Input::get('period');
         $scanner_type = Input::get('scanner_type');
         $venue = Input::get('venue');
@@ -2185,11 +2255,11 @@ public function activateVenue($id)
                 }';
 
         $jsonarray1 = json_decode($json1, true);
-        $scanners1 = \Sensor::select('name','xcoord','ycoord')->where("name", "like", $jsonarray1['scanners'][0]['id'])->orderBy('id', 'DESC')->first();
+        $scanners1 = \Sensor::select('name', 'xcoord', 'ycoord')->where("name", "like", $jsonarray1['scanners'][0]['id'])->orderBy('id', 'DESC')->first();
         $jsonarray1['xcoord'] = $scanners1->xcoord;
         $jsonarray1['ycoord'] = $scanners1->ycoord;
         $jsonarray1['name'] = $scanners1->name;
-        $json1 = json_encode($jsonarray1,true);
+        $json1 = json_encode($jsonarray1, true);
         //print_r($json1); die();
         $count1 = $jsonarray1['total']['total'];
 
@@ -2388,21 +2458,21 @@ public function activateVenue($id)
                 }';
 
         $jsonarray2 = json_decode($json2, true);
-        $scanners2 = \Sensor::select('name','xcoord','ycoord')->where("name", "like", $jsonarray2['scanners'][0]['id'])->orderBy('id', 'DESC')->first();
+        $scanners2 = \Sensor::select('name', 'xcoord', 'ycoord')->where("name", "like", $jsonarray2['scanners'][0]['id'])->orderBy('id', 'DESC')->first();
         $jsonarray2['xcoord'] = $scanners2->xcoord;
         $jsonarray2['ycoord'] = $scanners2->ycoord;
         $jsonarray2['name'] = $scanners2->name;
-        $json2 = json_encode($jsonarray2,true);
+        $json2 = json_encode($jsonarray2, true);
 
         $count2 = $jsonarray2['total']['total'];
 
-        $apijsonarray = '['.$json1.','.$json2.']'; //combining all json data from each sensors.
+        $apijsonarray = '[' . $json1 . ',' . $json2 . ']'; //combining all json data from each sensors.
         $apiarray = json_decode($apijsonarray, true);
 
         $resultarray = array();
 
         $heatmapdata  = array();
-        for ($i=1; $i <= 24; $i++) { 
+        for ($i = 1; $i <= 24; $i++) {
 
             $big = 0;
             foreach ($apiarray as $scanner) {
@@ -2411,29 +2481,26 @@ public function activateVenue($id)
                 $resultarray[$i]['scanner'] = $scanner['name'];
 
                 $hours = $scanner['total']['trends']['hours'];
-                
+
                 foreach ($hours as $hour) {
-                    if($hour['hour'] == ($i-1) ){
+                    if ($hour['hour'] == ($i - 1)) {
                         $resultarray[$i]['count'] = $hour['total'];
                     }
                 }
-                if($big < $resultarray[$i]['count']){
+                if ($big < $resultarray[$i]['count']) {
                     $big = $resultarray[$i]['count'];
                 }
-                $heatmapdata[$i]['data'][]  = array('x'=>$scanner["xcoord"],'y'=>$scanner["ycoord"],'count'=>$resultarray[$i]['count']);
+                $heatmapdata[$i]['data'][]  = array('x' => $scanner["xcoord"], 'y' => $scanner["ycoord"], 'count' => $resultarray[$i]['count']);
             }
             $heatmapdata[$i]['max'] = $big;
-            
         }
 
         $attTemp = json_encode($heatmapdata[14]); //just showing a single hour(14 th) details
         $attTemp = str_replace('"', "", $attTemp);
 
-        $retrn =  array('heatmap'=>$attTemp, 'cordinates'=>$scanners );
-        print_r(json_encode($retrn));  die();
-        
-        
-        
+        $retrn =  array('heatmap' => $attTemp, 'cordinates' => $scanners);
+        print_r(json_encode($retrn));
+        die();
     }
 
     //fetch sensors coordinates to preview floorplan image
@@ -2447,20 +2514,20 @@ public function activateVenue($id)
 
     //fetching data to create zonal tab view
     public function zonalJsondata()
-    {       
+    {
         $period = Input::get('period');
         $scanner_type = Input::get('scanner_type');
         $venue = Input::get('venue');
         $domain = Input::get('domain');
-        
-        
+
+
         /*$apiserver = \DB::table('systemconfig')->select("*")->where('name', '=', "track_api_server")->first();*/
-        if($period != 'custom'){
-            /*$sensers_url = $apiserver->value.$venue."?period=".$period."&min_session=5&max_session=60"; */  
-            $sensers_url = "http://".$domain."/aggregate/".$venue."?period=".$period."&min_session=5&max_session=60";         
+        if ($period != 'custom') {
+            /*$sensers_url = $apiserver->value.$venue."?period=".$period."&min_session=5&max_session=60"; */
+            $sensers_url = "http://" . $domain . "/aggregate/" . $venue . "?period=" . $period . "&min_session=5&max_session=60";
         } else {
             /*$sensers_url = $apiserver->value.$venue."?period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'&min_session=5&max_session=60";*/
-            $sensers_url = "http://".$domain."/venues/".$venue."?period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'&min_session=5&max_session=60";
+            $sensers_url = "http://" . $domain . "/venues/" . $venue . "?period=custom&start='" . Input::get('start') . "'&end='" . Input::get('end') . "'&min_session=5&max_session=60";
         }
         $sensers_json = file_get_contents($sensers_url);
         $sensers_array = json_decode($sensers_json, true);
@@ -2481,12 +2548,12 @@ public function activateVenue($id)
                   <tbody> ';
         $i = 1;
         foreach ($scanners as $scanner) {
-            if($period != 'custom'){
+            if ($period != 'custom') {
                 /*$json_url = $apiserver->value.$venue."?period=".$period."&min_session=5&max_session=60&scanner=".$scanner['id'];*/
-                $json_url = "http://".$domain."/aggregate/".$venue."?period=".$period."&min_session=5&max_session=60&scanner=".$scanner['id'];
+                $json_url = "http://" . $domain . "/aggregate/" . $venue . "?period=" . $period . "&min_session=5&max_session=60&scanner=" . $scanner['id'];
             } else {
                 /*$json_url = $apiserver->value.$venue."?period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'&min_session=5&max_session=60&scanner=".$scanner['id'];*/
-                $json_url = "http://".$domain."/venues/".$venue."?period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'&min_session=5&max_session=60&scanner=".$scanner['id'];
+                $json_url = "http://" . $domain . "/venues/" . $venue . "?period=custom&start='" . Input::get('start') . "'&end='" . Input::get('end') . "'&min_session=5&max_session=60&scanner=" . $scanner['id'];
             }
             $json = file_get_contents($json_url);
             $jsonarray = json_decode($json, true); //print_r($jsonarray);
@@ -2494,9 +2561,9 @@ public function activateVenue($id)
             $count = $jsonarray['total']['total'];
 
             $numscanners = 2;
-            if(sizeof($scanners) > 2) $numscanners =  sizeof($scanners) - 1;
+            if (sizeof($scanners) > 2) $numscanners =  sizeof($scanners) - 1;
             $dwelltime = round($jsonarray['total']['average_session'] / $numscanners, 1);
-            
+
             $rows = $rows . '
                     <tr>
                       <td> ' . $i  . '</td>
@@ -2513,13 +2580,13 @@ public function activateVenue($id)
                 </table>';
 
         $table = $beginTable . $rows . $endTable;
-        
-        
+
+
         print_r($table);
-        
     }
 
-    public function getWindowconversion(){
+    public function getWindowconversion()
+    {
 
         $select_period = Input::get('period');
         $scanner_type = Input::get('scanner_type');
@@ -2530,40 +2597,40 @@ public function activateVenue($id)
         $endDate = date('Y-m-d');
         $period = 'custom';
         $getdata1 = "period=now";
-        
+
         /*$apiserver = \DB::table('systemconfig')->select("*")->where('name', '=', "track_api_server")->first();*/
         /*$json_url1 = $apiserver->value.$venue."?min_session=5&max_session=60&".trim($getdata1);*/
-        $json_url1 = "http://".$domain."/aggregate/".$venue."?min_session=5&max_session=60&".trim($getdata1);
+        $json_url1 = "http://" . $domain . "/aggregate/" . $venue . "?min_session=5&max_session=60&" . trim($getdata1);
         /*$json_url1 = "http://cpt-mysql-slave.hipjam.net:9299/aggregate/".$venue."?min_session=5&max_session=60".trim($getdata1);*/
         $json1 = file_get_contents($json_url1);
 
         $getdata2 = "period=today";
         /*$json_url2 = $apiserver->value.$venue."?min_session=5&max_session=60&".trim($getdata2);*/
-        $json_url2 = "http://".$domain."/aggregate/".$venue."?min_session=5&max_session=60&".trim($getdata2);
+        $json_url2 = "http://" . $domain . "/aggregate/" . $venue . "?min_session=5&max_session=60&" . trim($getdata2);
         /*$json_url2 = "http://cpt-mysql-slave.hipjam.net:9299/aggregate/".$venue."?min_session=5&max_session=60".trim($getdata2);*/
         $json2 = file_get_contents($json_url2);
 
-        $json3 = json_encode (json_decode ("{}"));
-        if($select_period == 'daterange'){
-            $getdata3 = "period=custom&start='".Input::get('start')."'&end='".Input::get('end')."'";
-            
+        $json3 = json_encode(json_decode("{}"));
+        if ($select_period == 'daterange') {
+            $getdata3 = "period=custom&start='" . Input::get('start') . "'&end='" . Input::get('end') . "'";
+
             /*$json_url3 = $apiserver->value.$venue."?min_session=5&max_session=60".trim($getdata3);*/
-            $json_url3 = "http://".$domain."/venues/".$venue."?min_session=5&max_session=60".trim($getdata3);
+            $json_url3 = "http://" . $domain . "/venues/" . $venue . "?min_session=5&max_session=60" . trim($getdata3);
             /*$json_url3 = "http://mrp.doteleven.co/venues/mrp0381?".trim($getdata3);*/
             $json3 = file_get_contents($json_url3);
             $json3 = json_decode($json3);
-        }else {
-            if($select_period == 'rep7day'){
+        } else {
+            if ($select_period == 'rep7day') {
                 /*$json_url = $apiserver->value.$venue."?period=this_week&min_session=5&max_session=60";*/
-                $json_url = "http://".$domain."/aggregate/".$venue."?period=this_week&min_session=5&max_session=60";
+                $json_url = "http://" . $domain . "/aggregate/" . $venue . "?period=this_week&min_session=5&max_session=60";
                 /*$json_url = "http://mrp.doteleven.co/venues/mrp0381?period=week&scanner_type=".$scanner_type;*/
-            }else if($select_period == 'repthismonth'){
+            } else if ($select_period == 'repthismonth') {
                 /*$json_url = $apiserver->value.$venue."?period=this_month&min_session=5&max_session=60";*/
-                $json_url = "http://".$domain."/aggregate/".$venue."?period=this_month&min_session=5&max_session=60";
+                $json_url = "http://" . $domain . "/aggregate/" . $venue . "?period=this_month&min_session=5&max_session=60";
                 /*$json_url = "http://mrp.doteleven.co/venues/mrp0381?period=month&scanner_type=".$scanner_type;*/
-            }else if($select_period == 'replastmonth'){
+            } else if ($select_period == 'replastmonth') {
                 /*$json_url = $apiserver->value.$venue."?period=month&min_session=5&max_session=60";*/
-                $json_url = "http://".$domain."/aggregate/".$venue."?period=month&min_session=5&max_session=60";
+                $json_url = "http://" . $domain . "/aggregate/" . $venue . "?period=month&min_session=5&max_session=60";
                 /*$start = date('Y-m-d',strtotime('first day of last month'));
                 $end = date('Y-m-d',strtotime('last day of last month'));
                 $json_url = $apiserver->value.$venue."?period=custom&min_session=5&max_session=60&start='".$start."'&end='".$end."'";*/
@@ -2576,7 +2643,7 @@ public function activateVenue($id)
 
 
 
-        $json_array = array(json_decode($json1) , json_decode($json2) , $json3);
+        $json_array = array(json_decode($json1), json_decode($json2), $json3);
         $json = json_encode($json_array);
 
         print_r($json);
@@ -2592,8 +2659,8 @@ public function activateVenue($id)
         $venue = Input::get('venue');
         $domain = Input::get('domain');
 
-        $brand_id = \Venue::where('track_slug', '=' , $venue)->first()->brand_id;
-        $venue_id = \Venue::where('track_slug', '=' , $venue)->first()->id;
+        $brand_id = \Venue::where('track_slug', '=', $venue)->first()->brand_id;
+        $venue_id = \Venue::where('track_slug', '=', $venue)->first()->id;
         $min_session = \Brand::find($brand_id)->min_session_length;
         $max_session = \Brand::find($brand_id)->max_session_length;
 
@@ -2603,55 +2670,11 @@ public function activateVenue($id)
 
         /*$apiserver = \DB::table('systemconfig')->select("*")->where('name', '=', "track_api_server")->first();
         $json_url = $apiserver->value.$venue."?period=".$period."&min_session=5&max_session=60&start=".$start."&end=".$end;*/
-        $json_url = "http://".$domain."/aggregate/".$venue."/custom/".$start."/".$end."/?min_session=".$min_session."&max_session=".$max_session;
+        $json_url = "http://" . $domain . "/aggregate/" . $venue . "/custom/" . $start . "/" . $end . "/?min_session=" . $min_session . "&max_session=" . $max_session;
         /*$json_url = "http://cpt-mysql-slave.hipjam.net:9299/aggregate/".$venue."?period=".$period."&min_session=5&max_session=60&start=".$start."&end=".$end;*/
-        
+
         $json = file_get_contents($json_url);
 
         print_r($json);
-
     }
-
-    /////////////////////// Venues /////////////////////////
-
-    /*public function showvenues($json = null)
-    {
-        error_log("showVenues");
-
-        $data = array();
-        $data['currentMenuItem'] = "Venue Management";
-        // $venues = \Venue::all();
-        $venue = new \Venue();
-        $venues = $venue->getVenuesForUser('hipjam', 1);
-
-        foreach($venues as $venue) {
-            if($venue->ap_active == 0) {
-                $venue["status"] = '<span style="color:red">Inactive</span>';
-            } else {
-                $venue["status"] = '<span style="color:green">Active</span>';
-            }
-            if($venue->server) {
-                $venue["hostname"] = $venue->server->hostname;
-            } else {
-                $venue["hostname"] = "Server No longer exists";
-            }
-            // $venue["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $venue["sitename"]);
-        }
-
-        $data['venuesJson'] = json_encode($venues);
-
-        $data['currentMenuItem'] = "Venue Management";
-
-        if($json) {
-            error_log("showDashboard : returning json" );
-            return \Response::json($data['venuesJson']);
-
-        } else {
-            error_log("showDashboard : returning NON json" );
-            return \View::make('hipjam.showvenues')->with('data', $data);
-
-        }
-    }*/
-
-
 }

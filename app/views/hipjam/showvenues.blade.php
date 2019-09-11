@@ -68,6 +68,7 @@
           contentType: "application/json",
           url: "{{ url('hipjam_getinactivevenues'); }}",
           success: function(venues) {
+            debugger;
             var venuesjson = JSON.parse(venues); 
             console.log("venues : " + venues);
 
@@ -82,6 +83,9 @@
 
             $( "#venuelist" ).html( selectHtml );
 
+          },
+          error: function(xhr, m){
+debugger;
           }
       });
     }
@@ -139,6 +143,10 @@
             editbutton = '<a href="javascript:void(0)" onclick="alert(\'Track Venue Id and Track Server need to be set by a super admin before you can continue.\');" class="btn btn-default btn-sm">edit</a>\n';
           } else {
             editbutton = '<a href="{{ url('hipjam_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n';
+          }
+          console.log("{{$data['is_vicinity']}}")
+          if ("{{$data['is_vicinity']}}") {
+            editbutton = `<a href="/vicinity/venue/${value["id"]}" class="btn btn-default btn-sm">edit</a>\n`
           }
 
 

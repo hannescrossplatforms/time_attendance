@@ -145,7 +145,12 @@
                                 <div class="venuerow">
                                     <div class="modStat">
                                         <div class="modstattitle">
+                                        @if (\User::isVicinity())
+                                            <h3>Exposed to Billboard Today</h3>
+                                        @else
                                             <h3>Window Conversion Today</h3>
+                                        @endif
+                                            
                                         </div>
                                         <div id="window_today" class="modStatspan">loading...<!-- <span style="font-size: 35%;">Data Not Available</span> --></div>
                                     </div>
@@ -234,7 +239,11 @@
                                 <div class="venuerow">
                                     <div class="modStat">
                                         <div class="modstattitle">
+                                        @if (\User::isVicinity())
+                                            <h3>Exposed to Billboard</h3>
+                                        @else
                                             <h3>Window Conversion </h3>
+                                        @endif
                                         </div>
                                         <div id="window_con" class="modStatspan">loading...<!-- <span style="font-size: 35%;">Data Not Available</span> --></div>
                                     </div>

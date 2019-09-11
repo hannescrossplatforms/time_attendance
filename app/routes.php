@@ -305,6 +305,21 @@ Route::get('hipjam/zonalJsondata','hipjam\HipjamController@zonalJsondata');
 Route::get('hipjam/customchartJsondata','hipjam\HipjamController@customchartJsondata');
 /*Route::get('hipjam_viewchart', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');*/
 
+// VICINITY CHANGES
+Route::get('vicinity/venue/{id}', array('uses' => 'hipjam\HipjamController@vicinityVenue', 'as' => 'hipjam_editvicinityvenue'))->before('auth');
+Route::post('vicinity/venue/{id}/update', array('uses' => 'hipjam\HipjamController@updateVicinityVenue', 'as' => 'hipjam_updatevicinityvenue'))->before('auth');
+Route::get('vicinity/settings', array('uses' => 'hipjam\HipjamController@vicinitySettings', 'as' => 'hipjam_vicinitysettings'))->before('auth');
+// END VICNITY CHANGES
+// updateVicinityVenue
+
+
+
+
+
+
+
+
+
 Route::get('hipjam_editvenue/{id}', array('uses' => 'hipjam\HipjamController@editVenue', 'as' => 'hipjam_editvenue'))->before('auth');
 Route::post('hipjam_editvenue', array('uses' => 'hipjam\HipjamController@editVenueSave', 'as' => 'hipjam_editvenue'))->before('auth');
 Route::post('hipjam_editvenueserver', array('uses' => 'hipjam\HipjamController@editVenueServer', 'as' => 'hipjam_editvenueserver'))->before('auth');
@@ -313,6 +328,10 @@ Route::get('hipjam_redeploymikrotikvenue/{id}', array('uses' => 'hipjam\HipjamCo
 Route::get('hipjam_deployrsc/{id}', array('uses' => 'hipjam\HipjamController@deployRsc', 'as' => 'hipjam_deployrsc'))->before('auth');
 Route::post('hipjam_deployrsc', array('uses' => 'hipjam\HipjamController@deployRscSave', 'as' => 'hipjam_deployrsc'))->before('auth');
 Route::post('hipjam_previewsensors', array('uses' => 'hipjam\HipjamController@previewSensors', 'as' => 'hipjam_previewsensors'))->before('auth');
+
+
+
+
 
 // sensors' monitoring
 

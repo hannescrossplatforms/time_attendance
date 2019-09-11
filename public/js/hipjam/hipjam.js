@@ -41,6 +41,7 @@ $( document ).ready(function() {
     }
     venueid = $('#apivenueid').val();
 
+    debugger;
     //---------- now ----------
     $.ajax({
 
@@ -862,7 +863,7 @@ document.getElementById("heatmapreportperiod").onchange = function(){
 
     $('#loadingDiv').hide();
 }
-//This is a new comment on an existing product
+//function change_heatmap_report_period(){
 document.getElementById("heatmapreportperiod").onchange = function(){ //Commented_out
 
     $('#loadingDiv').show();
