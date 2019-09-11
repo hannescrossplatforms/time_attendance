@@ -276,7 +276,7 @@ class HippnpController extends \BaseController {
         $period = 'today';
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
-        $data['report_period'] = 'rep7day';
+        $data['report_period'] = 'replastmonth';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 
 
