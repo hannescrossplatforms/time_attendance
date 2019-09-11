@@ -273,10 +273,10 @@ class HippnpController extends \BaseController {
 
     public function periodchartJsondataStaff(){
 
-        $id = Input::get('id');
+        $stuff = \Request::getContent();
 
         $data = array();
-        $data['id'] = $id;
+        $data['id'] = $stuff;
 
 
         $json = json_encode($data);
