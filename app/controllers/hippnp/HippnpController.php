@@ -339,7 +339,7 @@ class HippnpController extends \BaseController {
                     array_push($dataArray, $empty_array);
                 } else {
 
-                    $objectArr = array(['value' => $response->value, 'id' => $stafId]);
+                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
                 }
 
