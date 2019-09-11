@@ -586,7 +586,7 @@ function renderCharts(time, start, end, category, store, province) {
                 "theme": "zune"
             };
 
-            let dataaa = data['staff_list_data']
+            let dataaa = data['staff_list_data'];
 
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
