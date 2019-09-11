@@ -280,11 +280,75 @@ class HippnpController extends \BaseController {
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
 
 
+
+
+        $finalChartObjectStaff = array();
+
+        $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($id);
+        $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
+            ->map(function($row) {
+                    return ['label' => $row['created_att']];
+            });
+
+        $data['all_staff'] = $allStaff;
+        $data['staff_list'] = $datesForAllStaff; //////////TOP ONE
+
+        foreach ($allStaff as $staff) {
+
+            $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->staff_id);
+            $stafId = $staffObj->id;
+            $staffName = $staffObj->name;
+            $dataArray = array();
+
+            foreach ( $datesForAllStaff as $date ) {
+                $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $stafId, $storeId, $provinceId, "SUM");
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0', 'id' => $stafId]);
+                    array_push($dataArray, $empty_array);
+                } else {
+
+                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+                    array_push($dataArray, $objectArr);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $staffName,
+                'data' => $dataArray
+            ];
+
+            array_push($finalChartObjectStaff, $obj);
+
+        };
+
+        if (count($finalChartObjectStaff) > 0) {
+            $data['staff_list_data'] = $finalChartObjectStaff[count($finalChartObjectStaff)- 1];
+        }
+        else {
+            $data['staff_list_data'] = []; ////DATASET
+        }
+
+        $obj = null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return \View::make('hippnp.showstaffdata')->with('data', $data);
 
-        // $json = json_encode($data);
-
-        // print_r($json);
     }
 
     public function periodchartJsondata(){
