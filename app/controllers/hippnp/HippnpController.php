@@ -271,6 +271,14 @@ class HippnpController extends \BaseController {
 
     }
 
+    public function periodchartJsondataStaff(){
+
+        $data = array();
+        $json = json_encode($data);
+
+        print_r($json);
+    }
+
     public function periodchartJsondata(){
 
         $data = array();
