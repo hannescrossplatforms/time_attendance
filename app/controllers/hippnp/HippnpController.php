@@ -282,7 +282,7 @@ class HippnpController extends \BaseController {
 
         $finalChartObjectStaff = array();
 
-        $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($id);
+        $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($staffId);
         $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, null, null)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
