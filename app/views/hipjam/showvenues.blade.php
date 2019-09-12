@@ -48,15 +48,24 @@
 
     <script src="js/prefixfree.min.js"></script>
 
+    @if (\User::isVicinity())
+  <script>
+    $('#activatevenue').click(function() {
+      window.location.href = `vicinity/venue/${$("#venuelist").val()}/activate`;
+    });
+  </script>
+  @else
+  <script>
+    $('#activatevenue').click(function() {
+      activatepage = "hipjam_activatevenue/" + $("#venuelist").val();
+      window.location.href = activatepage;
+    });
+  </script>
+  @endif
+
     <script>
 
     venuesJson = {{ $data['venuesJson'] }};
-
-
-    $('#activatevenue').click( function(){
-      activatepage = "hipjam_activatevenue/" + $( "#venuelist" ).val();
-      window.location.href = activatepage;
-    });
 
     buildVenueList();
 

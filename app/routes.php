@@ -307,8 +307,11 @@ Route::get('hipjam/customchartJsondata','hipjam\HipjamController@customchartJson
 
 // VICINITY CHANGES
 Route::get('vicinity/venue/{id}', array('uses' => 'hipjam\HipjamController@vicinityVenue', 'as' => 'hipjam_editvicinityvenue'))->before('auth');
+Route::get('vicinity/venue/{id}/activate', array('uses' => 'hipjam\HipjamController@vicinityVenueActivate', 'as' => 'hipjam_editvicinityvenueactivate'))->before('auth');
 Route::post('vicinity/venue/{id}/update', array('uses' => 'hipjam\HipjamController@updateVicinityVenue', 'as' => 'hipjam_updatevicinityvenue'))->before('auth');
 Route::get('vicinity/settings', array('uses' => 'hipjam\HipjamController@vicinitySettings', 'as' => 'hipjam_vicinitysettings'))->before('auth');
+
+
 // END VICNITY CHANGES
 // updateVicinityVenue
 
@@ -374,7 +377,6 @@ Route::post('hippnp/save_beacon','hippnp\HippnpController@saveBeacon');
 Route::get('hippnp/picknpay_delete_beacon/{id}', 'hippnp\HippnpController@deleteBeacon');
 Route::get('hippnp/picknpay_add_beacon', 'hippnp\HippnpController@addBeacon');
 Route::get('hippnp/storeCategories/{id}','hippnp\HippnpController@getStoreCategories');
-Route::get('hippnp/periodchartJsondataStaff/{id}','hippnp\HippnpController@periodchartJsondataStaff');
 
 // HipBidvest routes //////////////////////////////////////////////////////////////
 Route::any('/hipbidvest_showdashboard', array('uses' => 'hipbidvest\HipbidvestController@showDashboard', 'as' => 'hipbidvest_showdashboard'))->before('auth');

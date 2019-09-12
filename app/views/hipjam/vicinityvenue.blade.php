@@ -14,7 +14,7 @@
       @include('hipjam.sidebar')
       <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
 
-        <h1 class="page-header">Edit Track Venue - {{$data['venue']->sitename}}</h1>
+        <h1 class="page-header" data-venue="{{$data['venue']->sitename}}">Edit Track Venue - {{$data['venue']->sitename}}</h1>
         <div class="container-fluid">
           <p>General</p>
           <div class="row">
@@ -198,6 +198,12 @@
   <script src="{{asset('js/jquery.timepicker.min.js')}}"></script>
 
   <script>
+
+    if (window.location.href.indexOf('activate') !== -1) {
+      $('#update_vicinity_venue').html('Activate');
+      $('.page-header').html(`Activate Track Venue - ${$('.page-header').data('venue')}`);
+    }
+
     showLinkVenueToBillboard();
 
     $(document).on('change', '#track_type', function() {

@@ -346,6 +346,39 @@ class HipjamController extends \BaseController
         return \View::make('hipjam.vicinityvenue')->with('data', $data);
     }
 
+    public function vicinityVenueActivate($id)
+    {
+        $data = array();
+        $data['currentMenuItem'] = "Venue Management";
+        $data['edit'] = true;
+        $data['is_activation'] = false;
+        $edit = true;
+        $vpnip = new \Vpnip;
+        //$data['vpnips']  = $vpnip->getVpnips();
+        $data['venue'] = \Venue::find($id);
+        $data['old_sitename'] = $data['venue']["sitename"];
+        $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
+        foreach ($data['venue'] as $key => $value) {
+            error_log("TTT : $key => $value");
+        };
+
+        $assetsdir = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
+        $destinationPath = $assetsdir->value . 'track/images';
+        $data['previewurl'] = $destinationPath;
+
+        $sensors =  \Sensor::where("venue_id", "like", $data['venue']["id"])->orderBy('id', 'DESC')->get();
+        $data['sensors'] = $sensors;
+
+        $data['timezoneselect'] = $this->getTimezoneSelect($data['venue']['timezone']);
+
+        $venue = new \Venue();
+        $data['user'] = $venue->getUserData();
+        $data['billboards'] = \Venue::where('track_type', '=', "billboard")->get();
+        $sanitized_sitename = preg_replace("/[^a-zA-Z]+/", "", \Venue::find($id)->sitename);
+        $data['sensor_name'] = substr($sanitized_sitename, 0, 15).$sensors->count();
+        return \View::make('hipjam.vicinityvenue')->with('data', $data);
+    }
+
     public function updateVicinityVenue()
     {
         $form_data = json_decode(\Input::get("data"));
