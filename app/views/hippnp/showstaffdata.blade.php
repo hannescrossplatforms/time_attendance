@@ -26,14 +26,11 @@
 
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
                 <a href="/hippnp_showdashboard"><< Back</a>
-                <h1 class="page-header">Pick n Pay Category Management</h1>
+                <h1 class="page-header">{{$data['staff_name']}}</h1>
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
                 <input type="hidden" id="staff_id" name="" value={{$data['staff_id']}}>
 
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="venuecolheading">Staff Overview</div>
-                    </div>
                     <div class="row">
                         <div class="col-md-4" style="width:30%;">
                             <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">

@@ -362,6 +362,7 @@ class HippnpController extends \BaseController {
             $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->id);
             $stafId = $staffObj->id;
             $staffName = $staffObj->name;
+            $data['staff_name'] = $staffName;
             $dataArray = array();
 
             foreach ( $datesForAllStaff as $date ) {
