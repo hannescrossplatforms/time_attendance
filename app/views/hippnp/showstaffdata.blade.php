@@ -24,9 +24,8 @@
 
             @include('hippnp.sidebar')
 
-            <a href="/hippnp/picknpay_manage_store_categories" class="btn btn-default"><< Back</a>
-
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+                <a href="/hippnp/picknpay_manage_store_categories" class="btn btn-default"><< Back</a>
                 <h1 class="page-header">Pick n Pay Category Management</h1>
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
                 <input type="hidden" id="staff_id" name="" value={{$data['staff_id']}}>
