@@ -77,7 +77,7 @@
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Total dwell time per category</div>
+                                    <div class="chart-title venuecolheading">Total dwell time</div>
                                     <div class="chart-stage">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -127,7 +127,7 @@ $(document).ready(function() {
     //Staff graph
     var chartProperties = {
         "caption": "",
-        "xAxisName": "Staff Activity",
+        "xAxisName": "Dates",
         "yAxisName": "Total dwell time (minutes)",
         "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
@@ -199,7 +199,7 @@ function renderCharts(time, start, end, category, store, province) {
 
             var chartProperties = {
                 "caption": "",
-                "xAxisName": "Staff Activity",
+                "xAxisName": "Dates",
                 "yAxisName": "Total dwell time (minutes)",
                 "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
