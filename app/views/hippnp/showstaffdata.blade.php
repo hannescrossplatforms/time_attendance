@@ -128,7 +128,6 @@ $(document).ready(function() {
     pathname = $('#url').val();
 
     //Staff graph
-debugger;
     var chartProperties = {
         "caption": "",
         "xAxisName": "Staff Activity",
@@ -186,7 +185,6 @@ function custom_report_period() {
 
 function renderCharts(time, start, end, category, store, province) {
 
-    debugger;
     let staffId = $("#staff_id").val();
 
     $.ajax({
