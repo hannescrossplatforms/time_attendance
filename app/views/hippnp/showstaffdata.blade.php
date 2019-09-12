@@ -27,6 +27,7 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
                 <h1 class="page-header">Pick n Pay Category Management</h1>
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
+                <input type="hidden" id="staff_id" name="" value={{$data['staff_id']}}>
 
                 <div class="container-fluid">
                     <div class="row">
@@ -182,26 +183,23 @@ function custom_report_period() {
     renderCharts('daterange', from, to, category, store, province);
 }
 
-var staffActivityData = null;
-
 function renderCharts(time, start, end, category, store, province) {
+
+    debugger;
+    let staffId = $("#staff_id").val();
 
     $.ajax({
 
-        url: pathname + 'hippnp/periodchartJsondata',
+        url: pathname + 'hippnp/periodchartJsondataStaffAjax',
         type: 'get',
         dataType: 'json',
         data: {
             'period': time,
             'start': start,
             'end': end,
-            'category_id': category,
-            'store_id': store,
-            'province_id': province
+            'staff_id': staffId;
         },
         success: function(data) {
-
-            staffActivityData = data['staff_list_data'];
 
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
