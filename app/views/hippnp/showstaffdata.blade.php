@@ -201,6 +201,15 @@ function renderCharts(time, start, end, category, store, province) {
         },
         success: function(data) {
 
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Staff Activity",
+                "yAxisName": "Total dwell time (minutes)",
+                "paletteColors": "#0075c2,#f8b81d,#3CB371",
+                "rotatevalues": "1",
+                "theme": "zune"
+            };
+
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
                 renderAt: 'staff_activity',
