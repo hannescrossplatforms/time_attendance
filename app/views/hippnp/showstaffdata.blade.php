@@ -197,7 +197,7 @@ function renderCharts(time, start, end, category, store, province) {
             'period': time,
             'start': start,
             'end': end,
-            'staff_id': staffId;
+            'staff_id': staffId
         },
         success: function(data) {
 
