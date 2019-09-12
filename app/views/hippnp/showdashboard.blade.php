@@ -612,8 +612,6 @@ function renderCharts(time, start, end, category, store, province) {
 
                         window.location.replace("hippnp/periodchartJsondataStaff/" + staffMemeberID);
 
-                        debugger;
-
                     }
                 }
             });
