@@ -336,10 +336,10 @@ class HippnpController extends \BaseController {
 
     public function periodchartJsondataStaff($id){
         //todo today
-        $period = 'replastmonth';
+        $period = 'today';
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
-        $data['report_period'] = 'rep7day';
+        $data['report_period'] = 'today';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $data['staff_id'] = $id;
 
