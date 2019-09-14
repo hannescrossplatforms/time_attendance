@@ -144,7 +144,7 @@
                 }
             });
             apiChart.render();
-
+            debugger;
         });
 
 
