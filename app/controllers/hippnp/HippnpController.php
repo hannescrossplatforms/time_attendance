@@ -359,12 +359,11 @@ class HippnpController extends \BaseController {
         array_push($timeList, ['label' => "10AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
         array_push($timeList, ['label' => "11AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'end')]);
         array_push($timeList, ['label' => "12PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'end')]);
-        array_push($timeList, ['label' => "12PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'end')]);
-        array_push($timeList, ['label' => "13PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'end')]);
-        array_push($timeList, ['label' => "14PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'end')]);
-        array_push($timeList, ['label' => "15PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'end')]);
-        array_push($timeList, ['label' => "16PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'end')]);
-        array_push($timeList, ['label' => "17PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '17PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '17PM', 'end')]);
+        array_push($timeList, ['label' => "13PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'end')]);
+        array_push($timeList, ['label' => "14PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'end')]);
+        array_push($timeList, ['label' => "15PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'end')]);
+        array_push($timeList, ['label' => "16PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'end')]);
+        array_push($timeList, ['label' => "17PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'end')]);
 
         $data['time_list'] = json_encode($timeList);
 

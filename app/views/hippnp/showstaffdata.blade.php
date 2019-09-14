@@ -127,7 +127,7 @@
                 "rotatevalues": "1",
                 "theme": "fusion"
             };
-
+            debugger;
             apiChart = new FusionCharts({
                 type: 'mscolumn2d',
                 renderAt: 'staff_beacon_activity',
@@ -144,7 +144,7 @@
                 }
             });
             apiChart.render();
-            debugger;
+
         });
 
 

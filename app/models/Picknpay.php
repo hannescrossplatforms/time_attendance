@@ -315,7 +315,7 @@ class Picknpay extends Eloquent {
             }
 
         }
-        else if($time == '9AM'){
+        else if($time == '8AM'){
 
             if($startOrEnd == 'start') {
                 return "$date 08:00.00";
@@ -324,7 +324,7 @@ class Picknpay extends Eloquent {
                 return "$date 08:59.59";
             }
 
-        } else if($time == '10AM'){
+        } else if($time == '9AM'){
 
             if($startOrEnd == 'start') {
                 return "$date 09:00.00";
@@ -333,7 +333,7 @@ class Picknpay extends Eloquent {
                 return "$date 09:59.59";
             }
 
-        } else if($time == '11AM'){
+        } else if($time == '10AM'){
 
             if($startOrEnd == 'start') {
                 return "$date 10:00.00";
@@ -343,7 +343,7 @@ class Picknpay extends Eloquent {
             }
 
         }
-        else if($time == '12PM'){
+        else if($time == '11AM'){
 
             if($startOrEnd == 'start') {
                 return "$date 10:00.00";
@@ -353,7 +353,7 @@ class Picknpay extends Eloquent {
             }
 
         }
-        else if($time == '13PM'){
+        else if($time == '12PM'){
 
             if($startOrEnd == 'start') {
                 return "$date 12:00.00";
@@ -363,7 +363,7 @@ class Picknpay extends Eloquent {
             }
 
         }
-        else if($time == '14PM'){
+        else if($time == '13PM'){
 
             if($startOrEnd == 'start') {
                 return "$date 13:00.00";
@@ -373,7 +373,7 @@ class Picknpay extends Eloquent {
             }
 
         }
-        else if($time == '15PM'){
+        else if($time == '14PM'){
 
             if($startOrEnd == 'start') {
                 return "$date 14:00.00";
@@ -383,7 +383,7 @@ class Picknpay extends Eloquent {
             }
 
         }
-        else if($time == '16PM'){
+        else if($time == '15PM'){
 
             if($startOrEnd == 'start') {
                 return "$date 15:00.00";
@@ -393,7 +393,7 @@ class Picknpay extends Eloquent {
             }
 
         }
-        else if($time == '17PM'){
+        else if($time == '16PM'){
 
             if($startOrEnd == 'start') {
                 return "$date 16:00.00";
