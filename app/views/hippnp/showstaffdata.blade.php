@@ -101,6 +101,8 @@
         $('#selectedDate').change(function () {
 
             let date = $('#selectedDate').val();
+            pathname = $('#url').val();
+
 
             $.ajax({
                 url: pathname + 'hippnp/periodchartJsondataStaffAjax',
