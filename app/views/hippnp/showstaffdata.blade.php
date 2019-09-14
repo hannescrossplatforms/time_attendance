@@ -3,7 +3,6 @@
 @section('content')
 <style type="text/css">
 .modstattitle{
-    /*background-color: #d3d3d3;#106f5d*/
     background-color: #58A5DA;
     height: 70px;
     padding: 10px;
@@ -180,35 +179,7 @@
 
         });
 
-
-
-
-
-
-
-
     </script>
-    <script type="text/javascript">
-      function previewPDF() {
-          var myPageone    =   $("#modal-body-view").html();
-          var staffName =  $( "#memberHeader" ).text();
-          var report_date = $("#report_date_details").text();
-          var report_name = staffName+"-"+report_date;
-
-          $("#myPageone").val(myPageone);
-          $("#report_name").val(report_name);
-          $("#viewMyPage").submit();
-      }
-
-
-
-</script>
-
-    <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hiptnaStaffLookupDownload') }}" method="post">
-      <input type="hidden" name="myPageone" id="myPageone">
-      <input type="hidden" name="report_name" id="report_name">
-
-    </form>
 
   </body>
 @stop
