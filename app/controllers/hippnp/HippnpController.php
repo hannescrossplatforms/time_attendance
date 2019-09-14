@@ -423,11 +423,11 @@ class HippnpController extends \BaseController {
 
         $obj = null;
 
-        $json = json_encode($data);
+        // $json = json_encode($data);
 
-        print_r($json);
+        // print_r($json);
 
-        // return \View::make('hippnp.showstaffdata')->with('data', $data);
+        return \View::make('hippnp.showstaffdata')->with('data', $data);
 
     }
 
