@@ -140,6 +140,7 @@
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
 
                 }
+            });
 
         });
 
@@ -179,48 +180,6 @@
 
 
 
-      $(document).delegate('#reset', 'click', function() {
-        showStaffTable(staffJason);
-      });
-
-      $(document).delegate('.staff-view', 'click', function() {
-        external_user_id = this.getAttribute('data-external-user-id');
-        membergraph(external_user_id);
-        // showmembergraphs(3254, 'Bloggs, Joe Peter')
-
-      });
-
-      $("#brandreportperiod").change(function(event) {
-        membergraph(external_user_id);
-      });
-
-      $(document).delegate('.pagesendbutton', 'click', function(event) {
-        external_user_id = this.getAttribute('data-external-user-id');
-      });
-
-      $( ".sendMessage" ).on( "click", function(event) {
-        event.preventDefault();
-
-        content = $("#content").val();
-
-        $('#messageModal').modal('toggle');
-
-        event.preventDefault();
-      });
-
-      $(document).delegate('#filter', 'click', function(event) {
-
-        event.preventDefault();
-
-        surname = $( "#src-surname" ).val();
-        firstnames = $( "#src-firstnames" ).val();
-
-        showStaffTable(filteredStaffjson);
-      });
-
-      function showStaffTable(staffjson) {
-
-      };
 
 
     </script>
