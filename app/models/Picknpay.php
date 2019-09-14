@@ -387,7 +387,7 @@ class Picknpay extends Eloquent {
 
         }
 
-        return $returnValue;
+        return json_encode($returnValue);
 
     }
 
