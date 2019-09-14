@@ -30,7 +30,7 @@
                         <label>Report Period</label>
                     </div>
                     <div class="col-md-2" style="width:25%; padding:0px 0px 0px 6px;">
-                        <input type="text" class="form-control datepicker" name="selectedDate" id="selectedDate" onchange="datePicked()"
+                        <input type="text" class="form-control datepicker" name="selectedDate" id="selectedDate"
                             placeholder="Selected date">
                     </div>
                 </div>
@@ -98,6 +98,9 @@
 
         $("#selectedDate").datepicker("setDate", new Date());
 
+        $('#selectedDate').change(function () {
+            alert("0");
+        });
 
 
         $(document).ready(function() {
@@ -127,10 +130,6 @@
                 }
             });
             apiChart.render();
-
-            function datePicked() {
-                alert("0");
-            }
 
         });
 
