@@ -157,6 +157,20 @@ class Picknpay extends Eloquent {
 
     }
 
+    public static function fetchDwellTimeDataForStaffWithinAnHour($staffID, $startDate, $endDate){
+        $query = Picknpay::orderBy('created_at', 'ASC')
+        ->select(DB::raw("IFNULL(SUM(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
+        ->where('start_time', ">=", $startDate)
+        ->where('end_time', "<=", $endDate)
+        ->whereraw("staff_id = '$staffID'")
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
+
+
+        return $query->get();
+
+    }
+
     public static function fetchDwellVisitsForCategoryWithDate($date, $categoryId, $storeId, $provinceId){
         $query = Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("COUNT(*) AS value"))
@@ -282,6 +296,94 @@ class Picknpay extends Eloquent {
             $returnValue['startDate'] = "$start 00.00.00";
             $returnValue['endDate'] = "$end 23:59:59";
             $returnValue['period'] = "date";
+
+        }
+
+        return $returnValue;
+
+    }
+
+    public static function getDateForTimeOfDayPerHour($date, $time){
+
+        $returnValue = '';
+
+        if($time == '9AM'){
+
+            $startDate = "$date 08:00.00";
+            $endDate = "$date 08:59.59";
+
+            $returnValue['startDate'] = $startDate;
+            $returnValue['endDate'] = $endDate;
+
+        } else if($time == '10AM'){
+
+            $startDate = "$date 09:00.00";
+            $endDate = "$date 09:59.59";
+
+            $returnValue['startDate'] = $startDate;
+            $returnValue['endDate'] = $endDate;
+
+        } else if($time == '11AM'){
+
+            $startDate = "$date 10:00.00";
+            $endDate = "$date 10:59.59";
+
+            $returnValue['startDate'] = $startDate;
+            $returnValue['endDate'] = $endDate;
+
+        }
+        else if($time == '12PM'){
+
+            $startDate = "$date 11:00.00";
+            $endDate = "$date 11:59.59";
+
+            $returnValue['startDate'] = $startDate;
+            $returnValue['endDate'] = $endDate;
+
+        }
+        else if($time == '13PM'){
+
+            $startDate = "$date 12:00.00";
+            $endDate = "$date 12:59.59";
+
+            $returnValue['startDate'] = $startDate;
+            $returnValue['endDate'] = $endDate;
+
+        }
+        else if($time == '14PM'){
+
+            $startDate = "$date 13:00.00";
+            $endDate = "$date 13:59.59";
+
+            $returnValue['startDate'] = $startDate;
+            $returnValue['endDate'] = $endDate;
+
+        }
+        else if($time == '15PM'){
+
+            $startDate = "$date 14:00.00";
+            $endDate = "$date 14:59.59";
+
+            $returnValue['startDate'] = $startDate;
+            $returnValue['endDate'] = $endDate;
+
+        }
+        else if($time == '16PM'){
+
+            $startDate = "$date 15:00.00";
+            $endDate = "$date 15:59.59";
+
+            $returnValue['startDate'] = $startDate;
+            $returnValue['endDate'] = $endDate;
+
+        }
+        else if($time == '17PM'){
+
+            $startDate = "$date 16:00.00";
+            $endDate = "$date 16:59.59";
+
+            $returnValue['startDate'] = $startDate;
+            $returnValue['endDate'] = $endDate;
 
         }
 

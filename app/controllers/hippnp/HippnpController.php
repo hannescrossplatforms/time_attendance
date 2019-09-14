@@ -345,68 +345,72 @@ class HippnpController extends \BaseController {
 
         $timeList = array();
 
-        array_push($timeList, ['label' => "9AM"]);
-        array_push($timeList, ['label' => "10AM"]);
-        array_push($timeList, ['label' => "11AM"]);
-        array_push($timeList, ['label' => "12PM"]);
-        array_push($timeList, ['label' => "12PM"]);
-        array_push($timeList, ['label' => "13PM"]);
-        array_push($timeList, ['label' => "14PM"]);
-        array_push($timeList, ['label' => "15PM"]);
-        array_push($timeList, ['label' => "16PM"]);
-        array_push($timeList, ['label' => "17PM"]);
+        $dateSelected = "2019-09-14"
+
+
+        array_push($timeList, ['label' => "9AM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM')]);
+        array_push($timeList, ['label' => "10AM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM')]]);
+        array_push($timeList, ['label' => "11AM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM')]]);
+        array_push($timeList, ['label' => "12PM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '11AM')]]);
+        array_push($timeList, ['label' => "12PM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '12PM')]]);
+        array_push($timeList, ['label' => "13PM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '13PM')]]);
+        array_push($timeList, ['label' => "14PM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '14PM')]]);
+        array_push($timeList, ['label' => "15PM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM')]]);
+        array_push($timeList, ['label' => "16PM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM')]]);
+        array_push($timeList, ['label' => "17PM", 'time' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '17PM')]]);
 
         $data['time_list'] = json_encode($timeList);
 
+        //All staff memebers present in database for selected period.
+        $allStaff = \Picknpay::fetchAllStaff($period, $start, $end);
 
 
-        // $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($id);
-        // $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, null, null)
-        //     ->map(function($row) {
-        //             return ['label' => $row['created_att']];
-        //     });
-
-        // $data['all_staff'] = $allStaff;
 
 
-        // foreach ($allStaff as $staff) {
 
-        //     $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->id);
-        //     $stafId = $staffObj->id;
-        //     $staffName = $staffObj->name;
-        //     $data['staff_name'] = $staffName;
-        //     $dataArray = array();
+        foreach ($allStaff as $staff) {
 
-        //     foreach ( $datesForAllStaff as $date ) {
-        //         $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $stafId, null, null, "SUM");
-        //         if (count($response) == 0) {
-        //             $empty_array = array(['value' => '0', 'id' => $stafId]);
-        //             array_push($dataArray, $empty_array);
-        //         } else {
+            //Get staff memeber with all his details.
+            $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->id);
+            $stafId = $staffObj->id;
+            $staffName = $staffObj->name;
 
-        //             $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
-        //             array_push($dataArray, $objectArr);
-        //         }
+            $dataArray = array();
 
-        //     }
+            foreach ( $timeList as $timeObject ) {
 
-        //     $obj[] = [
-        //         'seriesname' => $staffName,
-        //         'data' => $dataArray
-        //     ];
+                $startTime = $timeObject['time']['startDate'];
+                $endTime = $timeObject['time']['endDate'];
 
-        //     array_push($finalChartObjectStaff, $obj);
 
-        // };
+                $response = \Picknpay::fetchDwellTimeDataForStaffWithinAnHour($stafId, $startTime, $endTime);
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0', 'id' => $stafId]);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+                    array_push($dataArray, $objectArr);
+                }
 
-        // if (count($finalChartObjectStaff) > 0) {
-        //     $data['staff_list_data'] = json_encode($finalChartObjectStaff[count($finalChartObjectStaff)- 1]);
-        // }
-        // else {
-        //     $data['staff_list_data'] = json_encode([]); ////DATASET
-        // }
+            }
 
-        // $obj = null;
+            $obj[] = [
+                'seriesname' => $staffName,
+                'data' => $dataArray
+            ];
+
+            array_push($finalChartObjectStaff, $obj);
+
+        };
+
+        if (count($finalChartObjectStaff) > 0) {
+            $data['time_list_data'] = json_encode($finalChartObjectStaff[count($finalChartObjectStaff)- 1]);
+        }
+        else {
+            $data['time_list_data'] = json_encode([]);
+        }
+
+        $obj = null;
 
         return \View::make('hippnp.showstaffdata')->with('data', $data);
 

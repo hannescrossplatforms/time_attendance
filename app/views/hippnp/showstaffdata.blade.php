@@ -139,7 +139,7 @@
                     "categories": [{
                         "category": <?php echo $data['time_list']; ?>
                     }],
-                    "dataset": ""
+                    "dataset": <?php echo $data['time_list_data']; ?>
 
                 }
             });
@@ -203,8 +203,6 @@
           var staffName =  $( "#memberHeader" ).text();
           var report_date = $("#report_date_details").text();
           var report_name = staffName+"-"+report_date;
-        //console.log(myPage); alert(myPage);
-        //alert(report_name);
 
           $("#myPageone").val(myPageone);
           $("#report_name").val(report_name);
