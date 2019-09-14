@@ -164,11 +164,7 @@
 
 
       $(function() {
-        $('#filter').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
-        pathname = $('#url').val();
-        previewurl = "{{$data['previewurl']}}";
 
-      });
 
       // $(document).delegate('#buildtable', 'click', function() {
       //   showStaffTable(staffJason);
