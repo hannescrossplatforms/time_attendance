@@ -24,6 +24,18 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
           <h1 class="page-header">Staff Lookup</h1>
 
+            <div class="row">
+                <div class="col-md-4" style="width:30%;">
+                    <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
+                        <label>Report Period</label>
+                    </div>
+                    <div class="col-md-2" style="width:25%; padding:0px 0px 0px 6px;">
+                        <input type="text" class="form-control datepicker" name="selectedDate" id="selectedDate" onchange="datePicked()"
+                            placeholder="Selected date">
+                    </div>
+                </div>
+            </div>
+
             <div id="fusion-chart">
                 <div class="row">
                     <div class="col-sm-12">
@@ -43,19 +55,6 @@
                 </div>
             </div>
 
-            <br>
-
-            <div class="row">
-                <div class="col-md-4" style="width:30%;">
-                    <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
-                        <label>Report Period</label>
-                    </div>
-                    <div class="col-md-2" style="width:25%; padding:0px 0px 0px 6px;">
-                        <input type="text" class="form-control datepicker" name="selectedDate" id="selectedDate"
-                            placeholder="Selected date">
-                    </div>
-                </div>
-            </div>
 
         </div>
       </div>
@@ -91,12 +90,17 @@
 
     <script>
 
-        $("#venuefrom, #selectedDate").datepicker({
+        $("#selectedDate").datepicker({
             format: 'yyyy-mm-dd',
             autoclose: true,
             orientation: "right bottom"
         });
+
         $("#selectedDate").datepicker("setDate", new Date());
+
+        function datePicked() {
+            alert("0");
+        }
 
         $(document).ready(function() {
 
