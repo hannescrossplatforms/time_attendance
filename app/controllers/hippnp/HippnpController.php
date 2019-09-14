@@ -345,16 +345,16 @@ class HippnpController extends \BaseController {
 
         $timeList = array();
 
-        $dateSelected = "2019-09-14"
+        $dateSelected = "2019-09-14";
 
         // $obj[] = ['label' => "9AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')];
-        $obj = array();
-        $obj = [
-            'seriesname' => $staffName,
-            'data' => $dataArray
-        ];
+        // $testing = array() ;
+        // $obj = [
+        //     'seriesname' => $staffName,
+        //     'data' => $dataArray
+        // ];
 
-        array_push($timeList, $obj);
+        // array_push($timeList, $obj);
         array_push($timeList, ['label' => "9AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
         array_push($timeList, ['label' => "10AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
         array_push($timeList, ['label' => "11AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'end')]);
