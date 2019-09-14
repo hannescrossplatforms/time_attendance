@@ -374,13 +374,9 @@ class HippnpController extends \BaseController {
         $allStaff = \Picknpay::fetchAllStaff('today', $startDate, $endDate);
 
 
-        $data["test1"] = $startDate;
-        $data["test2"] = $endDate;
-        $data["testallstaff"] = $allStaff;
-
         foreach ($allStaff as $staff) {
 
-            $data["test3"] = $staff->id;
+
 
 
             //Get staff memeber with all his details.
@@ -394,6 +390,9 @@ class HippnpController extends \BaseController {
 
                 $startTime = $timeObject['startDate'];
                 $endTime = $timeObject['endDate'];
+
+                $data["test1"] = $startTime;
+                $data["test2"] = $endTime;
 
                 $response = \Picknpay::fetchDwellTimeDataForStaffWithinAnHour($stafId, $startTime, $endTime);
                 if (count($response) == 0) {
