@@ -2,235 +2,243 @@
 
 @section('content')
 <style type="text/css">
-.overlay {
-    background: rgba(129, 119, 119, 0.5) none no-repeat scroll 0% 0%;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0px;
-    left: 1px;
-    z-index: 1019;
-    padding-left: 53%;
-    padding-top: 20%;
+.modstattitle{
+    /*background-color: #d3d3d3;#106f5d*/
+    background-color: #58A5DA;
+    height: 70px;
+    padding: 10px;
+}
+.modstattitle h3{
+    color: white;
 }
 </style>
-
-<body class="hipTnA">
-
-    <a id="buildtable"></a>
+  <body class="hipTnA">
+    <form role="form" id="mbimageform" method="post" enctype="multipart/form-data" action="{{ url('lib_savelookupmedia'); }}"></form>
+    <div id="mb_ext_div" name="mb_ext" style="display:none"></div>
 
     <div class="container-fluid">
-        <div class="row">
+      <div class="row">
 
-            @include('hippnp.sidebar')
+        @include('hippnp.sidebar')
 
-            <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-                <a href="/hippnp_showdashboard"><< Back</a>
-                <h1 class="page-header">{{$data['staff_name']}}</h1>
-                <input type="hidden" id="url" name="" value={{$data['url']}}>
-                <input type="hidden" id="staff_id" name="" value={{$data['staff_id']}}>
+        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+          <h1 class="page-header">Staff Lookup</h1>
 
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-4" style="width:30%;">
-                            <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
-                                <label>Report Period</label>
-                            </div>
-                            <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandreportperiod" onchange="change_report_period()" class="form-control"
-                                    name="reportperiod">
-                                    <option value="today">Today</option>
-                                    <option value="rep7day">This Week</option>
-                                    <option value="repthismonth">This month</option>
-                                    <option value="replastmonth">Last month</option>
-                                    <option value="daterange">Custom range</option>
-                                </select>
-                            </div>
-                        </div>
+          <form class="form-inline" role="form" style="margin-bottom: 15px;">
 
-                        <!--        printpreview button start-->
-                        <div id="printButton" class="col-md-4" style="width:30%; float: right;">
-                            <!-- <button type="button" class="btn btn-primary">View Printable Page</button> -->
-                        </div>
-                        <!--        print preview button end-->
-
-                        <div class="col-md-8" id="custom" style="display:none; width:70%;">
-                            <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
-                                <input type="text" class="form-control datepicker" name="venuefrom" id="venuefrom"
-                                    placeholder="FromDate">
-                            </div>
-                            <div class="col-md-2" style="width:25%; padding:0px 0px 0px 6px;">
-                                <input type="text" class="form-control datepicker" name="venueto" id="venueto"
-                                    placeholder="ToDate">
-                            </div>
-                            <div class="col-md-2" style="width:40%; padding:0px 0px 0px 6px;">
-                                <button type="submit" class="form-control" onclick="custom_report_period()">Submit Date
-                                    Range</button>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-
-                    <br><br>
-                    <div id="fusion-chart">
-                        <div class="row">
-
-                            <div class="col-sm-6">
-                                <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Total dwell time</div>
-                                    <div class="chart-stage">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="chart-stage">
-                                                    <div id="staff_activity">Loading...</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputEmail2">Surname</label>
+              <input type="text" class="form-control" id="src-surname" placeholder="Surname">
             </div>
+            <div class="form-group">
+              <label  class="sr-only" for="exampleInputEmail2">First Names</label>
+              <input type="text" class="form-control" id="src-firstnames" placeholder="First Names">
+            </div>
+
+            <button id="filter" type="submit" class="btn btn-primary">Filter</button>
+            <button id="reset" type="submit" class="btn btn-default">Reset</button>
+
+          </form>
+
+          <div class="table-responsive">
+              <table id="staffTable" class="table table-striped"> </table>
+          </div>
         </div>
-</body>
+      </div>
+    </div>
 
-<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h6 class="modal-title" id="myModalLabel">Send Message</h6>
+          </div>
+          <div class="modal-body">
+            <textarea id="content" class="form-control no-radius" placeholder="Message content " rows="4" cols="100"></textarea>
+            <br>
+            <div class="">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    Image
+                  </div>
+                  <div class="panel-body">
 
-<script src="{{ asset('js/jquery-2.1.4.js') }}"></script>
-<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+                    <div class="col-md-4 pushpic">
+                      <div class="form-group">
+                        <div id="pushimageedit" style="display:none"></div>
+                        <input id="mbimage" type="file" name="mbimage" form="mbimageform">
+                          <a  id="mb-file" href="#" class="btn btn-default btn-sm " data-toggle="modal" data-target="#mobileBgModal"  >
+                            Upload new image
+                          </a>
+                      </input>
+                    </div>
+                  </div>
 
-<script src="{{ asset('js/fusioncharts.js') }}"></script>
-<script src="{{ asset('js/fusioncharts.charts.js') }}"></script>
-<script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}"></script>
+                </div>
+              </div>
+            </div>
 
-<script type="text/javascript">
-    $("#venuefrom, #venueto").datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        orientation: "right bottom"
-    });
-    $("#venuefrom, #venueto").datepicker("setDate", new Date());
-</script>
-
-
-<script>
-
-
-$(document).ready(function() {
-
-    pathname = $('#url').val();
-
-    //Staff graph
-    var chartProperties = {
-        "caption": "",
-        "xAxisName": "Dates",
-        "yAxisName": "Total dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
-        "rotatevalues": "1",
-        "theme": "zune"
-    };
-
-    apiChart = new FusionCharts({
-        type: 'mscolumn2d',
-        renderAt: 'staff_activity',
-        width: '400',
-        height: '350',
-        dataFormat: 'json',
-        dataSource: {
-            "chart": chartProperties,
-            "categories": [{
-                "category": <?php echo $data['staff_list']; ?>
-            }],
-            "dataset": <?php echo $data['staff_list_data']; ?>
-
-        }
-    });
-    apiChart.render();
-
-});
-
-function change_report_period() {
-
-    var time = $("#brandreportperiod").val();
-
-    var category = $("#brandcategory").val();
-    var store = $("#brandstore").val();
-    var province = $("#brandprovince").val();
-
-    if (time == 'daterange') {
-        $('#custom').show();
-    } else {
-        $('#custom').hide();
-        renderCharts(time, '', '', category, store, province);
-    }
-}
-
-function custom_report_period() {
-    var from = $('#venuefrom').val();
-    var to = $('#venueto').val();
-
-    var category = $("#brandcategory").val();
-    var store = $("#brandstore").val();
-    var province = $("#brandprovince").val();
-
-    renderCharts('daterange', from, to, category, store, province);
-}
-
-function renderCharts(time, start, end, category, store, province) {
-
-    let staffId = $("#staff_id").val();
-
-    $.ajax({
-
-        url: pathname + 'hippnp/periodchartJsondataStaffAjax',
-        type: 'get',
-        dataType: 'json',
-        data: {
-            'period': time,
-            'start': start,
-            'end': end,
-            'staff_id': staffId
-        },
-        success: function(data) {
-
-            var chartProperties = {
-                "caption": "",
-                "xAxisName": "Dates",
-                "yAxisName": "Total dwell time (minutes)",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
-                "rotatevalues": "1",
-                "theme": "zune"
-            };
-
-            apiChart = new FusionCharts({
-                type: 'mscolumn2d',
-                renderAt: 'staff_activity',
-                width: '400',
-                height: '350',
-                dataFormat: 'json',
-                entityDef: data['entity_dev'],
-                dataSource: {
-                    "chart": chartProperties,
-                    "categories": [{
-                        "category": data['staff_list']
-                    }],
-                    "dataset": data['staff_list_data']
-
-                }
-            });
-            apiChart.render();
-
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-        }
-    });
-}
-</script>
+            <div class="modal-footer">
+              <button id="sendMessage" class="sendMessage" type="button" class="btn btn-primary">Send</button>
+              <a href="" class="btn btn-default" data-dismiss="modal">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
+     <!--     Code for staff member popup graphs -->
+    <div id="member_popup" class="modal fade " id="modal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none; overflow:auto;">
+      <div class="modal-dialog">
+        <div class="modal-content" style="width:130%;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">×</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h6 class="modal-title" id="myModalLabel"><div id="memberHeader"></div></h6>
+            <!--        printpreview button start-->
+                  <div id="printButton" class="col-md-4" style="width:20%; margin-right: 55px; margin-top: -30px; float: right;">
+                      <button type="button" class="btn btn-primary" onclick="printpreview()">View Printable Page</button>
+                  </div>
+                  <!--        print preview button end-->
+          </div>
+          <div class="modal-body" id="modal-body-view">
+
+            <!-- <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;"><!-- This should look the same as in Dashboard -->
+            <div>
+              <select id="brandreportperiod" name="reportperiod">
+                  <option value="today">Today</option>
+                  <option value="rep7day" selected>This Week</option>
+                  <option value="repthismonth" >This month</option>
+                  <option value="replastmonth">Last month</option>
+                  <option value="daterange">Custom range</option>
+              </select>
+              <div id="report_date_details" style="display:none">
+
+
+              </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div id="member_absence"></div>
+            <div id="member_lateness"></div>
+            <div id="member_proximity"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--     Code for staff member popup graphs -->
+    <div id="memberGraphModalhtml"> </div>
+    <div id="memberModalLinkDiv"> </div>
+    <script src="{{ asset('js/hiptna/membergraphs.js') }}"></script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.form.js') }}"></script>
+
+
+
+    <script src="{{ asset('js/hiptna/hiptna.js') }}"></script>
+
+    <script src="{{ asset('js/prefixfree.min.js') }}"></script>
+
+
+    <script src="{{ asset('js/hiptna/push.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/js.cookie.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('fusioncharts/fusioncharts.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('fusioncharts/themes/fusioncharts.theme.zune.js') }}"></script>
+    <script src="{{ asset('js/hiptna/hiptna.js') }}"></script>
+
+    <script>
+
+
+      $(function() {
+        $('#filter').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+        pathname = $('#url').val();
+        previewurl = "{{$data['previewurl']}}";
+
+      });
+
+      // $(document).delegate('#buildtable', 'click', function() {
+      //   showStaffTable(staffJason);
+      // });
+
+      $(document).delegate('#reset', 'click', function() {
+        showStaffTable(staffJason);
+      });
+
+      $(document).delegate('.staff-view', 'click', function() {
+        external_user_id = this.getAttribute('data-external-user-id');
+        membergraph(external_user_id);
+        // showmembergraphs(3254, 'Bloggs, Joe Peter')
+
+      });
+
+      $("#brandreportperiod").change(function(event) {
+        membergraph(external_user_id);
+      });
+
+      $(document).delegate('.pagesendbutton', 'click', function(event) {
+        external_user_id = this.getAttribute('data-external-user-id');
+      });
+
+      $( ".sendMessage" ).on( "click", function(event) {
+        event.preventDefault();
+
+        content = $("#content").val();
+
+        $('#messageModal').modal('toggle');
+
+        event.preventDefault();
+      });
+
+      $(document).delegate('#filter', 'click', function(event) {
+
+        event.preventDefault();
+
+        surname = $( "#src-surname" ).val();
+        firstnames = $( "#src-firstnames" ).val();
+
+        showStaffTable(filteredStaffjson);
+      });
+
+      function showStaffTable(staffjson) {
+
+      }
+
+    </script>
+    <script type="text/javascript">
+      function previewPDF() {
+          var myPageone    =   $("#modal-body-view").html();
+          var staffName =  $( "#memberHeader" ).text();
+          var report_date = $("#report_date_details").text();
+          var report_name = staffName+"-"+report_date;
+        //console.log(myPage); alert(myPage);
+        //alert(report_name);
+
+          $("#myPageone").val(myPageone);
+          $("#report_name").val(report_name);
+          $("#viewMyPage").submit();
+      }
+
+    </script>
+
+    <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hiptnaStaffLookupDownload') }}" method="post">
+      <input type="hidden" name="myPageone" id="myPageone">
+      <input type="hidden" name="report_name" id="report_name">
+
+    </form>
+
+  </body>
 @stop
