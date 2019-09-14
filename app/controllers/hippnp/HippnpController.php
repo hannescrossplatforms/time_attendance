@@ -369,11 +369,10 @@ class HippnpController extends \BaseController {
         $data['time_list'] = json_encode($timeList);
 
         //All staff memebers present in database for selected period.
-        $allStaff = \Picknpay::fetchAllStaff($period, $start, $end);
 
-
-
-
+        $startDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start')
+        $endDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end')
+        $allStaff = \Picknpay::fetchAllStaff('today', $startDate, $endDate);
 
         foreach ($allStaff as $staff) {
 

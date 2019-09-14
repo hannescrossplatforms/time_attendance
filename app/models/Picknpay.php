@@ -305,7 +305,17 @@ class Picknpay extends Eloquent {
 
     public static function getDateForTimeOfDayPerHour($date, $time, $startOrEnd){
 
-        if($time == '9AM'){
+        if ($time == 'allDay') {
+
+            if ($startOrEnd == 'start') {
+                return "$date 08:00.00";
+            }
+            else {
+                return "$date 17:00.00";
+            }
+
+        }
+        else if($time == '9AM'){
 
             if($startOrEnd == 'start') {
                 return "$date 08:00.00";
@@ -389,7 +399,7 @@ class Picknpay extends Eloquent {
                 return "$date 16:00.00";
             }
             else {
-                return "$date 16:59.59";
+                return "$date 17:00.00";
             }
 
         }
