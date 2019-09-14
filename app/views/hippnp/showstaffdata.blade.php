@@ -130,7 +130,7 @@
             };
             debugger;
             apiChart = new FusionCharts({
-                type: 'line',
+                type: 'msline',
                 renderAt: 'staff_beacon_activity',
                 width: '400',
                 height: '400',
