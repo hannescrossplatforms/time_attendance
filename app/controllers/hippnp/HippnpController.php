@@ -347,7 +347,10 @@ class HippnpController extends \BaseController {
 
         $dateSelected = "2019-09-14"
 
-        array_push($timeList, ['label' => "9AM", 'startDate' => 'asdf');
+        $obj[] = ['label' => "9AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')];
+
+
+        array_push($timeList, $obj);
         array_push($timeList, ['label' => "9AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
         array_push($timeList, ['label' => "10AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
         array_push($timeList, ['label' => "11AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'end')]);
