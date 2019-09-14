@@ -149,7 +149,7 @@
 
 
 
-      $(function() {
+
 
 
       $(document).delegate('#reset', 'click', function() {
@@ -193,7 +193,8 @@
 
       function showStaffTable(staffjson) {
 
-      }
+      };
+
 
     </script>
     <script type="text/javascript">
