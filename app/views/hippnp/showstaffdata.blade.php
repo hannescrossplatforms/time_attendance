@@ -30,8 +30,8 @@
                         <label>Report Period</label>
                     </div>
                     <div class="col-md-2" style="width:25%; padding:0px 0px 0px 6px;">
-                        <input type="text" class="form-control datepicker" name="venueto" id="venueto"
-                            placeholder="ToDate">
+                        <input type="text" class="form-control datepicker" name="selectedDate" id="selectedDate"
+                            placeholder="Selected date">
                     </div>
                 </div>
 
@@ -111,6 +111,12 @@
 
     <script>
 
+        $("#venuefrom, #selectedDate").datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            orientation: "right bottom"
+        });
+        $("#selectedDate").datepicker("setDate", new Date());
 
         $(document).ready(function() {
 
