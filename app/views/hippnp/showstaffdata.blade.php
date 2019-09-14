@@ -113,7 +113,7 @@
     <script type="text/javascript" src="{{ asset('js/moment.js') }}"></script>
     <script type="text/javascript" src="{{ asset('fusioncharts/fusioncharts.js') }}"></script>
     <script type="text/javascript" src="{{ asset('fusioncharts/themes/fusioncharts.theme.zune.js') }}"></script>
-    <script src="{{ asset('js/hiptna/hiptna.js') }}"></script>
+    <!-- <script src="{{ asset('js/hiptna/hiptna.js') }}"></script> -->
 
     <script>
 
