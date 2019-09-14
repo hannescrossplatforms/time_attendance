@@ -385,7 +385,7 @@ class HippnpController extends \BaseController {
 
             //Get staff memeber with all his details.
             $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->id);
-            $stafId = $staffObj->id;
+            $stafId = $staff->id;
             $staffName = $staffObj->name;
 
             $dataArray = array();
