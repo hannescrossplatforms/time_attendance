@@ -23,19 +23,19 @@
               <div class="col-md-6 text-left">
                 <div class="form-group">
                   <label for="track_slug">Track Venue ID</label>
+                  @if (empty($data['venue']->track_slug))
+                  <input id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="{{$data['venue']->sitename}}" required>
+                  @else
                   <input id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="{{$data['venue']->track_slug}}" required>
+                  @endif
                 </div>
               </div>
               <div class="col-md-6 text-left">
                 <div class="form-group">
                   <label for="billboard_retail">Billboard / Retail</label>
-                  <select class="form-control" name="track_type" id="track_type">
-                    <option value="venue" selected="<?php if ($data['venue']->track_type == 'venue') {
-                                                      echo 'selected';
-                                                    } ?>">Venue</option>
-                    <option value="billboard" selected="<?php if ($data['venue']->track_type == 'billboard') {
-                                                          echo 'selected';
-                                                        } ?>">Billboard</option>
+                  <select class="form-control" name="track_type" id="track_type" data-default-selected="{{$data['venue']->track_type}}">
+                    <option value="venue">Venue</option>
+                    <option value="billboard">Billboard</option>
                   </select>
                 </div>
               </div>
@@ -65,13 +65,21 @@
               <div class="col-md-6 text-left">
                 <div class="form-group">
                   <label for="track_ssid">Track WiFi SSID</label>
+                  @if (empty($data['venue']->track_ssid))
+                  <input id="track_ssid" type="text" class="form-control" name="track_ssid" placeholder="" value="RaspberryJAM" required>
+                  @else
                   <input id="track_ssid" type="text" class="form-control" name="track_ssid" placeholder="" value="{{$data['venue']->track_ssid}}" required>
+                  @endif
                 </div>
               </div>
               <div class="col-md-6 text-left">
                 <div class="form-group">
                   <label for="track_password">Track WiFi Password</label>
+                  @if (empty($data['venue']->track_password))
+                  <input id="track_password" type="text" class="form-control" name="track_password" placeholder="" value="3nd34vour" required>
+                  @else
                   <input id="track_password" type="text" class="form-control" name="track_password" placeholder="" value="{{$data['venue']->track_password}}" required>
+                  @endif
                 </div>
               </div>
             </div>
@@ -199,10 +207,18 @@
 
   <script>
 
+let default_selection = $('#track_type').data('default-selected');
+      if (default_selection !== '')
+        $('#track_type').val(default_selection);
+
+        
     if (window.location.href.indexOf('activate') !== -1) {
       $('#update_vicinity_venue').html('Activate');
       $('.page-header').html(`Activate Track Venue - ${$('.page-header').data('venue')}`);
+      $('#track_slug').attr('disabled', 'disabled');
     }
+
+    
 
     showLinkVenueToBillboard();
 
@@ -301,6 +317,11 @@
     }
 
     function showLinkVenueToBillboard() {
+      
+      // if (default_selection === 'venue' || default_selection === '') {
+
+      // }
+
       let selected_track_id = $('#track_type').val();
       let linked_billboard_container = $('#linked_billboard_container');
       if (selected_track_id === 'venue') {
@@ -382,7 +403,7 @@
                 else {
                 window.location.href = `http://hiphub.hipzone.co.za/vicinity/venue/${newrecord['venue_id']}`
                 }
-             
+                // window.location.href = `http://hiphub.hipzone.co.za/vicinity/venue/${newrecord['venue_id']}`
              },
              error: function(xhr,m) {
                debugger;
