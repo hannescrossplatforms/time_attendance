@@ -126,14 +126,14 @@
                 "yAxisName": "Total dwell time (minutes)",
                 "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
-                "theme": "zune",
+                "theme": "zune"
             };
             debugger;
             apiChart = new FusionCharts({
                 type: 'line',
                 renderAt: 'staff_beacon_activity',
                 width: '400',
-                height: '350',
+                height: '4000',
                 dataFormat: 'json',
                 dataSource: {
                     "chart": chartProperties,
