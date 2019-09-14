@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-    console.log("hiptna.js availableInstances : " + availableInstances);
+    // console.log("hiptna.js availableInstances : " + availableInstances);
     console.log("hiptna.js currentInstance : " + currentInstance);
 
     if (availableInstances == "BOTH") {
@@ -12,7 +12,7 @@ $( document ).ready(function() {
     } else {
         $("#exception_manage_menus").show();
     }
-    
+
     pathname = $('#url').val();
 
     $( ".close" ).click(function() {
@@ -24,7 +24,7 @@ $( document ).ready(function() {
 
         url: pathname+'hiptna/latenessthreshold',
         type: 'get',
-        async: false, 
+        async: false,
         data : '',
         success: function(data) {
 
@@ -35,16 +35,16 @@ $( document ).ready(function() {
 
         url: pathname+'hiptna/proximitythreshold',
         type: 'get',
-        async: false, 
+        async: false,
         data : '',
         success: function(data) {
 
         }
     }).responseText ;
 //alert(proximityresult);
-        
 
-    // new theme to drow different colors for negative and positive value    
+
+    // new theme to drow different colors for negative and positive value
         FusionCharts.register("theme",{name:"colorData",theme:{base:{chart:{paletteColors:"#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000,#0e948c,#8cbb2c,#f3de00,#c02d00,#5b0101",labelDisplay:"auto",baseFontColor:"#333333",baseFont:"Helvetica Neue,Arial",captionFontSize:"14",subcaptionFontSize:"14",subcaptionFontBold:"0",showBorder:"0",bgColor:"#ffffff",showShadow:"0",canvasBgColor:"#ffffff",showCanvasBorder:"0",useplotgradientcolor:"0",useRoundEdges:"0",showPlotBorder:"0",showAlternateHGridColor:"0",showAlternateVGridColor:"0",
 toolTipColor:"#ffffff",toolTipBorderThickness:"0",toolTipBgColor:"#000000",toolTipBgAlpha:"80",toolTipBorderRadius:"2",toolTipPadding:"5",legendBgAlpha:"0",legendBorderAlpha:"0",legendShadow:"0",legendItemFontSize:"10",legendItemFontColor:"#666666",legendCaptionFontSize:"9",divlineAlpha:"100",divlineColor:"#999999",divlineThickness:"1",divLineIsDashed:"1",divLineDashLen:"1",divLineGapLen:"1",scrollheight:"10",flatScrollBars:"1",scrollShowButtons:"0",scrollColor:"#cccccc",showHoverEffect:"1",valueFontSize:"10",
 showXAxisLine:"1",xAxisLineThickness:"1",xAxisLineColor:"#999999"},dataset:[{}],trendlines:[{}]},geo:{chart:{showLabels:"0",fillColor:"#0075c2",showBorder:"1",borderColor:"#eeeeee",borderThickness:"1",borderAlpha:"50",entityFillhoverColor:"#0075c2",entityFillhoverAlpha:"80",connectorColor:"#cccccc",connectorThickness:"1.5",markerFillHoverAlpha:"90"}},pie2d:{chart:{placeValuesInside:"0",use3dlighting:"0",valueFontColor:"#333333",captionPadding:"15"},data:function(c,a,b){a=window.Math;return{alpha:100-
@@ -54,7 +54,7 @@ showXAxisLine:"1",xAxisLineThickness:"1",xAxisLineColor:"#999999"},dataset:[{}],
                             color;
                         if (value > parseInt(result)) { //alert()
                             color = '#ff0000';
-                        } else if (value <= 0) {                           
+                        } else if (value <= 0) {
                             color = '#22B14C';
                         }
                         return {color: color};
@@ -69,9 +69,9 @@ cylinder:{chart:{cylFillColor:"#0075c2"}},sparkline:{chart:{linecolor:"#0075c2"}
 
 // end new theme to drow different colors for negative and positive value
 
-        
 
-    // new theme to drow different colors for negative and positive value    
+
+    // new theme to drow different colors for negative and positive value
         FusionCharts.register("theme",{name:"colorDataP",theme:{base:{chart:{paletteColors:"#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000,#0e948c,#8cbb2c,#f3de00,#c02d00,#5b0101",labelDisplay:"auto",baseFontColor:"#333333",baseFont:"Helvetica Neue,Arial",captionFontSize:"14",subcaptionFontSize:"14",subcaptionFontBold:"0",showBorder:"0",bgColor:"#ffffff",showShadow:"0",canvasBgColor:"#ffffff",showCanvasBorder:"0",useplotgradientcolor:"0",useRoundEdges:"0",showPlotBorder:"0",showAlternateHGridColor:"0",showAlternateVGridColor:"0",
 toolTipColor:"#ffffff",toolTipBorderThickness:"0",toolTipBgColor:"#000000",toolTipBgAlpha:"80",toolTipBorderRadius:"2",toolTipPadding:"5",legendBgAlpha:"0",legendBorderAlpha:"0",legendShadow:"0",legendItemFontSize:"10",legendItemFontColor:"#666666",legendCaptionFontSize:"9",divlineAlpha:"100",divlineColor:"#999999",divlineThickness:"1",divLineIsDashed:"1",divLineDashLen:"1",divLineGapLen:"1",scrollheight:"10",flatScrollBars:"1",scrollShowButtons:"0",scrollColor:"#cccccc",showHoverEffect:"1",valueFontSize:"10",
 showXAxisLine:"1",xAxisLineThickness:"1",xAxisLineColor:"#999999"},dataset:[{}],trendlines:[{}]},geo:{chart:{showLabels:"0",fillColor:"#0075c2",showBorder:"1",borderColor:"#eeeeee",borderThickness:"1",borderAlpha:"50",entityFillhoverColor:"#0075c2",entityFillhoverAlpha:"80",connectorColor:"#cccccc",connectorThickness:"1.5",markerFillHoverAlpha:"90"}},pie2d:{chart:{placeValuesInside:"0",use3dlighting:"0",valueFontColor:"#333333",captionPadding:"15"},data:function(c,a,b){a=window.Math;return{alpha:100-
@@ -79,9 +79,9 @@ showXAxisLine:"1",xAxisLineThickness:"1",xAxisLineColor:"#999999"},dataset:[{}],
                     data: function (index, dataItem, dataLength) {
                         var value = parseInt(dataItem.value),
                             colorp;
-                        if (value < parseInt(proximityresult)) { 
+                        if (value < parseInt(proximityresult)) {
                             colorp = '#ff0000';
-                        } else if (value >= parseInt(proximityresult)) {                           
+                        } else if (value >= parseInt(proximityresult)) {
                             colorp = '#22B14C';
                         }
                         return {color: colorp};
@@ -104,10 +104,10 @@ function getChartHeight(numrows) {
     // alert("getChartHeight");
   if(numrows <=4) {
     return 250;
-    
+
   } else if(numrows > 4 && numrows <= 8) {
     return 300;
-    
+
   } else if(numrows > 8 && numrows <= 16) {
     return 600;
 
@@ -122,7 +122,7 @@ function getChartHeight(numrows) {
 
   } else if(numrows > 128 && numrows <= 256) {
     return 5400;
-    
+
   } else {
     return 6400;
 
@@ -132,12 +132,12 @@ function getChartHeight(numrows) {
 
 
 function change_report_period(){
-    var time = $("#brandreportperiod").val();     
+    var time = $("#brandreportperiod").val();
     if(time == 'daterange') {
-        $('#custom').show();             
+        $('#custom').show();
     } else {
         $('#custom').hide();
-        renderCharts(time,'','')        
+        renderCharts(time,'','')
     }
 }
 
@@ -145,7 +145,7 @@ function custom_report_period(){
     var from = $('#venuefrom').val();
     var to = $('#venueto').val();
 
-    renderCharts('daterange',from,to)    
+    renderCharts('daterange',from,to)
 }
 
 
@@ -159,12 +159,12 @@ function renderCharts(time,start,end){
             dataType: 'json',
             data : { 'period':time,'start':start,'end':end },
             success: function(data) {
-                
+
                 $("#report_period").html(data.report_period);
                 $("#report_name_date").val(data.report_name_date);
 
                 if(data.currentInstance == 'NR01' || data.currentInstance == 'NR02' ){
-                    
+
                     //-------------- Staff On Time -------------
                     var chartProperties = {
                         "caption": "",
@@ -438,9 +438,9 @@ function printpreview() {
                 success     : function(result) {
                     $('#loadingDiv').hide();
                 }
-                
+
             });
-        
+
         var fusionImages  = fusionImg.responseJSON.result_img;
             $("span[class='fusioncharts-container']").each(function(index, elem){
                 $(this).removeAttr('style');
@@ -450,10 +450,10 @@ function printpreview() {
                 $(this).html('<img src="'+image_path+'">');
 
             });
-            
+
             var i = 1;
             $("#fusion-chart .col-sm-6").each(function(index, elem){
-                
+
                 if(i%2 == 0) {
                     $(this).addClass('col-6-right-al');
                 } else {
@@ -466,36 +466,36 @@ function printpreview() {
 }
 
 function exception_change_report_period(){
-    var time = $("#brandreportperiod").val();     
+    var time = $("#brandreportperiod").val();
     if(time == 'daterange') {
-        $('#custom').show();             
+        $('#custom').show();
     } else {
         $('#custom').hide();
-        renderexceptionCharts(time,'','')        
+        renderexceptionCharts(time,'','')
     }
 }
 
 function exception_custom_report_period(){
-    var time = $("#brandreportperiod").val(); 
+    var time = $("#brandreportperiod").val();
     var from = $('#venuefrom').val();
     var to = $('#venueto').val();
 
-    renderexceptionCharts(time,from,to)    
+    renderexceptionCharts(time,from,to)
 }
 
 function renderexceptionCharts(time,start,end){
-    
+
     $.ajax({
 
             url: pathname+'hiptna/periodExceptionchartJsondata',
             type: 'get',
             dataType: 'json',
             data : { 'period':time,'start':start,'end':end },
-            success: function(data) { 
+            success: function(data) {
 
-                
+
                 fullData = data;
-                
+
                 //absent
                 var chartProperties = {
                       "caption": "",
@@ -504,7 +504,7 @@ function renderexceptionCharts(time,start,end){
                       "rotatevalues": "1",
                       "theme": "zune",
                       "link": "JavaScript:membergraph("+data.external_user_id+")"
-                
+
                   };
                   apiChart = new FusionCharts({
                       type: 'bar2d',
@@ -538,7 +538,7 @@ function renderexceptionCharts(time,start,end){
                     dataSource: {
                         "chart": chartProperties,
                   "data": data.staff_lateness
-                  
+
                     }
                 });
                 apiChart.render();
@@ -575,7 +575,7 @@ function renderexceptionCharts(time,start,end){
               });
               var yaxisabsent = (most_absent.length == 0 || most_absent[0].value < 2 ) ? 5 : most_absent[0].value;
               //get least 5 absent details
-              var max_length = data.staff_absent.length; 
+              var max_length = data.staff_absent.length;
               var min_length = max_length - 5;
               var least_absent = [];
               $.each(data.staff_absent.slice(min_length,max_length).reverse(), function(i, list) {
@@ -642,7 +642,7 @@ function renderexceptionCharts(time,start,end){
               });
               var yaxislateness = (most_late.length == 0 || most_late[0].value < 2 ) ? 5 : most_late[0].value;
               //get least 5 lateness details
-              var max_length_l = data.staff_lateness.length; 
+              var max_length_l = data.staff_lateness.length;
               var min_length_l = max_length_l - 5;
               var least_late = [];
               $.each(data.staff_lateness.slice(min_length_l,max_length_l).reverse(), function(i, list) {
@@ -701,7 +701,7 @@ function renderexceptionCharts(time,start,end){
                   apiChart.render();
 
                       //------------------------
-                  
+
               //get most 5 proximity details
               var most_proximity = [];
               $.each(data.staff_proximity.slice(0,5), function(i, list) {
@@ -709,7 +709,7 @@ function renderexceptionCharts(time,start,end){
               });
               var yaxisproximity = (most_proximity.length == 0 || most_proximity[0].value < 2 ) ? 5 : most_proximity[0].value;
               //get least 5 proximity details
-              var max_length_p = data.staff_proximity.length; 
+              var max_length_p = data.staff_proximity.length;
               var min_length_p = max_length_p - 5;
               var least_proximity = [];
               $.each(data.staff_proximity.slice(min_length_p,max_length_p).reverse(), function(i, list) {
@@ -767,7 +767,7 @@ function renderexceptionCharts(time,start,end){
                   });
                   apiChart.render();
 
-                    
+
                     //get most 5 early leaving details
                     var most_early_leaving = [];
                     $.each(data.staff_early_leaving.slice(0,5), function(i, list) {
@@ -775,7 +775,7 @@ function renderexceptionCharts(time,start,end){
                     });
                     var yaxisearly_leaving = (most_early_leaving.length == 0 || most_early_leaving[0].value < 2 ) ? 5 : most_early_leaving[0].value;
                     //alert(yaxisearly_leaving);//get least 5 proximity details
-                    var max_length_e = data.staff_early_leaving.length; 
+                    var max_length_e = data.staff_early_leaving.length;
                     var min_length_e = max_length_e - 5;
                     var least_early_leaving = [];
                     $.each(data.staff_early_leaving.slice(min_length_e,max_length_e).reverse(), function(i, list) {
@@ -857,7 +857,7 @@ function renderexceptionCharts(time,start,end){
             type: 'get',
             dataType: 'json',
             data : { 'period':time,'start':start,'end':end,'staff_id':staff_id },
-            success: function(data) { 
+            success: function(data) {
 
                 $("#member_popup").addClass('in');
                 $("#member_popup").show();
@@ -869,7 +869,7 @@ function renderexceptionCharts(time,start,end){
                       "yAxisName": "Absence",
                       "rotatevalues": "1",
                       "theme": "zune"
-                
+
                   };
                   apiChart = new FusionCharts({
                       type: 'column2d',
@@ -902,7 +902,7 @@ function renderexceptionCharts(time,start,end){
                     dataSource: {
                         "chart": chartProperties,
                   "data": data.staff_lateness
-                  
+
                     }
                 });
                 apiChart.render();
@@ -953,7 +953,7 @@ function getParameterByName(name, url) {
           "yAxisName": "Absence",
           "rotatevalues": "1",
           "theme": "zune"
-    
+
       };
       apiChart = new FusionCharts({
           type: 'column2d',
@@ -966,7 +966,7 @@ function getParameterByName(name, url) {
               "data": data.staff_absent
           }
       });
-      apiChart.render();     
+      apiChart.render();
 }*/
 
 /*function displayMemberLateness(data) {
@@ -987,7 +987,7 @@ function getParameterByName(name, url) {
             dataSource: {
                 "chart": chartProperties,
           "data": data.staff_lateness
-          
+
             }
         });
         apiChart.render();
@@ -1033,7 +1033,7 @@ function displayMemberAbsenceToday(data) {
     $("#member_absence").html($boxcode);
 }
 
- 
+
 function displayMemberLatenessToday(data) {
 
     $boxcode='\
@@ -1051,7 +1051,7 @@ function displayMemberLatenessToday(data) {
     $("#member_lateness").html($boxcode);
 
 }
-                
+
 function displayMemberProximityToday(data) {
 
     $boxcode='\
@@ -1112,7 +1112,7 @@ function displayMemberLateness(data) {
         dataSource: {
             "chart": chartProperties,
       "data": data.staff_lateness
-      
+
         }
     });
     apiChart.render();
@@ -1151,7 +1151,7 @@ function displayMemberProximity(data) {
                 ]
           }
     });
-    apiChart.render();  
+    apiChart.render();
 }
 
 
@@ -1181,14 +1181,14 @@ function membergraph(staff_id) {
         type: 'get',
         dataType: 'json',
         data : { 'period':time,'start':start,'end':end,'staff_id':staff_id },
-        success: function(data) { 
+        success: function(data) {
 
             $("#member_popup").addClass('in');
             $("#member_popup").show();
-            $("#memberHeader").html(data.staff_absent[0].name);            
+            $("#memberHeader").html(data.staff_absent[0].name);
             $("#report_date_details").html(data.report_date);
             //$("#abc").html('blah');
-            
+
 
             if(time == "today") {
 
