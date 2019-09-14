@@ -163,7 +163,7 @@ class Picknpay extends Eloquent {
         ->where('end_time', ">=", $startDate)
         ->where('end_time', "<=", $endDate)
         ->whereraw("staff_id = '$staffID'")
-        ->groupBy(DB::raw("DATE_FORMsAT(created_at, '%Y-%m-%d')"))
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
 
 
