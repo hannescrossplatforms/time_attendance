@@ -294,7 +294,7 @@ class HippnpController extends \BaseController {
         array_push($timeList, ['label' => "16PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'end')]);
         array_push($timeList, ['label' => "17PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'end')]);
 
-        $data['time_list'] = json_encode($timeList);
+        $data['time_list'] = $timeList;
 
         //All staff memebers present in database for selected period.
 
