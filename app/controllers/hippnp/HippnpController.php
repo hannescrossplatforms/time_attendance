@@ -370,8 +370,8 @@ class HippnpController extends \BaseController {
 
         //All staff memebers present in database for selected period.
 
-        $startDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start')
-        $endDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end')
+        $startDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
+        $endDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
         $allStaff = \Picknpay::fetchAllStaff('today', $startDate, $endDate);
 
         foreach ($allStaff as $staff) {
