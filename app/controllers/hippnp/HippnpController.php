@@ -376,6 +376,7 @@ class HippnpController extends \BaseController {
 
         $data["test1"] = $startDate;
         $data["test2"] = $endDate;
+        $data["testallstaff"] = $allStaff;
 
         foreach ($allStaff as $staff) {
 
