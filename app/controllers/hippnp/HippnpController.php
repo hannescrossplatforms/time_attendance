@@ -374,7 +374,8 @@ class HippnpController extends \BaseController {
         $allStaff = \Picknpay::fetchAllStaff('today', $startDate, $endDate);
 
 
-        $data["testallstaff"] = $allStaff;
+        $data["test1"] = $startDate;
+        $data["test2"] = $endDate;
 
         foreach ($allStaff as $staff) {
 
