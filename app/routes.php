@@ -310,6 +310,7 @@ Route::get('vicinity/venue/{id}', array('uses' => 'hipjam\HipjamController@vicin
 Route::get('vicinity/venue/{id}/activate', array('uses' => 'hipjam\HipjamController@vicinityVenueActivate', 'as' => 'hipjam_editvicinityvenueactivate'))->before('auth');
 Route::post('vicinity/venue/{id}/update', array('uses' => 'hipjam\HipjamController@updateVicinityVenue', 'as' => 'hipjam_updatevicinityvenue'))->before('auth');
 Route::get('vicinity/settings', array('uses' => 'hipjam\HipjamController@vicinitySettings', 'as' => 'hipjam_vicinitysettings'))->before('auth');
+Route::get('vicinity/users/add', array('uses' => 'hipjam\HipjamController@vicinityAddUser', 'as' => 'hipjam_vicinityadduser'))->before('auth');
 
 
 // END VICNITY CHANGES

@@ -341,8 +341,15 @@ class HipjamController extends \BaseController
         $venue = new \Venue();
         $data['user'] = $venue->getUserData();
         $data['billboards'] = \Venue::where('track_type', '=', "billboard")->get();
+
         $sanitized_sitename = preg_replace("/[^a-zA-Z]+/", "", \Venue::find($id)->sitename);
-        $data['sensor_name'] = substr($sanitized_sitename, 0, 15).$sensors->count();
+        $sanitized_sitename = str_replace("VICINITY", "", $sanitized_sitename);
+        if ($sensors->count() == 0) {
+            $data['sensor_name'] = substr($sanitized_sitename, 0, 15);
+        } else {
+            $data['sensor_name'] = substr($sanitized_sitename, 0, 15).$sensors->count();
+        }
+
         return \View::make('hipjam.vicinityvenue')->with('data', $data);
     }
 
@@ -375,7 +382,13 @@ class HipjamController extends \BaseController
         $data['user'] = $venue->getUserData();
         $data['billboards'] = \Venue::where('track_type', '=', "billboard")->get();
         $sanitized_sitename = preg_replace("/[^a-zA-Z]+/", "", \Venue::find($id)->sitename);
-        $data['sensor_name'] = substr($sanitized_sitename, 0, 15).$sensors->count();
+        $sanitized_sitename = str_replace("VICINITY", "", $sanitized_sitename);
+        if ($sensors->count() == 0) {
+            $data['sensor_name'] = substr($sanitized_sitename, 0, 17);
+        } else {
+            $data['sensor_name'] = substr($sanitized_sitename, 0, 17).$sensors->count();
+        }
+        
         return \View::make('hipjam.vicinityvenue')->with('data', $data);
     }
 
@@ -397,12 +410,57 @@ class HipjamController extends \BaseController
         $venue->longitude = $form_data->longitude; // Venue Longitude (GPS co-ord)
 
         $venue->timezone = $form_data->timezone; // Time Zone
+        $venue->jam_activated = true;
         $result = $venue->save();
+
+
 
         // Sync new venue data with TRACK
         $this->saveVenueInTrackDb($venue);
 
         print_r($result);
+    }
+
+    public function vicinityAddUser() {
+        $data = array();
+        $data['user'] =  $user = new \User();
+        $data['edit'] = false;
+        $data['currentMenuItem'] = "User Admin";
+
+        $levels = \Level::All();
+        $level_names = array();
+        foreach($levels as $level) {
+            $level_names[$level->code] = $level->name;
+        }
+        $data['level_names'] = $level_names;
+
+        $brands = \Brand::All();
+        $data['allbrands'] = $brands;
+        $data['brandArray'] = array(); //TAKE THIS OUT WHEN DONE
+
+        $data['products']['HipWIFI'] = false;
+        $data['products']['HipRM'] = false;
+        $data['products']['HipJAM'] = false;
+        $data['products']['HipENGAGE'] = false;
+        $data['products']['HipREPORTS'] = false;
+        $data['products']['HipTnA'] = false;
+
+        $data['permissions']['ques_rw'] = false;
+        $data['permissions']['media_rw'] = false;
+        $data['permissions']['uru_rw'] = false;
+        $data['permissions']['rep_rw'] = false;
+
+        $data['venues'] = \Venue::where('brand_id', '=', '165')->get();
+
+        $data['countries'] = \Countrie::All();
+
+        $data['user']->level_code = "Brand Admin";
+
+        // foreach($data['allbrands'] as $brand) {
+        //     error_log("============= " . $brand->name);
+        // }
+
+        return \View::make('hipjam.vicinityadduser')->with('data', $data);
     }
 
     public function vicinitySettings()
@@ -1116,8 +1174,8 @@ class HipjamController extends \BaseController
     
         // shell_exec($command);
 
-        // print_r(json_encode($data));
-        print_r($output);
+        print_r(json_encode($data));
+        // print_r($output);
     }
 
     public function updateSvrScannerdata()
