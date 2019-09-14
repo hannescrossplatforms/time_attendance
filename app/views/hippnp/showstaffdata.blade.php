@@ -29,15 +29,9 @@
                     <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
                         <label>Report Period</label>
                     </div>
-                    <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                        <select id="brandreportperiod" onchange="change_report_period()" class="form-control"
-                            name="reportperiod">
-                            <option value="today">Today</option>
-                            <option value="rep7day">This Week</option>
-                            <option value="repthismonth">This month</option>
-                            <option value="replastmonth">Last month</option>
-                            <option value="daterange">Custom range</option>
-                        </select>
+                    <div class="col-md-2" style="width:25%; padding:0px 0px 0px 6px;">
+                        <input type="text" class="form-control datepicker" name="venueto" id="venueto"
+                            placeholder="ToDate">
                     </div>
                 </div>
 
@@ -128,7 +122,7 @@
                 "rotatevalues": "1",
                 "theme": "zune"
             };
-            debugger;
+
             apiChart = new FusionCharts({
                 type: 'msline',
                 renderAt: 'staff_beacon_activity',
