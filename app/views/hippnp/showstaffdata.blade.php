@@ -99,15 +99,47 @@
         $("#selectedDate").datepicker("setDate", new Date());
 
         $('#selectedDate').change(function () {
-            debugger;
-            alert( $('#selectedDate').val());
 
+            let date = $('#selectedDate').val();
 
+            $.ajax({
+                url: pathname + 'hippnp/periodchartJsondataStaffAjax',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    'date': date
+                },
+                success: function(data) {
 
+                    var chartProperties = {
+                        "caption": "",
+                        "xAxisName": "Time of day",
+                        "yAxisName": "Total dwell time (minutes)",
+                        "paletteColors": "#0075c2,#f8b81d,#3CB371",
+                        "rotatevalues": "1",
+                        "theme": "zune"
+                    };
 
+                    apiChart = new FusionCharts({
+                        type: 'msline',
+                        renderAt: 'staff_beacon_activity',
+                        width: '100%',
+                        height: 350,
+                        dataFormat: 'json',
+                        dataSource: {
+                            "chart": chartProperties,
+                            "categories": [{
+                                "category": data['time_list']
+                            }],
+                            "dataset": data['time_list_data']
 
+                        }
+                    });
+                    apiChart.render();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
 
-
+                }
 
         });
 
