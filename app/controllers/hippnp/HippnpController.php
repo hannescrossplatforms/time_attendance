@@ -345,16 +345,16 @@ class HippnpController extends \BaseController {
 
         $timeList = array();
 
-        array_push($datesList, ['label' => "9AM"]);
-        array_push($datesList, ['label' => "10AM"]);
-        array_push($datesList, ['label' => "11AM"]);
-        array_push($datesList, ['label' => "12PM"]);
-        array_push($datesList, ['label' => "12PM"]);
-        array_push($datesList, ['label' => "13PM"]);
-        array_push($datesList, ['label' => "14PM"]);
-        array_push($datesList, ['label' => "15PM"]);
-        array_push($datesList, ['label' => "16PM"]);
-        array_push($datesList, ['label' => "17PM"]);
+        array_push($timeList, ['label' => "9AM"]);
+        array_push($timeList, ['label' => "10AM"]);
+        array_push($timeList, ['label' => "11AM"]);
+        array_push($timeList, ['label' => "12PM"]);
+        array_push($timeList, ['label' => "12PM"]);
+        array_push($timeList, ['label' => "13PM"]);
+        array_push($timeList, ['label' => "14PM"]);
+        array_push($timeList, ['label' => "15PM"]);
+        array_push($timeList, ['label' => "16PM"]);
+        array_push($timeList, ['label' => "17PM"]);
 
         $data['time_list'] = $timeList;
 
