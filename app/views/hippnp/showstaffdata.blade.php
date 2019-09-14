@@ -133,7 +133,7 @@
                 type: 'line',
                 renderAt: 'staff_beacon_activity',
                 width: '400',
-                height: '4000',
+                height: '400',
                 dataFormat: 'json',
                 dataSource: {
                     "chart": chartProperties,
