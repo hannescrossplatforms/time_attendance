@@ -334,67 +334,67 @@ class HippnpController extends \BaseController {
 
     }
 
-    public function periodchartJsondataStaff($id){
+    public function periodchartJsondataStaff(){
         //todo today
         $period = 'today';
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['report_period'] = 'today';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        $data['staff_id'] = $id;
+        // $data['staff_id'] = $id;
 
 
 
 
-        $finalChartObjectStaff = array();
+        // $finalChartObjectStaff = array();
 
-        $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($id);
-        $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, null, null)
-            ->map(function($row) {
-                    return ['label' => $row['created_att']];
-            });
+        // $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($id);
+        // $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, null, null)
+        //     ->map(function($row) {
+        //             return ['label' => $row['created_att']];
+        //     });
 
-        $data['all_staff'] = $allStaff;
-        $data['staff_list'] = $datesForAllStaff; //////////TOP ONE
+        // $data['all_staff'] = $allStaff;
+        // $data['staff_list'] = $datesForAllStaff; //////////TOP ONE
 
-        foreach ($allStaff as $staff) {
+        // foreach ($allStaff as $staff) {
 
-            $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->id);
-            $stafId = $staffObj->id;
-            $staffName = $staffObj->name;
-            $data['staff_name'] = $staffName;
-            $dataArray = array();
+        //     $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->id);
+        //     $stafId = $staffObj->id;
+        //     $staffName = $staffObj->name;
+        //     $data['staff_name'] = $staffName;
+        //     $dataArray = array();
 
-            foreach ( $datesForAllStaff as $date ) {
-                $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $stafId, null, null, "SUM");
-                if (count($response) == 0) {
-                    $empty_array = array(['value' => '0', 'id' => $stafId]);
-                    array_push($dataArray, $empty_array);
-                } else {
+        //     foreach ( $datesForAllStaff as $date ) {
+        //         $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $stafId, null, null, "SUM");
+        //         if (count($response) == 0) {
+        //             $empty_array = array(['value' => '0', 'id' => $stafId]);
+        //             array_push($dataArray, $empty_array);
+        //         } else {
 
-                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
-                    array_push($dataArray, $objectArr);
-                }
+        //             $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+        //             array_push($dataArray, $objectArr);
+        //         }
 
-            }
+        //     }
 
-            $obj[] = [
-                'seriesname' => $staffName,
-                'data' => $dataArray
-            ];
+        //     $obj[] = [
+        //         'seriesname' => $staffName,
+        //         'data' => $dataArray
+        //     ];
 
-            array_push($finalChartObjectStaff, $obj);
+        //     array_push($finalChartObjectStaff, $obj);
 
-        };
+        // };
 
-        if (count($finalChartObjectStaff) > 0) {
-            $data['staff_list_data'] = json_encode($finalChartObjectStaff[count($finalChartObjectStaff)- 1]);
-        }
-        else {
-            $data['staff_list_data'] = json_encode([]); ////DATASET
-        }
+        // if (count($finalChartObjectStaff) > 0) {
+        //     $data['staff_list_data'] = json_encode($finalChartObjectStaff[count($finalChartObjectStaff)- 1]);
+        // }
+        // else {
+        //     $data['staff_list_data'] = json_encode([]); ////DATASET
+        // }
 
-        $obj = null;
+        // $obj = null;
 
         return \View::make('hippnp.showstaffdata')->with('data', $data);
 
