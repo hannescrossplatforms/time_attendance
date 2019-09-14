@@ -92,7 +92,7 @@
     <!--     Code for staff member popup graphs -->
     <div id="memberGraphModalhtml"> </div>
     <div id="memberModalLinkDiv"> </div>
-    <script src="{{ asset('js/hiptna/membergraphs.js') }}"></script>
+    <!-- <script src="{{ asset('js/hiptna/membergraphs.js') }}"></script> -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
