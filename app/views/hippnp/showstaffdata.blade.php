@@ -127,11 +127,10 @@
                 "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune",
-                "type": "line"
             };
             debugger;
             apiChart = new FusionCharts({
-                type: 'mscolumn2d',
+                type: 'line',
                 renderAt: 'staff_beacon_activity',
                 width: '400',
                 height: '350',
