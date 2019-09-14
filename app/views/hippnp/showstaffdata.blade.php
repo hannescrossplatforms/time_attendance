@@ -139,7 +139,7 @@
                     "categories": [{
                         "category": <?php echo $data['time_list']; ?>
                     }],
-                    "dataset": <?php echo $data['category_list_data']; ?>
+                    "dataset": "";
 
                 }
             });
