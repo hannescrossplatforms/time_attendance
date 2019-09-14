@@ -24,114 +24,63 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
           <h1 class="page-header">Staff Lookup</h1>
 
-          <form class="form-inline" role="form" style="margin-bottom: 15px;">
-
-            <div class="form-group">
-              <label class="sr-only" for="exampleInputEmail2">Surname</label>
-              <input type="text" class="form-control" id="src-surname" placeholder="Surname">
-            </div>
-            <div class="form-group">
-              <label  class="sr-only" for="exampleInputEmail2">First Names</label>
-              <input type="text" class="form-control" id="src-firstnames" placeholder="First Names">
-            </div>
-
-            <button id="filter" type="submit" class="btn btn-primary">Filter</button>
-            <button id="reset" type="submit" class="btn btn-default">Reset</button>
-
-          </form>
-
-          <div class="table-responsive">
-              <table id="staffTable" class="table table-striped"> </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h6 class="modal-title" id="myModalLabel">Send Message</h6>
-          </div>
-          <div class="modal-body">
-            <textarea id="content" class="form-control no-radius" placeholder="Message content " rows="4" cols="100"></textarea>
-            <br>
-            <div class="">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    Image
-                  </div>
-                  <div class="panel-body">
-
-                    <div class="col-md-4 pushpic">
-                      <div class="form-group">
-                        <div id="pushimageedit" style="display:none"></div>
-                        <input id="mbimage" type="file" name="mbimage" form="mbimageform">
-                          <a  id="mb-file" href="#" class="btn btn-default btn-sm " data-toggle="modal" data-target="#mobileBgModal"  >
-                            Upload new image
-                          </a>
-                      </input>
+          <div class="row">
+                <div class="col-md-4" style="width:30%;">
+                    <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
+                        <label>Report Period</label>
                     </div>
-                  </div>
-
+                    <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
+                        <select id="brandreportperiod" onchange="change_report_period()" class="form-control"
+                            name="reportperiod">
+                            <option value="today">Today</option>
+                            <option value="rep7day">This Week</option>
+                            <option value="repthismonth">This month</option>
+                            <option value="replastmonth">Last month</option>
+                            <option value="daterange">Custom range</option>
+                        </select>
+                    </div>
                 </div>
-              </div>
+
+                <!--        printpreview button start-->
+                <div id="printButton" class="col-md-4" style="width:30%; float: right;">
+                    <!-- <button type="button" class="btn btn-primary">View Printable Page</button> -->
+                </div>
+                <!--        print preview button end-->
+
+                <div class="col-md-8" id="custom" style="display:none; width:70%;">
+                    <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
+                        <input type="text" class="form-control datepicker" name="venuefrom" id="venuefrom"
+                            placeholder="FromDate">
+                    </div>
+                    <div class="col-md-2" style="width:25%; padding:0px 0px 0px 6px;">
+                        <input type="text" class="form-control datepicker" name="venueto" id="venueto"
+                            placeholder="ToDate">
+                    </div>
+                    <div class="col-md-2" style="width:40%; padding:0px 0px 0px 6px;">
+                        <button type="submit" class="form-control" onclick="custom_report_period()">Submit Date
+                            Range</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="modal-footer">
-              <button id="sendMessage" class="sendMessage" type="button" class="btn btn-primary">Send</button>
-              <a href="" class="btn btn-default" data-dismiss="modal">Cancel</a>
-            </div>
-          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
     </div>
 
-
-     <!--     Code for staff member popup graphs -->
-    <div id="member_popup" class="modal fade " id="modal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none; overflow:auto;">
-      <div class="modal-dialog">
-        <div class="modal-content" style="width:130%;">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true">×</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <h6 class="modal-title" id="myModalLabel"><div id="memberHeader"></div></h6>
-            <!--        printpreview button start-->
-                  <div id="printButton" class="col-md-4" style="width:20%; margin-right: 55px; margin-top: -30px; float: right;">
-                      <button type="button" class="btn btn-primary" onclick="printpreview()">View Printable Page</button>
-                  </div>
-                  <!--        print preview button end-->
-          </div>
-          <div class="modal-body" id="modal-body-view">
-
-            <!-- <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;"><!-- This should look the same as in Dashboard -->
-            <div>
-              <select id="brandreportperiod" name="reportperiod">
-                  <option value="today">Today</option>
-                  <option value="rep7day" selected>This Week</option>
-                  <option value="repthismonth" >This month</option>
-                  <option value="replastmonth">Last month</option>
-                  <option value="daterange">Custom range</option>
-              </select>
-              <div id="report_date_details" style="display:none">
-
-
-              </div>
-            </div>
-
-            <div class="clear"></div>
-
-            <div id="member_absence"></div>
-            <div id="member_lateness"></div>
-            <div id="member_proximity"></div>
-
-          </div>
-        </div>
-      </div>
-    </div>
 
 
     <!--     Code for staff member popup graphs -->
