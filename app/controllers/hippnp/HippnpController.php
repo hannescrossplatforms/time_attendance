@@ -278,7 +278,7 @@ class HippnpController extends \BaseController {
         $data['currentMenuItem'] = "Dashboard";
         $data['report_period'] = 'today';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        $dateSelected = $period = Input::get('date');
+        $dateSelected = Input::get('date');
 
         $finalChartObjectStaff = array();
 
@@ -349,7 +349,6 @@ class HippnpController extends \BaseController {
         $json = json_encode($data);
 
         print_r($json);
-
 
 
 

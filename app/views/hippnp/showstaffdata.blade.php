@@ -140,6 +140,7 @@
                         }
                     });
                     apiChart.render();
+
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
 
