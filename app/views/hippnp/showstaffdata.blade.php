@@ -98,9 +98,7 @@
 
         $("#selectedDate").datepicker("setDate", new Date());
 
-        function datePicked() {
-            alert("0");
-        }
+
 
         $(document).ready(function() {
 
@@ -129,6 +127,10 @@
                 }
             });
             apiChart.render();
+
+            function datePicked() {
+                alert("0");
+            }
 
         });
 
