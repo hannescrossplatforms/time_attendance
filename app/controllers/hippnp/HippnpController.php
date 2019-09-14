@@ -335,18 +335,30 @@ class HippnpController extends \BaseController {
     }
 
     public function periodchartJsondataStaff(){
-        //todo today
         $period = 'today';
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['report_period'] = 'today';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        // $data['staff_id'] = $id;
+
+        $finalChartObjectStaff = array();
+
+        $timeList = array();
+
+        array_push($datesList, ['label' => "9AM"]);
+        array_push($datesList, ['label' => "10AM"]);
+        array_push($datesList, ['label' => "11AM"]);
+        array_push($datesList, ['label' => "12PM"]);
+        array_push($datesList, ['label' => "12PM"]);
+        array_push($datesList, ['label' => "13PM"]);
+        array_push($datesList, ['label' => "14PM"]);
+        array_push($datesList, ['label' => "15PM"]);
+        array_push($datesList, ['label' => "16PM"]);
+        array_push($datesList, ['label' => "17PM"]);
+
+        $data['time_list'] = $timeList;
 
 
-
-
-        // $finalChartObjectStaff = array();
 
         // $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($id);
         // $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, null, null)
@@ -355,7 +367,7 @@ class HippnpController extends \BaseController {
         //     });
 
         // $data['all_staff'] = $allStaff;
-        // $data['staff_list'] = $datesForAllStaff; //////////TOP ONE
+
 
         // foreach ($allStaff as $staff) {
 

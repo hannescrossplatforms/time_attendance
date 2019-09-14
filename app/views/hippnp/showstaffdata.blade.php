@@ -24,7 +24,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
           <h1 class="page-header">Staff Lookup</h1>
 
-          <div class="row">
+            <div class="row">
                 <div class="col-md-4" style="width:30%;">
                     <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
                         <label>Report Period</label>
@@ -63,18 +63,24 @@
                 </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
+            <div id="fusion-chart">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="chart-wrapper">
+                            <div class="chart-title venuecolheading">Staff beacon activity</div>
+                            <div class="chart-stage">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="chart-stage">
+                                            <div id="staff_beacon_activity">Loading...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
         </div>
@@ -112,12 +118,39 @@
     <script>
 
 
+        $(document).ready(function() {
+
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Category",
+                "yAxisName": "Total dwell time (minutes)",
+                "rotatevalues": "1",
+                "theme": "fusion"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'mscolumn2d',
+                renderAt: 'staff_beacon_activity',
+                width: '400',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "categories": [{
+                        "category": <?php echo $data['time_list']; ?>
+                    }],
+                    "dataset": <?php echo $data['category_list_data']; ?>
+
+                }
+            });
+            apiChart.render();
+
+        });
+
+
+
       $(function() {
 
-
-      // $(document).delegate('#buildtable', 'click', function() {
-      //   showStaffTable(staffJason);
-      // });
 
       $(document).delegate('#reset', 'click', function() {
         showStaffTable(staffJason);
@@ -177,7 +210,9 @@
           $("#viewMyPage").submit();
       }
 
-    </script>
+
+
+</script>
 
     <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hiptnaStaffLookupDownload') }}" method="post">
       <input type="hidden" name="myPageone" id="myPageone">
