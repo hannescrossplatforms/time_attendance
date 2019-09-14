@@ -99,7 +99,16 @@
         $("#selectedDate").datepicker("setDate", new Date());
 
         $('#selectedDate').change(function () {
-            alert("0");
+
+            alert($this.val());
+
+
+
+
+
+
+
+
         });
 
 
