@@ -356,7 +356,7 @@ class HippnpController extends \BaseController {
         array_push($timeList, ['label' => "16PM"]);
         array_push($timeList, ['label' => "17PM"]);
 
-        $data['time_list'] = $timeList;
+        $data['time_list'] = json_encode($timeList);
 
 
 
