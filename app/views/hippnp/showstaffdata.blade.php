@@ -114,6 +114,7 @@
                 },
                 success: function(data) {
 
+                    debugger;
                     var chartProperties = {
                         "caption": "",
                         "xAxisName": "Time of day",

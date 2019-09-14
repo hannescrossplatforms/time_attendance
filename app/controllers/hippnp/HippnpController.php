@@ -437,14 +437,6 @@ class HippnpController extends \BaseController {
 
         $dateSelected = "2019-09-14";
 
-        // $obj[] = ['label' => "9AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')];
-        // $testing = array() ;
-        // $obj = [
-        //     'seriesname' => $staffName,
-        //     'data' => $dataArray
-        // ];
-
-        // array_push($timeList, $obj);
         array_push($timeList, ['label' => "9AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
         array_push($timeList, ['label' => "10AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
         array_push($timeList, ['label' => "11AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'end')]);
@@ -512,10 +504,6 @@ class HippnpController extends \BaseController {
         }
 
         $obj = null;
-
-        // $json = json_encode($data);
-
-        // print_r($json);
 
         return \View::make('hippnp.showstaffdata')->with('data', $data);
 
