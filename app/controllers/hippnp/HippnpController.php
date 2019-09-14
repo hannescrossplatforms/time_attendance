@@ -412,7 +412,7 @@ class HippnpController extends \BaseController {
             $data['time_list_data'] = json_encode($finalChartObjectStaff[count($finalChartObjectStaff)- 1]);
         }
         else {
-            $data['time_list_data'] = json_encode(['asdf' => 'asdf']);
+            $data['time_list_data'] = json_encode([]);
         }
 
         $obj = null;

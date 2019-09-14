@@ -111,8 +111,8 @@ class Picknpay extends Eloquent {
 
 
         return Picknpay::select(DB::raw("DISTINCT staff_id"))
-        ->where('created_at', "<=", $endDate)
-        ->where('created_at', ">=", $startDate)
+        ->where('end_time', "<=", $endDate)
+        ->where('end_time', ">=", $startDate)
         ->get();
 
     }
