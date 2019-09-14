@@ -132,7 +132,6 @@
             apiChart = new FusionCharts({
                 type: 'msline',
                 renderAt: 'staff_beacon_activity',
-                height: '350',
                 dataFormat: 'json',
                 dataSource: {
                     "chart": chartProperties,
