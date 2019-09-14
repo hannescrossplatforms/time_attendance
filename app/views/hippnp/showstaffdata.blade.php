@@ -65,7 +65,7 @@
 
             <div id="fusion-chart">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="chart-wrapper">
                             <div class="chart-title venuecolheading">Staff beacon activity</div>
                             <div class="chart-stage">
@@ -132,8 +132,7 @@
             apiChart = new FusionCharts({
                 type: 'msline',
                 renderAt: 'staff_beacon_activity',
-                width: '400',
-                height: '400',
+                height: '350',
                 dataFormat: 'json',
                 dataSource: {
                     "chart": chartProperties,
