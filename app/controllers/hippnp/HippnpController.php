@@ -380,6 +380,9 @@ class HippnpController extends \BaseController {
 
         foreach ($allStaff as $staff) {
 
+            $data["test3"] = $staff->id;
+
+
             //Get staff memeber with all his details.
             $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->id);
             $stafId = $staffObj->id;
