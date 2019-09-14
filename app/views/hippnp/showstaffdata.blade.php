@@ -92,7 +92,7 @@
     <!--     Code for staff member popup graphs -->
     <div id="memberGraphModalhtml"> </div>
     <div id="memberModalLinkDiv"> </div>
-    <!-- <script src="{{ asset('js/hiptna/membergraphs.js') }}"></script> -->
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -103,17 +103,17 @@
 
 
 
-    <script src="{{ asset('js/hiptna/hiptna.js') }}"></script>
+
 
     <script src="{{ asset('js/prefixfree.min.js') }}"></script>
 
 
-    <script src="{{ asset('js/hiptna/push.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset('js/js.cookie.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/moment.js') }}"></script>
     <script type="text/javascript" src="{{ asset('fusioncharts/fusioncharts.js') }}"></script>
     <script type="text/javascript" src="{{ asset('fusioncharts/themes/fusioncharts.theme.zune.js') }}"></script>
-    <!-- <script src="{{ asset('js/hiptna/hiptna.js') }}"></script> -->
+
 
     <script>
 
