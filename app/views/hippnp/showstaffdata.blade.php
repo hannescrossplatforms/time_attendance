@@ -25,11 +25,11 @@
           <input type="hidden" id="url" name="" value={{$data['url']}}>
 
             <div class="row">
-                <div class="col-md-4" style="width:30%;">
+                <div class="col-md-6" style="width:30%;">
                     <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
                         <label>Report Period</label>
                     </div>
-                    <div class="col-md-2" style="width:25%; padding:0px 0px 0px 6px;">
+                    <div class="col-md-4" style="width:25%; padding:0px 0px 0px 6px;">
                         <input type="text" class="form-control datepicker" name="selectedDate" id="selectedDate"
                             placeholder="Selected date">
                     </div>
