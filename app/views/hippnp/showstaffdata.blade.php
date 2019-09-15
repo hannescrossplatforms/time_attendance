@@ -144,8 +144,8 @@
                 },
                 success: function(data) {
 
-                    $("#staff_select").val(-1);
-                    $("#staff_select").text('Select');
+                    $("#staff_select").val('0');
+
 
                     debugger;
                     var chartProperties = {
