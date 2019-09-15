@@ -171,6 +171,32 @@
                     });
                     apiChart.render();
 
+                    var chartProperties = {
+                    "caption": "",
+                    "xAxisName": "Time of day",
+                    "yAxisName": "Total dwell time (minutes)",
+                    "paletteColors": "#0075c2,#f8b81d,#3CB371",
+                    "rotatevalues": "1",
+                    "theme": "zune"
+                };
+
+                apiChart = new FusionCharts({
+                    type: 'msline',
+                    renderAt: 'single_staff_beacon_activity',
+                    width: '100%',
+                    height: 350,
+                    dataFormat: 'json',
+                    dataSource: {
+                        "chart": chartProperties,
+                        "categories": [{
+                            "category": []
+                        }],
+                        "dataset": []
+
+                    }
+                });
+                apiChart.render();
+
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
 
