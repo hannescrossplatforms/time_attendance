@@ -18,4 +18,9 @@ class EngagePicknPayStaff extends Eloquent {
         ->get();
     }
 
+    public static function getAllStaff(){
+        return EngagePicknPayStaff::all()
+        ->get();
+    }
+
 }
