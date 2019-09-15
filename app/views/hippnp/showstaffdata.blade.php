@@ -144,8 +144,8 @@
                 },
                 success: function(data) {
 
-                    $("#selectedDate").val(-1);
-                    $("#selectedDate").text('Select');
+                    $("#staff_select").val(-1);
+                    $("#staff_select").text('Select');
 
                     debugger;
                     var chartProperties = {
