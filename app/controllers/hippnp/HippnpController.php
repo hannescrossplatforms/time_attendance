@@ -422,8 +422,10 @@ class HippnpController extends \BaseController {
 
     }
 
-    public function periodchartJsondataSingleStaffAjax($id){
-        $tesy = Input::get('date');
+    public function periodchartJsondataSingleStaffAjax(){
+        $dateSelected = Input::get('date');
+        $staffId = Input::get('staff_id');
+
         $period = 'today';
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
@@ -433,9 +435,6 @@ class HippnpController extends \BaseController {
         $finalChartObjectStaff = array();
 
         $timeList = array();
-
-
-        $dateSelected = date('Y-m-d',strtotime('today'));
 
         array_push($timeList, ['label' => "9AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
         array_push($timeList, ['label' => "10AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
@@ -453,7 +452,7 @@ class HippnpController extends \BaseController {
 
         $startDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
         $endDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
-        $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($id);
+        $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($staffId);
 
 
         foreach ($allStaff as $staff) {

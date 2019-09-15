@@ -187,10 +187,11 @@
 
             $.ajax({
                 url: pathname + 'hippnp/periodchartJsondataSingleStaffAjax/' + staffId,
-                type: 'get',
+                type: 'post',
                 dataType: 'json',
                 data: {
-                    'date': date
+                    'date': date,
+                    'staff_id': staffId
                 },
                 success: function(data) {
 
