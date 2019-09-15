@@ -237,7 +237,6 @@ class HippnpController extends \BaseController {
                     array_push($dataArrayVisitsStore, $response);
                 }
 
-            }
 
             $obj[] = [
                 'seriesname' => $storeName,
@@ -424,13 +423,13 @@ class HippnpController extends \BaseController {
     }
 
     public function periodchartJsondataSingleStaffAjax($id){
-
+        $tesy = Input::get('date');
         $period = 'today';
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['report_period'] = 'today';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-
+        $data['test'] = $tesy;
         $finalChartObjectStaff = array();
 
         $timeList = array();
