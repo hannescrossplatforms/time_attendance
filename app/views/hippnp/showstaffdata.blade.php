@@ -223,7 +223,7 @@
 
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-
+                    debugger;
                 }
             });
 
