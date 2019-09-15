@@ -380,6 +380,9 @@ Route::get('hippnp/picknpay_add_beacon', 'hippnp\HippnpController@addBeacon');
 Route::get('hippnp/storeCategories/{id}','hippnp\HippnpController@getStoreCategories');
 Route::get('hippnp/periodchartJsondataStaff','hippnp\HippnpController@periodchartJsondataStaff');
 Route::get('hippnp/periodchartJsondataStaffAjax','hippnp\HippnpController@periodchartJsondataStaffAjax');
+Route::get('hippnp/periodchartJsondataSingleStaffAjax/{id}','hippnp\HippnpController@periodchartJsondataSingleStaffAjax');
+
+// periodchartJsondataSingleStaffAjax
 
 // HipBidvest routes //////////////////////////////////////////////////////////////
 Route::any('/hipbidvest_showdashboard', array('uses' => 'hipbidvest\HipbidvestController@showDashboard', 'as' => 'hipbidvest_showdashboard'))->before('auth');

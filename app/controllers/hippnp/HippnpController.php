@@ -423,6 +423,88 @@ class HippnpController extends \BaseController {
 
     }
 
+    public function periodchartJsondataSingleStaffAjax($id){
+
+        $period = 'today';
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        $data['report_period'] = 'today';
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+        $finalChartObjectStaff = array();
+
+        $timeList = array();
+
+
+        $dateSelected = date('Y-m-d',strtotime('today'));
+
+        array_push($timeList, ['label' => "9AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
+        array_push($timeList, ['label' => "10AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
+        array_push($timeList, ['label' => "11AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'end')]);
+        array_push($timeList, ['label' => "12PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'end')]);
+        array_push($timeList, ['label' => "13PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'end')]);
+        array_push($timeList, ['label' => "14PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'end')]);
+        array_push($timeList, ['label' => "15PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'end')]);
+        array_push($timeList, ['label' => "16PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'end')]);
+        array_push($timeList, ['label' => "17PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'end')]);
+
+        $data['time_list'] = json_encode($timeList);
+
+        //All staff memebers present in database for selected period.
+
+        $startDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
+        $endDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
+        $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($id);
+
+
+        foreach ($allStaff as $staff) {
+
+            //Get staff memeber with all his details.
+            $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->staff_id);
+            $stafId = $staff->staff_id;
+            $staffName = $staffObj->name;
+
+            $dataArray = array();
+
+            foreach ( $timeList as $timeObject ) {
+
+                $startTime = $timeObject['startDate'];
+                $endTime = $timeObject['endDate'];
+
+                $response = \Picknpay::fetchDwellTimeDataForStaffWithinAnHour($stafId, $startTime, $endTime);
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0', 'id' => $stafId]);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+                    array_push($dataArray, $objectArr);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $staffName,
+                'data' => $dataArray
+            ];
+
+            array_push($finalChartObjectStaff, $obj);
+
+        };
+
+        if (count($finalChartObjectStaff) > 0) {
+            $data['time_list_data'] = json_encode($finalChartObjectStaff[count($finalChartObjectStaff)- 1]);
+        }
+        else {
+            $data['time_list_data'] = json_encode([]);
+        }
+
+        $obj = null;
+
+        return \View::make('hippnp.showstaffdata')->with('data', $data);
+
+
+    }
+
     public function periodchartJsondataStaff(){
         $period = 'today';
         $data = array() ;
@@ -436,7 +518,7 @@ class HippnpController extends \BaseController {
 
         $timeList = array();
 
-        $dateSelected = "2019-09-14";
+        $dateSelected = date('Y-m-d',strtotime('today'));
 
         array_push($timeList, ['label' => "9AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
         array_push($timeList, ['label' => "10AM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
