@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label>Staff member</label>
                 <select id="staff_select" name="store_id" onchange="get_staff_chart()" class="form-control" required>
-                <option value="">Select</option>
+                <option value="0">Select</option>
                 @foreach($data['staff'] as $staffMember)
                     <option value="{{ $staffMember->id }}">
                     {{ $staffMember->name }} {{ $staffMember->surname }}
