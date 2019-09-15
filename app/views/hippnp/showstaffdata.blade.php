@@ -160,6 +160,11 @@
 
         });
 
+        function get_staff_chart(){
+            let staffId = $('#staff_select').val();
+            alert(staffId);
+        }
+
 
         $(document).ready(function() {
 
