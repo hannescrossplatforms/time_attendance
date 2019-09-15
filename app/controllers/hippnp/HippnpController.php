@@ -280,8 +280,6 @@ class HippnpController extends \BaseController {
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $dateSelected = Input::get('date');
 
-        $data['staff'] = \EngagePicknPayStaff::getAllStaff();
-
         $finalChartObjectStaff = array();
 
         $timeList = array();
@@ -431,6 +429,8 @@ class HippnpController extends \BaseController {
         $data['currentMenuItem'] = "Dashboard";
         $data['report_period'] = 'today';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+        $data['staff'] = \EngagePicknPayStaff::getAllStaff();
 
         $finalChartObjectStaff = array();
 
