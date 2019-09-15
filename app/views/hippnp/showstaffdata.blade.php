@@ -186,7 +186,7 @@
             let staffId = $('#staff_select').val();
 
             $.ajax({
-                url: pathname + 'hippnp/periodchartJsondataSingleStaffAjax/' + staffId,
+                url: pathname + 'hippnp/periodchartJsondataSingleStaffAjax',
                 type: 'post',
                 dataType: 'json',
                 data: {
