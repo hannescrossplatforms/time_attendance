@@ -181,6 +181,7 @@
 
         function get_staff_chart(){
 
+            pathname = $('#url').val();
             let staffId = $('#staff_select').val();
 
             $.ajax({
