@@ -431,7 +431,7 @@ class HippnpController extends \BaseController {
         $data['currentMenuItem'] = "Dashboard";
         $data['report_period'] = 'today';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
-        $data['test'] = $tesy;
+
         $finalChartObjectStaff = array();
 
         $timeList = array();
