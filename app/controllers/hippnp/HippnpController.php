@@ -448,7 +448,7 @@ class HippnpController extends \BaseController {
         array_push($timeList, ['label' => "16PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'end')]);
         array_push($timeList, ['label' => "17PM", 'startDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'start'), 'endDate' => \Picknpay::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'end')]);
 
-        $data['time_list'] = json_encode($timeList);
+        $data['time_list'] = $timeList;
 
         //All staff memebers present in database for selected period.
 
@@ -492,15 +492,17 @@ class HippnpController extends \BaseController {
         };
 
         if (count($finalChartObjectStaff) > 0) {
-            $data['time_list_data'] = json_encode($finalChartObjectStaff[count($finalChartObjectStaff)- 1]);
+            $data['time_list_data'] = $finalChartObjectStaff[count($finalChartObjectStaff)- 1];
         }
         else {
-            $data['time_list_data'] = json_encode([]);
+            $data['time_list_data'] = [];
         }
 
         $obj = null;
 
-        return \View::make('hippnp.showstaffdata')->with('data', $data);
+        $json = json_encode($data);
+
+        print_r($json);
 
 
     }
