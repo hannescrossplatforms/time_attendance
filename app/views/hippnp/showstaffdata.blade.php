@@ -141,6 +141,9 @@
 
     <script>
 
+        var timeListData = null;
+        var singleTimeListData = null;
+
         $("#selectedDate").datepicker({
             format: 'yyyy-mm-dd',
             autoclose: true,
@@ -177,6 +180,8 @@
                         "theme": "zune"
                     };
 
+                    timeListData = data['time_list_data'];
+
                     apiChart = new FusionCharts({
                         type: 'msline',
                         renderAt: 'staff_beacon_activity',
@@ -190,6 +195,16 @@
                             }],
                             "dataset": data['time_list_data']
 
+                        },
+                        events: {
+                            "dataPlotClick": function (eventObj, dataObj) {
+                                let object = staffActivityData[dataObj.datasetIndex];
+                                let id = object.data[dataObj.dataIndex][0].id;
+                                let staffMemeberID = parseInt(id);
+                                alert(staffMemeberID);
+                                // window.location.replace("hippnp/periodchartJsondataStaff/" + staffMemeberID);
+
+                            }
                         }
                     });
                     apiChart.render();
@@ -216,6 +231,16 @@
                             }],
                             "dataset": []
 
+                        }
+                        events: {
+                            "dataPlotClick": function (eventObj, dataObj) {
+                                let object = staffActivityData[dataObj.datasetIndex];
+                                let id = object.data[dataObj.dataIndex][0].id;
+                                let staffMemeberID = parseInt(id);
+                                alert(staffMemeberID);
+                                // window.location.replace("hippnp/periodchartJsondataStaff/" + staffMemeberID);
+
+                            }
                         }
                     });
                     apiChart.render();
@@ -248,7 +273,7 @@
                     },
                     success: function(data) {
 
-                        debugger;
+                        singleTimeListData = data['time_list_data'];
                         var chartProperties = {
                             "caption": "",
                             "xAxisName": "Time of day",
@@ -317,6 +342,8 @@
         $(document).ready(function() {
 
             $('#messageModal').modal('toggle');
+
+            timeListData = data['time_list_data'];
 
             var chartProperties = {
                 "caption": "",
