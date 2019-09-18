@@ -231,7 +231,7 @@
                             }],
                             "dataset": []
 
-                        }
+                        },
                         events: {
                             "dataPlotClick": function (eventObj, dataObj) {
                                 let object = staffActivityData[dataObj.datasetIndex];
