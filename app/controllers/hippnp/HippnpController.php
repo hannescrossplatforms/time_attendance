@@ -454,7 +454,7 @@ class HippnpController extends \BaseController {
         $allStaff = \EngagePicknPayStaff::getStaffAsArrayWithID($staffId);
 
 
-        $allCategoryIdsForFilter = \Picknpay::fetchAllCategoriesForStaffActivity($staffId);
+        $allCategoryIdsForFilter = \Picknpay::fetchAllCategoriesForStaffActivity($staffId, $dateSelected);
         $allCategories = array();
 
         $data['test'] = $allCategoryIdsForFilter;
