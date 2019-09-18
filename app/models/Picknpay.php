@@ -95,7 +95,7 @@ class Picknpay extends Eloquent {
     public static function fetchAllCategoriesForStaffActivity($staffID, $date) {
         return EngagePicknPay::raw("SELECT DISTINCT category_id FROM picknpay")
         ->where('staff_id', "=", $staffID)
-        ->whereraw("DATE_FORMAT(creaaaated_at, '%Y-%m-%d') = '$date'")
+        ->whereraw("DATE_FORMAT(end_time, '%Y-%m-%d') = '$date'")
         ->groupBy('category_id')
         ->get();
 
