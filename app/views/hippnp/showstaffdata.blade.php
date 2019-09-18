@@ -282,7 +282,7 @@
                     };
 
                     apiChart = new FusionCharts({
-                        type: 'msline',
+                        type: 'mscolumn2d',
                         renderAt: 'staff_category_activity',
                         width: '100%',
                         height: 350,
