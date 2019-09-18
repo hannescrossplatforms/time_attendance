@@ -286,6 +286,16 @@
                                 }],
                                 "dataset": data['time_list_data']
 
+                            },
+                            events: {
+                                "dataPlotClick": function (eventObj, dataObj) {
+                                    let object = singleTimeListData[dataObj.datasetIndex];
+                                    let id = object.data[dataObj.dataIndex][0].id;
+                                    let staffMemeberID = parseInt(id);
+                                    alert(staffMemeberID);
+                                    // window.location.replace("hippnp/periodchartJsondataStaff/" + staffMemeberID);
+
+                                }
                             }
                         });
                         apiChart.render();
