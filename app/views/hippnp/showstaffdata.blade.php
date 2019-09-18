@@ -100,7 +100,24 @@
             <h6 class="modal-title" id="myModalLabel">Category Activity</h6>
           </div>
             <div class="modal-body">
-            <h1>test</h1>
+            <div id="fusion-chart">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="chart-wrapper">
+                            <div class="chart-title venuecolheading">Staff beacon activity</div>
+                            <div class="chart-stage">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="chart-stage">
+                                            <div id="staff_category_activity">Loading...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
 
             <div class="modal-footer">
@@ -169,8 +186,6 @@
 
                     $("#staff_select").val('0');
 
-
-                    debugger;
                     var chartProperties = {
                         "caption": "",
                         "xAxisName": "Time of day",
@@ -201,8 +216,10 @@
                                 let object = timeListData[dataObj.datasetIndex];
                                 let id = object.data[dataObj.dataIndex][0].id;
                                 let staffMemeberID = parseInt(id);
-                                alert(staffMemeberID);
-                                // window.location.replace("hippnp/periodchartJsondataStaff/" + staffMemeberID);
+
+                                let date = $('#selectedDate').val();
+
+                                get_staff_category_details(staffMemeberID, date);
 
                             }
                         }
@@ -242,6 +259,57 @@
             });
 
         });
+
+        function get_staff_category_details(staffId, date){
+
+            $.ajax({
+                url: pathname + 'hippnp/periodchartJsondataSingleStaffAjaxCategories',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    'date': date,
+                    'staff_id': staffId
+                },
+                success: function(data) {
+
+                    $("#staff_select").val('0');
+
+                    var chartProperties = {
+                        "caption": "",
+                        "xAxisName": "Time of day",
+                        "yAxisName": "Total dwell time (minutes)",
+                        "paletteColors": "#0075c2,#f8b81d,#3CB371",
+                        "rotatevalues": "1",
+                        "theme": "zune"
+                    };
+
+                    timeListData = data['time_list_data'];
+
+                    apiChart = new FusionCharts({
+                        type: 'msline',
+                        renderAt: 'staff_category_activity',
+                        width: '100%',
+                        height: 350,
+                        dataFormat: 'json',
+                        dataSource: {
+                            "chart": chartProperties,
+                            "categories": [{
+                                "category": data['time_list']
+                            }],
+                            "dataset": data['time_list_data']
+
+                        }
+                    });
+                    apiChart.render();
+
+                    $('#messageModal').modal('toggle');
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        }
 
         function get_staff_chart(){
 
@@ -292,8 +360,8 @@
                                     let object = singleTimeListData[dataObj.datasetIndex];
                                     let id = object.data[dataObj.dataIndex][0].id;
                                     let staffMemeberID = parseInt(id);
-                                    alert(staffMemeberID);
-                                    // window.location.replace("hippnp/periodchartJsondataStaff/" + staffMemeberID);
+                                    // periodchartJsondataSingleStaffAjaxCategories
+
 
                                 }
                             }
@@ -302,7 +370,7 @@
 
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        debugger;
+
                     }
                 });
 
@@ -341,7 +409,7 @@
 
         $(document).ready(function() {
 
-            $('#messageModal').modal('toggle');
+
 
             timeListData = <?php echo $data['time_list_data']; ?>
 

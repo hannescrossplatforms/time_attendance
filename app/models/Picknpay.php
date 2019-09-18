@@ -92,6 +92,13 @@ class Picknpay extends Eloquent {
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
     }
 
+    public static function fetchAllCategoriesForStaffActivity($staffID) {
+        return EngagePicknPay::raw("SELECT DISTINCT category_id FROM picknpay")
+        ->where('staff_id', "=", $staffID)
+        ->get();
+
+    }
+
     public static function fetchAllStaffForFilter(){
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_staff")->get();
     }
@@ -158,6 +165,20 @@ class Picknpay extends Eloquent {
     }
 
     public static function fetchDwellTimeDataForStaffWithinAnHour($staffID, $startDate, $endDate){
+        $query = Picknpay::orderBy('created_at', 'ASC')
+        ->select(DB::raw("IFNULL(SUM(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
+        ->where('end_time', ">=", $startDate)
+        ->where('end_time', "<=", $endDate)
+        ->whereraw("staff_id = '$staffID'")
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
+
+
+        return $query->get();
+
+    }
+
+    public static function fetchDwellTimeDataForCategoryWithinAnHour($staffID, $startDate, $endDate){
         $query = Picknpay::orderBy('created_at', 'ASC')
         ->select(DB::raw("IFNULL(SUM(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
         ->where('end_time', ">=", $startDate)
