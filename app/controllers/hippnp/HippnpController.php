@@ -422,7 +422,7 @@ class HippnpController extends \BaseController {
 
     }
 
-    public function periodchartJsondataSingleStaffAjaxCategories(){
+    public function hannesTest(){
 
         $dateSelected = Input::get('date');
         $staffId = Input::get('staff_id');

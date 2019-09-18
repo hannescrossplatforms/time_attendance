@@ -263,8 +263,8 @@
         function get_staff_category_details(staffId, date){
 
             $.ajax({
-                url: pathname + 'hippnp/periodchartJsondataSingleStaffAjaxCategories',
-                type: 'post',
+                url: pathname + 'hippnp/hannesTest',
+                type: 'POST',
                 dataType: 'json',
                 data: {
                     'date': date,
