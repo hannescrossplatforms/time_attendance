@@ -218,7 +218,7 @@
                                 let staffMemeberID = parseInt(id);
 
                                 let date = $('#selectedDate').val();
-
+                                alert(staffMemeberID);
                                 get_staff_category_details(staffMemeberID, date);
 
                             }
