@@ -216,7 +216,7 @@
                                 let object = timeListData[dataObj.datasetIndex];
                                 let id = object.data[dataObj.dataIndex][0].id;
                                 let staffMemeberID = parseInt(id);
-                                debugger;
+
                                 let date = $('#selectedDate').val();
                                 alert(staffMemeberID);
                                 get_staff_category_details(staffMemeberID, date);
@@ -271,7 +271,7 @@
                     'staff_id': staffId
                 },
                 success: function(data) {
-debugger;
+
                     var chartProperties = {
                         "caption": "",
                         "xAxisName": "Time of day",
@@ -356,8 +356,10 @@ debugger;
                                     let object = singleTimeListData[dataObj.datasetIndex];
                                     let id = object.data[dataObj.dataIndex][0].id;
                                     let staffMemeberID = parseInt(id);
-                                    // periodchartJsondataSingleStaffAjaxCategories
 
+                                    let date = $('#selectedDate').val();
+                                    alert(staffMemeberID);
+                                    get_staff_category_details(staffMemeberID, date);
 
                                 }
                             }
