@@ -475,12 +475,12 @@ class HippnpController extends \BaseController {
                 $startTime = $timeObject['startDate'];
                 $endTime = $timeObject['endDate'];
 
-                $response = \Picknpay::fetchDwellTimeDataForStaffWithinAnHour($stafId, $startTime, $endTime);
+                $response = \Picknpay::fetchDwellTimeDataForStaffWithinAnHour($staffId, $startTime, $endTime);
                 if (count($response) == 0) {
-                    $empty_array = array(['value' => '0', 'id' => $stafId]);
+                    $empty_array = array(['value' => '0', 'id' => $staffId]);
                     array_push($dataArray, $empty_array);
                 } else {
-                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+                    $objectArr = array(['value' => $response->first()->value, 'id' => $staffId]);
                     array_push($dataArray, $objectArr);
                 }
 
