@@ -216,7 +216,7 @@
                                 let object = timeListData[dataObj.datasetIndex];
                                 let id = object.data[dataObj.dataIndex][0].id;
                                 let staffMemeberID = parseInt(id);
-
+                                debugger;
                                 let date = $('#selectedDate').val();
                                 alert(staffMemeberID);
                                 get_staff_category_details(staffMemeberID, date);
