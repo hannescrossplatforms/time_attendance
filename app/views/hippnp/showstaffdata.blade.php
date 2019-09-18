@@ -281,8 +281,6 @@ debugger;
                         "theme": "zune"
                     };
 
-                    timeListData = data['time_list_data'];
-
                     apiChart = new FusionCharts({
                         type: 'msline',
                         renderAt: 'staff_category_activity',
