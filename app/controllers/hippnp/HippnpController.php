@@ -458,7 +458,7 @@ class HippnpController extends \BaseController {
         $allCategories = array();
 
         foreach ($allCategoryIdsForFilter as $categoryID) {
-            $category = \EngagePicknPayCategory::find($category->category_id);
+            $category = \EngagePicknPayCategory::find($categoryID->category_id);
             array_push($allCategories, $category);
         }
 
