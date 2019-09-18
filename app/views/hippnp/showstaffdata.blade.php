@@ -198,7 +198,7 @@
                         },
                         events: {
                             "dataPlotClick": function (eventObj, dataObj) {
-                                let object = staffActivityData[dataObj.datasetIndex];
+                                let object = timeListData[dataObj.datasetIndex];
                                 let id = object.data[dataObj.dataIndex][0].id;
                                 let staffMemeberID = parseInt(id);
                                 alert(staffMemeberID);
@@ -231,16 +231,6 @@
                             }],
                             "dataset": []
 
-                        },
-                        events: {
-                            "dataPlotClick": function (eventObj, dataObj) {
-                                let object = staffActivityData[dataObj.datasetIndex];
-                                let id = object.data[dataObj.dataIndex][0].id;
-                                let staffMemeberID = parseInt(id);
-                                alert(staffMemeberID);
-                                // window.location.replace("hippnp/periodchartJsondataStaff/" + staffMemeberID);
-
-                            }
                         }
                     });
                     apiChart.render();
