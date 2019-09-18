@@ -271,7 +271,7 @@
                     'staff_id': staffId
                 },
                 success: function(data) {
-
+debugger;
                     var chartProperties = {
                         "caption": "",
                         "xAxisName": "Time of day",
