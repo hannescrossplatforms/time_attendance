@@ -343,7 +343,7 @@
 
             $('#messageModal').modal('toggle');
 
-            timeListData = $data['time_list_data'];
+            timeListData = <?php echo $data['time_list_data']; ?>
 
             var chartProperties = {
                 "caption": "",
