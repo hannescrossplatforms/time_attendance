@@ -97,31 +97,13 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h6 class="modal-title" id="myModalLabel">Send Message</h6>
+            <h6 class="modal-title" id="myModalLabel">Category Activity</h6>
           </div>
-          <div class="modal-body">
-            <textarea id="content" class="form-control no-radius" placeholder="Message content " rows="4" cols="100"></textarea>
-            <br>
-            <div class="">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    Image
-                  </div>
-                  <div class="panel-body">
-
-                    <div class="col-md-4 pushpic">
-                      <div class="form-group">
-                        <div id="pushimageedit" style="display:none"></div>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+            <div class="modal-body">
+            <h1>test</h1>
             </div>
 
             <div class="modal-footer">
-              <button id="sendMessage" class="sendMessage" type="button" class="btn btn-primary">Send</button>
               <a href="" class="btn btn-default" data-dismiss="modal">Cancel</a>
             </div>
           </div>
