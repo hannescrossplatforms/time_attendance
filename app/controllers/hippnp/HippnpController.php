@@ -422,7 +422,7 @@ class HippnpController extends \BaseController {
 
     }
 
-    public function hannesTest(){
+    public function staffCategoryActivity(){
 
         $dateSelected = Input::get('date');
         $staffId = Input::get('staff_id');
@@ -456,6 +456,8 @@ class HippnpController extends \BaseController {
 
         $allCategoryIdsForFilter = \Picknpay::fetchAllCategoriesForStaffActivity($staffId);
         $allCategories = array();
+
+        $data['test'] = $allCategoryIdsForFilter;
 
         foreach ($allCategoryIdsForFilter as $categoryID) {
             $category = \EngagePicknPayCategory::find($categoryID->category_id);

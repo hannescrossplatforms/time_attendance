@@ -263,7 +263,7 @@
         function get_staff_category_details(staffId, date){
 
             $.ajax({
-                url: pathname + 'hippnp/hannesTest',
+                url: pathname + 'hippnp/staffCategoryActivity',
                 type: 'POST',
                 dataType: 'json',
                 data: {
@@ -271,8 +271,6 @@
                     'staff_id': staffId
                 },
                 success: function(data) {
-
-                    $("#staff_select").val('0');
 
                     var chartProperties = {
                         "caption": "",
