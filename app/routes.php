@@ -400,6 +400,11 @@ Route::get('hipbidvest/bidvest_delete_beacon/{id}', 'hipbidvest\HipbidvestContro
 Route::get('hipbidvest/bidvest_add_beacon', 'hipbidvest\HipbidvestController@addBeacon');
 Route::get('hipbidvest/storeCategories/{id}','hipbidvest\HipbidvestController@getStoreCategories');
 
+Route::get('hipbidvest/periodchartJsondataStaff','hipbidvest\HipbidvestController@periodchartJsondataStaff');
+Route::get('hipbidvest/periodchartJsondataStaffAjax','hipbidvest\HipbidvestController@periodchartJsondataStaffAjax');
+Route::post('hipbidvest/staffCategoryActivity','hipbidvest\HipbidvestController@staffCategoryActivity');
+Route::post('hipbidvest/periodchartJsondataSingleStaffAjax','hipbidvest\HippnpController@periodchartJsondataSingleStaffAjax');
+
 Route::get('/hipbidvest/bidvest_manage_default_checklist','hipbidvest\HipbidvestController@bidvestDefaultCheckListManagement');
 Route::get('/hipbidvest/bidvest_add_default_checklist_item','hipbidvest\HipbidvestController@bidvestAddItemToDefaultChecklist');
 Route::post('hipbidvest/save_default_checklist_item','hipbidvest\HipbidvestController@saveDefaultChecklistItem');

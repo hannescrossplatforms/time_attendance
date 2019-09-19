@@ -82,6 +82,20 @@ class Bidvest extends Eloquent {
 
     }
 
+    public static function fetchDwellTimeDataForStaffWithinAnHour($staffID, $startDate, $endDate){
+        $query = Bidvest::orderBy('created_at', 'ASC')
+        ->select(DB::raw("IFNULL(SUM(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
+        ->where('end_time', ">=", $startDate)
+        ->where('end_time', "<=", $endDate)
+        ->whereraw("staff_id = '$staffID'")
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
+
+
+        return $query->get();
+
+    }
+
     public static function fetchAllCategoriesForFilter(){
         return EngageBidvestCategory::raw("SELECT DISTINCT name FROM bidvest_category")->get();
     }
@@ -255,6 +269,109 @@ class Bidvest extends Eloquent {
         }
 
         return $returnValue;
+
+    }
+
+    public static function getDateForTimeOfDayPerHour($date, $time, $startOrEnd){
+
+        if ($time == 'allDay') {
+
+            if ($startOrEnd == 'start') {
+                return "$date 08:00:00";
+            }
+            else {
+                return "$date 17:00:00";
+            }
+
+        }
+        else if($time == '8AM'){
+
+            if($startOrEnd == 'start') {
+                return "$date 08:00:00";
+            }
+            else {
+                return "$date 08:59:59";
+            }
+
+        } else if($time == '9AM'){
+
+            if($startOrEnd == 'start') {
+                return "$date 09:00:00";
+            }
+            else {
+                return "$date 09:59:59";
+            }
+
+        } else if($time == '10AM'){
+
+            if($startOrEnd == 'start') {
+                return "$date 10:00:00";
+            }
+            else {
+                return "$date 10:59:59";
+            }
+
+        }
+        else if($time == '11AM'){
+
+            if($startOrEnd == 'start') {
+                return "$date 10:00:00";
+            }
+            else {
+                return "$date 11:00:00";
+            }
+
+        }
+        else if($time == '12PM'){
+
+            if($startOrEnd == 'start') {
+                return "$date 12:00:00";
+            }
+            else {
+                return "$date 12:59:59";
+            }
+
+        }
+        else if($time == '13PM'){
+
+            if($startOrEnd == 'start') {
+                return "$date 13:00:00";
+            }
+            else {
+                return "$date 13:59:59";
+            }
+
+        }
+        else if($time == '14PM'){
+
+            if($startOrEnd == 'start') {
+                return "$date 14:00:00";
+            }
+            else {
+                return "$date 14:59:59";
+            }
+
+        }
+        else if($time == '15PM'){
+
+            if($startOrEnd == 'start') {
+                return "$date 15:00:00";
+            }
+            else {
+                return "$date 15:59:59";
+            }
+
+        }
+        else if($time == '16PM'){
+
+            if($startOrEnd == 'start') {
+                return "$date 16:00:00";
+            }
+            else {
+                return "$date 17:00:00";
+            }
+
+        }
 
     }
 

@@ -272,7 +272,7 @@ class HipbidvestController extends \BaseController {
         $storeId = Input::get('store_id');
         $provinceId = Input::get('province_id');
 
-        $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter();
+        $allCategoriesForFilter = \Bidvest::fetchAllCategoriesForFilter();
         $data['all_categories_for_filter'] = $allCategoriesForFilter;
 
         if ($start != null && $end != null){
@@ -496,6 +496,346 @@ class HipbidvestController extends \BaseController {
         $json = json_encode($data);
 
         print_r($json);
+
+    }
+
+    public function periodchartJsondataStaff(){
+        $period = 'today';
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        $data['report_period'] = 'today';
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+        $data['staff'] = \EngageBidvestStaff::getAllStaff();
+
+        $finalChartObjectStaff = array();
+
+        $timeList = array();
+
+        $dateSelected = date('Y-m-d',strtotime('today'));
+
+        array_push($timeList, ['label' => "9AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
+        array_push($timeList, ['label' => "10AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
+        array_push($timeList, ['label' => "11AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'end')]);
+        array_push($timeList, ['label' => "12PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'end')]);
+        array_push($timeList, ['label' => "13PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'end')]);
+        array_push($timeList, ['label' => "14PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'end')]);
+        array_push($timeList, ['label' => "15PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'end')]);
+        array_push($timeList, ['label' => "16PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'end')]);
+        array_push($timeList, ['label' => "17PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'end')]);
+
+        $data['time_list'] = json_encode($timeList);
+
+        //All staff memebers present in database for selected period.
+
+        $startDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
+        $endDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
+        $allStaff = \Bidvest::fetchAllStaff('today', $startDate, $endDate);
+
+
+        foreach ($allStaff as $staff) {
+
+            //Get staff memeber with all his details.
+            $staffObj = \EngageBidvestStaff::getStaffWithID($staff->staff_id);
+            $stafId = $staff->staff_id;
+            $staffName = $staffObj->name;
+
+            $dataArray = array();
+
+            foreach ( $timeList as $timeObject ) {
+
+                $startTime = $timeObject['startDate'];
+                $endTime = $timeObject['endDate'];
+
+                $data["test1"] = $startTime;
+                $data["test2"] = $endTime;
+
+                $response = \Bidvest::fetchDwellTimeDataForStaffWithinAnHour($stafId, $startTime, $endTime);
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0', 'id' => $stafId]);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+                    array_push($dataArray, $objectArr);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $staffName,
+                'data' => $dataArray
+            ];
+
+            array_push($finalChartObjectStaff, $obj);
+
+        };
+
+        if (count($finalChartObjectStaff) > 0) {
+            $data['time_list_data'] = json_encode($finalChartObjectStaff[count($finalChartObjectStaff)- 1]);
+        }
+        else {
+            $data['time_list_data'] = json_encode([]);
+        }
+
+        $obj = null;
+
+        return \View::make('hipbidvest.showstaffdata')->with('data', $data);
+
+    }
+
+    public function periodchartJsonDataStaffAjax(){
+
+        $period = 'today';
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        $data['report_period'] = 'today';
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+        $dateSelected = Input::get('date');
+
+        $finalChartObjectStaff = array();
+
+        $timeList = array();
+
+        array_push($timeList, ['label' => "9AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
+        array_push($timeList, ['label' => "10AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
+        array_push($timeList, ['label' => "11AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'end')]);
+        array_push($timeList, ['label' => "12PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'end')]);
+        array_push($timeList, ['label' => "13PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'end')]);
+        array_push($timeList, ['label' => "14PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'end')]);
+        array_push($timeList, ['label' => "15PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'end')]);
+        array_push($timeList, ['label' => "16PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'end')]);
+        array_push($timeList, ['label' => "17PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'end')]);
+
+        $data['time_list'] = $timeList;
+
+        //All staff memebers present in database for selected period.
+
+        $startDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
+        $endDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
+        $allStaff = \Bidvest::fetchAllStaff('today', $startDate, $endDate);
+
+
+        foreach ($allStaff as $staff) {
+
+            //Get staff memeber with all his details.
+            $staffObj = \EngageBidvestStaff::getStaffWithID($staff->staff_id);
+            $stafId = $staff->staff_id;
+            $staffName = $staffObj->name;
+
+            $dataArray = array();
+
+            foreach ( $timeList as $timeObject ) {
+
+                $startTime = $timeObject['startDate'];
+                $endTime = $timeObject['endDate'];
+
+                $response = \Bidvest::fetchDwellTimeDataForStaffWithinAnHour($stafId, $startTime, $endTime);
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0', 'id' => $stafId]);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+                    array_push($dataArray, $objectArr);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $staffName,
+                'data' => $dataArray
+            ];
+
+            array_push($finalChartObjectStaff, $obj);
+
+        };
+
+        if (count($finalChartObjectStaff) > 0) {
+            $data['time_list_data'] = $finalChartObjectStaff[count($finalChartObjectStaff)- 1];
+        }
+        else {
+            $data['time_list_data'] = [];
+        }
+
+        $obj = null;
+
+        $json = json_encode($data);
+
+        print_r($json);
+
+    }
+
+    public function staffCategoryActivity(){
+
+        $dateSelected = Input::get('date');
+        $staffId = Input::get('staff_id');
+
+        $period = 'today';
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        $data['report_period'] = 'today';
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+        $finalChartObjectCategories = array();
+
+        $timeList = array();
+
+        array_push($timeList, ['label' => "9AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
+        array_push($timeList, ['label' => "10AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
+        array_push($timeList, ['label' => "11AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'end')]);
+        array_push($timeList, ['label' => "12PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'end')]);
+        array_push($timeList, ['label' => "13PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'end')]);
+        array_push($timeList, ['label' => "14PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'end')]);
+        array_push($timeList, ['label' => "15PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'end')]);
+        array_push($timeList, ['label' => "16PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'end')]);
+        array_push($timeList, ['label' => "17PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'end')]);
+
+        $data['time_list'] = $timeList;
+
+        $startDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
+        $endDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
+        $allStaff = \EngageBidvestStaff::getStaffAsArrayWithID($staffId);
+
+
+        $allCategoryIdsForFilter = \Bidvest::fetchAllCategoriesForStaffActivity($staffId, $dateSelected);
+        $allCategories = array();
+
+        $data['test'] = $allCategoryIdsForFilter;
+
+        foreach ($allCategoryIdsForFilter as $categoryID) {
+            $category = \EngageBidvestCategory::find($categoryID->category_id);
+            array_push($allCategories, $category);
+        }
+
+        foreach ($allCategories as $category) {
+
+            //Get staff memeber with all his details.
+            // $staffObj = \EngagePicknPayStaff::getStaffWithID($staffId);
+            // $staffName = $staffObj->name;
+
+            $dataArray = array();
+
+            foreach ( $timeList as $timeObject ) {
+
+                $startTime = $timeObject['startDate'];
+                $endTime = $timeObject['endDate'];
+
+                $response = \Bidvest::fetchDwellTimeDataForStaffWithinAnHour($staffId, $startTime, $endTime);
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0', 'id' => $staffId]);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    $objectArr = array(['value' => $response->first()->value, 'id' => $staffId]);
+                    array_push($dataArray, $objectArr);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $category->name,
+                'data' => $dataArray
+            ];
+
+            array_push($finalChartObjectCategories, $obj);
+
+        };
+
+
+        if (count($finalChartObjectCategories) > 0) {
+            $data['time_list_data'] = $finalChartObjectCategories[count($finalChartObjectCategories)- 1];
+        }
+        else {
+            $data['time_list_data'] = [];
+        }
+
+        $obj = null;
+
+        $json = json_encode($data);
+
+        print_r($json);
+
+    }
+
+    public function periodchartJsondataSingleStaffAjax(){
+
+        $dateSelected = Input::get('date');
+        $staffId = Input::get('staff_id');
+
+        $period = 'today';
+        $data = array() ;
+        $data['currentMenuItem'] = "Dashboard";
+        $data['report_period'] = 'today';
+        $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+
+        $finalChartObjectStaff = array();
+
+        $timeList = array();
+
+        array_push($timeList, ['label' => "9AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '8AM', 'end')]);
+        array_push($timeList, ['label' => "10AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '9AM', 'end')]);
+        array_push($timeList, ['label' => "11AM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '10AM', 'end')]);
+        array_push($timeList, ['label' => "12PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '11AM', 'end')]);
+        array_push($timeList, ['label' => "13PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '12PM', 'end')]);
+        array_push($timeList, ['label' => "14PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '13PM', 'end')]);
+        array_push($timeList, ['label' => "15PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '14PM', 'end')]);
+        array_push($timeList, ['label' => "16PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '15PM', 'end')]);
+        array_push($timeList, ['label' => "17PM", 'startDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'start'), 'endDate' => \Bidvest::getDateForTimeOfDayPerHour($dateSelected, '16PM', 'end')]);
+
+        $data['time_list'] = $timeList;
+
+        //All staff memebers present in database for selected period.
+
+        $startDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
+        $endDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
+        $allStaff = \EngageBidvestStaff::getStaffAsArrayWithID($staffId);
+
+
+        foreach ($allStaff as $staff) {
+
+            //Get staff memeber with all his details.
+            $staffObj = \EngageBidvestStaff::getStaffWithID($staff->id);
+            $stafId = $staff->id;
+            $staffName = $staffObj->name;
+
+            $dataArray = array();
+
+            foreach ( $timeList as $timeObject ) {
+
+                $startTime = $timeObject['startDate'];
+                $endTime = $timeObject['endDate'];
+
+                $response = \Bidvest::fetchDwellTimeDataForStaffWithinAnHour($stafId, $startTime, $endTime);
+                if (count($response) == 0) {
+                    $empty_array = array(['value' => '0', 'id' => $stafId]);
+                    array_push($dataArray, $empty_array);
+                } else {
+                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+                    array_push($dataArray, $objectArr);
+                }
+
+            }
+
+            $obj[] = [
+                'seriesname' => $staffName,
+                'data' => $dataArray
+            ];
+
+            array_push($finalChartObjectStaff, $obj);
+
+        };
+
+        if (count($finalChartObjectStaff) > 0) {
+            $data['time_list_data'] = $finalChartObjectStaff[count($finalChartObjectStaff)- 1];
+        }
+        else {
+            $data['time_list_data'] = [];
+        }
+
+        $obj = null;
+
+        $json = json_encode($data);
+
+        print_r($json);
+
 
     }
 
