@@ -96,6 +96,15 @@ class Bidvest extends Eloquent {
 
     }
 
+    public static function fetchAllCategoriesForStaffActivity($staffID, $date) {
+        return EngageBidvest::raw("SELECT DISTINCT category_id FROM bidvest")
+        ->where('staff_id', "=", $staffID)
+        ->whereraw("DATE_FORMAT(end_time, '%Y-%m-%d') = '$date'")
+        ->groupBy('category_id')
+        ->get();
+
+    }
+
     public static function fetchAllCategoriesForFilter(){
         return EngageBidvestCategory::raw("SELECT DISTINCT name FROM bidvest_category")->get();
     }
