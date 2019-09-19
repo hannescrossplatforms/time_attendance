@@ -64,6 +64,24 @@ class Bidvest extends Eloquent {
 
     }
 
+    public static function fetchDwellTimeDataForStaffWithDate($date, $staffID, $storeId, $provinceId, $verb){
+        $query = Bidvest::orderBy('created_at', 'ASC')
+        ->select(DB::raw("IFNULL($verb(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
+        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
+        ->whereraw("staff_id = '$staffID'")
+        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+        ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
+
+        if($storeId != "") {
+            $query = $query->whereraw("store_id = '$storeId'");
+        }
+        if($provinceId != "") {
+            $query = $query->whereraw("province_id = '$provinceId'");
+        }
+        return $query->get();
+
+    }
+
     public static function fetchAllCategoriesForFilter(){
         return EngageBidvestCategory::raw("SELECT DISTINCT name FROM bidvest_category")->get();
     }
@@ -153,6 +171,24 @@ class Bidvest extends Eloquent {
     public static function fetchAllStores(){
         $bidvestBrand = \Brand::where('name', '=', 'Bidvest')->firstOrFail();
         return $bidvestBrand->venues()->get();
+    }
+
+    public static function fetchAllStaff($date, $startDate, $endDate){
+
+        if ($startDate == null && $endDate == null) {
+
+            $dateRange = Bidvest::getDateForPeriodAndTimeOfDay($date);
+
+            $startDate = $dateRange['startDate'];
+            $endDate = $dateRange['endDate'];
+
+        }
+
+        return Bidvest::select(DB::raw("DISTINCT staff_id"))
+        ->where('end_time', "<=", $endDate)
+        ->where('end_time', ">=", $startDate)
+        ->get();
+
     }
 
     public static function fetchStoreForVenue($venue){

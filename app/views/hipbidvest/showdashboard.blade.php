@@ -231,10 +231,25 @@
                                 </div>
                             </div>
 
-
-
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="chart-wrapper">
+                                <div class="chart-title venuecolheading">Staff activity</div>
+                                <div class="chart-stage">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="chart-stage">
+                                                <div id="staff_activity">Loading...</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                 </div>
             </div>
         </div>
@@ -379,6 +394,34 @@ $(document).ready(function() {
     });
     apiChart.render();
 
+    //Staff graph
+
+    var chartProperties = {
+        "caption": "",
+        "xAxisName": "Staff Activity",
+        "yAxisName": "Total dwell time (minutes)",
+        "paletteColors": "#0075c2,#f8b81d,#3CB371",
+        "rotatevalues": "1",
+        "theme": "zune"
+    };
+
+    apiChart = new FusionCharts({
+        type: 'mscolumn2d',
+        renderAt: 'staff_activity',
+        width: '400',
+        height: '350',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": chartProperties,
+            "categories": [{
+                "category": <?php echo $data['staff_list']; ?>
+            }],
+            "dataset": <?php echo $data['staff_list_data']; ?>
+
+        }
+    });
+    apiChart.render();
+
 });
 
 function change_report_period() {
@@ -408,9 +451,9 @@ function custom_report_period() {
     renderCharts('daterange', from, to, category, store, province);
 }
 
+var staffActivityData = null;
+
 function renderCharts(time, start, end, category, store, province) {
-
-
 
     $.ajax({
 
@@ -529,6 +572,36 @@ function renderCharts(time, start, end, category, store, province) {
                     }],
                     "dataset": data['category_list_data_visits_store']
 
+                }
+            });
+            apiChart.render();
+
+            staffActivityData = data['staff_list_data'];
+
+            apiChart = new FusionCharts({
+                type: 'mscolumn2d',
+                renderAt: 'staff_activity',
+                width: '400',
+                height: '350',
+                dataFormat: 'json',
+                entityDef: data['entity_dev'],
+                dataSource: {
+                    "chart": chartProperties,
+                    "categories": [{
+                        "category": data['staff_list']
+                    }],
+                    "dataset": data['staff_list_data']
+
+                },
+                events: {
+                    "dataPlotClick": function (eventObj, dataObj) {
+                        let object = staffActivityData[dataObj.datasetIndex];
+                        let id = object.data[dataObj.dataIndex][0].id;
+                        let staffMemeberID = parseInt(id);
+
+                        window.location.replace("hippnp/periodchartJsondataStaff/" + staffMemeberID);
+
+                    }
                 }
             });
             apiChart.render();
