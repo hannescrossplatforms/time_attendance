@@ -403,7 +403,7 @@ Route::get('hipbidvest/storeCategories/{id}','hipbidvest\HipbidvestController@ge
 Route::get('hipbidvest/periodchartJsondataStaff','hipbidvest\HipbidvestController@periodchartJsondataStaff');
 Route::get('hipbidvest/periodchartJsondataStaffAjax','hipbidvest\HipbidvestController@periodchartJsondataStaffAjax');
 Route::post('hipbidvest/staffCategoryActivity','hipbidvest\HipbidvestController@staffCategoryActivity');
-Route::post('hipbidvest/periodchartJsondataSingleStaffAjax','hipbidvest\HippnpController@periodchartJsondataSingleStaffAjax');
+Route::post('hipbidvest/periodchartJsondataSingleStaffAjax','hipbidvest\HipbidvestController@periodchartJsondataSingleStaffAjax');
 
 Route::get('/hipbidvest/bidvest_manage_default_checklist','hipbidvest\HipbidvestController@bidvestDefaultCheckListManagement');
 Route::get('/hipbidvest/bidvest_add_default_checklist_item','hipbidvest\HipbidvestController@bidvestAddItemToDefaultChecklist');
