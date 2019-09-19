@@ -230,25 +230,30 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="chart-wrapper">
-                                <div class="chart-title venuecolheading">Staff activity</div>
-                                <div class="chart-stage">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="chart-stage">
-                                                <div id="staff_activity">Loading...</div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title venuecolheading">Staff activity</div>
+                                    <div class="chart-stage">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="chart-stage">
+                                                    <div id="staff_activity">Loading...</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+
+
+
+
 
                 </div>
             </div>
