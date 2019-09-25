@@ -93,17 +93,7 @@
                             <div id="section_one">
                                 {{ $fusionchartElementOne }}
                             </div>
-                            <!-- section preview one end -->
-                            <!-- section preview two start -->
-                            <div id="section_two">
-                                {{ $fusionchartElementTwo }}
-                            </div>
-                            <!-- section preview two start -->
-                        </div>
-                        <!-- section preview three start -->
-                        <div id="section_three">
-                            {{ $fusionchartElementThree }}
-                        </div>
+
                         <!-- section preview three start -->
                     </div>
                 </div>
@@ -118,32 +108,11 @@
     <script type="text/javascript">
         function convertPDF() {
             var myPageone    =   $("#section_one").html();
-            var myPagetwo    =   $("#section_two").html();
-            var myPagethree  =   $("#section_three").html();
 
-            var totalWifiSessions = $("#brandavgwifisessions").html();
-
-            var wifiDataTotal = $("#brandavgwifidatatotal").html();
-
-            var avgNumberofPeople = $("#brandavgnumberofpeople").html();
-
-            var avgFirstTimeUsers = $("#brandavgfirsttimeusers").html();
-
-            var avgDataPerSession = $("#brandbrandavgdatapersession").html();
-
-            var avgTimePerSession = $("#brandbrandavgtimepersession").html();
 
 
             //console.log(myPage); alert(myPage);
             $("#myPageone").val(myPageone);
-            $("#myPagetwo").val(myPagetwo);
-            $("#myPagethree").val(myPagethree);
-            $("#totalWifiSessions").val(totalWifiSessions);
-            $("#wifiDataTotal").val(wifiDataTotal);
-            $("#avgNumberofPeople").val(avgNumberofPeople);
-            $("#avgFirstTimeUsers").val(avgFirstTimeUsers);
-            $("#avgDataPerSession").val(avgDataPerSession);
-            $("#avgTimePerSession").val(avgTimePerSession);
             $("#printMyPage").submit();
         }
     </script>
@@ -152,16 +121,6 @@
 
     <form name="printMyPage" id="printMyPage" action="{{ url('hipwifiBrandPdfDownload') }}" method="post">
         <input type="hidden" name="myPageone" id="myPageone">
-        <input type="hidden" name="myPagetwo" id="myPagetwo">
-        <input type="hidden" name="myPagethree" id="myPagethree">
-        <input type="hidden" name="totalWifiSessions" id="totalWifiSessions">
-        <input type="hidden" name="wifiDataTotal" id="wifiDataTotal">
-        <input type="hidden" name="avgNumberofPeople" id="avgNumberofPeople">
-        <input type="hidden" name="avgFirstTimeUsers" id="avgFirstTimeUsers">
-        <input type="hidden" name="avgDataPerSession" id="avgDataPerSession">
-        <input type="hidden" name="avgTimePerSession" id="avgTimePerSession">
-        <input type="hidden" name="printtoken" value="true" id="printtoken">
-        <input type="hidden" name="report_name" id="report_name" value="{{ $report_name }}">
 
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

@@ -1062,6 +1062,42 @@ class HippnpController extends \BaseController {
 
     }
 
+    public function hippnpPDFPreview()
+    {
+        $input_data                 =       Input::all();
+        $data                       =       array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['fusionchartElementOne'] =  $input_data['myPageone'];
+
+//         if(isset($input_data['printtoken'])) {
+
+//             $data['totalWifiSessions'] = $input_data['totalWifiSessions'];
+//             $data['wifiDataTotal'] = $input_data['wifiDataTotal'];
+//             $data['avgNumberofPeople'] = $input_data['avgNumberofPeople'];
+//             $data['avgFirstTimeUsers'] = $input_data['avgFirstTimeUsers'];
+//             $data['avgDataPerSession'] = $input_data['avgDataPerSession'];
+//             $data['avgTimePerSession'] = $input_data['avgTimePerSession'];
+
+//             // return \View::make('hipreports.hipwifi_brand_download', $data);
+//             $dompdf = \PDF::loadView('hipreports.hipwifi_brand_download', $data);
+// //            $pdf->set_paper(DEFAULT_PDF_PAPER_SIZE, 'portrait');
+// //            $pdf->get_option('enable_css_float');
+//             //$filename               =       $data['report_name'].".pdf";
+//             $filename = preg_replace( "/\s+/", " ", $data['report_name'].".pdf" );
+//             $filename = str_ireplace(" ", "_", $filename);
+
+// //            $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
+//             return $dompdf->download($filename);
+//            // $pdf = $dompdf->output();
+//            // $file_location = base_path()."/public/fc_images/pdfreport/".$filename;
+//            // file_put_contents($file_location,$pdf);
+//         } else {
+
+            $data['printButtonToken']   =   TRUE;
+            return \View::make('hippnp.hippnp_brand_download_preview.blade', $data);
+        // }
+    }
+
 
 }
 

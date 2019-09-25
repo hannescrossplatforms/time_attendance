@@ -384,6 +384,7 @@ Route::post('hippnp/periodchartJsondataSingleStaffAjax','hippnp\HippnpController
 Route::post('hippnp/staffCategoryActivity','hippnp\HippnpController@staffCategoryActivity');
 
 Route::any('/hippnp_convertsvgtoimage', array('uses' => 'hippnp\HippnpController@convertSvgToImage', 'as' => 'hippnp_showdashboard'))->before('auth');
+Route::any('/hippnpBrandPdfDownload', array('uses' => 'hippnp\HippnpController@hippnpPDFPreview', 'as' => 'hippnp_showdashboard'));
 
 // periodchartJsondataSingleStaffAjax
 
