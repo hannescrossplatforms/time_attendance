@@ -1023,6 +1023,46 @@ class HippnpController extends \BaseController {
 
     }
 
+    public function convertSvgToImage()
+    {
+        $data                       =       array();
+        $input_data                 =       Input::all();
+
+        $fusionchart_spans                  =   $input_data['fusionchartspans'];
+        $chart_svg                          =   "";
+        $images                         =   array();
+        $svgs                           =   array();
+        $i                              =   0;
+        //converting svg code to image
+        foreach($fusionchart_spans as $key => $charts) {
+            $i++;
+            $chart_svg                 .=       $charts;
+            $path                       =       base_path()."/public/fc_images/svg_temp/";
+            $fileName                   =       $key.strtotime(date('H:i:s'));
+            $svg_file                   =       fopen($path.$fileName.".svg","w");
+            fwrite($svg_file, $charts);
+            fclose($svg_file);
+            $svgs["img_".$key]               =   $fileName;
+        }
+
+
+/////////////for dev1 pdfinvestigation /////////////
+            $svgpath                    =   base_path().'/public/fc_images/svg_temp/';
+            $imgpath                    =   base_path().'/public/fc_images/image_temp/';
+        foreach($svgs as $key => $val) {
+            //shell excution for svg to image
+            $cmd                        =   'inkscape -f '.$svgpath.$val.'.svg -e '.$imgpath.$val.'.png';
+            shell_exec($cmd);
+            $images[$key]               =   $val.".png";
+            unlink($svgpath.$val.'.svg');
+        }
+
+        $response                       =   array('status' => "success" , 'result_img' => $images);
+        print_r(json_encode($response));exit;
+
+    }
+
+
 }
 
 

@@ -160,7 +160,7 @@
 
                     <div class="row">
                         <div id="printButton" class="col-md-4" style="width:30%; float: right;">
-                                <button type="button" class="btn btn-primary">View Printable Page</button>
+                                <button type="button" class="btn btn-primary" onclick="printpreview()" >View Printable Page</button>
                         </div>
                     </div>
 

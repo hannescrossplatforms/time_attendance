@@ -383,6 +383,8 @@ Route::get('hippnp/periodchartJsondataStaffAjax','hippnp\HippnpController@period
 Route::post('hippnp/periodchartJsondataSingleStaffAjax','hippnp\HippnpController@periodchartJsondataSingleStaffAjax');
 Route::post('hippnp/staffCategoryActivity','hippnp\HippnpController@staffCategoryActivity');
 
+Route::any('/hippnp_convertsvgtoimage', array('uses' => 'hippnp\HippnpController@convertSvgToImage', 'as' => 'hippnp_showdashboard'))->before('auth');
+
 // periodchartJsondataSingleStaffAjax
 
 // HipBidvest routes //////////////////////////////////////////////////////////////
