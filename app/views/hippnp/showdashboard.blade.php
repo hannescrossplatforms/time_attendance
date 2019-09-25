@@ -157,6 +157,11 @@
                     </div>
 
                     <br><br>
+
+                    <div id="printButton" class="col-md-4" style="width:30%; float: right;">
+                            <!-- <button type="button" class="btn btn-primary">View Printable Page</button> -->
+                    </div>
+
                     <div id="fusion-chart">
                         <div class="row">
                             <!-- <div id="report_period"><br><br>{{$data['report_period']}}</div> -->
