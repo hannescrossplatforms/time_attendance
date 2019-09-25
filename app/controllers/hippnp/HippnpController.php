@@ -1094,11 +1094,9 @@ class HippnpController extends \BaseController {
 //         } else {
 
             $data['printButtonToken']   =   TRUE;
-            return \View::make('hippnp.hippnp_brand_download_preview.blade', $data);
+            return \View::make('hippnp.hippnp_brand_download_preview', $data);
         // }
     }
 
 
 }
-
-
