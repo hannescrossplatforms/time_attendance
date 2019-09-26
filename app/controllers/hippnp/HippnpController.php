@@ -1098,5 +1098,29 @@ class HippnpController extends \BaseController {
         // }
     }
 
+    public function hippnpBrandPdfDownload(){
+
+        $input_data                 =       Input::all();
+        $data                       =       array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['fusionchartElementOne'] =  $input_data['myPageone'];
+
+        if(isset($input_data['printtoken'])) {
+
+
+
+            $dompdf = \PDF::loadView('hipreports.hippnp_brand_download', $data);
+            $filename = preg_replace( "/\s+/", " ", $data['report_name'].".pdf" );
+            $filename = str_ireplace(" ", "_", $filename);
+
+            return $dompdf->download($filename);
+        } else {
+
+            $data['printButtonToken']   =   TRUE;
+            return \View::make('hipreports.hippnp_brand_download_preview', $data);
+        }
+
+    }
+
 
 }

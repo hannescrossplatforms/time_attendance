@@ -48,7 +48,7 @@
             position: absolute;
             min-height: 107px;
             left: 78%;
-            bottom: 92%;
+            bottom: 96.5%;
             float: right;
         }
         .pdf_doc_logo img {
@@ -64,7 +64,7 @@
 
         <div class="col-sm-9 main" style="width: 80%; margin: 10px 10% 0 12%;">
 
-            <h1 class="page-header">HipWIFI Reports</h1>
+            <h1 class="page-header">Pick n Pay Reports</h1>
             <div class="pdf_doc_logo" >
                 <img src="{{asset('img/logo_hiphub_logo.jpg')}}">
             </div>
@@ -81,7 +81,7 @@
                     <div>
                         <?php if(isset($printButtonToken)) { ?>
                         <div id="download-button" class="col-md-4" style="width:20%; float: right;">
-                            <button type="button" class="btn btn-primary" style="float:right;" onclick="convertPDF()">Print to Pdf</button>
+                            <button type="button" class="btn btn-primary" onclick="convertPDF()">Print to Pdf</button>
                         </div>
                           <?php } ?>
                     </div>
@@ -93,8 +93,10 @@
                             <div id="section_one">
                                 {{ $fusionchartElementOne }}
                             </div>
+                            <!-- section preview one end -->
 
-                        <!-- section preview three start -->
+                        </div>
+
                     </div>
                 </div>
 
@@ -105,24 +107,34 @@
     </div>
 
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         function convertPDF() {
             var myPageone    =   $("#section_one").html();
 
 
 
-            //console.log(myPage); alert(myPage);
+
             $("#myPageone").val(myPageone);
             $("#printMyPage").submit();
         }
-    </script>
+    </script> -->
 
 
 
-    <form name="printMyPage" id="printMyPage" action="{{ url('hippnpBrandPdfDownload') }}" method="post">
+    <!-- <form name="printMyPage" id="printMyPage" action="{{ url('hipwifiBrandPdfDownload') }}" method="post">
         <input type="hidden" name="myPageone" id="myPageone">
+        <input type="hidden" name="myPagetwo" id="myPagetwo">
+        <input type="hidden" name="myPagethree" id="myPagethree">
+        <input type="hidden" name="totalWifiSessions" id="totalWifiSessions">
+        <input type="hidden" name="wifiDataTotal" id="wifiDataTotal">
+        <input type="hidden" name="avgNumberofPeople" id="avgNumberofPeople">
+        <input type="hidden" name="avgFirstTimeUsers" id="avgFirstTimeUsers">
+        <input type="hidden" name="avgDataPerSession" id="avgDataPerSession">
+        <input type="hidden" name="avgTimePerSession" id="avgTimePerSession">
+        <input type="hidden" name="printtoken" value="true" id="printtoken">
+        <input type="hidden" name="report_name" id="report_name" value="{{ $report_name }}">
 
-    </form>
+    </form> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/js.cookie.js"></script>
