@@ -166,43 +166,45 @@
 
 
                     <div id="fusion-chart">
-                        <div class="row">
-                            <!-- <div id="report_period"><br><br>{{$data['report_period']}}</div> -->
+                        <div class="section_one">
+                            <div class="row">
+                                <!-- <div id="report_period"><br><br>{{$data['report_period']}}</div> -->
 
 
 
-                            <div class="col-sm-6">
-                                <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Total dwell time per category</div>
-                                    <div class="chart-stage">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="chart-stage">
-                                                    <div id="staff_wrk">Loading...</div>
+                                <div class="col-sm-6">
+                                    <div class="chart-wrapper">
+                                        <div class="chart-title venuecolheading">Total dwell time per category</div>
+                                        <div class="chart-stage">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="chart-stage">
+                                                        <div id="staff_wrk">Loading...</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-sm-6">
-                                <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Average dwell time per category</div>
-                                    <div class="chart-stage">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="chart-stage">
-                                                    <div id="staff_wrk_avg">Loading...</div>
+                                <div class="col-sm-6">
+                                    <div class="chart-wrapper">
+                                        <div class="chart-title venuecolheading">Average dwell time per category</div>
+                                        <div class="chart-stage">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="chart-stage">
+                                                        <div id="staff_wrk_avg">Loading...</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+
+
                             </div>
-
-
-
                         </div>
                     </div>
 
@@ -701,8 +703,8 @@ function printpreview() {
     <input type="hidden" name="myPageone" id="myPageone">
 </form>
 
-<div id="section_one" >
+<!-- <div id="section_one" >
     <h1>Test</h1>
-</div>
+</div> -->
 
 @stop
