@@ -1094,8 +1094,15 @@ class HippnpController extends \BaseController {
 //            // file_put_contents($file_location,$pdf);
 //         } else {
 
-            $data['printButtonToken']   =   TRUE;
-            return \View::make('hippnp.hippnp_brand_download_preview', $data);
+
+
+$json = json_encode($input_data);
+
+        print_r($json);
+
+
+            // $data['printButtonToken']   =   TRUE;
+            // return \View::make('hippnp.hippnp_brand_download_preview', $data);
         // }
     }
 
