@@ -121,6 +121,7 @@
 
     <form name="printMyPage" id="printMyPage" action="{{ url('hippnpBrandPdfDownload') }}" method="post">
         <input type="hidden" name="myPageone" id="myPageone">
+        <input type="report_name" name="myPageone" id="myPageone">
 
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

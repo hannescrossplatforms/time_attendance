@@ -1068,6 +1068,7 @@ class HippnpController extends \BaseController {
         $data                       =       array();
         $data['currentMenuItem'] = "Dashboard";
         $data['fusionchartElementOne'] =  $input_data['myPageone'];
+        $data['fileName'] =  $input_data['fileName'];
 
 //         if(isset($input_data['printtoken'])) {
 
@@ -1086,7 +1087,7 @@ class HippnpController extends \BaseController {
 //             $filename = preg_replace( "/\s+/", " ", $data['report_name'].".pdf" );
 //             $filename = str_ireplace(" ", "_", $filename);
 
-           $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
+        //    $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
 //             return $dompdf->download($filename);
 //            // $pdf = $dompdf->output();
 //            // $file_location = base_path()."/public/fc_images/pdfreport/".$filename;
@@ -1104,6 +1105,7 @@ class HippnpController extends \BaseController {
         $data                       =       array();
         $data['currentMenuItem'] = "Dashboard";
         $data['fusionchartElementOne'] =  $input_data['myPageone'];
+        $data['reportName'] = $input_data['reportName'];
 
         // if(isset($input_data['printtoken'])) {
 

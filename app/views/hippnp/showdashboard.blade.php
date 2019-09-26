@@ -694,7 +694,7 @@ function printpreview() {
 
 <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hippnpBrandPdfDownloadPreview') }}" method="post">
     <input type="hidden" name="myPageone" id="myPageone">
-    <input type="hidden" name="report_name" id="reportName" value="HannesTest">
+    <input type="hidden" name="reportName" id="reportName" value="HannesTest">
 </form>
 
 <!-- <div id="section_one" >
