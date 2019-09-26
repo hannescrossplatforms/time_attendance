@@ -1068,7 +1068,7 @@ class HippnpController extends \BaseController {
         $data                       =       array();
         $data['currentMenuItem'] = "Dashboard";
         $data['fusionchartElementOne'] =  $input_data['myPageone'];
-        // $data['fileName'] =  $input_data['fileName'];
+        $data['reportName'] =  $input_data['reportName'];
 
 //         if(isset($input_data['printtoken'])) {
 
@@ -1096,13 +1096,13 @@ class HippnpController extends \BaseController {
 
 
 
-$json = json_encode($input_data);
+// $json = json_encode($input_data);
 
-        print_r($json);
+//         print_r($json);
 
 
-            // $data['printButtonToken']   =   TRUE;
-            // return \View::make('hippnp.hippnp_brand_download_preview', $data);
+            $data['printButtonToken']   =   TRUE;
+            return \View::make('hippnp.hippnp_brand_download_preview', $data);
         // }
     }
 
