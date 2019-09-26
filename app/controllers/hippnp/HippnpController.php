@@ -1086,7 +1086,7 @@ class HippnpController extends \BaseController {
 //             $filename = preg_replace( "/\s+/", " ", $data['report_name'].".pdf" );
 //             $filename = str_ireplace(" ", "_", $filename);
 
-// //            $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
+           $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
 //             return $dompdf->download($filename);
 //            // $pdf = $dompdf->output();
 //            // $file_location = base_path()."/public/fc_images/pdfreport/".$filename;

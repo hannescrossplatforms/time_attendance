@@ -384,7 +384,7 @@ Route::post('hippnp/periodchartJsondataSingleStaffAjax','hippnp\HippnpController
 Route::post('hippnp/staffCategoryActivity','hippnp\HippnpController@staffCategoryActivity');
 
 Route::any('/hippnp_convertsvgtoimage', array('uses' => 'hippnp\HippnpController@convertSvgToImage', 'as' => 'hippnp_showdashboard'))->before('auth');
-Route::any('/hippnpBrandPdfDownload', array('uses' => 'hippnp\HippnpController@hippnpPDFPreview', 'as' => 'hippnp_showdashboard'));
+Route::any('/hippnpBrandPdfDownloadPreview', array('uses' => 'hippnp\HippnpController@hippnpPDFPreview', 'as' => 'hippnp_showdashboard'));
 Route::any('/hippnpBrandPdfDownload', array('uses' => 'hippnp\HippnpController@hippnpBrandPdfDownload', 'as' => 'hipreports_showdashboard'));
 // Route::any('/hipwifiBrandPdfDownload', array('uses' => 'hipreports\HipreportsController@hipwifi_Brand_Pdf_Download', 'as' => 'hipreports_showdashboard'));
 
