@@ -1117,7 +1117,7 @@ class HippnpController extends \BaseController {
         } else {
 
             $data['printButtonToken']   =   TRUE;
-            return \View::make('hipreports.hippnp_brand_download_preview', $data);
+            return \View::make('hippnp.hippnp_brand_download_preview', $data);
         }
 
     }
