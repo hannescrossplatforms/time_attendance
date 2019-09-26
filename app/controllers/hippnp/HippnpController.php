@@ -1119,7 +1119,7 @@ class HippnpController extends \BaseController {
 
 
             $dompdf = \PDF::loadView('hipreports.hippnp_brand_download', $data);
-            $filename = preg_replace( "/\s+/", " ", $data['report_name'].".pdf" );
+            $filename = preg_replace( "/\s+/", " ", $data['reportName'].".pdf" );
             $filename = str_ireplace(" ", "_", $filename);
 
             return $dompdf->download($filename);
