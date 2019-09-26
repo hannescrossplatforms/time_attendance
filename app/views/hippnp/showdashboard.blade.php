@@ -164,14 +164,10 @@
                         </div>
                     </div>
 
-
+                    <div id="section_one">
                     <div id="fusion-chart">
-                        <div id="section_one">
+
                             <div class="row">
-                                <!-- <div id="report_period"><br><br>{{$data['report_period']}}</div> -->
-
-
-
                                 <div class="col-sm-6">
                                     <div class="chart-wrapper">
                                         <div class="chart-title venuecolheading">Total dwell time per category</div>
@@ -201,11 +197,8 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
                             </div>
-                        </div>
+
                     </div>
 
                     <div class="row">
@@ -260,7 +253,7 @@
                         </div>
 
                     </div>
-
+                    </div>
                 </div>
             </div>
         </div>
