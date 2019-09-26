@@ -162,22 +162,17 @@
     <script type="text/javascript">
         function convertPDF() {
             var myPageone    =   $("#section_one").html();
-            var myPagetwo    =   $("#section_two").html();
-            var myPagethree  =   $("#section_three").html();
+
             //console.log(myPage); alert(myPage);
             $("#myPageone").val(myPageone);
-            $("#myPagetwo").val(myPagetwo);
-            $("#myPagethree").val(myPagethree);
             $("#printMyPage").submit();
         }
     </script>
 
 
 
-    <form name="printMyPage" id="printMyPage" action="{{ url('hipwifiBrandPdfDownload') }}" method="post">
+    <form name="printMyPage" id="printMyPage" action="{{ url('hippnpBrandPdfDownload') }}" method="post">
         <input type="hidden" name="myPageone" id="myPageone">
-        <input type="hidden" name="myPagetwo" id="myPagetwo">
-        <input type="hidden" name="myPagethree" id="myPagethree">
         <input type="hidden" name="printtoken" value="true" id="printtoken">
         <input type="hidden" name="report_name" id="report_name" value="{{ $report_name }}">
     </form>
