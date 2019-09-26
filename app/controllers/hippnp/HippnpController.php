@@ -1119,7 +1119,7 @@ class HippnpController extends \BaseController {
 
             $data['printButtonToken']   =   TRUE;
             return \View::make('hippnp.hippnp_brand_download_preview', $data);
-        }
+        // }
 
         // $json = json_encode($input_data);
 
