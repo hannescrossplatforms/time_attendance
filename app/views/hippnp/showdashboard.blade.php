@@ -166,7 +166,7 @@
 
 
                     <div id="fusion-chart">
-                        <div class="section_one">
+                        <div id="section_one">
                             <div class="row">
                                 <!-- <div id="report_period"><br><br>{{$data['report_period']}}</div> -->
 
