@@ -1109,16 +1109,16 @@ class HippnpController extends \BaseController {
 
 
 
-        //     $dompdf = \PDF::loadView('hipreports.hippnp_brand_download', $data);
-        //     $filename = preg_replace( "/\s+/", " ", $data['report_name'].".pdf" );
-        //     $filename = str_ireplace(" ", "_", $filename);
+            $dompdf = \PDF::loadView('hipreports.hippnp_brand_download', $data);
+            $filename = preg_replace( "/\s+/", " ", $data['report_name'].".pdf" );
+            $filename = str_ireplace(" ", "_", $filename);
 
-        //     return $dompdf->download($filename);
+            return $dompdf->download($filename);
 
         // } else {
 
-            $data['printButtonToken']   =   TRUE;
-            return \View::make('hippnp.hippnp_brand_download_preview', $data);
+            // $data['printButtonToken']   =   TRUE;
+            // return \View::make('hippnp.hippnp_brand_download_preview', $data);
         // }
 
         // $json = json_encode($input_data);
