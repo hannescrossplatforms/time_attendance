@@ -1068,7 +1068,7 @@ class HippnpController extends \BaseController {
         $data                       =       array();
         $data['currentMenuItem'] = "Dashboard";
         $data['fusionchartElementOne'] =  $input_data['myPageone'];
-        $data['fileName'] =  $input_data['fileName'];
+        // $data['fileName'] =  $input_data['fileName'];
 
 //         if(isset($input_data['printtoken'])) {
 
