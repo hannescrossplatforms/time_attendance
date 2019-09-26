@@ -48,7 +48,7 @@
             position: absolute;
             min-height: 107px;
             left: 78%;
-            bottom: 96.5%;
+            bottom: 92%;
             float: right;
         }
         .pdf_doc_logo img {
@@ -81,7 +81,7 @@
                     <div>
                         <?php if(isset($printButtonToken)) { ?>
                         <div id="download-button" class="col-md-4" style="width:20%; float: right;">
-                            <button type="button" class="btn btn-primary" onclick="convertPDF()">Print to Pdf</button>
+                            <button type="button" class="btn btn-primary" style="float:right;" onclick="convertPDF()">Print to Pdf</button>
                         </div>
                           <?php } ?>
                     </div>
