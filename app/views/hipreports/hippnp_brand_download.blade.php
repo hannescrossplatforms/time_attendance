@@ -174,7 +174,7 @@
     <form name="printMyPage" id="printMyPage" action="{{ url('hippnpBrandPdfDownload') }}" method="post">
         <input type="hidden" name="myPageone" id="myPageone">
         <input type="hidden" name="printtoken" value="true" id="printtoken">
-        <input type="hidden" name="report_name" id="report_name" value="{{ $report_name }}">
+        <input type="hidden" name="reportName" id="reportName" value="{{ $reportName }}">
     </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
