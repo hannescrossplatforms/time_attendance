@@ -103,6 +103,10 @@
         solid !important;
       }
 
+      .fusioncharts-container img {
+        width:200px;
+      }
+
 
     </style>
 
