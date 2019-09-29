@@ -176,9 +176,13 @@
 
 
 
-                    <div id="section_two"> <!-- Section two start -->
+
+
+
+                    <!-- <div id="section_one"> -->
                         <div id="fusion-chart">
 
+                            <div id="section_two"> <!-- Section one start -->
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="chart-wrapper">
@@ -210,6 +214,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+                            </div><!-- Section two end -->
 
                         </div>
 
@@ -264,7 +270,7 @@
                                 </div>
                             </div>
 
-                        </div>  <!-- Section two end -->
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
