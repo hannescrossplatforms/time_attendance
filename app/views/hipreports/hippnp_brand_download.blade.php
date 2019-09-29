@@ -124,12 +124,27 @@
 
 
 
+<script type="text/javascript">
+        function convertPDF() {
+            var myPageone    =   $("#section_one").html();
+            var myPagetwo    =   $("#section_two").html();
+
+            //console.log(myPage); alert(myPage);
+            $("#myPageone").val(myPageone);
+            $("#myPagetwo").val(myPagetwo);
+            $("#printMyPage").submit();
+        }
+    </script>
+
+
+
     <form name="printMyPage" id="printMyPage" action="{{ url('hippnpBrandPdfDownload') }}" method="post">
         <input type="hidden" name="myPageone" id="myPageone">
         <input type="hidden" name="myPagetwo" id="myPagetwo">
-        <input type="reportName" name="reportName" id="reportName" value="{{ $reportName }}">
-
+        <input type="hidden" name="printtoken" value="true" id="printtoken">
+        <input type="hidden" name="reportName" id="reportName" value="{{ $reportName }}">
     </form>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/js.cookie.js"></script>
