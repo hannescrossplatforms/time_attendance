@@ -64,6 +64,9 @@
                             </div>
                         </div>
                     </div>
+
+                    </div>  <!-- Section one end -->
+
                     <div class="row">
                         <div class="col-md-4" style="width:30%;">
                             <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
@@ -174,7 +177,7 @@
 
 
 
-                    </div>  <!-- Section one end -->
+
 
                     <!-- <div id="section_one"> -->
                         <div id="fusion-chart">
