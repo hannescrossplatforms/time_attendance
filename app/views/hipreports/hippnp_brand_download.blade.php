@@ -104,7 +104,7 @@
       }
 
       .fusioncharts-container img {
-        width:500px;
+        width:400px;
       }
 
       .section_two {
