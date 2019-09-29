@@ -107,12 +107,15 @@
         width:200px;
       }
 
-      .fusion-chart .section_two .row {
+      .section_two .row {
 
       }
 
-      .fusion-chart .section_two .row .col-sm-6 {
-        display:inline;
+      .section_two .row .col-sm-6 {
+        width: 500px;
+        background-color: purple;
+        height: 200px;
+        display: inline-block;
       }
 
 
