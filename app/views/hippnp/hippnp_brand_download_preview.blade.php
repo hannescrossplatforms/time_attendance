@@ -97,6 +97,10 @@
                                 {{ $fusionchartElementTwo }}
                             </div>
 
+                            <div id="section_three">
+                                {{ $fusionchartElementThree }}
+                            </div>
+
                         <!-- section preview three start -->
                     </div>
                 </div>
@@ -112,9 +116,11 @@
         function convertPDF() {
             var myPageone    =   $("#section_one").html();
             var myPagetwo    =   $("#section_two").html();
+            var myPagethree    =   $("#section_three").html();
 
             $("#myPageone").val(myPageone);
             $("#myPagetwo").val(myPagetwo);
+            $("#myPagethree").val(myPagethree);
             $("#printMyPage").submit();
         }
     </script>

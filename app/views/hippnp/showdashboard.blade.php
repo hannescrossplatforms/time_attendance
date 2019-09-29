@@ -220,35 +220,39 @@
 
                         <div class="row">
 
-                            <div class="col-sm-6">
-                                <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Number of visits per category</div>
-                                    <div class="chart-stage">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="chart-stage">
-                                                    <div id="staff_visits_per_category">Loading...</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div id="section_three"> <!-- Section three start -->
 
-                            <div class="col-sm-6">
-                                <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Number of visits per store</div>
-                                    <div class="chart-stage">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="chart-stage">
-                                                    <div id="staff_visits_per_store">Loading...</div>
+                                <div class="col-sm-6 charty">
+                                    <div class="chart-wrapper">
+                                        <div class="chart-title venuecolheading">Number of visits per category</div>
+                                        <div class="chart-stage">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="chart-stage">
+                                                        <div id="staff_visits_per_category">Loading...</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="col-sm-6 charty">
+                                    <div class="chart-wrapper">
+                                        <div class="chart-title venuecolheading">Number of visits per store</div>
+                                        <div class="chart-stage">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="chart-stage">
+                                                        <div id="staff_visits_per_store">Loading...</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- Section three end -->
+
 
                         </div>
 
@@ -700,10 +704,12 @@ function printpreview() {
   function previewPDF() {
         var myPageone    =   $("#section_one").html();
         var myPagetwo    =   $("#section_two").html();
+        var myPagethree    =   $("#section_three").html();
 
     //console.log(myPage); alert(myPage);
         $("#myPageone").val(myPageone);
         $("#myPagetwo").val(myPagetwo);
+        $("#myPagethree").val(myPagethree);
         $("#viewMyPage").submit()
     }
 
@@ -714,6 +720,7 @@ function printpreview() {
 <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hippnpBrandPdfDownloadPreview') }}" method="post">
     <input type="hidden" name="myPageone" id="myPageone">
     <input type="hidden" name="myPagetwo" id="myPagetwo">
+    <input type="hidden" name="myPagethree" id="myPagethree">
     <input type="hidden" name="reportName" id="reportName" value="HannesTest">
 </form>
 

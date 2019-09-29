@@ -56,7 +56,6 @@
 
     <style type="text/css">
 
-
       .svgimg img { width: 200px; height: 300px; }
       .hipReports {
         color: #555555; font-family: 'Ubuntu',sans-serif;
@@ -175,6 +174,10 @@
                             <!-- section  one end -->
                             <div id="section_two">
                                 {{ $fusionchartElementTwo }}
+                            </div>
+
+                            <div id="section_three">
+                                {{ $fusionchartElementThree }}
                             </div>
 
                         </div>

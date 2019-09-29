@@ -1069,6 +1069,7 @@ class HippnpController extends \BaseController {
         $data['currentMenuItem'] = "Dashboard";
         $data['fusionchartElementOne'] =  $input_data['myPageone'];
         $data['fusionchartElementTwo'] =  $input_data['myPagetwo'];
+        $data['fusionchartElementThree'] =  $input_data['myPagethree'];
         $data['reportName'] =  $input_data['reportName'];
 
 //         if(isset($input_data['printtoken'])) {
@@ -1114,6 +1115,7 @@ class HippnpController extends \BaseController {
         $data['currentMenuItem'] = "Dashboard";
         $data['fusionchartElementOne'] =  $input_data['myPageone'];
         $data['fusionchartElementTwo'] =  $input_data['myPagetwo'];
+        $data['fusionchartElementThree'] =  $input_data['myPagethree'];
         $data['reportName'] = $input_data['reportName'];
 
         // if(isset($input_data['printtoken'])) {
