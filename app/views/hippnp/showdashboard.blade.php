@@ -35,10 +35,9 @@
                 <div class="container-fluid">
 
 
-
+                <div id="section_one"> <!-- Section one start -->
 
                     <div class="row">
-                    <div id="section_one"> <!-- Section one start -->
                         <div class="venuecolheading">Staff Overview</div>
                         <div class="col-md-2">
                             <div class="venuerow">
@@ -64,10 +63,9 @@
                                 </div>
                             </div>
                         </div>
-                        </div>  <!-- Section one end -->
                     </div>
 
-
+                    </div>  <!-- Section one end -->
 
                     <div class="row">
                         <div class="col-md-4" style="width:30%;">
