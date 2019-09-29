@@ -35,9 +35,10 @@
                 <div class="container-fluid">
 
 
-                <div id="section_one"> <!-- Section one start -->
+
 
                     <div class="row">
+                    <div id="section_one"> <!-- Section one start -->
                         <div class="venuecolheading">Staff Overview</div>
                         <div class="col-md-2">
                             <div class="venuerow">
@@ -63,9 +64,10 @@
                                 </div>
                             </div>
                         </div>
+                        </div>  <!-- Section one end -->
                     </div>
 
-                    </div>  <!-- Section one end -->
+
 
                     <div class="row">
                         <div class="col-md-4" style="width:30%;">
@@ -177,7 +179,6 @@
 
 
                     <div id="section_two"> <!-- Section two start -->
-                    </div>
                         <div id="fusion-chart">
 
                                 <div class="row">
@@ -265,7 +266,7 @@
                                 </div>
                             </div>
 
-                        <!-- </div>  Section two end -->
+                        </div>  <!-- Section two end -->
                     </div>
                 </div>
             </div>
