@@ -55,6 +55,7 @@
             height: 102px;
             width: 125px;
         }
+        body {background-color: red;}
     </style>
   </head>
 
@@ -84,19 +85,6 @@
                             <button type="button" class="btn btn-primary" style="float:right;" onclick="convertPDF()">Print to Pdf</button>
                         </div>
                           <?php } ?>
-                    </div>
-
-                    <div class='row'>
-
-                    <div class="col-md-3" style="background-color:red">
-                    <h1>test</h1>
-                    </div>
-                    <div class="col-md-3" style="background-color:blue">
-                    <h1>test</h1></div>
-                    <div class="col-md-3"style="background-color:green">
-                    <h1>test</h1>
-                    </div>
-
                     </div>
 
                     <div id="download-preview"><br><br>
@@ -148,7 +136,6 @@
     <script type="text/javascript" src="fusioncharts/themes/fusioncharts.theme.zune.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/hipreports/hipwifi/hipwifi_brand.js"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 </body>
 
