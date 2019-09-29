@@ -111,6 +111,7 @@
     <script type="text/javascript">
         function convertPDF() {
             var myPageone    =   $("#section_one").html();
+            var myPagetwo    =   $("#section_two").html();
 
             $("#myPageone").val(myPageone);
             $("#myPagetwo").val(myPagetwo);
