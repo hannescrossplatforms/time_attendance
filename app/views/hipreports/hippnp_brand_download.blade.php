@@ -114,11 +114,11 @@
         background-color:red;
       }
 
-      .section_two .row .col-sm-6 {
-        width: 300px;
-        background-color: purple;
-        height: 200px;
-        display: inline-block;
+      .charty {
+        width: 300px !important;
+        background-color: purple !important;
+        height: 200px !important;
+        display: inline-block !important;
       }
 
 

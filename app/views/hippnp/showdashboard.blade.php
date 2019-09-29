@@ -179,13 +179,11 @@
 
 
 
-
-                    <!-- <div id="section_one"> -->
                         <div id="fusion-chart">
 
                             <div id="section_two"> <!-- Section two start -->
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 charty">
                                         <div class="chart-wrapper">
                                             <div class="chart-title venuecolheading">Total dwell time per category</div>
                                             <div class="chart-stage">
@@ -200,7 +198,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 charty">
                                         <div class="chart-wrapper">
                                             <div class="chart-title venuecolheading">Average dwell time per category</div>
                                             <div class="chart-stage">
