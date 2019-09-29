@@ -146,6 +146,9 @@
                                 {{ $fusionchartElementOne }}
                             </div>
                             <!-- section  one end -->
+                            <div id="section_two">
+                                {{ $fusionchartElementTwo }}
+                            </div>
 
                         </div>
 

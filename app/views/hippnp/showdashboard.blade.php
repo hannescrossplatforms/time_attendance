@@ -694,9 +694,11 @@ function printpreview() {
 
   function previewPDF() {
         var myPageone    =   $("#section_one").html();
+        var myPagetwo    =   $("#section_two").html();
 
     //console.log(myPage); alert(myPage);
         $("#myPageone").val(myPageone);
+        $("#myPagetwo").val(myPagetwo);
         $("#viewMyPage").submit()
     }
 
@@ -706,6 +708,7 @@ function printpreview() {
 
 <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hippnpBrandPdfDownloadPreview') }}" method="post">
     <input type="hidden" name="myPageone" id="myPageone">
+    <input type="hidden" name="myPagetwo" id="myPagetwo">
     <input type="hidden" name="reportName" id="reportName" value="HannesTest">
 </form>
 

@@ -93,6 +93,9 @@
                             <div id="section_one">
                                 {{ $fusionchartElementOne }}
                             </div>
+                            <div id="section_two">
+                                {{ $fusionchartElementTwo }}
+                            </div>
 
                         <!-- section preview three start -->
                     </div>
@@ -109,10 +112,8 @@
         function convertPDF() {
             var myPageone    =   $("#section_one").html();
 
-
-
-            //console.log(myPage); alert(myPage);
             $("#myPageone").val(myPageone);
+            $("#myPagetwo").val(myPagetwo);
             $("#printMyPage").submit();
         }
     </script>
@@ -121,6 +122,7 @@
 
     <form name="printMyPage" id="printMyPage" action="{{ url('hippnpBrandPdfDownload') }}" method="post">
         <input type="hidden" name="myPageone" id="myPageone">
+        <input type="hidden" name="myPagetwo" id="myPagetwo">
         <input type="reportName" name="reportName" id="reportName" value="{{ $reportName }}">
 
     </form>
