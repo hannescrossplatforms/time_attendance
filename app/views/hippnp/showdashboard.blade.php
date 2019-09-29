@@ -177,6 +177,7 @@
 
 
                     <div id="section_two"> <!-- Section two start -->
+                    </div>
                         <div id="fusion-chart">
 
                                 <div class="row">
@@ -264,7 +265,7 @@
                                 </div>
                             </div>
 
-                        </div>  <!-- Section two end -->
+                        <!-- </div>  Section two end -->
                     </div>
                 </div>
             </div>
