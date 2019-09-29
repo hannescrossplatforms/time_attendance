@@ -19,7 +19,7 @@
     <link href="{{ asset('css/datepicker.css')}}" rel="stylesheet" media="screen" />
 
     <!-- Fontawesome CSS -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Sweet Alert CSS -->
     <script type="text/javascript" src="{{ asset('js/sweet-alert.min.js') }}"></script>
