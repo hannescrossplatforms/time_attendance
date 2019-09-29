@@ -176,9 +176,8 @@
 
 
 
-
+                    <div id="section_two"> <!-- Section two start -->
                         <div id="fusion-chart">
-                        <div id="section_two"> <!-- Section two start -->
 
                                 <div class="row">
                                     <div class="col-sm-6">
