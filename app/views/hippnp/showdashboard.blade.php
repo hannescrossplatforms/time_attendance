@@ -183,7 +183,7 @@
                     <!-- <div id="section_one"> -->
                         <div id="fusion-chart">
 
-                            <div id="section_two"> <!-- Section one start -->
+                            <div id="section_two"> <!-- Section two start -->
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="chart-wrapper">

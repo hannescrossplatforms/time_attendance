@@ -107,6 +107,14 @@
         width:200px;
       }
 
+      .fusion-chart .section_two .row {
+
+      }
+
+      .fusion-chart .section_two .row .col-sm-6 {
+        display:inline;
+      }
+
 
     </style>
 
