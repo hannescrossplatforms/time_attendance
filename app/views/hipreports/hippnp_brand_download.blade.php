@@ -197,7 +197,14 @@
         <input type="hidden" name="printtoken" value="true" id="printtoken">
         <input type="hidden" name="reportName" id="reportName" value="{{ $reportName }}">
     </form>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/js.cookie.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
+    <script type="text/javascript" src="fusioncharts/fusioncharts.js"></script>
+    <script type="text/javascript" src="fusioncharts/themes/fusioncharts.theme.zune.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/hipreports/hipwifi/hipwifi_brand.js"></script>
 
 
   </body>
