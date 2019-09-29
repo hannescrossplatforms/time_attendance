@@ -30,7 +30,13 @@
                 <h1 class="page-header">Pick n Pay Category Management</h1>
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
+
+
                 <div class="container-fluid">
+
+
+                <div id="section_one"> <!-- Section one start -->
+
                     <div class="row">
                         <div class="venuecolheading">Staff Overview</div>
                         <div class="col-md-2">
@@ -164,18 +170,40 @@
                         </div>
                     </div>
 
-                    <div id="section_one">
-                    <div id="fusion-chart">
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="chart-wrapper">
-                                        <div class="chart-title venuecolheading">Total dwell time per category</div>
-                                        <div class="chart-stage">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="chart-stage">
-                                                        <div id="staff_wrk">Loading...</div>
+
+
+
+                    </div>  <!-- Section one end -->
+
+                    <!-- <div id="section_one"> -->
+                        <div id="fusion-chart">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="chart-wrapper">
+                                            <div class="chart-title venuecolheading">Total dwell time per category</div>
+                                            <div class="chart-stage">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="chart-stage">
+                                                            <div id="staff_wrk">Loading...</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="chart-wrapper">
+                                            <div class="chart-title venuecolheading">Average dwell time per category</div>
+                                            <div class="chart-stage">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="chart-stage">
+                                                            <div id="staff_wrk_avg">Loading...</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,15 +211,18 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <div class="chart-wrapper">
-                                        <div class="chart-title venuecolheading">Average dwell time per category</div>
-                                        <div class="chart-stage">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="chart-stage">
-                                                        <div id="staff_wrk_avg">Loading...</div>
-                                                    </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title venuecolheading">Number of visits per category</div>
+                                    <div class="chart-stage">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="chart-stage">
+                                                    <div id="staff_visits_per_category">Loading...</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -199,60 +230,41 @@
                                 </div>
                             </div>
 
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-sm-6">
-                            <div class="chart-wrapper">
-                                <div class="chart-title venuecolheading">Number of visits per category</div>
-                                <div class="chart-stage">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="chart-stage">
-                                                <div id="staff_visits_per_category">Loading...</div>
+                            <div class="col-sm-6">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title venuecolheading">Number of visits per store</div>
+                                    <div class="chart-stage">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="chart-stage">
+                                                    <div id="staff_visits_per_store">Loading...</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
-                        <div class="col-sm-6">
-                            <div class="chart-wrapper">
-                                <div class="chart-title venuecolheading">Number of visits per store</div>
-                                <div class="chart-stage">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="chart-stage">
-                                                <div id="staff_visits_per_store">Loading...</div>
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title venuecolheading">Staff activity</div>
+                                    <div class="chart-stage">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="chart-stage">
+                                                    <div id="staff_activity">Loading...</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-sm-6">
-                            <div class="chart-wrapper">
-                                <div class="chart-title venuecolheading">Staff activity</div>
-                                <div class="chart-stage">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="chart-stage">
-                                                <div id="staff_activity">Loading...</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
