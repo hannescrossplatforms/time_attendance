@@ -108,7 +108,7 @@
       }
 
       .section_two .row {
-
+        background-color:red;
       }
 
       .section_two .row .col-sm-6 {
