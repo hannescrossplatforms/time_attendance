@@ -130,6 +130,7 @@
     <form name="printMyPage" id="printMyPage" action="{{ url('hippnpBrandPdfDownload') }}" method="post">
         <input type="hidden" name="myPageone" id="myPageone">
         <input type="hidden" name="myPagetwo" id="myPagetwo">
+        <input type="hidden" name="myPagethree" id="myPagethree">
         <input type="reportName" name="reportName" id="reportName" value="{{ $reportName }}">
 
     </form>
