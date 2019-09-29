@@ -107,7 +107,7 @@
         width:200px;
       }
 
-      .section_two .row {
+      .section_two {
         background-color:red;
       }
 
