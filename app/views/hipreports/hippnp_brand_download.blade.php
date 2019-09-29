@@ -57,6 +57,7 @@
     <style type="text/css">
 
       body {background-color: red;}
+
       .svgimg img { width: 200px; height: 300px; }
       .hipReports {
         color: #555555; font-family: 'Ubuntu',sans-serif;
@@ -106,7 +107,7 @@
       }
 
       .fusioncharts-container img {
-        width:400px;
+        width:300px;
       }
 
       .section_two {
@@ -114,7 +115,7 @@
       }
 
       .section_two .row .col-sm-6 {
-        width: 500px;
+        width: 300px;
         background-color: purple;
         height: 200px;
         display: inline-block;
