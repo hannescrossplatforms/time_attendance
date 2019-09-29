@@ -109,7 +109,17 @@
       }
 
       .section_two {
+        background-color:red;
         margin-top: -100px;
+      }
+
+      .section_three {
+        background-color:orange;
+      }
+
+
+      .section_four {
+        background-color:purple;
       }
 
       .charty {
