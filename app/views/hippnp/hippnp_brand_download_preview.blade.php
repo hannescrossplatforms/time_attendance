@@ -101,6 +101,10 @@
                                 {{ $fusionchartElementThree }}
                             </div>
 
+                            <div id="section_four">
+                                {{ $fusionchartElementFour }}
+                            </div>
+
                         <!-- section preview three start -->
                     </div>
                 </div>

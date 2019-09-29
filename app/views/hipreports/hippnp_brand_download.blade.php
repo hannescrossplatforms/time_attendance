@@ -180,6 +180,10 @@
                                 {{ $fusionchartElementThree }}
                             </div>
 
+                            <div id="section_four">
+                                {{ $fusionchartElementFour }}
+                            </div>
+
                         </div>
 
                     </div>
@@ -196,10 +200,14 @@
         function convertPDF() {
             var myPageone    =   $("#section_one").html();
             var myPagetwo    =   $("#section_two").html();
+            var myPagethree    =   $("#section_three").html();
+            var myPagefour    =   $("#section_four").html();
 
             //console.log(myPage); alert(myPage);
             $("#myPageone").val(myPageone);
             $("#myPagetwo").val(myPagetwo);
+            $("#myPagethree").val(myPagethree);
+            $("#myPagefour").val(myPagefour);
             $("#printMyPage").submit();
         }
     </script>

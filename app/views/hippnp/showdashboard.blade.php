@@ -258,22 +258,25 @@
 
                         <div class="row">
 
-                            <div class="col-sm-6">
-                                <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Staff activity</div>
-                                    <div class="chart-stage">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="chart-stage">
-                                                    <div id="staff_activity">Loading...</div>
+                            <div id="section_four"> <!-- Section four start -->
+
+                                <div class="col-sm-6">
+                                    <div class="chart-wrapper">
+                                        <div class="chart-title venuecolheading">Staff activity</div>
+                                        <div class="chart-stage">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="chart-stage">
+                                                        <div id="staff_activity">Loading...</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        <!-- </div> -->
+                            </div> <!-- Section four end -->
+
                     </div>
                 </div>
             </div>
@@ -705,11 +708,13 @@ function printpreview() {
         var myPageone    =   $("#section_one").html();
         var myPagetwo    =   $("#section_two").html();
         var myPagethree    =   $("#section_three").html();
+        var myPagefour    =   $("#section_four").html();
 
     //console.log(myPage); alert(myPage);
         $("#myPageone").val(myPageone);
         $("#myPagetwo").val(myPagetwo);
         $("#myPagethree").val(myPagethree);
+        $("#myPagefour").val(myPagefour);
         $("#viewMyPage").submit()
     }
 
@@ -721,6 +726,7 @@ function printpreview() {
     <input type="hidden" name="myPageone" id="myPageone">
     <input type="hidden" name="myPagetwo" id="myPagetwo">
     <input type="hidden" name="myPagethree" id="myPagethree">
+    <input type="hidden" name="myPagefour" id="myPagefour">
     <input type="hidden" name="reportName" id="reportName" value="HannesTest">
 </form>
 
