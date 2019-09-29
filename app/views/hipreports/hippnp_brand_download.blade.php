@@ -123,10 +123,10 @@
 
     <script type="text/javascript">
 
-         $(function(){
-            $("img").attr(style:"width:200px");
+        //  $(function(){
+        //     $("img").attr(style:"width:200px");
 
-         });
+        //  });
 
 
     </script>
