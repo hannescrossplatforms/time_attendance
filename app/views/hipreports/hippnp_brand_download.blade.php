@@ -143,6 +143,20 @@
                         <!-- BEGIN DEMOGRAPHICS AND USAGE -->
                         <div class="venuereports">
                             <!-- section  one start -->
+
+                          <div class='row'>
+
+                          <div class="col-md-3" style="background-color:red">
+                            <h1>test</h1>
+                          </div>
+                          <div class="col-md-3" style="background-color:blue">
+                          <h1>test</h1></div>
+                          <div class="col-md-3"style="background-color:green">
+                          <h1>test</h1>
+                          </div>
+
+                          </div>
+
                             <div id="section_one">
                                 {{ $fusionchartElementOne }}
                             </div>
