@@ -55,7 +55,6 @@
             height: 102px;
             width: 125px;
         }
-        body {background-color: red;}
     </style>
   </head>
 

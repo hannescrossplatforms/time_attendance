@@ -55,6 +55,8 @@
     <![endif]-->
 
     <style type="text/css">
+
+      body {background-color: red;}
       .svgimg img { width: 200px; height: 300px; }
       .hipReports {
         color: #555555; font-family: 'Ubuntu',sans-serif;
