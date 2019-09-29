@@ -148,6 +148,7 @@
     <script type="text/javascript" src="fusioncharts/themes/fusioncharts.theme.zune.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/hipreports/hipwifi/hipwifi_brand.js"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 </body>
 
