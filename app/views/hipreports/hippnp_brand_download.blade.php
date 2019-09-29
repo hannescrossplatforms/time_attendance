@@ -56,7 +56,6 @@
 
     <style type="text/css">
 
-      body {background-color: red;}
 
       .svgimg img { width: 200px; height: 300px; }
       .hipReports {
@@ -111,13 +110,12 @@
       }
 
       .section_two {
-        background-color:red;
+
       }
 
       .charty {
-        width: 300px !important;
-        background-color: purple !important;
-        height: 200px !important;
+        width: 500px !important;
+        height: 300px !important;
         display: inline-block !important;
       }
 
