@@ -121,10 +121,12 @@
             var myPageone    =   $("#section_one").html();
             var myPagetwo    =   $("#section_two").html();
             var myPagethree    =   $("#section_three").html();
+            var myPagefour    =   $("#section_four").html();
 
             $("#myPageone").val(myPageone);
             $("#myPagetwo").val(myPagetwo);
             $("#myPagethree").val(myPagethree);
+            $("#myPagefour").val(myPagefour);
             $("#printMyPage").submit();
         }
     </script>
@@ -135,6 +137,7 @@
         <input type="hidden" name="myPageone" id="myPageone">
         <input type="hidden" name="myPagetwo" id="myPagetwo">
         <input type="hidden" name="myPagethree" id="myPagethree">
+        <input type="hidden" name="myPagefour" id="myPagefour">
         <input type="reportName" name="reportName" id="reportName" value="{{ $reportName }}">
 
     </form>
