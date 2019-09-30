@@ -199,7 +199,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 charty">
                                     <div class="chart-wrapper">
                                         <div class="chart-title venuecolheading">Average dwell time per room</div>
                                         <div class="chart-stage">
@@ -238,7 +238,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 charty">
                                 <div class="chart-wrapper">
                                     <div class="chart-title venuecolheading">Number of visits per hospital</div>
                                     <div class="chart-stage">
