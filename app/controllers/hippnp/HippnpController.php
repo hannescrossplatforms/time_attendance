@@ -1071,7 +1071,7 @@ class HippnpController extends \BaseController {
         $data['fusionchartElementTwo'] =  $input_data['myPagetwo'];
         $data['fusionchartElementThree'] =  $input_data['myPagethree'];
         $data['fusionchartElementFour'] =  $input_data['myPagefour'];
-        $data['reportName'] =  $input_data['reportName'];
+        // $data['reportName'] =  $input_data['reportName'];
 
 //         if(isset($input_data['printtoken'])) {
 
@@ -1086,11 +1086,12 @@ class HippnpController extends \BaseController {
 //             $dompdf = \PDF::loadView('hipreports.hipwifi_brand_download', $data);
 // //            $pdf->set_paper(DEFAULT_PDF_PAPER_SIZE, 'portrait');
 // //            $pdf->get_option('enable_css_float');
-//             //$filename               =       $data['report_name'].".pdf";
+            //$filename               =       $data['report_name'].".pdf";
 //             $filename = preg_replace( "/\s+/", " ", $data['report_name'].".pdf" );
 //             $filename = str_ireplace(" ", "_", $filename);
 
-        //    $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
+           $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
+           $data['reportName'] =  $filename;
 //             return $dompdf->download($filename);
 //            // $pdf = $dompdf->output();
 //            // $file_location = base_path()."/public/fc_images/pdfreport/".$filename;
