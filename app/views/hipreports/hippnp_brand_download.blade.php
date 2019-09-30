@@ -22,8 +22,8 @@
     <!-- Latest compiled JavaScript -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
 
-    <link href="{{asset('css/bootstrap.css') }}" rel="stylesheet" media="screen" />
-    <link href="{{asset('css/bootstrap-social.css')}}" rel="stylesheet" media="screen" />
+    <!-- <link href="{{asset('css/bootstrap.css') }}" rel="stylesheet" media="screen" />
+    <link href="{{asset('css/bootstrap-social.css')}}" rel="stylesheet" media="screen" /> -->
 
     <link href="{{ asset('css/datepicker.css')}}" rel="stylesheet" media="screen" />
 
