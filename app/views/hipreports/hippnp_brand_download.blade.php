@@ -111,6 +111,7 @@
       .section_two {
         background-color:red;
         margin-top: -100px;
+        height: 400px;
       }
 
       .section_three {
