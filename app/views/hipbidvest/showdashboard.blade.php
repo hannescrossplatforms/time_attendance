@@ -184,7 +184,7 @@
 
                             <div class="row">
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 charty">
                                     <div class="chart-wrapper">
                                         <div class="chart-title venuecolheading">Total dwell time per room</div>
                                         <div class="chart-stage">
@@ -223,7 +223,7 @@
 
                         <div id="section_three"> <!-- Section three start -->
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 charty">
                                 <div class="chart-wrapper">
                                     <div class="chart-title venuecolheading">Number of visits per room</div>
                                     <div class="chart-stage">
@@ -262,7 +262,7 @@
 
                         <div id="section_four"> <!-- Section four start -->
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 charty">
                                 <div class="chart-wrapper">
                                     <div class="chart-title venuecolheading">Staff activity</div>
                                     <div class="chart-stage">
