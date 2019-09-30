@@ -111,7 +111,7 @@
       #section_two {
         background-color:red!important;
         margin-top: -100px!important;
-        height: 400px!important;
+        height: 300px!important;
       }
 
       #section_three {
