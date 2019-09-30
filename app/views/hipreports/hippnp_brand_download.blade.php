@@ -109,9 +109,9 @@
       }
 
       .section_two {
-        background-color:red;
-        margin-top: -100px;
-        height: 400px;
+        background-color:red!important;
+        margin-top: -100px!important;
+        height: 400px!important;
       }
 
       .section_three {
