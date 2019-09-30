@@ -109,7 +109,7 @@
       }
 
       #section_two {
-        margin-top: -100px!important;
+        /* margin-top: -100px!important; */
         height: 300px!important;
       }
 
