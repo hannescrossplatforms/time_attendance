@@ -1257,7 +1257,10 @@ class HipbidvestController extends \BaseController {
         $filename = preg_replace( "/\s+/", " ", $data['reportName'].".pdf" );
         $filename = str_ireplace(" ", "_", $filename);
 
-        return $dompdf->download($filename);
+        // return $dompdf->download($filename);
+
+        $data['printButtonToken']   =   TRUE;
+            return \View::make('hipreports.hipbidvest_brand_download', $data);
 
     }
 
