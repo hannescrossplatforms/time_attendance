@@ -50,6 +50,7 @@
             left: 78%;
             bottom: 92%;
             float: right;
+            top:-8;
         }
         .pdf_doc_logo img {
             height: 102px;
