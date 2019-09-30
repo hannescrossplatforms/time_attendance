@@ -139,7 +139,7 @@
         <input type="hidden" name="myPagetwo" id="myPagetwo">
         <input type="hidden" name="myPagethree" id="myPagethree">
         <input type="hidden" name="myPagefour" id="myPagefour">
-        <input type="reportName" name="reportName" id="reportName" value="{{ $reportName }}">
+        <input type="hidden" name="reportName" id="reportName" value="{{ $reportName }}">
 
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
