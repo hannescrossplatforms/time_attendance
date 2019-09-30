@@ -66,6 +66,7 @@
           min-height: 107px;
           right: 5%;
           bottom: 93.4%;
+          top:-8;
       }
       .pdf_doc_logo img {
           height: 102px;
