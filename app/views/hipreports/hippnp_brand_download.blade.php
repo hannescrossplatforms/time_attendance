@@ -108,18 +108,18 @@
         width:300px;
       }
 
-      .section_two {
+      #section_two {
         background-color:red!important;
         margin-top: -100px!important;
         height: 400px!important;
       }
 
-      .section_three {
+      #section_three {
         background-color:orange;
       }
 
 
-      .section_four {
+      #section_four {
         background-color:purple;
       }
 
