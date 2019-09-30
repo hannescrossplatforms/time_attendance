@@ -46,7 +46,7 @@
                                             <h3>Staff In Hospital Today</h3>
                                         </div>
                                         <div id="staff_today" class="modStatspan">
-                                            <span style="font-size: 30%;">{{$data['customer_in_store_today']}}</span>
+                                            <span>{{$data['customer_in_store_today']}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -57,8 +57,10 @@
                                         <div class="modstattitlebidvest">
                                             <h3>Staff In Hospital This Month</h3>
                                         </div>
-                                        <div id="staff_today" class="modStatspan"><span
-                                                style="font-size: 30%;">{{$data['customer_in_store_this_month']}}</span>
+                                        <div id="staff_today" class="modStatspan">
+                                        <span>
+                                            {{$data['customer_in_store_this_month']}}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
