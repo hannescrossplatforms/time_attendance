@@ -153,7 +153,7 @@
 
         <div class="col-sm-9 main" style="width: 80%; margin: 0px 10% 0 12%;">
 
-          <h1 class="page-header">Pick n Pay Reports</h1>
+          <h1 class="page-header">Pick n Pay Report</h1>
             <div class="pdf_doc_logo" >
                 <img src="{{asset('img/logo_hiphub_logo.jpg')}}">
             </div>

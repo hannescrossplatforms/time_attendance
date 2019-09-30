@@ -727,7 +727,7 @@ function printpreview() {
     <input type="hidden" name="myPagetwo" id="myPagetwo">
     <input type="hidden" name="myPagethree" id="myPagethree">
     <input type="hidden" name="myPagefour" id="myPagefour">
-    <input type="hidden" name="reportName" id="reportName" value="HannesTest">
+    <input type="hidden" style="display:none" name="reportName" id="reportName" value="HannesTest">
 </form>
 
 <!-- <div id="section_one" >
