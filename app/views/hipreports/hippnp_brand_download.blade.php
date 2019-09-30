@@ -109,18 +109,19 @@
       }
 
       #section_two {
-        background-color:red!important;
         margin-top: -100px!important;
         height: 300px!important;
       }
 
       #section_three {
-        background-color:orange;
+        margin-top: -100px!important;
+        height: 300px!important;
       }
 
 
       #section_four {
-        background-color:purple;
+        margin-top: -100px!important;
+        height: 300px!important;
       }
 
       .charty {
