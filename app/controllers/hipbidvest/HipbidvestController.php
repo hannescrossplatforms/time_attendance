@@ -1185,6 +1185,82 @@ class HipbidvestController extends \BaseController {
 
     }
 
+    public function convertSvgToImage()
+    {
+        $data                       =       array();
+        $input_data                 =       Input::all();
+
+        $fusionchart_spans                  =   $input_data['fusionchartspans'];
+        $chart_svg                          =   "";
+        $images                         =   array();
+        $svgs                           =   array();
+        $i                              =   0;
+        //converting svg code to image
+        foreach($fusionchart_spans as $key => $charts) {
+            $i++;
+            $chart_svg                 .=       $charts;
+            $path                       =       base_path()."/public/fc_images/svg_temp/";
+            $fileName                   =       $key.strtotime(date('H:i:s'));
+            $svg_file                   =       fopen($path.$fileName.".svg","w");
+            fwrite($svg_file, $charts);
+            fclose($svg_file);
+            $svgs["img_".$key]               =   $fileName;
+        }
+
+
+/////////////for dev1 pdfinvestigation /////////////
+            $svgpath                    =   base_path().'/public/fc_images/svg_temp/';
+            $imgpath                    =   base_path().'/public/fc_images/image_temp/';
+        foreach($svgs as $key => $val) {
+            //shell excution for svg to image
+            $cmd                        =   'inkscape -f '.$svgpath.$val.'.svg -e '.$imgpath.$val.'.png';
+            shell_exec($cmd);
+            $images[$key]               =   $val.".png";
+            unlink($svgpath.$val.'.svg');
+        }
+
+        $response                       =   array('status' => "success" , 'result_img' => $images);
+        print_r(json_encode($response));exit;
+
+    }
+
+    public function hipbidvestPDFPreview()
+    {
+        $input_data                 =       Input::all();
+        $data                       =       array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['fusionchartElementOne'] =  $input_data['myPageone'];
+        $data['fusionchartElementTwo'] =  $input_data['myPagetwo'];
+        $data['fusionchartElementThree'] =  $input_data['myPagethree'];
+        $data['fusionchartElementFour'] =  $input_data['myPagefour'];
+
+        $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
+        $data['reportName'] =  $filename;
+
+        $data['printButtonToken']   =   TRUE;
+        return \View::make('hipbidvest.hipbidvest_brand_download_preview', $data);
+
+    }
+
+    public function hipbidvestBrandPdfDownload(){
+
+        $input_data                 =       Input::all();
+        $data                       =       array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['fusionchartElementOne'] =  $input_data['myPageone'];
+        $data['fusionchartElementTwo'] =  $input_data['myPagetwo'];
+        $data['fusionchartElementThree'] =  $input_data['myPagethree'];
+        $data['fusionchartElementFour'] =  $input_data['myPagefour'];
+        $data['reportName'] = $input_data['reportName'];
+
+        $dompdf = \PDF::loadView('hipreports.hipbidvest_brand_download', $data);
+        $filename = preg_replace( "/\s+/", " ", $data['reportName'].".pdf" );
+        $filename = str_ireplace(" ", "_", $filename);
+
+        return $dompdf->download($filename);
+
+    }
+
 }
 
 

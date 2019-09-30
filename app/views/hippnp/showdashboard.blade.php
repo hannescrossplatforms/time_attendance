@@ -730,8 +730,4 @@ function printpreview() {
     <input type="hidden" style="display:none" name="reportName" id="reportName" value="HannesTest">
 </form>
 
-<!-- <div id="section_one" >
-    <h1>Test</h1>
-</div> -->
-
 @stop

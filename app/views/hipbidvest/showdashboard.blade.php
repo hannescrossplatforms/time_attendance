@@ -22,6 +22,9 @@
     <a id="buildtable"></a>
 
     <div class="container-fluid">
+
+
+
         <div class="row">
 
             @include('hipbidvest.sidebar')
@@ -31,33 +34,39 @@
                 <input type="hidden" id="url" name="" value={{$data['url']}}>
 
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="venuecolheading">Staff Overview</div>
-                        <div class="col-md-2">
-                            <div class="venuerow">
-                                <div class="modStat">
-                                    <div class="modstattitlebidvest">
-                                        <h3>Staff In Hospital Today</h3>
+
+                    <div id="section_one"> <!-- Section one start -->
+
+                        <div class="row">
+                            <div class="venuecolheading">Staff Overview</div>
+                            <div class="col-md-2">
+                                <div class="venuerow">
+                                    <div class="modStat">
+                                        <div class="modstattitlebidvest">
+                                            <h3>Staff In Hospital Today</h3>
+                                        </div>
+                                        <div id="staff_today" class="modStatspan">
+                                            <span style="font-size: 30%;">{{$data['customer_in_store_today']}}</span>
+                                        </div>
                                     </div>
-                                    <div id="staff_today" class="modStatspan">
-                                        <span style="font-size: 30%;">{{$data['customer_in_store_today']}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="venuerow">
+                                    <div class="modStat">
+                                        <div class="modstattitlebidvest">
+                                            <h3>Staff In Hospital This Month</h3>
+                                        </div>
+                                        <div id="staff_today" class="modStatspan"><span
+                                                style="font-size: 30%;">{{$data['customer_in_store_this_month']}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="venuerow">
-                                <div class="modStat">
-                                    <div class="modstattitlebidvest">
-                                        <h3>Staff In Hospital This Month</h3>
-                                    </div>
-                                    <div id="staff_today" class="modStatspan"><span
-                                            style="font-size: 30%;">{{$data['customer_in_store_this_month']}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    </div><!-- Section one end -->
+
                     <div class="row">
                         <div class="col-md-4" style="width:30%;">
                             <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
@@ -80,6 +89,8 @@
                             <!-- <button type="button" class="btn btn-primary">View Printable Page</button> -->
                         </div>
                         <!--        print preview button end-->
+
+
 
                         <div class="col-md-8" id="custom" style="display:none; width:70%;">
                             <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
@@ -158,48 +169,59 @@
                     </div>
 
                     <br><br>
-                    <div id="fusion-chart">
-                        <div class="row">
-                            <!-- <div id="report_period"><br><br>{{$data['report_period']}}</div> -->
 
-
-
-                            <div class="col-sm-6">
-                                <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Total dwell time per room</div>
-                                    <div class="chart-stage">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="chart-stage">
-                                                    <div id="staff_wrk">Loading...</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="chart-wrapper">
-                                    <div class="chart-title venuecolheading">Average dwell time per room</div>
-                                    <div class="chart-stage">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="chart-stage">
-                                                    <div id="staff_wrk_avg">Loading...</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
+                    <div class="row">
+                        <div id="printButton" class="col-md-4" style="width:30%; float: right;">
+                                <button type="button" class="btn btn-primary" onclick="printpreview()" >View Printable Page</button>
                         </div>
                     </div>
 
+
+                    <div id="fusion-chart">
+
+
+                        <div id="section_two"> <!-- Section two start -->
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="chart-wrapper">
+                                        <div class="chart-title venuecolheading">Total dwell time per room</div>
+                                        <div class="chart-stage">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="chart-stage">
+                                                        <div id="staff_wrk">Loading...</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="chart-wrapper">
+                                        <div class="chart-title venuecolheading">Average dwell time per room</div>
+                                        <div class="chart-stage">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="chart-stage">
+                                                        <div id="staff_wrk_avg">Loading...</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div> <!-- Section two end -->
+                    </div>
+
                     <div class="row">
+
+                        <div id="section_three"> <!-- Section three start -->
 
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
@@ -230,9 +252,16 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row">
+                        </div> <!-- Section three end -->
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <div id="section_four"> <!-- Section four start -->
+
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
                                     <div class="chart-title venuecolheading">Staff activity</div>
@@ -247,9 +276,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                        </div> <!-- Section four end -->
 
                     </div>
+
+                </div>
 
 
 
@@ -618,7 +650,81 @@ function renderCharts(time, start, end, category, store, province) {
         }
     });
 }
+
+function printpreview() {
+
+    $('#loadingDiv').show();
+    pathname = $('#url').val();
+
+    var fusioncharts_container = {};
+    $("span[class='fusioncharts-container']").each(function(index, elem) {
+    var spanId = $(this).attr('id');
+    spanId = spanId.split('-');
+    fusioncharts_container[spanId[1]] = $(this).html();
+    });
+
+    var fusionchartspans = fusioncharts_container;
+    var fusionImg = $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    async: false,
+    url: pathname + 'hippnp_convertsvgtoimage',
+    data: {
+        fusionchartspans: fusionchartspans
+    },
+    success: function(result) {
+        $('#loadingDiv').hide();
+    }
+    });
+
+    var fusionImages = fusionImg.responseJSON.result_img;
+    $("span[class='fusioncharts-container']").each(function(index, elem) {
+    $(this).removeAttr('style');
+    var spanId = $(this).attr('id');
+    spanId = spanId.split('-');
+    var image_path = 'fc_images/image_temp/' + fusionImages['img_' + spanId[1]];
+    $(this).html('<img src="' + image_path + '">');
+    });
+
+    var i = 1;
+    $('#fusion-chart .col-sm-6').each(function(index, elem) {
+    if (i % 2 == 0) {
+        $(this).addClass('col-6-right-al');
+    } else {
+        $(this).addClass('col-6-left-al');
+    }
+    i++;
+    });
+
+    previewPDF();
+
+}
+
+function previewPDF() {
+    var myPageone    =   $("#section_one").html();
+    var myPagetwo    =   $("#section_two").html();
+    var myPagethree    =   $("#section_three").html();
+    var myPagefour    =   $("#section_four").html();
+
+//console.log(myPage); alert(myPage);
+    $("#myPageone").val(myPageone);
+    $("#myPagetwo").val(myPagetwo);
+    $("#myPagethree").val(myPagethree);
+    $("#myPagefour").val(myPagefour);
+    $("#viewMyPage").submit()
+}
+
+
+
 </script>
+
+<form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hipbidvestBrandPdfDownloadPreview') }}" method="post">
+<input type="hidden" name="myPageone" id="myPageone">
+<input type="hidden" name="myPagetwo" id="myPagetwo">
+<input type="hidden" name="myPagethree" id="myPagethree">
+<input type="hidden" name="myPagefour" id="myPagefour">
+<input type="hidden" style="display:none" name="reportName" id="reportName" value="HannesTest">
+</form>
 
 
 @stop

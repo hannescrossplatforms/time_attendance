@@ -386,7 +386,7 @@ Route::post('hippnp/staffCategoryActivity','hippnp\HippnpController@staffCategor
 Route::any('/hippnp_convertsvgtoimage', array('uses' => 'hippnp\HippnpController@convertSvgToImage', 'as' => 'hippnp_showdashboard'))->before('auth');
 Route::any('/hippnpBrandPdfDownloadPreview', array('uses' => 'hippnp\HippnpController@hippnpPDFPreview', 'as' => 'hippnp_showdashboard'));
 Route::any('/hippnpBrandPdfDownload', array('uses' => 'hippnp\HippnpController@hippnpBrandPdfDownload', 'as' => 'hipreports_showdashboard'));
-// Route::any('/hipwifiBrandPdfDownload', array('uses' => 'hipreports\HipreportsController@hipwifi_Brand_Pdf_Download', 'as' => 'hipreports_showdashboard'));
+
 
 
 
@@ -421,6 +421,10 @@ Route::post('/hipbidvest/bidvest_assign_default_checklist_items','hipbidvest\Hip
 Route::post('/hipbidvest/bidvest_get_checklist_items','hipbidvest\HipbidvestController@getChecklistItems');
 Route::post('/hipbidvest/bidvest_delete_assigned_checklist_item','hipbidvest\HipbidvestController@deleteAssignedChecklistItem');
 Route::post('/hipbidvest/add_new_item_to_room','hipbidvest\HipbidvestController@addChceklistItemToRoom');
+
+Route::any('/hipbidvest_convertsvgtoimage', array('uses' => 'hipbidvest\HipbidvestController@convertSvgToImage', 'as' => 'hipbidvest_showdashboard'))->before('auth');
+Route::any('/hipbidvestBrandPdfDownloadPreview', array('uses' => 'hipbidvest\HipbidvestController@hipbidvestPDFPreview', 'as' => 'hipbidvest_showdashboard'));
+Route::any('/hipbidvestBrandPdfDownload', array('uses' => 'hipbidvest\HipbidvestController@hipbidvestBrandPdfDownload', 'as' => 'hipreports_showdashboard'));
 
 
 
