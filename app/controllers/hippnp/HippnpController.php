@@ -906,9 +906,14 @@ class HippnpController extends \BaseController {
 
     public static function picknpayStoreCategoryManagement(){
 
+
+        $pnpBrand = \Brand::where('name', '=', 'PicknPay')->firstOrFail();
+        $venues = $pnpBrand->venues()->get();
+
         $data = array();
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+        $data['brands'] = $venues;
         $engageCategories = \EngagePicknPayCategory::all();
 
         $data['engageCategories'] = $engageCategories;
