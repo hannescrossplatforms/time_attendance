@@ -140,6 +140,7 @@ return array(
     'EngagePicknPay' => $baseDir . '/app/models/EngagePicknpay.php',
     'EngagePicknPayBeacon' => $baseDir . '/app/models/EngagePicknPayBeacon.php',
     'EngagePicknPayCategory' => $baseDir . '/app/models/EngagePicknPayCategory.php',
+    'EngagePicknPayStaff' => $baseDir . '/app/models/EngagePicknPayStaff.php',
     'Engagebrand' => $baseDir . '/app/models/Engagebrand.php',
     'Eventschedule' => $baseDir . '/app/models/Eventschedule.php',
     'Eventtime' => $baseDir . '/app/models/Eventtime.php',

@@ -40,6 +40,14 @@
                                 <label for="exampleInputEmail1">Password</label>
                                 <input type="password" class="form-control" id="exampleInputEmail1" name="password" placeholder="" @if(!$edit) required @endif>
                             </div>
+                            <div class="form-group">
+                                <label for="brands">Brand</label>
+                                <select id="brand_select" name="brand" class="form-control">
+                                @foreach ($data['brands'] as $brand)
+                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                @endforeach
+                                </select>
+                            </div>
                             <h2 class="sub-header">Access Level</h2>
                             @if (\User::hasAccess("superadmin"))
                             <div class="radio">
@@ -83,18 +91,7 @@
                                     {{ $data['level_names']['defaultuser']; }}
                                 </label>
                             </div>
-                            @endif
-
-                            <h2 class="sub-header">Venues Managed</h2>
-                            <div class="row">
-                                <?php if (!empty($data['venues'])) {
-                                    foreach ($data['venues'] as $venue) { ?>
-                                        <div class="col-md-3">
-                                        <input type="checkbox" /> {{$venue->sitename}}
-                                        </div>
-                                <?php  }
-                                } ?>
-                            </div>
+                            @endif  
 
 
 

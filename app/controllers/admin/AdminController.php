@@ -247,6 +247,10 @@ class AdminController extends \BaseController {
         public function constructBrandRecord($brand, $input, $newrecord)
     {
 
+        if (\User::isVicinity()) {
+            $brand->parent_brand = 165;
+        }
+
         if($newrecord) {
             $brand->isp_id = \Input::get('isp_id');
             $brand->remotedb_id = \Input::get('remotedb_id');
@@ -344,7 +348,20 @@ class AdminController extends \BaseController {
         $data['allisps'] = $isps;
 
         $brand = new \Brand();
-        $data['brands'] = $brand->getBrandsForProduct('hipwifi and tna');
+        if (\User::isVicinity()) {
+            $data['brands'] = \DB::table('brands')
+            ->select("*")
+            ->where('brands.hipengage', '=', 1)
+            ->where('id', 165)
+            ->whereNull('deleted_at')
+            ->orderBy('name')
+            ->get();
+        } else {
+            $data['brands'] = $brand->getBrandsForProduct('hipwifi and tna');    
+        }
+        
+        
+        
 
         $data['ap_active_checked'] = "checked";
         $data['ap_inactive_checked'] = "";
@@ -464,6 +481,13 @@ error_log("admin_editVenueSave 10");
 
         if($venue) {
             error_log("admin_deleteVenue - deleting venue - id = $id");
+            $list_of_sensors = \Sensor::where('venue_id', '=', $id);
+            foreach ($list_of_sensors as $sensor)
+            {
+                $command = 'ssh  -v -i /var/www/.ssh/id_rsa root@vpn.hipzone.co.za -p 1759 "delete_keys ' . $sensor->name . '" 2>&1'; 
+                $output = shell_exec($command);
+                $sensor->delete();
+            }
             $venue->delete();
             $venue->deleteVenueInRadius($venue, $remotedb_id);
             error_log("admin_deleteVenue 20");
@@ -471,6 +495,7 @@ error_log("admin_editVenueSave 10");
             error_log("admin_deleteVenue 30");
             $mikrotik = new \Mikrotik();
             $mikrotik->deleteVenue($venue);
+            
         }
 
         return \Redirect::route('admin_showvenues', ['json' => 1]);

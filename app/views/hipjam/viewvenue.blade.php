@@ -75,10 +75,12 @@
             <!-- Nav tabs -->
               <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation"  class="active"><a id="absencetab" href="#venue" aria-controls="absence" role="tab" data-toggle="tab">Store</a></li>
-                <li role="presentation"><a id="zonaltab" href="#zonal" aria-controls="lateness" role="tab" data-toggle="tab">Zonal</a></li>
-                <li role="presentation"><a id="wsproximitytab" href="#heatmap" aria-controls="wsproximity" role="tab" data-toggle="tab">
+                @if (!\User::isVicinity())
+                <li role="presentation" style="@if (\User::isVicinity()) {{'display: none'}} @endif "><a id="zonaltab" href="#zonal" aria-controls="lateness" role="tab" data-toggle="tab">Zonal</a></li>
+                <li role="presentation" style="@if (\User::isVicinity()) {{'display: none'}} @endif "><a id="wsproximitytab" href="#heatmap" aria-controls="wsproximity" role="tab" data-toggle="tab">
                 Heatmap
                 </a></li>
+                @endif
               </ul>
               <br>
 
@@ -166,10 +168,14 @@
                                 <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                                     <select id="brandreportperiod" onchange="change_report_period()" class="form-control" name="reportperiod" >
                                         <!-- <option value="">Select</option> -->
-                                        <option value="rep7day">This week</option>
+                                        <!-- <option value="rep7day">This week</option>
                                         <option value="repthismonth">This month</option>
                                         <option value="replastmonth">Last month</option>
-                                        <option value="daterange">Custom range</option>
+                                        <option value="daterange">Custom range</option> -->
+                                        <option value="this_week">This week</option>
+                                        <option value="this_month">This month</option>
+                                        <option value="last_month">Last month</option>
+                                        <option value="custom">Custom range</option>
                                     </select>
                                 </div>
                                 

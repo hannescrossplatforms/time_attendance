@@ -102,9 +102,99 @@ if($data["is_activation"]) { $is_activation = 1; } else { $is_activation = 0; };
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     
-    <script src="js/prefixfree.min.js"></script> 
+    <script src="/js/prefixfree.min.js"></script> 
+    @if (\User::isVicinity())
+        <style>
+          .sidebar {
+            background-image: url(https://i.ibb.co/KbKv0Fc/vicinity-bg-copy.png);
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 413px;
+            background-position: center;
+          }
+
+          .nav.nav-sidebar.nav-products {
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+          }
+
+          .nav.subNav {
+            padding: 0;
+          }
+
+          .productTitle.pull-left {
+            background-color: transparent;
+          }
+
+          .productTitle.pull-left h2 {
+            background-color: transparent;
+          }
+
+          .logo.pull-left {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 32px 0px;
+          }
+
+          .sidebarActive .subNav li.active a {
+            background-color: rgba(255, 255, 255, 0.18);
+            height: 60px;
+          }
+
+          .hipJAM .sidebarActive .subNav {
+            background: transparent !important;
+          }
+
+          li.li-jam a:before {
+            background: transparent !important;
+          }
+
+          li.li-jam a i,
+          .nav-sidebar>li>a>i {
+            background: transparent !important;
+          }
+
+          .sidebarActive .subNav li {
+            border: none !important;
+          }
+
+          /* .vacinity-layer {
+            background-color: rgba(0, 0, 0, 0.2);
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+          } */
+          .nav-products li a:before {
+            background-color: transparent !important;
+          }
+
+          .hipJAM .page-header {
+            color: #9dd1ed !important;
+          }
+
+          .sidebarActive .logo img {
+            margin-top: -12px;
+          }
+
+          li.li-jam a {
+            background-color: #3d728b !important;
+          }
+
+          @media (max-width: 1555px) {
+            .main {
+              padding-left: 120px;
+            }
+          }
+
+          .modstattitle {
+            background-color: #9DD1ED;
+          }
+        </style>
+        @endif
     
     <script>
   
