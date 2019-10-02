@@ -37,6 +37,21 @@
                                 <label>Category name*</label>
                                 <input type="text" class="form-control" size="6" placeholder="Category name" name="category_name" required>
                             </div>
+
+
+                            <div class="form-group">
+                                <label>Store*</label>
+                                <select id="store_select" name="store_id" class="form-control" required>
+                                <option value="">Select</option>
+                                @foreach($data['brands'] as $store)
+                                    <option value="{{ $store->id }}">
+                                    {{ $store->sitename }}
+                                    </option>
+                                @endforeach
+                                </select>
+                            </div>
+
+
                             <br>
                             <button id="submitform" class="btn btn-primary">Submit</button>
                             <a href="/hippnp/picknpay_manage_store_categories" class="btn btn-default">Cancel</a>

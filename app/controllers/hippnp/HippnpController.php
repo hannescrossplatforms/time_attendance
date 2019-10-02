@@ -985,9 +985,13 @@ class HippnpController extends \BaseController {
 
     public static function addCategoryToStore() {
 
+        $pnpBrand = \Brand::where('name', '=', 'PicknPay')->firstOrFail();
+        $venues = $pnpBrand->venues()->get();
+
         $data = array() ;
         $data['currentMenuItem'] = "Dashboard";
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
+        $data['brands'] = $venues;
 
         return \View::make('hippnp.addcategory')->with('data', $data);
     }
