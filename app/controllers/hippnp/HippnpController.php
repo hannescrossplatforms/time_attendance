@@ -1028,6 +1028,17 @@ class HippnpController extends \BaseController {
 
     public static function getStoreCategories($id) {
 
+        $data = array();
+
+        $storeCategories = \EngagePicknPayCategory::where('store_id', '=', $id)->get();
+
+        $data['engageCategories'] = $storeCategories;
+        return \View::make('hippnp.categeory_list_table_view')->with('data', $data);
+
+    }
+
+    public static function getStoreCategoriesForCategoryDash($id) {
+
         $storeCategories = \EngagePicknPayCategory::where('store_id', '=', $id)->get();
         $json = json_encode($storeCategories);
         print_r($json);

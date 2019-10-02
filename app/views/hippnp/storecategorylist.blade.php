@@ -46,6 +46,12 @@
 
 
                 <a class="btn-add-category btn btn-default btn-sm" href="/hippnp/picknpay_manage_store_categories/add_category">Add Category</a>
+
+                    <div id="table-container">
+
+                    </div>
+
+
                     <div class="table-responsive">
                         <table class="table table-striped">
                         <tr>
@@ -68,5 +74,41 @@
         </div>
 </body>
 
+<script>
+
+    function get_categories_for_store() {
+
+        let pathname = $('#url').val();
+        var store_id = $("#store_select").val();
+
+        $textValue = $("#store_select option:selected").text();
+
+        if ($textValue != "Select"){
+            $.ajax({
+                url: pathname + 'hippnp/storeCategoriesForDash/' + store_id,
+                type: 'get',
+                dataType: 'html',
+                data: {
+                    'id': store_id
+                },
+                success: function(result) {
+
+                    $("#table-container").html(result);
+
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        }
+        else {
+            $("#select_room_container").addClass('hidden');
+        }
+
+
+
+    }
+</script>
 
 @stop
