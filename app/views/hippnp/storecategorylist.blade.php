@@ -32,6 +32,18 @@
 
                 <div class="container-fluid">
 
+                <div class="form-group">
+                    <label>Select store*</label>
+                    <select id="store_select" name="store_id" onchange="get_categories_for_store()" class="form-control" required>
+                    <option value="">Select</option>
+                    @foreach($data['brands'] as $store)
+                        <option value="{{ $store->id }}">
+                        {{ $store->sitename }}
+                        </option>
+                    @endforeach
+                    </select>
+                </div>
+
 
                 <a class="btn-add-category btn btn-default btn-sm" href="/hippnp/picknpay_manage_store_categories/add_category">Add Category</a>
                     <div class="table-responsive">
