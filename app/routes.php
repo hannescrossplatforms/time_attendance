@@ -385,6 +385,7 @@ Route::post('hippnp/periodchartJsondataSingleStaffAjax','hippnp\HippnpController
 Route::post('hippnp/staffCategoryActivity','hippnp\HippnpController@staffCategoryActivity');
 Route::get('hippnp/getCategoriesForStore/{id}','hippnp\HippnpController@getCategoriesForStore');
 Route::get('hippnp/getStoresForProvince/{id}','hippnp\HippnpController@getStoresForProvince');
+Route::get('hippnp/getCategoriesForStoreBeacon/{id}','hippnp\HippnpController@getCategoriesForStoreBeacon');
 
 
 

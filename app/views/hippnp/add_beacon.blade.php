@@ -57,17 +57,6 @@
                                 </select>
                             </div>
                             <div id="category-select-container"></div>
-                            <div class="form-group">
-                                <label>Category*</label>
-                                <select id="isplist" name="category_id" class="form-control" required>
-                                @foreach($data['categories'] as $category)
-                                    <option value="{{ $category->id }}">
-                                    {{ $category->name }}
-                                    </option>
-                                @endforeach
-                                </select>
-                            </div>
-
 
                             <br>
                             <button id="submitform" class="btn btn-primary">Submit</button>
@@ -96,14 +85,11 @@ function get_categories_for_store() {
     var store_id = $("#store_select").val();
 
     $.ajax({
-        url: pathname + 'hippnp/storeCategories/' + store_id,
+        url: pathname + 'hippnp/getCategoriesForStoreBeacon/' + store_id,
         type: 'get',
-        dataType: 'json',
-        data: {
-            'id': store_id
-        },
+        dataType: 'html'
         success: function(data) {
-           alert(data);
+            $("#category-select-container").html(result);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
 
