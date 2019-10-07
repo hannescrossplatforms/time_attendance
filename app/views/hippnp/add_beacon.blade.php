@@ -89,7 +89,7 @@ function get_categories_for_store() {
         url: pathname + 'hippnp/getCategoriesForStoreBeacon/' + store_id,
         type: 'get',
         dataType: 'html',
-        success: function(data) {
+        success: function(result) {
             $("#category-select-container").html(result);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
