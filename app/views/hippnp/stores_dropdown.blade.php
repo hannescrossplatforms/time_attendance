@@ -39,7 +39,7 @@
     }
 
     function change_report_period() {
-
+        debugger;
         var time = $("#brandreportperiod").val();
 
         var category = $("#brandcategory").val();

@@ -460,25 +460,7 @@ function get_stores_for_province() {
         });
 }
 
-function get_categories_for_store() {
 
-    var storeID = $("#brandstore").val();
-
-    $.ajax({
-            url: pathname + 'hippnp/getCategoriesForStore/' + storeID,
-            type: 'get',
-            dataType: 'html',
-            success: function(result) {
-                $("#categories-select-container").html(result);
-
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("error");
-            }
-        });
-
-
-}
 
 function custom_report_period() {
     var from = $('#venuefrom').val();
