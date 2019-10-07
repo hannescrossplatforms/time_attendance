@@ -200,11 +200,6 @@ function renderChartsTest(time, start, end, category, store, province) {
         var store = $("#brandstore").val();
         var province = $("#brandprovince").val();
 
-        alert(time);
-        alert(category);
-        alert(store);
-        alert(province);
-
         if (time == 'daterange') {
             $('#custom').show();
         } else {
@@ -214,7 +209,7 @@ function renderChartsTest(time, start, end, category, store, province) {
     }
 
     function get_categories_for_store() {
-        debugger;
+
         var storeID = $("#brandstore").val();
 
         $.ajax({
