@@ -193,7 +193,7 @@ function renderChartsTest(time, start, end, category, store, province) {
     }
 
     function change_report_period_test() {
-        debugger;
+
         var time = $("#brandreportperiod").val();
 
         var category = $("#brandcategory").val();
