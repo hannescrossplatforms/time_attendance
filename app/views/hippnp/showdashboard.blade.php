@@ -465,29 +465,6 @@ function get_stores_for_province() {
             }
         });
 
-
-        // var storeID = $("#brandstore").val();
-        // if (storeID == '') {
-        //     $("#categories-select-container").html(null);
-        // }
-
-
-        // $.ajax({
-        //     url: pathname + 'hippnp/getCategoriesForStore/' + storeID,
-        //     type: 'get',
-        //     dataType: 'html',
-        //     success: function(result) {
-        //         $("#categories-select-container").html(result);
-        //         change_report_period_test();
-
-        //     },
-        //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-        //         change_report_period_test();
-        //     }
-        // });
-
-
-
 }
 
 

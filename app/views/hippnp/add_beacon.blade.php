@@ -56,7 +56,7 @@
                                 @endforeach
                                 </select>
                             </div>
-
+                            <div id="category-select-container"></div>
                             <div class="form-group">
                                 <label>Category*</label>
                                 <select id="isplist" name="category_id" class="form-control" required>
@@ -81,6 +81,12 @@
         </div>
 </body>
 
+
+<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+<script src="{{ asset('js/jquery-2.1.4.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 
 <script>
 
