@@ -460,12 +460,9 @@ function get_categories_for_store() {
     var storeID = $("#brandstore").val();
 
     $.ajax({
-            url: pathname + 'hippnp/getCategoriesForStore',
-            type: 'post',
+            url: pathname + 'hippnp/getCategoriesForStore/' + storeID,
+            type: 'get',
             dataType: 'html',
-            data: {
-                'store_id': storeID
-            },
             success: function(result) {
                 $("#categories-select-container").html(result);
 
