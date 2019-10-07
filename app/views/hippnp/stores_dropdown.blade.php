@@ -212,7 +212,8 @@ function renderChartsTest(time, start, end, category, store, province) {
 
         var storeID = $("#brandstore").val();
         if (storeID == '') {
-            alert(storeID);
+            $("#categories-select-container").html(null);
+            change_report_period_test();
         }
 
 
