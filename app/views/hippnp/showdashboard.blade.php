@@ -493,6 +493,8 @@ function get_stores_for_province() {
 
 
 function custom_report_period() {
+
+    var time = $("#brandreportperiod").val();
     var from = $('#venuefrom').val();
     var to = $('#venueto').val();
 
@@ -500,7 +502,7 @@ function custom_report_period() {
     var store = $("#brandstore").val();
     var province = $("#brandprovince").val();
 
-    renderCharts('daterange', from, to, category, store, province);
+    renderCharts(time, from, to, category, store, province);
 }
 
 var staffActivityData = null;
