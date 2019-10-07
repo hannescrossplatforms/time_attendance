@@ -99,7 +99,7 @@ class Picknpay extends Eloquent {
 
     public static function categoriesForStore($storeId) {
 
-        $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE store_id = '$storeID'");
+        $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE store_id = '$storeId'");
         return $query->get();
 
     }
