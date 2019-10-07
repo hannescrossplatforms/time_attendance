@@ -86,7 +86,7 @@ class HippnpController extends \BaseController {
 
         $allCategories = \Picknpay::fetchAllCategories($period, null, null, null, null);
         $allStores = \Picknpay::fetchAllStores($period, null, null);
-        $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter();
+        $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter(null);
         $data['all_categories_for_filter'] = $allCategoriesForFilter;
 
         $allProvinces = array();

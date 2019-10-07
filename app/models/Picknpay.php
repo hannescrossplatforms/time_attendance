@@ -113,9 +113,17 @@ class Picknpay extends Eloquent {
     }
 
     public static function fetchAllCategoriesForFilter($storeID){
-        return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")
-        ->where('store_id', "=", $storeID)
-        ->get();
+
+        if ($storeID == null) {
+            return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
+
+        }
+        else {
+            return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")
+            ->where('store_id', "=", $storeID)
+            ->get();
+        }
+
     }
 
     public static function fetchAllCategoriesForStaffActivity($staffID, $date) {
