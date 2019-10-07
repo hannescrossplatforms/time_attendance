@@ -17,28 +17,7 @@
 
 <script>
 
-    function get_categories_for_store() {
-        debugger;
-        var storeID = $("#brandstore").val();
-
-        $.ajax({
-            url: pathname + 'hippnp/getCategoriesForStore/' + storeID,
-            type: 'get',
-            dataType: 'html',
-            success: function(result) {
-                $("#categories-select-container").html(result);
-                change_report_period();
-
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("error");
-            }
-        });
-
-
-    }
-
-    function change_report_period() {
+    function change_report_period_test() {
         debugger;
         var time = $("#brandreportperiod").val();
 
@@ -58,6 +37,29 @@
             renderCharts(time, '', '', category, store, province);
         }
     }
+
+    function get_categories_for_store() {
+        debugger;
+        var storeID = $("#brandstore").val();
+
+        $.ajax({
+            url: pathname + 'hippnp/getCategoriesForStore/' + storeID,
+            type: 'get',
+            dataType: 'html',
+            success: function(result) {
+                $("#categories-select-container").html(result);
+                change_report_period_test();
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("error");
+            }
+        });
+
+
+    }
+
+
 
 
     function renderCharts(time, start, end, category, store, province) {
