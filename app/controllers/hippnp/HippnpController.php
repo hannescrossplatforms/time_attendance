@@ -352,6 +352,7 @@ class HippnpController extends \BaseController {
     }
 
     public function getCategoriesForStore($id){
+
         $data = array();
 
         $data["all_categories_for_filter"] = \Picknpay::categoriesForStore($id);
