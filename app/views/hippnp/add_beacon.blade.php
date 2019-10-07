@@ -20,7 +20,7 @@
 
     <div class="container-fluid">
         <div class="row">
-
+        <input type="hidden" id="url" name="" value={{$data['url']}}>
             @include('hippnp.sidebar')
 
             <form role="form" id="category-form" method="post"
@@ -83,6 +83,7 @@
 function get_categories_for_store() {
 
     var store_id = $("#store_select").val();
+    var pathname = $('#url').val();
 
     $.ajax({
         url: pathname + 'hippnp/getCategoriesForStoreBeacon/' + store_id,
