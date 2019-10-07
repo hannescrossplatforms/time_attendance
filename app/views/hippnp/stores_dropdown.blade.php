@@ -17,7 +17,7 @@
 
 <script>
 
-function renderCharts(time, start, end, category, store, province) {
+function renderChartsTest(time, start, end, category, store, province) {
 
     $.ajax({
 
@@ -209,7 +209,7 @@ function renderCharts(time, start, end, category, store, province) {
             $('#custom').show();
         } else {
             $('#custom').hide();
-            renderCharts(time, '', '', category, store, province);
+            renderChartsTest(time, '', '', category, store, province);
         }
     }
 
