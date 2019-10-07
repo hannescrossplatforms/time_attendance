@@ -93,8 +93,8 @@ class HippnpController extends \BaseController {
         foreach ($allStores as $store) {
             $province = \Picknpay::fetchStoreForVenue($store);
 
-            $hasVal = false
-            foreach($allProvinces as $prov) {
+            $hasVal = false;
+            foreach ($allProvinces as $prov) {
                 if($prov->name == $province->name) {
                     $hasVal = true;
                 }
