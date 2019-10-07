@@ -363,12 +363,17 @@ class HippnpController extends \BaseController {
 
     }
 
+    public function getStoresForProvince($id) {
+
+        $data = array();
+        $data["all_stores_for_province"] = \Picknpay::storesForProvince($id);
+        return \View::make('hippnp.stores_dropdown')->with('data', $data);
+    }
+
     public function getCategoriesForStore($id){
 
         $data = array();
-
         $data["all_categories_for_filter"] = \Picknpay::categoriesForStore($id);
-
         return \View::make('hippnp.categories_for_store_dropdown')->with('data', $data);
 
     }

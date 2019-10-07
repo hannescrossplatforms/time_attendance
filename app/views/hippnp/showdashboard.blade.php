@@ -114,7 +114,7 @@
                                 <label>Province</label>
                             </div>
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandprovince" onchange="change_report_period()" class="form-control"
+                                <select id="brandprovince" onchange="get_stores_for_province()" class="form-control"
                                     name="brandprovince">
                                     <option value="">Select</option>
                                     @foreach($data['all_provinces'] as $province)
@@ -129,22 +129,9 @@
 
                     <br>
                     <div class="row">
-                        <div class="col-md-4" style="width:30%;">
-                            <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
-                                <label>Store</label>
-                            </div>
-                            <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandstore" onchange="get_categories_for_store()" class="form-control"
-                                    name="brandstore">
-                                    <option value="">Select</option>
-                                    @foreach($data['all_stores'] as $store)
-                                    <option value="{{ $store->id }}">
-                                    {{ $store->sitename }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+
+                        <div id="store-select-container"></div>
+
                     </div>
 
                     <br>
@@ -453,6 +440,24 @@ function change_report_period() {
         $('#custom').hide();
         renderCharts(time, '', '', category, store, province);
     }
+}
+
+function get_stores_for_province() {
+
+    var provinceID = $("#brandprovince").val();
+
+    $.ajax({
+            url: pathname + 'hippnp/getStoresForProvince/' + provinceID,
+            type: 'get',
+            dataType: 'html',
+            success: function(result) {
+                $("#store-select-container").html(result);
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("error");
+            }
+        });
 }
 
 function get_categories_for_store() {

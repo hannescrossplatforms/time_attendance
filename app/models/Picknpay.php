@@ -107,6 +107,10 @@ class Picknpay extends Eloquent {
 
     }
 
+    public static function storesForProvince($provinceId) {
+        return \Venue::where('province_id', "=", $provinceId)->get();
+    }
+
     public static function fetchAllCategoriesForFilter(){
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
     }
