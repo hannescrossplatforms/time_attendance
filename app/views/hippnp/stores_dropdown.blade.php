@@ -213,7 +213,6 @@ function renderChartsTest(time, start, end, category, store, province) {
         var storeID = $("#brandstore").val();
         if (storeID == '') {
             $("#categories-select-container").html(null);
-            change_report_period_test();
         }
 
 
@@ -227,7 +226,7 @@ function renderChartsTest(time, start, end, category, store, province) {
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("error");
+                change_report_period_test();
             }
         });
 
