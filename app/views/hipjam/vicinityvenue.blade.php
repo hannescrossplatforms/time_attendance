@@ -414,6 +414,28 @@ let default_selection = $('#track_type').data('default-selected');
           }
 
         });
+        function removeServerRow(removeNum) {
+        
+        var url = '{{ URL::route('hipjam_deleteSvrScannerdata')}}';
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            //contentType: "application/json",
+            url: url,
+            data: "record="+removeNum,
+            //async: false,
+            success:  function(objResult){
+              console.log(objResult); 
+              if(objResult.msg == 'deleted'){
+                jQuery('#row'+removeNum).remove();
+              }
+            },
+            error: function(xjr, err) {
+debugger;
+            }
+        });
+    
+  }
   </script>
 </body>
 

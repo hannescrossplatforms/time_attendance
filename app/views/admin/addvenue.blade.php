@@ -68,6 +68,7 @@
                         <input  id="sitename" type="text" class="form-control" id="exampleInputEmail1" 
                                 name="sitename" placeholder="" 
                                 value="@if(Input::old('sitename')){{Input::old('sitename')}}@else{{$data['venue']->sitename}}@endif" 
+                                maxlength="18"
                                 required>
                       </div>
 

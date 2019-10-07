@@ -320,18 +320,20 @@ class Brand extends Eloquent {
 
     public function getBrandsForUser($user_id) {
 
-
-        if(\User::hasAccess("superadmin")) {
-            $brands = \Brand::orderBy('name', 'asc')->get();
+        if (\User::isVicinity()) {
+            $brands = \Brand::whereRaw('parent_brand = 165 AND id != 165')->get();
         } else {
-
-            $brands = \Brand::join('brand_user', 'brands.id', '=', 'brand_user.brand_id')
-                    ->select("brands.*")
-                    ->where('brand_user.user_id', '=', $user_id)
-                    ->whereNull('deleted_at')
-                    ->orderBy('brands.name','ASC')
-                    ->get();
-
+            if(\User::hasAccess("superadmin")) {
+                $brands = \Brand::orderBy('name', 'asc')->get();
+            } else {
+                $brands = \Brand::join('brand_user', 'brands.id', '=', 'brand_user.brand_id')
+                        ->select("brands.*")
+                        ->where('brand_user.user_id', '=', $user_id)
+                        ->whereNull('deleted_at')
+                        ->orderBy('brands.name','ASC')
+                        ->get();
+    
+            }
         }
 
         return $brands;

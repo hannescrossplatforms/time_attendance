@@ -384,9 +384,9 @@ class HipjamController extends \BaseController
         $sanitized_sitename = preg_replace("/[^a-zA-Z]+/", "", \Venue::find($id)->sitename);
         $sanitized_sitename = str_replace("VICINITY", "", $sanitized_sitename);
         if ($sensors->count() == 0) {
-            $data['sensor_name'] = substr($sanitized_sitename, 0, 17);
+            $data['sensor_name'] = $sanitized_sitename;
         } else {
-            $data['sensor_name'] = substr($sanitized_sitename, 0, 17).$sensors->count();
+            $data['sensor_name'] = $sanitized_sitename.$sensors->count();
         }
         
         return \View::make('hipjam.vicinityvenue')->with('data', $data);
@@ -449,6 +449,14 @@ class HipjamController extends \BaseController
         $data['permissions']['media_rw'] = false;
         $data['permissions']['uru_rw'] = false;
         $data['permissions']['rep_rw'] = false;
+
+        $data['brands'] = \DB::table('brands')
+                ->select("*")
+                ->where('brands.parent_brand', '=', 165)
+                ->orWhere('id', 165)
+                ->whereNull('deleted_at')
+                ->orderBy('name')
+                ->get();
 
         $data['venues'] = \Venue::where('brand_id', '=', '165')->get();
 
@@ -773,6 +781,26 @@ class HipjamController extends \BaseController
 
         $id = \Input::get('id');
 
+        $vpnip = new \Vpnip();
+        $vpnip = $vpnip->getVpnip();
+        $objReport = new \Sensor();
+        $objData = json_decode(\Input::get());
+
+        $objReport->name = $objData->track_name;
+        //$objReport->code = 'server_track';
+        $objReport->location = $objData->track_location;
+        $objReport->queue = $objData->track_queue;
+        $objReport->mac =  $objData->mac;
+        $objReport->vpnip_id = $vpnip->id;
+        $objReport->min_power = $objData->track_min_power;
+        $objReport->max_power = $objData->track_max_power;
+        $objReport->venue_id = $objData->venue_id;
+        $objReport->venue_location = $objData->venue_location;
+
+        createConfigYml($objReport, $update = true, $oldmac = null);
+
+
+
         //no data to update - venue_id is move to the track server side.
         //$venue =  \Venue::find($id);
         //$venue->track_venue_id = $input['venue_id'];
@@ -871,6 +899,10 @@ class HipjamController extends \BaseController
         $track_server_location = \Venue::find($scannerObj->venue_id)->track_server_location;
         error_log("addSvrScannerdata : track_server_location = $track_server_location");
         error_log("addSvrScannerdata : id = " . $scannerObj->id);
+
+        if (\User::isVicinity()) {
+            $track_server_location = 'tracks03.hipzone.co.za';
+        }
 
 
         // Get the connection
@@ -1055,8 +1087,14 @@ class HipjamController extends \BaseController
         $connect = ftp_connect('vpn.hipzone.co.za');
         $login = ftp_login($connect, 'sensor', 's3ns0r');
         ftp_pasv($connect, true);
-        $deleteyml = ftp_delete($connect, $filepathyml);
-        $deletevpn = ftp_delete($connect, $filepathvpn);
+        // try {
+        //     $deleteyml = ftp_delete($connect, $filepathyml);
+        //     $deletevpn = ftp_delete($connect, $filepathvpn);
+        // }
+        // catch (exception $e) {
+        //     //code to handle the exception
+        // }
+       
         $chapsecentry = file_get_contents('/home/mikrotik/deployment/templates/sensors/chapsecentry');
         $first = str_replace("scannername", $scannerObj->name, $chapsecentry);
         $second = str_replace("vpnip", $scannerObj->vpnip->ip_address, $first);
@@ -1067,14 +1105,14 @@ class HipjamController extends \BaseController
         $main2 = fopen('/home/mikrotik/deployment/templates/sensors/chap-secretsdel2', 'w');
         $remove = file_get_contents('/home/mikrotik/deployment/templates/sensors/chapsecentrydel');
         ftp_chdir($connect, "/etc/ppp/");
-        ftp_fget($connect, $main, 'chap-secrets', FTP_BINARY);
+        // ftp_fget($connect, $main, 'chap-secrets', FTP_BINARY);
         fclose($main);
         $file = file_get_contents('/home/mikrotik/deployment/templates/sensors/chap-secretsdel');
         $delete = str_replace($remove, '', $file);
         fwrite($main2, $delete);
         fclose($main2);
         $deletedone = fopen('/home/mikrotik/deployment/templates/sensors/chap-secretsdel2', 'r');
-        ftp_fput($connect, 'chap-secrets', $deletedone, FTP_BINARY);
+        // ftp_fput($connect, 'chap-secrets', $deletedone, FTP_BINARY);
         unlink('/home/mikrotik/deployment/templates/sensors/chap-secretsdel');
         unlink('/home/mikrotik/deployment/templates/sensors/chap-secretsdel2');
         $vpnip = new \Vpnip();

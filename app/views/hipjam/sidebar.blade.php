@@ -85,38 +85,38 @@
         <style>
           .sidebar {
             background-image: url(https://i.ibb.co/KbKv0Fc/vicinity-bg-copy.png);
-            background-color: transparent;
-            background-repeat: no-repeat;
+            background-color: transparent !important;
+            background-repeat: no-repeat !important;
             background-size: cover;
-            width: 413px;
-            background-position: center;
+            width: 413px !important;
+            background-position: center !important;
           }
 
           .nav.nav-sidebar.nav-products {
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.3);
+            height: 100vh !important;
+            background: rgba(0, 0, 0, 0.3) !important;
           }
 
           .nav.subNav {
-            padding: 0;
+            padding: 0 !important;
           }
 
           .productTitle.pull-left {
-            background-color: transparent;
+            background-color: transparent !important;
           }
 
           .productTitle.pull-left h2 {
-            background-color: transparent;
+            background-color: transparent !important;
           }
 
           .logo.pull-left {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 32px 0px;
+            background: rgba(0, 0, 0, 0.3) !important;
+            padding: 32px 0px !important;;
           }
 
           .sidebarActive .subNav li.active a {
-            background-color: rgba(255, 255, 255, 0.18);
-            height: 60px;
+            background-color: rgba(255, 255, 255, 0.18) !important;;
+            height: 60px !important;;
           }
 
           .hipJAM .sidebarActive .subNav {
@@ -153,7 +153,7 @@
           }
 
           .sidebarActive .logo img {
-            margin-top: -12px;
+            margin-top: -12px !important;
           }
 
           li.li-jam a {
@@ -162,12 +162,12 @@
 
           @media (max-width: 1555px) {
             .main {
-              padding-left: 120px;
+              padding-left: 120px !important;
             }
           }
 
           .modstattitle {
-            background-color: #9DD1ED;
+            background-color: #9DD1ED !important;
           }
         </style>
         @endif

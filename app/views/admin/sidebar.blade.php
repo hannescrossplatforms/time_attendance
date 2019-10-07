@@ -48,11 +48,11 @@
         <li @if ( $data['currentMenuItem'] == "Roles and Permissions" ) class="active" @endif><a href="{{ url('admin_showrolesandpermissions'); }}"><i class="fa fa-check-square"></i>Roles and Permissions</a></li>
         @endif
         
-        @if (\User::hasAccess("superadmin"))
+        @if (\User::hasAccess("superadmin") || (\User::isVicinity() && \User::hasAccess("admin")))
         <li @if ( $data['currentMenuItem'] == "Brands" ) class="active" @endif><a href="{{ url('admin_showbrands'); }}"><i class="fa fa-rocket"></i>Brand Management</a></li>
         @endif
 
-         @if (\User::hasAccess("superadmin"))
+         @if (\User::hasAccess("superadmin") || (\User::isVicinity() && \User::hasAccess("admin")))
         <li @if ( $data['currentMenuItem'] == "Venues" ) class="active" @endif><a href="{{ url('admin_showvenues'); }}"><i class="fa fa-sitemap"></i>Venue Management</a></li>
         @endif
 
