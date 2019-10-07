@@ -17,54 +17,9 @@
 
 <script>
 
-    function change_report_period_test() {
-        debugger;
-        var time = $("#brandreportperiod").val();
+function renderCharts(time, start, end, category, store, province) {
 
-        var category = $("#brandcategory").val();
-        var store = $("#brandstore").val();
-        var province = $("#brandprovince").val();
-
-        alert(time);
-        alert(category);
-        alert(store);
-        alert(province);
-
-        if (time == 'daterange') {
-            $('#custom').show();
-        } else {
-            $('#custom').hide();
-            renderCharts(time, '', '', category, store, province);
-        }
-    }
-
-    function get_categories_for_store() {
-        debugger;
-        var storeID = $("#brandstore").val();
-
-        $.ajax({
-            url: pathname + 'hippnp/getCategoriesForStore/' + storeID,
-            type: 'get',
-            dataType: 'html',
-            success: function(result) {
-                $("#categories-select-container").html(result);
-                change_report_period_test();
-
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("error");
-            }
-        });
-
-
-    }
-
-
-
-
-    function renderCharts(time, start, end, category, store, province) {
-
-        $.ajax({
+    $.ajax({
 
             url: pathname + 'hippnp/periodchartJsondata',
             type: 'get',
@@ -236,5 +191,52 @@
             }
         });
     }
+
+    function change_report_period_test() {
+        debugger;
+        var time = $("#brandreportperiod").val();
+
+        var category = $("#brandcategory").val();
+        var store = $("#brandstore").val();
+        var province = $("#brandprovince").val();
+
+        alert(time);
+        alert(category);
+        alert(store);
+        alert(province);
+
+        if (time == 'daterange') {
+            $('#custom').show();
+        } else {
+            $('#custom').hide();
+            renderCharts(time, '', '', category, store, province);
+        }
+    }
+
+    function get_categories_for_store() {
+        debugger;
+        var storeID = $("#brandstore").val();
+
+        $.ajax({
+            url: pathname + 'hippnp/getCategoriesForStore/' + storeID,
+            type: 'get',
+            dataType: 'html',
+            success: function(result) {
+                $("#categories-select-container").html(result);
+                change_report_period_test();
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("error");
+            }
+        });
+
+
+    }
+
+
+
+
+
 
 </script>
