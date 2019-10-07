@@ -211,7 +211,10 @@ function renderChartsTest(time, start, end, category, store, province) {
     function get_categories_for_store() {
 
         var storeID = $("#brandstore").val();
-        alert(storeID);
+        if (storeID == null) {
+            alert(storeID);
+        }
+
 
         $.ajax({
             url: pathname + 'hippnp/getCategoriesForStore/' + storeID,
