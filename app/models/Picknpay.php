@@ -108,7 +108,8 @@ class Picknpay extends Eloquent {
     }
 
     public static function storesForProvince($provinceId) {
-        return \Venue::where('province_id', "=", $provinceId)->get();
+        return \Venue::whereraw("sitename LIKE 'PicknPay'")
+        ->where('province_id', "=", $provinceId)->get();
     }
 
     public static function fetchAllCategoriesForFilter(){
