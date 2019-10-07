@@ -69,29 +69,50 @@ class Picknpay extends Eloquent {
             $endDate = $dateRange['endDate'];
 
         }
-        if ($categoryID != '' && $categoryID != null && $storeID != '' && $storeID != null) {
 
-            $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID' AND store_id = '$storeID'");
-            if($categoryID != "" && $categoryID != null && $categoryID != '') {
-                $query = $query->where('id', "=", $categoryID);
-            }
+        $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'");
 
-            return $query->get();
-
+        if($categoryID != "" && $categoryID != null && $categoryID != '') {
+            $query = $query->where('id', "=", $categoryID);
         }
-        else if ($categoryID != '' && $categoryID != null) {
-
-            $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID'");
-            if($categoryID != "" && $categoryID != null && $categoryID != '') {
-                $query = $query->where('id', "=", $categoryID);
-            }
-
-            return $query->get();
-
+        if($storeID != "" && $storeID != null && $storeID != '') {
+            $query = $query->where('store_id', "=", $storeID);
         }
-        else {
-            return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
-        }
+
+        return $query->get();
+        // if ($categoryID != '' && $categoryID != null && $storeID != '' && $storeID != null) {
+
+        //     $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID' AND store_id = '$storeID'");
+        //     if($categoryID != "" && $categoryID != null && $categoryID != '') {
+        //         $query = $query->where('id', "=", $categoryID);
+        //     }
+
+        //     return $query->get();
+
+        // }
+        // else if ($storeID != '' && $storeID != null) {
+
+        //     $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID'");
+
+        //         $query = $query->where('store_id', "=", $storeID);
+
+
+        //     return $query->get();
+
+        // }
+        // else if ($categoryID != '' && $categoryID != null) {
+
+        //     $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID'");
+        //     if($categoryID != "" && $categoryID != null && $categoryID != '') {
+        //         $query = $query->where('id', "=", $categoryID);
+        //     }
+
+        //     return $query->get();
+
+        // }
+        // else {
+        //     return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
+        // }
 
 
 
@@ -116,7 +137,6 @@ class Picknpay extends Eloquent {
 
         if ($storeID == null) {
             return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")->get();
-
         }
         else {
             return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category")
