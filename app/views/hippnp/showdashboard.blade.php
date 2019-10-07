@@ -446,18 +446,48 @@ function get_stores_for_province() {
 
     var provinceID = $("#brandprovince").val();
 
+    if (provinceID == '') {
+        $("#categories-select-container").html(null);
+        $("#store-select-container").html(null);
+    }
+
     $.ajax({
             url: pathname + 'hippnp/getStoresForProvince/' + provinceID,
             type: 'get',
             dataType: 'html',
             success: function(result) {
                 $("#store-select-container").html(result);
+                custom_report_period();
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("error");
+                custom_report_period();
             }
         });
+
+
+        // var storeID = $("#brandstore").val();
+        // if (storeID == '') {
+        //     $("#categories-select-container").html(null);
+        // }
+
+
+        // $.ajax({
+        //     url: pathname + 'hippnp/getCategoriesForStore/' + storeID,
+        //     type: 'get',
+        //     dataType: 'html',
+        //     success: function(result) {
+        //         $("#categories-select-container").html(result);
+        //         change_report_period_test();
+
+        //     },
+        //     error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //         change_report_period_test();
+        //     }
+        // });
+
+
+
 }
 
 
