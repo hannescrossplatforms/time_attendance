@@ -211,7 +211,7 @@ function renderChartsTest(time, start, end, category, store, province) {
     function get_categories_for_store() {
 
         var storeID = $("#brandstore").val();
-        if (storeID == undefined) {
+        if (storeID == '') {
             alert(storeID);
         }
 
