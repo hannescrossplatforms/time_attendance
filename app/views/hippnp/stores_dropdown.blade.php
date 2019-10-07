@@ -18,7 +18,7 @@
 <script>
 
     function get_categories_for_store() {
-
+        debugger;
         var storeID = $("#brandstore").val();
 
         $.ajax({
