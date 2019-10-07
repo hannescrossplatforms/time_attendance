@@ -102,9 +102,10 @@ if($data["is_activation"]) { $is_activation = 1; } else { $is_activation = 0; };
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     
-    <script src="js/prefixfree.min.js"></script> 
+    <script src="/js/prefixfree.min.js"></script> 
+    
     
     <script>
   

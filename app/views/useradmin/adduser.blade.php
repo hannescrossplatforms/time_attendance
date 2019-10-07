@@ -103,6 +103,9 @@
                     <table id="brandManagementTable" class="table table-striped"></table>
                     <div class="form-group">
                         <div class="input-group">
+                        @foreach ($errors->all() as $error)
+                            {{ $error }}<br>        
+                        @endforeach
                           <a href="#" id="addbrand" class="btn btn-primary" data-toggle="modal" data-target="#addBrandModal">
                             <i class="fa fa-plus"></i>Add Brand
                           </a>
@@ -112,8 +115,8 @@
                   <!-- <div class="table-responsive"></div> -->
 
 
-                  <h2 class="sub-header">Product Access</h2>
-                  <div class="checkbox">
+                  <h2 style="{{\User::isVicinity() ? 'display:none' : ''}}" class="sub-header">Product Access</h2>
+                  <div style="{{\User::isVicinity() ? 'display:none' : ''}}"  class="checkbox">
                     <label>
                       <!-- <input type="checkbox" name="product_ids[]" value="1" checked> -->
                       {{ Form::checkbox('product_ids[]', 1, $data['products']['HipWIFI'], ['id' => 'product_ids1']) }}
@@ -121,7 +124,7 @@
                     </label>
                     <a href="#" id="xyz" data-toggle="modal" data-target="#hipWIFIModal"><i class="fa fa-gear" ></i></a>
                   </div>
-                  <div class="checkbox">
+                  <div style="{{\User::isVicinity() ? 'display:none' : ''}}"   class="checkbox">
                     <label>
                       <!-- $data['products']['HipRM']) -->
                       {{ Form::checkbox('product_ids[]', 2, $data['products']['HipRM'], ['id' => 'product_ids2']) }}
@@ -129,28 +132,28 @@
                     </label>
                     <a href="#" data-toggle="modal" data-target="#hipRMModal"><i class="fa fa-gear" ></i></a>
                   </div>
-                  <div class="checkbox">
+                  <div style="{{\User::isVicinity() ? 'display:none' : ''}}"   class="checkbox">
                     <label>
                       {{ Form::checkbox('product_ids[]', 3, $data['products']['HipJAM'], ['id' => 'product_ids3']) }}
                       TRACK
                     </label>
                     <a href="#" data-toggle="modal" data-target="#hipJAMModal"><i class="fa fa-gear" ></i></a>
                   </div>
-                  <div class="checkbox">
+                  <div style="{{\User::isVicinity() ? 'display:none' : ''}}"   class="checkbox">
                     <label>
                       {{ Form::checkbox('product_ids[]', 4, $data['products']['HipENGAGE'], ['id' => 'product_ids4']) }}
                       ENGAGE
                     </label>
                     <a href="#" data-toggle="modal" data-target="#hipJAMModal"><i class="fa fa-gear" ></i></a>
                   </div>
-                  <div class="checkbox">
+                  <div style="{{\User::isVicinity() ? 'display:none' : ''}}"   class="checkbox">
                     <label>
                       {{ Form::checkbox('product_ids[]', 5, $data['products']['HipREPORTS'], ['id' => 'product_ids5']) }}
                       REPORTS
                     </label>
                     <a href="#" data-toggle="modal" data-target="#hipJAMModal"><i class="fa fa-gear" ></i></a>
                   </div> 
-                  <div class="checkbox">
+                  <div style="{{\User::isVicinity() ? 'display:none' : ''}}"   class="checkbox">
                     <label>
                       {{ Form::checkbox('product_ids[]', 6, $data['products']['HipTnA'], ['id' => 'product_ids6']) }}
                       T&A 
@@ -340,6 +343,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/prefixfree.min.js') }}"></script>
+
+    @if (\User::isVicinity())
+    <script>
+      $('#product_ids3').prop('checked','checked');
+    </script>
+    @endif
     
   <script>
   

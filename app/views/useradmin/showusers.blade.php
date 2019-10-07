@@ -24,11 +24,9 @@
               </div>
               <button type="submit" class="btn btn-primary" name="filter" value="on">Filter</button>
               <button type="submit" class="btn btn-default" name="filter" value="off">Reset</button>
-              @if (\User::isVicinity())
-              <a href="/vicinity/users/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</a>
-              @else
+             
               <a href="{{ url('useradmin_add'); }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</a>
-              @endif
+           
             </form>
 
             <div class="table-responsive">
