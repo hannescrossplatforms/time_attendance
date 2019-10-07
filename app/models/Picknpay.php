@@ -59,7 +59,7 @@ class Picknpay extends Eloquent {
 
     }
 
-    public static function fetchAllCategories($date, $startDate, $endDate, $categoryID){
+    public static function fetchAllCategories($date, $startDate, $endDate, $categoryID, $storeID){
 
         if ($startDate == null && $endDate == null) {
 
@@ -69,8 +69,17 @@ class Picknpay extends Eloquent {
             $endDate = $dateRange['endDate'];
 
         }
+        if ($categoryID != '' && $categoryID != null && $storeID != '' && $storeID != null) {
 
-        if ($categoryID != '' && $categoryID != null) {
+            $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID' AND store_id = '$storeID'");
+            if($categoryID != "" && $categoryID != null && $categoryID != '') {
+                $query = $query->where('id', "=", $categoryID);
+            }
+
+            return $query->get();
+
+        }
+        else if ($categoryID != '' && $categoryID != null) {
 
             $query = EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_category WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate' AND id = '$categoryID'");
             if($categoryID != "" && $categoryID != null && $categoryID != '') {
