@@ -106,25 +106,6 @@
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-4" style="width:30%;">
-                            <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
-                                <label>Store</label>
-                            </div>
-                            <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandstore" onchange="change_report_period()" class="form-control"
-                                    name="brandstore">
-                                    <option value="">Select</option>
-                                    @foreach($data['all_stores'] as $store)
-                                    <option value="{{ $store->id }}">
-                                    {{ $store->sitename }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
                     <br>
                     <div class="row">
@@ -150,20 +131,26 @@
                     <div class="row">
                         <div class="col-md-4" style="width:30%;">
                             <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
-                                <label>Category</label>
+                                <label>Store</label>
                             </div>
                             <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                <select id="brandcategory" onchange="change_report_period()" class="form-control"
-                                    name="brandcategory">
+                                <select id="brandstore" onchange="get_categories_for_store()" class="form-control"
+                                    name="brandstore">
                                     <option value="">Select</option>
-                                    @foreach($data['all_categories_for_filter'] as $category)
-                                    <option value="{{ $category->id }}">
-                                    {{ $category->name }}
+                                    @foreach($data['all_stores'] as $store)
+                                    <option value="{{ $store->id }}">
+                                    {{ $store->sitename }}
                                     </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div id="categories-select-container"></div>
+
                     </div>
 
                     <br><br>
@@ -466,6 +453,29 @@ function change_report_period() {
         $('#custom').hide();
         renderCharts(time, '', '', category, store, province);
     }
+}
+
+function get_categories_for_store() {
+
+    var storeID = $("#brandstore").val();
+
+    $.ajax({
+            url: pathname + 'hippnp/getCategoriesForStore',
+            type: 'post',
+            dataType: 'html',
+            data: {
+                'store_id': storeID
+            },
+            success: function(result) {
+                $("#categories-select-container").html(result);
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("error");
+            }
+        });
+
+
 }
 
 function custom_report_period() {

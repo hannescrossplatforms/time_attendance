@@ -351,6 +351,15 @@ class HippnpController extends \BaseController {
 
     }
 
+    public function getCategoriesForStore($id){
+        $data = array();
+
+        $data["all_categories_for_filter"] = \Picknpay::categoriesForStore($id);
+
+        return \View::make('hippnp.categories_for_store_dropdown')->with('data', $data);
+
+    }
+
     public function staffCategoryActivity(){
 
         $dateSelected = Input::get('date');

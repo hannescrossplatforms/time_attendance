@@ -383,6 +383,8 @@ Route::get('hippnp/periodchartJsondataStaff','hippnp\HippnpController@periodchar
 Route::get('hippnp/periodchartJsondataStaffAjax','hippnp\HippnpController@periodchartJsondataStaffAjax');
 Route::post('hippnp/periodchartJsondataSingleStaffAjax','hippnp\HippnpController@periodchartJsondataSingleStaffAjax');
 Route::post('hippnp/staffCategoryActivity','hippnp\HippnpController@staffCategoryActivity');
+Route::get('hippnp/getCategoriesForStore/{id}','hippnp\HippnpController@getCategoriesForStore');
+
 
 Route::any('/hippnp_convertsvgtoimage', array('uses' => 'hippnp\HippnpController@convertSvgToImage', 'as' => 'hippnp_showdashboard'))->before('auth');
 Route::any('/hippnpBrandPdfDownloadPreview', array('uses' => 'hippnp\HippnpController@hippnpPDFPreview', 'as' => 'hippnp_showdashboard'));
