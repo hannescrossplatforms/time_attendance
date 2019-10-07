@@ -49,6 +49,7 @@
                             <div class="form-group">
                                 <label>Store*</label>
                                 <select id="store_select" name="store_id" onchange="get_categories_for_store()" class="form-control" required>
+                                <option value="">Select</option>
                                 @foreach($data['brands'] as $store)
                                     <option value="{{ $store->id }}">
                                     {{ $store->sitename }}
@@ -84,6 +85,10 @@ function get_categories_for_store() {
 
     var store_id = $("#store_select").val();
     var pathname = $('#url').val();
+
+    if (store_id == '') {
+        $("#category-select-container").html(null);
+    }
 
     $.ajax({
         url: pathname + 'hippnp/getCategoriesForStoreBeacon/' + store_id,
