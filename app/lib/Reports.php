@@ -1589,10 +1589,11 @@ class Reports extends Eloquent {
         $categories = array(array("category" => $category));
 
         $sitename = preg_replace("/_/", " ", $nasid);
-        $remotedb_id = \Venue::where('sitename', 'like', $sitename)->first()->remotedb_id;
+        $venue = \Venue::where('sitename', 'like', $sitename)->first();
+        
 
-        if ($remotedb_id) {
-
+        if ($venue) {
+          $remotedb_id = $venue->remotedb_id;
           // echo "brandname : $brandname";
           $remotedb = \DB::table('remotedbs')->select("dbconnection")->where('id', '=', $remotedb_id)->first();
           $connection = $remotedb->dbconnection;
