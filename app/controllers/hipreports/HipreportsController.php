@@ -318,6 +318,9 @@ class HipreportsController extends \BaseController {
             $data = $reportObj->getAge($reportperiod, $from, $to, $nasid, $brandcodes, 1);
 
             $txt = "The age returned was : ".json_encode($data);
+
+            \Log::info("hipreports_hipwifi_branddatajsonsingle : age report filtered data = $txt");
+
             $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
         } else if ($queryname == "gender") {
