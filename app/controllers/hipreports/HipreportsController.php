@@ -301,8 +301,6 @@ class HipreportsController extends \BaseController {
 
         $brandcodes = array($brandcode);
 
-        \Log::info("hipreports_hipwifi_branddatajsonsingle : brandcodes = $brandcodes");
-
         \Log::info("hipreports_hipwifi_branddatajsonsingle : queryName is: = $queryname");
 
         if ($queryname == "builddaterangereporttable") {
