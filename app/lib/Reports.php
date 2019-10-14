@@ -1983,23 +1983,8 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
 
         $venue = \Venue::where("sitename", "like", $sitename)->first();
 
-        $location = \Venue::where("sitename", "like", $sitename)->first()->location;
-
-        $results = \DB::connection("hipreports")->table("partner")
-           ->select(DB::raw('answer, count(*) AS value'))
-           ->where('sitename', 'like', $location)
-           ->where('created_at', '>', $from)
-           ->where('created_at', '<', $to)
-           ->where('quickie_id', '=', $quickie_id)
-           ->wherein('answer', $answers)
-           ->groupby('answer')
-           ->get();
-
-        return $this->getSortedAnswers($answers, $results);
-
-
         if ($venue) {
-          $location = $venue->location;
+          $location = \Venue::where("sitename", "like", $sitename)->first()->location;
 
           $results = \DB::connection("hipreports")->table("partner")
              ->select(DB::raw('answer, count(*) AS value'))
@@ -2010,9 +1995,27 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
              ->wherein('answer', $answers)
              ->groupby('answer')
              ->get();
-
+  
           return $this->getSortedAnswers($answers, $results);
+  
+  
+          if ($venue) {
+            $location = $venue->location;
+  
+            $results = \DB::connection("hipreports")->table("partner")
+               ->select(DB::raw('answer, count(*) AS value'))
+               ->where('sitename', 'like', $location)
+               ->where('created_at', '>', $from)
+               ->where('created_at', '<', $to)
+               ->where('quickie_id', '=', $quickie_id)
+               ->wherein('answer', $answers)
+               ->groupby('answer')
+               ->get();
+  
+            return $this->getSortedAnswers($answers, $results);
+          }
         }
+        
 
     }
 
