@@ -2044,6 +2044,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         // $numvenues = $avcount[0]["count"];
 
         $sitename = preg_replace("/_/", " ", $nasid);
+
         $location = \Venue::where("sitename", "like", $sitename)->first()->location;
         $nastype = substr($location, 0, 9);
 
