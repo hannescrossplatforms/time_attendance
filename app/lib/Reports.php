@@ -1284,7 +1284,12 @@ class Reports extends Eloquent {
       }
         // error_log("getBrandUptime : number of venues = " . sizeof($activeVenues));
 
-      $branduptimepercent = round($sumUptime / sizeof($activeVenues), 2);
+        if (sizeof($activeVenues) != 0) {
+          $branduptimepercent = round($sumUptime / sizeof($activeVenues), 2);
+        } else {
+          $branduptimepercent = 0;
+        }
+      
       // error_log("getBrandUptime : branduptimepercent = " . $branduptimepercent);
 
       return $branduptimepercent;
