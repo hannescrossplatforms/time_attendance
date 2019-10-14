@@ -2044,34 +2044,6 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         // $numvenues = $avcount[0]["count"];
 
         $sitename = preg_replace("/_/", " ", $nasid);
-<<<<<<< HEAD
-        $venue = \Venue::where("sitename", "like", $sitename)->first();
-        if ($venue) {
-          $location = $venue->location;
-          $nastype = substr($location, 0, 9);
-
-          // error_log("lalalalalalalal activeVenueLocationsArray = " . print_r($activeVenueLocationsArray, true));
-          $results = \DB::connection("hipreports")->table("partner")
-             ->select(DB::raw('answer, count(*) AS value'))
-             ->where('created_at', '>', $from)
-             ->where('created_at', '<', $to)
-             ->where('quickie_id', '=', $quickie_id)
-             ->wherein('sitename', $activeVenueLocationsArray)
-             ->wherein('answer', $answers)
-             ->groupby('answer')
-             ->get();
-
-          // Calculate the averages
-          foreach ($results as $result) {
-            if($numvenues) {
-              if($brandonly) { // Retun the total instead of the average
-                $result->value = round($result->value);
-                error_log("getAggregatedAnswersForBrand : brandonly : " . $result->value);
-              } else {
-                $result->value = round($result->value / $numvenues);
-                error_log("getAggregatedAnswersForBrand : NOT brandonly : " . $result->value);
-              }
-=======
         $location = \Venue::where("sitename", "like", $sitename)->first()->location;
         $nastype = substr($location, 0, 9);
 
@@ -2092,7 +2064,6 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
             if($brandonly) { // Retun the total instead of the average
               $result->value = round($result->value);
               error_log("getAggregatedAnswersForBrand : brandonly : " . $result->value);
->>>>>>> 47d0f5b9da9666a9a05e8ff9fb7cf61b3d604552
             } else {
               $result->value = 0;
             }
