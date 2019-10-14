@@ -54,7 +54,7 @@ class HipreportsController extends \BaseController {
             $date = $datetime->format('Y-m-d');
 
             $allvenues = \Venue::all();
-            foreach($allvenues as $venue) {  
+            foreach($allvenues as $venue) {
                 $nasid = preg_replace("/ /", "_", $venue->sitename);
 
                 // $dayoftheweek = $datetime->date("D");
@@ -98,8 +98,8 @@ class HipreportsController extends \BaseController {
         $data['currentMenuItem'] = "HipWifi";
 
         $brandObj = new \Brand();
-        $reportObj = new \Reports();    
-        
+        $reportObj = new \Reports();
+
         $data['brands'] = $brandObj->getBrandsForProduct('hipwifi');
         error_log("HipreportsController : hipWifi " . print_r($data['brands'], 1));
 
@@ -141,7 +141,7 @@ class HipreportsController extends \BaseController {
         $data["to"] = $to;
 
         $from  = $from . " 00:00:00";
-        $too  = $to . "  23:59:59";         
+        $too  = $to . "  23:59:59";
 
         $stats = new \Statistics();
 
@@ -169,10 +169,10 @@ class HipreportsController extends \BaseController {
         if(!$from or $from == "") {
             $from  = date("Y-m-d");
             $to  = date("Y-m-d");
-        } 
+        }
 
         $from  = $from . " 00:00:00";
-        $too  = $to . "  23:59:59";         
+        $too  = $to . "  23:59:59";
 
         error_log("hipreports_hipwifi_statistcsjson $sitename : $from : $to" );
 
@@ -185,7 +185,7 @@ class HipreportsController extends \BaseController {
         return \Response::json($statsdata);
     }
 
-    ////////////////////////////////// DASHBOARD //////////////////////////////////    
+    ////////////////////////////////// DASHBOARD //////////////////////////////////
 
     public function hipreports_hipwifi_dashboarddatajson() {
 
@@ -200,7 +200,7 @@ class HipreportsController extends \BaseController {
         return \Response::json($data);
     }
 
-    ////////////////////////////////// BRAND //////////////////////////////////  
+    ////////////////////////////////// BRAND //////////////////////////////////
 
     public function hipreports_hipwifi_downloaduserprofiledata() {
 
@@ -221,7 +221,7 @@ class HipreportsController extends \BaseController {
         // return $filepath;
         return \Response::json($filepath);
 
-    } 
+    }
 
     public function hipreports_hipwifi_downloadlistcustomerusage() {
 
@@ -241,12 +241,12 @@ class HipreportsController extends \BaseController {
         // return $filepath;
         return \Response::json($filepath);
 
-    } 
+    }
 
 
     public function hipreports_hipwifi_branddatajsonsingle() {
 
-
+        ////
         $reportObj = new \Reports();
         $data = array();
         $brand_id = \Input::get('brand_id');
@@ -256,7 +256,7 @@ class HipreportsController extends \BaseController {
         $reportperiod = \Input::get('reportperiod');
         $from = \Input::get('from');
         $to = \Input::get('to');
-        
+
         if($reportperiod == "daterange") {
           $reportperiod = "tmp_period_" . $brandname . "_" . $from . "_" . $to ;
         }
@@ -281,7 +281,7 @@ class HipreportsController extends \BaseController {
         // $data["biggestSessionDecreasedata"] = $reportObj->getbiggestSessionDecreasedata($brandcode, $reportperiod);
         // $data["biggestUniquesDecreasedata"] = $reportObj->getbiggestUniquesDecreasedata($brandcode, $reportperiod);
         // $data["biggestAdminIncreasedata"] = $reportObj->getbiggestAdminIncreasedata($brandcode, $reportperiod);
-        // $data["totalDwellTimedata"] = $reportObj->gettotalDwellTimedata($from, $to, $brandcode); 
+        // $data["totalDwellTimedata"] = $reportObj->gettotalDwellTimedata($from, $to, $brandcode);
 
         // Get Brand Data Averages For Demographics and usage
         if(preg_match('/.*SAB.*$/i', $brandcode)) {
@@ -301,13 +301,13 @@ class HipreportsController extends \BaseController {
             $txt .= "\n to: ".$to;
             $txt .= "\n brandcode: ".$brandcode;
 
-            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);        
+            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
             $data = $reportObj->getAge($reportperiod, $from, $to, $nasid, $brandcodes, 1);
-                        
+
             $txt = "The age returned was : ".json_encode($data);
-            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);        
-    
+            $myfile = file_put_contents('/var/www/hiphub/public/hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+
         } else if ($queryname == "gender") {
             $data = $reportObj->getGender($reportperiod, $from, $to, $nasid, $brandcodes, 1);
         } else if ($queryname == "income") {
@@ -336,8 +336,8 @@ class HipreportsController extends \BaseController {
             $data = $reportObj->getCustomersByTimePeriod($reportperiod, $from, $to, $nasid, $brandname, 1);
         } else if ($queryname == "brandavguptime") {
             $data = $reportObj->getBrandUptime($reportperiod, $from, $to, $nasid, $brandname, 1);
-        } 
-        
+        }
+
 
 
         return \Response::json($data);
@@ -378,13 +378,13 @@ class HipreportsController extends \BaseController {
         $data["biggestSessionDecreasedata"] = $reportObj->getbiggestSessionDecreasedata($brandcode, $reportperiod);
         $data["biggestUniquesDecreasedata"] = $reportObj->getbiggestUniquesDecreasedata($brandcode, $reportperiod);
         $data["biggestAdminIncreasedata"] = $reportObj->getbiggestAdminIncreasedata($brandcode, $reportperiod);
-        $data["totalDwellTimedata"] = $reportObj->gettotalDwellTimedata($from, $to, $brandcode); 
+        $data["totalDwellTimedata"] = $reportObj->gettotalDwellTimedata($from, $to, $brandcode);
 
         return \Response::json($data);
 
     }
-     
-    ////////////////////////////////// VENUE //////////////////////////////////    
+
+    ////////////////////////////////// VENUE //////////////////////////////////
 
     public function hipreports_hipwifi_venuedatajsonsingle() {
 
@@ -412,14 +412,14 @@ class HipreportsController extends \BaseController {
 
         // NOTE FOR WHEN WE IMPLEMENT ORGANISATIONS - i.e. groups of brands:
         // If the brand belongs to an organisation then we compare to all venues within the organisation, else we compare to venues within the brand.
-        
+
         $brandname = preg_replace("/(^.*)(_)(.*$)/", "$1", $nasid);
         $brand = \DB::table("brands")->where('name', 'like', $brandname . "%")->first();
         $brandcodes = array($brand->code);
-        
+
         if($reportperiod == "daterange") {
           $reportperiod = "tmp_period_" . $brandname . "_" . $from . "_" . $to ;
-        }        
+        }
         error_log("hipreports_hipwifi_venuedatajsonsingle :reportperiod  : $reportperiod");
 
         if ($queryname == "builddaterangereporttable") {
@@ -435,13 +435,13 @@ class HipreportsController extends \BaseController {
             $txt .= "\n nasid: ".$nasid;
             $txt .= "\n brandcodes: ".json_encode($brandcodes);
 
-            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);        
-    
+            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+
             $data = $reportObj->getAge($reportperiod, $from, $to, $nasid, $brandcodes);
-            
+
             $txt = "The age returned was : ".json_encode($data);
-            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);        
-    
+            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+
         } else if ($queryname == "gender") {
             $data = $reportObj->getGender($reportperiod, $from, $to, $nasid, $brandcodes);
         } else if ($queryname == "income") {
@@ -502,7 +502,7 @@ class HipreportsController extends \BaseController {
 
         // NOTE FOR WHEN WE IMPLEMENT ORGANISATIONS - i.e. groups of brands:
         // If the brand belongs to an organisation then we compare to all venues within the organisation, else we compare to venues within the brand.
-        
+
         // if($venuebrandcompare == "thisbrandonly") {
             $brandname = preg_replace("/(^.*)(_)(.*$)/", "$1", $nasid);
             $brand = \DB::table("brands")->where('name', 'like', $brandname . "%")->first();
@@ -530,13 +530,13 @@ class HipreportsController extends \BaseController {
         $data["avgtimepersession"] = $reportObj->getAvgTimePerSession($reportperiod, $from, $to, $nasid, $brandcodes);
 
         return \Response::json($data);
-    }   
+    }
 
 ///////////////////////////////////////////////////////////////
 
 // Name: hipwifi_Brand_Pdf_Download
 
-// Purpose:  To convert hipwifi_brand to a pdf format and enable download option 
+// Purpose:  To convert hipwifi_brand to a pdf format and enable download option
 // using Dom pdf
 
 // It receive html content and pdf name from the form submission, pass it to the  // download preview page and to the download page. Enable pdf download using Dom  // pdf.
@@ -545,7 +545,7 @@ class HipreportsController extends \BaseController {
 
 // Last updated at 26-10-2016 by Prajeesh
 
-////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////
 
     public function hipwifi_Brand_Pdf_Download()
     {
@@ -556,16 +556,16 @@ class HipreportsController extends \BaseController {
         $data['fusionchartElementTwo'] =  $input_data['myPagetwo'];
         $data['fusionchartElementThree'] =  $input_data['myPagethree'];
         $data['report_name']             = $input_data['report_name'];
-        
-        if(isset($input_data['printtoken'])) { 
+
+        if(isset($input_data['printtoken'])) {
 
             $data['totalWifiSessions'] = $input_data['totalWifiSessions'];
             $data['wifiDataTotal'] = $input_data['wifiDataTotal'];
             $data['avgNumberofPeople'] = $input_data['avgNumberofPeople'];
             $data['avgFirstTimeUsers'] = $input_data['avgFirstTimeUsers'];
             $data['avgDataPerSession'] = $input_data['avgDataPerSession'];
-            $data['avgTimePerSession'] = $input_data['avgTimePerSession']; 
-            
+            $data['avgTimePerSession'] = $input_data['avgTimePerSession'];
+
             // return \View::make('hipreports.hipwifi_brand_download', $data);
             $dompdf = \PDF::loadView('hipreports.hipwifi_brand_download', $data);
 //            $pdf->set_paper(DEFAULT_PDF_PAPER_SIZE, 'portrait');
@@ -573,15 +573,15 @@ class HipreportsController extends \BaseController {
             //$filename               =       $data['report_name'].".pdf";
             $filename = preg_replace( "/\s+/", " ", $data['report_name'].".pdf" );
             $filename = str_ireplace(" ", "_", $filename);
-            
+
 //            $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
             return $dompdf->download($filename);
            // $pdf = $dompdf->output();
            // $file_location = base_path()."/public/fc_images/pdfreport/".$filename;
-           // file_put_contents($file_location,$pdf); 
+           // file_put_contents($file_location,$pdf);
         } else {
 
-            $data['printButtonToken']   =   TRUE;            
+            $data['printButtonToken']   =   TRUE;
             return \View::make('hipreports.hipwifi_brand_download_preview', $data);
         }
     }
@@ -590,7 +590,7 @@ class HipreportsController extends \BaseController {
 
 // Name: hipwifi_Venue_Pdf_Download
 
-// Purpose:  To convert hipwifi_Venue to a pdf format and enable download option 
+// Purpose:  To convert hipwifi_Venue to a pdf format and enable download option
 // using Dom pdf
 
 // It receive html content and pdf name from the form submission, pass it to the  // download preview page and to the download page. Enable pdf download using Dom  // pdf.
@@ -599,23 +599,23 @@ class HipreportsController extends \BaseController {
 
 // Last updated at 2-11-2016 by Prajeesh
 
-////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////
 
     public function hipwifi_Venue_Pdf_Download()
     {
-        $input_data                 =       Input::all(); 
-        $data                       =       array();        
-        $data['currentMenuItem'] = "Dashboard";        
+        $input_data                 =       Input::all();
+        $data                       =       array();
+        $data['currentMenuItem'] = "Dashboard";
         $data['fusionchartElementOne'] =  $input_data['myVenuePageone'];
         $data['fusionchartElementTwo'] =  $input_data['myVenuePagetwo'];
         $data['fusionchartElementThree'] =  $input_data['myVenuePagethree'];
         $data['report_name_venue']             = $input_data['report_name_venue'];
-        
-        if(isset($input_data['printtoken'])) { 
+
+        if(isset($input_data['printtoken'])) {
 
             $data['totalWifiSessions'] = $input_data['totalWifiSessions'];
 
-            $data['avgWifiSessions'] = $input_data['avgWifiSessions']; 
+            $data['avgWifiSessions'] = $input_data['avgWifiSessions'];
 
             $data['wifiDataTotal'] = $input_data['wifiDataTotal'];
 
@@ -627,7 +627,7 @@ class HipreportsController extends \BaseController {
 
             $data['avgFirstTimeUsers'] = $input_data['avgFirstTimeUsers'];
 
-            $data['venueAvgDataPerSession'] = $input_data['venueAvgDataPerSession']; 
+            $data['venueAvgDataPerSession'] = $input_data['venueAvgDataPerSession'];
 
             $data['totalTirstTimeUsers'] = $input_data['totalTirstTimeUsers'];
 
@@ -636,7 +636,7 @@ class HipreportsController extends \BaseController {
             $data['venueAvgTimePerSession'] = $input_data['venueAvgTimePerSession'];
 
             $data['brandAvgTimePerSession'] = $input_data['brandAvgTimePerSession'];
-            
+
             //return \View::make('hipreports.hipwifi_venue_download', $data);
             $dompdf = \PDF::loadView('hipreports.hipwifi_venue_download', $data);
 //            $pdf->set_paper(DEFAULT_PDF_PAPER_SIZE, 'portrait');
@@ -644,33 +644,33 @@ class HipreportsController extends \BaseController {
             //$filename               =       $data['report_name'].".pdf";
             $filename = preg_replace( "/\s+/", " ", $data['report_name_venue'].".pdf" );
             $filename = str_ireplace(" ", "_", $filename);
-            
+
 //            $filename           =       "graphview".strtotime(date('h:i:s')).".pdf";
             return $dompdf->download($filename);
            // $pdf = $dompdf->output();
            // $file_location = base_path()."/public/fc_images/pdfreport/".$filename;
-           // file_put_contents($file_location,$pdf); 
+           // file_put_contents($file_location,$pdf);
         } else {
 
             //die($data);
 
-            $data['printButtonToken']   =   TRUE;            
+            $data['printButtonToken']   =   TRUE;
             return \View::make('hipreports.hipwifi_venue_download_preview', $data);
         }
     }
 
-    public function convertSvgToImage() 
-    {        
+    public function convertSvgToImage()
+    {
         $data                       =       array();
         $input_data                 =       Input::all();
-        
+
         $fusionchart_spans                  =   $input_data['fusionchartspans'];
-        $chart_svg                          =   "";   
+        $chart_svg                          =   "";
         $images                         =   array();
         $svgs                           =   array();
         $i                              =   0;
         //converting svg code to image
-        foreach($fusionchart_spans as $key => $charts) { 
+        foreach($fusionchart_spans as $key => $charts) {
             $i++;
             $chart_svg                 .=       $charts;
             $path                       =       base_path()."/public/fc_images/svg_temp/";
@@ -679,12 +679,12 @@ class HipreportsController extends \BaseController {
             fwrite($svg_file, $charts);
             fclose($svg_file);
             $svgs["img_".$key]               =   $fileName;
-        }    
+        }
 
 
 /////////////for dev1 pdfinvestigation /////////////
             $svgpath                    =   base_path().'/public/fc_images/svg_temp/';
-            $imgpath                    =   base_path().'/public/fc_images/image_temp/';            
+            $imgpath                    =   base_path().'/public/fc_images/image_temp/';
         foreach($svgs as $key => $val) {
             //shell excution for svg to image
             $cmd                        =   'inkscape -f '.$svgpath.$val.'.svg -e '.$imgpath.$val.'.png';
@@ -692,10 +692,10 @@ class HipreportsController extends \BaseController {
             $images[$key]               =   $val.".png";
             unlink($svgpath.$val.'.svg');
         }
-        
+
         $response                       =   array('status' => "success" , 'result_img' => $images);
         print_r(json_encode($response));exit;
-        
+
     }
 
 }
