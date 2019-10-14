@@ -301,7 +301,7 @@ class HipreportsController extends \BaseController {
             $txt .= "\n to: ".$to;
             $txt .= "\n brandcode: ".$brandcode;
 
-            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+            $myfile = file_put_contents('/var/www/hiphub/public/hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
             $data = $reportObj->getAge($reportperiod, $from, $to, $nasid, $brandcodes, 1);
 
