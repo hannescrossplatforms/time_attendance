@@ -2192,7 +2192,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         $brandaveragedata = $this->getAggregatedAnswersForBrand($reportperiod, $from, $to, $nasid, $answers, $brandcodes, $quickie_id, $brandonly);
 
         \Log::info('---------------------------- Matt Log --------------------------------');
-        \Log::info(join(", ",$brandaveragedata));
+        \Log::info($brandaveragedata);
       
         \Log::info('---------------------------- End Matt Log --------------------------------');
         // error_log("getAge : brandaveragedata = " . print_r($brandaveragedata, true));

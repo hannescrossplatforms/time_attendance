@@ -58,10 +58,10 @@ function downloadlistcustomerusage()  {
       from = $("#brandfrom").val();
       to = $("#brandto").val();
 
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
       };
 
@@ -69,13 +69,13 @@ function downloadlistcustomerusage()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: downloadlistcustomerusageurl,
         success: function(filepath) {
           // Initiate the download
           document.getElementById('my_iframe').src = filepath;
         }
-      });
+      }); 
 }
 
 function downloaduserprofiledata()  {
@@ -84,10 +84,10 @@ function downloaduserprofiledata()  {
       from = $("#brandfrom").val();
       to = $("#brandto").val();
 
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
       };
 
@@ -95,21 +95,21 @@ function downloaduserprofiledata()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: downloaduserprofiledataurl,
         success: function(filepath) {
           // Initiate the download
           document.getElementById('my_iframe').src = filepath;
         }
-      });
+      }); 
 }
 
 function buildDateRangeReportTableBrand(report)  {
 
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': "daterange",
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'builddaterangereporttable'
       };
@@ -118,13 +118,13 @@ function buildDateRangeReportTableBrand(report)  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function() {
           $("#loadingModal").modal('hide');
           processBrandReports();
         }
-      });
+      }); 
 }
 
 function processBrandReports()  {
@@ -169,19 +169,19 @@ function processBrandReports()  {
   $("#brandavgstoredwelltime").html("Loading...");
 
   $("#brandtotalwifisessions").html("Loading...");
-  $("#brandavgwifisessions").html("Loading...");
+  $("#brandavgwifisessions").html("Loading...");   
 
   $("#brandtotalwifidatatotal").html("Loading...");
-  $("#brandavgwifidatatotal").html("Loading...");
+  $("#brandavgwifidatatotal").html("Loading...");        
 
   $("#brandtotalnumberofpeople").html("Loading...");
-  $("#brandavgnumberofpeople").html("Loading...");
+  $("#brandavgnumberofpeople").html("Loading..."); 
 
   $("#brandtotalfirsttimeusers").html("Loading...");
-  $("#brandavgfirsttimeusers").html("Loading...");
+  $("#brandavgfirsttimeusers").html("Loading...");    
 
   $("#brandvenueavgdatapersession").html("Loading...");
-  $("#brandbrandavgdatapersession").html("Loading...");
+  $("#brandbrandavgdatapersession").html("Loading...");       
 
   $("#brandvenueavgtimepersession").html("Loading...");
   $("#brandbrandavgtimepersession").html("Loading...");
@@ -195,10 +195,10 @@ function processBrandReports()  {
     type: "GET",
     dataType: 'json',
     contentType: "application/json",
-    data: {
-      'brand_id': brand_id,
+    data: { 
+      'brand_id': brand_id, 
       'reportperiod': reportperiod,
-      'from': from,
+      'from': from, 
       'to': to
     },
     url: branddataurl,
@@ -209,10 +209,10 @@ function processBrandReports()  {
   });
 
      //////// age ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'age'
       };
@@ -221,7 +221,7 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(agedata) {
           console.log('---------------');
@@ -230,13 +230,13 @@ function processBrandReports()  {
           debugger;
           showBrandAge(agedata);
         }
-      });
+      }); 
 
      //////// gender ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'gender'
       };
@@ -245,19 +245,19 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log(data);
           showBrandGender(data);
         }
-      });
+      }); 
 
      //////// income ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'income'
       };
@@ -266,19 +266,19 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log(data);
           showBrandIncome(data);
         }
-      });
+      }); 
 
      //////// newvsreturning ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'newvsreturning'
       };
@@ -287,19 +287,19 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log(data);
           showBrandNewVsReturning(data);
         }
-      });
+      }); 
 
      //////// brandavgjamvenuedwelltime ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'avgjamvenuedwelltime'
       };
@@ -308,19 +308,19 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log(data);
           showBrandAvgJamVenueDwellTime(data);
         }
-      });
+      }); 
 
      //////// brandtotalstoredwelltime ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'brandtotalstoredwelltime'
       };
@@ -329,19 +329,19 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log(data);
           showBrandTotalStoreDwellTime(data);
         }
-      });
+      }); 
 
      //////// brandavguptime ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'brandavguptime'
       };
@@ -350,19 +350,19 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log("brandavguptime : " + data);
           showBrandBrandAvgUptime(data);
         }
-      });
+      }); 
 
      //////// brandtotalwifisessions ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'brandtotalwifisessions'
       };
@@ -371,20 +371,20 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           debugger;
           console.log("brandtotalwifisessions : " + data);
           showBrandTotalWifiSessions(data);
         }
-      });
+      }); 
 
      //////// brandtotalwifidatatotal ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'brandtotalwifidatatotal'
       };
@@ -393,19 +393,19 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log("brandtotalwifidatatotal : " + data);
           showBrandTotalWifiDataTotal(data);
         }
-      });
+      }); 
 
      //////// brandtotalnumberofpeople ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'brandtotalnumberofpeople'
       };
@@ -414,19 +414,19 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log("brandtotalnumberofpeople : " + data);
           showBrandTotalNumberOfPeople(data);
         }
-      });
+      }); 
 
      //////// brandtotalfirsttimeusers ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'brandtotalfirsttimeusers'
       };
@@ -435,7 +435,7 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log("brandtotalfirsttimeusers : " + data);
@@ -444,10 +444,10 @@ function processBrandReports()  {
       });
 
      //////// brandvenueavgdatapersession ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'brandvenueavgdatapersession'
       };
@@ -456,7 +456,7 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log("brandvenueavgdatapersession : " + data);
@@ -465,10 +465,10 @@ function processBrandReports()  {
       });
 
      //////// brandvenueavgtimepersession ///
-      data = {
-        'brand_id': brand_id,
+      data = { 
+        'brand_id': brand_id, 
         'reportperiod': reportperiod,
-        'from': from,
+        'from': from, 
         'to': to,
         'queryname': 'brandvenueavgtimepersession'
       };
@@ -477,7 +477,7 @@ function processBrandReports()  {
         type: "GET",
         dataType: 'json',
         contentType: "application/json",
-        data: data,
+        data: data,   
         url: branddatasingleurl,
         success: function(data) {
           console.log("brandvenueavgtimepersession : " + data);
@@ -486,10 +486,10 @@ function processBrandReports()  {
       });
 
        //////// dwelltimebysessionduration ///
-        data = {
-            'brand_id': brand_id,
+        data = { 
+            'brand_id': brand_id, 
             'reportperiod': reportperiod,
-            'from': from,
+            'from': from, 
             'to': to,
             'queryname': 'dwelltimebysessionduration'
         };
@@ -502,13 +502,13 @@ function processBrandReports()  {
           success: function(dwelltimebysessionduration) {
             showBrandDwellTimeBySessionDuration(dwelltimebysessionduration);
           }
-        });
+        }); 
 
        //////// dwelltimebyhour ///
-        data = {
-            'brand_id': brand_id,
+        data = { 
+            'brand_id': brand_id, 
             'reportperiod': reportperiod,
-            'from': from,
+            'from': from, 
             'to': to,
             'queryname': 'dwelltimebyhour'
         };
@@ -552,6 +552,7 @@ function showBrandGender(data) {
 }
 
 function showBrandIncome(data) {
+  debugger;
       var age = new FusionCharts({
         type: "mscolumn2d",
         renderAt: "brandincome",
@@ -597,12 +598,12 @@ function showBrandBrandAvgUptime(data) {
 
 function showBrandTotalWifiSessions(data) {
           $("#brandtotalwifisessions").html(data.total);
-          $("#brandavgwifisessions").html(Math.round(data.avg));
+          $("#brandavgwifisessions").html(Math.round(data.avg)); 
 }
 
 function showBrandTotalWifiDataTotal(data) {
           $("#brandtotalwifidatatotal").html(data.total.toFixed(2));
-          $("#brandavgwifidatatotal").html(data.avg.toFixed(2));
+          $("#brandavgwifidatatotal").html(data.avg.toFixed(2));  
 }
 
 function showBrandTotalNumberOfPeople(data) {
@@ -617,7 +618,7 @@ function showBrandTotalFirstTimeUsers(data) {
 
 function showBrandVenueAvgDataPerSession(data) {
         $("#brandvenueavgdatapersession").html(Math.round(data.venue));
-        $("#brandbrandavgdatapersession").html(Math.round(data.brand));
+        $("#brandbrandavgdatapersession").html(Math.round(data.brand));  
 }
 
 function showBrandVenueAvgTimePerSession(data) {
@@ -695,7 +696,7 @@ function showBrandPerformanceGraphs(brandData) {
         dataSource: brandData["highest5AvgTimedata"]
         });
       highest5AvgTime.render("chartcol1row3");
-
+      
       var lowest5Sessions = new FusionCharts({
         type: "column2d",
         renderAt: "chartcol2row1",
@@ -858,19 +859,19 @@ function showbrandLevelReport(brandData) {
           $("#brandavgstoredwelltime").html(Math.round(brandData.storedwelltime.avg));
 
           $("#brandtotalwifisessions").html(brandData.totalwifisessions.total);
-          $("#brandavgwifisessions").html(Math.round(brandData.totalwifisessions.avg));
+          $("#brandavgwifisessions").html(Math.round(brandData.totalwifisessions.avg));   
 
           $("#brandtotalwifidatatotal").html( brandData.wifidatatotal.total.toFixed(2));
-          $("#brandavgwifidatatotal").html(brandData.wifidatatotal.avg.toFixed(2));
+          $("#brandavgwifidatatotal").html(brandData.wifidatatotal.avg.toFixed(2));        
 
           $("#brandtotalnumberofpeople").html(brandData.numberofpeople.total);
-          $("#brandavgnumberofpeople").html(Math.round(brandData.numberofpeople.avg));
+          $("#brandavgnumberofpeople").html(Math.round(brandData.numberofpeople.avg)); 
 
           $("#brandtotalfirsttimeusers").html(brandData.firsttimeusers.total);
-          $("#brandavgfirsttimeusers").html(Math.round(brandData.firsttimeusers.avg));
+          $("#brandavgfirsttimeusers").html(Math.round(brandData.firsttimeusers.avg));    
 
           $("#brandvenueavgdatapersession").html(Math.round(brandData.avgdatapersession.venue));
-          $("#brandbrandavgdatapersession").html(Math.round(brandData.avgdatapersession.brand));
+          $("#brandbrandavgdatapersession").html(Math.round(brandData.avgdatapersession.brand));       
 
           $("#brandvenueavgtimepersession").html(Math.round(brandData.avgtimepersession.venue));
           $("#brandbrandavgtimepersession").html(Math.round(brandData.avgtimepersession.brand));
@@ -919,7 +920,7 @@ function showbrandLevelReport(brandData) {
         dataSource: brandData["highest5AvgTimedata"]
         });
       highest5AvgTime.render("chartcol1row3");
-
+      
       var lowest5Sessions = new FusionCharts({
         type: "column2d",
         renderAt: "chartcol2row1",
@@ -1026,18 +1027,18 @@ function showbrandLevelReport(brandData) {
 FusionCharts.ready(function(){
 
   console.log("FusionCharts ready function");
+  
 
 
-
-});
+}); 
 
 
 //printpreview for hiptna charts starts here
 
 function printpreview() {
     $('#loadingDiv').show();
-    pathname = $('#url').val();
-
+    pathname = $('#url').val(); 
+       
 
     var fusioncharts_container = {};
     $("span[class='fusioncharts-container']").each(function(index, elem){
@@ -1059,9 +1060,9 @@ function printpreview() {
                 $('#loadingDiv').hide();
 
             }
-
+            
         });
-
+        
     var fusionImages  = fusionImg.responseJSON.result_img;
     $("span[class='fusioncharts-container']").each(function(index, elem){
         $(this).removeAttr('style');
@@ -1071,20 +1072,20 @@ function printpreview() {
         $(this).html('<img src="'+image_path+'">');
 
     });
-
+            
     var i = 1;
     $("#fusion-chart .col-sm-6").each(function(index, elem){
-
+        
         if(i%2 == 0) {
             $(this).addClass('col-6-right-al');
         } else {
             $(this).addClass('col-6-left-al');
         }
         i++;
-    });
+    });         
 
     previewPDF();
-
+      
 }
 
 
