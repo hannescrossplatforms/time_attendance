@@ -3,14 +3,14 @@
 
 
 class Reports extends Eloquent {
-
+    
     // MASS ASSIGNMENT -------------------------------------------------------
     // define which attributes are mass assignable (for security)
     // we only want these 3 attributes able to be filled
     protected $fillable = array('name', 'taste_level');
 
     public function generateDailyData($daysback) {
-      DB::table('repdailytotals')->delete();
+      DB::table('repdailytotals')->delete();  
       $stats = new \Statistics();
 
       // $daysback = 100; //TESTING
@@ -20,7 +20,7 @@ class Reports extends Eloquent {
 
       $allvenues = \Venue::all();
       $allnasids = array();
-      foreach($allvenues as $venue) {
+      foreach($allvenues as $venue) {  
         $thisnasid = preg_replace("/ /", "_", $venue->sitename);
         array_push($allnasids, $thisnasid);
       }
@@ -47,7 +47,7 @@ class Reports extends Eloquent {
               $data = ($venueSessionCount->input_data + $venueSessionCount->output_data) / 1048576;
 
               if(in_array($nasid, $allnasids)) {
-                DB::table('repdailytotals')->insert(array( "nasid" => $nasid, "brandcode" => $brandcode,
+                DB::table('repdailytotals')->insert(array( "nasid" => $nasid, "brandcode" => $brandcode, 
                   "sessions" => $session_count, "dwelltime" => $dwell_time, "data" => $data, "date" => $targetDate ));
               }
             }
@@ -72,7 +72,7 @@ class Reports extends Eloquent {
 
     public function initializeVenueDataTable($tablename, $brandname = null) {
 
-        DB::table($tablename)->delete();
+        DB::table($tablename)->delete();  
 
         // $stats = new \Statistics();
         // $venues = $stats->getActiveVenues($brandname);
@@ -91,7 +91,7 @@ class Reports extends Eloquent {
                 ->get();
                 // ->where('device_type', 'like', 'Mikrotik')
 
-
+        
         foreach($venues as $venue) {
           $nasid = preg_replace("/ /", "_", $venue->sitename);
           // print($nasid . "<br>");
@@ -108,7 +108,7 @@ class Reports extends Eloquent {
 
         // dd("initializeVenueDataTable");
 
-    }
+    } 
 
     public function getBeginEndDates($reportperiod, $from, $to) {
 
@@ -130,33 +130,33 @@ class Reports extends Eloquent {
 
             $date = new \DateTime(date('Y-m-d'));
             $endcurrent =  $date->format('Y-m-d');
-
-            $date->modify('first day of this month');
+            
+            $date->modify('first day of this month'); 
             $begincurrent = $date->format('Y-m-d');
 
             $date = new \DateTime(date('Y-m-d'));
-            $date->sub(new \DateInterval('P1M'));
+            $date->sub(new \DateInterval('P1M')); 
             $endprevious =  $date->format('Y-m-d');
 
-            $date->modify('first day of this month');
+            $date->modify('first day of this month'); 
             $beginprevious = $date->format('Y-m-d');
-
+            
         } elseif($reportperiod == "replastmonth") {
 
             $date = new \DateTime('first day of this month');
 
-            $date->sub(new \DateInterval('P1D'));
+            $date->sub(new \DateInterval('P1D')); 
             $endcurrent =  $date->format('Y-m-d');
 
             $date->modify('first day of this month');
             $begincurrent = $date->format('Y-m-d');
 
-            $date->sub(new \DateInterval('P1D'));
+            $date->sub(new \DateInterval('P1D')); 
             $endprevious = $date->format('Y-m-d');
 
-            $date->modify('first day of this month');
+            $date->modify('first day of this month'); 
             $beginprevious = $date->format('Y-m-d');
-
+            
         } else { // Must be a date range
 
             $datetimeto = new DateTime($to);
@@ -166,14 +166,14 @@ class Reports extends Eloquent {
             $begincurrent =  $from;
 
             $interval = $datetimefrom->diff($datetimeto)->format('%a') + 1;
-
-            $date->sub(new \DateInterval('P1D'));
+            
+            $date->sub(new \DateInterval('P1D')); 
             $endprevious = $date->format('Y-m-d');
 
-            $date->sub(new \DateInterval('P' . $interval . 'D'));
-            $beginprevious = $date->format('Y-m-d');
+            $date->sub(new \DateInterval('P' . $interval . 'D')); 
+            $beginprevious = $date->format('Y-m-d');            
 
-        }
+        } 
 
         $dates = array();
         $dates["begincurrent"] = $begincurrent;
@@ -191,12 +191,12 @@ class Reports extends Eloquent {
 
             // Cycle through all the venues
             $rows = DB::table($table)->get();
-            foreach($rows as $row) {
+            foreach($rows as $row) { 
 
               if($row->calledstationid) {
                 // Calculate and set the differences in session count between the two periods
                 $this->setDiffAndPercentSessions($table, $row);
-
+              
                 $this->setAllVenueData($connection, $table, $row,  $begincurrent, $endcurrent, $beginprevious, $endprevious);
               }
 
@@ -218,7 +218,7 @@ class Reports extends Eloquent {
         }
 
         $this->initializeVenueDataTable($table, $brandname);
-
+        
         error_log("Reports : generateAggregatedVenueData : ========= : reportperiod = $reportperiod");
         error_log("Reports : generateAggregatedVenueData : endcurrent = $endcurrent");
         error_log("Reports : generateAggregatedVenueData : begincurrent = $begincurrent");
@@ -249,7 +249,7 @@ class Reports extends Eloquent {
           }
         }
 
-
+            
             // error_log("getNewUsersForVenue xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx connection = $connection");
 
 
@@ -270,7 +270,7 @@ class Reports extends Eloquent {
         }
 
         $this->initializeVenueDataTable($table, $brandname);
-
+        
         error_log("Reports : generateAggregatedVenueData : ========= : reportperiod = $reportperiod");
         error_log("Reports : generateAggregatedVenueData : endcurrent = $endcurrent");
         error_log("Reports : generateAggregatedVenueData : begincurrent = $begincurrent");
@@ -294,13 +294,13 @@ class Reports extends Eloquent {
 
             // Cycle through all the venues
             $rows = DB::table($table)->get();
-            foreach($rows as $row) {
+            foreach($rows as $row) { 
 
               if($row->calledstationid) {
                 // Calculate and set the differences in session count between the two periods
                 $this->setDiffAndPercentSessions($table, $row);
         // error_log("getNewUsersForVenue YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
-
+              
                 // $this->setAllVenueData($connection, $table, $row,  $begincurrent, $endcurrent, $beginprevious, $endprevious);
               }
 
@@ -372,7 +372,7 @@ class Reports extends Eloquent {
       }
 
     }
-
+            
     public function setNewUsersData($table, $row, $previousnewusers, $currentnewusers) {
 
         $diffnewusers = $currentnewusers - $previousnewusers;
@@ -386,10 +386,10 @@ class Reports extends Eloquent {
 
         // error_log("setNewUsersData : ddd : $previousnewusers === $currentnewusers ::::" . $row->nasid);
 
-        $record = array(  "previousnewusers" => $previousnewusers,
-                          "currentnewusers" => $currentnewusers,
-                          "diffnewusers" => $diffnewusers,
-                          "percentnewusers" => $percentnewusers
+        $record = array(  "previousnewusers" => $previousnewusers, 
+                          "currentnewusers" => $currentnewusers, 
+                          "diffnewusers" => $diffnewusers, 
+                          "percentnewusers" => $percentnewusers 
                           );
 
         DB::table($table)->where('nasid', 'like', $row->nasid)->update($record);
@@ -406,10 +406,10 @@ class Reports extends Eloquent {
         }
         $percentminutes = round($percentminutes);
 
-        $record = array(  "previousminutes" => $previousminutes,
-                          "currentminutes" => $currentminutes,
-                          "diffminutes" => $diffminutes,
-                          "percentminutes" => $percentminutes
+        $record = array(  "previousminutes" => $previousminutes, 
+                          "currentminutes" => $currentminutes, 
+                          "diffminutes" => $diffminutes, 
+                          "percentminutes" => $percentminutes 
                           );
 
         DB::table($table)->where('nasid', 'like', $row->nasid)->update($record);
@@ -426,10 +426,10 @@ class Reports extends Eloquent {
         }
         $percentunique = round($percentunique);
 
-        $record = array(  "previousunique" => $previousunique,
-                          "currentunique" => $currentunique,
-                          "diffunique" => $diffunique,
-                          "percentunique" => $percentunique
+        $record = array(  "previousunique" => $previousunique, 
+                          "currentunique" => $currentunique, 
+                          "diffunique" => $diffunique, 
+                          "percentunique" => $percentunique 
                           );
 
         DB::table($table)->where('nasid', 'like', $row->nasid)->update($record);
@@ -448,10 +448,10 @@ class Reports extends Eloquent {
         }
         $percentdata = round($percentdata);
 
-        $record = array(  "previousdata" => $previousdata,
-                          "currentdata" => $currentdata,
-                          "diffdata" => $diffdata,
-                          "percentdata" => $percentdata
+        $record = array(  "previousdata" => $previousdata, 
+                          "currentdata" => $currentdata, 
+                          "diffdata" => $diffdata, 
+                          "percentdata" => $percentdata 
                           );
 
         DB::table($table)->where('nasid', 'like', $row->nasid)->update($record);
@@ -478,7 +478,7 @@ class Reports extends Eloquent {
           ->where('nasid', 'like', $row->nasid)
           ->update($record);
     }
-
+    
 
     // This is needed as the calledstationid is sometime the venue sitename and sometimes the mac address
     // This resolves it to the sitename
@@ -587,7 +587,7 @@ class Reports extends Eloquent {
     public function stripOutBrandFromGraphLabels($data) {
 
         foreach($data as $record) {
-          $record->label = preg_replace("/(.*) (.*$)/", "$2", $record->label);
+          $record->label = preg_replace("/(.*) (.*$)/", "$2", $record->label); 
         }
 
         return $data;
@@ -906,9 +906,9 @@ class Reports extends Eloquent {
               ->orderby("percentunique", "asc")
               ->limit(5)
               ->get();
-
+              
         $data = $this->stripOutBrandFromGraphLabels($data);
-
+        
         $chartData = array(
           'chart' => array(
             'subCaption' => "Biggest Uniques % Decrease",
@@ -1010,7 +1010,7 @@ class Reports extends Eloquent {
     public function getStoreDwellTime($from, $to, $nasid, $brandcodes, $brandonly = null) {
         $statistics = new \Statistics();
         $activeVenues = $statistics->getActiveVenues();
-        // error_log("Parameters for getStoreDwellTime : $nasid ::: $from  ::: $to");
+        // error_log("Parameters for getStoreDwellTime : $nasid ::: $from  ::: $to"); 
 
         $data = array();
         $data["avg"] = "";
@@ -1018,7 +1018,7 @@ class Reports extends Eloquent {
                ->selectRaw('sum(dwelltime) as total')
                ->where('nasid', 'like', '%' . $nasid . '%')
                ->where('date', '>=', $from)
-               ->where('date', '<=', $to)
+               ->where('date', '<=', $to) 
                ->where('dwelltime', '>', 0)
                ->get();
         $data["total"] = $rows[0]->total;
@@ -1028,7 +1028,7 @@ class Reports extends Eloquent {
                ->wherein('brandcode', $brandcodes)
                ->wherein('nasid', $activeVenues)
                ->where('date', '>=', $from)
-               ->where('date', '<=', $to)
+               ->where('date', '<=', $to) 
                ->groupby('nasid')
                ->get();
 
@@ -1052,43 +1052,43 @@ class Reports extends Eloquent {
         // error_log("getStoreDwellTime : avg = " . $data["avg"]);
 
         // $jsonrows = json_encode($rows);
-        // error_log("getStoreDwellTime : jason :  $jsonrows");
-
+        // error_log("getStoreDwellTime : jason :  $jsonrows"); 
+               
         return $data;
     }
 
     public function getTotalWifiSessions($from, $to, $nasid, $brandcodes, $brandonly = null) {
         $statistics = new \Statistics();
         $activeVenues = $statistics->getActiveVenues();
-        // error_log("Parameters for getTotalWifiSessions : $nasid ::: $from  ::: $to");
+        // error_log("Parameters for getTotalWifiSessions : $nasid ::: $from  ::: $to"); 
 
 
         $rows = \DB::table("repdailytotals")
                ->selectRaw('sum(sessions) as total')
                ->where('nasid', 'like', '%' . $nasid . '%')
                ->where('date', '>=', $from)
-               ->where('date', '<=', $to)
+               ->where('date', '<=', $to) 
                ->get();
         $data["total"] = $rows[0]->total;
-        // error_log("Parameters for getTotalWifiSessions : total : " . $rows[0]->total);
+        // error_log("Parameters for getTotalWifiSessions : total : " . $rows[0]->total); 
 
         $rows = \DB::table("repdailytotals")
                ->selectRaw('sum(sessions) as total, nasid')
                ->where('date', '>=', $from)
-               ->where('date', '<=', $to)
+               ->where('date', '<=', $to) 
                ->wherein('brandcode', $brandcodes)
                ->wherein('nasid', $activeVenues)
                ->groupby('nasid')
                ->get();
 
-        // error_log("Parameters for getTotalWifiSessions : rows : " . print_r($rows, true));
+        // error_log("Parameters for getTotalWifiSessions : rows : " . print_r($rows, true)); 
 
         $combinedTotal = 0;
         foreach($rows as $row) {
             $combinedTotal = $combinedTotal + $row->total;
         }
         $venueCount = sizeof($rows);
-        // error_log("Parameters for getTotalWifiSessions : venueCount : $venueCount");
+        // error_log("Parameters for getTotalWifiSessions : venueCount : $venueCount"); 
 
         if($venueCount) {
 
@@ -1113,7 +1113,7 @@ class Reports extends Eloquent {
                ->selectRaw('sum(data) as total, avg(data) as avg')
                ->where('nasid', 'like', '%' . $nasid . '%')
                ->where('date', '>=', $from)
-               ->where('date', '<=', $to)
+               ->where('date', '<=', $to) 
                ->get();
 
         $data["total"] = $rows[0]->total / 1024;
@@ -1123,7 +1123,7 @@ class Reports extends Eloquent {
                ->wherein('brandcode', $brandcodes)
                ->wherein('nasid', $activeVenues)
                ->where('date', '>=', $from)
-               ->where('date', '<=', $to)
+               ->where('date', '<=', $to) 
                ->groupby('nasid')
                ->get();
 
@@ -1187,38 +1187,43 @@ class Reports extends Eloquent {
     public function getFirstTimeUsers($reportperiod, $from, $to, $nasid, $brandcodes, $brandonly = null) {
         $statistics = new \Statistics();
         $activeVenues = $statistics->getActiveVenues();
-        $macaddress = \Venue::where('sitename', 'like', $nasid)->first()->macaddress;
+        $venue = \Venue::where('sitename', 'like', $nasid)->first();
 
-        $data = array();
+        if ($venue) {
+          $macaddress = $venue->macaddress;
 
-        $rows = DB::table($reportperiod)
-          ->selectRaw('currentnewusers as total')
-          ->where('nasid', 'like', '%' . $nasid . '%')
-          ->orwhere('nasid', 'like', '%' . $macaddress . '%')
-          ->get();
-
-        if(sizeof($rows) > 0) {
-          $data['total'] = $rows[0]->total;
-        } else {
-          $data['total'] = 0;
+          $data = array();
+  
+          $rows = DB::table($reportperiod)
+            ->selectRaw('currentnewusers as total')
+            ->where('nasid', 'like', '%' . $nasid . '%')
+            ->orwhere('nasid', 'like', '%' . $macaddress . '%')
+            ->get();
+  
+          if(sizeof($rows) > 0) {
+            $data['total'] = $rows[0]->total;
+          } else {
+            $data['total'] = 0;
+          }
+  
+          if($brandonly) {
+            $selectText = 'sum(currentnewusers) as avg';
+          } else {
+            $selectText = 'avg(currentnewusers) as avg';
+          }
+  
+          $rows = DB::table($reportperiod)
+            ->selectRaw($selectText)
+            ->wherein('brandcode', $brandcodes)
+            ->wherein('nasid', $activeVenues)
+            ->get();
+          $data['avg'] = $rows[0]->avg;
+  
+          // error_log("getFirstTimeUsers : avg = " . $data['avg']);
+  
+          return $data;
         }
-
-        if($brandonly) {
-          $selectText = 'sum(currentnewusers) as avg';
-        } else {
-          $selectText = 'avg(currentnewusers) as avg';
-        }
-
-        $rows = DB::table($reportperiod)
-          ->selectRaw($selectText)
-          ->wherein('brandcode', $brandcodes)
-          ->wherein('nasid', $activeVenues)
-          ->get();
-        $data['avg'] = $rows[0]->avg;
-
-        // error_log("getFirstTimeUsers : avg = " . $data['avg']);
-
-        return $data;
+        
     }
 
     public function getAvgDataPerSession($reportperiod, $from, $to, $nasid, $brandcodes) {
@@ -1291,7 +1296,7 @@ class Reports extends Eloquent {
 
 
       ///////////////////////
-      // get the list of opening hours in an array ARR["MON"]["OPEN"], ARR["MON"]["CLOSED"] ... ARR["SUN"]["OPEN"], ARR["SUN"]["CLOSED"]
+      // get the list of opening hours in an array ARR["MON"]["OPEN"], ARR["MON"]["CLOSED"] ... ARR["SUN"]["OPEN"], ARR["SUN"]["CLOSED"] 
       $sitename = preg_replace("/_/", " ", $nasid);
 
       $openinghours = \Venue::selectRaw('mon_from, mon_to, tue_from, tue_to, wed_from, wed_to, thu_from, thu_to, fri_from, fri_to, sat_from, sat_to, sun_from, sun_to')
@@ -1389,7 +1394,7 @@ class Reports extends Eloquent {
                   ->selectRaw('sum(periodsdown) as totalperiodsdown')
                   ->where('nasid', 'like', $nasid)
                   ->where('date', '>=', $begincurrent)
-                  ->where('date', '<=', $endcurrent)
+                  ->where('date', '<=', $endcurrent) 
                   ->get();
 
       $totalPeriodsDown = $rows[0]->totalperiodsdown;
@@ -1418,16 +1423,16 @@ class Reports extends Eloquent {
         $statistics = new \Statistics();
 
         $durations =  array(
-                        array("begin" => "00:00:00", "end" => "01:00:00"),
-                        array("begin" => "01:00:00", "end" => "02:00:00"),
-                        array("begin" => "02:00:00", "end" => "03:00:00"),
-                        array("begin" => "03:00:00", "end" => "04:00:00"),
-                        array("begin" => "04:00:00", "end" => "05:00:00"),
-                        array("begin" => "05:00:00", "end" => "06:00:00"),
-                        array("begin" => "06:00:00", "end" => "07:00:00"),
-                        array("begin" => "07:00:00", "end" => "08:00:00"),
-                        array("begin" => "08:00:00", "end" => "09:00:00"),
-                        array("begin" => "09:00:00", "end" => "10:00:00"),
+                        array("begin" => "00:00:00", "end" => "01:00:00"), 
+                        array("begin" => "01:00:00", "end" => "02:00:00"), 
+                        array("begin" => "02:00:00", "end" => "03:00:00"), 
+                        array("begin" => "03:00:00", "end" => "04:00:00"), 
+                        array("begin" => "04:00:00", "end" => "05:00:00"), 
+                        array("begin" => "05:00:00", "end" => "06:00:00"), 
+                        array("begin" => "06:00:00", "end" => "07:00:00"), 
+                        array("begin" => "07:00:00", "end" => "08:00:00"), 
+                        array("begin" => "08:00:00", "end" => "09:00:00"), 
+                        array("begin" => "09:00:00", "end" => "10:00:00"), 
                         array("begin" => "10:00:00", "end" => "11:00:00"),
                         array("begin" => "11:00:00", "end" => "12:00:00"),
                         array("begin" => "12:00:00", "end" => "13:00:00"),
@@ -1552,7 +1557,7 @@ class Reports extends Eloquent {
           'categories' => $categories,
           'dataset' => $dataset
         );
-
+        
         return $chartData;
     }
 
@@ -1560,11 +1565,11 @@ class Reports extends Eloquent {
 
         $statistics = new \Statistics();
 
-        $durations =  array(array("min" => 0, "max" => 4),
-                      array("min" => 5, "max" => 10),
-                      array("min" => 11, "max" => 20),
-                      array("min" => 21, "max" => 30),
-                      array("min" => 31, "max" => 45),
+        $durations =  array(array("min" => 0, "max" => 4), 
+                      array("min" => 5, "max" => 10), 
+                      array("min" => 11, "max" => 20), 
+                      array("min" => 21, "max" => 30), 
+                      array("min" => 31, "max" => 45), 
                       array("min" => 46, "max" => 99));
 
         $category = array(
@@ -1659,7 +1664,7 @@ class Reports extends Eloquent {
           'categories' => $categories,
           'dataset' => $dataset
         );
-
+        
         return $chartData;
     }
 
@@ -1725,7 +1730,7 @@ class Reports extends Eloquent {
     //              ->wherein('brandcode', $brandcodes)
     //              ->wherein('nasid', $activeVenues)
     //              ->where('date', '>=', $from)
-    //              ->where('date', '<=', $to)
+    //              ->where('date', '<=', $to) 
     //              ->orderBy('dwelltime')
     //              ->get();
 
@@ -1749,7 +1754,7 @@ class Reports extends Eloquent {
 
     //     error_log("getDwellTimeTopBottom10PercentThreshholds : totalminutes = $totalminutes");
 
-    //     if($totalminutes > 0) {
+    //     if($totalminutes > 0) { 
     //       $data['brand'] = round($totalminutes / $totalsessions);
     //       error_log("getDwellTimeTopBottom10PercentThreshholds : data['brand'] = " . $data['brand']);
 
@@ -1767,9 +1772,9 @@ class Reports extends Eloquent {
         //        ->wherein('brandcode', $brandcodes)
         //        ->wherein('nasid', $activeVenues)
         //        ->where('date', '>=', $from)
-        //        ->where('date', '<=', $to)
-        //        ->where('dwelltime', '>=', $threholds["bottom"])
-        //        ->where('dwelltime', '<=', $threholds["top"])
+        //        ->where('date', '<=', $to) 
+        //        ->where('dwelltime', '>=', $threholds["bottom"]) 
+        //        ->where('dwelltime', '<=', $threholds["top"]) 
         //        ->get();
 
         // if($rows[0]->totalminutes > 0) {
@@ -1791,14 +1796,14 @@ class Reports extends Eloquent {
       $url = 'http://api.doteleven.co/venues/mrp0381?period=custom&start=' . $from . '&end=' . $to . '&min_session=5&max_session=60';
       error_log("getAveJamVenueDwellTime : url : $url ");
 
-      $ch = curl_init($url);
+      $ch = curl_init($url);                                                                      
 
-      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-          'Content-Type: application/json'
-      ));
-
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                                     
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+          'Content-Type: application/json'                                                                     
+      ));                                                                                                                   
+       
       $resultsjson = curl_exec($ch);// json_encode(curl_exec($ch));
       $resultsObj = json_decode($resultsjson);
 
@@ -1824,7 +1829,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           ->selectRaw('sum(currentunique) as total')
           ->where('brandcode', 'like', '%' . $brandcode . '%')
           ->get();
-
+ 
 
         $rows2 = DB::table($reportperiod)
           ->selectRaw('sum(currentnewusers) as new')
@@ -1894,7 +1899,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           ->selectRaw('currentunique as total')
           ->where('nasid', 'like', '%' . $nasid . '%')
           ->get();
-
+ 
 
         $rows2 = DB::table($reportperiod)
           ->selectRaw('currentnewusers as new')
@@ -1955,7 +1960,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
     public function getSortedAnswers($answers, $results) {
 
       $sortedresults = array();
-
+      
       foreach($answers as $answer) {
 
           $row = array("value" => "No value for : " . $answer);
@@ -1975,9 +1980,6 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
     public function getAggregatedAnswersForVenue($reportperiod, $from, $to, $nasid, $answers, $quickie_id) {
 
         $sitename = preg_replace("/_/", " ", $nasid);
-        \Log::info('------------------------------------- SITENAME --------------------------------------');
-        \Log::info($sitename);
-
         $location = \Venue::where("sitename", "like", $sitename)->first()->location;
 
         $results = \DB::connection("hipreports")->table("partner")
@@ -1989,7 +1991,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
            ->wherein('answer', $answers)
            ->groupby('answer')
            ->get();
-
+           
         return $this->getSortedAnswers($answers, $results);
 
     }
@@ -2009,13 +2011,13 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
                   $subquery->orwhere('location', 'like', "%" . $brandcode . "%");
                 }
               })
-          ->get();
+          ->get(); 
 
         $activeVenueLocationsArray = array();
         foreach($activeVenueLocations as $x) {
             array_push($activeVenueLocationsArray, $x->location);
         }
-        // $activeVenueLocationsArray = (array)$activeVenueLocations;
+        // $activeVenueLocationsArray = (array)$activeVenueLocations;  
         $numvenues = sizeof($activeVenueLocationsArray);
 
         error_log("getAggregatedAnswersForBrand : activeVenueCount : " . $numvenues );
@@ -2024,7 +2026,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         $sitename = preg_replace("/_/", " ", $nasid);
         $location = \Venue::where("sitename", "like", $sitename)->first()->location;
         $nastype = substr($location, 0, 9);
-
+        
         // error_log("lalalalalalalal activeVenueLocationsArray = " . print_r($activeVenueLocationsArray, true));
         $results = \DB::connection("hipreports")->table("partner")
            ->select(DB::raw('answer, count(*) AS value'))
@@ -2034,9 +2036,9 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
            ->wherein('sitename', $activeVenueLocationsArray)
            ->wherein('answer', $answers)
            ->groupby('answer')
-           ->get();
+           ->get(); 
 
-        // Calculate the averages
+        // Calculate the averages 
         foreach ($results as $result) {
           if($numvenues) {
             if($brandonly) { // Retun the total instead of the average
@@ -2083,12 +2085,12 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
             $table->integer('previousnewusers');
             $table->integer('diffnewusers');
             $table->integer('percentnewusers');
-
+            
             $table->integer('currentminutes');
             $table->integer('previousminutes');
             $table->integer('diffminutes');
             $table->integer('percentminutes');
-
+            
             $table->integer('currentdata');
             $table->integer('previousdata');
             $table->integer('diffdata');
@@ -2098,7 +2100,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         });
         $this->generateAggregatedVenueData("daterange", $from, $to, $brandname);
     }
-
+    
 
     public function getAge($reportperiod, $from, $to, $nasid, $brandcodes, $brandonly = null) {
 
@@ -2137,11 +2139,11 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
 
         $categories = array(array("category" => $category));
         $txt = "Categories for age are : ".json_encode($categories);
-        $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+        $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);        
 
         $thisvenuedata = $this->getAggregatedAnswersForVenue($reportperiod, $from, $to, $nasid, $answers, $quickie_id);
         $txt = "The venuedata are : ".json_encode($thisvenuedata);
-        $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+        $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);        
 
         error_log("getAge : thisvenuedata = " . print_r($thisvenuedata, true));
         // $testdata = json_encode("$thisvenuedata");
@@ -2159,7 +2161,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           $dataset = array($thisvenue, $brandaverage);
         }
         $txt = "The Brand Average are : ".json_encode($brandaverage);
-        $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+        $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);        
 
         $chartData = array(
           'chart' => array(
@@ -2193,7 +2195,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           'dataset' => $dataset
         );
         $txt = "The Chart Data are : ".json_encode($chartData);
-        $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+        $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);        
 
         // $x = json_encode($chartData);
         // error_log($x);
@@ -2290,7 +2292,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           'categories' => $categories,
           'dataset' => $dataset
         );
-
+        
         // $x = json_encode($chartData);
         // error_log($x);
         return $chartData;
@@ -2349,7 +2351,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           'categories' => $categories,
           'dataset' => $dataset
         );
-
+        
         // $x = json_encode($chartData);
         // error_log($x);
         return $chartData;
@@ -2458,7 +2460,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           } else {
         }
 
-      }
+      } 
       return $currentsessions;
     }
 
