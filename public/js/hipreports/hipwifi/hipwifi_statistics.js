@@ -1,77 +1,115 @@
 
-      // $('.datepicker').datepicker({
-      //   format: 'yyyy-mm-dd',
-      //   autoclose: true,
-      //   orientation: "bottom"
-      // });
+// $('.datepicker').datepicker({
+//   format: 'yyyy-mm-dd',
+//   autoclose: true,
+//   orientation: "bottom"
+// });
 
-      // statsdata = {{ $data['statsdata'] }};
+// statsdata = {{ $data['statsdata'] }};
 
-      $(function() {
-      	// alert("statsdata : " + statsdata);
-      	console.log(statsdata);
-        $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+$(function () {
+  // alert("statsdata : " + statsdata);
+  debugger;
+  console.log(statsdata);
+  $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
 
-      });
+});
 
-      $(document).delegate('#buildtable', 'click', function() {
-        showStatsTable(statsdata);
-      });
+function getDataFromServer(callback) {
+  let i_sitename = $('#filtresitename').val();
+  let i_from = $('#from').val();
+  let i_to = $('#to').val();
 
-      $(document).delegate('#reset', 'click', function() {
-        // alert("booboo");
-        showStatsTable(statsdata);
-      });
+  $.ajax({
+    type: "POST",
+    dataType: 'json',
+    contentType: "application/json",
+    data: {
+      'sitename': i_sitename,
+      'from': i_from,
+      'to': i_to
+    },
+    url: '/hipwifi_showstatistics/requestStatsData',
+    success: function (filteredstatsdata) {
+      debugger;
+      callback(filteredstatsdata);
+    },
+    error: function (xhr, err) {
+      debugger;
+    }
+  });
+}
 
-      $(document).delegate('#filter', 'click', function(event) {
+$(document).delegate('#buildtable', 'click', function () {
+  if (statsdata === null || statsdata === undefined) {
+    getDataFromServer(function (statsdata) {
+      showStatsTable(statsdata);  
+    })
+  } else {
+    showStatsTable(statsdata);
+  }
+});
 
-        event.preventDefault();
-        console.log("In Filter");
+$(document).delegate('#reset', 'click', function () {
+  if (statsdata === null || statsdata === undefined) {
+    getDataFromServer(function (statsdata) {
+      showStatsTable(statsdata);  
+    })
+  } else {
+    showStatsTable(statsdata);
+  }
+});
 
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            contentType: "application/json",
-            data: { 
-              'sitename': $('#filtresitename').val(), 
-              'from': $('#from').val(), 
-              'to': $('#to').val()
-            },
-              url: statsurl,
-              success: function(filteredstatsdata) {
-              console.log(filteredstatsdata);
-              // var fsd = JSON.parse(filteredstatsdata);
-              showStatsTable(filteredstatsdata);
-            }
-         });
-      });
+$(document).delegate('#filter', 'click', function (event) {
 
-      function showStatsForBrand() {
+  event.preventDefault();
+  console.log("In Filter");
 
-          $.ajax({
-            type: "GET",
-            dataType: 'json',
-            contentType: "application/json",
-            data: { 
-              'sitename': $('#sitename').val(), 
-              'from': $('#from').val(), 
-              'to': $('#to').val(),
-              'brand_id': $('#brandlist').val()
-            },
-              url: statsurl,
-              success: function(filteredstatsdata) {
-              console.log(filteredstatsdata);
-              // var fsd = JSON.parse(filteredstatsdata);
-              showStatsTable(filteredstatsdata);
-            }
-         });
-      }
+  $.ajax({
+    type: "GET",
+    dataType: 'json',
+    contentType: "application/json",
+    data: {
+      'sitename': $('#filtresitename').val(),
+      'from': $('#from').val(),
+      'to': $('#to').val()
+    },
+    url: statsurl,
+    success: function (filteredstatsdata) {
+      debugger;
+      console.log(filteredstatsdata);
+      // var fsd = JSON.parse(filteredstatsdata);
+      showStatsTable(filteredstatsdata);
+    }
+  });
+});
 
-      function showStatsTable(venuestatsdata) {
-        console.log("In showStatsTable : " + venuestatsdata);
-        table = '';
-        rows = '';
-        beginTable = '\
+function showStatsForBrand() {
+
+  $.ajax({
+    type: "GET",
+    dataType: 'json',
+    contentType: "application/json",
+    data: {
+      'sitename': $('#sitename').val(),
+      'from': $('#from').val(),
+      'to': $('#to').val(),
+      'brand_id': $('#brandlist').val()
+    },
+    url: statsurl,
+    success: function (filteredstatsdata) {
+      console.log(filteredstatsdata);
+      // var fsd = JSON.parse(filteredstatsdata);
+      showStatsTable(filteredstatsdata);
+    }
+  });
+}
+
+function showStatsTable(venuestatsdata) {
+  console.log("In showStatsTable : " + venuestatsdata);
+  table = '';
+  rows = '';
+  beginTable = '\
                 <table class="table table-striped">\n\
                   <thead>\n\
                     <tr>\n\
@@ -84,22 +122,24 @@
                     </tr>\n\
                   </thead>\n\
                   <tbody>  \n';
-        $.each(venuestatsdata['venues'], function(index, value) {
-            rows = rows + '\
+                  
+  console.log(`---------------------------\n\n${venuestatsdata['venues']}\n\n---------------------------`)
+  $.each(venuestatsdata['venues'], function (index, value) {
+    rows = rows + '\
                     <tr>\n\
-                      <td> ' + index  + '</td>\n\
-                      <td> ' + value["totalsessions"]  + '</td>\n\
+                      <td> ' + index + '</td>\n\
+                      <td> ' + value["totalsessions"] + '</td>\n\
                       <td> ' + value["uniqueusers"] + '</td>\n\
                       <td> ' + value["newusers"] + '</td>\n\
                       <td> ' + value["dwelltime"] + '</td>\n\
                       <td> ' + value["dataused"] + '</td>\n\
                     </tr>\n\
                     ';
-        });
-        totals = '\
+  });
+  totals = '\
                     <tr class="totals">\n\
                       <td>Total</td>\n\
-                      <td> ' + venuestatsdata["totalsessionstotal"]  + '</td>\n\
+                      <td> ' + venuestatsdata["totalsessionstotal"] + '</td>\n\
                       <td> ' + venuestatsdata["uniqueuserstotal"] + '</td>\n\
                       <td> ' + venuestatsdata["newuserstotal"] + '</td>\n\
                       <td> ' + venuestatsdata["dwelltimetotalaverage"] + '</td>\n\
@@ -107,12 +147,12 @@
                     </tr>\n\
                     ';
 
-        endTable = ' \
+  endTable = ' \
                   </tbody>\n\
                 </table>';
 
-        table = beginTable + rows + totals + endTable;
-        $( "#statsTable" ).html( table );
-      }
+  table = beginTable + rows + totals + endTable;
+  $("#statsTable").html(table);
+}
 
-  
+

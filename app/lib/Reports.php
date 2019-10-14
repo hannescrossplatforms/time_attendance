@@ -1981,6 +1981,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
 
           foreach($results as $result) {
             if($result->answer == $answer) {
+              \Log::info('FINAL: '.$result->value);
               $row["value"] = $result->value;
             }
           }
@@ -1994,11 +1995,16 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
     public function getAggregatedAnswersForVenue($reportperiod, $from, $to, $nasid, $answers, $quickie_id) {
 
         $sitename = preg_replace("/_/", " ", $nasid);
-
-        $venue = \Venue::where("sitename", "like", $sitename)->first();
+        $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($sitename)."%'")->get()->first();
 
         if ($venue) {
-          $location = \Venue::where("sitename", "like", $sitename)->first()->location;
+          $location = $venue->location;
+          \Log::info('-------------------------------------AGGREGATED RESULTS FOR '.$location.'-------------------------------------');
+          \Log::info('QUICKIE_ID: '.$quickie_id);
+          \Log::info('FROM: '.$from);
+          \Log::info('TO: '.$to);
+          \Log::info('ANSWER: '.join(", ",$answers));
+          
 
           $results = \DB::connection("hipreports")->table("partner")
              ->select(DB::raw('answer, count(*) AS value'))
@@ -2010,24 +2016,18 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
              ->groupby('answer')
              ->get();
 
+
+             foreach ($results as $result) {
+              \Log::info('answer: '.$result->answer);
+              \Log::info('count: '.$result->value);
+             }
+
+            //  \Log::info(jsonEncode($results));
+
+             \Log::info('-----------------------------------------------------------------------------------------------------------------');
+
           return $this->getSortedAnswers($answers, $results);
 
-
-          if ($venue) {
-            $location = $venue->location;
-
-            $results = \DB::connection("hipreports")->table("partner")
-               ->select(DB::raw('answer, count(*) AS value'))
-               ->where('sitename', 'like', $location)
-               ->where('created_at', '>', $from)
-               ->where('created_at', '<', $to)
-               ->where('quickie_id', '=', $quickie_id)
-               ->wherein('answer', $answers)
-               ->groupby('answer')
-               ->get();
-
-            return $this->getSortedAnswers($answers, $results);
-          }
         }
 
 

@@ -35,7 +35,12 @@ class Statistics extends Eloquent {
 		        $remotedb_id = $venue->brand->remotedb_id;
 
             // error_log("getStatsData : remotedb_id = $remotedb_id ::: brand = " . $venue->brand->name);
-		        $connection = \DB::table('remotedbs')->select("*")->where('id', '=', $remotedb_id)->first()->dbconnection;
+            $dbs = \DB::table('remotedbs')->select("*")->where('id', '=', $remotedb_id)->first();
+            if ($dbs) {
+              $connection = $dbs->dbconnection;
+            } else {
+              $connection = 'radius_hipspot';
+            }
 
         		$data['venues'][$venue->sitename] = array();
         		$data['venues'][$venue->sitename]['totalsessions'] = $this->getTotalSessionsForVenue($connection, $venue, $from, $to);

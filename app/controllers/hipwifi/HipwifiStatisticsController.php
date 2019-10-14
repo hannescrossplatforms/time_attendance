@@ -44,4 +44,22 @@ class HipwifiStatisticsController extends \BaseController {
             
         }
     }
+
+    public function requestStatsData() {
+        $stats = new \Statistics();
+        
+        $sitename = \Input::get('sitename');
+        $from = \Input::get('from');
+        $to = \Input::get('to');
+
+        // Default to todays date
+        if(!$from or $from == "") {
+	        $from  = date("Y-m-d");
+	        $to  = date("Y-m-d");
+        } 
+
+        $statsdata = $stats->getStatsData($sitename, $from, $to);
+        header('Content-type: application/json');
+        return \Response::json(json_encode( $statsdata ));
+    }
 }
