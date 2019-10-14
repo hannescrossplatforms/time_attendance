@@ -1978,23 +1978,19 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         \Log::info('------------------------------------- SITENAME --------------------------------------');
         \Log::info($sitename);
 
-        $json = json_encode($sitename);
-        print_r($json);
+        $location = \Venue::where("sitename", "like", $sitename)->first()->location;
 
+        $results = \DB::connection("hipreports")->table("partner")
+           ->select(DB::raw('answer, count(*) AS value'))
+           ->where('sitename', 'like', $location)
+           ->where('created_at', '>', $from)
+           ->where('created_at', '<', $to)
+           ->where('quickie_id', '=', $quickie_id)
+           ->wherein('answer', $answers)
+           ->groupby('answer')
+           ->get();
 
-        // $location = \Venue::where("sitename", "like", $sitename)->first()->location;
-
-        // $results = \DB::connection("hipreports")->table("partner")
-        //    ->select(DB::raw('answer, count(*) AS value'))
-        //    ->where('sitename', 'like', $location)
-        //    ->where('created_at', '>', $from)
-        //    ->where('created_at', '<', $to)
-        //    ->where('quickie_id', '=', $quickie_id)
-        //    ->wherein('answer', $answers)
-        //    ->groupby('answer')
-        //    ->get();
-
-        // return $this->getSortedAnswers($answers, $results);
+        return $this->getSortedAnswers($answers, $results);
 
     }
 
@@ -2026,6 +2022,11 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         // $numvenues = $avcount[0]["count"];
 
         $sitename = preg_replace("/_/", " ", $nasid);
+
+        $json = json_encode($sitename);
+        print_r($json);
+
+
         $location = \Venue::where("sitename", "like", $sitename)->first()->location;
         $nastype = substr($location, 0, 9);
 
