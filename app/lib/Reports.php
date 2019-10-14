@@ -1981,7 +1981,6 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
 
           foreach($results as $result) {
             if($result->answer == $answer) {
-              \Log::info('FINAL: '.$result->value);
               $row["value"] = $result->value;
             }
           }
@@ -2039,11 +2038,10 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         error_log("getAggregatedAnswersForBrand : answers : " . print_r($answers, true));
         error_log("getAggregatedAnswersForBrand : brandcodes : " . print_r($brandcodes, true));
 
-
         $activeVenueLocations = \Venue::selectRaw('location')
           ->where('ap_active', '=', 1)
           ->where(function ($subquery) use ($brandcodes) {
-                $subquery->where('location', 'like', "thisisadummyvalue");
+                // $subquery->where('location', 'like', "thisisadummyvalue");
                 foreach($brandcodes as $brandcode) {
                   $subquery->orwhere('location', 'like', "%" . $brandcode . "%");
                 }
@@ -2091,6 +2089,8 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
 
             return $this->getSortedAnswers($answers, $results);
           }
+        } else {
+          \Log::error('Venue is null in Reports@getAggregatedAnswersForBrand');
         }
 
 
@@ -2190,6 +2190,11 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         // error_log("getAge : testdata = $testdata");
 
         $brandaveragedata = $this->getAggregatedAnswersForBrand($reportperiod, $from, $to, $nasid, $answers, $brandcodes, $quickie_id, $brandonly);
+
+        \Log::info('---------------------------- Matt Log --------------------------------');
+        \Log::info(join(", ",$brandaveragedata));
+      
+        \Log::info('---------------------------- End Matt Log --------------------------------');
         // error_log("getAge : brandaveragedata = " . print_r($brandaveragedata, true));
 
         $thisvenue = array("seriesname" => "This Venue", "data" => $thisvenuedata);
