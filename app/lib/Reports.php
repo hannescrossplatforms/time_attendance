@@ -1484,86 +1484,91 @@ class Reports extends Eloquent {
         $categories = array(array("category" => $category));
 
         $sitename = preg_replace("/_/", " ", $nasid);
-        $remotedb_id = \Venue::where('sitename', 'like', $sitename)->first()->remotedb_id;
+        $venue = \Venue::where('sitename', 'like', $sitename)->first();
 
-        // echo "brandname : $brandname";
-        $remotedb = \DB::table('remotedbs')->select("dbconnection")->where('id', '=', $remotedb_id)->first();
-        $connection = $remotedb->dbconnection;
+        if ($venue) {
+          $remotedb_id = $venue->remotedb_id;
 
-        $venueData = array(); $venueValues = array();
-        $brandData = array(); $brandValues = array();
-
-        $totalVenueSessions = 0;
-        $totalBrandSessions = 0;
-
-        foreach($durations as $duration) {
-
-          $venueSessionCount = $statistics->getSessionCountByTimePeriodAndVenue($connection, $nasid, $from, $to, $duration["begin"], $duration["end"]);
-          $totalVenueSessions = $totalVenueSessions + $venueSessionCount;
-          array_push($venueValues, $venueSessionCount);
-
-          $brandSessionCount = $statistics->getSessionCountByTimePeriodAndBrand($connection, $brandname, $from, $to, $duration["begin"], $duration["end"]);
-          $totalBrandSessions = $totalBrandSessions + $brandSessionCount;
-          array_push($brandValues, $brandSessionCount);
-
+          // echo "brandname : $brandname";
+          $remotedb = \DB::table('remotedbs')->select("dbconnection")->where('id', '=', $remotedb_id)->first();
+          $connection = $remotedb->dbconnection;
+  
+          $venueData = array(); $venueValues = array();
+          $brandData = array(); $brandValues = array();
+  
+          $totalVenueSessions = 0;
+          $totalBrandSessions = 0;
+  
+          foreach($durations as $duration) {
+  
+            $venueSessionCount = $statistics->getSessionCountByTimePeriodAndVenue($connection, $nasid, $from, $to, $duration["begin"], $duration["end"]);
+            $totalVenueSessions = $totalVenueSessions + $venueSessionCount;
+            array_push($venueValues, $venueSessionCount);
+  
+            $brandSessionCount = $statistics->getSessionCountByTimePeriodAndBrand($connection, $brandname, $from, $to, $duration["begin"], $duration["end"]);
+            $totalBrandSessions = $totalBrandSessions + $brandSessionCount;
+            array_push($brandValues, $brandSessionCount);
+  
+          }
+  
+          if(!$totalVenueSessions) $totalVenueSessions = 1;
+          foreach($venueValues as $value) {
+            $percentage = round(100 * $value / $totalVenueSessions);
+            array_push($venueData, array("value" => $percentage));
+          }
+  
+          if(!$totalBrandSessions) $totalBrandSessions = 1;
+          foreach($brandValues as $value) {
+            $percentage = round(100 * $value / $totalBrandSessions);
+            array_push($brandData, array("value" => $percentage));
+          }
+  
+          // error_log("getDwellTimeBySessionDuration : venueData = " . print_r($venueData, true));
+          // error_log("getDwellTimeBySessionDuration : brandData = " . print_r($brandData, true));
+  
+          $thisvenue = array("seriesname" => "Venue %", "data" => $venueData);
+          $brandAverages = array("seriesname" => "Brand %", "data" => $brandData);
+          if($brandonly) {
+            $dataset = array($brandAverages);
+          } else {
+            $dataset = array($thisvenue, $brandAverages);
+          }
+  
+          $chartData = array(
+            'chart' => array(
+                "caption" => "",
+                "subCaption" => "",
+                "xAxisname" => "Hour of Day",
+                "yAxisname" => "",
+                "showYAxisValues" => "0",
+                "numberPrefix" => "",
+                "numDivLines" => "0",
+                "paletteColors" => "#68a2da, #808080, #ed7d31, #f2c500,#f45b00,#8e0000,   #68a2da,#a5a5a5a5",
+                "bgColor" => "#ffffff",
+                "showBorder" => "0",
+                "showHoverEffect" => "1",
+                "showCanvasBorder" => "0",
+                "usePlotGradientColor" => "0",
+                "plotBorderAlpha" => "10",
+                "legendBorderAlpha" => "0",
+                "legendShadow" => "0",
+                "placevaluesInside" => "1",
+                "valueFontColor" => "#ffffff",
+                "showXAxisLine" => "0",
+                "xAxisLineColor" => "#999999",
+                "divlineColor" => "#999999",
+                "divLineDashed" => "0",
+                "showAlternateVGridColor" => "0",
+                "subcaptionFontBold" => "0",
+                "subcaptionFontSize" => "14",
+            ),
+            'categories' => $categories,
+            'dataset' => $dataset
+          );
+  
+          return $chartData;
         }
-
-        if(!$totalVenueSessions) $totalVenueSessions = 1;
-        foreach($venueValues as $value) {
-          $percentage = round(100 * $value / $totalVenueSessions);
-          array_push($venueData, array("value" => $percentage));
-        }
-
-        if(!$totalBrandSessions) $totalBrandSessions = 1;
-        foreach($brandValues as $value) {
-          $percentage = round(100 * $value / $totalBrandSessions);
-          array_push($brandData, array("value" => $percentage));
-        }
-
-        // error_log("getDwellTimeBySessionDuration : venueData = " . print_r($venueData, true));
-        // error_log("getDwellTimeBySessionDuration : brandData = " . print_r($brandData, true));
-
-        $thisvenue = array("seriesname" => "Venue %", "data" => $venueData);
-        $brandAverages = array("seriesname" => "Brand %", "data" => $brandData);
-        if($brandonly) {
-          $dataset = array($brandAverages);
-        } else {
-          $dataset = array($thisvenue, $brandAverages);
-        }
-
-        $chartData = array(
-          'chart' => array(
-              "caption" => "",
-              "subCaption" => "",
-              "xAxisname" => "Hour of Day",
-              "yAxisname" => "",
-              "showYAxisValues" => "0",
-              "numberPrefix" => "",
-              "numDivLines" => "0",
-              "paletteColors" => "#68a2da, #808080, #ed7d31, #f2c500,#f45b00,#8e0000,   #68a2da,#a5a5a5a5",
-              "bgColor" => "#ffffff",
-              "showBorder" => "0",
-              "showHoverEffect" => "1",
-              "showCanvasBorder" => "0",
-              "usePlotGradientColor" => "0",
-              "plotBorderAlpha" => "10",
-              "legendBorderAlpha" => "0",
-              "legendShadow" => "0",
-              "placevaluesInside" => "1",
-              "valueFontColor" => "#ffffff",
-              "showXAxisLine" => "0",
-              "xAxisLineColor" => "#999999",
-              "divlineColor" => "#999999",
-              "divLineDashed" => "0",
-              "showAlternateVGridColor" => "0",
-              "subcaptionFontBold" => "0",
-              "subcaptionFontSize" => "14",
-          ),
-          'categories' => $categories,
-          'dataset' => $dataset
-        );
-
-        return $chartData;
+        
     }
 
     public function getDwellTimeBySessionDuration($reportperiod, $from, $to, $nasid, $brandname, $brandonly = null) {
