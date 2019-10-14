@@ -1978,6 +1978,9 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         \Log::info('------------------------------------- SITENAME --------------------------------------');
         \Log::info($sitename);
 
+        $json = json_encode($sitename);
+        print_r($json);
+
         $location = \Venue::where("sitename", "like", $sitename)->first()->location;
 
         $results = \DB::connection("hipreports")->table("partner")
