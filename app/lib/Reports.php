@@ -1980,9 +1980,9 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
     public function getAggregatedAnswersForVenue($reportperiod, $from, $to, $nasid, $answers, $quickie_id) {
 
         $sitename = preg_replace("/_/", " ", $nasid);
-<<<<<<< HEAD
+
         $venue = \Venue::where("sitename", "like", $sitename)->first();
-=======
+
         $location = \Venue::where("sitename", "like", $sitename)->first()->location;
 
         $results = \DB::connection("hipreports")->table("partner")
@@ -1996,7 +1996,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
            ->get();
 
         return $this->getSortedAnswers($answers, $results);
->>>>>>> 47d0f5b9da9666a9a05e8ff9fb7cf61b3d604552
+
 
         if ($venue) {
           $location = $venue->location;
@@ -2010,10 +2010,10 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
              ->wherein('answer', $answers)
              ->groupby('answer')
              ->get();
-             
+
           return $this->getSortedAnswers($answers, $results);
         }
-        
+
     }
 
     public function getAggregatedAnswersForBrand($reportperiod, $from, $to, $nasid, $answers, $brandcodes, $quickie_id, $brandonly = null) {
@@ -2049,7 +2049,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         if ($venue) {
           $location = $venue->location;
           $nastype = substr($location, 0, 9);
-          
+
           // error_log("lalalalalalalal activeVenueLocationsArray = " . print_r($activeVenueLocationsArray, true));
           $results = \DB::connection("hipreports")->table("partner")
              ->select(DB::raw('answer, count(*) AS value'))
@@ -2059,9 +2059,9 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
              ->wherein('sitename', $activeVenueLocationsArray)
              ->wherein('answer', $answers)
              ->groupby('answer')
-             ->get(); 
-  
-          // Calculate the averages 
+             ->get();
+
+          // Calculate the averages
           foreach ($results as $result) {
             if($numvenues) {
               if($brandonly) { // Retun the total instead of the average
@@ -2097,10 +2097,10 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
               $result->value = 0;
             }
           }
-  
+
           return $this->getSortedAnswers($answers, $results);
         }
-        
+
     }
 
     public function buildDateRangeReportTable($from, $to, $brandname) {
