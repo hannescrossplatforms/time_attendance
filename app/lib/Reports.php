@@ -1586,86 +1586,89 @@ class Reports extends Eloquent {
         $sitename = preg_replace("/_/", " ", $nasid);
         $remotedb_id = \Venue::where('sitename', 'like', $sitename)->first()->remotedb_id;
 
-        // echo "brandname : $brandname";
-        $remotedb = \DB::table('remotedbs')->select("dbconnection")->where('id', '=', $remotedb_id)->first();
-        $connection = $remotedb->dbconnection;
+        if ($remotedb_id) {
 
-        $venueData = array(); $venueValues = array();
-        $brandData = array(); $brandValues = array();
+          // echo "brandname : $brandname";
+          $remotedb = \DB::table('remotedbs')->select("dbconnection")->where('id', '=', $remotedb_id)->first();
+          $connection = $remotedb->dbconnection;
 
-        $totalVenueSessions = 0;
-        $totalBrandSessions = 0;
+          $venueData = array(); $venueValues = array();
+          $brandData = array(); $brandValues = array();
 
-        foreach($durations as $duration) {
+          $totalVenueSessions = 0;
+          $totalBrandSessions = 0;
 
-          $minseconds = $duration["min"] * 60;
-          $maxseconds = $duration["max"] * 60;
+          foreach($durations as $duration) {
 
-          $venueSessionCount = $statistics->getSessionCountByDwellTimeAndVenue($connection, $nasid, $from, $to, $minseconds, $maxseconds);
-          $totalVenueSessions = $totalVenueSessions + $venueSessionCount;
-          array_push($venueValues, $venueSessionCount);
+            $minseconds = $duration["min"] * 60;
+            $maxseconds = $duration["max"] * 60;
 
-          $brandSessionCount = $statistics->getSessionCountByDwellTimeAndBrand($connection, $brandname, $from, $to, $minseconds, $maxseconds);
-          $totalBrandSessions = $totalBrandSessions + $brandSessionCount;
-          array_push($brandValues, $brandSessionCount);
-        }
+            $venueSessionCount = $statistics->getSessionCountByDwellTimeAndVenue($connection, $nasid, $from, $to, $minseconds, $maxseconds);
+            $totalVenueSessions = $totalVenueSessions + $venueSessionCount;
+            array_push($venueValues, $venueSessionCount);
 
-        if(!$totalVenueSessions) $totalVenueSessions = 1;
-        foreach($venueValues as $value) {
-          $percentage = round(100 * $value / $totalVenueSessions);
-          array_push($venueData, array("value" => $percentage));
-        }
+            $brandSessionCount = $statistics->getSessionCountByDwellTimeAndBrand($connection, $brandname, $from, $to, $minseconds, $maxseconds);
+            $totalBrandSessions = $totalBrandSessions + $brandSessionCount;
+            array_push($brandValues, $brandSessionCount);
+          }
 
-        if(!$totalBrandSessions) $totalBrandSessions = 1;
-        foreach($brandValues as $value) {
-          $percentage = round(100 * $value / $totalBrandSessions);
-          array_push($brandData, array("value" => $percentage));
-        }
+          if(!$totalVenueSessions) $totalVenueSessions = 1;
+          foreach($venueValues as $value) {
+            $percentage = round(100 * $value / $totalVenueSessions);
+            array_push($venueData, array("value" => $percentage));
+          }
 
-        // error_log("getDwellTimeBySessionDuration : venueData = " . print_r($venueData, true));
-        // error_log("getDwellTimeBySessionDuration : brandData = " . print_r($brandData, true));
+          if(!$totalBrandSessions) $totalBrandSessions = 1;
+          foreach($brandValues as $value) {
+            $percentage = round(100 * $value / $totalBrandSessions);
+            array_push($brandData, array("value" => $percentage));
+          }
 
-        $thisvenue = array("seriesname" => "Venue %", "data" => $venueData);
-        $brandAverages = array("seriesname" => "Brand %", "data" => $brandData);
-        if($brandonly) {
-          $dataset = array($brandAverages);
-        } else {
-          $dataset = array($thisvenue, $brandAverages);
-        }
+          // error_log("getDwellTimeBySessionDuration : venueData = " . print_r($venueData, true));
+          // error_log("getDwellTimeBySessionDuration : brandData = " . print_r($brandData, true));
 
-        $chartData = array(
-          'chart' => array(
-              "caption" => "",
-              "subCaption" => "",
-              "xAxisname" => "Dwell Time Period (mins)",
-              "yAxisname" => "",
-              "showYAxisValues" => "0",
-              "numberPrefix" => "",
-              "numDivLines" => "0",
-              "paletteColors" => "#68a2da, #808080, #ed7d31, #f2c500,#f45b00,#8e0000,   #68a2da,#a5a5a5a5",
-              "bgColor" => "#ffffff",
-              "showBorder" => "0",
-              "showHoverEffect" => "1",
-              "showCanvasBorder" => "0",
-              "usePlotGradientColor" => "0",
-              "plotBorderAlpha" => "10",
-              "legendBorderAlpha" => "0",
-              "legendShadow" => "0",
-              "placevaluesInside" => "1",
-              "valueFontColor" => "#ffffff",
-              "showXAxisLine" => "0",
-              "xAxisLineColor" => "#999999",
-              "divlineColor" => "#999999",
-              "divLineDashed" => "0",
-              "showAlternateVGridColor" => "0",
-              "subcaptionFontBold" => "0",
-              "subcaptionFontSize" => "14",
-          ),
-          'categories' => $categories,
-          'dataset' => $dataset
-        );
+          $thisvenue = array("seriesname" => "Venue %", "data" => $venueData);
+          $brandAverages = array("seriesname" => "Brand %", "data" => $brandData);
+          if($brandonly) {
+            $dataset = array($brandAverages);
+          } else {
+            $dataset = array($thisvenue, $brandAverages);
+          }
+
+          $chartData = array(
+            'chart' => array(
+                "caption" => "",
+                "subCaption" => "",
+                "xAxisname" => "Dwell Time Period (mins)",
+                "yAxisname" => "",
+                "showYAxisValues" => "0",
+                "numberPrefix" => "",
+                "numDivLines" => "0",
+                "paletteColors" => "#68a2da, #808080, #ed7d31, #f2c500,#f45b00,#8e0000,   #68a2da,#a5a5a5a5",
+                "bgColor" => "#ffffff",
+                "showBorder" => "0",
+                "showHoverEffect" => "1",
+                "showCanvasBorder" => "0",
+                "usePlotGradientColor" => "0",
+                "plotBorderAlpha" => "10",
+                "legendBorderAlpha" => "0",
+                "legendShadow" => "0",
+                "placevaluesInside" => "1",
+                "valueFontColor" => "#ffffff",
+                "showXAxisLine" => "0",
+                "xAxisLineColor" => "#999999",
+                "divlineColor" => "#999999",
+                "divLineDashed" => "0",
+                "showAlternateVGridColor" => "0",
+                "subcaptionFontBold" => "0",
+                "subcaptionFontSize" => "14",
+            ),
+            'categories' => $categories,
+            'dataset' => $dataset
+          );
 
         return $chartData;
+      }
     }
 
     public function getDwellTimeByHour($reportperiod, $from, $to, $nasid, $brandcodes) {
@@ -1995,13 +1998,13 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
              ->wherein('answer', $answers)
              ->groupby('answer')
              ->get();
-  
+
           return $this->getSortedAnswers($answers, $results);
-  
-  
+
+
           if ($venue) {
             $location = $venue->location;
-  
+
             $results = \DB::connection("hipreports")->table("partner")
                ->select(DB::raw('answer, count(*) AS value'))
                ->where('sitename', 'like', $location)
@@ -2011,11 +2014,11 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
                ->wherein('answer', $answers)
                ->groupby('answer')
                ->get();
-  
+
             return $this->getSortedAnswers($answers, $results);
           }
         }
-        
+
 
     }
 
@@ -2052,7 +2055,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         if ($venue) {
           $location = $venue->location;
           $nastype = substr($location, 0, 9);
-  
+
           // error_log("lalalalalalalal activeVenueLocationsArray = " . print_r($activeVenueLocationsArray, true));
           $results = \DB::connection("hipreports")->table("partner")
              ->select(DB::raw('answer, count(*) AS value'))
@@ -2063,7 +2066,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
              ->wherein('answer', $answers)
              ->groupby('answer')
              ->get();
-  
+
           // Calculate the averages
           foreach ($results as $result) {
             if($numvenues) {
@@ -2074,11 +2077,11 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
                 $result->value = 0;
               }
             }
-  
+
             return $this->getSortedAnswers($answers, $results);
           }
         }
-        
+
 
     }
 
