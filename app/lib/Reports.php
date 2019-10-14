@@ -1289,7 +1289,7 @@ class Reports extends Eloquent {
         } else {
           $branduptimepercent = 0;
         }
-      
+
       // error_log("getBrandUptime : branduptimepercent = " . $branduptimepercent);
 
       return $branduptimepercent;
@@ -1492,40 +1492,40 @@ class Reports extends Eloquent {
           // echo "brandname : $brandname";
           $remotedb = \DB::table('remotedbs')->select("dbconnection")->where('id', '=', $remotedb_id)->first();
           $connection = $remotedb->dbconnection;
-  
+
           $venueData = array(); $venueValues = array();
           $brandData = array(); $brandValues = array();
-  
+
           $totalVenueSessions = 0;
           $totalBrandSessions = 0;
-  
+
           foreach($durations as $duration) {
-  
+
             $venueSessionCount = $statistics->getSessionCountByTimePeriodAndVenue($connection, $nasid, $from, $to, $duration["begin"], $duration["end"]);
             $totalVenueSessions = $totalVenueSessions + $venueSessionCount;
             array_push($venueValues, $venueSessionCount);
-  
+
             $brandSessionCount = $statistics->getSessionCountByTimePeriodAndBrand($connection, $brandname, $from, $to, $duration["begin"], $duration["end"]);
             $totalBrandSessions = $totalBrandSessions + $brandSessionCount;
             array_push($brandValues, $brandSessionCount);
-  
+
           }
-  
+
           if(!$totalVenueSessions) $totalVenueSessions = 1;
           foreach($venueValues as $value) {
             $percentage = round(100 * $value / $totalVenueSessions);
             array_push($venueData, array("value" => $percentage));
           }
-  
+
           if(!$totalBrandSessions) $totalBrandSessions = 1;
           foreach($brandValues as $value) {
             $percentage = round(100 * $value / $totalBrandSessions);
             array_push($brandData, array("value" => $percentage));
           }
-  
+
           // error_log("getDwellTimeBySessionDuration : venueData = " . print_r($venueData, true));
           // error_log("getDwellTimeBySessionDuration : brandData = " . print_r($brandData, true));
-  
+
           $thisvenue = array("seriesname" => "Venue %", "data" => $venueData);
           $brandAverages = array("seriesname" => "Brand %", "data" => $brandData);
           if($brandonly) {
@@ -1533,7 +1533,7 @@ class Reports extends Eloquent {
           } else {
             $dataset = array($thisvenue, $brandAverages);
           }
-  
+
           $chartData = array(
             'chart' => array(
                 "caption" => "",
@@ -1565,10 +1565,10 @@ class Reports extends Eloquent {
             'categories' => $categories,
             'dataset' => $dataset
           );
-  
+
           return $chartData;
         }
-        
+
     }
 
     public function getDwellTimeBySessionDuration($reportperiod, $from, $to, $nasid, $brandname, $brandonly = null) {
@@ -1595,7 +1595,7 @@ class Reports extends Eloquent {
 
         $sitename = preg_replace("/_/", " ", $nasid);
         $venue = \Venue::where('sitename', 'like', $sitename)->first();
-        
+
 
         if ($venue) {
           $remotedb_id = $venue->remotedb_id;
@@ -2003,7 +2003,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           \Log::info('FROM: '.$from);
           \Log::info('TO: '.$to);
           \Log::info('ANSWER: '.join(", ",$answers));
-          
+
 
           $results = \DB::connection("hipreports")->table("partner")
              ->select(DB::raw('answer, count(*) AS value'))
@@ -2147,8 +2147,10 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         error_log("getAge : nasid = $nasid");
         error_log("getAge : brandcodes = " . print_r($brandcodes, true));
 
+        \Log::info("hannes reports : get age : nasid = $nasid");
+        \Log::info("hannes reports : get age : brandcodes = ". print_r($brandcodes, true));
         if(preg_match('/.*SAB_.*$/i', $nasid)) {
-
+          \Log::info("hannes reports : comes in if");
           $category = array(
             array("label" => "18-25"),
             array("label" => "26-30"),
@@ -2162,6 +2164,8 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           $quickie_id = 488;
 
         } else {
+
+          \Log::info("hannes reports : comes in else");
 
           $category = array(
             array("label" => "Under 18"),
@@ -2179,10 +2183,16 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
 
         $categories = array(array("category" => $category));
         $txt = "Categories for age are : ".json_encode($categories);
+
+        \Log::info("hannes reports : categories for age are: ". json_encode($categories));
+
         $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
         $thisvenuedata = $this->getAggregatedAnswersForVenue($reportperiod, $from, $to, $nasid, $answers, $quickie_id);
         $txt = "The venuedata are : ".json_encode($thisvenuedata);
+
+        \Log::info("hannes reports : the venue data are: $txt");
+
         $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
         error_log("getAge : thisvenuedata = " . print_r($thisvenuedata, true));
@@ -2191,21 +2201,32 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
 
         $brandaveragedata = $this->getAggregatedAnswersForBrand($reportperiod, $from, $to, $nasid, $answers, $brandcodes, $quickie_id, $brandonly);
 
+        \Log::info("hannes reports : the venue data are: $brandaveragedata");
+
         \Log::info('---------------------------- Matt Log --------------------------------');
         \Log::info($brandaveragedata);
-      
+
         \Log::info('---------------------------- End Matt Log --------------------------------');
         // error_log("getAge : brandaveragedata = " . print_r($brandaveragedata, true));
 
+
         $thisvenue = array("seriesname" => "This Venue", "data" => $thisvenuedata);
         if($brandonly) {
+
+          \Log::info("hannes reports : is brand only");
           $brandaverage = array("seriesname" => "Brand Total", "data" => $brandaveragedata);
           $dataset = array($brandaverage);
         } else {
+
+          \Log::info("hannes reports : NOT brand only");
+
           $brandaverage = array("seriesname" => "Brand Avg", "data" => $brandaveragedata);
           $dataset = array($thisvenue, $brandaverage);
         }
         $txt = "The Brand Average are : ".json_encode($brandaverage);
+
+        \Log::info("hannes reports : brand average data: $txt");
+
         $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
         $chartData = array(
