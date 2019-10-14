@@ -306,7 +306,7 @@ class HipreportsController extends \BaseController {
             $data = $reportObj->getAge($reportperiod, $from, $to, $nasid, $brandcodes, 1);
 
             $txt = "The age returned was : ".json_encode($data);
-            $myfile = file_put_contents('/var/www/hiphub/public/hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
         } else if ($queryname == "gender") {
             $data = $reportObj->getGender($reportperiod, $from, $to, $nasid, $brandcodes, 1);
