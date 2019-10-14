@@ -1980,20 +1980,24 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
     public function getAggregatedAnswersForVenue($reportperiod, $from, $to, $nasid, $answers, $quickie_id) {
 
         $sitename = preg_replace("/_/", " ", $nasid);
-        $location = \Venue::where("sitename", "like", $sitename)->first()->location;
+        $venue = \Venue::where("sitename", "like", $sitename)->first();
 
-        $results = \DB::connection("hipreports")->table("partner")
-           ->select(DB::raw('answer, count(*) AS value'))
-           ->where('sitename', 'like', $location)
-           ->where('created_at', '>', $from)
-           ->where('created_at', '<', $to)
-           ->where('quickie_id', '=', $quickie_id)
-           ->wherein('answer', $answers)
-           ->groupby('answer')
-           ->get();
-           
-        return $this->getSortedAnswers($answers, $results);
+        if ($venue) {
+          $location = $venue->location;
 
+          $results = \DB::connection("hipreports")->table("partner")
+             ->select(DB::raw('answer, count(*) AS value'))
+             ->where('sitename', 'like', $location)
+             ->where('created_at', '>', $from)
+             ->where('created_at', '<', $to)
+             ->where('quickie_id', '=', $quickie_id)
+             ->wherein('answer', $answers)
+             ->groupby('answer')
+             ->get();
+             
+          return $this->getSortedAnswers($answers, $results);
+        }
+        
     }
 
     public function getAggregatedAnswersForBrand($reportperiod, $from, $to, $nasid, $answers, $brandcodes, $quickie_id, $brandonly = null) {
@@ -2024,36 +2028,40 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         // $numvenues = $avcount[0]["count"];
 
         $sitename = preg_replace("/_/", " ", $nasid);
-        $location = \Venue::where("sitename", "like", $sitename)->first()->location;
-        $nastype = substr($location, 0, 9);
-        
-        // error_log("lalalalalalalal activeVenueLocationsArray = " . print_r($activeVenueLocationsArray, true));
-        $results = \DB::connection("hipreports")->table("partner")
-           ->select(DB::raw('answer, count(*) AS value'))
-           ->where('created_at', '>', $from)
-           ->where('created_at', '<', $to)
-           ->where('quickie_id', '=', $quickie_id)
-           ->wherein('sitename', $activeVenueLocationsArray)
-           ->wherein('answer', $answers)
-           ->groupby('answer')
-           ->get(); 
-
-        // Calculate the averages 
-        foreach ($results as $result) {
-          if($numvenues) {
-            if($brandonly) { // Retun the total instead of the average
-              $result->value = round($result->value);
-              error_log("getAggregatedAnswersForBrand : brandonly : " . $result->value);
+        $venue = \Venue::where("sitename", "like", $sitename)->first();
+        if ($venue) {
+          $location = $venue->location;
+          $nastype = substr($location, 0, 9);
+          
+          // error_log("lalalalalalalal activeVenueLocationsArray = " . print_r($activeVenueLocationsArray, true));
+          $results = \DB::connection("hipreports")->table("partner")
+             ->select(DB::raw('answer, count(*) AS value'))
+             ->where('created_at', '>', $from)
+             ->where('created_at', '<', $to)
+             ->where('quickie_id', '=', $quickie_id)
+             ->wherein('sitename', $activeVenueLocationsArray)
+             ->wherein('answer', $answers)
+             ->groupby('answer')
+             ->get(); 
+  
+          // Calculate the averages 
+          foreach ($results as $result) {
+            if($numvenues) {
+              if($brandonly) { // Retun the total instead of the average
+                $result->value = round($result->value);
+                error_log("getAggregatedAnswersForBrand : brandonly : " . $result->value);
+              } else {
+                $result->value = round($result->value / $numvenues);
+                error_log("getAggregatedAnswersForBrand : NOT brandonly : " . $result->value);
+              }
             } else {
-              $result->value = round($result->value / $numvenues);
-              error_log("getAggregatedAnswersForBrand : NOT brandonly : " . $result->value);
+              $result->value = 0;
             }
-          } else {
-            $result->value = 0;
           }
+  
+          return $this->getSortedAnswers($answers, $results);
         }
-
-        return $this->getSortedAnswers($answers, $results);
+        
     }
 
     public function buildDateRangeReportTable($from, $to, $brandname) {
