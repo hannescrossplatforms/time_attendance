@@ -75,7 +75,14 @@ class HipjamController extends \BaseController
         $data = array();
         $data['currentMenuItem'] = "Brand Management";
         $brand = new \Brand();
-        $jambrands = $brand->getJamBrandsForUser(\Auth::user()->id, "active");
+        if (\User::isVicinity()) {
+            $jambrands = \Brand::where('parent_brand', '=', 165)
+                    ->whereNull('deleted_at')
+                    ->where('brands.hipjam', '=', 1)
+                    ->orderBy('name', 'asc')->get();
+        } else {
+            $jambrands = $brand->getJamBrandsForUser(\Auth::user()->id, "active");
+        }
 
         $data['brandsStruct'] = $jambrands;
         $brandsJason = json_encode($jambrands);
@@ -256,7 +263,28 @@ class HipjamController extends \BaseController
 
         // $venues = $venue->getVenuesForUser('hipjam', 1);
 
-        $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
+        if (\User::isVicinity()) {
+            // $venues = \Venue::join('brands', 'brands.id', '=', 'venues.brand_id')
+            //             ->select("venues.*")
+            //             ->where('brands.parent_brand', '=', 165)
+            //             ->where('venues.jam_activated', '=', 1)
+            //             ->orderBy('venues.sitename','ASC')
+            //             ->get();
+
+               $venues = \Venue::join('brands', 'brands.id', '=', 'venues.brand_id')
+               ->select("venues.*")
+               ->where(function ($query) {
+                            $query->where('brands.parent_brand', '=', 165)
+                                  ->where('venues.jam_activated', '=', 1);
+                        })->orWhere(function ($query) {
+                            $query->where('brands.id', '=', 165)
+                                  ->where('venues.jam_activated', '=', 1);
+                        })->orderBy('venues.sitename','ASC')
+                        ->get();
+        } else {
+            $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
+        }
+        
 
         foreach ($venues as $venue) {
             if ($venue->ap_active == 0) {
@@ -298,8 +326,17 @@ class HipjamController extends \BaseController
         $data = array();
         $venue = new \Venue();
         // $venues = null;
-
-        $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "inactive");
+        
+        if (\User::isVicinity()) {
+            $venues = \Venue::join('brands', 'brands.id', '=', 'venues.brand_id')
+                        ->select("venues.*")
+                        ->where('brands.parent_brand', '=', 165)
+                        ->where('venues.jam_activated', '!=', 1)
+                        ->orderBy('venues.sitename','ASC')
+                        ->get();
+        } else {
+            $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "inactive");
+        }
 
         $venuesJason = json_encode($venues);
         // error_log("getInactiveVenues jam venues = $venues");

@@ -1975,6 +1975,8 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
     public function getAggregatedAnswersForVenue($reportperiod, $from, $to, $nasid, $answers, $quickie_id) {
 
         $sitename = preg_replace("/_/", " ", $nasid);
+        \Log::info('------------------------------------- SITENAME --------------------------------------');
+        \Log::info($sitename);
         $location = \Venue::where("sitename", "like", $sitename)->first()->location;
 
         $results = \DB::connection("hipreports")->table("partner")
