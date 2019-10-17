@@ -123,7 +123,7 @@ Time spent in store (dwell) -->
               debugger;
             }
           });
-      }
+      })
 
 
     venuesJson = {{ $data['venuesJson'] }};
