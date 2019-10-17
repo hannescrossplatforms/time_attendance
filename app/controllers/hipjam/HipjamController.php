@@ -27,10 +27,11 @@ class HipjamController extends \BaseController
         $data['currentMenuItem'] = "Venue Management";
 
         $userObj = \Auth::user();
-        $userObject = $userObj->getUsersData(null, null);
+
+        // $userObject = $userObj->getUsersData(null, null);
 
 //print_r($data['user']); die();
-        $userDataString = print_r($userObject);
+        $userDataString = print_r($userObj->name);
         \Log::info("[HipjamController  showDashboard] - userObject= $userDataString");
 
         $data['live_number_of_billboards'] = 0;
