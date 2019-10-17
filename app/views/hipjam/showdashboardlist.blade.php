@@ -122,9 +122,9 @@ Time spent in store (dwell) -->
             success: function(response) {
 
 
-              $('#individuals_exposed_current').val(response.individualsExposedCurrent);
-              $('#individuals_exposed_today').val(response.individuals_exposed_today);
-              $('#uniques_today').val(response.uniques_today);
+              $('#individuals_exposed_current').html(response.individualsExposedCurrent);
+              $('#individuals_exposed_today').html(response.individuals_exposed_today);
+              $('#uniques_today').html(response.uniques_today);
 
               debugger;
             },
