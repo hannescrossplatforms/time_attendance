@@ -26,7 +26,7 @@ class HipjamController extends \BaseController
         $data = array();
         $data['currentMenuItem'] = "Venue Management";
 
-        $userObj = Auth::user();
+        $userObj = \Auth::user();
         $userObject = $userObj->getUsersData(null, null);
 
 //print_r($data['user']); die();
