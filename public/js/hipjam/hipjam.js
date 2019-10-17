@@ -6,7 +6,7 @@ $( document ).ready(function() {
     $('#loadingDiv').hide();
 
     $(document).on('input', '#heatmaphourslider', function() {
-        
+
         updateSliderChanges();
     });
 
@@ -20,22 +20,22 @@ $( document ).ready(function() {
         ctx.drawImage(img,0,0,img.width,img.height,0,0,img.width,img.height);
 
         var xx = h337.create({"element":document.getElementById("heatmapArea"),"visible":true});
-        var el =  JSON.stringify(resultdata); 
+        var el =  JSON.stringify(resultdata);
         // alert("generateHeatmap : " + el);
         var obj = eval('('+el+')');
         xx.store.setDataSet(obj);
     }
-    
+
     pathname = $('#url').val();
     venuename = $('#apivenuename').val();
     if(venuename == 'no_venue'){
-        
+
         alert("Track Venue Id has not been provided. Please configure in Track->Venue Management");
         return false;
     }
     domainname = $('#apisitename').val();
     if(domainname == 'no_venue'){
-        
+
         alert("Track Venue Id has not been provided. Please configure in Track->Venue Management");
         return false;
     }
@@ -50,12 +50,13 @@ $( document ).ready(function() {
         dataType: 'json',
         data : { 'period':'now','scanner_type':'internal','venue':venuename ,'domain':domainname },
         success: function(data) {
+            debugger;
             now_data = data;
             Data1 = data;
-            Data2 = Data1.total.total; 
+            Data2 = Data1.total.total;
             $('#customer_now').html(Data2);
             $('#new_now').html(Data1.total.new);
-            
+
         },
         error: function (error) {
             $('#customer_now').html('<span style="font-size: 35%;">Data not available</span>');
@@ -71,12 +72,12 @@ $( document ).ready(function() {
         dataType: 'json',
         data : { 'period':'today','scanner_type':'internal','venue':venuename ,'domain':domainname },
         success: function(data) {
-            Data1 = data;        
-            Data2 = Data1.total.total; 
+            Data1 = data;
+            Data2 = Data1.total.total;
             $('#customer_today').html(Data2);
             $('#new_today').html(Data1.total.new);
             $('#window_today').html(Data1.total.window_conversion + '%');
-            
+
         },
         error: function (error) {
             $('#customer_today').html('<span style="font-size: 35%;">Data not available</span>');
@@ -91,7 +92,7 @@ $( document ).ready(function() {
     //     var s_end = $('#venueto').val();
     // }else{
     //     var s_start = '';
-    //     var s_end = '';   
+    //     var s_end = '';
     // }
     // $.ajax({
 
@@ -99,9 +100,9 @@ $( document ).ready(function() {
     //     type: 'get',
     //     dataType: 'json',
     //     data : { 'period':$('#brandreportperiod').val(),'scanner_type':'internal','start':s_start,'end':s_end,'venue':venuename ,'domain':domainname },
-    //     success: function(data) { 
+    //     success: function(data) {
     //         console.log("In window conversion 10");
-    //         if(data){ 
+    //         if(data){
     //             if(!("error" in data)){
     //                 if((data[1] != null) && (data[0] != null) && (data[1].total.total != 0)){
     //                     window_conversion = ((data[0].total.total/data[1].total.total)*100).toFixed(2)+'%';
@@ -125,8 +126,8 @@ $( document ).ready(function() {
     //         }
     //         // $('#window_today').html(window_conversion);
     //         // $('#window_con').html(window_conversion_select);
-            
-            
+
+
     //     },
     //     error: function (error) {
     //         window_conversion = '<span style="font-size: 35%;">Data not available</span>';
@@ -154,13 +155,13 @@ $( document ).ready(function() {
                 var img = document.getElementById("myImg");
                 // alert("wsproximitytab img.height = " + img.height);
                 c.width=img.width;
-                
+
                 c.height=img.height;
                 ctx.drawImage(img,0,0,img.width,img.height,0,0,img.width,img.height);
                 // c.width=900;
                 // c.height=500;
                 // ctx.drawImage(img,0,0,900,500,0,0,900,500);
-                
+
                 var xx = h337.create({"element":document.getElementById("heatmapArea"),"visible":true});
                 var el =  JSON.stringify(resultdata);
                 $.removeCookie('current_heatmap_hours');
@@ -169,7 +170,7 @@ $( document ).ready(function() {
                 var obj = eval('('+el+')');
                 xx.store.setDataSet(obj);
                 $('#loadingDiv').hide();
-            }, 
+            },
             error: function(returnval) {
                 $('#loadingDiv').hide();
                 alert("Error retrieving data");
@@ -185,9 +186,9 @@ $( document ).ready(function() {
             type: 'get',
             data : { 'period':'today','scanner_type':'internal','venue':venuename ,'domain':domainname },
             success: function(resultdata) {
-                
+
                 $( "#zoneTable" ).html( resultdata );
-                
+
             }
         });
     }
@@ -204,7 +205,7 @@ $( document ).ready(function() {
         dataType: 'json',
         data : { 'period':'this_week','scanner_type':'internal','venue':venuename ,'domain':domainname},
         success: function(data) {
-            Data1 = data;            
+            Data1 = data;
             Data2 = Data1.total.total;
             $('#new_week').html(Data1.total.new);
             //for onchange function
@@ -221,7 +222,7 @@ $( document ).ready(function() {
             $('#storeTrfc').html('This Week');
 
             //----------------------- week visit  -------
-            chartData_w1 = week_data.total.trends.dates; 
+            chartData_w1 = week_data.total.trends.dates;
             jsonObj_w = [];
             $.each(chartData_w1 , function (){
                 item_w = {} ;
@@ -279,13 +280,13 @@ $( document ).ready(function() {
             apiChart.render();
 
             //-----------------------overall traffic ( new/returning ) ----------
-            chartData2 = week_data.total.trends.weekdays; 
+            chartData2 = week_data.total.trends.weekdays;
             jsonObj = [];
             jsonCat = [];
 
             jsonCat_s = {};
             jsonCat_s["category"] = [];
-            
+
             jsonDat = [];
 
             item1 = {} ;
@@ -297,7 +298,7 @@ $( document ).ready(function() {
             $.each(chartData2 , function (){
                 item = {} ;
                 item ["label"] = this.weekday;
-                
+
                 jsonCat_s["category"].push(item);
 
                 itemsnew = {};
@@ -342,9 +343,9 @@ $( document ).ready(function() {
             });
             apiChart.render();
 
-            
+
             //------------------- store traffic /hour -----------
-            chartData_t1 = week_data.total.trends.hours; 
+            chartData_t1 = week_data.total.trends.hours;
             jsonObj = [];
             $.each(chartData_t1 , function (){
                 item = {} ;
@@ -376,7 +377,7 @@ $( document ).ready(function() {
                 }
             });
             apiChart.render();
-            
+
         },
         error: function (error) {
             $('#rep_customer').html('<span style="font-size: 35%;">Data not available</span>');
@@ -395,7 +396,7 @@ $( document ).ready(function() {
         data : { 'period':'year','scanner_type':'internal' },
         success: function(data) {
             chartData1 = data;
-            chartData2 = chartData1.total.trends.months; 
+            chartData2 = chartData1.total.trends.months;
             jsonObj = [];
             $.each(chartData2 , function (){
                 item = {} ;
@@ -437,8 +438,8 @@ $( document ).ready(function() {
         dataType: 'json',
         data : { 'period':'day','scanner_type':'internal' },
         success: function(data) {
-            chartData_t = data; 
-            chartData_t1 = chartData_t.total.trends.hours; 
+            chartData_t = data;
+            chartData_t1 = chartData_t.total.trends.hours;
             jsonObj = [];
     alert("OK");
             $.each(chartData_t1 , function (){
@@ -474,7 +475,7 @@ $( document ).ready(function() {
 
 
             //----------------------- ave today visit -new/returning -------
-            chartData2 = chartData_t.total.trends.hours; 
+            chartData2 = chartData_t.total.trends.hours;
             jsonObj = [];
             jsonCat = [];
 
@@ -491,7 +492,7 @@ $( document ).ready(function() {
             $.each(chartData2 , function (){
                 item = {} ;
                 item ["label"] = this.hour;
-                
+
                 jsonCat_s["category"].push(item);
 
                 itemsnew = {};
@@ -549,8 +550,8 @@ $( document ).ready(function() {
         dataType: 'json',
         data : { 'period':'week','scanner_type':'internal' },
         success: function(data) {
-            chartData_w = data; 
-            chartData_w1 = chartData_w.total.trends.dates; 
+            chartData_w = data;
+            chartData_w1 = chartData_w.total.trends.dates;
             jsonObj_w = [];
             $.each(chartData_w1 , function (){
                 item_w = {} ;
@@ -584,13 +585,13 @@ $( document ).ready(function() {
 
 
             //----------------------- ave week visit -new/returning -------
-            chartData2 = chartData_w.total.trends.weekdays; 
+            chartData2 = chartData_w.total.trends.weekdays;
             jsonObj = [];
             jsonCat = [];
 
             jsonCat_s = {};
             jsonCat_s["category"] = [];
-            
+
             jsonDat = [];
 
             item1 = {} ;
@@ -602,7 +603,7 @@ $( document ).ready(function() {
             $.each(chartData2 , function (){
                 item = {} ;
                 item ["label"] = this.weekday;
-                
+
                 jsonCat_s["category"].push(item);
 
                 itemsnew = {};
@@ -660,13 +661,13 @@ $( document ).ready(function() {
         dataType: 'json',
         success: function(data) {*/
             /*chartData1 = {"id":"mrp0381","name":"mrp V\u0026A Waterfront","franchise":"mrp","address":null,"coordinates":null,"timezone":"Africa/Johannesburg","scanners":[{"id":"mrp_01","updated_at":"2015-12-04T14:39:28.000+02:00","location":"Entrance","type":""},{"id":"mrp_02","updated_at":"2016-07-13T13:55:02.000+02:00","location":"PoS","type":null},{"id":"mrp_03","updated_at":"2016-07-13T13:54:55.000+02:00","location":"Three","type":null},{"id":"mrp_04","updated_at":"2016-07-13T13:54:17.000+02:00","location":"Shoes","type":null},{"id":"mrp_05","updated_at":"2016-06-22T12:28:30.000+02:00","location":"Five","type":null},{"id":"mrp_06","updated_at":"2016-04-13T08:04:21.000+02:00","location":"Six","type":null}],"period":{"start":"2015-07-13T13:55:23+00:00","end":"2016-07-13T13:55:23+00:00"},"total":{"total":725622,"new":573537,"average_session":"12:55","previous_period":{"total":0,"new":0,"average_session":0,"change":{"total":725622,"new":573537,"average_session":0}},"trends":{"hours":[{"hour":9,"total":32339,"new":21307,"average_session":"45:34"},{"hour":10,"total":62037,"new":43610,"average_session":"31:16"},{"hour":11,"total":94727,"new":67205,"average_session":"30:17"},{"hour":12,"total":119428,"new":74323,"average_session":"37:46"},{"hour":13,"total":135808,"new":65645,"average_session":"54:31"},{"hour":14,"total":149974,"new":58332,"average_session":"50:52"},{"hour":15,"total":160315,"new":52646,"average_session":"55:13"},{"hour":16,"total":168566,"new":47797,"average_session":"58:26"},{"hour":17,"total":173050,"new":43368,"average_session":"55:19"},{"hour":18,"total":182790,"new":40743,"average_session":"56:06"},{"hour":19,"total":185337,"new":33913,"average_session":"58:37"},{"hour":20,"total":180227,"new":24640,"average_session":"00:47"},{"hour":21,"total":103,"new":8,"average_session":"04:07"}],"months":[{"month":"January","total":64689,"new":30978,"average_session":"11:37"},{"month":"February","total":90987,"new":68585,"average_session":"03:31"},{"month":"March","total":123972,"new":104877,"average_session":"44:15"},{"month":"April","total":88251,"new":72473,"average_session":"02:01"},{"month":"May","total":75894,"new":60674,"average_session":"02:03"},{"month":"June","total":76638,"new":60414,"average_session":"02:25"},{"month":"July","total":46034,"new":35401,"average_session":"02:31"},{"month":"October","total":92612,"new":49228,"average_session":"09:29"},{"month":"November","total":89733,"new":44995,"average_session":"09:40"},{"month":"December","total":86925,"new":45912,"average_session":"56:19"}],"weekdays":[{"weekday":"Monday","total":110748,"new":75133,"average_session":"33:41"},{"weekday":"Tuesday","total":114643,"new":76996,"average_session":"55:14"},{"weekday":"Wednesday","total":111601,"new":73871,"average_session":"55:59"},{"weekday":"Thursday","total":115897,"new":76260,"average_session":"54:15"},{"weekday":"Friday","total":124112,"new":84178,"average_session":"52:45"},{"weekday":"Saturday","total":143394,"new":98642,"average_session":"03:11"},{"weekday":"Sunday","total":130658,"new":88457,"average_session":"04:43"}]}}};
-            chartData2 = chartData1.total.trends.months; 
+            chartData2 = chartData1.total.trends.months;
             jsonObj = [];
             jsonCat = [];
 
             jsonCat_s = {};
             jsonCat_s["category"] = [];
-            
+
 
             jsonDat = [];
 
@@ -679,7 +680,7 @@ $( document ).ready(function() {
             $.each(chartData2 , function (){
                 item = {} ;
                 item ["label"] = this.month;
-                
+
                 jsonCat_s["category"].push(item);
 
                 itemsnew = {};
@@ -733,10 +734,10 @@ $( document ).ready(function() {
         dataType: 'json',
         data : { 'period':'this_month','scanner_type':'internal','venue':venuename ,'domain':domainname },
         success: function(data) {
-            
+
             month_data = data;
             // alert(month_data);
-            
+
         }
     });
 
@@ -750,9 +751,9 @@ $( document ).ready(function() {
         /*data : { 'period':'custom','scanner_type':'internal','start':'2016-06-01','end':'2016-06-30','venue':venuename },*/
         data : { 'period':'last_month','scanner_type':'internal','venue':venuename ,'domain':domainname },
         success: function(data) {
-            
+
             pre_month_data = data;
-            
+
         }
     });
 
@@ -785,9 +786,9 @@ function change_zonal_report_period(){
             type: 'get',
             data : { 'period':period,'scanner_type':'internal','venue':venuename ,'start':'','end':'' ,'domain':domainname },
             success: function(resultdata) {
-                
+
                 $( "#zoneTable" ).html( resultdata );
-                
+
             }
         });
     } else {
@@ -811,9 +812,9 @@ function custom_zonal_report_period(){
             type: 'get',
             data : { 'period':'custom','scanner_type':'internal','venue':venuename ,'start':from,'end':to ,'domain':domainname },
             success: function(resultdata) {
-                
+
                 $( "#zoneTable" ).html( resultdata );
-                
+
             }
         });
 }
@@ -834,7 +835,7 @@ document.getElementById("heatmapreportperiod").onchange = function(){
                 // generateHeatmap(resultdata); // For some reason I get an referenceerror with this
                 var c = document.getElementById("imgcanvas");
                 var ctx = c.getContext("2d");
-                
+
                 var img = document.getElementById("myImg");
                 c.width=img.width;
                 c.height=img.height;
@@ -842,7 +843,7 @@ document.getElementById("heatmapreportperiod").onchange = function(){
                 ctx.drawImage(img,0,0,img.width,img.height,0,0,img.width,img.height);
 
                 var xx = h337.create({"element":document.getElementById("heatmapArea"),"visible":true});
-                
+
                 var el =  JSON.stringify(resultdata);
                 $.removeCookie('current_heatmap_hours');
                 $.cookie("current_heatmap_hours", el);
@@ -851,7 +852,7 @@ document.getElementById("heatmapreportperiod").onchange = function(){
                 xx.store.setDataSet(obj);
 
                 $('#loadingDiv').hide();
-            }, 
+            },
             error: function(returnval) {
                 $('#loadingDiv').hide();
                 alert("Error retrieving data");
@@ -884,7 +885,7 @@ document.getElementById("heatmapreportperiod").onchange = function(){ //Commente
                 c.width=img.width;
                 c.height=img.height;
                 ctx.drawImage(img,0,0,img.width,img.height,0,0,img.width,img.height);
-                
+
                 var xx = h337.create({"element":document.getElementById("heatmapArea"),"visible":true});
                 var el =  JSON.stringify(resultdata);
                 // alert("generateHeatmap : " + el);
@@ -892,7 +893,7 @@ document.getElementById("heatmapreportperiod").onchange = function(){ //Commente
                 xx.store.setDataSet(obj);
 
                 $('#loadingDiv').hide();
-            }, 
+            },
             error: function(returnval) {
                 $('#loadingDiv').hide();
                 alert("Error retrieving data");
@@ -930,10 +931,10 @@ function custom_heatmap_report_period(){
                 $.each(resultdata.cordinates, function(arrayID,group) {
                     drawCoordinates(group.xcoord,group.ycoord);
                 });
-                
+
                 var xx = h337.create({"element":document.getElementById("heatmapArea"), "radius":25, "visible":true});
-                
-                //var el =  "{max: 100, data: [{x:800,y:100,count:100},{x:290,y:80,count:20},{x:30,y:580,count:80},{x:10,y:100,count:10},{x:40,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";  
+
+                //var el =  "{max: 100, data: [{x:800,y:100,count:100},{x:290,y:80,count:20},{x:30,y:580,count:80},{x:10,y:100,count:10},{x:40,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";
                 //var el =  "{max: 100, data: "+resultdata+"}";
                 //var el =  "{max: "+resultdata.split('&')[1]+", data: "+resultdata.split('&')[0]+"}";
                 var el = resultdata.heatmap;
@@ -941,7 +942,7 @@ function custom_heatmap_report_period(){
                 var obj = eval('('+el+')');
                 // call the heatmap's store's setDataSet method in order to set static data
                 xx.store.setDataSet(obj);
-                
+
             }
         });
 }
@@ -970,7 +971,7 @@ function updateSliderChanges(){
             // generateHeatmap(resultdata); // For some reason I get an referenceerror with this
             var c = document.getElementById("imgcanvas");
             var ctx = c.getContext("2d");
-            
+
             var img = document.getElementById("myImg");
             c.width=img.width;
             c.height=img.height;
@@ -978,22 +979,22 @@ function updateSliderChanges(){
             ctx.drawImage(img,0,0,img.width,img.height,0,0,img.width,img.height);
 
             var xx = h337.create({"element":document.getElementById("heatmapArea"),"visible":true});
-            
+
             var el =  JSON.stringify(resultdata);
             // alert("generateHeatmap : " + el);
             var obj = eval('('+el+')');
             xx.store.setDataSet(obj);
 
             $('#loadingDiv').hide();
-        }, 
+        },
         error: function(returnval) {
             $('#loadingDiv').hide();
             alert("Error retrieving data");
         }
     });
-    
+
 }
- 
+
 function change_report_period()
 {
     var time = $("#brandreportperiod").val();
@@ -1004,7 +1005,7 @@ function change_report_period()
         $('#rep_ave').html('loading...');
         $('#window_con').html('loading...');
     }
-    
+
     if(time == 'rep7day'){
         $('#rep_customer').html(week_data.total.total);
         $('#new_rep_customer').html(week_data.total.new);
@@ -1015,7 +1016,7 @@ function change_report_period()
         $('#window_con').html(week_data.total.window_conversion + '%');
 
         store_traffic('rep7day')
-        
+
         //$('#rep_max').html();
     }else if(time == 'repthismonth'){
         $('#rep_customer').html(month_data.total.total);
@@ -1040,10 +1041,10 @@ function change_report_period()
         $('#window_con').html(pre_month_data.total.window_conversion + '%');
 
         store_traffic('replastmonth')
-        //$('#rep_max').html();       
+        //$('#rep_max').html();
     }else if(time == 'daterange'){
         $('#custom').show();
-              
+
     }else if(time == ''){
         alert('Please Select');
     }else{
@@ -1058,7 +1059,7 @@ function custom_report_period(){
         alert("Enter Range");
         return false;
     }
-    
+
 
     $('#rep_customer').html('loading...');
     $('#new_rep_customer').html('loading...');
@@ -1076,7 +1077,7 @@ function custom_report_period(){
             // console.log("total : " + data.total);
             // console.log("total.total : " + data.total.total);
             // console.log("total.window_conversion : " + data.total.window_conversion);
-            
+
             $('#rep_customer').html(data.total.total);
             $('#new_rep_customer').html(data.total.new);
             $('#engaged_customers').html(data.total.engaged_customers);
@@ -1088,7 +1089,7 @@ function custom_report_period(){
             $('#storeTrfc').html('From '+from+' To '+to+' ');
             $('#storeTrfc').html('From '+from+' To '+to+' ');
             //----------------------- week visit  -------
-                chartData_w1 = data.total.trends.dates; 
+                chartData_w1 = data.total.trends.dates;
                 jsonObj_w = [];
                 $.each(chartData_w1 , function (){
                     item_w = {} ;
@@ -1146,13 +1147,13 @@ function custom_report_period(){
                 apiChart.render();
 
                 //-----------------------overall traffic ( new/returning ) ----------
-                chartData2 = data.total.trends.dates; 
+                chartData2 = data.total.trends.dates;
                 jsonObj = [];
                 jsonCat = [];
 
                 jsonCat_s = {};
                 jsonCat_s["category"] = [];
-                
+
                 jsonDat = [];
 
                 item1 = {} ;
@@ -1164,7 +1165,7 @@ function custom_report_period(){
                 $.each(chartData2 , function (){
                     item = {} ;
                     item ["label"] = this.date;
-                    
+
                     jsonCat_s["category"].push(item);
 
                     itemsnew = {};
@@ -1208,9 +1209,9 @@ function custom_report_period(){
                     }
                 });
                 apiChart.render();
-                
+
                 //------------------- store traffic /hour -----------
-                chartData_t1 = data.total.trends.hours; 
+                chartData_t1 = data.total.trends.hours;
                 jsonObj = [];
                 $.each(chartData_t1 , function (){
                     item = {} ;
@@ -1245,7 +1246,7 @@ function custom_report_period(){
 
 
 
-            
+
         }
     });
 }
@@ -1261,7 +1262,7 @@ function store_traffic(period){
         $('#storeTrfc').html('This Week');
 
             //----------------------- week visit  -------
-            chartData_w1 = week_data.total.trends.dates; 
+            chartData_w1 = week_data.total.trends.dates;
             jsonObj_w = [];
             $.each(chartData_w1 , function (){
                 item_w = {} ;
@@ -1319,13 +1320,13 @@ function store_traffic(period){
             apiChart.render();
 
             //-----------------------overall traffic ( new/returning ) ----------
-            chartData2 = week_data.total.trends.weekdays; 
+            chartData2 = week_data.total.trends.weekdays;
             jsonObj = [];
             jsonCat = [];
 
             jsonCat_s = {};
             jsonCat_s["category"] = [];
-            
+
             jsonDat = [];
 
             item1 = {} ;
@@ -1337,7 +1338,7 @@ function store_traffic(period){
             $.each(chartData2 , function (){
                 item = {} ;
                 item ["label"] = this.weekday;
-                
+
                 jsonCat_s["category"].push(item);
 
                 itemsnew = {};
@@ -1382,9 +1383,9 @@ function store_traffic(period){
             });
             apiChart.render();
 
-            
+
             //------------------- store traffic /hour -----------
-            chartData_t1 = week_data.total.trends.hours; 
+            chartData_t1 = week_data.total.trends.hours;
             jsonObj = [];
             $.each(chartData_t1 , function (){
                 item = {} ;
@@ -1425,7 +1426,7 @@ function store_traffic(period){
         $('#storeTrfc').html('This Month');
         $('#storeTrfc').html('This Month');
         //----------------------- week visit  -------
-            chartData_w1 = month_data.total.trends.dates; 
+            chartData_w1 = month_data.total.trends.dates;
             jsonObj_w = [];
             $.each(chartData_w1 , function (){
                 item_w = {} ;
@@ -1484,13 +1485,13 @@ function store_traffic(period){
             apiChart.render();
 
             //-----------------------overall traffic ( new/returning ) ----------
-            chartData2 = month_data.total.trends.dates; 
+            chartData2 = month_data.total.trends.dates;
             jsonObj = [];
             jsonCat = [];
 
             jsonCat_s = {};
             jsonCat_s["category"] = [];
-            
+
             jsonDat = [];
 
             item1 = {} ;
@@ -1502,7 +1503,7 @@ function store_traffic(period){
             $.each(chartData2 , function (){
                 item = {} ;
                 item ["label"] = this.date;
-                
+
                 jsonCat_s["category"].push(item);
 
                 itemsnew = {};
@@ -1546,9 +1547,9 @@ function store_traffic(period){
                 }
             });
             apiChart.render();
-            
+
             //------------------- store traffic /hour -----------
-            chartData_t1 = month_data.total.trends.hours; 
+            chartData_t1 = month_data.total.trends.hours;
             jsonObj = [];
             $.each(chartData_t1 , function (){
                 item = {} ;
@@ -1588,7 +1589,7 @@ function store_traffic(period){
         $('#storeTrfc').html('Last Month');
 
         //----------------------- week visit  -------
-            chartData_w1 = pre_month_data.total.trends.dates; 
+            chartData_w1 = pre_month_data.total.trends.dates;
             jsonObj_w = [];
             $.each(chartData_w1 , function (){
                 item_w = {} ;
@@ -1646,13 +1647,13 @@ function store_traffic(period){
             apiChart.render();
 
             //-----------------------overall traffic ( new/returning ) ----------
-            chartData2 = pre_month_data.total.trends.dates; 
+            chartData2 = pre_month_data.total.trends.dates;
             jsonObj = [];
             jsonCat = [];
 
             jsonCat_s = {};
             jsonCat_s["category"] = [];
-            
+
             jsonDat = [];
 
             item1 = {} ;
@@ -1664,7 +1665,7 @@ function store_traffic(period){
             $.each(chartData2 , function (){
                 item = {} ;
                 item ["label"] = this.date;
-                
+
                 jsonCat_s["category"].push(item);
 
                 itemsnew = {};
@@ -1709,9 +1710,9 @@ function store_traffic(period){
             });
             apiChart.render();
 
-            
+
             //------------------- store traffic /hour -----------
-            chartData_t1 = pre_month_data.total.trends.hours; 
+            chartData_t1 = pre_month_data.total.trends.hours;
             jsonObj = [];
             $.each(chartData_t1 , function (){
                 item = {} ;

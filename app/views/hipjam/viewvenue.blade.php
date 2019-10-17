@@ -103,7 +103,7 @@
                                 <div class="venuerow">
                                     <div class="modStat">
                                         <div class="modstattitle">
-                                            <h3>Customers In Store Nosw</h3>
+                                            <h3>Customers In Store Now</h3>
                                         </div>
                                         <div id="customer_now" class="modStatspan">loading...</div>
                                     </div>
