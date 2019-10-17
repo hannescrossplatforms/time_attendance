@@ -14,13 +14,6 @@ class HipjamController extends \BaseController
     /////////////////////// Venues /////////////////////////
     public function showDashboard($json = null)
     {
-
-        /*$data = array();
-        $data['currentMenuItem'] = "Dashboard";
-
-
-        return \View::make('hipjam.showdashboard')->with('data', $data);*/
-
         error_log("showDashboard");
 
         $data = array();
@@ -50,25 +43,10 @@ class HipjamController extends \BaseController
 
         foreach ($allVenues as $venue) {
 
-            // $brand = $venue->brand;
-
-            // \Log::info("[HipjamController  showDashboard] - venue_name is: $venue_name");
-            // \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
-
-
-            // http://tracks03.hipzone.co.za/aggregate/1376?period=now
-
-            $json = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now");
-            \Log::info("[HipjamController  showDashboard] - JSON IS: $json");
-
-            // $foundVenue = \Venue::where('track_slug', '=', $venue_name)->first();
-
-            // $brand_id = \Venue::where('track_slug', '=', $venue_name)->first()->brand_id;
-            // $venue_id = \Venue::where('track_slug', '=', $venue_name)->first()->id;
-
-
-            // $min_session = $brand->min_session_length;
-            // $max_session = $brand->max_session_length;
+            $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now");
+            $json = json_decode($jsonString);
+            $total = $json->total->total;
+            \Log::info("[HipjamController  showDashboard] - TOTAL is: $total");
         }
 
 

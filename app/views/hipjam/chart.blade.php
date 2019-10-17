@@ -38,7 +38,7 @@
               <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
-                      <div>CUSTOMERS IN STORE NOWs</div>
+                      <div>CUSTOMERS IN STORE NOW</div>
                     </div>
                 </div>
               </div>
