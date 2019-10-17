@@ -61,21 +61,21 @@ class HipjamController extends \BaseController
 
         //exposed_visits_this_month START
 
-        $totalExposedVisitsThisMonth = 0;
+        // $totalExposedVisitsThisMonth = 0;
 
-        foreach ($allVenues as $venue) {
+        // foreach ($allVenues as $venue) {
 
-            $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=this_month");
+        //     $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=this_month");
 
-            $jsonData = json_decode($jsonString);
-            $total = $jsonData->total->total;
-            $totalExposedVisitsThisMonth += $total;
+        //     $jsonData = json_decode($jsonString);
+        //     $total = $jsonData->total->total;
+        //     $totalExposedVisitsThisMonth += $total;
 
-        }
+        // }
 
-        \Log::info("[HipjamController  showDashboard] - exposed_visits_this_month is:  $totalExposedVisitsThisMonth");
+        // \Log::info("[HipjamController  showDashboard] - exposed_visits_this_month is:  $totalExposedVisitsThisMonth");
 
-        $data['exposed_visits_this_month'] = $totalExposedVisitsThisMonth;
+        $data['exposed_visits_this_month'] = 0;
 
         //exposed_visits_this_monty END
 
