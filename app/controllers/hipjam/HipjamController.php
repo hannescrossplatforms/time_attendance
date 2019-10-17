@@ -57,7 +57,10 @@ class HipjamController extends \BaseController
             $brand_id = $venue->brand_id;
             $venue_id = $venue->id;
 
+            $brand = $venue->brand;
 
+            $min_session = $brand->min_session_length;
+            $max_session = $brand->max_session_length;
         }
 
 
