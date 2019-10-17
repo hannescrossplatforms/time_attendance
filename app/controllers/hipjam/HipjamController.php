@@ -45,6 +45,39 @@ class HipjamController extends \BaseController
         \Log::info("[HipjamController  showDashboard] - live_number_of_retail_venues is: $liveNumberOfRetailVenues");
 
 
+        ///////
+        $allVenues = \Venue::whereraw("track_type = 'billboard' AND brand_id IN ($brandIdsString)")->get();
+
+        foreach ($allVenues as $venue) {
+
+            $period = 'now'
+            $scanner_type = 'internal'
+            $venue = $venue->sitename;
+            $domain = "tracks03.hipzone.co.za"
+            $brand_id = $venue->brand_id;
+            $venue_id = $venue->id;
+
+
+        }
+
+
+
+
+        // $brand_id = \Venue::where('track_slug', '=', $venue)->first()->brand_id;
+        // $venue_id = \Venue::where('track_slug', '=', $venue)->first()->id;
+
+        // $min_session = \Brand::find($brand_id)->min_session_length;
+        // $max_session = \Brand::find($brand_id)->max_session_length;
+
+        // $json_url = "http://" . $domain . "/aggregate/" . $venue_id . "?period=" . $period . "&max_session=" . $max_session . "&min_session=" . $min_session;
+        // error_log("chartJsondata : json_url = $json_url");
+        // $json = file_get_contents($json_url);
+
+        // print_r($json);
+
+
+
+
         $data['exposed_visits_today'] = 0;
         $data['exposed_visits_this_month'] = 0;
         $data['time_spent_in_store'] = 0;
