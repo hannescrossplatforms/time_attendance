@@ -113,6 +113,21 @@ Time spent in store (dwell) -->
     // });
 
 
+      $(document).ready(function(){
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            contentType: "application/json",
+            url: "{{ url('hipjam_load_customer_stats_for_dash'); }}",
+            success: function(responsive) {
+              debugger;
+            }, error: function(){
+              debugger;
+            }
+          });
+      }
+
+
     venuesJson = {{ $data['venuesJson'] }};
 
       $(function() {
