@@ -60,6 +60,7 @@ class HipjamController extends \BaseController
             \Log::info("[HipjamController  showDashboard] - venue_name is: $venue_name");
             \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
 
+            $foundVenue = \Venue::where('track_slug', '=', $venue_name)->first();
             $brand_id = \Venue::where('track_slug', '=', $venue_name)->first()->brand_id;
             $venue_id = \Venue::where('track_slug', '=', $venue_name)->first()->id;
 
