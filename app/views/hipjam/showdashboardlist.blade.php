@@ -121,8 +121,6 @@ Time spent in store (dwell) -->
             url: "{{ url('hipjam_load_customer_stats_for_dash'); }}",
             success: function(responsive) {
               debugger;
-            }, error: function(){
-              debugger;
             }
           });
       }
