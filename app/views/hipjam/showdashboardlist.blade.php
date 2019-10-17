@@ -48,7 +48,7 @@
                   <div class="d-flex align-items-center text-size-3">
                     <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                     <div class="text-monospace">
-                      <span id="individuals_exposed_current" class="text-size-1" style="font-size: 36px;">Loading...</span>
+                      <span id="individuals_exposed_current" style="font-size: 36px;">Loading...</span>
                     </div>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                 <div class="d-flex align-items-center text-size-3">
                   <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                   <div class="text-monospace">
-                    <span id="individuals_exposed_today" class="text-size-1" style="font-size: 36px;">Loading...</span>
+                    <span id="individuals_exposed_today" style="font-size: 36px;">Loading...</span>
                   </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@
                   <div class="d-flex align-items-center text-size-3">
                     <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                     <div class="text-monospace">
-                      <span id="uniques_today" class="text-size-1" style="font-size: 36px;">Loading...</span>
+                      <span id="uniques_today">Loading...</span>
                     </div>
                   </div>
                 </div>
@@ -126,16 +126,10 @@ Time spent in store (dwell) -->
               $('#individuals_exposed_today').html(response.individuals_exposed_today);
               $('#uniques_today').html(response.uniques_today);
 
-              $('#individuals_exposed_current').removeClass( "text-size-1" );
-              $('#individuals_exposed_today').removeClass( "text-size-1" );
-              $('#uniques_today').removeClass( "text-size-1" );
+              $('#individuals_exposed_current').addClass( "font36" );
+              $('#individuals_exposed_today').addClass( "font36" );
+              $('#uniques_today').addClass( "font36" );
 
-              $('#individuals_exposed_current').addClass( "text-size-2" );
-              $('#individuals_exposed_today').addClass( "text-size-2" );
-              $('#uniques_today').addClass( "text-size-2" );
-
-
-              debugger;
             },
             error: function(error){
           debugger;
@@ -277,6 +271,10 @@ Time spent in store (dwell) -->
           height: 182px !important;
         }
         .text-tracked{height: 45px;}
+      }
+
+      .font36{
+        font-size: 36px;
       }
     </style>
 
