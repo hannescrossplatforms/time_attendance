@@ -56,9 +56,9 @@ class HipjamController extends \BaseController
             $scanner_type = 'internal';
             $venue_name = $venue->sitename;
             $domain = "tracks03.hipzone.co.za";
-            $brand_id = $brand->id;
-            $venue_id = $venue->id;
 
+            $brand_id = \Venue::where('track_slug', '=', $venue_name)->first()->brand_id;
+            $venue_id = \Venue::where('track_slug', '=', $venue_name)->first()->id;
 
 
             $min_session = $brand->min_session_length;
