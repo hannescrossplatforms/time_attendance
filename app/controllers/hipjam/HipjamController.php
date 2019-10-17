@@ -50,10 +50,10 @@ class HipjamController extends \BaseController
 
         foreach ($allVenues as $venue) {
 
-            $period = 'now'
-            $scanner_type = 'internal'
+            $period = 'now';
+            $scanner_type = 'internal';
             $venue = $venue->sitename;
-            $domain = "tracks03.hipzone.co.za"
+            $domain = "tracks03.hipzone.co.za";
             $brand_id = $venue->brand_id;
             $venue_id = $venue->id;
 
