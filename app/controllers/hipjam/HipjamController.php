@@ -47,7 +47,7 @@ class HipjamController extends \BaseController
 
             $jsonData = json_decode($jsonString);
             $total = $jsonData->total->total;
-            \Log::info("[HipjamController  showDashboard] - TOTAL is: $total");
+            \Log::info("[HipjamController  showDashboard] - TOTAL is:  $total");
 
         }
 
