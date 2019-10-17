@@ -53,7 +53,7 @@ class HipjamController extends \BaseController
 
         $data['live_number_of_billboards'] = $liveNumberOfBillboardsQuery;
 
-        \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsQuery->numberOfRecords");
+        // \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsQuery->numberOfRecords");
 
 
 
