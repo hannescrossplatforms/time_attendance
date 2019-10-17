@@ -114,6 +114,7 @@ Time spent in store (dwell) -->
 
 
       $(document).ready(function(){
+        debugger;
         $.ajax({
             type: "GET",
             dataType: 'json',
