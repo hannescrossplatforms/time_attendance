@@ -56,7 +56,7 @@
               <!-- Unexposed visits month (without being exposed to billboard) -->
               <div class="col-lg-2 text-center dash-widget">
                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
-                <div class="text-uppercase text-tracked text-muted mb-2">Unexposed Visits This Month</div>
+                <div class="text-uppercase text-tracked text-muted mb-2">Individuals exposed today</div>
                 <div class="d-flex align-items-center text-size-3">
                   <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                   <div class="text-monospace">
@@ -68,7 +68,7 @@
               <!-- Time spent in store (dwell) -->
             <div class="col-lg-2 text-center dash-widget">
                  <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
-                  <div class="text-uppercase text-tracked text-muted mb-2">Time spent in store</div>
+                  <div class="text-uppercase text-tracked text-muted mb-2">Uniqueness today</div>
                   <div class="d-flex align-items-center text-size-3">
                     <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                     <div class="text-monospace">
