@@ -20,7 +20,7 @@
             <!-- Exposed visits today global view (Exposed to billboard) -->
               <div class="col-lg-2 text-center dash-widget">
                  <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
-                  <div class="text-uppercase text-tracked text-muted mb-2">Exposed Visits Today</div>
+                  <div class="text-uppercase text-tracked text-muted mb-2">Live number of billboards</div>
                   <div class="d-flex align-items-center text-size-3">
                     <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                     <div class="text-monospace">
@@ -79,9 +79,9 @@
               </div>
 
             </div>
-            
 
-<!-- 
+
+<!--
             Exposed visits today global view (Exposed to billboard)
 Exposed visits month (Exposed to billboard)
 Unexposed visits today (without being exposed to billboard)
@@ -170,7 +170,7 @@ Time spent in store (dwell) -->
 
 
             /*editbutton = '<a href="{{ url('hipwifi_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n';*/
-            if(value["apisitename"] != 'no_venue'){             
+            if(value["apisitename"] != 'no_venue'){
               viewbutton = '<a href="{{ url('hipjam_viewvenue'); }}/' + value["id"]+'/'+value["apisitename"] + '" class="btn btn-default btn-sm">view</a>\n';
             } else {
               viewbutton = '<a href="javascript:void(0);" onclick="alert_message()" class="btn btn-default btn-sm">view</a>\n';

@@ -25,6 +25,23 @@ class HipjamController extends \BaseController
 
         $data = array();
         $data['currentMenuItem'] = "Venue Management";
+
+
+        $userObject = $userObj->getUsersData(null, null);
+
+//print_r($data['user']); die();
+        $userDataString = print_r($userObject)l;
+        \Log::info("[HipjamController  showDashboard] - userObject= $userDataString");
+
+        $data['live_number_of_billboards'] = 0;
+        $data['live_number_of_retail_venues'] = 0;
+        $data['exposed_visits_today'] = 0;
+        $data['exposed_visits_this_month'] = 0;
+        $data['time_spent_in_store'] = 0;
+
+
+
+
         // $venues = \Venue::all();
         $venue = new \Venue();
         // $venues = $venue->getVenuesForUser('hipjam', 1);
@@ -284,7 +301,7 @@ class HipjamController extends \BaseController
         } else {
             $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
         }
-        
+
 
         foreach ($venues as $venue) {
             if ($venue->ap_active == 0) {
@@ -326,7 +343,7 @@ class HipjamController extends \BaseController
         $data = array();
         $venue = new \Venue();
         // $venues = null;
-        
+
         if (\User::isVicinity()) {
             $venues = \Venue::join('brands', 'brands.id', '=', 'venues.brand_id')
                         ->select("venues.*")
@@ -425,7 +442,7 @@ class HipjamController extends \BaseController
         } else {
             $data['sensor_name'] = $sanitized_sitename.$sensors->count();
         }
-        
+
         return \View::make('hipjam.vicinityvenue')->with('data', $data);
     }
 
@@ -879,7 +896,7 @@ class HipjamController extends \BaseController
     }
 
 
-    //update the track server name and id 
+    //update the track server name and id
     public function editVenueServer()
     {
         error_log("editVenueServer 10");
@@ -894,7 +911,7 @@ class HipjamController extends \BaseController
         $venue->timezone = $objData->timezone;
         $result = $venue->save();
 
-        // Update the venues table on the server 
+        // Update the venues table on the server
         $this->saveVenueInTrackDb($venue);
 
         print_r($result); // For some reason the success condition in the javascript will only fir if I do this. Not quite sure why.
@@ -949,10 +966,10 @@ class HipjamController extends \BaseController
 
         // Build record. Also need to add:
         // | service_version | string
-        // | type            | string 
-        // | meraki          | integer   
-        // | meraki_secret   | string 
-        // | power_offset    | integer 
+        // | type            | string
+        // | meraki          | integer
+        // | meraki_secret   | string
+        // | power_offset    | integer
         $record = array(
             "id" => $scannerObj->id,
             "venue_id" => $scannerObj->venue_id,
@@ -1034,9 +1051,9 @@ class HipjamController extends \BaseController
         ftp_chdir($connect, "/etc/ppp/");
         $path = '/home/mikrotik/deployment/templates/sensors/updatechapsecret';  //create an empty file
         $path2 = '/home/mikrotik/deployment/templates/sensors/updatechapsecret2';
-        $updatechapsecret = fopen($path, 'w');                                                     // open the empty file and assign it to an handler 
+        $updatechapsecret = fopen($path, 'w');                                                     // open the empty file and assign it to an handler
         ftp_fget($connect, $updatechapsecret, 'chap-secrets', FTP_BINARY);             // get the chap-secret file from the vpn server and put in the empty path created
-        $file = file_get_contents($path);                                                                  // get the content of the file which now contains the server chap-secret entry        
+        $file = file_get_contents($path);                                                                  // get the content of the file which now contains the server chap-secret entry
         $update = str_replace($oldscannername, $newscannername, $file);              // replace the old scanner name in the entry with the new scanner name
         $updatechapsecret2 = fopen($path2, 'w');
         fwrite($updatechapsecret2, $update);                                                          // now copy the modify entry into the initially created file and overwrite it
@@ -1061,7 +1078,7 @@ class HipjamController extends \BaseController
         $tempbatman = "/home/mikrotik/deployment/templates/sensors/" . $objReport->mac . "tempbatman";
 
         if ($update == true) {
-            //dd($oldmac); 
+            //dd($oldmac);
             $filepathyml = "sensors/" . $oldmac . ".yml";
             $filepathvpn = "sensors/" . $oldmac . "vpn";
             $delete = ftp_delete($connect, $filepathyml);
@@ -1091,7 +1108,7 @@ class HipjamController extends \BaseController
         ftp_fput($connect, $dest, $createdconfigyml, FTP_BINARY);
         ftp_fput($connect, $destbatman, $createdbatmanvpn, FTP_BINARY);
 
-    
+
 
         ftp_close($connect);
         unlink($tempconfigyml);
@@ -1131,7 +1148,7 @@ class HipjamController extends \BaseController
         // catch (exception $e) {
         //     //code to handle the exception
         // }
-       
+
         $chapsecentry = file_get_contents('/home/mikrotik/deployment/templates/sensors/chapsecentry');
         $first = str_replace("scannername", $scannerObj->name, $chapsecentry);
         $second = str_replace("vpnip", $scannerObj->vpnip->ip_address, $first);
@@ -1237,7 +1254,7 @@ class HipjamController extends \BaseController
                           </td>
 
                           <td width="17%">
-                          <a onclick="updateServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a> 
+                          <a onclick="updateServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a>
                           </td></tr> ';
         }
         $data = array('row' => $rows);
@@ -1246,7 +1263,7 @@ class HipjamController extends \BaseController
         $command = 'ssh  -v -i /var/www/.ssh/id_rsa root@vpn.hipzone.co.za -p 1759 "create_keys ' . $objReport->name . '" 2>&1';
         // $command = 'pwd';
         $output = shell_exec($command);
-    
+
         // shell_exec($command);
 
         print_r(json_encode($data));
@@ -1342,7 +1359,7 @@ class HipjamController extends \BaseController
                             <input id="track_max_power' . $value->id . '" class="form-control no-radius" type="text" required autocomplete="off" placeholder="Max Power" value="' . $value->max_power . '">
                           </td>
                           <td width="17%">
-                          <a onclick="updateServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a> 
+                          <a onclick="updateServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm">Update</a><a href="javascript:void(0);" onclick="removeServerRow(' . $value->id . ');" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a>
                           </td></tr> ';
             }
         }
@@ -1637,13 +1654,13 @@ class HipjamController extends \BaseController
             }
         }
 
-        // create array 
+        // create array
         $returnArray = array("max" => $max, "data" => $mapData);
         $retrnJson = json_encode($returnArray);
         $retrnJson = str_replace('"', '', $retrnJson);
         error_log("heatmapJsondata : retrnJson = $retrnJson");
 
-        // $retrn =   "{max: 100, data: [{x:300,y:100,count:1000},{x:290,y:400,count:20},{x:30,y:2000,count:80},{x:10,y:100,count:10},{x:200,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";  
+        // $retrn =   "{max: 100, data: [{x:300,y:100,count:1000},{x:290,y:400,count:20},{x:30,y:2000,count:80},{x:10,y:100,count:10},{x:200,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";
 
         return \Response::json($returnArray);
         // print_r($retrn);  // die();
@@ -2203,13 +2220,13 @@ class HipjamController extends \BaseController
             array_push($mapData, $scannerMapRecord);
         }
 
-        // create array 
+        // create array
         $returnArray = array("max" => $max, "data" => $mapData);
         $retrnJson = json_encode($returnArray);
         $retrnJson = str_replace('"', '', $retrnJson);
         error_log("heatmapJsondata : retrnJson = $retrnJson");
 
-        // $retrn =   "{max: 100, data: [{x:300,y:100,count:1000},{x:290,y:400,count:20},{x:30,y:2000,count:80},{x:10,y:100,count:10},{x:200,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";  
+        // $retrn =   "{max: 100, data: [{x:300,y:100,count:1000},{x:290,y:400,count:20},{x:30,y:2000,count:80},{x:10,y:100,count:10},{x:200,y:70,count:60},{x:90,y:10,count:40},{x:50,y:100,count:70},{x:20,y:70,count:30},{x:60,y:50,count:15},{x:90,y:40,count:20}]}";
 
         return \Response::json($returnArray);
         // print_r($retrn);  // die();
