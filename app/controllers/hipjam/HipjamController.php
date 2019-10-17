@@ -43,7 +43,8 @@ class HipjamController extends \BaseController
 
         foreach ($allVenues as $venue) {
 
-            $json = json_decode(file_get_contents('http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now'));
+            $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now");
+            $json = json_decode($jsonString);
             $total = $json->total->total;
             \Log::info("[HipjamController  showDashboard] - TOTAL is: $total");
         }
