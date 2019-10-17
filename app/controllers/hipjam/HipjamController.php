@@ -50,23 +50,25 @@ class HipjamController extends \BaseController
 
         foreach ($allVenues as $venue) {
 
-            $brand = $venue->brand;
+            // $brand = $venue->brand;
 
-            $period = 'now';
-            $scanner_type = 'internal';
-            $venue_name = $venue->sitename;
-            $domain = "tracks03.hipzone.co.za";
-
-            \Log::info("[HipjamController  showDashboard] - venue_name is: $venue_name");
-            \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
-
-            $foundVenue = \Venue::where('track_slug', '=', $venue_name)->first();
-            $brand_id = \Venue::where('track_slug', '=', $venue_name)->first()->brand_id;
-            $venue_id = \Venue::where('track_slug', '=', $venue_name)->first()->id;
+            // \Log::info("[HipjamController  showDashboard] - venue_name is: $venue_name");
+            // \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
 
 
-            $min_session = $brand->min_session_length;
-            $max_session = $brand->max_session_length;
+            // http://tracks03.hipzone.co.za/aggregate/1376?period=now
+
+            $json = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now");
+            \Log::info("[HipjamController  showDashboard] - JSON IS: $json");
+
+            // $foundVenue = \Venue::where('track_slug', '=', $venue_name)->first();
+
+            // $brand_id = \Venue::where('track_slug', '=', $venue_name)->first()->brand_id;
+            // $venue_id = \Venue::where('track_slug', '=', $venue_name)->first()->id;
+
+
+            // $min_session = $brand->min_session_length;
+            // $max_session = $brand->max_session_length;
         }
 
 
