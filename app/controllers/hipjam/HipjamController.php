@@ -34,9 +34,17 @@ class HipjamController extends \BaseController
         foreach ($brands as $brand) {
             array_push($brandIds, $brand->id);
         }
-        // SELECT count(*) as count FROM venues where track_type = 'billboard' AND brand_id IN (165, 182)
-        // $liveNumberOfBillboardsQuery = \Venue::whereRaw("LOWER(location) LIKE '%".strtolower($nasid)."%'")->get()->first();
-        $liveNumberOfBillboardsQuery = \Venue::whereraw("count(*) as count FROM venues where track_type = 'billboard' AND brand_id IN (165, 182)")->first()->get();
+
+
+
+        // $query = Picknpay::orderBy('created_at', 'ASC')
+        // ->select(DB::raw("COUNT(*) AS value"))
+        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
+        // ->whereraw("category_id = '$categoryId'");
+
+        $liveNumberOfBillboardsQuery = Venue::select(DB::raw("count(*) as count"))->get();
+
+        // $liveNumberOfBillboardsQuery = \Venue::whereraw("SELECT count(*) as count FROM venues where track_type = 'billboard' AND brand_id IN (165, 182)")->first()->get();
 
         $data['live_number_of_billboards'] = $liveNumberOfBillboardsQuery->count;
 
