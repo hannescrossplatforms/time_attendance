@@ -45,8 +45,8 @@ class HipjamController extends \BaseController
 
             $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now");
 
-            $json = var_dump(json_decode($jsonString));
-            $total = $json->total->total;
+            $jsonData = json_decode($jsonString);
+            $total = $jsonData->total->total;
             \Log::info("[HipjamController  showDashboard] - TOTAL is: $total");
 
         }
