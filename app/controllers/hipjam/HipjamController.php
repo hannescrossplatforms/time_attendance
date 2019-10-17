@@ -34,7 +34,7 @@ class HipjamController extends \BaseController
         foreach ($brands as $brand) {
             array_push($brandIds, $brand->id);
         }
-        $idString = implode("\n",$brandIds);
+        $idString = implode(":D",$brandIds);
 
         \Log::info("[HipjamController  showDashboard] - user brand count is: $idString");
 
