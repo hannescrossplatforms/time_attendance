@@ -57,6 +57,9 @@ class HipjamController extends \BaseController
             $venue_name = $venue->sitename;
             $domain = "tracks03.hipzone.co.za";
 
+            \Log::info("[HipjamController  showDashboard] - venue_name is: $venue_name");
+            \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
+
             $brand_id = \Venue::where('track_slug', '=', $venue_name)->first()->brand_id;
             $venue_id = \Venue::where('track_slug', '=', $venue_name)->first()->id;
 
