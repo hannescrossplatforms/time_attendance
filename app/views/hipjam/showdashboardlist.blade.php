@@ -48,7 +48,7 @@
                   <div class="d-flex align-items-center text-size-3">
                     <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                     <div class="text-monospace">
-                      <span class="text-size-2" style="font-size: 36px;">Loading...</span>
+                      <span id="individuals_exposed_current" class="text-size-2" style="font-size: 36px;">Loading...</span>
                     </div>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                 <div class="d-flex align-items-center text-size-3">
                   <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                   <div class="text-monospace">
-                    <span class="text-size-2" style="font-size: 36px;">Loading...</span>
+                    <span id="individuals_exposed_today" class="text-size-2" style="font-size: 36px;">Loading...</span>
                   </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@
                   <div class="d-flex align-items-center text-size-3">
                     <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                     <div class="text-monospace">
-                      <span class="text-size-2" style="font-size: 36px;">Loading...</span>
+                      <span id="uniques_today" class="text-size-2" style="font-size: 36px;">Loading...</span>
                     </div>
                   </div>
                 </div>
@@ -114,13 +114,18 @@ Time spent in store (dwell) -->
 
 
       $(document).ready(function(){
-        debugger;
         $.ajax({
             type: "GET",
             dataType: 'json',
             contentType: "application/json",
             url: "{{ url('hipjam_load_customer_stats_for_dash'); }}",
-            success: function(responsive) {
+            success: function(response) {
+
+
+              $('#individuals_exposed_current').val(response.individualsExposedCurrent);
+              $('#individuals_exposed_today').val(response.individuals_exposed_today);
+              $('#uniques_today').val(response.uniques_today);
+
               debugger;
             },
             error: function(error){
