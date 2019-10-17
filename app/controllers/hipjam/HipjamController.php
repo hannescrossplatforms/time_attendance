@@ -27,15 +27,8 @@ class HipjamController extends \BaseController
         $data['currentMenuItem'] = "Venue Management";
 
         $userObj = \Auth::user();
-
-        // $user = Auth::user();
-        // if ($user->id != 1) {
-
-        // $userObject = $userObj->getUsersData(null, null);
-
-//print_r($data['user']); die();
-        // $userDataString = print_r($userObj->fullname);
-        \Log::info("[HipjamController  showDashboard] - user id is: $userObj->id");
+        $brandCount = count($userObj->brands);
+        \Log::info("[HipjamController  showDashboard] - user brand count is: $brandCount");
 
         $data['live_number_of_billboards'] = 0;
         $data['live_number_of_retail_venues'] = 0;
