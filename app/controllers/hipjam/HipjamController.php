@@ -26,8 +26,14 @@ class HipjamController extends \BaseController
         $data = array();
         $data['currentMenuItem'] = "Venue Management";
 
+        $brandIds = array();
+
         $userObj = \Auth::user();
-        $brandIds = $userObj->brands->pluck('id');
+        $brands = $userObj->brands;
+
+        foreach ($brands as $brand) {
+            array_push($brandIds, $brand->id);
+        }
         $idString = implode("\n",$brandIds);
 
         \Log::info("[HipjamController  showDashboard] - user brand count is: $idString");
