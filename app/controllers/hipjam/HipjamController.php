@@ -40,10 +40,11 @@ class HipjamController extends \BaseController
         $data['live_number_of_billboards'] = $liveNumberOfBillboardsCount;
         \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
 
+        $liveNumberOfRetailVenues = count(\Venue::whereraw("track_type = 'venue' OR track_type IS NULL AND brand_id IN ($brandIdsString)")->get());
+        $data['live_number_of_retail_venues'] = $liveNumberOfBillboardsCount;
+        \Log::info("[HipjamController  showDashboard] - live_number_of_retail_venues is: $liveNumberOfRetailVenues");
 
 
-
-        $data['live_number_of_retail_venues'] = 0;
         $data['exposed_visits_today'] = 0;
         $data['exposed_visits_this_month'] = 0;
         $data['time_spent_in_store'] = 0;
