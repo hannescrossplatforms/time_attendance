@@ -150,6 +150,11 @@ class HipjamController extends \BaseController
 
         //UNIQUENESS TODAY END
 
+        $json = json_encode($data);
+
+        print_r($json);
+
+
     }
 
 
