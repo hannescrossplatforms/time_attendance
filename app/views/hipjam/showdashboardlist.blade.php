@@ -24,7 +24,7 @@
                   <div class="d-flex align-items-center text-size-3">
                     <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                     <div class="text-monospace">
-                      <span class="text-size-2" style="font-size: 36px;">43</span>
+                      <span class="text-size-2" style="font-size: 36px;">{{$data["live_number_of_billboards"]}}</span>
                     </div>
                   </div>
                 </div>

@@ -36,29 +36,13 @@ class HipjamController extends \BaseController
         }
 
         $brandIdsString = implode(",", $brandIds);
-
-
-
-        // $query = Picknpay::orderBy('created_at', 'ASC')
-        // ->select(DB::raw("COUNT(*) AS value"))
-        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
-        // ->whereraw("category_id = '$categoryId'");
-
-        // $liveNumberOfBillboardsQuery = \Venue::select(\Venue::raw("count(*) as count"))->get();
-
-
-        // $liveNumberOfBillboardsQuery = \Venue::select("SELECT * as count FROM venues where track_type = 'billboard' AND brand_id IN $brandIdsString")->get();
-
         $liveNumberOfBillboardsCount = count(\Venue::whereraw("track_type = 'billboard' AND brand_id IN ($brandIdsString)")->get());
-
         $data['live_number_of_billboards'] = $liveNumberOfBillboardsCount;
-
         \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
 
 
 
 
-        $data['live_number_of_billboards'] = 0;
         $data['live_number_of_retail_venues'] = 0;
         $data['exposed_visits_today'] = 0;
         $data['exposed_visits_this_month'] = 0;
