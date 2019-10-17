@@ -35,6 +35,8 @@ class HipjamController extends \BaseController
             array_push($brandIds, $brand->id);
         }
 
+        $brandIdsString = serialize($brandIds);
+
 
 
         // $query = Picknpay::orderBy('created_at', 'ASC')
@@ -45,7 +47,7 @@ class HipjamController extends \BaseController
         // $liveNumberOfBillboardsQuery = \Venue::select(\Venue::raw("count(*) as count"))->get();
 
         // $liveNumberOfBillboardsQuery = \Venue::whereraw("SELECT count(*) as count FROM venues where track_type = 'billboard' AND brand_id IN (165, 182)")->first()->get();
-        $liveNumberOfBillboardsQuery = \Venue::select("SELECT count(*) as count FROM venues where track_type = 'billboard' AND brand_id IN $brandIds");
+        $liveNumberOfBillboardsQuery = \Venue::select("SELECT count(*) as count FROM venues where track_type = 'billboard' AND brand_id IN $brandIdsString");
 
         // $liveNumberOfBillboardsQuery = \Venue::whereraw("SELECT * as count FROM venues")->count()->get();
 
