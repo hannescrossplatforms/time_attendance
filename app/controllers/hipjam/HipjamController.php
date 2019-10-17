@@ -49,11 +49,11 @@ class HipjamController extends \BaseController
 
         // $liveNumberOfBillboardsQuery = \Venue::select("SELECT * as count FROM venues where track_type = 'billboard' AND brand_id IN $brandIdsString")->get();
 
-        $liveNumberOfBillboardsQuery = \Venue::whereraw("track_type = 'billboard'")->get();
+        $liveNumberOfBillboardsCount = count(\Venue::whereraw("track_type = 'billboard' AND brand_id IN $brandIdsString")->get());
 
-        $data['live_number_of_billboards'] = $liveNumberOfBillboardsQuery;
+        $data['live_number_of_billboards'] = $liveNumberOfBillboardsCount;
 
-        \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsQuery->count");
+        \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
 
 
 
