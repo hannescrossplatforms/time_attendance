@@ -132,28 +132,50 @@ class HipjamController extends \BaseController
 
         //UNIQUENESS TODAY START
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //UNIQUENESS TODAY END
 
         $json = json_encode($data);
 
         print_r($json);
+
+
+    }
+
+    public function graphData(){
+
+
+
+            error_log("gethighest5Sessions brandcode : $brandcode ---- reportperiod : $reportperiod");
+            $statistics = new \Statistics();
+            $activeVenues = $statistics->getActiveVenues();
+
+            $data = DB::table($reportperiod)
+                  ->selectRaw('sitename as label, currentsessions as value')
+                  ->where('brandcode', 'like', $brandcode)
+                  ->wherein('nasid', $activeVenues)
+                  ->orderby("currentsessions", "desc")
+                  ->limit(5)
+                  ->get();
+
+            error_log("gethighest5Sessions : data = " . print_r($data, true));
+
+            $data = $this->stripOutBrandFromGraphLabels($data);
+
+            $chartData = array(
+              'chart' => array(
+                'subCaption' => "Highest 5 Session Count",
+                'paletteColors' => "#70ad47",
+                'showYAxisValues' => "0",
+                'rotatelabels' => "1",
+                'slantlabels' => "1",
+                'theme' => "zune"
+              ),
+              'data' => $data
+            );
+
+            return $chartData;
+
+
 
 
     }

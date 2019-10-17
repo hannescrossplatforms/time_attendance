@@ -80,24 +80,21 @@
             </div>
 
             <div class="row">
-            <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
-              <div class="graphcol" style="width: 20%; margin: 20px; float: left; border: 2px solid !important;">
-                <h1>Best Performance</h1>
-                <div class="graphcell">
-                  <div id="chartcol1row1"></div>
-                </div>
-                <div class="graphcell">
-                  <div id="chartcol1row2"></div>
-                </div>
-                <div class="graphcell">
-                  <div id="chartcol1row3"></div>
+
+              <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
+                <div class="graphcol" style="width: 20%; margin: 20px; float: left; border: 2px solid !important;">
+                  <h1>Best Performance</h1>
+                  <div class="graphcell">
+                    <div id="chartcol1row1"></div>
+                  </div>
+                  <div class="graphcell">
+                    <div id="chartcol1row2"></div>
+                  </div>
+                  <div class="graphcell">
+                    <div id="chartcol1row3"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-
-
-
-
 
             </div>
 
@@ -153,9 +150,38 @@ Time spent in store (dwell) -->
 
             },
             error: function(error){
-          debugger;
+
             }
           });
+
+
+          $.ajax({
+            type: "GET`",
+            dataType: 'json',
+            contentType: "application/json",
+            data: {
+              'brand_id': brand_id,
+              'reportperiod': reportperiod,
+              'from': from,
+              'to': to
+            },
+            url: branddataurl,
+            success: function(brandjson) {
+              console.log(brandjson);
+              showBrandPerformanceGraphs(brandjson);
+            }
+          });`
+
+
+
+
+
+
+
+
+
+
+
       })
 
 
