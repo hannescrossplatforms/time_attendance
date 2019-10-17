@@ -43,20 +43,9 @@ class HipjamController extends \BaseController
 
         foreach ($allVenues as $venue) {
 
-            $url = "http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now"
+            // $url = "http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now"
 
-            // $json = json_decode(get_data("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now"));
-
-            $ch = curl_init();
-            $timeout = 5;
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-            $data = curl_exec($ch);
-            $json = json_decode($data);
-            curl_close($ch);
-
-
+            $json = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now");
             // $json = json_decode($jsonString);
             $total = $json->total->total;
             \Log::info("[HipjamController  showDashboard] - TOTAL is: $total");
@@ -108,17 +97,6 @@ class HipjamController extends \BaseController
 
     // BEGIN BRAND /////////////////////////////////////////////////////////////
 
-
-    // function get_data($url) {
-    //     $ch = curl_init();
-    //     $timeout = 5;
-    //     curl_setopt($ch, CURLOPT_URL, $url);
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    //     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-    //     $data = curl_exec($ch);
-    //     curl_close($ch);
-    //     return $data;
-    // }
 
     public function showBrands($json = null)
     {
