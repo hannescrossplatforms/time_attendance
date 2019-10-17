@@ -43,8 +43,6 @@ class HipjamController extends \BaseController
 
         foreach ($allVenues as $venue) {
 
-            $url = "http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now"
-
             $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now");
 
             $json = json_encode($jsonString);
