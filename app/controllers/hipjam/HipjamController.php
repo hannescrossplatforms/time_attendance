@@ -42,7 +42,7 @@ class HipjamController extends \BaseController
         // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') = '$date'")
         // ->whereraw("category_id = '$categoryId'");
 
-        $liveNumberOfBillboardsQuery = Venue::select(DB::raw("count(*) as count"))->get();
+        $liveNumberOfBillboardsQuery = \Venue::select(DB::raw("count(*) as count"))->get();
 
         // $liveNumberOfBillboardsQuery = \Venue::whereraw("SELECT count(*) as count FROM venues where track_type = 'billboard' AND brand_id IN (165, 182)")->first()->get();
 
