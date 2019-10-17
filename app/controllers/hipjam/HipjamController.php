@@ -54,7 +54,7 @@ class HipjamController extends \BaseController
 
             $period = 'now';
             $scanner_type = 'internal';
-            $venue = $venue->sitename;
+            $venue_name = $venue->sitename;
             $domain = "tracks03.hipzone.co.za";
             $brand_id = $brand->id;
             $venue_id = $venue->id;
