@@ -28,11 +28,14 @@ class HipjamController extends \BaseController
 
         $userObj = \Auth::user();
 
+        // $user = Auth::user();
+        // if ($user->id != 1) {
+
         // $userObject = $userObj->getUsersData(null, null);
 
 //print_r($data['user']); die();
-        $userDataString = print_r($userObj->fullname);
-        \Log::info("[HipjamController  showDashboard] - userObject = $userDataString");
+        // $userDataString = print_r($userObj->fullname);
+        \Log::info("[HipjamController  showDashboard] - user id is: $userObj->id");
 
         $data['live_number_of_billboards'] = 0;
         $data['live_number_of_retail_venues'] = 0;
