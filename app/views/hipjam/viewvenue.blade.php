@@ -43,8 +43,8 @@
 </style>
 <body class="hipJAM">
 
-    <div id="loadingDiv" class="overlay" >    
-        <img src="/img/loader.gif" style="width:80px;">                
+    <div id="loadingDiv" class="overlay" >
+        <img src="/img/loader.gif" style="width:80px;">
     </div>
 
     <a id="buildtable"></a>
@@ -71,7 +71,7 @@
              <input type="hidden" id="apivenueid" name="" value="{{$data['apivenueid']}}">
 
           <div class="container-fluid">
-            
+
             <!-- Nav tabs -->
               <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation"  class="active"><a id="absencetab" href="#venue" aria-controls="absence" role="tab" data-toggle="tab">Store</a></li>
@@ -89,8 +89,8 @@
               <!-- Tab panes -->
               <div class="tab-content">
                 <div id="report_period"></div>
-                <div role="tabpanel" class="tab-pane active" id="venue"> 
-                  
+                <div role="tabpanel" class="tab-pane active" id="venue">
+
                     <!-- <div class="container-fluid"> -->
                     <div class="clear">
                     <br><br>
@@ -98,18 +98,18 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="venuecolheading">Today</div>
-                            
+
                             <div class="col-md-2" style="width: 20%;">
                                 <div class="venuerow">
                                     <div class="modStat">
                                         <div class="modstattitle">
-                                            <h3>Customers In Store Now</h3>
+                                            <h3>Customers In Store Nosw</h3>
                                         </div>
                                         <div id="customer_now" class="modStatspan">loading...</div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-2" style="width: 20%;">
                                 <div class="venuerow">
                                     <div class="modStat">
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-2" style="width: 20%;">
                                 <div class="venuerow">
                                     <div class="modStat">
@@ -131,7 +131,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-2" style="width: 20%;">
                                 <div class="venuerow">
                                     <div class="modStat">
@@ -152,13 +152,13 @@
                                         @else
                                             <h3>Window Conversion Today</h3>
                                         @endif
-                                            
+
                                         </div>
                                         <div id="window_today" class="modStatspan">loading...<!-- <span style="font-size: 35%;">Data Not Available</span> --></div>
                                     </div>
                                 </div>
-                            </div>        
-                         
+                            </div>
+
                         </div>
                         <div class="row">
                             <div class="col-md-4" style="width:30%;">
@@ -178,7 +178,7 @@
                                         <option value="custom">Custom range</option>
                                     </select>
                                 </div>
-                                
+
                             </div>
                             <div class="col-md-8" id="custom" style="display:none; width:70%;">
                                 <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
@@ -188,13 +188,13 @@
                                     <input type="text" class="form-control datepicker" name="venueto" id="venueto" placeholder="ToDate">
                                 </div>
                                 <div class="col-md-2" style="width:40%; padding:0px 0px 0px 6px;">
-                                    <button type="submit" class="form-control" onclick="custom_report_period()">Submit Date Range</button> 
+                                    <button type="submit" class="form-control" onclick="custom_report_period()">Submit Date Range</button>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
-                          
+
                             <div class="col-md-2" style="width: 20%;">
                                 <div class="venuerow">
                                     <div class="modStat">
@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-2" style="width: 20%;">
                                 <div class="venuerow">
                                     <div class="modStat">
@@ -216,7 +216,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-3" style="width: 20%;">
                                 <div class="venuerow">
                                     <div class="modStat">
@@ -254,8 +254,8 @@
                                         <div id="window_con" class="modStatspan">loading...<!-- <span style="font-size: 35%;">Data Not Available</span> --></div>
                                     </div>
                                 </div>
-                            </div>        
-                          
+                            </div>
+
                         </div>
 
                         <div class="row">
@@ -275,14 +275,14 @@
                             <div class="col-sm-6">
                                 <div class="chart-wrapper">
                                     <div class="chart-title venuecolheading">Store Traffic/Hour <span id="perHperiod">Today</span></div>
-                                    <div class="chart-stage">            
+                                    <div class="chart-stage">
                                         <div class="row">
-                                            <div class="col-sm-12">                    
-                                                <div class="chart-stage">               
-                                                    <div id="chart-container">Loading...</div> 
+                                            <div class="col-sm-12">
+                                                <div class="chart-stage">
+                                                    <div id="chart-container">Loading...</div>
                                                 </div>
                                             </div>
-                                        </div>           
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -292,7 +292,7 @@
                                     <div class="chart-title venuecolheading">Store Traffic <span id="venueTrfc">This Week</span></div>
                                     <div class="chart-stage">
                                         <div class="row">
-                                            <div class="col-sm-12">                    
+                                            <div class="col-sm-12">
                                                 <div class="chart-stage">
                                                     <div id="date_week">Charts will render here</div>
                                                 </div>
@@ -339,7 +339,7 @@
                                     <option value="daterange">Custom range</option>
                                 </select>
                             </div>
-                            
+
                         </div>
                         <div class="col-md-8" id="zonecustom" style="display:none; width:70%;">
                             <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
@@ -349,7 +349,7 @@
                                 <input type="text" class="form-control datepicker" name="zonalto" id="zonalto" placeholder="ToDate">
                             </div>
                             <div class="col-md-2" style="width:40%; padding:0px 0px 0px 6px;">
-                                <button type="submit" class="form-control" onclick="custom_zonal_report_period()">Submit Date Range</button> 
+                                <button type="submit" class="form-control" onclick="custom_zonal_report_period()">Submit Date Range</button>
                             </div>
                         </div>
                     </div>
@@ -377,7 +377,7 @@
                                     <option value="daterange">Custom range</option>
                                 </select>
                             </div>
-                            
+
                         </div>
                         <div class="col-md-8" id="heatmapcustom" style="display:none; width:70%;">
                             <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
@@ -387,7 +387,7 @@
                                 <input type="text" class="form-control datepicker" name="heatmapto" id="heatmapto" placeholder="ToDate">
                             </div>
                             <div class="col-md-2" style="width:40%; padding:0px 0px 0px 6px;">
-                                <button type="submit" class="form-control" onclick="custom_heatmap_report_period()">Submit Date Range</button> 
+                                <button type="submit" class="form-control" onclick="custom_heatmap_report_period()">Submit Date Range</button>
                             </div>
                         </div>
                     </div>
@@ -414,7 +414,7 @@
                     </div>
                 </div>
                 </div>
-                </div> 
+                </div>
                 </div>
 
               </div>
@@ -425,7 +425,7 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 
     <script src="{{ asset('js/jquery-2.1.4.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script> 
+    <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 
     <script src="{{ asset('js/jquery_cookie.js') }}"></script>
     <script src="{{ asset('js/fusioncharts.js') }}"></script>
@@ -443,13 +443,13 @@
       $("#venuefrom, #venueto").datepicker("setDate", new Date());
 
     </script>
-            
-            
+
+
         </div>
       </div>
     </div>
-  
-     
+
+
 
   </body>
 
