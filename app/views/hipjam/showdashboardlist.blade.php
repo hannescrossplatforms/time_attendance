@@ -48,7 +48,7 @@
                   <div class="d-flex align-items-center text-size-3">
                     <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                     <div class="text-monospace">
-                      <span id="individuals_exposed_current" style="font-size: 36px;">Loading...</span>
+                      <span id="individuals_exposed_current">Loading...</span>
                     </div>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                 <div class="d-flex align-items-center text-size-3">
                   <i class="fas fa fa-door-open opacity-25 mr-2"></i>
                   <div class="text-monospace">
-                    <span id="individuals_exposed_today" style="font-size: 36px;">Loading...</span>
+                    <span id="individuals_exposed_today">Loading...</span>
                   </div>
                 </div>
               </div>
