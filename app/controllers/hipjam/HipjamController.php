@@ -35,7 +35,7 @@ class HipjamController extends \BaseController
             array_push($brandIds, $brand->id);
         }
 
-        $brandIdsString = serialize($brandIds);
+        $brandIdsString = implode(",", $brandIds);
 
 
 
