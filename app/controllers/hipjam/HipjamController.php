@@ -126,8 +126,6 @@ class HipjamController extends \BaseController
 
         }
 
-        \Log::info("[HipjamController  showDashboard] - exposed_visits_this_month is:  $totalExposedVisitsThisMonth");
-
         $data['individuals_exposed_today'] = $individualsExposedToday;
         $data['uniques_today'] = $uniquesToday;
         //exposed_visits_this_monty END
