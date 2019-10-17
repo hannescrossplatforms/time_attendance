@@ -89,9 +89,9 @@ class HipjamController extends \BaseController
 
         $allVenues = \Venue::whereraw("track_type = 'billboard' AND brand_id IN ($brandIdsString)")->get();
 
-        //exposed_visits_today START
+        //INDIVIDUALS EXPOSED CURRENT START
 
-        $totalExposedVisitsToday = 0;
+        $individualsExposedCurrent = 0;
 
         foreach ($allVenues as $venue) {
 
@@ -99,34 +99,37 @@ class HipjamController extends \BaseController
 
             $jsonData = json_decode($jsonString);
             $total = $jsonData->total->total;
-            $totalExposedVisitsToday += $total;
+            $individualsExposedCurrent += $total;
 
         }
 
-        \Log::info("[HipjamController  showDashboard] - exposed_visits_today is:  $totalExposedVisitsToday");
+        \Log::info("[HipjamController  showDashboard] - exposed_visits_today is:  $individualsExposedCurrent");
 
-        $data['exposed_visits_today'] = $totalExposedVisitsToday;
+        $data['individualsExposedCurrent'] = $individualsExposedCurrent;
 
-        //exposed_visits_today END
+        //INDIVIDUALS EXPOSED CURRENT END
 
         //exposed_visits_this_month START
-
-        $totalExposedVisitsThisMonth = 0;
-
+        // INDIVIDUALS EXPOSED TODAY
+        $individualsExposedToday = 0;
+        $uniquesToday = 0;
         foreach ($allVenues as $venue) {
 
-            $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=this_month");
+            $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=today");
 
             $jsonData = json_decode($jsonString);
             $total = $jsonData->total->total;
-            $totalExposedVisitsThisMonth += $total;
+            $new = $jsonData->total->new;
+
+            $individualsExposedToday += $total;
+            $uniquesToday += $new;
 
         }
 
         \Log::info("[HipjamController  showDashboard] - exposed_visits_this_month is:  $totalExposedVisitsThisMonth");
 
-        $data['exposed_visits_this_month'] = $totalExposedVisitsThisMonth;
-
+        $data['individuals_exposed_today'] = $individualsExposedToday;
+        $data['uniques_today'] = $uniquesToday;
         //exposed_visits_this_monty END
 
         //UNIQUENESS TODAY START
@@ -146,7 +149,7 @@ class HipjamController extends \BaseController
 
 
 
-        $data['time_spent_in_store'] = 0;
+
 
         //UNIQUENESS TODAY END
 
