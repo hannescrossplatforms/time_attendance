@@ -37,9 +37,11 @@ class HipjamController extends \BaseController
         $data['live_number_of_retail_venues'] = $liveNumberOfBillboardsCount;
         \Log::info("[HipjamController  showDashboard] - live_number_of_retail_venues is: $liveNumberOfRetailVenues");
 
-
-        ///////
         $allVenues = \Venue::whereraw("track_type = 'billboard' AND brand_id IN ($brandIdsString)")->get();
+
+        //exposed_visits_today START
+
+        $totalExposedVisitsToday = 0;
 
         foreach ($allVenues as $venue) {
 
@@ -47,12 +49,37 @@ class HipjamController extends \BaseController
 
             $jsonData = json_decode($jsonString);
             $total = $jsonData->total->total;
-            \Log::info("[HipjamController  showDashboard] - TOTAL is:  $total");
+            $totalExposedVisitsToday += $total;
 
         }
 
-        $data['exposed_visits_today'] = 0;
-        $data['exposed_visits_this_month'] = 0;
+        \Log::info("[HipjamController  showDashboard] - exposed_visits_today is:  $totalExposedVisitsToday");
+
+        $data['exposed_visits_today'] = $totalExposedVisitsToday;
+
+        //exposed_visits_today END
+
+        //exposed_visits_this_month START
+
+        $totalExposedVisitsThisMonth = 0;
+
+        foreach ($allVenues as $venue) {
+
+            $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=this_month");
+
+            $jsonData = json_decode($jsonString);
+            $total = $jsonData->total->total;
+            $totalExposedVisitsThisMonth += $total;
+
+        }
+
+        \Log::info("[HipjamController  showDashboard] - exposed_visits_this_month is:  $totalExposedVisitsThisMonth");
+
+        $data['exposed_visits_this_month'] = $totalExposedVisitsThisMonth;
+
+        //exposed_visits_this_monty END
+
+
         $data['time_spent_in_store'] = 0;
 
 
