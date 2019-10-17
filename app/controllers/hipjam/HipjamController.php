@@ -30,7 +30,7 @@ class HipjamController extends \BaseController
         $userObject = $userObj->getUsersData(null, null);
 
 //print_r($data['user']); die();
-        $userDataString = print_r($userObject)l;
+        $userDataString = print_r($userObject);
         \Log::info("[HipjamController  showDashboard] - userObject= $userDataString");
 
         $data['live_number_of_billboards'] = 0;
