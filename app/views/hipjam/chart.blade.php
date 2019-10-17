@@ -9,7 +9,7 @@
       <div class="row">
 
         @include('hipjam.sidebar')
-        
+
 
         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
             <h1 class="page-header">Venue Management</h1>
@@ -36,110 +36,110 @@
         <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
-                      <div>CUSTOMERS IN STORE NOW</div>
+                      <div>CUSTOMERS IN STORE NOWs</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h1 id="customer_now" >4</h1>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
         <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>CUSTOMERS IN STORE TODAY</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h1 id="customer_today" >253</h1>
-                    
-                  </div>             
+
+                  </div>
               </div>
           </div>
         </div>
       <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>TIME SPENT IN STORE (MIN)</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h4 ><span>15.2&nbsp; &nbsp; &nbsp;&nbsp; AVE</h4>
                     <h4 >22.5  MEDIAN</h4>
                     <h4 >47.3  &nbsp; &nbsp;&nbsp;   MAX</h4>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
         <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>NEW CUSTOMERS NOW</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h1 id="new_now">0</h1>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
         <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>NEW CUSTOMERS TODAY</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h1 id="new_today" >16</h1>
-                    
-                  </div>             
+
+                  </div>
               </div>
           </div>
         </div>
         <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>NEW CUSTOMERS THIS WEEK</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h1 id="new_week">102</h1>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
-        
+
       <!-- <div class="col-md-6" style="width: 14%;">
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -164,7 +164,7 @@
           </a>
         </div>
       </div> -->
-      
+
     </div>
     <div class="row">
 
@@ -186,10 +186,10 @@
         <div class="col-sm-6">
           <div class="chart-wrapper">
               <div class="chart-title">STORE TRAFFIC/HOUR TODAY</div>
-            <div class="chart-stage">            
-                <div class="tab-content">               
-                  <div id="chart-container">Loading...</div> 
-                </div>           
+            <div class="chart-stage">
+                <div class="tab-content">
+                  <div id="chart-container">Loading...</div>
+                </div>
             </div>
         </div>
         </div>
@@ -201,7 +201,7 @@
               <div class="chart-stage">
                 <div class="row">
                     <div class="col-sm-12">
-                    
+
                       <div class="chart-stage">
                           <div id="date_week">Charts will render here</div>
                       </div>
@@ -215,118 +215,118 @@
 
     <div class="row">
     <div>COMPARITIVE ANALTYICS </div>
-      
+
       <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>OVERALL TRAFFIC ENTRY VS PREVIOUS PERIOD</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h3 >2015</h3>
                     <h4>1845</h4>
                     <h5 >20%</h5>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
       <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>NEW CUSTOMERS VS PREVIOUS PERIOD</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h3 >102</h3>
                     <h4>85</h4>
                     <h5 >15.5%</h5>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
       <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>RETURNING CUSTOMERS VS PREVIOUS PERIOD</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h3 >256</h3>
                     <h4>262</h4>
                     <h5 >3 %</h5>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
       <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>AVERAGE TIME SPENT IN STORE VS PREVIOUS PERIOD</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h3 >15.2</h3>
                     <h4>30.4</h4>
                     <h5 >50 %</h5>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
       <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>WINDOW CONVERSION %</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h3 >14%</h3>
                     <h4>8%</h4>
                     <h5 >50%</h5>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
       <div class="col-md-6" style="width: 16%;">
           <div class="panel panel-primary">
               <div class="panel-heading">
-                <div class="row">             
+                <div class="row">
                     <div class="col-xs-12 text-center fa-comments" style="height:60px;">
                       <div>VISITS TO TILL POINT %</div>
                     </div>
                 </div>
               </div>
               <div class="panel-footer" style="height:120px; padding:0px 0px 0px 0px;">
-              
+
                   <div class="container text-center" style="width:167px; padding:0px 0px 0px 0px;">
                     <h3 >54%</h3>
                     <h4>67%</h4>
                     <h5 >25%</h5>
-                  </div>             
+                  </div>
               </div>
           </div>
         </div>
@@ -374,7 +374,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
     <div class="row">
 
@@ -466,7 +466,7 @@
               </div>
             </div>
         </div>
-        <div class="row"> 
+        <div class="row">
           <div class="col-md-6" style="width: 100%;">
             <img src="" >
           </div>
@@ -515,7 +515,7 @@
 
 
 
-            
+
         </div>
       </div>
     </div>
@@ -525,10 +525,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script> -->
-    
-    <script src="{{ asset('js/prefixfree.min.js') }}"></script> 
-    
-    
+
+    <script src="{{ asset('js/prefixfree.min.js') }}"></script>
+
+
 
   </body>
 
