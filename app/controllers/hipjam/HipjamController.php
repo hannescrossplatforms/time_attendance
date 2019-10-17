@@ -34,9 +34,15 @@ class HipjamController extends \BaseController
         foreach ($brands as $brand) {
             array_push($brandIds, $brand->id);
         }
-        $idString = implode(":D",$brandIds);
 
-        \Log::info("[HipjamController  showDashboard] - user brand count is: $idString");
+        $liveNumberOfBillboardsQuery = \Venue::whereraw("SELECT count(*) as count FROM venues where track_type = 'billboard' AND brand_id IN $brandIds")->get();
+
+        $data['live_number_of_billboards'] = $liveNumberOfBillboardsQuery->count;
+
+        \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsQuery->count");
+
+
+
 
         $data['live_number_of_billboards'] = 0;
         $data['live_number_of_retail_venues'] = 0;
