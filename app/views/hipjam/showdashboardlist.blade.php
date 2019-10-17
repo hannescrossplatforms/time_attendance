@@ -13,6 +13,83 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
             <h1 class="page-header">Dashboard</h1>
 
+
+
+
+            <div class="row justify-content-center">
+            <!-- Exposed visits today global view (Exposed to billboard) -->
+              <div class="col-lg-2 text-center dash-widget">
+                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
+                  <div class="text-uppercase text-tracked text-muted mb-2">Exposed Visits Today</div>
+                  <div class="d-flex align-items-center text-size-3">
+                    <i class="fas fa fa-door-open opacity-25 mr-2"></i>
+                    <div class="text-monospace">
+                      <span class="text-size-2" style="font-size: 36px;">43</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Exposed visits month (Exposed to billboard) -->
+              <div class="col-lg-2 text-center dash-widget">
+                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
+                  <div class="text-uppercase text-tracked text-muted mb-2">Exposed Visits This Month</div>
+                  <div class="d-flex align-items-center text-size-3">
+                    <i class="fas fa fa-door-open opacity-25 mr-2"></i>
+                    <div class="text-monospace">
+                      <span class="text-size-2" style="font-size: 36px;">43</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Unexposed visits today (without being exposed to billboard) -->
+              <div class="col-lg-2 text-center dash-widget">
+                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
+                  <div class="text-uppercase text-tracked text-muted mb-2">Unexposed Visits Today</div>
+                  <div class="d-flex align-items-center text-size-3">
+                    <i class="fas fa fa-door-open opacity-25 mr-2"></i>
+                    <div class="text-monospace">
+                      <span class="text-size-2" style="font-size: 36px;">43</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Unexposed visits month (without being exposed to billboard) -->
+              <div class="col-lg-2 text-center dash-widget">
+                <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
+                <div class="text-uppercase text-tracked text-muted mb-2">Unexposed Visits This Month</div>
+                <div class="d-flex align-items-center text-size-3">
+                  <i class="fas fa fa-door-open opacity-25 mr-2"></i>
+                  <div class="text-monospace">
+                    <span class="text-size-2" style="font-size: 36px;">43</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <!-- Time spent in store (dwell) -->
+            <div class="col-lg-2 text-center dash-widget">
+                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
+                  <div class="text-uppercase text-tracked text-muted mb-2">Time spent in store</div>
+                  <div class="d-flex align-items-center text-size-3">
+                    <i class="fas fa fa-door-open opacity-25 mr-2"></i>
+                    <div class="text-monospace">
+                      <span class="text-size-2" style="font-size: 36px;">43</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+
+<!-- 
+            Exposed visits today global view (Exposed to billboard)
+Exposed visits month (Exposed to billboard)
+Unexposed visits today (without being exposed to billboard)
+Unexposed visits month (without being exposed to billboard)
+Time spent in store (dwell) -->
+
+
+
             <div class="table-responsive">
                 <table id="venueTable" class="table table-striped"> </table>
             </div>
@@ -159,6 +236,18 @@
       });
 
     </script>
+
+    <style>
+      .dash-widget {
+        border: 1px solid #D1D1D1D1; padding: 25px;    margin-right: 10px;    height: 142px;
+      }
+      @media only screen and (max-width: 1512px) {
+        .dash-widget {
+          height: 182px !important;
+        }
+        .text-tracked{height: 45px;}
+      }
+    </style>
 
   </body>
 

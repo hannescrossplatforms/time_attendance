@@ -438,8 +438,12 @@ function processBrandReports()  {
         data: data,   
         url: branddatasingleurl,
         success: function(data) {
+          debugger;
           console.log("brandtotalfirsttimeusers : " + data);
           showBrandTotalFirstTimeUsers(data);
+        },
+        error: function(xhr,err) {
+          debugger;
         }
       });
 
@@ -527,7 +531,6 @@ function processBrandReports()  {
 
 
 function showBrandAge(data) {
-  debugger;
       var age = new FusionCharts({
         type: "mscolumn2d",
         renderAt: "brandage",
@@ -552,7 +555,6 @@ function showBrandGender(data) {
 }
 
 function showBrandIncome(data) {
-  debugger;
       var age = new FusionCharts({
         type: "mscolumn2d",
         renderAt: "brandincome",
@@ -613,6 +615,7 @@ function showBrandTotalNumberOfPeople(data) {
 
 function showBrandTotalFirstTimeUsers(data) {
         $("#brandtotalfirsttimeusers").html(data.total);
+        debugger;
         $("#brandavgfirsttimeusers").html(Math.round(data.avg));
 }
 
@@ -868,6 +871,7 @@ function showbrandLevelReport(brandData) {
           $("#brandavgnumberofpeople").html(Math.round(brandData.numberofpeople.avg)); 
 
           $("#brandtotalfirsttimeusers").html(brandData.firsttimeusers.total);
+          debugger;
           $("#brandavgfirsttimeusers").html(Math.round(brandData.firsttimeusers.avg));    
 
           $("#brandvenueavgdatapersession").html(Math.round(brandData.avgdatapersession.venue));

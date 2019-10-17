@@ -1187,7 +1187,9 @@ class Reports extends Eloquent {
     public function getFirstTimeUsers($reportperiod, $from, $to, $nasid, $brandcodes, $brandonly = null) {
         $statistics = new \Statistics();
         $activeVenues = $statistics->getActiveVenues();
-        $venue = \Venue::where('sitename', 'like', $nasid)->first();
+
+        $venue = \Venue::whereRaw("LOWER(location) LIKE '%".strtolower($nasid)."%'")->get()->first();
+        // $venue = \Venue::where('sitename', 'like', $nasid)->first();
 
         if ($venue) {
           $macaddress = $venue->macaddress;
@@ -2060,7 +2062,8 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
 
         $sitename = preg_replace("/_/", " ", $nasid);
 
-        $venue = \Venue::where("sitename", "like", $sitename)->first();
+        // no touchie!!
+        $venue = \Venue::whereRaw("LOWER(location) LIKE '%".strtolower($sitename)."%'")->get()->first();
         if ($venue) {
           $location = $venue->location;
           $nastype = substr($location, 0, 9);
@@ -2147,10 +2150,7 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         error_log("getAge : nasid = $nasid");
         error_log("getAge : brandcodes = " . print_r($brandcodes, true));
 
-        \Log::info("hannes reports : get age : nasid = $nasid");
-        \Log::info("hannes reports : get age : brandcodes = ". print_r($brandcodes, true));
         if(preg_match('/.*SAB_.*$/i', $nasid)) {
-          \Log::info("hannes reports : comes in if");
           $category = array(
             array("label" => "18-25"),
             array("label" => "26-30"),
@@ -2164,8 +2164,6 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
           $quickie_id = 488;
 
         } else {
-
-          \Log::info("hannes reports : comes in else");
 
           $category = array(
             array("label" => "Under 18"),
@@ -2184,14 +2182,10 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         $categories = array(array("category" => $category));
         $txt = "Categories for age are : ".json_encode($categories);
 
-        \Log::info("hannes reports : categories for age are: ". json_encode($categories));
-
         $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
         $thisvenuedata = $this->getAggregatedAnswersForVenue($reportperiod, $from, $to, $nasid, $answers, $quickie_id);
         $txt = "The venuedata are : ".json_encode($thisvenuedata);
-
-        \Log::info("hannes reports : the venue data are: $txt");
 
         $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
@@ -2200,8 +2194,6 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         // error_log("getAge : testdata = $testdata");
 
         $brandaveragedata = $this->getAggregatedAnswersForBrand($reportperiod, $from, $to, $nasid, $answers, $brandcodes, $quickie_id, $brandonly);
-
-        \Log::info("hannes reports : the venue data are: $brandaveragedata");
 
         \Log::info('---------------------------- Matt Log --------------------------------');
         \Log::info($brandaveragedata);
@@ -2213,19 +2205,14 @@ public function getNewVsReturningForBrand($reportperiod, $from, $to, $brandcode)
         $thisvenue = array("seriesname" => "This Venue", "data" => $thisvenuedata);
         if($brandonly) {
 
-          \Log::info("hannes reports : is brand only");
           $brandaverage = array("seriesname" => "Brand Total", "data" => $brandaveragedata);
           $dataset = array($brandaverage);
         } else {
-
-          \Log::info("hannes reports : NOT brand only");
 
           $brandaverage = array("seriesname" => "Brand Avg", "data" => $brandaveragedata);
           $dataset = array($thisvenue, $brandaverage);
         }
         $txt = "The Brand Average are : ".json_encode($brandaverage);
-
-        \Log::info("hannes reports : brand average data: $txt");
 
         $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
