@@ -43,29 +43,11 @@ class HipjamController extends \BaseController
 
         foreach ($allVenues as $venue) {
 
-            $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now");
-            $json = json_decode($jsonString);
-            $total = $json->total->total;
-            \Log::info("[HipjamController  showDashboard] - TOTAL is: $total");
+            // $jsonString = file_get_contents("http://tracks03.hipzone.co.za/aggregate/$venue->id?period=now");
+            // $json = json_decode($jsonString);
+            // $total = $json->total->total;
+            // \Log::info("[HipjamController  showDashboard] - TOTAL is: $total");
         }
-
-
-
-
-        // $brand_id = \Venue::where('track_slug', '=', $venue)->first()->brand_id;
-        // $venue_id = \Venue::where('track_slug', '=', $venue)->first()->id;
-
-        // $min_session = \Brand::find($brand_id)->min_session_length;
-        // $max_session = \Brand::find($brand_id)->max_session_length;
-
-        // $json_url = "http://" . $domain . "/aggregate/" . $venue_id . "?period=" . $period . "&max_session=" . $max_session . "&min_session=" . $min_session;
-        // error_log("chartJsondata : json_url = $json_url");
-        // $json = file_get_contents($json_url);
-
-        // print_r($json);
-
-
-
 
         $data['exposed_visits_today'] = 0;
         $data['exposed_visits_this_month'] = 0;
@@ -73,12 +55,9 @@ class HipjamController extends \BaseController
 
 
 
-
-        // $venues = \Venue::all();
         $venue = new \Venue();
         // $venues = $venue->getVenuesForUser('hipjam', 1);
         $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
-
 
         foreach ($venues as $venue) {
             if ($venue->ap_active == 0) {
