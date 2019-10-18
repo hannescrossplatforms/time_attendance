@@ -154,7 +154,7 @@ Time spent in store (dwell) -->
             }
           });
 
-
+          // /hipjam_graph_data/{brand_id}
           $.ajax({
             type: "GET`",
             dataType: 'json',
@@ -170,7 +170,7 @@ Time spent in store (dwell) -->
               console.log(brandjson);
               showBrandPerformanceGraphs(brandjson);
             }
-          });`
+          });
 
 
 
