@@ -179,8 +179,8 @@ Time spent in store (dwell) -->
             var highest5Sessions = new FusionCharts({
               type: "column2d",
               renderAt: "chartcol1row1",
-              width: chartWidth,
-              height: chartHeight,
+              width: 400,
+              height: 400,
               dataFormat: "json",
               dataSource: brandData["highest5Sessions"]
               });
