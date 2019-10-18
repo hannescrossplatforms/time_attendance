@@ -182,7 +182,7 @@ Time spent in store (dwell) -->
               });
             highest5Sessions.render("chartcol1row1");
 
-
+            }
 
       })
 
