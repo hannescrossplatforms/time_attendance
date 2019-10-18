@@ -155,22 +155,22 @@ Time spent in store (dwell) -->
           });
 
           // /hipjam_graph_data/{brand_id}
-          $.ajax({
-            type: "GET`",
-            dataType: 'json',
-            contentType: "application/json",
-            data: {
-              'brand_id': brand_id,
-              'reportperiod': reportperiod,
-              'from': from,
-              'to': to
-            },
-            url: branddataurl,
-            success: function(brandjson) {
-              console.log(brandjson);
-              showBrandPerformanceGraphs(brandjson);
-            }
-          });
+          // $.ajax({
+          //   type: "GET`",
+          //   dataType: 'json',
+          //   contentType: "application/json",
+          //   data: {
+          //     'brand_id': brand_id,
+          //     'reportperiod': reportperiod,
+          //     'from': from,
+          //     'to': to
+          //   },
+          //   url: branddataurl,
+          //   success: function(brandjson) {
+          //     console.log(brandjson);
+          //     showBrandPerformanceGraphs(brandjson);
+          //   }
+          // });
 
 
 
