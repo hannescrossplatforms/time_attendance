@@ -356,6 +356,9 @@ Time spent in store (dwell) -->
       .font36{
         font-size: 36px;
       }
+      .graph-container{
+        display:inline;
+      }
     </style>
 
   </body>
