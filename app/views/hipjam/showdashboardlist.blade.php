@@ -186,7 +186,7 @@ Time spent in store (dwell) -->
               });
               highest5Sessions.render("chartcol1row1");
 
-              var worstPerformance = new FusionCharts({
+              var lowest5session = new FusionCharts({
               type: "column2d",
               renderAt: "chartcol1row2",
               width: "100%",
@@ -194,7 +194,7 @@ Time spent in store (dwell) -->
               dataFormat: "json",
               dataSource: brandData["lowest5Sessionsdata"]
               });
-              highest5Sessions.render("chartcol1row2");
+              lowest5session.render("chartcol1row2");
 
             }
 
