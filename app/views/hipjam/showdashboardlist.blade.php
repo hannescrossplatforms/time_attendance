@@ -121,6 +121,10 @@ Time spent in store (dwell) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="{{ asset('js/fusioncharts.js') }}"></script>
+    <script src="{{ asset('js/fusioncharts.charts.js') }}"></script>
+    <script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}"></script>
+
     <script src="js/prefixfree.min.js"></script>
 
     <script>
