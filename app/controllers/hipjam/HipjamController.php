@@ -161,6 +161,8 @@ class HipjamController extends \BaseController
 
         $data["highest5Sessions"] = $reportObj->gethighest5Sessions(null, $reportperiod, $brandCodesString);
 
+        print_r(json_encode($data));
+
     }
 
 
