@@ -160,6 +160,8 @@ class HipjamController extends \BaseController
         $reportperiod = "rep7day";
 
         $data["highest5Sessions"] = $reportObj->gethighest5Sessions(null, $reportperiod, $brandCodesString);
+        $data["lowest5Sessionsdata"] = $reportObj->getlowest5Sessionsdata(null, $reportperiod, $brandCodesString);
+
 
         print_r(json_encode($data));
 
