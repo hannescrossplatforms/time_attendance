@@ -608,6 +608,7 @@ class Reports extends Eloquent {
 
           $data = DB::table($reportperiod)
           ->selectRaw('sitename as label, currentsessions as value')
+          ->where("track_type", "=", "venue")
           ->where(function ($query) use($brandCodesArray) {
                          for ($i = 0; $i < count($brandCodesArray); $i++){
                             $query->orwhere('brandcode', 'like',  '%' . $brandCodesArray[$i] .'%');
