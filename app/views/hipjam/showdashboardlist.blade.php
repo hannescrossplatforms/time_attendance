@@ -96,6 +96,21 @@
                 </div>
               </div>
 
+              <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
+                <div class="graphcol" style="width: 20%; margin: 20px; float: left; border: 2px solid !important;">
+                  <h1>Worst Performance</h1>
+                  <div class="graphcell">
+                    <div id="chartcol2row1"></div>
+                  </div>
+                  <div class="graphcell">
+                    <div id="chartcol2row2"></div>
+                  </div>
+                  <div class="graphcell">
+                    <div id="chartcol2row3"></div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
 
@@ -188,13 +203,13 @@ Time spent in store (dwell) -->
 
               var lowest5session = new FusionCharts({
               type: "column2d",
-              renderAt: "chartcol1row2",
+              renderAt: "chartcol2row1",
               width: "100%",
               height: "300",
               dataFormat: "json",
               dataSource: brandData["lowest5Sessionsdata"]
               });
-              lowest5session.render("chartcol1row2");
+              lowest5session.render("chartcol2row1");
 
             }
 
