@@ -157,7 +157,7 @@ class HipjamController extends \BaseController
 
         $reportObj = new \Reports();
         $data = array();
-        $reportperiod = "now";
+        $reportperiod = "rep7day";
 
         $data["highest5Sessions"] = $reportObj->gethighest5Sessions(null, $reportperiod, $brandCodesString);
 
