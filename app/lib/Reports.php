@@ -608,11 +608,32 @@ class Reports extends Eloquent {
 
           $data = DB::table($reportperiod)
           ->selectRaw('sitename as label, currentsessions as value')
-          ->whereRaw("brandcode REGEXP $brandCodesArray")
+          ->where(function ($query) use($brandCodesArray) {
+                         for ($i = 0; $i < count($brandCodesArray); $i++){
+                            $query->orwhere('brandcode', 'like',  '%' . $book[$i] .'%');
+                         }
+                    })
           ->wherein('nasid', $activeVenues)
           ->orderby("currentsessions", "desc")
           ->limit(5)
           ->get();
+
+          // $name = DB::Table('bookinfo')
+          //         ->select('BookName', 'bookId')
+          //         ->Where(function ($query) use($book) {
+          //              for ($i = 0; $i < count($book); $i++){
+          //                 $query->orwhere('bookname', 'like',  '%' . $book[$i] .'%');
+          //              }
+          //         })->get();
+
+
+          // $data = DB::table($reportperiod)
+          // ->selectRaw('sitename as label, currentsessions as value')
+          // ->whereRaw("brandcode REGEXP $brandCodesArray")
+          // ->wherein('nasid', $activeVenues)
+          // ->orderby("currentsessions", "desc")
+          // ->limit(5)
+          // ->get();
 
         }
         else {
