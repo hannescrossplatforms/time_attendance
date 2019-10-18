@@ -592,19 +592,42 @@ class Reports extends Eloquent {
 
         return $data;
     }
-    public function gethighest5Sessions($brandcode, $reportperiod) {
+
+    public function gethighest5Sessions($brandcode, $reportperiod, $brandCodesArray = null) {
 
         error_log("gethighest5Sessions brandcode : $brandcode ---- reportperiod : $reportperiod");
         $statistics = new \Statistics();
         $activeVenues = $statistics->getActiveVenues();
 
-        $data = DB::table($reportperiod)
-              ->selectRaw('sitename as label, currentsessions as value')
-              ->where('brandcode', 'like', $brandcode)
-              ->wherein('nasid', $activeVenues)
-              ->orderby("currentsessions", "desc")
-              ->limit(5)
-              ->get();
+
+        if $brandCodesArray != null {
+
+          // SELECT * from fiberbox where field REGEXP '1740|1938|1940';
+          // $data['brands'] = \Brand::whereRaw('parent_brand = 165 OR id = 165')->get();
+
+
+          $data = DB::table($reportperiod)
+          ->selectRaw('sitename as label, currentsessions as value')
+          ->whereRaw("brandcode REGEXP $brandCodesArray")
+          ->wherein('nasid', $activeVenues)
+          ->orderby("currentsessions", "desc")
+          ->limit(5)
+          ->get();
+
+        }
+        else {
+
+          $data = DB::table($reportperiod)
+          ->selectRaw('sitename as label, currentsessions as value')
+          ->where('brandcode', 'like', $brandcode)
+          ->wherein('nasid', $activeVenues)
+          ->orderby("currentsessions", "desc")
+          ->limit(5)
+          ->get();
+
+        }
+
+
 
         error_log("gethighest5Sessions : data = " . print_r($data, true));
 

@@ -143,40 +143,23 @@ class HipjamController extends \BaseController
 
     public function graphData(){
 
+        $data = array();
+        $brandCodes = array();
 
+        $userObj = \Auth::user();
+        $brands = $userObj->brands;
 
-            error_log("gethighest5Sessions brandcode : $brandcode ---- reportperiod : $reportperiod");
-            $statistics = new \Statistics();
-            $activeVenues = $statistics->getActiveVenues();
+        foreach ($brands as $brand) {
+            array_push($brandCodes, $brand->code);
+        }
 
-            $data = DB::table($reportperiod)
-                  ->selectRaw('sitename as label, currentsessions as value')
-                  ->where('brandcode', 'like', $brandcode)
-                  ->wherein('nasid', $activeVenues)
-                  ->orderby("currentsessions", "desc")
-                  ->limit(5)
-                  ->get();
+        $brandCodesString = implode("|", $brandCodes);
 
-            error_log("gethighest5Sessions : data = " . print_r($data, true));
+        $reportObj = new \Reports();
+        $data = array();
+        $reportperiod = "today"
 
-            $data = $this->stripOutBrandFromGraphLabels($data);
-
-            $chartData = array(
-              'chart' => array(
-                'subCaption' => "Highest 5 Session Count",
-                'paletteColors' => "#70ad47",
-                'showYAxisValues' => "0",
-                'rotatelabels' => "1",
-                'slantlabels' => "1",
-                'theme' => "zune"
-              ),
-              'data' => $data
-            );
-
-            return $chartData;
-
-
-
+        $data["highest5Sessions"] = $reportObj->gethighest5Sessions(null, $reportperiod, $brandCodesString);
 
     }
 
