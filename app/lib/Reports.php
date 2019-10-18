@@ -600,7 +600,7 @@ class Reports extends Eloquent {
         $activeVenues = $statistics->getActiveVenues();
 
 
-        if $brandCodesArray != null {
+        if ($brandCodesArray != null) {
 
           // SELECT * from fiberbox where field REGEXP '1740|1938|1940';
           // $data['brands'] = \Brand::whereRaw('parent_brand = 165 OR id = 165')->get();
