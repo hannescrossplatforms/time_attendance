@@ -1,4 +1,3 @@
-
 // $('.datepicker').datepicker({
 //   format: 'yyyy-mm-dd',
 //   autoclose: true,
@@ -7,12 +6,11 @@
 
 // statsdata = {{ $data['statsdata'] }};
 
-$(function () {
+$(function() {
   // alert("statsdata : " + statsdata);
-  debugger;
+
   console.log(statsdata);
   $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
-
 });
 
 function getDataFromServer(callback) {
@@ -21,62 +19,57 @@ function getDataFromServer(callback) {
   let i_to = $('#to').val();
 
   $.ajax({
-    type: "POST",
+    type: 'POST',
     dataType: 'json',
-    contentType: "application/json",
+    contentType: 'application/json',
     data: {
-      'sitename': i_sitename,
-      'from': i_from,
-      'to': i_to
+      sitename: i_sitename,
+      from: i_from,
+      to: i_to
     },
     url: '/hipwifi_showstatistics/requestStatsData',
-    success: function (filteredstatsdata) {
-      debugger;
+    success: function(filteredstatsdata) {
       callback(filteredstatsdata);
     },
-    error: function (xhr, err) {
-      debugger;
-    }
+    error: function(xhr, err) {}
   });
 }
 
-$(document).delegate('#buildtable', 'click', function () {
+$(document).delegate('#buildtable', 'click', function() {
   if (statsdata === null || statsdata === undefined) {
-    getDataFromServer(function (statsdata) {
-      showStatsTable(statsdata);  
-    })
+    getDataFromServer(function(statsdata) {
+      showStatsTable(statsdata);
+    });
   } else {
     showStatsTable(statsdata);
   }
 });
 
-$(document).delegate('#reset', 'click', function () {
+$(document).delegate('#reset', 'click', function() {
   if (statsdata === null || statsdata === undefined) {
-    getDataFromServer(function (statsdata) {
-      showStatsTable(statsdata);  
-    })
+    getDataFromServer(function(statsdata) {
+      showStatsTable(statsdata);
+    });
   } else {
     showStatsTable(statsdata);
   }
 });
 
-$(document).delegate('#filter', 'click', function (event) {
-
+$(document).delegate('#filter', 'click', function(event) {
   event.preventDefault();
-  console.log("In Filter");
+  console.log('In Filter');
 
   $.ajax({
-    type: "GET",
+    type: 'GET',
     dataType: 'json',
-    contentType: "application/json",
+    contentType: 'application/json',
     data: {
-      'sitename': $('#filtresitename').val(),
-      'from': $('#from').val(),
-      'to': $('#to').val()
+      sitename: $('#filtresitename').val(),
+      from: $('#from').val(),
+      to: $('#to').val()
     },
     url: statsurl,
-    success: function (filteredstatsdata) {
-      debugger;
+    success: function(filteredstatsdata) {
       console.log(filteredstatsdata);
       // var fsd = JSON.parse(filteredstatsdata);
       showStatsTable(filteredstatsdata);
@@ -85,19 +78,18 @@ $(document).delegate('#filter', 'click', function (event) {
 });
 
 function showStatsForBrand() {
-
   $.ajax({
-    type: "GET",
+    type: 'GET',
     dataType: 'json',
-    contentType: "application/json",
+    contentType: 'application/json',
     data: {
-      'sitename': $('#sitename').val(),
-      'from': $('#from').val(),
-      'to': $('#to').val(),
-      'brand_id': $('#brandlist').val()
+      sitename: $('#sitename').val(),
+      from: $('#from').val(),
+      to: $('#to').val(),
+      brand_id: $('#brandlist').val()
     },
     url: statsurl,
-    success: function (filteredstatsdata) {
+    success: function(filteredstatsdata) {
       console.log(filteredstatsdata);
       // var fsd = JSON.parse(filteredstatsdata);
       showStatsTable(filteredstatsdata);
@@ -106,10 +98,11 @@ function showStatsForBrand() {
 }
 
 function showStatsTable(venuestatsdata) {
-  console.log("In showStatsTable : " + venuestatsdata);
+  console.log('In showStatsTable : ' + venuestatsdata);
   table = '';
   rows = '';
-  beginTable = '\
+  beginTable =
+    '\
                 <table class="table table-striped">\n\
                   <thead>\n\
                     <tr>\n\
@@ -122,28 +115,53 @@ function showStatsTable(venuestatsdata) {
                     </tr>\n\
                   </thead>\n\
                   <tbody>  \n';
-                  
-  console.log(`---------------------------\n\n${venuestatsdata['venues']}\n\n---------------------------`)
-  $.each(venuestatsdata['venues'], function (index, value) {
-    rows = rows + '\
+
+  console.log(`---------------------------\n\n${venuestatsdata['venues']}\n\n---------------------------`);
+  $.each(venuestatsdata['venues'], function(index, value) {
+    rows =
+      rows +
+      '\
                     <tr>\n\
-                      <td> ' + index + '</td>\n\
-                      <td> ' + value["totalsessions"] + '</td>\n\
-                      <td> ' + value["uniqueusers"] + '</td>\n\
-                      <td> ' + value["newusers"] + '</td>\n\
-                      <td> ' + value["dwelltime"] + '</td>\n\
-                      <td> ' + value["dataused"] + '</td>\n\
+                      <td> ' +
+      index +
+      '</td>\n\
+                      <td> ' +
+      value['totalsessions'] +
+      '</td>\n\
+                      <td> ' +
+      value['uniqueusers'] +
+      '</td>\n\
+                      <td> ' +
+      value['newusers'] +
+      '</td>\n\
+                      <td> ' +
+      value['dwelltime'] +
+      '</td>\n\
+                      <td> ' +
+      value['dataused'] +
+      '</td>\n\
                     </tr>\n\
                     ';
   });
-  totals = '\
+  totals =
+    '\
                     <tr class="totals">\n\
                       <td>Total</td>\n\
-                      <td> ' + venuestatsdata["totalsessionstotal"] + '</td>\n\
-                      <td> ' + venuestatsdata["uniqueuserstotal"] + '</td>\n\
-                      <td> ' + venuestatsdata["newuserstotal"] + '</td>\n\
-                      <td> ' + venuestatsdata["dwelltimetotalaverage"] + '</td>\n\
-                      <td> ' + venuestatsdata["datausedtotal"] + '</td>\n\
+                      <td> ' +
+    venuestatsdata['totalsessionstotal'] +
+    '</td>\n\
+                      <td> ' +
+    venuestatsdata['uniqueuserstotal'] +
+    '</td>\n\
+                      <td> ' +
+    venuestatsdata['newuserstotal'] +
+    '</td>\n\
+                      <td> ' +
+    venuestatsdata['dwelltimetotalaverage'] +
+    '</td>\n\
+                      <td> ' +
+    venuestatsdata['datausedtotal'] +
+    '</td>\n\
                     </tr>\n\
                     ';
 
@@ -152,7 +170,5 @@ function showStatsTable(venuestatsdata) {
                 </table>';
 
   table = beginTable + rows + totals + endTable;
-  $("#statsTable").html(table);
+  $('#statsTable').html(table);
 }
-
-

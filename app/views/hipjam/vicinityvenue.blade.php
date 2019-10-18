@@ -211,14 +211,14 @@ let default_selection = $('#track_type').data('default-selected');
       if (default_selection !== '')
         $('#track_type').val(default_selection);
 
-        
+
     if (window.location.href.indexOf('activate') !== -1) {
       $('#update_vicinity_venue').html('Activate');
       $('.page-header').html(`Activate Track Venue - ${$('.page-header').data('venue')}`);
       $('#track_slug').attr('disabled', 'disabled');
     }
 
-    
+
 
     showLinkVenueToBillboard();
 
@@ -238,7 +238,7 @@ let default_selection = $('#track_type').data('default-selected');
             window.location.href = 'http://hiphub.hipzone.co.za/hipjam_showvenues';
           },
           error: function(jqXHR, status) {
-            debugger;
+
             alert("Invalid Track Server");
           }
         });
@@ -317,7 +317,7 @@ let default_selection = $('#track_type').data('default-selected');
     }
 
     function showLinkVenueToBillboard() {
-      
+
       // if (default_selection === 'venue' || default_selection === '') {
 
       // }
@@ -334,13 +334,13 @@ let default_selection = $('#track_type').data('default-selected');
     $( "#addscanner" ).click(function(event) {
           event.preventDefault();
           var newrecord = {};
-          newrecord['track_name'] = $('#hf_sensor_name').val(); 
+          newrecord['track_name'] = $('#hf_sensor_name').val();
           newrecord['track_location'] = "{{$data['venue']->track_type ? $data['venue']->track_type : 'venue'}}";
 
-          newrecord['track_queue'] = 'tracks03'; 
+          newrecord['track_queue'] = 'tracks03';
           newrecord['mac'] = $('#sensor_mac').val();
-          newrecord['track_min_power'] = $('#track_min_power').val(); 
-          newrecord['track_max_power'] = $('#track_max_power').val(); 
+          newrecord['track_min_power'] = $('#track_min_power').val();
+          newrecord['track_max_power'] = $('#track_max_power').val();
 
           newrecord['venue_id'] = "{{$data['venue']->id}}";
           newrecord['vpnip'] = $('#sensor_vpnip').val();
@@ -351,48 +351,48 @@ let default_selection = $('#track_type').data('default-selected');
 
           var dataJson = JSON.stringify(newrecord);
 
-          
+
           if(!newrecord['track_name']) {
             alert("Enter Name");
-            return false; 
+            return false;
 
           } else if(!newrecord['track_location']) {
             alert("Enter Location");
-            return false; 
+            return false;
 
           } else if(!newrecord['track_queue']) {
             alert("Enter Queue");
-            return false; 
+            return false;
 
           } else if(!newrecord['track_min_power']) {
             alert("Enter Min power");
-            return false; 
+            return false;
 
           } else if(!newrecord['track_max_power']) {
             alert("Enter Max power");
-            return false; 
+            return false;
 
             } else if(newrecord['vpnip'] == 1){
               alert("Select vpn ip");
               return false;
-            
+
 
           } else {
-           
+
             $.ajax({
                 type: "POST",
                 dataType: 'json',
                 //contentType: "application/json",
                 url: url,
                 data: "newrecord="+dataJson,
-               
+
                 //async: false,
-                
+
               success:  function(objResult){
-                debugger;
+
                 if (objResult.status == 422){
-                  debugger;
-                 var errors = objResult.msg 
+
+                 var errors = objResult.msg
                  errorsHtml = '<div class="alert alert-danger"><ul>';
                  $.each( errors , function( key, value ) {
                  errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
@@ -406,16 +406,16 @@ let default_selection = $('#track_type').data('default-selected');
                 // window.location.href = `http://hiphub.hipzone.co.za/vicinity/venue/${newrecord['venue_id']}`
              },
              error: function(xhr,m) {
-               debugger;
-             }     
-            }); 
+
+             }
+            });
 
 
           }
 
         });
         function removeServerRow(removeNum) {
-        
+
         var url = '{{ URL::route('hipjam_deleteSvrScannerdata')}}';
         $.ajax({
             type: "POST",
@@ -425,16 +425,16 @@ let default_selection = $('#track_type').data('default-selected');
             data: "record="+removeNum,
             //async: false,
             success:  function(objResult){
-              console.log(objResult); 
+              console.log(objResult);
               if(objResult.msg == 'deleted'){
                 jQuery('#row'+removeNum).remove();
               }
             },
             error: function(xjr, err) {
-debugger;
+
             }
         });
-    
+
   }
   </script>
 </body>
