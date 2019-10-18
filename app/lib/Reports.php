@@ -725,7 +725,7 @@ class Reports extends Eloquent {
                          }
                     })
           ->wherein('nasid', $activeVenues)
-          ->orderby("currentsessions", "desc")
+          ->orderby("currentsessions", "asc")
           ->limit(5)
           ->get();
 
