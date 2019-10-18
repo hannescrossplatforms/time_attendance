@@ -79,7 +79,7 @@
               </div>
             </div>
 
-            <!-- <div class="row">
+            <div class="row">
 
               <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
                 <div class="graphcol" style="width: 20%; margin: 20px; float: left; border: 2px solid !important;">
@@ -96,7 +96,7 @@
                 </div>
               </div>
 
-            </div> -->
+            </div>
 
 
 <!--
@@ -170,12 +170,17 @@ Time spent in store (dwell) -->
           });
 
 
+          function showBrandPerformanceGraphs(brandData) {
 
-
-
-
-
-
+            var highest5Sessions = new FusionCharts({
+              type: "column2d",
+              renderAt: "chartcol1row1",
+              width: chartWidth,
+              height: chartHeight,
+              dataFormat: "json",
+              dataSource: brandData["highest5Sessions"]
+              });
+            highest5Sessions.render("chartcol1row1");
 
 
 
