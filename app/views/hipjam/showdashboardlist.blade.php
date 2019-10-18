@@ -155,7 +155,7 @@ Time spent in store (dwell) -->
           });
 
           $.ajax({
-            type: "GET`",
+            type: "GET",
             dataType: 'json',
             contentType: "application/json",
             url: "{{ url('hipjam_graph_data'); }}",
