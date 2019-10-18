@@ -711,17 +711,36 @@ class Reports extends Eloquent {
         return $chartData;
     }
 
-    public function getlowest5Sessionsdata($brandcode, $reportperiod) {
+    public function getlowest5Sessionsdata($brandcode, $reportperiod, $brandCodesArray = null) {
         $statistics = new \Statistics();
         $activeVenues = $statistics->getActiveVenues();
 
-        $data = DB::table($reportperiod)
+        if ($brandCodesArray != null) {
+
+          $data = DB::table($reportperiod)
+          ->selectRaw('sitename as label, currentsessions as value')
+          ->where(function ($query) use($brandCodesArray) {
+                         for ($i = 0; $i < count($brandCodesArray); $i++){
+                            $query->orwhere('brandcode', 'like',  '%' . $brandCodesArray[$i] .'%');
+                         }
+                    })
+          ->wherein('nasid', $activeVenues)
+          ->orderby("currentsessions", "desc")
+          ->limit(5)
+          ->get();
+
+        }
+        else {
+
+          $data = DB::table($reportperiod)
           ->selectRaw('sitename as label, currentsessions as value')
           ->where('brandcode', 'like', $brandcode)
           ->wherein('nasid', $activeVenues)
           ->orderby("currentsessions", "asc")
           ->limit(5)
           ->get();
+
+        }
 
         $data = $this->stripOutBrandFromGraphLabels($data);
 

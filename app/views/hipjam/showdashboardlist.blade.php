@@ -184,9 +184,21 @@ Time spent in store (dwell) -->
               dataFormat: "json",
               dataSource: brandData["highest5Sessions"]
               });
-            highest5Sessions.render("chartcol1row1");
+              highest5Sessions.render("chartcol1row1");
+
+              var worstPerformance = new FusionCharts({
+              type: "column2d",
+              renderAt: "chartcol1row2",
+              width: "100%",
+              height: "300",
+              dataFormat: "json",
+              dataSource: brandData["lowest5Sessionsdata"]
+              });
+              highest5Sessions.render("chartcol1row2");
 
             }
+
+
 
       })
 
