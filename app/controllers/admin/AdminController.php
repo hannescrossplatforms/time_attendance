@@ -91,6 +91,16 @@ class AdminController extends \BaseController {
         return \View::make('admin.addbrand')->with('data', $data);
     }
 
+    public function admin_check_if_brand_exists() {
+        $name = \Input::get("name");
+        $exists = \Brand::where("name", "like", $name)->first();
+        $obj = (object) [
+            'exists' => !is_null($exists)
+        ];
+        header('Content-Type: application/json');
+        return json_encode($obj);
+    }
+
     public function admin_addBrandSave()
     {
 
@@ -100,7 +110,7 @@ class AdminController extends \BaseController {
 
         $name = \Input::get("name");
         $exists = \Brand::where("name", "like", $name)->first();
-        if(! is_null($exists)) {
+        if(!is_null($exists)) {
             $exists->forceDelete();
         }
 

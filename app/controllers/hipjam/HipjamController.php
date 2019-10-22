@@ -482,12 +482,14 @@ class HipjamController extends \BaseController
         $data['user'] = $venue->getUserData();
         $data['billboards'] = \Venue::where('track_type', '=', "billboard")->get();
 
-        $sanitized_sitename = preg_replace("/[^a-zA-Z]+/", "", \Venue::find($id)->sitename);
-        $sanitized_sitename = str_replace("VICINITY", "", $sanitized_sitename);
+        $sanitized_sitename = \Venue::find($id)->sitename;
+        $split_for_count = explode(' ', $sanitized_sitename);
+            $brand_concat = substr($split_for_count[0], 0, 8);
+            $venue_concat = substr($split_for_count[1], 0, 10);
         if ($sensors->count() == 0) {
-            $data['sensor_name'] = substr($sanitized_sitename, 0, 15);
+            $data['sensor_name'] = $brand_concat.$venue_concat;
         } else {
-            $data['sensor_name'] = substr($sanitized_sitename, 0, 15).$sensors->count();
+            $data['sensor_name'] = $brand_concat.$venue_concat.$sensors->count();
         }
 
         return \View::make('hipjam.vicinityvenue')->with('data', $data);

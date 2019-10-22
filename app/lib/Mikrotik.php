@@ -265,7 +265,8 @@ class Mikrotik extends Eloquent {
 
     public function getAllVenueMonitoringData() {
         $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();   
-        $logDir = $mikrotikdir->value . "log/*.txt";
+        $logDir = $mikrotikdir->value . "log/*.txt"; // -- /home/mikrotik/log/*.txt
+        
 
         $data = array();
         $venuename = array();             
@@ -339,8 +340,8 @@ class Mikrotik extends Eloquent {
             $id = $venue->id;
             $this->monitorTabletposPrinters($mac, $id);
 
-            if (array_key_exists($sitename, $allVenueData)) {
-                $filerteredVenueData[$sitename] = $allVenueData[$sitename];
+            if (array_key_exists($sitename, $allVenueData)) { 
+                $filerteredVenueData[$sitename] = $allVenueData[$sitename]; // Undefined index: OceanBXX Bedfordview
 
                 if($allVenueData[$sitename]['status'] == 'Online') { // Status comments are for offline venues only
                     $venue->statuscomment = "No comment"; 

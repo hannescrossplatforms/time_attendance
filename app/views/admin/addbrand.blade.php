@@ -40,7 +40,7 @@ $edit = $data["edit"] ;
                 </select>
               </div>
               @endif
-              <div class="form-group">
+              <div class="form-group" id="brand_name_container">
 
 
                 <label for="exampleInputEmail1">Brand Name</label>
@@ -49,6 +49,7 @@ $edit = $data["edit"] ;
                         value="@if(Input::old('name')){{Input::old('name')}}@else{{$data['brand']->name;}}@endif"
                         maxlength="8">
               </div>
+              <p id="brand_already_exists" style="color: red; font-size: 12px; display:none;">A brand with this name already exists.</p>
               <div class="form-group" style="{{\User::isVicinity() ? 'display:none' : ''}}">
                 <label for="exampleInputEmail1">Brand Code</label>
                 <input type="text" class="form-control" id="brand_code_input" size="6" placeholder="" name="code" 
@@ -89,7 +90,7 @@ $edit = $data["edit"] ;
             @if (\User::isVicinity())
               <input type="hidden" name="parent_brand" value="165">
             @endif
-            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary" id="admin_add_brand_button" type="button">Submit</button>
             <a href="{{ url('admin_showbrands'); }}" class="btn btn-default">Cancel</a>
             </form>          
         </div>
@@ -109,12 +110,27 @@ $edit = $data["edit"] ;
     @if(\User::isVicinity())
     <script>
       $(document).on('input', '#brand_name_input', function() {
-        debugger;
         let sub = $('#brand_name_input').val().substring(0, 6)
         $('#brand_code_input').val(sub)
       });
     </script>
     @endif
+
+    <script>
+    $(document).on('click', '#admin_add_brand_button', function() {
+      $.post('/admin_check_if_brand_exists', {name: $('#brand_name_input').val()}, function(b) {
+        let brand = JSON.parse(b);
+        if (brand.exists) {
+          $('#brand_name_container').addClass('has-error');
+          $('#brand_already_exists').slideDown('fast');
+        } else {
+          $('#brand_name_container').removeClass('has-error');
+          $('#brand_already_exists').slideUp('fast');
+          $('#mainform').submit();
+        }
+      })
+    });
+    </script>
     
     <script>
 

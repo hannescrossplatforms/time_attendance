@@ -90,6 +90,7 @@ Route::post('admin_addbrand', array('uses' => 'admin\AdminController@admin_addBr
 Route::get('admin_editbrand/{id}', array('uses' => 'admin\AdminController@admin_editBrand', 'as' => 'admin_editbrand'))->before('auth');
 Route::post('admin_editbrand', array('uses' => 'admin\AdminController@admin_editBrandSave', 'as' => 'admin_editbrand'))->before('auth');
 Route::get('admin_deletebrand/{id}', array('uses' => 'admin\AdminController@admin_deleteBrand', 'as' => 'admin_deletebrand'))->before('auth');
+Route::post('admin_check_if_brand_exists', array('uses' => 'admin\AdminController@admin_check_if_brand_exists', 'as' => 'admin_check_if_brand_exists'))->before('auth');
 // Admin Venue Management
 Route::any('/admin_showvenues/{json?}', array('uses' => 'admin\AdminController@admin_showvenues', 'as' => 'admin_showvenues'))->before('auth');
 Route::get('admin_addvenue', array('uses' => 'admin\AdminController@admin_addVenue', 'as' => 'admin_addvenue'))->before('auth');

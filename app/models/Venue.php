@@ -131,9 +131,9 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface
         */
 
         if (\User::isVicinity()) {
-            if ($user->level_code == "defaultuser") {
-                $query->where('venues.brand_id', "=", $brand_id);
-            } else {
+            // if ($user->level_code == "defaultuser") {
+            //     $query->where('venues.brand_id', "=", $brand_id);
+            // } else {
                 $brand_array = array();
                 $brands = \Brand::where('parent_brand', '=', 165)->get();
                 foreach ($brands as $brand) {
@@ -142,7 +142,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface
                 array_push($brand_array, 165);
                 Log::info(join($brand_array, ', '));
                 $query->whereIn('venues.brand_id', $brand_array);
-            } 
+            // } 
         }
         $venues = $query->get();
 

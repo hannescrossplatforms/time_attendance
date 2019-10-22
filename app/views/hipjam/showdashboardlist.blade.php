@@ -12,6 +12,8 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
             <h1 class="page-header">Dashboard</h1>
+            <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
+              <div id="map" style="width:100%; height: 500px;"></div>
 
 
 
@@ -141,6 +143,141 @@ Time spent in store (dwell) -->
     <script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}"></script>
 
     <script src="js/prefixfree.min.js"></script>
+
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDS0aGw5pQFy_dg8198J42w0EeuZtI2Wuk" type="text/javascript"></script>
+    <script>
+
+    let venues = {{ $data['venuesJson'] }};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 5,
+      center: new google.maps.LatLng(-30.341529, 25.322594),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: [
+            {elementType: 'geometry', stylers: [{color: '#08304b'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#000000'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#FFFFFF'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#000000'}]
+            },
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#0e5064'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#165f71'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#165f71'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#165f71'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#165f71'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#165f71'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#9dd5ff'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#000000'}]
+            }
+          ]
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+    let markers = [];
+    let no_lat_long_count = 0;
+
+
+    $.each(venues, function(i, venue) {
+      if (venue.latitude === null || venue.latitude === '') {
+        no_lat_long_count++;
+      } else {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(venue.latitude,  venue.longitude),
+          map: map,
+          icon: venue.track_type === 'venue' || venue.track_type === '' || venue.track_type === null ? 'http://hiphub.hipzone.co.za/img/retail_marker.png' : 'http://hiphub.hipzone.co.za/img/billboard_marker.png'
+        });
+        markers.push(marker)
+      }
+    });
+
+    if (no_lat_long_count !== 0) {
+      $('#warn_no_locations_found').html(`<i class="fa fa-info-circle" style="margin-right: 10px"></i>${no_lat_long_count} venues do not have location data`)
+      $('#warn_no_locations_found').slideDown('fast');
+    }
+
+    var markerCluster = new MarkerClusterer(map, markers,
+          {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      return function() {
+        infowindow.setContent(locations[i][0]);
+        infowindow.open(map, marker);
+      }
+      })(marker, i));
+ 
+    </script>
 
     <script>
 

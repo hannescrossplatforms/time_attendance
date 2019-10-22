@@ -605,30 +605,40 @@ class Reports extends Eloquent {
           // SELECT * from fiberbox where field REGEXP '1740|1938|1940';
           // $data['brands'] = \Brand::whereRaw('parent_brand = 165 OR id = 165')->get();
 
-
-          $data = DB::table($reportperiod)
-          ->selectRaw('sitename as label, currentsessions as value')
-          ->where(function ($query) use($brandCodesArray) {
-                         for ($i = 0; $i < count($brandCodesArray); $i++){
-                            $query->orwhere('brandcode', 'like',  '%' . $brandCodesArray[$i] .'%');
-                         }
-                    })
-          ->wherein('nasid', $activeVenues)
-          ->orderby("currentsessions", "desc")
-          ->limit(5)
-          ->get();
+          if (\User::isVicinity()) {
+            $data = array();
+          } else {
+            $data = DB::table($reportperiod)
+            ->selectRaw('sitename as label, currentsessions as value')
+            ->where(function ($query) use($brandCodesArray) {
+                           for ($i = 0; $i < count($brandCodesArray); $i++){
+                              $query->orwhere('brandcode', 'like',  '%' . $brandCodesArray[$i] .'%');
+                           }
+                      })
+            ->wherein('nasid', $activeVenues)
+            ->orderby("currentsessions", "desc")
+            ->limit(5)
+            ->get();
+          }
+          
 
         }
         else {
-
-          $data = DB::table($reportperiod)
-          ->selectRaw('sitename as label, currentsessions as value')
-          ->where('brandcode', 'like', $brandcode)
-          ->wherein('nasid', $activeVenues)
-          ->orderby("currentsessions", "desc")
-          ->limit(5)
-          ->get();
-
+          
+          if (\User::isVicinity()) {
+            $data = array();
+          } else {
+            $data = DB::table($reportperiod)
+            ->selectRaw('sitename as label, currentsessions as value')
+            ->where('brandcode', 'like', $brandcode)
+            ->where()
+            ->wherein('nasid', $activeVenues)
+            ->orderby("currentsessions", "desc")
+            ->limit(5)
+            ->get();
+          }
+          
+        
         }
 
 
@@ -717,29 +727,35 @@ class Reports extends Eloquent {
 
         if ($brandCodesArray != null) {
 
-          $data = DB::table($reportperiod)
-          ->selectRaw('sitename as label, currentsessions as value')
-          ->where(function ($query) use($brandCodesArray) {
-                         for ($i = 0; $i < count($brandCodesArray); $i++){
-                            $query->orwhere('brandcode', 'like',  '%' . $brandCodesArray[$i] .'%');
-                         }
-                    })
-          ->wherein('nasid', $activeVenues)
-          ->orderby("currentsessions", "asc")
-          ->limit(5)
-          ->get();
-
+          if (\User::isVicinity()) {
+            $data = array();
+          } else {
+            $data = DB::table($reportperiod)
+            ->selectRaw('sitename as label, currentsessions as value')
+            ->where(function ($query) use($brandCodesArray) {
+                           for ($i = 0; $i < count($brandCodesArray); $i++){
+                              $query->orwhere('brandcode', 'like',  '%' . $brandCodesArray[$i] .'%');
+                           }
+                      })
+            ->wherein('nasid', $activeVenues)
+            ->orderby("currentsessions", "asc")
+            ->limit(5)
+            ->get();
+          }
         }
         else {
-
-          $data = DB::table($reportperiod)
+          if (\User::isVicinity()) {
+            $data = array();
+          } else {
+            $data = DB::table($reportperiod)
           ->selectRaw('sitename as label, currentsessions as value')
           ->where('brandcode', 'like', $brandcode)
           ->wherein('nasid', $activeVenues)
           ->orderby("currentsessions", "asc")
           ->limit(5)
           ->get();
-
+          }
+        
         }
 
         $data = $this->stripOutBrandFromGraphLabels($data);
