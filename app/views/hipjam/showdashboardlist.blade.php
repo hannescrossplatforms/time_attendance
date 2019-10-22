@@ -14,13 +14,87 @@
             <h1 class="page-header">Dashboard</h1>
             <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
               <div id="map" style="width:100%; height: 500px;"></div>
+              
+
+              <div style="width: 100%; margin-top: 15px;">
+                <div style="width:18vw; display: inline-block; height:94px; margin-right: 2vw;">
+                  <div style="background-color: #2e80e7; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                    <i class="fa fa-map-signs" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+                  </div>
+                  <div style="background-color: #5d9dec; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_billboards"]}}</p>
+                    <small style="color: white; margin-left: 15px; text-transform: uppercase;">Live number of billboards</small>
+                  </div>
+                </div>
+
+                <div style="width:18vw; display: inline-block; height:94px; margin-right: 2vw;">
+                  <div style="background-color: #2e80e7; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                    <i class="fa fa-map-signs" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+                  </div>
+                  <div style="background-color: #5d9dec; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_retail_venues"]}}</p>
+                    <small style="color: white; margin-left: 15px; text-transform: uppercase;">Live number of retail venues</small>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="row justify-content-center" style="margin-top: 20px;">
+
+                <!-- <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="card-title">{{$data["live_number_of_billboards"]}}</h5>
+                      <!-- <h6 class="card-subtitle mb-2 text-muted"></h6> -->
+                      <p class="card-text" style="font-size: 13px;">Live number of billboards</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="card-title">{{$data["live_number_of_retail_venues"]}}</h5>
+                      <p class="card-text" style="font-size: 13px;">Live number of retail venues</p>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="card-title" id="individuals_exposed_current">Loading...</h5>
+                      <p class="card-text" style="font-size: 13px;">Individuals exposed current</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="card-title" id="individuals_exposed_today">Loading...</h5>
+                      <p class="card-text" style="font-size: 13px;">Individuals exposed today</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="card-title" id="uniques_today">Loading...</h5>
+                      <p class="card-text" style="font-size: 13px;">Uniques today</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
 
 
 
-
-            <div class="row justify-content-center">
+            <!-- <div class="row justify-content-center" style="padding-left: 165px;margin-top: 25px;"> -->
             <!-- Exposed visits today global view (Exposed to billboard) -->
-              <div class="col-lg-2 text-center dash-widget">
+              <!-- <div class="col-lg-2 text-center dash-widget">
                  <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
                   <div class="text-uppercase text-tracked text-muted mb-2">Live number of billboards</div>
                   <div class="d-flex align-items-center text-size-3">
@@ -30,9 +104,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- Exposed visits month (Exposed to billboard) -->
-              <div class="col-lg-2 text-center dash-widget">
+              <!-- <div class="col-lg-2 text-center dash-widget">
                  <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
                   <div class="text-uppercase text-tracked text-muted mb-2">Live number of retail venues</div>
                   <div class="d-flex align-items-center text-size-3">
@@ -42,9 +116,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- Unexposed visits today (without being exposed to billboard) -->
-              <div class="col-lg-2 text-center dash-widget">
+              <!-- <div class="col-lg-2 text-center dash-widget">
                  <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
                   <div class="text-uppercase text-tracked text-muted mb-2">Individuals exposed current</div>
                   <div class="d-flex align-items-center text-size-3">
@@ -54,9 +128,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- Unexposed visits month (without being exposed to billboard) -->
-              <div class="col-lg-2 text-center dash-widget">
+              <!-- <div class="col-lg-2 text-center dash-widget">
                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
                 <div class="text-uppercase text-tracked text-muted mb-2">Individuals exposed today</div>
                 <div class="d-flex align-items-center text-size-3">
@@ -66,9 +140,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
               <!-- Time spent in store (dwell) -->
-            <div class="col-lg-2 text-center dash-widget">
+            <!-- <div class="col-lg-2 text-center dash-widget">
                  <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
                   <div class="text-uppercase text-tracked text-muted mb-2">Uniques today</div>
                   <div class="d-flex align-items-center text-size-3">
@@ -78,8 +152,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </div> -->
+            <!-- </div> -->
 
             <div class="row">
 
@@ -253,10 +327,26 @@ Time spent in store (dwell) -->
       if (venue.latitude === null || venue.latitude === '') {
         no_lat_long_count++;
       } else {
+        let ico = '';
+
+        if (venue.track_type === 'venue' || venue.track_type === '' || venue.track_type === null) {
+          if (venue.status === 'Online') {
+            ico = 'http://hiphub.hipzone.co.za/img/retail_marker.png'
+          } else {
+            ico = 'http://hiphub.hipzone.co.za/img/offline_retail_marker.gif'
+          }
+        } else {
+          if (venue.status === 'Online') {
+            ico = 'http://hiphub.hipzone.co.za/img/billboard_marker.png'
+          } else {
+            ico = 'http://hiphub.hipzone.co.za/img/offline_billboard_marker.gif'
+          }
+        }
+
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(venue.latitude,  venue.longitude),
           map: map,
-          icon: venue.track_type === 'venue' || venue.track_type === '' || venue.track_type === null ? 'http://hiphub.hipzone.co.za/img/retail_marker.png' : 'http://hiphub.hipzone.co.za/img/billboard_marker.png'
+          icon: ico
         });
         markers.push(marker)
       }
@@ -316,7 +406,6 @@ Time spent in store (dwell) -->
             contentType: "application/json",
             url: "{{ url('hipjam_graph_data'); }}",
             success: function(brandjson) {
-              debugger;
               console.log(brandjson);
               showBrandPerformanceGraphs(brandjson);
             },
