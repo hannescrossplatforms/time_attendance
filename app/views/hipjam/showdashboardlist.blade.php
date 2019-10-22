@@ -17,23 +17,33 @@
               
 
               <div style="width: 100%; margin-top: 15px;">
-                <div style="width:18vw; display: inline-block; height:94px; margin-right: 2vw;">
+                <div style="width:33%; display: inline-block; height:94px;">
                   <div style="background-color: #2e80e7; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
                     <i class="fa fa-map-signs" style="color: white; font-size: 41px; margin-top: 25px;"></i>
                   </div>
                   <div style="background-color: #5d9dec; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
                     <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_billboards"]}}</p>
-                    <small style="color: white; margin-left: 15px; text-transform: uppercase;">Live number of billboards</small>
+                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of billboards</small>
                   </div>
                 </div>
 
-                <div style="width:18vw; display: inline-block; height:94px; margin-right: 2vw;">
-                  <div style="background-color: #2e80e7; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                    <i class="fa fa-map-signs" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+                <div style="width:33%; display: inline-block; height:94px;">
+                  <div style="background-color: #2a9579; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                    <i class="fa fa-building" style="color: white; font-size: 41px; margin-top: 25px;"></i>
                   </div>
-                  <div style="background-color: #5d9dec; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                  <div style="background-color: #37bc9b; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
                     <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_retail_venues"]}}</p>
-                    <small style="color: white; margin-left: 15px; text-transform: uppercase;">Live number of retail venues</small>
+                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of retail venues</small>
+                  </div>
+                </div>
+
+                <div style="width:33%; display: inline-block; height:94px;">
+                  <div style="background-color: #2a9579; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                    <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+                  </div>
+                  <div style="background-color: #37bc9b; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="individuals_exposed_current">Loading...</p>
+                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed current</small>
                   </div>
                 </div>
 
@@ -42,33 +52,8 @@
 
               <div class="row justify-content-center" style="margin-top: 20px;">
 
-                <!-- <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <h5 class="card-title">{{$data["live_number_of_billboards"]}}</h5>
-                      <!-- <h6 class="card-subtitle mb-2 text-muted"></h6> -->
-                      <p class="card-text" style="font-size: 13px;">Live number of billboards</p>
-                    </div>
-                  </div>
-                </div>
+            
 
-                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <h5 class="card-title">{{$data["live_number_of_retail_venues"]}}</h5>
-                      <p class="card-text" style="font-size: 13px;">Live number of retail venues</p>
-                    </div>
-                  </div>
-                </div> -->
-
-                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <h5 class="card-title" id="individuals_exposed_current">Loading...</h5>
-                      <p class="card-text" style="font-size: 13px;">Individuals exposed current</p>
-                    </div>
-                  </div>
-                </div>
 
                 <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
                   <div class="card">
