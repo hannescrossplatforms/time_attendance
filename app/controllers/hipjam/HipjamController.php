@@ -261,7 +261,7 @@ class HipjamController extends \BaseController
         $auth_id = \Input::get('auth_id');
         $venues = \Venue::all();
 
-        print_r(json_encode($venues));
+        print_r(json_encode($auth_id));
 
     }
 
