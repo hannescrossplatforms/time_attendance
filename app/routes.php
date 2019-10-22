@@ -252,6 +252,7 @@ Route::any('/hipwifi_showstatistics/{json?}', array('uses' => 'hipwifi\HipwifiSt
 Route::any('/hipjam_showdashboard', array('uses' => 'hipjam\HipjamController@showDashboard', 'as' => 'hipjam_showdashboard'))->before('auth');
 Route::any('/hipjam_load_customer_stats_for_dash', array('uses' => 'hipjam\HipjamController@loadCustomerStatsForDash', 'as' => 'hipjam_load_customer_stats_for_dash'))->before('auth');
 Route::get('/hipjam_graph_data', array('uses' => 'hipjam\HipjamController@graphData', 'as' => 'hipjam_graph_data'))->before('auth');
+Route::get('/hipjam_venue_json/{auth_id}', array('uses' => 'hipjam\HipjamController@venuesAsJson', 'as' => 'hipjam_venue_json'));
 // User Management
 Route::get('hipjam_showusers/{json?}', array('uses' => 'hipjam\HipjamController@showUsers', 'as' => 'hipjam_showusers'))->before('auth');
 Route::get('hipjam_adduser', array('uses' => 'hipjam\HipjamController@addUser', 'as' => 'hipjam_adduser'))->before('auth');

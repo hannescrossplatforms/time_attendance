@@ -255,6 +255,17 @@ class HipjamController extends \BaseController
         return \View::make('hipjam.addbrand')->with('data', $data);
     }
 
+
+    public function venuesAsJson($auth_id){
+
+        $auth_id = \Input::get('auth_id');
+        $venues = \Venue::all();
+
+        print_r(json_encode($venues));
+
+    }
+
+
     private function getErrorActivateMessages()
     {
         return array(
