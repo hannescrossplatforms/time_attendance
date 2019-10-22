@@ -259,9 +259,14 @@ class HipjamController extends \BaseController
     public function venuesAsJson($auth_id){
 
         // $auth_id = \Input::get('auth_id');
-        $venues = \Venue::all();
 
-        print_r(json_encode($auth_id));
+        if($auth_id == "290a58c3-3ccf-497d-90f4-6f97f4baa368") {
+            $venues = \Venue::all();
+            print_r(json_encode($venues));
+        }
+        else {
+            print_r("Untuthorized")
+        }
 
     }
 
