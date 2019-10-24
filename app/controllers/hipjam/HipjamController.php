@@ -265,7 +265,7 @@ class HipjamController extends \BaseController
             print_r(json_encode($venues));
         }
         else {
-            print_r("Untuthorized");
+            print_r("Unauthorized");
         }
 
     }
