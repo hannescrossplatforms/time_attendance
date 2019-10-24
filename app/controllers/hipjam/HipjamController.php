@@ -558,7 +558,7 @@ class HipjamController extends \BaseController
 
         $venue->track_slug = $form_data->track_slug; // Track Venue ID
         $venue->track_type = $form_data->track_type; // Billboard / Retail
-
+        $venue->linked_billboard = $form_data->linked_billboard; // Venue linked to billboard
         $venue->track_server_location = $form_data->track_server_location; // Vicinity Server ID
 
         $venue->track_ssid = $form_data->track_ssid; // Track WiFi SSID

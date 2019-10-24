@@ -50,8 +50,8 @@
               <div class="col-md-6 text-left">
                 <div class="form-group" id="linked_billboard_container" style="display: none;">
                   <label for="track_linked_billboard">Linked Billboard</label>
-                  <select class="form-control" name="track_type" id="track_linked_billboard">
-                  <option value="unlinked">Unlinked</option>
+                  <select class="form-control" name="linked_billboard" id="track_linked_billboard" value="{{$data['venue']->linked_billboard}}">
+                  <option>Unlinked</option>
                   <?php foreach ($data['billboards'] as $billboard) { ?>
                                 <option value="{{$billboard->id}}">{{$billboard->sitename}}</option>
                             <?php  }
@@ -238,7 +238,7 @@ let default_selection = $('#track_type').data('default-selected');
             window.location.href = 'http://hiphub.hipzone.co.za/hipjam_showvenues';
           },
           error: function(jqXHR, status) {
-
+debugger;
             alert("Invalid Track Server");
           }
         });
@@ -261,6 +261,7 @@ let default_selection = $('#track_type').data('default-selected');
       data['longitude'] = $('#longitude').val();
 
       data['timezone'] = $('#timezone_select').val();
+      data['linked_billboard'] = $('#track_linked_billboard').val();
 
       data['venue_location'] = "{{$data['venue']->location}}";
 
