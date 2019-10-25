@@ -17,150 +17,64 @@
 
 
               <div style="width: 100%; margin-top: 15px;">
-                <div style="width:18vw; display: inline-block; height:94px; margin-right: 2vw;">
+                <div style="width:33%; display: inline-block; height:94px;">
                   <div style="background-color: #2e80e7; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
                     <i class="fa fa-map-signs" style="color: white; font-size: 41px; margin-top: 25px;"></i>
                   </div>
                   <div style="background-color: #5d9dec; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
                     <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_billboards"]}}</p>
-                    <small style="color: white; margin-left: 15px; text-transform: uppercase;">Live number of billboards</small>
+                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of billboards</small>
                   </div>
                 </div>
 
-                <div style="width:18vw; display: inline-block; height:94px; margin-right: 2vw;">
-                  <div style="background-color: #2e80e7; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                    <i class="fa fa-map-signs" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+                <div style="width:33%; display: inline-block; height:94px;">
+                  <div style="background-color: #2a9579; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                    <i class="fa fa-building" style="color: white; font-size: 41px; margin-top: 25px;"></i>
                   </div>
-                  <div style="background-color: #5d9dec; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                  <div style="background-color: #37bc9b; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
                     <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_retail_venues"]}}</p>
-                    <small style="color: white; margin-left: 15px; text-transform: uppercase;">Live number of retail venues</small>
+                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of retail venues</small>
+                  </div>
+                </div>
+
+                <div style="width:33%; display: inline-block; height:94px;">
+                  <div style="background-color: #574aa3; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                    <i class="fa fa-history" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+                  </div>
+                  <div style="background-color: #7d6dde; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="uniques_today">Loading...</p>
+                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Uniques today</small>
+                  </div>
+                </div>
+
+                <div style="width:calc(50% - 5px); display: inline-block; height:94px;">
+                  <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                    <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+                  </div>
+                  <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="individuals_exposed_current">Loading...</p>
+                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed current</small>
+                  </div>
+                </div>
+
+                <div style="width:calc(50% - 5px); display: inline-block; height:94px;">
+                  <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                    <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+                  </div>
+                  <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="individuals_exposed_today">Loading...</p>
+                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed today</small>
                   </div>
                 </div>
 
               </div>
-
-
-              <div class="row justify-content-center" style="margin-top: 20px;">
-
-                <!-- <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <h5 class="card-title">{{$data["live_number_of_billboards"]}}</h5>
-                      <!-- <h6 class="card-subtitle mb-2 text-muted"></h6> -->
-                      <p class="card-text" style="font-size: 13px;">Live number of billboards</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <h5 class="card-title">{{$data["live_number_of_retail_venues"]}}</h5>
-                      <p class="card-text" style="font-size: 13px;">Live number of retail venues</p>
-                    </div>
-                  </div>
-                </div> -->
-
-                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <h5 class="card-title" id="individuals_exposed_current">Loading...</h5>
-                      <p class="card-text" style="font-size: 13px;">Individuals exposed current</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <h5 class="card-title" id="individuals_exposed_today">Loading...</h5>
-                      <p class="card-text" style="font-size: 13px;">Individuals exposed today</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-2" style="border: 1px solid #CCCCCC;">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <h5 class="card-title" id="uniques_today">Loading...</h5>
-                      <p class="card-text" style="font-size: 13px;">Uniques today</p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-
-
-            <!-- <div class="row justify-content-center" style="padding-left: 165px;margin-top: 25px;"> -->
-            <!-- Exposed visits today global view (Exposed to billboard) -->
-              <!-- <div class="col-lg-2 text-center dash-widget">
-                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
-                  <div class="text-uppercase text-tracked text-muted mb-2">Live number of billboards</div>
-                  <div class="d-flex align-items-center text-size-3">
-                    <i class="fas fa fa-door-open opacity-25 mr-2"></i>
-                    <div class="text-monospace">
-                      <span class="text-size-2" style="font-size: 36px;">{{$data["live_number_of_billboards"]}}</span>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-              <!-- Exposed visits month (Exposed to billboard) -->
-              <!-- <div class="col-lg-2 text-center dash-widget">
-                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
-                  <div class="text-uppercase text-tracked text-muted mb-2">Live number of retail venues</div>
-                  <div class="d-flex align-items-center text-size-3">
-                    <i class="fas fa fa-door-open opacity-25 mr-2"></i>
-                    <div class="text-monospace">
-                      <span class="text-size-2" style="font-size: 36px;">{{$data["live_number_of_retail_venues"]}}</span>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-              <!-- Unexposed visits today (without being exposed to billboard) -->
-              <!-- <div class="col-lg-2 text-center dash-widget">
-                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
-                  <div class="text-uppercase text-tracked text-muted mb-2">Individuals exposed current</div>
-                  <div class="d-flex align-items-center text-size-3">
-                    <i class="fas fa fa-door-open opacity-25 mr-2"></i>
-                    <div class="text-monospace">
-                      <span id="individuals_exposed_current">Loading...</span>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-              <!-- Unexposed visits month (without being exposed to billboard) -->
-              <!-- <div class="col-lg-2 text-center dash-widget">
-                <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
-                <div class="text-uppercase text-tracked text-muted mb-2">Individuals exposed today</div>
-                <div class="d-flex align-items-center text-size-3">
-                  <i class="fas fa fa-door-open opacity-25 mr-2"></i>
-                  <div class="text-monospace">
-                    <span id="individuals_exposed_today">Loading...</span>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-              <!-- Time spent in store (dwell) -->
-            <!-- <div class="col-lg-2 text-center dash-widget">
-                 <div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
-                  <div class="text-uppercase text-tracked text-muted mb-2">Uniques today</div>
-                  <div class="d-flex align-items-center text-size-3">
-                    <i class="fas fa fa-door-open opacity-25 mr-2"></i>
-                    <div class="text-monospace">
-                      <span id="uniques_today">Loading...</span>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-            <!-- </div> -->
 
             <div class="row">
 
-              <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
-                <div class="graphcol" style="width: 20%; margin: 20px; float: left; border: 2px solid !important;">
+              <div class="graph-container" style="padding: 10px; width: 100%;">
+                <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;margin-top: 20px;">
                   <h1>Best Performance</h1>
-                  <div class="graphcell">
+                  <div class="graphcell" style="padding: 1px;">
                     <div id="chartcol1row1"></div>
                   </div>
                   <div class="graphcell">
@@ -172,10 +86,10 @@
                 </div>
               </div>
 
-              <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
-                <div class="graphcol" style="width: 20%; margin: 20px; float: left; border: 2px solid !important;">
+              <div class="graph-container" style="padding: 10px; width: 100%;">
+                <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;">
                   <h1>Worst Performance</h1>
-                  <div class="graphcell">
+                  <div class="graphcell" style="padding: 1px;">
                     <div id="chartcol2row1"></div>
                   </div>
                   <div class="graphcell">
@@ -420,7 +334,7 @@ Time spent in store (dwell) -->
             var highest5Sessions = new FusionCharts({
               type: "column2d",
               renderAt: "chartcol1row1",
-              width: "100%",
+              width: "98%",
               height: "300",
               dataFormat: "json",
               dataSource: brandData["highest5Sessions"]
@@ -430,7 +344,7 @@ Time spent in store (dwell) -->
               var lowest5session = new FusionCharts({
               type: "column2d",
               renderAt: "chartcol2row1",
-              width: "100%",
+              width: "98%",
               height: "300",
               dataFormat: "json",
               dataSource: brandData["lowest5Sessionsdata"]
