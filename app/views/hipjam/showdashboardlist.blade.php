@@ -283,7 +283,31 @@ Time spent in store (dwell) -->
 
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
       return function() {
-        alert(`marker clickeed: ${marker}`);
+
+        let venue_id = marker.venue_id;
+
+
+        $.ajax({
+            type: "GET",
+            dataType: 'html',
+            contentType: "application/json",
+            url: `hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za/json`
+            success: function(response) {
+
+
+              alert("success");
+
+            },
+            error: function(error){
+              alert("fail");
+            }
+        });
+
+
+        // http://hiphub.hipzone.co.za/hipjam_viewvenue/1346/tracks03.hipzone.co.za
+        // Route::get('hipjam_viewvenue/{id}/{name}/json', array('uses' => 'hipjam\HipjamController@viewVenueJson', 'as' => 'hipjam_viewvenuejson'))->before('auth');
+
+        console.log(`marker clicked with id: ${venue_id}`);
       }
       })(marker, i));
 

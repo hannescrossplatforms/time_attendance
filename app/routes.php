@@ -303,6 +303,7 @@ Route::get('hipjam/getWindowconversion','hipjam\HipjamController@getWindowconver
 /*Route::get('hipjam_viewvenue/{id}', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');*/
 Route::get('hipjam_viewvenue/{id}', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');
 Route::get('hipjam_viewvenue/{id}/{name}', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');
+Route::get('hipjam_viewvenue/{id}/{name}/json', array('uses' => 'hipjam\HipjamController@viewVenueJson', 'as' => 'hipjam_viewvenuejson'))->before('auth');
 Route::get('hipjam_viewvenue', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');
 Route::get('hipjam/chartJsondata','hipjam\HipjamController@chartJsondata');
 Route::get('hipjam/heatmapJsondata','hipjam\HipjamController@heatmapJsondata');

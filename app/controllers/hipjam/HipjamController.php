@@ -1666,6 +1666,67 @@ class HipjamController extends \BaseController
         /*}*/
     }
 
+    public function viewVenueJson($json = null, $name = null)
+    {
+        /*$data = array();
+        //$data['edit'] = false;
+        $data['currentMenuItem'] = "Dashboard";
+
+        return \View::make('hipjam.viewvenue')->with('data', $data);*/
+        //return \View::make('hipjam.chart')->with('data', $data);
+
+        /*$data = array();
+        $data['currentMenuItem'] = "Dashboard";
+
+
+        return \View::make('hipjam.showdashboard')->with('data', $data);*/
+
+        error_log("showVenues");
+
+        $data = array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['apisitename'] = $name;
+        $data['apivenueid'] = $json;
+        $venue = \DB::table('venues')->select("sitename", "location", "track_slug")->where('id', '=', $json)->first();
+        $data['venue'] = $venue->sitename;
+        $data['track_slugname'] = $venue->track_slug;
+        //$data['location'] = $venue->location;
+
+        $assetsdiry = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
+        $data['fullpathimage'] = $assetsdiry->value . 'track/images/' . $venue->location . '.jpg';
+        // $venues = \Venue::all();
+        /*$venue = new \Venue();
+        $venues = $venue->getVenuesForUser('hipjam', 1);//print_r($venues); die();
+
+        foreach($venues as $venue) {
+            if($venue->ap_active == 0) {
+                $venue["status"] = '<span style="color:red">Inactive</span>';
+            } else {
+                $venue["status"] = '<span style="color:green">Active</span>';
+            }
+            if($venue->server) {
+                $venue["hostname"] = $venue->server->hostname;
+            } else {
+                $venue["hostname"] = "Server No longer exists";
+            }
+            // $venue["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $venue["sitename"]);
+        }
+
+        $data['venuesJson'] = json_encode($venues);*/
+
+        /*if($json) {
+            error_log("showDashboard : returning json" );
+            return \Response::json($data['venuesJson']);
+
+        } else {*/
+        error_log("showDashboard : returning NON json");
+        //return \View::make('hipjam.showvenues')->with('data', $data);
+        return \View::make('hipjam.viewvenue')->with('data', $data);
+        //return \Redirect::route('hipjam_showdashboard', ['json' => 1]);
+
+        /*}*/
+    }
+
     public function chartJsondata()
     {
 
