@@ -250,13 +250,13 @@ Time spent in store (dwell) -->
 
         if (venue.track_type === 'venue' || venue.track_type === '' || venue.track_type === null) {
           console.log(`[showdashbaordlist.blade] - Venue status: ${venue.status}` )
-          if (venue.status === 'Online') {
+          if (venue.status.toLowerCase().indexOf('online') >= 0) {
             ico = 'http://hiphub.hipzone.co.za/img/retail_marker.png'
           } else {
             ico = 'http://hiphub.hipzone.co.za/img/offline_retail_marker.gif'
           }
         } else {
-          if (venue.status === 'Online') {
+          if (venue.status.toLowerCase().indexOf('online') >=0) {
             ico = 'http://hiphub.hipzone.co.za/img/billboard_marker.png'
           } else {
             ico = 'http://hiphub.hipzone.co.za/img/offline_billboard_marker.gif'
