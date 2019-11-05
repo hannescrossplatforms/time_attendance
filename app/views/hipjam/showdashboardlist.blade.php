@@ -249,6 +249,7 @@ Time spent in store (dwell) -->
         let ico = '';
 
         if (venue.track_type === 'venue' || venue.track_type === '' || venue.track_type === null) {
+          console.log(`[showdashbaordlist.blade] - Venue status: ${venue.status}` )
           if (venue.status === 'Online') {
             ico = 'http://hiphub.hipzone.co.za/img/retail_marker.png'
           } else {
