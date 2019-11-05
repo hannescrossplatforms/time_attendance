@@ -41,7 +41,7 @@
 
 
 </style>
-<body class="hipJAM">
+<!-- <body class="hipJAM"> -->
 
     <a id="buildtable"></a>
 
@@ -50,7 +50,7 @@
 
         @include('hipjam.sidebar')
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+        <div>
             <h1 class="page-header">{{$data['venue']}} </h1>
 
             <?php if (strpos($_SERVER['REQUEST_URI'],'public') !== false) {
@@ -445,6 +445,6 @@
 
 
 
-  </body>
+  <!-- </body> -->
 
 @stop
