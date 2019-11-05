@@ -317,7 +317,7 @@ Time spent in store (dwell) -->
       })(marker, i));
 
       $("#clear-button-div").click(function(){
-        $("#clear-button-div").css("display", 'hidden');
+        $("#clear-button-div").css("display", 'none');
         $("#stats-and-graph-container").css("display", "initial");
         $("#ajax-venue-stats-page").html(null);
       });
