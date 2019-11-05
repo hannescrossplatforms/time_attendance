@@ -15,6 +15,9 @@
             <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
               <div id="map" style="width:100%; height: 500px;"></div>
 
+              <div id="clear-button-div" style="display: none">
+                <a class="btn btn-default btn-sm">Clear</a>
+              </div>
               <div id="ajax-venue-stats-page"></div>
 
             <div id="stats-and-graph-container">
@@ -296,6 +299,7 @@ Time spent in store (dwell) -->
             url: `hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za/json`,
             success: function(response) {
 
+              $("#clear-button-div").css("display": 'initial');
               $("#stats-and-graph-container").css("display", "none");
               $("#ajax-venue-stats-page").html(response);
             },
