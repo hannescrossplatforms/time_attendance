@@ -15,7 +15,7 @@
             <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
               <div id="map" style="width:100%; height: 500px;"></div>
 
-              <div id="clear-button-div" style="display: none">
+              <div id="clear-button-div" style="display: none; float: right; margin-top: 10px;">
                 <a class="btn btn-default btn-sm">Clear</a>
               </div>
               <div id="ajax-venue-stats-page"></div>
@@ -287,10 +287,10 @@ Time spent in store (dwell) -->
           {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
       return function() {
 
         let venue_id = marker.venue_id;
-
 
         $.ajax({
             type: "GET",
@@ -304,7 +304,7 @@ Time spent in store (dwell) -->
               $("#ajax-venue-stats-page").html(response);
             },
             error: function(error){
-              alert("fail");
+
             }
         });
 
@@ -315,6 +315,12 @@ Time spent in store (dwell) -->
         console.log(`marker clicked with id: ${venue_id}`);
       }
       })(marker, i));
+
+      $("#clear-button-div").click(function(){
+        $("#clear-button-div").css("display", 'hidden');
+        $("#stats-and-graph-container").css("display", "initial");
+        $("#ajax-venue-stats-page").html(null);
+      });
 
     </script>
 
