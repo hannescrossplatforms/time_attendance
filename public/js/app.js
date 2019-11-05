@@ -16,6 +16,8 @@ $( document ).ready(function() {
             $('#customer_now').html(Data2);
             $('#new_now').html(Data1.total.new);
 
+        }, error: function(xhr,err) {
+            debugger;
         }
     });
 
@@ -32,6 +34,8 @@ $( document ).ready(function() {
             $('#customer_today').html(Data2);
             $('#new_today').html(Data1.total.new);
 
+        }, error: function(xhr,err) {
+            debugger;
         }
     });
 
@@ -49,6 +53,8 @@ $( document ).ready(function() {
             //for onchange function
             week_data = data;
 
+        }, error: function(xhr,err) {
+            debugger;
         }
     });
 

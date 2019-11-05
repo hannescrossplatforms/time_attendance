@@ -140,7 +140,7 @@ $( document ).ready(function() {
 
 
     //---------- heatmap ----------
-    document.getElementById("wsproximitytab").onclick = function(){
+    $(document).on('click', '#wsproximitytab', function() {
         $('#loadingDiv').show();
         var hour = 13;
         $.ajax({
@@ -176,10 +176,10 @@ $( document ).ready(function() {
                 alert("Error retrieving data");
             }
         });
-    }
+    });
 
     //---------- zonal tab ----------
-    document.getElementById("zonaltab").onclick = function(){
+    $(document).on('click', '#zonaltab', function () {
         $.ajax({
 
             url: pathname+'hipjam/zonalJsondata',
@@ -191,7 +191,7 @@ $( document ).ready(function() {
 
             }
         });
-    }
+    });
 
     //---------- week ----------
     $('#rep_customer').html('loading...');
