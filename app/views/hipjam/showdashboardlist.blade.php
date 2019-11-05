@@ -291,7 +291,7 @@ Time spent in store (dwell) -->
             type: "GET",
             dataType: 'html',
             contentType: "application/json",
-            url: `hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za/json`
+            url: `hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za/json`,
             success: function(response) {
 
 
