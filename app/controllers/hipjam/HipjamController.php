@@ -1721,7 +1721,7 @@ class HipjamController extends \BaseController
         } else {*/
         error_log("showDashboard : returning NON json");
         //return \View::make('hipjam.showvenues')->with('data', $data);
-        return \View::make('hipjam.viewvenue')->with('data', $data);
+        return \View::make('hipjam.viewvenueajax')->with('data', $data);
         //return \Redirect::route('hipjam_showdashboard', ['json' => 1]);
 
         /*}*/
