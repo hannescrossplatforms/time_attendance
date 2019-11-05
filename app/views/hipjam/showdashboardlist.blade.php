@@ -299,7 +299,7 @@ Time spent in store (dwell) -->
             url: `hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za/json`,
             success: function(response) {
 
-              $("#clear-button-div").css("display": 'initial');
+              $("#clear-button-div").css("display", 'initial');
               $("#stats-and-graph-container").css("display", "none");
               $("#ajax-venue-stats-page").html(response);
             },
