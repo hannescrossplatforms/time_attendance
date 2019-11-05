@@ -15,6 +15,7 @@
             <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
               <div id="map" style="width:100%; height: 500px;"></div>
 
+            <div id="stats-and-graph-container">
 
               <div style="width: 100%; margin-top: 15px;">
                 <div style="width:33%; display: inline-block; height:94px;">
@@ -69,39 +70,43 @@
 
               </div>
 
-            <div class="row">
+              <div class="row">
 
-              <div class="graph-container" style="padding: 10px; width: 100%;">
-                <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;margin-top: 20px;">
-                  <h1>Best Performance</h1>
-                  <div class="graphcell" style="padding: 1px;">
-                    <div id="chartcol1row1"></div>
-                  </div>
-                  <div class="graphcell">
-                    <div id="chartcol1row2"></div>
-                  </div>
-                  <div class="graphcell">
-                    <div id="chartcol1row3"></div>
+                <div class="graph-container" style="padding: 10px; width: 100%;">
+                  <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;margin-top: 20px;">
+                    <h1>Best Performance</h1>
+                    <div class="graphcell" style="padding: 1px;">
+                      <div id="chartcol1row1"></div>
+                    </div>
+                    <div class="graphcell">
+                      <div id="chartcol1row2"></div>
+                    </div>
+                    <div class="graphcell">
+                      <div id="chartcol1row3"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="graph-container" style="padding: 10px; width: 100%;">
-                <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;">
-                  <h1>Worst Performance</h1>
-                  <div class="graphcell" style="padding: 1px;">
-                    <div id="chartcol2row1"></div>
-                  </div>
-                  <div class="graphcell">
-                    <div id="chartcol2row2"></div>
-                  </div>
-                  <div class="graphcell">
-                    <div id="chartcol2row3"></div>
+                <div class="graph-container" style="padding: 10px; width: 100%;">
+                  <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;">
+                    <h1>Worst Performance</h1>
+                    <div class="graphcell" style="padding: 1px;">
+                      <div id="chartcol2row1"></div>
+                    </div>
+                    <div class="graphcell">
+                      <div id="chartcol2row2"></div>
+                    </div>
+                    <div class="graphcell">
+                      <div id="chartcol2row3"></div>
+                    </div>
                   </div>
                 </div>
+
               </div>
 
             </div>
+
+
 
 
 <!--
