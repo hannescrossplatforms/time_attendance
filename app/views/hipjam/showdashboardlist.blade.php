@@ -266,7 +266,8 @@ Time spent in store (dwell) -->
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(venue.latitude,  venue.longitude),
           map: map,
-          icon: ico
+          icon: ico,
+          venue_id: venue.id
         });
         markers.push(marker)
       }
@@ -282,8 +283,7 @@ Time spent in store (dwell) -->
 
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
       return function() {
-        infowindow.setContent(locations[i][0]);
-        infowindow.open(map, marker);
+        alert(`marker clickeed: ${marker}`);
       }
       })(marker, i));
 
