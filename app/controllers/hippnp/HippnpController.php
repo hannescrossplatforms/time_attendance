@@ -700,6 +700,7 @@ class HippnpController extends \BaseController {
         \Log::info("Hannes 1");
 
         $allStaff = \Picknpay::fetchAllStaff($period, $start, $end, $storeId);
+        \Log::info("Hannes 1.1 staff count: 'count($allStaff)'");
         \Log::info("Hannes 2");
         $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, $start, $start, $storeId)
             ->map(function($row) {
