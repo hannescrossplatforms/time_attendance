@@ -20,11 +20,17 @@ class HipjamController extends \BaseController
         $data['currentMenuItem'] = "Venue Management";
 
         $brandIds = array();
-
         $userObj = \Auth::user();
-        $brands = $userObj->brands;
 
-        foreach ($brands as $brand) {
+        if (\User::hasAccess("superadmin")) {
+            $allowedbrands = \Brand::All();  
+        } else {
+            error_log("getBrandsForDatabase : NOT superadmin");
+            $allowedbrands = $userObj->brands;  
+        }
+    
+
+        foreach ($allowedbrands as $brand) {
             array_push($brandIds, $brand->id);
         }
 
@@ -33,7 +39,7 @@ class HipjamController extends \BaseController
         $data['live_number_of_billboards'] = $liveNumberOfBillboardsCount;
         \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
 
-        $liveNumberOfRetailVenues = count(\Venue::whereraw("track_type = 'venue' OR track_type IS NULL AND brand_id IN ($brandIdsString)")->get());
+        $liveNumberOfRetailVenues = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND brand_id IN ($brandIdsString)")->get());
         $data['live_number_of_retail_venues'] = $liveNumberOfBillboardsCount;
         \Log::info("[HipjamController  showDashboard] - live_number_of_retail_venues is: $liveNumberOfRetailVenues");
 
@@ -1626,8 +1632,9 @@ class HipjamController extends \BaseController
         $data['currentMenuItem'] = "Dashboard";
         $data['apisitename'] = $name;
         $data['apivenueid'] = $json;
-        $venue = \DB::table('venues')->select("sitename", "location", "track_slug")->where('id', '=', $json)->first();
+        $venue = \DB::table('venues')->select("id", "sitename", "location", "track_slug")->where('id', '=', $json)->first();
         $data['venue'] = $venue->sitename;
+        $data['venue_id'] = $venue->id;
         $data['track_slugname'] = $venue->track_slug;
         //$data['location'] = $venue->location;
 

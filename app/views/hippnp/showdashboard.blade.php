@@ -164,7 +164,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="chart-stage">
-                                                            <div id="staff_wrk">Loading...</div>
+                                                            <div class="popup-chart" data-fusion-id="chartobject-1" id="staff_wrk">Loading...</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -179,7 +179,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="chart-stage">
-                                                            <div id="staff_wrk_avg">Loading...</div>
+                                                            <div class="popup-chart" data-fusion-id="chartobject-2" id="staff_wrk_avg">Loading...</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -203,7 +203,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="chart-stage">
-                                                        <div id="staff_visits_per_category">Loading...</div>
+                                                        <div class="popup-chart" data-fusion-id="chartobject-3" id="staff_visits_per_category">Loading...</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,7 +218,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="chart-stage">
-                                                        <div id="staff_visits_per_store">Loading...</div>
+                                                        <div class="popup-chart" data-fusion-id="chartobject-4" id="staff_visits_per_store">Loading...</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -241,7 +241,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="chart-stage">
-                                                        <div id="staff_activity">Loading...</div>
+                                                        <div class="popup-chart" data-fusion-id="chartobject-5" id="staff_activity">Loading...</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -393,7 +393,7 @@ $(document).ready(function() {
             "dataset": <?php echo $data['category_list_data_visits_store']; ?>
         }
     });
-    debugger;
+
     apiChart.render();
 
     //Staff graph
@@ -485,7 +485,7 @@ function custom_report_period() {
 var staffActivityData = null;
 
 function renderCharts(time, start, end, category, store, province) {
-    debugger;
+
     $.ajax({
 
         url: pathname + 'hippnp/periodchartJsondata',
@@ -511,6 +511,7 @@ function renderCharts(time, start, end, category, store, province) {
             };
 
             apiChart = new FusionCharts({
+                id: 'staff_wrk',
                 type: 'mscolumn2d',
                 renderAt: 'staff_wrk',
                 width: '400',
@@ -537,6 +538,7 @@ function renderCharts(time, start, end, category, store, province) {
             };
 
             apiChart = new FusionCharts({
+                id: 'staff_wrk_avg',
                 type: 'mscolumn2d',
                 renderAt: 'staff_wrk_avg',
                 width: '400',
@@ -563,6 +565,7 @@ function renderCharts(time, start, end, category, store, province) {
             };
 
             apiChart = new FusionCharts({
+                id: 'staff_visits_per_category',
                 type: 'mscolumn2d',
                 renderAt: 'staff_visits_per_category',
                 width: '400',
@@ -591,6 +594,7 @@ function renderCharts(time, start, end, category, store, province) {
             };
 
             apiChart = new FusionCharts({
+                id: 'staff_visits_per_store',
                 type: 'mscolumn2d',
                 renderAt: 'staff_visits_per_store',
                 width: '400',
@@ -620,6 +624,7 @@ function renderCharts(time, start, end, category, store, province) {
             staffActivityData = data['staff_list_data'];
 
             apiChart = new FusionCharts({
+                id: 'staff_activity',
                 type: 'mscolumn2d',
                 renderAt: 'staff_activity',
                 width: '400',
@@ -725,6 +730,46 @@ function printpreview() {
 
 </script>
 
+<div id="chart_popup">
+</div>
+
+<script>
+    var opened_element = null;
+    $(document).on('click', '.popup-chart', function (e) {
+        console.info(e.target.toString())
+        if (opened_element === null && e.target.toString() !== "[object HTMLButtonElement]") {
+            opened_element = $(this);
+            $(this).fadeOut('fast', function () {
+            let chart_id = $(this).data('fusion-id');
+            let chart = FusionCharts.items[chart_id];
+            $(this).addClass('chart-popup');
+            chart.resizeTo('100%', '100%');
+
+            opened_element.prepend('<button class="close-popup-chart">X</button>');
+
+            $(this).fadeIn('fast');
+        });
+        }
+        
+    });
+    $(document).on('click', '.close-popup-chart', function () {
+        if (opened_element !== null) {
+            opened_element.fadeOut('fast', function() {
+            
+            let chart_id = opened_element.data('fusion-id');
+            let chart = FusionCharts.items[chart_id];
+            opened_element.removeClass('chart-popup');
+            chart.resizeTo(400, 350);
+            opened_element.fadeIn('fast');
+            $('.close-popup-chart').remove();
+        opened_element = null;
+        });
+        
+        }
+    });
+
+</script>
+
 <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hippnpBrandPdfDownloadPreview') }}" method="post">
     <input type="hidden" name="myPageone" id="myPageone">
     <input type="hidden" name="myPagetwo" id="myPagetwo">
@@ -732,5 +777,27 @@ function printpreview() {
     <input type="hidden" name="myPagefour" id="myPagefour">
     <input type="hidden" style="display:none" name="reportName" id="reportName" value="HannesTest">
 </form>
+
+<style>
+    .chart-popup {
+    left: calc(50% - 428px);
+    height: 80%;
+    width: 60%;
+    position: fixed;
+    margin: 80px;
+    top: 0;
+    z-index: 999;
+    background-color: #FFFFFF;
+
+    -webkit-box-shadow: 0px 0px 20px -9px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 20px -9px rgba(0,0,0,1);
+    box-shadow: 0px 0px 20px -9px rgba(0,0,0,1);
+    /* padding: 10%; */
+    }
+    .close-popup-chart {
+        float: right;
+        border: 1px solid gray;
+    }
+</style>
 
 @stop

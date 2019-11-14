@@ -48,7 +48,7 @@
                     <i class="fa fa-history" style="color: white; font-size: 41px; margin-top: 25px;"></i>
                   </div>
                   <div style="background-color: #7d6dde; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="uniques_today">Loading...</p>
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_uniques_today">Loading...</p>
                     <small style="color: white; padding-left: 15px; text-transform: uppercase;">Uniques today</small>
                   </div>
                 </div>
@@ -58,7 +58,7 @@
                     <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
                   </div>
                   <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="individuals_exposed_current">Loading...</p>
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_current">Loading...</p>
                     <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed current</small>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
                     <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
                   </div>
                   <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="individuals_exposed_today">Loading...</p>
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">Loading...</p>
                     <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed today</small>
                   </div>
                 </div>
@@ -248,20 +248,20 @@ Time spent in store (dwell) -->
 
 
     $.each(venues, function(i, venue) {
-      if (venue.latitude === null || venue.latitude === '') {
+    
+      if (venue.latitude === null && venue.latitude === '') {
         no_lat_long_count++;
       } else {
         let ico = '';
-
         if (venue.track_type === 'venue' || venue.track_type === '' || venue.track_type === null) {
-          console.log(`[showdashbaordlist.blade] - Venue status: ${venue.status}` )
-          if (venue.status.toLowerCase().indexOf('active') >= 0) {
+          console.log(venue.status.toLowerCase())
+          if (venue.status.toLowerCase().indexOf('inactive') === -1) {
             ico = 'http://hiphub.hipzone.co.za/img/retail_marker.png'
           } else {
             ico = 'http://hiphub.hipzone.co.za/img/offline_retail_marker.gif'
           }
         } else {
-          if (venue.status.toLowerCase().indexOf('active') >=0) {
+          if (venue.status.toLowerCase().indexOf('inactive') === -1) {
             ico = 'http://hiphub.hipzone.co.za/img/billboard_marker.png'
           } else {
             ico = 'http://hiphub.hipzone.co.za/img/offline_billboard_marker.gif'
@@ -269,29 +269,17 @@ Time spent in store (dwell) -->
         }
 
         marker = new google.maps.Marker({
-          position: new google.maps.LatLng(venue.latitude,  venue.longitude),
+          position: new google.maps.LatLng(parseFloat(venue.latitude),  parseFloat(venue.longitude)),
           map: map,
           icon: ico,
           venue_id: venue.id
         });
-        markers.push(marker)
-      }
-    });
 
-    if (no_lat_long_count !== 0) {
-      $('#warn_no_locations_found').html(`<i class="fa fa-info-circle" style="margin-right: 10px"></i>${no_lat_long_count} venues do not have location data`)
-      $('#warn_no_locations_found').slideDown('fast');
-    }
-
-    var markerCluster = new MarkerClusterer(map, markers,
-          {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
       return function() {
 
         let venue_id = marker.venue_id;
-
+        
         $.ajax({
             type: "GET",
             dataType: 'html',
@@ -315,6 +303,20 @@ Time spent in store (dwell) -->
         console.log(`marker clicked with id: ${venue_id}`);
       }
       })(marker, i));
+
+        markers.push(marker)
+      }
+    });
+
+    if (no_lat_long_count !== 0) {
+      $('#warn_no_locations_found').html(`<i class="fa fa-info-circle" style="margin-right: 10px"></i>${no_lat_long_count} venues do not have location data`)
+      $('#warn_no_locations_found').slideDown('fast');
+    }
+
+    var markerCluster = new MarkerClusterer(map, markers,
+          {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+    
 
       $("#clear-button-div").click(function(){
         $("#clear-button-div").css("display", 'none');
@@ -541,6 +543,69 @@ Time spent in store (dwell) -->
         display:inline;
       }
     </style>
+<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-analytics.js"></script>
+<script>
+            let liveJam = {};
+            let loaded_venues = {{$data['venuesJson']}};
+            let venue_array = [];
+          
+            liveJam.initialize = (callback) => {
+                $.getScript('https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js', () => {
+                    let config = {
+                        apiKey: "AIzaSyDUxh-Quw0-D6V7Q2Pjcwgeco7R7x08hWw",
+                        authDomain: "tracks-e61f4.firebaseapp.com",
+                        databaseURL: "https://tracks-e61f4.firebaseio.com",
+                        projectId: "tracks-e61f4",
+                        storageBucket: "",
+                        messagingSenderId: "798983478031",
+                        appId: "1:798983478031:web:f81f6341211ab4dfd7bc7a",
+                        measurementId: "G-9B1XXZ1MXG"
+                    };
+                    firebase.initializeApp(config);
+                    firebase.analytics();
+
+                    var db = firebase.firestore();
+                    this.all = db.collection;
+                    $.each(loaded_venues, function(i, v) {
+                      venue_array.push(db.collection(v.id));
+                    });
+                    
+                    callback();
+                });
+            };
+
+            liveJam.getVenueData = () => {
+                let current_date = new Date();
+                let formatted_node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}`
+                let exposed_current = 0;
+                let exposed_today = 0;
+                let uniques_today = 0;
+                let venues_with_no_data = 0; 
+
+                $.each(venue_array, function(i, v) {
+                  v.doc(formatted_node).get()
+                    .then((doc => {
+                      console.log('Venue loaded')
+                      if (doc.exists) {
+                        exposed_current += doc.data().customers_in_store_now;
+                        exposed_today += doc.data().customers_in_store_today;
+                        uniques_today += doc.data().new_customers_today;
+                      } else {
+                        venues_with_no_data += 1;
+                      }
+                      $('#live_individuals_exposed_current').html(exposed_current.toString());
+                      $('#live_individuals_exposed_today').html(exposed_today.toString());
+                      $('#live_uniques_today').html(uniques_today.toString());
+                    }))
+                });
+                
+            }
+
+            liveJam.initialize(() => {
+                liveJam.getVenueData();
+            })
+        </script>
 
   </body>
 
