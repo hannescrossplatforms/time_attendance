@@ -13,8 +13,6 @@ class EngagePicknPay extends Eloquent {
 
         if ($startDate == null && $endDate == null) {
 
-            \Log::info("Hannes FETCH STORES start and end date was nil");
-
             $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
 
             $startDate = $dateRange['startDate'];

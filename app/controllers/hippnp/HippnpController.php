@@ -697,53 +697,51 @@ class HippnpController extends \BaseController {
         // Sum of all categories
 
         $finalChartObjectStaff = array();
-        \Log::info("Hannes 1");
 
         $allStaff = \Picknpay::fetchAllStaff($period, $start, $end, $storeId);
         $staffCount = count($allStaff);
-        \Log::info("Hannes 1.1 staff count: '$staffCount'");
-        \Log::info("Hannes 2");
+
         $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, $start, $start, $storeId)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
             });
 
-            \Log::info("Hannes 3");
+
         $data['all_staff'] = $allStaff;
         $data['staff_list'] = $datesForAllStaff; //////////TOP ONE
 
-        \Log::info("Hannes 4");
+
         foreach ($allStaff as $staff) {
 
-            \Log::info("Hannes 5");
+
             $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->staff_id);
             $stafId = $staffObj->id;
             $staffName = $staffObj->name;
             $dataArray = array();
 
-            \Log::info("Hannes 6");
+
 
             foreach ( $datesForAllStaff as $date ) {
 
-                \Log::info("Hannes 7");
+
                 $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $stafId, $storeId, $provinceId, "SUM");
                 if (count($response) == 0) {
-                    \Log::info("Hannes 8");
+
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
                     array_push($dataArray, $empty_array);
                 } else {
-                    \Log::info("Hannes 9");
+
                     $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
                 }
 
             }
-            \Log::info("Hannes 10");
+
             $obj[] = [
                 'seriesname' => $staffName,
                 'data' => $dataArray
             ];
-            \Log::info("Hannes 11");
+
             array_push($finalChartObjectStaff, $obj);
 
         };
