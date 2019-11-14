@@ -179,11 +179,14 @@ class Picknpay extends Eloquent {
         // ->get();
 
         if ($storeID != null) {
+            \Log::info("Hannes Store id is not null");
+            \Log::info("Hannes Store id is '$storeID'");
             return Picknpay::select(DB::raw("DISTINCT staff_id"))
             ->where("store_id", "=", $storeID)
             ->get();
         }
         else {
+            \Log::info("Hannes Store id is null");
             return Picknpay::select(DB::raw("DISTINCT staff_id"))
             ->get();
         }
