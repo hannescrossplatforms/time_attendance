@@ -29,9 +29,12 @@ class EngagePicknPay extends Eloquent {
         \Log::info("Hannes FETCH STORES now startDate is: '$startDate'");
         \Log::info("Hannes FETCH STORES now endDate is: '$endDate'");
 
+        // return EngagePicknPay::select(DB::raw("DISTINCT store, store_id"))
+        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
+        // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
+        // ->get();
+
         return EngagePicknPay::select(DB::raw("DISTINCT store, store_id"))
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
         ->get();
 
     }
