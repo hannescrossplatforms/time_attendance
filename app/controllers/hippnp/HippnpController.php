@@ -232,28 +232,25 @@ class HippnpController extends \BaseController {
 
         //Number of visits per store
 
-        \Log::info("Hannes 1");
 
         $finalVisitsStoreChartObject = array();
         $allStores = \EngagePicknpay::fetchAllStores($period, null, null);
 
-        \Log::info("Hannes 2");
-
         foreach ($allStores as $store) {
-            \Log::info("Hannes 2.1");
+
             $storeName = $store->store;
             $storeId = $store->store_id;
             $dataArrayVisitsStore = array();
-            \Log::info("Hannes 2.2");
+
             foreach ( $dates as $date ) {
-                \Log::info("Hannes 2.3");
+
                 $response = \Picknpay::fetchDwellVisitsForStoreWithDate($date['label'], $storeId, "");
                 if (count($response) == 0) {
-                    \Log::info("Hannes 2.4");
+
                     $empty_array = array(['value' => '0']);
                     array_push($dataArrayVisitsStore, $empty_array);
                 } else {
-                    \Log::info("Hannes 2.5");
+
                     array_push($dataArrayVisitsStore, $response);
                 }
 
@@ -264,8 +261,6 @@ class HippnpController extends \BaseController {
             ];
             array_push($finalVisitsStoreChartObject, $obj);
         };
-
-        \Log::info("Hannes 3");
 
         if (count($finalVisitsStoreChartObject) > 0) {
             $data['category_list_data_visits_store'] = json_encode($finalVisitsStoreChartObject[count($finalVisitsStoreChartObject)- 1]);
@@ -286,7 +281,7 @@ class HippnpController extends \BaseController {
 
         //
 
-        \Log::info("Hannes 4");
+
 
         return \View::make('hippnp.showdashboard')->with('data', $data);
 
@@ -702,41 +697,51 @@ class HippnpController extends \BaseController {
         // Sum of all categories
 
         $finalChartObjectStaff = array();
+        \Log::info("Hannes 1");
 
         $allStaff = \Picknpay::fetchAllStaff($period, $start, $end);
+        \Log::info("Hannes 2");
         $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
             });
 
+            \Log::info("Hannes 3");
         $data['all_staff'] = $allStaff;
         $data['staff_list'] = $datesForAllStaff; //////////TOP ONE
 
+        \Log::info("Hannes 4");
         foreach ($allStaff as $staff) {
 
+            \Log::info("Hannes 5");
             $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->staff_id);
             $stafId = $staffObj->id;
             $staffName = $staffObj->name;
             $dataArray = array();
 
+            \Log::info("Hannes 6");
+
             foreach ( $datesForAllStaff as $date ) {
+
+                \Log::info("Hannes 7");
                 $response = \Picknpay::fetchDwellTimeDataForStaffWithDate($date['label'], $stafId, $storeId, $provinceId, "SUM");
                 if (count($response) == 0) {
+                    \Log::info("Hannes 8");
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
                     array_push($dataArray, $empty_array);
                 } else {
-
+                    \Log::info("Hannes 9");
                     $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
                 }
 
             }
-
+            \Log::info("Hannes 10");
             $obj[] = [
                 'seriesname' => $staffName,
                 'data' => $dataArray
             ];
-
+            \Log::info("Hannes 11");
             array_push($finalChartObjectStaff, $obj);
 
         };
