@@ -32,7 +32,7 @@ class HippnpController extends \BaseController {
         $finalChartObjectStaff = array();
 
         $allStaff = \Picknpay::fetchAllStaff($period, null, null, null);
-        $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, null, null)
+        $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, null, null, null)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
             });
@@ -112,7 +112,7 @@ class HippnpController extends \BaseController {
         $data['all_provinces'] = $allProvinces;
 
 
-        $dates = \Picknpay::datesToFetchChartDataFor($period, null, null)
+        $dates = \Picknpay::datesToFetchChartDataFor($period, null, null, null)
         ->map(function($row) {
                 return ['label' => $row['created_att']];
             });
@@ -671,14 +671,14 @@ class HippnpController extends \BaseController {
 
         if ($start != null && $end != null){
             $allCategories = \Picknpay::fetchAllCategories($period, $start, $end, $categoryId, $storeId);
-            $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $end)
+            $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $end, $storeId)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
                 });
         }
         else {
             $allCategories = \Picknpay::fetchAllCategories($period, $start, $start, $categoryId, $storeId);
-            $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
+            $dates = \Picknpay::datesToFetchChartDataFor($period, $start, $start, $storeId)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
             });
@@ -701,7 +701,7 @@ class HippnpController extends \BaseController {
 
         $allStaff = \Picknpay::fetchAllStaff($period, $start, $end, $storeId);
         \Log::info("Hannes 2");
-        $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, $start, $start)
+        $datesForAllStaff = \Picknpay::datesToFetchChartDataFor($period, $start, $start, $storeId)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
             });

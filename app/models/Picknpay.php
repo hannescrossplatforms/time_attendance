@@ -13,7 +13,7 @@ class Picknpay extends Eloquent {
         $this->connection = \Utils::getEngageDbConnection();
     }
 
-    public static function datesToFetchChartDataFor($date, $startDate, $endDate){
+    public static function datesToFetchChartDataFor($date, $startDate, $endDate, $storeID = null){
 
         if ($startDate == null && $endDate == null) {
 
@@ -29,12 +29,25 @@ class Picknpay extends Eloquent {
         $startDate = $dateRange['startDate'];
         $endDate = $dateRange['endDate'];
 
-        return Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
-        ->where('created_at', ">=", $startDate)
-        ->where('created_at', "<=", $endDate)
-        ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-        ->get();
+        if ($storeID != null) {
+            return Picknpay::orderBy('created_at', 'ASC')
+            ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
+            ->where('created_at', ">=", $startDate)
+            ->where('created_at', "<=", $endDate)
+            ->where("store_id", "=", $storeID)
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+            ->get();
+        }
+        else {
+            return Picknpay::orderBy('created_at', 'ASC')
+            ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS created_att"))
+            ->where('created_at', ">=", $startDate)
+            ->where('created_at', "<=", $endDate)
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+            ->get();
+        }
+
+
 
     }
 
