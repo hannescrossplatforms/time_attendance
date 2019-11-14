@@ -232,8 +232,12 @@ class HippnpController extends \BaseController {
 
         //Number of visits per store
 
+        \Log::info("Hannes 1");
+
         $finalVisitsStoreChartObject = array();
         $allStores = \EngagePicknpay::fetchAllStores($period, null, null);
+
+        \Log::info("Hannes 2");
 
         foreach ($allStores as $store) {
             $storeName = $store->store;
@@ -257,6 +261,8 @@ class HippnpController extends \BaseController {
             array_push($finalVisitsStoreChartObject, $obj);
         };
 
+        \Log::info("Hannes 3");
+
         if (count($finalVisitsStoreChartObject) > 0) {
             $data['category_list_data_visits_store'] = json_encode($finalVisitsStoreChartObject[count($finalVisitsStoreChartObject)- 1]);
         }
@@ -276,7 +282,7 @@ class HippnpController extends \BaseController {
 
         //
 
-
+        \Log::info("Hannes 4");
 
         return \View::make('hippnp.showdashboard')->with('data', $data);
 
