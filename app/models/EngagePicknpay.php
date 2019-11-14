@@ -10,7 +10,7 @@ class EngagePicknPay extends Eloquent {
     }
 
     public static function fetchAllStores($date, $startDate, $endDate, $storeID = null){
-
+st
         if ($startDate == null && $endDate == null) {
 
             $dateRange = Picknpay::getDateForPeriodAndTimeOfDay($date);
