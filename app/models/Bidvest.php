@@ -196,7 +196,7 @@ class Bidvest extends Eloquent {
         return $bidvestBrand->venues()->get();
     }
 
-    public static function fetchAllStaff($date, $startDate, $endDate){
+    public static function fetchAllStaff($date, $startDate, $endDate, $storeID = null){
 
         if ($startDate == null && $endDate == null) {
 
@@ -207,8 +207,15 @@ class Bidvest extends Eloquent {
 
         }
 
-        return Bidvest::select(DB::raw("DISTINCT staff_id"))
-        ->get();
+        if ($storeID != null) {
+            return Bidvest::select(DB::raw("DISTINCT staff_id"))
+            ->whereraw("store_id = '$storeID'")
+            ->get();
+        }
+        else {
+            return Bidvest::select(DB::raw("DISTINCT staff_id"))
+            ->get();
+        }
 
     }
 

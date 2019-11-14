@@ -34,8 +34,8 @@ class HipbidvestController extends \BaseController {
 
         $finalChartObjectStaff = array();
 
-        $allStaff = \Bidvest::fetchAllStaff($period, null, null);
-        $datesForAllStaff = \Bidvest::datesToFetchChartDataFor($period, null, null)
+        $allStaff = \Bidvest::fetchAllStaff($period, null, null, null);
+        $datesForAllStaff = \Bidvest::datesToFetchChartDataFor($period, null, null, null)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
             });
@@ -101,7 +101,7 @@ class HipbidvestController extends \BaseController {
         $data['all_provinces'] = $allProvinces;
 
 
-        $dates = \Bidvest::datesToFetchChartDataFor($period, null, null)
+        $dates = \Bidvest::datesToFetchChartDataFor($period, null, null, null)
         ->map(function($row) {
                 return ['label' => $row['created_att']];
             });
@@ -277,14 +277,14 @@ class HipbidvestController extends \BaseController {
 
         if ($start != null && $end != null){
             $allCategories = \Bidvest::fetchAllCategories($period, $start, $end, $categoryId);
-            $dates = \Bidvest::datesToFetchChartDataFor($period, $start, $end)
+            $dates = \Bidvest::datesToFetchChartDataFor($period, $start, $end, $storeId)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
                 });
         }
         else {
             $allCategories = \Bidvest::fetchAllCategories($period, $start, $start, $categoryId);
-            $dates = \Bidvest::datesToFetchChartDataFor($period, $start, $start)
+            $dates = \Bidvest::datesToFetchChartDataFor($period, $start, $start, $storeId)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
                 });
@@ -443,8 +443,8 @@ class HipbidvestController extends \BaseController {
 
         $finalChartObjectStaff = array();
 
-        $allStaff = \Bidvest::fetchAllStaff($period, $start, $end);
-        $datesForAllStaff = \Bidvest::datesToFetchChartDataFor($period, $start, $start)
+        $allStaff = \Bidvest::fetchAllStaff($period, $start, $end, $storeId);
+        $datesForAllStaff = \Bidvest::datesToFetchChartDataFor($period, $start, $start, $storeId)
             ->map(function($row) {
                     return ['label' => $row['created_att']];
             });
@@ -530,7 +530,7 @@ class HipbidvestController extends \BaseController {
 
         $startDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
         $endDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
-        $allStaff = \Bidvest::fetchAllStaff('today', $startDate, $endDate);
+        $allStaff = \Bidvest::fetchAllStaff('today', $startDate, $endDate, null);
 
 
         foreach ($allStaff as $staff) {
@@ -612,7 +612,7 @@ class HipbidvestController extends \BaseController {
 
         $startDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
         $endDate = \Bidvest::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
-        $allStaff = \Bidvest::fetchAllStaff('today', $startDate, $endDate);
+        $allStaff = \Bidvest::fetchAllStaff('today', $startDate, $endDate, null);
 
 
         foreach ($allStaff as $staff) {
