@@ -85,7 +85,7 @@ class HippnpController extends \BaseController {
         //Get all categories for charts to render
 
         $allCategories = \Picknpay::fetchAllCategories($period, null, null, null, null);
-        $allStores = \Picknpay::fetchAllStores($period, null, null);
+        $allStores = \Picknpay::fetchAllStores($period, null, null, null);
         $allCategoriesForFilter = \Picknpay::fetchAllCategoriesForFilter(null);
         $data['all_categories_for_filter'] = $allCategoriesForFilter;
 
@@ -234,7 +234,7 @@ class HippnpController extends \BaseController {
 
 
         $finalVisitsStoreChartObject = array();
-        $allStores = \EngagePicknpay::fetchAllStores($period, null, null);
+        $allStores = \EngagePicknpay::fetchAllStores($period, null, null, null);
 
         foreach ($allStores as $store) {
 
@@ -874,7 +874,7 @@ class HippnpController extends \BaseController {
         //Number of visits per store
 
         $finalVisitsStoreChartObject = array();
-        $allStores = \EngagePicknpay::fetchAllStores($period, null, null);
+        $allStores = \EngagePicknpay::fetchAllStores($period, null, null, $storeId);
 
         foreach ($allStores as $store) {
             $storeName = $store->store;

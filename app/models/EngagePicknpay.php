@@ -9,7 +9,7 @@ class EngagePicknPay extends Eloquent {
         $this->connection = \Utils::getEngageDbConnection();
     }
 
-    public static function fetchAllStores($date, $startDate, $endDate){
+    public static function fetchAllStores($date, $startDate, $endDate, $storeID = null){
 
         if ($startDate == null && $endDate == null) {
 
@@ -27,8 +27,17 @@ class EngagePicknPay extends Eloquent {
         // ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
         // ->get();
 
-        return EngagePicknPay::select(DB::raw("DISTINCT store, store_id"))
-        ->get();
+        if ($storeID != null) {
+            return EngagePicknPay::select(DB::raw("DISTINCT store, store_id"))
+            ->where("store_id", "=", $storeID)
+            ->get();
+        }
+        else {
+            return EngagePicknPay::select(DB::raw("DISTINCT store, store_id"))
+            ->get();
+        }
+
+
 
     }
 

@@ -86,7 +86,7 @@ class HipbidvestController extends \BaseController {
         //Get all categories for charts to render
 
         $allCategories = \Bidvest::fetchAllCategories($period, null, null, null);
-        $allStores = \Bidvest::fetchAllStores($period, null, null);
+        $allStores = \Bidvest::fetchAllStores($period, null, null, null);
         $allCategoriesForFilter = \Bidvest::fetchAllCategoriesForFilter();
         $data['all_categories_for_filter'] = $allCategoriesForFilter;
 
@@ -222,7 +222,7 @@ class HipbidvestController extends \BaseController {
         //Number of visits per store
 
         $finalVisitsStoreChartObject = array();
-        $allStores = \EngageBidvest::fetchAllStores($period, null, null);
+        $allStores = \EngageBidvest::fetchAllStores($period, null, null, null);
 
         foreach ($allStores as $store) {
             $storeName = $store->store;
@@ -403,7 +403,7 @@ class HipbidvestController extends \BaseController {
         //Number of visits per store
 
         $finalVisitsStoreChartObject = array();
-        $allStores = \EngageBidvest::fetchAllStores($period, null, null);
+        $allStores = \EngageBidvest::fetchAllStores($period, null, null, $storeId);
 
         foreach ($allStores as $store) {
             $storeName = $store->store;

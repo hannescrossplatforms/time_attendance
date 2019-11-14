@@ -9,7 +9,7 @@ class EngageBidvest extends Eloquent {
         $this->connection = \Utils::getEngageDbConnection();
     }
 
-    public static function fetchAllStores($date, $startDate, $endDate){
+    public static function fetchAllStores($date, $startDate, $endDate, $storeID = null){
 
         if ($startDate == null && $endDate == null) {
 
@@ -20,11 +20,21 @@ class EngageBidvest extends Eloquent {
 
         }
 
+        if($storeID != null) {
+            return EngageBidvest::select(DB::raw("DISTINCT store, store_id"))
+            ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
+            ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
+            ->where("store_id", "=", $storeID)
+            ->get();
+        }
+        else {
+            return EngageBidvest::select(DB::raw("DISTINCT store, store_id"))
+            ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
+            ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
+            ->get();
+        }
 
-        return EngageBidvest::select(DB::raw("DISTINCT store, store_id"))
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate'")
-        ->whereraw("DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")
-        ->get();
+
 
     }
 
