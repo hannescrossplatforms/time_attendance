@@ -159,7 +159,7 @@ class Picknpay extends Eloquent {
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_staff")->get();
     }
 
-    public static function fetchAllStaff($date, $startDate, $endDate){
+    public static function fetchAllStaff($date, $startDate, $endDate, $storeID = null){
 
         if ($startDate == null && $endDate == null) {
 
@@ -178,8 +178,17 @@ class Picknpay extends Eloquent {
         // ->where('end_time', ">=", $startDate)
         // ->get();
 
-        return Picknpay::select(DB::raw("DISTINCT staff_id"))
-        ->get();
+        if ($storeID != null) {
+            return Picknpay::select(DB::raw("DISTINCT staff_id"))
+            ->where("store_id", "=", $storeID)
+            ->get();
+        }
+        else {
+            return Picknpay::select(DB::raw("DISTINCT staff_id"))
+            ->get();
+        }
+
+
 
     }
 
