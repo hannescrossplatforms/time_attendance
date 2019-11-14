@@ -208,8 +208,6 @@ class Bidvest extends Eloquent {
         }
 
         return Bidvest::select(DB::raw("DISTINCT staff_id"))
-        ->where('end_time', "<=", $endDate)
-        ->where('end_time', ">=", $startDate)
         ->get();
 
     }
