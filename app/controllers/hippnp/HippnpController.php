@@ -240,16 +240,20 @@ class HippnpController extends \BaseController {
         \Log::info("Hannes 2");
 
         foreach ($allStores as $store) {
+            \Log::info("Hannes 2.1");
             $storeName = $store->store;
             $storeId = $store->store_id;
             $dataArrayVisitsStore = array();
-
+            \Log::info("Hannes 2.2");
             foreach ( $dates as $date ) {
+                \Log::info("Hannes 2.3");
                 $response = \Picknpay::fetchDwellVisitsForStoreWithDate($date['label'], $storeId, "");
                 if (count($response) == 0) {
+                    \Log::info("Hannes 2.4");
                     $empty_array = array(['value' => '0']);
                     array_push($dataArrayVisitsStore, $empty_array);
                 } else {
+                    \Log::info("Hannes 2.5");
                     array_push($dataArrayVisitsStore, $response);
                 }
 
