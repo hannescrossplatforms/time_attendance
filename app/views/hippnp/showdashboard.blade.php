@@ -391,9 +391,9 @@ $(document).ready(function() {
                 "category": <?php echo $data['category_list']; ?>
             }],
             "dataset": <?php echo $data['category_list_data_visits_store']; ?>
-
         }
     });
+    debugger;
     apiChart.render();
 
     //Staff graph
