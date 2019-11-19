@@ -465,6 +465,7 @@ function get_stores_for_province() {
             success: function(result) {
                 $("#store-select-container").html(result);
                 custom_report_period();
+                loadChartPopoutJS();
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
