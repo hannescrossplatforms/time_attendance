@@ -19,6 +19,8 @@
 
 function renderChartsTest(time, start, end, category, store, province) {
 
+    debugger;
+
     $.ajax({
 
             url: pathname + 'hippnp/periodchartJsondata',
