@@ -270,7 +270,6 @@
 
 <script type="text/javascript">
 
-    loadChartPopoutJS();
     $("#venuefrom, #venueto").datepicker({
         format: 'yyyy-mm-dd',
         autoclose: true,
@@ -804,5 +803,9 @@ function printpreview() {
         border: 1px solid gray;
     }
 </style>
+
+<script>
+    loadChartPopoutJS();
+</script>
 
 @stop
