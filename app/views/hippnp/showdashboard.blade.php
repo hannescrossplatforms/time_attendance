@@ -15,6 +15,12 @@
 }
 </style>
 
+<script src="{{ asset('js/hippnp/hippnp.js') }}"></script>
+
+<script>
+    loadChartPopoutJS();
+</script>
+
 <body class="hipTnA">
     <!-- <div id="loadingDiv" class="overlay">
         <img src="./img/loader.gif" style="width:80px;">
@@ -733,7 +739,8 @@ function printpreview() {
 <div id="chart_popup">
 </div>
 
-<script>
+
+<!-- <script>
     var opened_element = null;
     $(document).on('click', '.popup-chart', function (e) {
         console.info(e.target.toString())
@@ -750,12 +757,12 @@ function printpreview() {
             $(this).fadeIn('fast');
         });
         }
-        
+
     });
     $(document).on('click', '.close-popup-chart', function () {
         if (opened_element !== null) {
             opened_element.fadeOut('fast', function() {
-            
+
             let chart_id = opened_element.data('fusion-id');
             let chart = FusionCharts.items[chart_id];
             opened_element.removeClass('chart-popup');
@@ -764,11 +771,11 @@ function printpreview() {
             $('.close-popup-chart').remove();
         opened_element = null;
         });
-        
+
         }
     });
 
-</script>
+</script> -->
 
 <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hippnpBrandPdfDownloadPreview') }}" method="post">
     <input type="hidden" name="myPageone" id="myPageone">
@@ -799,5 +806,7 @@ function printpreview() {
         border: 1px solid gray;
     }
 </style>
+
+
 
 @stop

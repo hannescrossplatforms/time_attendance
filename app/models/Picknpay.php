@@ -197,7 +197,6 @@ class Picknpay extends Eloquent {
             ->get();
         }
         else {
-            \Log::info("Hannes Store id is null");
             return Picknpay::select(DB::raw("DISTINCT staff_id"))
             ->get();
         }
