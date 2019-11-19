@@ -510,7 +510,7 @@ function renderCharts(time, start, end, category, store, province) {
                 "theme": "zune"
             };
 
-            apiChart = new FusionCharts({
+            var apiChart = new FusionCharts({
                 id: 'staff_wrk',
                 type: 'mscolumn2d',
                 renderAt: 'staff_wrk',
