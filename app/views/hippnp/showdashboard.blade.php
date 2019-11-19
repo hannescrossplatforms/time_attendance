@@ -15,11 +15,7 @@
 }
 </style>
 
-<script src="{{ asset('js/hippnp/hippnp.js') }}"></script>
 
-<script>
-    loadChartPopoutJS();
-</script>
 
 <body class="hipTnA">
     <!-- <div id="loadingDiv" class="overlay">
@@ -265,6 +261,12 @@
 
 <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+<script src="{{ asset('js/hippnp/hippnp.js') }}"></script>
+
+<script>
+    loadChartPopoutJS();
+</script>
 
 <script src="{{ asset('js/jquery-2.1.4.js') }}"></script>
 <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
