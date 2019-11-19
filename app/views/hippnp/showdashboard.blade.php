@@ -538,7 +538,7 @@ function renderCharts(time, start, end, category, store, province) {
             };
 
             apiChart = new FusionCharts({
-                id: 'staff_wrk_avg',
+                id: 'staff_wrk_avg_chart',
                 type: 'mscolumn2d',
                 renderAt: 'staff_wrk_avg',
                 width: '400',
@@ -565,7 +565,7 @@ function renderCharts(time, start, end, category, store, province) {
             };
 
             apiChart = new FusionCharts({
-                id: 'staff_visits_per_category',
+                id: 'staff_visits_per_category_chart',
                 type: 'mscolumn2d',
                 renderAt: 'staff_visits_per_category',
                 width: '400',
@@ -594,7 +594,7 @@ function renderCharts(time, start, end, category, store, province) {
             };
 
             apiChart = new FusionCharts({
-                id: 'staff_visits_per_store',
+                id: 'staff_visits_per_store_chart',
                 type: 'mscolumn2d',
                 renderAt: 'staff_visits_per_store',
                 width: '400',
@@ -624,7 +624,7 @@ function renderCharts(time, start, end, category, store, province) {
             staffActivityData = data['staff_list_data'];
 
             apiChart = new FusionCharts({
-                id: 'staff_activity',
+                id: 'staff_activity_chart',
                 type: 'mscolumn2d',
                 renderAt: 'staff_activity',
                 width: '400',
