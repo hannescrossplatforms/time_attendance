@@ -58,7 +58,8 @@
                     "xAxisName": "Category",
                     "yAxisName": "Total dwell time (minutes)",
                     "rotatevalues": "1",
-                    "theme": "zune"
+                    "theme": "zune",
+                    "decimals": "2"
                 };
 
                 apiChart = new FusionCharts({
@@ -84,7 +85,8 @@
                     "xAxisName": "Category",
                     "yAxisName": "Average dwell time (minutes)",
                     "rotatevalues": "1",
-                    "theme": "zune"
+                    "theme": "zune",
+                    "decimals": "2"
                 };
 
                 apiChart = new FusionCharts({
@@ -110,7 +112,8 @@
                     "xAxisName": "Category",
                     "yAxisName": "Number of visits",
                     "rotatevalues": "1",
-                    "theme": "zune"
+                    "theme": "zune",
+                    "decimals": "2"
                 };
 
                 apiChart = new FusionCharts({
@@ -138,7 +141,8 @@
                     "xAxisName": "Store",
                     "yAxisName": "Number of visits per store",
                     "rotatevalues": "1",
-                    "theme": "zune"
+                    "theme": "zune",
+                    "decimals": "2"
                 };
 
                 apiChart = new FusionCharts({
@@ -165,7 +169,8 @@
                     "xAxisName": "Staff Activity",
                     "yAxisName": "Total dwell time (minutes)",
                     "rotatevalues": "1",
-                    "theme": "zune"
+                    "theme": "zune",
+                    "decimals": "2"
                 };
 
                 staffActivityData = data['staff_list_data'];

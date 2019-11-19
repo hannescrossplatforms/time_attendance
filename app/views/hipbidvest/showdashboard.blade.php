@@ -328,7 +328,8 @@ $(document).ready(function() {
         "xAxisName": "Room",
         "yAxisName": "Total dwell time (minutes)",
         "rotatevalues": "1",
-        "theme": "zune"
+        "theme": "zune",
+        "decimals": "2"
     };
 
     apiChart = new FusionCharts({
@@ -354,9 +355,9 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Room",
         "yAxisName": "Average dwell time (minutes)",
-
         "rotatevalues": "1",
-        "theme": "zune"
+        "theme": "zune",
+        "decimals": "2"
     };
 
     apiChart = new FusionCharts({
@@ -383,7 +384,8 @@ $(document).ready(function() {
         "xAxisName": "Room",
         "yAxisName": "Number of visits per category",
         "rotatevalues": "1",
-        "theme": "zune"
+        "theme": "zune",
+        "decimals": "2"
     };
 
     apiChart = new FusionCharts({
@@ -410,7 +412,8 @@ $(document).ready(function() {
         "xAxisName": "Hospital",
         "yAxisName": "Number of visits per hospital",
         "rotatevalues": "1",
-        "theme": "zune"
+        "theme": "zune",
+        "decimals": "2"
     };
 
     apiChart = new FusionCharts({
@@ -437,7 +440,8 @@ $(document).ready(function() {
         "xAxisName": "Staff Activity",
         "yAxisName": "Total dwell time (minutes)",
         "rotatevalues": "1",
-        "theme": "zune"
+        "theme": "zune",
+        "decimals": "2"
     };
 
     apiChart = new FusionCharts({
@@ -510,7 +514,8 @@ function renderCharts(time, start, end, category, store, province) {
                 "xAxisName": "Room",
                 "yAxisName": "Total dwell time (minutes)",
                 "rotatevalues": "1",
-                "theme": "zune"
+                "theme": "zune",
+                "decimals": "2"
             };
 
             apiChart = new FusionCharts({
@@ -535,7 +540,8 @@ function renderCharts(time, start, end, category, store, province) {
                 "xAxisName": "Room",
                 "yAxisName": "Average dwell time (minutes)",
                 "rotatevalues": "1",
-                "theme": "zune"
+                "theme": "zune",
+                "decimals": "2"
             };
 
             apiChart = new FusionCharts({
@@ -560,7 +566,8 @@ function renderCharts(time, start, end, category, store, province) {
                 "xAxisName": "Room",
                 "yAxisName": "Number of visits",
                 "rotatevalues": "1",
-                "theme": "zune"
+                "theme": "zune",
+                "decimals": "2"
             };
 
             apiChart = new FusionCharts({
@@ -587,7 +594,8 @@ function renderCharts(time, start, end, category, store, province) {
                 "xAxisName": "Hospital",
                 "yAxisName": "Number of visits per hospital",
                 "rotatevalues": "1",
-                "theme": "zune"
+                "theme": "zune",
+                "decimals": "2"
             };
 
             apiChart = new FusionCharts({

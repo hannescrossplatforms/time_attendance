@@ -190,7 +190,8 @@
                         "xAxisName": "Time of day",
                         "yAxisName": "Total dwell time (minutes)",
                         "rotatevalues": "1",
-                        "theme": "zune"
+                        "theme": "zune",
+                        "decimals": "2"
                     };
 
                     timeListData = data['time_list_data'];
@@ -229,7 +230,8 @@
                         "xAxisName": "Time of day",
                         "yAxisName": "Total dwell time (minutes)",
                         "rotatevalues": "1",
-                        "theme": "zune"
+                        "theme": "zune",
+                        "decimals": "2"
                     };
 
                     apiChart = new FusionCharts({
@@ -274,7 +276,8 @@
                         "xAxisName": "Time of day",
                         "yAxisName": "Total dwell time (minutes)",
                         "rotatevalues": "1",
-                        "theme": "zune"
+                        "theme": "zune",
+                        "decimals": "2"
                     };
 
                     apiChart = new FusionCharts({
@@ -329,7 +332,8 @@
                             "xAxisName": "Time of day",
                             "yAxisName": "Total dwell time (minutes)",
                             "rotatevalues": "1",
-                            "theme": "zune"
+                            "theme": "zune",
+                            "decimals": "2"
                         };
 
                         apiChart = new FusionCharts({
@@ -375,7 +379,8 @@
                     "xAxisName": "Time of day",
                     "yAxisName": "Total dwell time (minutes)",
                     "rotatevalues": "1",
-                    "theme": "zune"
+                    "theme": "zune",
+                    "decimals": "2"
                 };
 
                 apiChart = new FusionCharts({
@@ -410,7 +415,8 @@
                 "xAxisName": "Time of day",
                 "yAxisName": "Total dwell time (minutes)",
                 "rotatevalues": "1",
-                "theme": "zune"
+                "theme": "zune",
+                "decimals": "2"
             };
 
             apiChart = new FusionCharts({
@@ -435,7 +441,8 @@
                     "xAxisName": "Time of day",
                     "yAxisName": "Total dwell time (minutes)",
                     "rotatevalues": "1",
-                    "theme": "zune"
+                    "theme": "zune",
+                    "decimals": "2"
                 };
 
                 apiChart = new FusionCharts({
