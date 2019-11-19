@@ -80,9 +80,9 @@ function loadChartPopoutJS() {
 }
 
 function removeFusionCharts() {
-  items = FusionCharts.items;
-
-  items.forEach(chart => {
-    chart.dispose();
-  });
+  FusionCharts.items.staff_activity_chart.dispose();
+  FusionCharts.items.staff_visits_per_category_chart.dispose();
+  FusionCharts.items.staff_visits_per_store_chart.dispose();
+  FusionCharts.items.staff_wrk_avg_chart.dispose();
+  FusionCharts.items.staff_wrk_chart.dispose();
 }
