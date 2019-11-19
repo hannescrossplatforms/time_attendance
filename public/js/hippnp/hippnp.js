@@ -81,9 +81,23 @@ function loadChartPopoutJS() {
 }
 
 function removeFusionCharts() {
-  FusionCharts.items.staff_activity_chart.dispose();
-  FusionCharts.items.staff_visits_per_category_chart.dispose();
-  FusionCharts.items.staff_visits_per_store_chart.dispose();
-  FusionCharts.items.staff_wrk_avg_chart.dispose();
-  FusionCharts.items.staff_wrk_chart.dispose();
+  if (FusionCharts.items.staff_activity_chart !== undefined) {
+    FusionCharts.items.staff_activity_chart.dispose();
+  }
+
+  if (FusionCharts.items.staff_visits_per_category_chart !== undefined) {
+    FusionCharts.items.staff_visits_per_category_chart.dispose();
+  }
+
+  if (FusionCharts.items.staff_visits_per_store_chart !== undefined) {
+    FusionCharts.items.staff_visits_per_store_chart.dispose();
+  }
+
+  if (FusionCharts.items.staff_wrk_avg_chart !== undefined) {
+    FusionCharts.items.staff_wrk_avg_chart.dispose();
+  }
+
+  if (FusionCharts.items.staff_wrk_chart !== undefined) {
+    FusionCharts.items.staff_wrk_chart.dispose();
+  }
 }
