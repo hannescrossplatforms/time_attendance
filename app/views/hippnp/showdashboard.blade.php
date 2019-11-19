@@ -466,7 +466,7 @@ function get_stores_for_province() {
             success: function(result) {
                 $("#store-select-container").html(result);
                 custom_report_period();
-
+                loadChartPopoutJS();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 custom_report_period();
@@ -661,7 +661,7 @@ function renderCharts(time, start, end, category, store, province) {
             apiChart.render();
 
 
-
+            loadChartPopoutJS();
 
 
 
@@ -695,6 +695,7 @@ function printpreview() {
       },
       success: function(result) {
         $('#loadingDiv').hide();
+        loadChartPopoutJS();
       }
     });
 
