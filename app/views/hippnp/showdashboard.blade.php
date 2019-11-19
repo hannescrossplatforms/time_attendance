@@ -15,8 +15,6 @@
 }
 </style>
 
-
-
 <body class="hipTnA">
     <!-- <div id="loadingDiv" class="overlay">
         <img src="./img/loader.gif" style="width:80px;">
@@ -262,12 +260,6 @@
 <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 
-<script src="{{ asset('js/hippnp/hippnp.js') }}"></script>
-
-<script>
-    loadChartPopoutJS();
-</script>
-
 <script src="{{ asset('js/jquery-2.1.4.js') }}"></script>
 <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 
@@ -466,7 +458,7 @@ function get_stores_for_province() {
             success: function(result) {
                 $("#store-select-container").html(result);
                 custom_report_period();
-                loadChartPopoutJS();
+
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 custom_report_period();
@@ -661,7 +653,7 @@ function renderCharts(time, start, end, category, store, province) {
             apiChart.render();
 
 
-            loadChartPopoutJS();
+
 
 
 
@@ -695,7 +687,6 @@ function printpreview() {
       },
       success: function(result) {
         $('#loadingDiv').hide();
-        loadChartPopoutJS();
       }
     });
 
@@ -742,8 +733,7 @@ function printpreview() {
 <div id="chart_popup">
 </div>
 
-
-<!-- <script>
+<script>
     var opened_element = null;
     $(document).on('click', '.popup-chart', function (e) {
         console.info(e.target.toString())
@@ -778,7 +768,7 @@ function printpreview() {
         }
     });
 
-</script> -->
+</script>
 
 <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hippnpBrandPdfDownloadPreview') }}" method="post">
     <input type="hidden" name="myPageone" id="myPageone">
@@ -809,7 +799,5 @@ function printpreview() {
         border: 1px solid gray;
     }
 </style>
-
-
 
 @stop
