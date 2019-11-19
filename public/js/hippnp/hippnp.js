@@ -53,6 +53,7 @@ function loadChartPopoutJS() {
       opened_element = $(this);
       $(this).fadeOut('fast', function() {
         let chart_id = $(this).data('fusion-id');
+        debugger;
         let chart = FusionCharts.items[chart_id];
         $(this).addClass('chart-popup');
         debugger;
