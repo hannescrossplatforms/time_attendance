@@ -53,17 +53,13 @@ function loadChartPopoutJS() {
       opened_element = $(this);
       $(this).fadeOut('fast', function() {
         let chart_id = $(this).data('fusion-id');
-        debugger;
         let chart = FusionCharts.items[chart_id];
         $(this).addClass('chart-popup');
-        debugger;
         chart.resizeTo('100%', '100%');
 
-        if (opened_element.has('button').length > 0) {
-        } else {
+        if (opened_element.has('button').length == 0) {
           opened_element.prepend('<button class="close-popup-chart">X</button>');
         }
-
         $(this).fadeIn('fast');
       });
     }
