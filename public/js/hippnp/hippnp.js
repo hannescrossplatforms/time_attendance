@@ -55,6 +55,7 @@ function loadChartPopoutJS() {
         let chart_id = $(this).data('fusion-id');
         let chart = FusionCharts.items[chart_id];
         $(this).addClass('chart-popup');
+        debugger;
         chart.resizeTo('100%', '100%');
 
         opened_element.prepend('<button class="close-popup-chart">X</button>');
