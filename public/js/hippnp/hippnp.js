@@ -59,7 +59,10 @@ function loadChartPopoutJS() {
         debugger;
         chart.resizeTo('100%', '100%');
 
-        opened_element.prepend('<button class="close-popup-chart">X</button>');
+        if (opened_element.has('button').length > 0) {
+        } else {
+          opened_element.prepend('<button class="close-popup-chart">X</button>');
+        }
 
         $(this).fadeIn('fast');
       });
