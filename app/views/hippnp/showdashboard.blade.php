@@ -463,9 +463,10 @@ function get_stores_for_province() {
             type: 'get',
             dataType: 'html',
             success: function(result) {
+                removeFusionCharts();
                 $("#store-select-container").html(result);
                 custom_report_period();
-                loadChartPopoutJS();
+
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
