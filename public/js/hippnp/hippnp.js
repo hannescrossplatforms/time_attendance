@@ -46,32 +46,34 @@ function printpreview() {
 }
 
 function loadChartPopoutJS() {
-  // var opened_element = null;
-  // $(document).on('click', '.popup-chart', function(e) {
-  //   console.info(e.target.toString());
-  //   if (opened_element === null && e.target.toString() !== '[object HTMLButtonElement]') {
-  //     opened_element = $(this);
-  //     $(this).fadeOut('fast', function() {
-  //       let chart_id = $(this).data('fusion-id');
-  //       let chart = FusionCharts.items[chart_id];
-  //       $(this).addClass('chart-popup');
-  //       chart.resizeTo('100%', '100%');
-  //       opened_element.prepend('<button class="close-popup-chart">X</button>');
-  //       $(this).fadeIn('fast');
-  //     });
-  //   }
-  // });
-  // $(document).on('click', '.close-popup-chart', function() {
-  //   if (opened_element !== null) {
-  //     opened_element.fadeOut('fast', function() {
-  //       let chart_id = opened_element.data('fusion-id');
-  //       let chart = FusionCharts.items[chart_id];
-  //       opened_element.removeClass('chart-popup');
-  //       chart.resizeTo(400, 350);
-  //       opened_element.fadeIn('fast');
-  //       $('.close-popup-chart').remove();
-  //       opened_element = null;
-  //     });
-  //   }
-  // });
+  var opened_element = null;
+  $(document).on('click', '.popup-chart', function(e) {
+    console.info(e.target.toString());
+    if (opened_element === null && e.target.toString() !== '[object HTMLButtonElement]') {
+      opened_element = $(this);
+      $(this).fadeOut('fast', function() {
+        let chart_id = $(this).data('fusion-id');
+        let chart = FusionCharts.items[chart_id];
+        $(this).addClass('chart-popup');
+        chart.resizeTo('100%', '100%');
+
+        opened_element.prepend('<button class="close-popup-chart">X</button>');
+
+        $(this).fadeIn('fast');
+      });
+    }
+  });
+  $(document).on('click', '.close-popup-chart', function() {
+    if (opened_element !== null) {
+      opened_element.fadeOut('fast', function() {
+        let chart_id = opened_element.data('fusion-id');
+        let chart = FusionCharts.items[chart_id];
+        opened_element.removeClass('chart-popup');
+        chart.resizeTo(400, 350);
+        opened_element.fadeIn('fast');
+        $('.close-popup-chart').remove();
+        opened_element = null;
+      });
+    }
+  });
 }

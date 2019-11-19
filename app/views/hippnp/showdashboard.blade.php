@@ -733,7 +733,7 @@ function printpreview() {
 <div id="chart_popup">
 </div>
 
-<script>
+<!-- <script>
     var opened_element = null;
     $(document).on('click', '.popup-chart', function (e) {
         console.info(e.target.toString())
@@ -768,7 +768,7 @@ function printpreview() {
         }
     });
 
-</script>
+</script> -->
 
 <form name="viewMyPage" id="viewMyPage" target="_blank" action="{{ url('hippnpBrandPdfDownloadPreview') }}" method="post">
     <input type="hidden" name="myPageone" id="myPageone">
