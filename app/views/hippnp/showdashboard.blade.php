@@ -259,6 +259,7 @@
 
 <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="js/hippnp.js"></script>
 
 <script src="{{ asset('js/jquery-2.1.4.js') }}"></script>
 <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
@@ -268,6 +269,8 @@
 <script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}"></script>
 
 <script type="text/javascript">
+
+    loadChartPopoutJS();
     $("#venuefrom, #venueto").datepicker({
         format: 'yyyy-mm-dd',
         autoclose: true,
@@ -458,6 +461,7 @@ function get_stores_for_province() {
             success: function(result) {
                 $("#store-select-container").html(result);
                 custom_report_period();
+                loadChartPopoutJS();
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -652,7 +656,7 @@ function renderCharts(time, start, end, category, store, province) {
             });
             apiChart.render();
 
-
+            loadChartPopoutJS();
 
 
 
@@ -687,6 +691,7 @@ function printpreview() {
       },
       success: function(result) {
         $('#loadingDiv').hide();
+        loadChartPopoutJS();
       }
     });
 
