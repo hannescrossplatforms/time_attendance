@@ -292,7 +292,6 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Category",
         "yAxisName": "Total dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -321,7 +320,6 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Category",
         "yAxisName": "Average dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -350,7 +348,6 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Category",
         "yAxisName": "Number of visits per category",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -379,7 +376,6 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Store",
         "yAxisName": "Number of visits per store",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -408,7 +404,6 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Staff Activity",
         "yAxisName": "Total dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -516,7 +511,6 @@ function renderCharts(time, start, end, category, store, province) {
                 "caption": "",
                 "xAxisName": "Category",
                 "yAxisName": "Total dwell time (minutes)",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
@@ -543,7 +537,6 @@ function renderCharts(time, start, end, category, store, province) {
                 "caption": "",
                 "xAxisName": "Category",
                 "yAxisName": "Average dwell time (minutes)",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
@@ -570,7 +563,6 @@ function renderCharts(time, start, end, category, store, province) {
                 "caption": "",
                 "xAxisName": "Category",
                 "yAxisName": "Number of visits",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
@@ -599,7 +591,6 @@ function renderCharts(time, start, end, category, store, province) {
                 "caption": "",
                 "xAxisName": "Store",
                 "yAxisName": "Number of visits per store",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
@@ -627,7 +618,6 @@ function renderCharts(time, start, end, category, store, province) {
                 "caption": "",
                 "xAxisName": "Staff Activity",
                 "yAxisName": "Total dwell time (minutes)",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
