@@ -78,3 +78,11 @@ function loadChartPopoutJS() {
     }
   });
 }
+
+function removeFusionCharts() {
+  var items = FusionCharts.items;
+
+  items.forEach(chart => {
+    chart.dispose();
+  });
+}
