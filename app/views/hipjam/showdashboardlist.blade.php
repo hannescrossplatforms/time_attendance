@@ -12,6 +12,8 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
             <h1 class="page-header">Dashboard</h1>
+          
+            
             <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
               <div id="map" style="width:100%; height: 500px;"></div>
 
@@ -53,7 +55,7 @@
                   </div>
                 </div>
 
-                <div style="width:calc(50% - 5px); display: inline-block; height:94px;">
+                <div style="width:33%; display: inline-block; height:94px;">
                   <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
                     <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
                   </div>
@@ -63,13 +65,23 @@
                   </div>
                 </div>
 
-                <div style="width:calc(50% - 5px); display: inline-block; height:94px;">
+                <div style="width:33%; display: inline-block; height:94px;">
                   <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
                     <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
                   </div>
                   <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
                     <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">Loading...</p>
                     <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed today</small>
+                  </div>
+                </div>
+
+                <div style="width:33%; display: inline-block; height:94px;">
+                  <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                    <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+                  </div>
+                  <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">{{$data['avg_distance'][0]->distance}}km</p>
+                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Avg Distance Billboard / Retail</small>
                   </div>
                 </div>
 
@@ -249,7 +261,7 @@ Time spent in store (dwell) -->
 
     $.each(venues, function(i, venue) {
     
-      if (venue.latitude === null && venue.latitude === '') {
+      if ((venue.latitude === null || venue.latitude === '') || venue.ap_active === '0') {
         no_lat_long_count++;
       } else {
         let ico = '';

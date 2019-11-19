@@ -35,13 +35,61 @@ class HipjamController extends \BaseController
         }
 
         $brandIdsString = implode(",", $brandIds);
-        $liveNumberOfBillboardsCount = count(\Venue::whereraw("track_type = 'billboard' AND brand_id IN ($brandIdsString)")->get());
+        $liveNumberOfBillboardsCount = count(\Venue::whereraw("track_type = 'billboard' AND brand_id IN ($brandIdsString) AND ap_active = 1")->get());
+
+        if (\User::isVicinity()) {
+            $vicinity_brands = \Brand::where('parent_brand', '=', 165)->get();
+            $vbrands = array();
+            foreach ($vicinity_brands as $brand) {
+                array_push($vbrands, $brand->id);
+            }
+            $vbrandsarray = implode(",", $vbrands);
+            $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard' OR track_type IS NULL) AND ((brand_id = 165 OR brand_id IN ($vbrandsarray)) AND ap_active = true)")->get());
+        } else {
+            $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard' OR track_type IS NULL) AND (brand_id IN ($brandIdsString) AND ap_active = true)")->get());
+        }
+
+        $avg_distance = \DB::select("
+            SELECT 
+                ROUND(IFNULL(AVG( 6371 * acos (cos ( radians(billboard_latitude))
+                                * cos( radians( venue_latitude ) )
+                                * cos( radians( venue_logitude ) - radians(billboard_longitude) )
+                                + sin ( radians(billboard_latitude) )
+                                * sin( radians( venue_latitude ) )
+                                )
+                            ), 0), 2) as distance
+            FROM 
+                (
+                    SELECT 
+                        (SELECT latitude FROM venues WHERE id = v.linked_billboard) as billboard_latitude,
+                        (SELECT longitude FROM venues WHERE id = v.linked_billboard) as billboard_longitude,
+                        latitude as venue_latitude,
+                        longitude as venue_logitude
+                    FROM 
+                        venues v
+                    WHERE 
+                        linked_billboard IS NOT NULL 
+                    AND linked_billboard != 0
+                ) as inq
+        ");
+        $data['avg_distance'] = $avg_distance;
         $data['live_number_of_billboards'] = $liveNumberOfBillboardsCount;
+        
         \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
 
-        $liveNumberOfRetailVenues = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND brand_id IN ($brandIdsString)")->get());
-        $data['live_number_of_retail_venues'] = $liveNumberOfBillboardsCount;
-        \Log::info("[HipjamController  showDashboard] - live_number_of_retail_venues is: $liveNumberOfRetailVenues");
+        if (\User::isVicinity()) {
+            $vicinity_brands = \Brand::where('parent_brand', '=', 165)->get();
+            $vbrands = array();
+            foreach ($vicinity_brands as $brand) {
+                array_push($vbrands, $brand->id);
+            }
+            $vbrandsarray = implode(",", $vbrands);
+            $liveNumberOfRetailVenuesCount = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND ((brand_id = 165 OR brand_id IN ($vbrandsarray)) AND ap_active = true)")->get());
+        } else {
+            $liveNumberOfRetailVenuesCount = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND (brand_id IN ($brandIdsString) AND ap_active = true)")->get());
+        }
+        
+        $data['live_number_of_retail_venues'] = $liveNumberOfRetailVenuesCount;
 
         $venue = new \Venue();
         // $venues = $venue->getVenuesForUser('hipjam', 1);
@@ -386,26 +434,15 @@ class HipjamController extends \BaseController
 
         $venue = new \Venue();
 
-        // $venues = $venue->getVenuesForUser('hipjam', 1);
-
         if (\User::isVicinity()) {
-            // $venues = \Venue::join('brands', 'brands.id', '=', 'venues.brand_id')
-            //             ->select("venues.*")
-            //             ->where('brands.parent_brand', '=', 165)
-            //             ->where('venues.jam_activated', '=', 1)
-            //             ->orderBy('venues.sitename','ASC')
-            //             ->get();
+            $vicinity_brands = \Brand::whereRaw('id = 165 OR parent_brand = 165')->get();
+            $vbrands = array();
+            foreach ($vicinity_brands as $brand) {
+                array_push($vbrands, $brand->id);
+            }
+            $vbrandsarray = implode(",", $vbrands);
+            $venues = \Venue::whereRaw("brand_id IN ($vbrandsarray) AND jam_activated = 1 ")->get();
 
-               $venues = \Venue::join('brands', 'brands.id', '=', 'venues.brand_id')
-               ->select("venues.*")
-               ->where(function ($query) {
-                            $query->where('brands.parent_brand', '=', 165)
-                                  ->where('venues.jam_activated', '=', 1);
-                        })->orWhere(function ($query) {
-                            $query->where('brands.id', '=', 165)
-                                  ->where('venues.jam_activated', '=', 1);
-                        })->orderBy('venues.sitename','ASC')
-                        ->get();
         } else {
             $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
         }
@@ -484,7 +521,8 @@ class HipjamController extends \BaseController
         $edit = true;
         $vpnip = new \Vpnip;
         //$data['vpnips']  = $vpnip->getVpnips();
-        $data['venue'] = \Venue::find($id);
+        $venue = \Venue::find($id);
+        $data['venue'] = $venue;
         $data['old_sitename'] = $data['venue']["sitename"];
         $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
         foreach ($data['venue'] as $key => $value) {
@@ -498,6 +536,16 @@ class HipjamController extends \BaseController
         $sensors =  \Sensor::where("venue_id", "like", $data['venue']["id"])->orderBy('id', 'DESC')->get();
         $data['sensors'] = $sensors;
 
+
+
+
+        if ($venue->ap_active == true) {
+            $data['ap_active_checked'] = "checked";
+            $data['ap_inactive_checked'] = "";
+        } else {
+            $data['ap_active_checked'] = "";
+            $data['ap_inactive_checked'] = "checked"; 
+        }
         $data['timezoneselect'] = $this->getTimezoneSelect($data['venue']['timezone']);
 
         $venue = new \Venue();
@@ -566,6 +614,7 @@ class HipjamController extends \BaseController
         $venue->track_type = $form_data->track_type; // Billboard / Retail
         $venue->linked_billboard = $form_data->linked_billboard; // Venue linked to billboard
         $venue->track_server_location = $form_data->track_server_location; // Vicinity Server ID
+        $venue->ap_active = $form_data->ap_active;
 
         $venue->track_ssid = $form_data->track_ssid; // Track WiFi SSID
         $venue->track_password = $form_data->track_password; // Track WiFi Password

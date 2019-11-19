@@ -106,10 +106,19 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-6 text-left">
-
-              </div>
+              <div class="col-md-12 text-left">
+                <div class="form-group">
+                  <label>Sensor Status : </label>
+                  <label class="radio-inline">
+                    <input type="radio" id="ap_active" name="ap_active" value="1" {{ $data['ap_active_checked']}}> Active
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" id="ap_inactive" name="ap_active" value="0" {{ $data['ap_inactive_checked']}}> Inactive
+                  </label>
+                </div>
+                  </div>
             </div>
+          
             <br>
             <button id="update_vicinity_venue" class="btn btn-primary" type="button"> Submit </button>
           </div>
@@ -262,6 +271,11 @@ debugger;
 
       data['timezone'] = $('#timezone_select').val();
       data['linked_billboard'] = $('#track_linked_billboard').val();
+
+    
+      data['ap_active'] = $('#ap_active').prop('checked');
+    
+      
 
       data['venue_location'] = "{{$data['venue']->location}}";
 
