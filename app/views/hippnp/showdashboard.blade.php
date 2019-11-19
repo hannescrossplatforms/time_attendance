@@ -164,7 +164,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="chart-stage">
-                                                            <div class="popup-chart" data-fusion-id="chartobject-1" id="staff_wrk">Loading...</div>
+                                                            <div class="popup-chart" data-fusion-id="staff_wrk" id="staff_wrk">Loading...</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -179,7 +179,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="chart-stage">
-                                                            <div class="popup-chart" data-fusion-id="chartobject-2" id="staff_wrk_avg">Loading...</div>
+                                                            <div class="popup-chart" data-fusion-id="staff_wrk_avg" id="staff_wrk_avg">Loading...</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -203,7 +203,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="chart-stage">
-                                                        <div class="popup-chart" data-fusion-id="chartobject-3" id="staff_visits_per_category">Loading...</div>
+                                                        <div class="popup-chart" data-fusion-id="staff_visits_per_category" id="staff_visits_per_category">Loading...</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,7 +218,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="chart-stage">
-                                                        <div class="popup-chart" data-fusion-id="chartobject-4" id="staff_visits_per_store">Loading...</div>
+                                                        <div class="popup-chart" data-fusion-id="staff_visits_per_store" id="staff_visits_per_store">Loading...</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -241,7 +241,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="chart-stage">
-                                                        <div class="popup-chart" data-fusion-id="chartobject-5" id="staff_activity">Loading...</div>
+                                                        <div class="popup-chart" data-fusion-id="staff_activity" id="staff_activity">Loading...</div>
                                                     </div>
                                                 </div>
                                             </div>
