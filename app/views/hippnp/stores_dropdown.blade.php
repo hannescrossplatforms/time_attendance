@@ -19,7 +19,7 @@
 
 function renderChartsTest(time, start, end, category, store, province) {
 
-    debugger;
+    removeFusionCharts();
 
     $.ajax({
 
