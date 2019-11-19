@@ -327,7 +327,6 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Room",
         "yAxisName": "Total dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -355,7 +354,7 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Room",
         "yAxisName": "Average dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
+
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -383,7 +382,6 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Room",
         "yAxisName": "Number of visits per category",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -411,7 +409,6 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Hospital",
         "yAxisName": "Number of visits per hospital",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -439,7 +436,6 @@ $(document).ready(function() {
         "caption": "",
         "xAxisName": "Staff Activity",
         "yAxisName": "Total dwell time (minutes)",
-        "paletteColors": "#0075c2,#f8b81d,#3CB371",
         "rotatevalues": "1",
         "theme": "zune"
     };
@@ -513,7 +509,6 @@ function renderCharts(time, start, end, category, store, province) {
                 "caption": "",
                 "xAxisName": "Room",
                 "yAxisName": "Total dwell time (minutes)",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
@@ -539,7 +534,6 @@ function renderCharts(time, start, end, category, store, province) {
                 "caption": "",
                 "xAxisName": "Room",
                 "yAxisName": "Average dwell time (minutes)",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
@@ -565,7 +559,6 @@ function renderCharts(time, start, end, category, store, province) {
                 "caption": "",
                 "xAxisName": "Room",
                 "yAxisName": "Number of visits",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
@@ -593,7 +586,6 @@ function renderCharts(time, start, end, category, store, province) {
                 "caption": "",
                 "xAxisName": "Hospital",
                 "yAxisName": "Number of visits per hospital",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };

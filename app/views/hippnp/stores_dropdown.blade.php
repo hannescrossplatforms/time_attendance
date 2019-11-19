@@ -66,7 +66,6 @@ function renderChartsTest(time, start, end, category, store, province) {
                     "caption": "",
                     "xAxisName": "Category",
                     "yAxisName": "Average dwell time (minutes)",
-                    "paletteColors": "#0075c2,#f8b81d,#3CB371",
                     "rotatevalues": "1",
                     "theme": "zune"
                 };

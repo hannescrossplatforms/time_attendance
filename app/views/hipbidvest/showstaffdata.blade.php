@@ -189,7 +189,6 @@
                         "caption": "",
                         "xAxisName": "Time of day",
                         "yAxisName": "Total dwell time (minutes)",
-                        "paletteColors": "#0075c2,#f8b81d,#3CB371",
                         "rotatevalues": "1",
                         "theme": "zune"
                     };
@@ -229,7 +228,6 @@
                         "caption": "",
                         "xAxisName": "Time of day",
                         "yAxisName": "Total dwell time (minutes)",
-                        "paletteColors": "#0075c2,#f8b81d,#3CB371",
                         "rotatevalues": "1",
                         "theme": "zune"
                     };
@@ -275,7 +273,6 @@
                         "caption": "",
                         "xAxisName": "Time of day",
                         "yAxisName": "Total dwell time (minutes)",
-                        "paletteColors": "#0075c2,#f8b81d,#3CB371",
                         "rotatevalues": "1",
                         "theme": "zune"
                     };
@@ -331,7 +328,6 @@
                             "caption": "",
                             "xAxisName": "Time of day",
                             "yAxisName": "Total dwell time (minutes)",
-                            "paletteColors": "#0075c2,#f8b81d,#3CB371",
                             "rotatevalues": "1",
                             "theme": "zune"
                         };
@@ -378,7 +374,6 @@
                     "caption": "",
                     "xAxisName": "Time of day",
                     "yAxisName": "Total dwell time (minutes)",
-                    "paletteColors": "#0075c2,#f8b81d,#3CB371",
                     "rotatevalues": "1",
                     "theme": "zune"
                 };
@@ -414,7 +409,6 @@
                 "caption": "",
                 "xAxisName": "Time of day",
                 "yAxisName": "Total dwell time (minutes)",
-                "paletteColors": "#0075c2,#f8b81d,#3CB371",
                 "rotatevalues": "1",
                 "theme": "zune"
             };
@@ -440,7 +434,6 @@
                     "caption": "",
                     "xAxisName": "Time of day",
                     "yAxisName": "Total dwell time (minutes)",
-                    "paletteColors": "#0075c2,#f8b81d,#3CB371",
                     "rotatevalues": "1",
                     "theme": "zune"
                 };
