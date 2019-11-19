@@ -36,6 +36,8 @@
 
     function renderCharts(time, start, end, category, store, province) {
 
+        removeFusionCharts();
+
         $.ajax({
 
             url: pathname + 'hippnp/periodchartJsondata',
