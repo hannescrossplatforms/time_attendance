@@ -350,7 +350,10 @@ class HippnpController extends \BaseController {
 
                     $dwellTime = $response->first()->value;
 
-                    $asdf = strtotime('12/12/2019 08:00:00');
+
+                    // $test=date_create("2019-03-03 08:00:00");
+//
+                    $asdf = strtotime('2019-03-03 08:00:00');
                     \Log::info("Hannes FOK $asdf");
 
 
