@@ -356,6 +356,12 @@ class HippnpController extends \BaseController {
                     // $eightAmStartDate = "16/10/2013";
                     $eightAmStartDate = \DateTime::createFromFormat("yyyy-MM-dd HH:mm:SS", $startTime);
 
+                    $test=date_create($startTime);
+                    date_time_set($date,08,00,00);
+                    $datestring = date_format($date,'Y-m-d H:i:s');
+
+                    \Log::info("Hannes datestring IS $datestring");
+                    // date(‘Y-m-d’, strtotime($stringDate));
                     \Log::info("Hannes eightAmStartDate IS $eightAmStartDate");
                     // \Log::info("Hannes THE ID IS $test");
                     // \Log::info("Hannes THE VALUE IS $vaaaaaa");
