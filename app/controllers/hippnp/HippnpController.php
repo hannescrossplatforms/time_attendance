@@ -343,10 +343,6 @@ class HippnpController extends \BaseController {
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
                     array_push($dataArray, $empty_array);
                 } else {
-                    \Log::info("Hannes NOU NOU NOU  HIER");
-
-                    // $eightAmStartDateString = "$startTime 08:00:00";
-                    \Log::info("Hannes startTime IS $startTime");
 
                     $dwellTime = $response->first()->value;
                     $eightAmStartDate = strtotime($startTime);
@@ -471,7 +467,17 @@ class HippnpController extends \BaseController {
                     $empty_array = array(['value' => '0', 'id' => $staffId]);
                     array_push($dataArray, $empty_array);
                 } else {
-                    $objectArr = array(['value' => $response->first()->value, 'id' => $staffId]);
+
+                    $dwellTime = $response->first()->value;
+                    $eightAmStartDate = strtotime($startTime);
+                    $recordStartTime = strtotime($response->first()->start_time);
+
+                    if($eightAmStartDate > $recordStartTime) {
+                        $millisecondsDifference = $eightAmStartDate - $recordStartTime;
+                        $dwellTime = $dwellTime - $millisecondsDifference;
+                    }
+
+                    $objectArr = array(['value' => round($dwellTime / 60), 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
                 }
 
@@ -555,7 +561,17 @@ class HippnpController extends \BaseController {
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
                     array_push($dataArray, $empty_array);
                 } else {
-                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+
+                    $dwellTime = $response->first()->value;
+                    $eightAmStartDate = strtotime($startTime);
+                    $recordStartTime = strtotime($response->first()->start_time);
+
+                    if($eightAmStartDate > $recordStartTime) {
+                        $millisecondsDifference = $eightAmStartDate - $recordStartTime;
+                        $dwellTime = $dwellTime - $millisecondsDifference;
+                    }
+
+                    $objectArr = array(['value' => round($dwellTime / 60), 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
                 }
 
@@ -645,8 +661,19 @@ class HippnpController extends \BaseController {
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
                     array_push($dataArray, $empty_array);
                 } else {
-                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+
+                    $dwellTime = $response->first()->value;
+                    $eightAmStartDate = strtotime($startTime);
+                    $recordStartTime = strtotime($response->first()->start_time);
+
+                    if($eightAmStartDate > $recordStartTime) {
+                        $millisecondsDifference = $eightAmStartDate - $recordStartTime;
+                        $dwellTime = $dwellTime - $millisecondsDifference;
+                    }
+
+                    $objectArr = array(['value' => round($dwellTime / 60), 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
+
                 }
 
             }
