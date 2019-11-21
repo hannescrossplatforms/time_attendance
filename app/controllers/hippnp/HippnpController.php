@@ -352,31 +352,14 @@ class HippnpController extends \BaseController {
                     $eightAmStartDate = strtotime($startTime);
                     $recordStartTime = strtotime($response->first()->start_time);
 
-                    // $isGreater = $eightAmStartDate->greaterThan($recordStartTime);
-                    if ($stafId == 40) {
-                        \Log::info("Hannes EIGHT AM START: $eightAmStartDate RECORD START $recordStartTime");
-                    }
-
                     if($eightAmStartDate > $recordStartTime) {
                         $millisecondsDifference = $eightAmStartDate - $recordStartTime;
-
                         $dwellTime = $dwellTime - $millisecondsDifference;
-
-
-                        if ($stafId == 40) {
-                            $min = $millisecondsDifference / 1000 / 60;
-                            \Log::info("Hannes min DIFFERENCE IS $min");
-                        }
                     }
 
-
-
-
-
-                    //remember to /60
-
-                    $objectArr = array(['value' => $dwellTime / 60, 'id' => $stafId]);
+                    $objectArr = array(['value' => round($dwellTime / 60), 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
+
                 }
 
             }
