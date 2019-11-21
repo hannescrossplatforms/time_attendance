@@ -358,13 +358,14 @@ class HippnpController extends \BaseController {
                     }
 
                     if($eightAmStartDate > $recordStartTime) {
-                        $secondsDifference = ($eightAmStartDate - $recordStartTime) / 1000;
+                        $millisecondsDifference = $eightAmStartDate - $recordStartTime;
 
-                        $dwellTime = $dwellTime - $secondsDifference;
+                        $dwellTime = $dwellTime - $millisecondsDifference;
 
 
                         if ($stafId == 40) {
-                            \Log::info("Hannes DIFFERENCE IS $secondsDifference");
+                            $min = $millisecondsDifference / 1000 / 60
+                            \Log::info("Hannes min DIFFERENCE IS $min");
                         }
                     }
 
