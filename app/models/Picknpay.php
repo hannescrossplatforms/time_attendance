@@ -257,9 +257,9 @@ class Picknpay extends Eloquent {
 
         $result = $query->get();
 
-        $value = $result->first()->value;
+        $value = $result->first();
 
-        \Log::info("Hannes YMD IS $ymd");
+        \Log::info("Hannes value IS $value");
         \Log::info("Hannes STD IS $startDate");
 
         return $result;
