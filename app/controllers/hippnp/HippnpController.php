@@ -345,9 +345,17 @@ class HippnpController extends \BaseController {
                 } else {
                     \Log::info("Hannes NOU NOU NOU  HIER");
 
-                    $eightAmStartDate = "$startTime 08:00:00";
-                    $vaaaaaa = $response->first()->value;
-                    $test = $response->first()->id;
+                    $eightAmStartDateString = "$startTime 08:00:00";
+
+                    $dwellTime = $response->first()->value;
+
+                    $recordStartTime = $response->first()->start_time;
+
+
+                    // $eightAmStartDate = "16/10/2013";
+                    $eightAmStartDate = \DateTime::createFromFormat("yyyy-MM-dd HH:mm:SS", $eightAmStartDateString);
+
+                    \Log::info("Hannes eightAmStartDate IS $eightAmStartDate");
                     \Log::info("Hannes THE ID IS $test");
                     \Log::info("Hannes THE VALUE IS $vaaaaaa");
                     \Log::info("Hannes STD IS $startDate");
