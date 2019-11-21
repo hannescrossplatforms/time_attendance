@@ -350,6 +350,10 @@ class HippnpController extends \BaseController {
 
                     $dwellTime = $response->first()->value;
 
+                    $asdf = strtotime('12/12/2019 08:00:00');
+                    \Log::info("Hannes FOK $asdf");
+
+
                     $recordStartTime = $response->first()->start_time;
                     \Log::info("Hannes recordStartTime IS $recordStartTime");
                     \Log::info("Hannes dwellTime IS $dwellTime");
