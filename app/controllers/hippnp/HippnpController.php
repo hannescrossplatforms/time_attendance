@@ -343,6 +343,15 @@ class HippnpController extends \BaseController {
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
                     array_push($dataArray, $empty_array);
                 } else {
+
+
+                    $date = "$startTime 08:00:00";
+
+
+                    \Log::info("Hannes YMD IS $date");
+                    \Log::info("Hannes STD IS $startDate");
+                    // $eightAmStart  = new Carbon('2018-10-04 15:00:03');
+
                     $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
                 }
