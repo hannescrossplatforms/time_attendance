@@ -350,7 +350,7 @@ class HippnpController extends \BaseController {
 
                     $dwellTime = $response->first()->value;
                     $eightAmStartDate = strtotime($startTime);
-                    $recordStartTime = $response->first()->start_time;
+                    $recordStartTime = strtotime($response->first()->start_time);
 
                     $isGreater = $eightAmStartDate->greaterThan($recordStartTime);
 
