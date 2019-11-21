@@ -256,7 +256,7 @@ class Picknpay extends Eloquent {
 
         $result = $query->get();
 
-        $value = $result->valuue;
+        $value = $result["valuue"];
         $startTime = $result->start_time;
 
 
