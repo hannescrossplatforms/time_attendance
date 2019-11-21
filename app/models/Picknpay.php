@@ -253,7 +253,7 @@ class Picknpay extends Eloquent {
         ->whereraw("staff_id = '$staffID'")
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
-35
+
 
         return $query->get();
 
