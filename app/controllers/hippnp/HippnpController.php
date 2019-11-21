@@ -318,7 +318,7 @@ class HippnpController extends \BaseController {
         $endDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
         $allStaff = \Picknpay::fetchAllStaff('today', $startDate, $endDate, null);
 
-
+        \Log::info("Hannes KOM HIER 0");
         foreach ($allStaff as $staff) {
 
             //Get staff memeber with all his details.
@@ -327,6 +327,8 @@ class HippnpController extends \BaseController {
             $staffName = $staffObj->name;
 
             $dataArray = array();
+
+            \Log::info("Hannes KOM HIER");
 
             foreach ( $timeList as $timeObject ) {
 
