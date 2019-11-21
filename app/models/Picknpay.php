@@ -256,8 +256,8 @@ class Picknpay extends Eloquent {
 
         $result = $query->get();
 
-        $value = $result->value();
-        $startTime = $result->value();
+        $value = $result->value;
+        $startTime = $result->start_time;
 
 
         $ymd = $startTime->format('yyyy-MM-dd');
