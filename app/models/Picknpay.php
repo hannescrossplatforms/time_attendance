@@ -259,7 +259,7 @@ class Picknpay extends Eloquent {
 
         // $value = $result->first()->value;
 
-        \Log::info("Hannes result IS $result");
+        \Log::info("Hannes result IS $result->first");
         \Log::info("Hannes STD IS $startDate");
 
         return $result;
