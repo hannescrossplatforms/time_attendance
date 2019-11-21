@@ -352,7 +352,7 @@ class HippnpController extends \BaseController {
 
                     $recordStartTime = $response->first()->start_time;
                     \Log::info("Hannes recordStartTime IS $recordStartTime");
-
+                    \Log::info("Hannes dwellTime IS $dwellTime");
                     // $eightAmStartDate = "16/10/2013";
                     // $eightAmStartDate = \DateTime::createFromFormat("yyyy-MM-dd HH:mm:SS", $eightAmStartDateString);
 
