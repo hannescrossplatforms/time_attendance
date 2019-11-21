@@ -355,10 +355,13 @@ class HippnpController extends \BaseController {
                     \Log::info("Hannes dwellTime IS $dwellTime");
                     // $eightAmStartDate = "16/10/2013";
                     $eightAmStartDate = \DateTime::createFromFormat("yyyy-MM-dd HH:mm:SS", $startTime);
-
-                    $test=date_create($startTime);
+                    \Log::info("Hannes meh 0");
+                    $test=date_create("2019-03-03");
+                    \Log::info("Hannes meh 1");
                     date_time_set($date,08,00,00);
+                    \Log::info("Hannes meh 2");
                     $datestring = date_format($date,'Y-m-d H:i:s');
+                    \Log::info("Hannes meh 3");
 
                     \Log::info("Hannes datestring IS $datestring");
                     // date(‘Y-m-d’, strtotime($stringDate));
