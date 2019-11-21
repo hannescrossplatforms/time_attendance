@@ -364,7 +364,7 @@ class HippnpController extends \BaseController {
 
 
                         if ($stafId == 40) {
-                            $min = $millisecondsDifference / 1000 / 60
+                            $min = $millisecondsDifference / 1000 / 60;
                             \Log::info("Hannes min DIFFERENCE IS $min");
                         }
                     }
