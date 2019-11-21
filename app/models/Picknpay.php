@@ -247,13 +247,13 @@ class Picknpay extends Eloquent {
 
     public static function fetchDwellTimeDataForStaffWithinAnHour($staffID, $startDate, $endDate){
         $query = Picknpay::orderBy('created_at', 'ASC')
-        ->select(DB::raw("*, IFNULL(SUM(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
+        ->select(DB::raw("*, IFNULL(SUM(ROUdND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
         ->where('end_time', ">=", $startDate)
         ->where('end_time', "<=", $endDate)
         ->whereraw("staff_id = '$staffID'")
         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
         ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
-
+35
 
         return $query->get();
 
