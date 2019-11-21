@@ -19,7 +19,7 @@ class EngagePicknPayStaff extends Eloquent {
     }
 
     public static function getAllStaff(){
-        return EngagePicknPayStaff::all();
+        return EngagePicknPayStaff::orderBy('name', 'DESC')->get();
     }
 
 }
