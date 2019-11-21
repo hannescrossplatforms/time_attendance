@@ -343,6 +343,17 @@ class HippnpController extends \BaseController {
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
                     array_push($dataArray, $empty_array);
                 } else {
+                    $value = $response->first()->value;
+                    \Log::info("Hannes value is $value");
+
+
+
+
+
+
+
+
+
                     $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
                 }
