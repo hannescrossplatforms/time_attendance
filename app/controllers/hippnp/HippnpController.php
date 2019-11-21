@@ -354,9 +354,9 @@ class HippnpController extends \BaseController {
                     \Log::info("Hannes recordStartTime IS $recordStartTime");
                     \Log::info("Hannes dwellTime IS $dwellTime");
                     // $eightAmStartDate = "16/10/2013";
-                    // $eightAmStartDate = \DateTime::createFromFormat("yyyy-MM-dd HH:mm:SS", $eightAmStartDateString);
+                    $eightAmStartDate = \DateTime::createFromFormat("yyyy-MM-dd HH:mm:SS", $startTime);
 
-                    // \Log::info("Hannes eightAmStartDate IS $eightAmStartDate");
+                    \Log::info("Hannes eightAmStartDate IS $eightAmStartDate");
                     // \Log::info("Hannes THE ID IS $test");
                     // \Log::info("Hannes THE VALUE IS $vaaaaaa");
                     // \Log::info("Hannes STD IS $startDate");
