@@ -346,9 +346,10 @@ class HippnpController extends \BaseController {
                     \Log::info("Hannes NOU NOU NOU  HIER");
 
                     $eightAmStartDate = "$startTime 08:00:00";
-
+                    $vaaaaaa = $response->first()->value;
                     $test = $response->first()->id;
-                    \Log::info("Hannes YMD IS $test");
+                    \Log::info("Hannes THE ID IS $test");
+                    \Log::info("Hannes THE VALUE IS $vaaaaaa");
                     \Log::info("Hannes STD IS $startDate");
                     // $eightAmStart  = new Carbon('2018-10-04 15:00:03');
 
