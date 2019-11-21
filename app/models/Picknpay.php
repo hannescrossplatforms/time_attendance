@@ -169,7 +169,7 @@ class Picknpay extends Eloquent {
     }
 
     public static function fetchAllStaffForFilter(){
-        return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_staff")->get();
+        return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_staff ORDER BY name")->get();
     }
 
     public static function fetchAllStaff($date, $startDate, $endDate, $storeID = null){
