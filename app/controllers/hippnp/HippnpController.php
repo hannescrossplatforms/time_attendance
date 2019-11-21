@@ -343,7 +343,7 @@ class HippnpController extends \BaseController {
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
                     array_push($dataArray, $empty_array);
                 } else {
-
+                    \Log::info("Hannes NOU NOU NOU  HIER");
 
                     $eightAmStartDate = "$startTime 08:00:00";
 
