@@ -352,9 +352,9 @@ class HippnpController extends \BaseController {
                     $eightAmStartDate = strtotime($startTime);
                     $recordStartTime = strtotime($response->first()->start_time);
 
-                    $isGreater = $eightAmStartDate->greaterThan($eightAmStartDate);
+                    // $isGreater = $eightAmStartDate->greaterThan($recordStartTime);
 
-                    if($isGreater) {
+                    if($eightAmStartDate > $recordStartTime) {
                         \Log::info("Hannes IS GREATER");
                     }
                     else {
