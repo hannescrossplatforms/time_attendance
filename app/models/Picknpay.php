@@ -256,17 +256,17 @@ class Picknpay extends Eloquent {
 
         $result = $query->get();
 
-        // $value = $result->value();
-        // $startTime = $result->value();
+        $value = $result->value();
+        $startTime = $result->value();
 
 
-        $ymd = $startDate->format('yyyy-MM-dd');
+        $ymd = $startTime->format('yyyy-MM-dd');
         \Log::info("Hannes YMD IS $ymd");
         // $eightAmStart  = new Carbon('2018-10-04 15:00:03');
 
 
 
-        return $result;
+        return $value;
 
     }
 
