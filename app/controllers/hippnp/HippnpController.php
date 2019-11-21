@@ -362,7 +362,10 @@ class HippnpController extends \BaseController {
 
                         $dwellTime = $dwellTime - $secondsDifference;
 
-                        \Log::info("Hannes DIFFERENCE IS $secondsDifference");
+
+                        if ($stafId == 40) {
+                            \Log::info("Hannes DIFFERENCE IS $secondsDifference");
+                        }
                     }
 
 
