@@ -355,21 +355,20 @@ class HippnpController extends \BaseController {
                     // $isGreater = $eightAmStartDate->greaterThan($recordStartTime);
 
                     if($eightAmStartDate > $recordStartTime) {
-                        $millisecondDifference = $eightAmStartDate - $recordStartTime;
+                        $secondDifference = ($eightAmStartDate - $recordStartTime) \ 1000;
+
+                        $dwellTime = $dwellTime - $secondsDifference;
 
                         \Log::info("Hannes DIFFERENCE IS $millisecondDifference");
                     }
-                    else {
 
-                        \Log::info("Hannes $eightAmStartDate IS NOT GREATER THAN $recordStartTime");
-                    }
 
 
 
 
                     //remember to /60
 
-                    $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
+                    $objectArr = array(['value' => $dwellTime / 60, 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
                 }
 
