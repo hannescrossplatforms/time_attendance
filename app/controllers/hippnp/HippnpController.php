@@ -355,7 +355,7 @@ class HippnpController extends \BaseController {
                     // $isGreater = $eightAmStartDate->greaterThan($recordStartTime);
 
                     if($eightAmStartDate > $recordStartTime) {
-                        $secondDifference = ($eightAmStartDate - $recordStartTime) \ 1000;
+                        $secondDifference = ($eightAmStartDate - $recordStartTime) / 1000;
 
                         $dwellTime = $dwellTime - $secondsDifference;
 
