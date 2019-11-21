@@ -355,8 +355,9 @@ class HippnpController extends \BaseController {
                     // $isGreater = $eightAmStartDate->greaterThan($recordStartTime);
 
                     if($eightAmStartDate > $recordStartTime) {
+                        $millisecondDifference = $eightAmStartDate - $recordStartTime;
 
-                        \Log::info("Hannes $eightAmStartDate IS GREATER THAN $recordStartTime");
+                        \Log::info("Hannes DIFFERENCE IS $millisecondDifference");
                     }
                     else {
 
