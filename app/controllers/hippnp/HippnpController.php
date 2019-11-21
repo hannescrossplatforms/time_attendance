@@ -358,8 +358,8 @@ class HippnpController extends \BaseController {
                     \Log::info("Hannes meh 0");
                     $test=date_create("2019-03-03");
                     \Log::info("Hannes meh 1");
-                    date_time_set($test,08,00,00);
-                    \Log::info("Hannes meh 2");
+                    $wtf = date_time_set($test,08,00,00);
+                    \Log::info("Hannes meh 2 $wtf");
                     $datestring = date_format($date,'Y-m-d H:i:s');
                     \Log::info("Hannes meh 3");
 
