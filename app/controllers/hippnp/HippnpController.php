@@ -345,8 +345,8 @@ class HippnpController extends \BaseController {
                 } else {
                     \Log::info("Hannes NOU NOU NOU  HIER");
 
-                    $eightAmStartDateString = "$startTime 08:00:00";
-                    \Log::info("Hannes eightAmStartDateString IS $eightAmStartDateString");
+                    // $eightAmStartDateString = "$startTime 08:00:00";
+                    \Log::info("Hannes startTime IS $startTime");
 
                     $dwellTime = $response->first()->value;
 
@@ -354,12 +354,12 @@ class HippnpController extends \BaseController {
                     \Log::info("Hannes recordStartTime IS $recordStartTime");
 
                     // $eightAmStartDate = "16/10/2013";
-                    $eightAmStartDate = \DateTime::createFromFormat("yyyy-MM-dd HH:mm:SS", $eightAmStartDateString);
+                    // $eightAmStartDate = \DateTime::createFromFormat("yyyy-MM-dd HH:mm:SS", $eightAmStartDateString);
 
-                    \Log::info("Hannes eightAmStartDate IS $eightAmStartDate");
-                    \Log::info("Hannes THE ID IS $test");
-                    \Log::info("Hannes THE VALUE IS $vaaaaaa");
-                    \Log::info("Hannes STD IS $startDate");
+                    // \Log::info("Hannes eightAmStartDate IS $eightAmStartDate");
+                    // \Log::info("Hannes THE ID IS $test");
+                    // \Log::info("Hannes THE VALUE IS $vaaaaaa");
+                    // \Log::info("Hannes STD IS $startDate");
                     // $eightAmStart  = new Carbon('2018-10-04 15:00:03');
 
                     $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
