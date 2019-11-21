@@ -359,7 +359,7 @@ class HippnpController extends \BaseController {
 
                         $dwellTime = $dwellTime - $secondsDifference;
 
-                        \Log::info("Hannes DIFFERENCE IS $millisecondDifference");
+                        \Log::info("Hannes DIFFERENCE IS $secondsDifference");
                     }
 
 
