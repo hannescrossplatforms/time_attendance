@@ -345,10 +345,10 @@ class HippnpController extends \BaseController {
                 } else {
 
 
-                    $date = "$startTime 08:00:00";
+                    $eightAmStartDate = "$startTime 08:00:00";
 
-
-                    \Log::info("Hannes YMD IS $date");
+                    $test = $response->first()->id;
+                    \Log::info("Hannes YMD IS $test");
                     \Log::info("Hannes STD IS $startDate");
                     // $eightAmStart  = new Carbon('2018-10-04 15:00:03');
 
