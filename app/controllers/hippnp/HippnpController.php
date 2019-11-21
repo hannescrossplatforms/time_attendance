@@ -333,6 +333,9 @@ class HippnpController extends \BaseController {
                 $startTime = $timeObject['startDate'];
                 $endTime = $timeObject['endDate'];
 
+                \Log::info("Hannes logs: start time = $startTime");
+                \Log::info("Hannes logs: end time = $endTime");
+
                 $response = \Picknpay::fetchDwellTimeDataForStaffWithinAnHour($stafId, $startTime, $endTime);
                 if (count($response) == 0) {
                     $empty_array = array(['value' => '0', 'id' => $stafId]);
