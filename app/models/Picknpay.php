@@ -255,45 +255,7 @@ class Picknpay extends Eloquent {
         ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
 
 
-        $result = $query->get();
-
-        // $value = $result->first()->value;
-
-        \Log::info("Hannes result IS $result->first");
-        \Log::info("Hannes STD IS $startDate");
-
-        return $result;
-
-
-
-            // $query = Picknpay::orderBy('created_at', 'ASC')
-            // ->select(DB::raw("IFNULL(SUM(ROUND(CAST(dwell_time AS UNSIGNED)/60)), 0) AS value"))
-            // ->where('end_time', ">=", $startDate)
-            // ->where('end_time', "<=", $endDate)
-            // ->whereraw("staff_id = '$staffID'")
-            // ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
-            // ->orderBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
-
-
-
-            // $result = $query->get();
-
-            // $value = $result->value;
-            // // $startTime = $result->start_time;
-
-
-            // // $ymd = $startTime->format('yyyy-MM-dd');
-            // \Log::info("Hannes YMD IS $ymd");
-            // \Log::info("Hannes STD IS $startDate");
-            // // $eightAmStart  = new Carbon('2018-10-04 15:00:03');
-
-
-
-            // return $value;
-
-
-
-
+        return $query->get();
 
     }
 
