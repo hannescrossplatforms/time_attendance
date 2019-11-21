@@ -349,34 +349,22 @@ class HippnpController extends \BaseController {
                     \Log::info("Hannes startTime IS $startTime");
 
                     $dwellTime = $response->first()->value;
-
-
-                    // $test=date_create("2019-03-03 08:00:00");
-//
-                    $asdf = strtotime('2019-03-03 08:00:00');
-                    \Log::info("Hannes FOK $asdf");
-
-
+                    $eightAmStartDate = strtotime($startTime);
                     $recordStartTime = $response->first()->start_time;
-                    \Log::info("Hannes recordStartTime IS $recordStartTime");
-                    \Log::info("Hannes dwellTime IS $dwellTime");
-                    // $eightAmStartDate = "16/10/2013";
-                    $eightAmStartDate = \DateTime::createFromFormat("yyyy-MM-dd HH:mm:SS", $startTime);
-                    \Log::info("Hannes meh 0");
-                    $test=date_create("2019-03-03");
-                    \Log::info("Hannes meh 1");
-                    $wtf = date_time_set($test,08,00,00);
-                    \Log::info("Hannes meh 2 $wtf");
-                    $datestring = date_format($date,'Y-m-d H:i:s');
-                    \Log::info("Hannes meh 3");
 
-                    \Log::info("Hannes datestring IS $datestring");
-                    // date(‘Y-m-d’, strtotime($stringDate));
-                    \Log::info("Hannes eightAmStartDate IS $eightAmStartDate");
-                    // \Log::info("Hannes THE ID IS $test");
-                    // \Log::info("Hannes THE VALUE IS $vaaaaaa");
-                    // \Log::info("Hannes STD IS $startDate");
-                    // $eightAmStart  = new Carbon('2018-10-04 15:00:03');
+                    $isGreater = $eightAmStartDate->gt($recordStartTime));
+
+                    if($isGreater) {
+                        \Log::info("Hannes IS GREATER");
+                    }
+                    else {
+                        \Log::info("Hannes IS NOT GREATER");
+                    }
+
+
+
+
+                    //remember to /60
 
                     $objectArr = array(['value' => $response->first()->value, 'id' => $stafId]);
                     array_push($dataArray, $objectArr);
