@@ -50,8 +50,10 @@
                     </ul>
                 </div>
                 <div id="picknpay_settings">
-                  <li><a href="{{ url('hippnp/picknpay_manage_store_categories'); }}"><i class="fa fa-gears"></i>Category Management</a></li>
-                  <li><a href="{{ url('hippnp/picknpay_beacon_management'); }}"><i class="fa fa-gears"></i>Beacon Management</a></li>
+                  @if (\User::hasAccess("admin") || \User::hasAccess("superadmin"))
+                    <li><a href="{{ url('hippnp/picknpay_manage_store_categories'); }}"><i class="fa fa-gears"></i>Category Management</a></li>
+                    <li><a href="{{ url('hippnp/picknpay_beacon_management'); }}"><i class="fa fa-gears"></i>Beacon Management</a></li>
+                  @endif
                   <li><a href="{{ url('hippnp/periodchartJsondataStaff'); }}"><i class="fa fa-gears"></i>Staff Lookup</a></li>
                 </div>
               @endif
@@ -62,9 +64,11 @@
                   </ul>
               </div>
               <div id="bidvest_settings">
-                <li><a href="{{ url('hipbidvest/bidvest_manage_store_categories'); }}"><i class="fa fa-gears"></i>Room Management</a></li>
-                <li><a href="{{ url('hipbidvest/bidvest_beacon_management'); }}"><i class="fa fa-gears"></i>Beacon Management</a></li>
-                <li><a href="{{ url('hipbidvest/bidvest_checklist_management'); }}"><i class="fa fa-gears"></i>Checklist Management</a></li>
+                @if (\User::hasAccess("admin") || \User::hasAccess("superadmin"))
+                  <li><a href="{{ url('hipbidvest/bidvest_manage_store_categories'); }}"><i class="fa fa-gears"></i>Room Management</a></li>
+                  <li><a href="{{ url('hipbidvest/bidvest_beacon_management'); }}"><i class="fa fa-gears"></i>Beacon Management</a></li>
+                  <li><a href="{{ url('hipbidvest/bidvest_checklist_management'); }}"><i class="fa fa-gears"></i>Checklist Management</a></li>
+                @endif
                 <li><a href="{{ url('hipbidvest/periodchartJsondataStaff'); }}"><i class="fa fa-gears"></i>Staff Lookup</a></li>
               </div>
 
