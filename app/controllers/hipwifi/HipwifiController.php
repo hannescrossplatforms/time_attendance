@@ -1163,7 +1163,18 @@ private function getActivateRules() {
         error_log("getInactiveVenues wifi");
         $data = array();
         $venue = new \Venue();
-        $venues = $venue->getVenuesForUser('hipwifi', 1, null, null, "inactive");
+        // if (\User::isVicinity()) {
+        //     $vicinity_brands = \Brand::whereRaw('id = 165 OR parent_brand = 165')->get();
+        //     $vbrands = array();
+        //     foreach ($vicinity_brands as $brand) {
+        //         array_push($vbrands, $brand->id);
+        //     }
+        //     $vbrandsarray = implode(",", $vbrands);
+        //     $venues = \Venue::whereRaw("brand_id IN ($vbrandsarray) AND jam_activated = 0")->get();
+
+        // } else {
+            $venues = $venue->getVenuesForUser('hipwifi', 1, null, null, "inactive");
+        // }
         $venuesJason = json_encode($venues);
 
         return \Response::json($venuesJason);

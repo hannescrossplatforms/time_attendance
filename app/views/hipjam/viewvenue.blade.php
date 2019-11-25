@@ -420,6 +420,7 @@
                                 </div>
 
                             </div>
+                            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
                             <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
                             <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 
@@ -477,34 +478,167 @@
             liveJam.getVenueData = () => {
                 let current_date = new Date();
                 let formatted_node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}`
-            
+
                 venue.doc(formatted_node).get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        let venue_data = doc.data();
-                        $('#live_customer_now').html(venue_data.customers_in_store_now);
-                        $('#live_customer_today').html(venue_data.customers_in_store_today);
-                        $('#live_new_now').html(venue_data.new_customers_now);
-                        $('#live_new_today').html(venue_data.new_customers_today);
-                        $('#live_window_today').html('0');
-                    
-                        // console.log(`DATA FROM FIREBASE: ${doc.data()}`)
-                    } else {
-                        $('#live_customer_now').html('No data');
-                        $('#live_customer_today').html('No data');
-                        $('#live_new_now').html('No data');
-                        $('#live_new_today').html('No data');
-                        $('#live_window_today').html('No data');
-                        console.log('x> No venue found in track FireStore')
-                    }
+                    .then((doc) => {
+                        if (doc.exists) {
+                            let venue_data = doc.data();
+                            $('#live_customer_now').html(venue_data.customers_in_store_now);
+                            $('#live_customer_today').html(venue_data.customers_in_store_today);
+                            $('#live_new_now').html(venue_data.new_customers_now);
+                            $('#live_new_today').html(venue_data.new_customers_today);
+                            $('#live_window_today').html('0');
+                        } else {
+                            $('#live_customer_now').html('No data');
+                            $('#live_customer_today').html('No data');
+                            $('#live_new_now').html('No data');
+                            $('#live_new_today').html('No data');
+                            $('#live_window_today').html('No data');
+                            console.log('x> No venue found in track FireStore')
+                        }
+                    })
+                    .catch(function(error) {
+                        console.log("Error getting document:", error);
+                    })
+            }
+
+            liveJam.getVenueDataWeek = () => {
+
+            }
+            liveJam.compileNodeArray = (span) => {
+                let start = moment().startOf(span);
+                let end = moment().endOf(span);
+                let date_array = [];
+                while (start.format('YYYY-MM-DD') !== end.format('YYYY-MM-DD')) {
+                    date_array.push(start.format('YYYY-MM-DD'))
+                    start.add(1, 'days');
+                }
+                return date_array;
+            }
+
+            liveJam.retrieveNode = (node, callback) => {
+                 venue.doc(node).get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            callback({
+                                date: node,
+                                data: doc.data()
+                            })
+                        } else {
+                            callback({
+                                date: node,
+                                data: {
+                                    average_dwell: 0,
+                                    customers_in_store_now: 0,
+                                    customers_in_store_today: 0,
+                                    last_seen: 0,
+                                    new_customers_now: 0,
+                                    new_customers_today: 0,
+                                    type: ''
+                                }
+                            })
+                        }
+                    })
+                    .catch(function(error) {
+                        callback({
+                            date: node,
+                            data: {
+                                average_dwell: 0,
+                                customers_in_store_now: 0,
+                                customers_in_store_today: 0,
+                                last_seen: 0,
+                                new_customers_now: 0,
+                                new_customers_today: 0,
+                                type: ''
+                            }
+                        })
+                    })
+            }
+
+            liveJam.compileData = (span, callback) => {
+                let nodes = liveJam.compileNodeArray(span);
+                let week_data = [];
+                $.each(nodes, function(i, node) {
+                    console.log('GETTING DATA FOR: ' + node);
+                    liveJam.retrieveNode(node, function(data) {
+                        week_data.push(data);
+                        if (i + 1 === nodes.length) {
+                            callback(week_data)
+                        }
+                    })
+                });
+            }
+
+            liveJam.sortArray = (array) => {
+                array.sort(function(a, b){
+                    var nameA=a.date.toLowerCase(), nameB=b.date.toLowerCase()
+                    if (nameA < nameB)
+                        return -1 
+                    if (nameA > nameB)
+                        return 1
+                    return 0
                 })
-                .catch(function(error) {
-                    console.log("Error getting document:", error);
-                })
+            }
+
+            liveJam.graphSerializer = (raw_data) => {
+                raw_data.sort((a, b) => a.date.localeCompare(b.date));
+                return $.map( raw_data, function( d, i ) {
+                    return {label: d.date, value: d.data.customers_in_store_today}
+                });
+            }
+
+            liveJam.renderGraph = (data) => {
+                var chartProperties = {
+                "caption": "OVERALL STORE TRAFFIC TREND",
+                "xAxisName": "Week",
+                "yAxisName": "Customers",
+                "rotatevalues": "1",
+                "theme": "zune"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'line',
+                renderAt: 'chart-05',
+                width: '50%',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "data": liveJam.graphSerializer(data)
+
+                }
+            });
+            apiChart.render();
             }
 
             liveJam.initialize(() => {
                 liveJam.getVenueData();
+                liveJam.compileData('week', function (week_data) { 
+                    var time_since_opening = moment.duration(moment().diff(moment('2019-11-21 08:00:00'))).asMinutes();
+                    var customers_in_store = 0
+                    var new_customers_in_store = 0;
+                    var dwell = 0; 
+                    var dwell_words = '';
+                    var exposed_to_billboard = 0;
+                    $.each(week_data, function(index, item) {
+                        customers_in_store += item.data.customers_in_store_today;
+                        new_customers_in_store += item.data.new_customers_today;
+                        exposed_to_billboard = 0;
+                    });
+                    
+                    dwell = time_since_opening / customers_in_store;
+                  
+
+                    $('#rep_customer').html(customers_in_store);
+                    $('#new_rep_customer').html(new_customers_in_store);
+                    $('#engaged_customers').html(customers_in_store);
+                    $('#rep_ave').html(Math.round(dwell));
+                    $('#window_con').html('0');
+
+                    liveJam.renderGraph(week_data);
+                    debugger;
+                });
+
             })
         </script>
 
