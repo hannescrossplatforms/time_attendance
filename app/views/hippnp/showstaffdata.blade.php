@@ -223,10 +223,12 @@
                 success: function(data) {
                     debugger;
 
-                    $('selectedStore').children().remove();
-                    options = '<option id="" selected="selected">Please select</option>';
+                    $('#selectedStore').children().remove();
+
+                    $("#selectedStore").append('<option id="" selected="selected">Please select</option>');
+
                     $.each(data["storesForProvince"], function(index, value) {
-                        options = options + '<option value="' + value["id"] + '">' + value["sitename"] + '</option>';
+                        $("#selectedStore").append('<option value="' + value["id"] + '">' + value["sitename"] + '</option>');
                     });
 
                     $("#staff_select").val('0');
