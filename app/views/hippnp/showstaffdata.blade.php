@@ -42,7 +42,7 @@
                         <label>Province</label>
                     </div>
                     <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                        <select id="brandprovince" onchange="get_stores_for_province()" class="form-control"
+                        <select id="selectedProvince" onchange="getChartDetailsAccordingToFilters()" class="form-control"
                             name="brandprovince">
                             <option value="">Select</option>
                             @foreach($data['all_provinces'] as $province)
@@ -188,17 +188,23 @@
         $("#selectedDate").datepicker("setDate", new Date());
 
         $('#selectedDate').change(function () {
+            getChartDetailsAccordingToFilters();
+        });
 
+        function getChartDetailsAccordingToFilters(){
+            debugger;
             let date = $('#selectedDate').val();
-            pathname = $('#url').val();
+            let province = $('#selectedProvince').val();
 
+            pathname = $('#url').val();
 
             $.ajax({
                 url: pathname + 'hippnp/periodchartJsondataStaffAjax',
                 type: 'get',
                 dataType: 'json',
                 data: {
-                    'date': date
+                    'date': date,
+                    'province': province
                 },
                 success: function(data) {
 
@@ -276,7 +282,8 @@
                 }
             });
 
-        });
+
+        };
 
         function get_staff_category_details(staffId, date){
 
