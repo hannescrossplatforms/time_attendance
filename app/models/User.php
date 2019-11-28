@@ -69,7 +69,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         if ($user->id != 1) {
             $brands = $user->brands;
             foreach($brands as $brand) {   
-                if ($brand->name == "VICINITY") {
+                if ($brand->id == 165) {
                     return true;
                 }   
             }

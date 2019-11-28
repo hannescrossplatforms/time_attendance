@@ -490,12 +490,13 @@ class HipjamController extends \BaseController
         // $venues = null;
 
         if (\User::isVicinity()) {
-            $venues = \Venue::join('brands', 'brands.id', '=', 'venues.brand_id')
-                        ->select("venues.*")
-                        ->where('brands.parent_brand', '=', 165)
-                        ->where('venues.jam_activated', '!=', 1)
-                        ->orderBy('venues.sitename','ASC')
-                        ->get();
+            $vicinity_brands = \Brand::whereRaw('id = 165 OR parent_brand = 165')->get();
+            $vbrands = array();
+            foreach ($vicinity_brands as $brand) {
+                array_push($vbrands, $brand->id);
+            }
+            $vbrandsarray = implode(",", $vbrands);
+            $venues = \Venue::whereRaw("brand_id IN ($vbrandsarray) AND jam_activated = 0")->get();
         } else {
             $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "inactive");
         }
@@ -595,6 +596,13 @@ class HipjamController extends \BaseController
         $data['billboards'] = \Venue::where('track_type', '=', "billboard")->get();
         $sanitized_sitename = preg_replace("/[^a-zA-Z]+/", "", \Venue::find($id)->sitename);
         $sanitized_sitename = str_replace("VICINITY", "", $sanitized_sitename);
+        if ($venue->ap_active == true) {
+            $data['ap_active_checked'] = "checked";
+            $data['ap_inactive_checked'] = "";
+        } else {
+            $data['ap_active_checked'] = "";
+            $data['ap_inactive_checked'] = "checked"; 
+        }
         if ($sensors->count() == 0) {
             $data['sensor_name'] = $sanitized_sitename;
         } else {
@@ -602,6 +610,11 @@ class HipjamController extends \BaseController
         }
 
         return \View::make('hipjam.vicinityvenue')->with('data', $data);
+    }
+
+    public function venueConfig($id) {
+        $venue =  \Venue::find($id);
+        return \Response::json($venue);
     }
 
     public function updateVicinityVenue()

@@ -41,7 +41,7 @@ $( document ).ready(function() {
     }
     venueid = $('#apivenueid').val();
 
-    debugger;
+
     //---------- now ----------
     $.ajax({
 
@@ -50,7 +50,7 @@ $( document ).ready(function() {
         dataType: 'json',
         data : { 'period':'now','scanner_type':'internal','venue':venuename ,'domain':domainname },
         success: function(data) {
-            debugger;
+        
             now_data = data;
             Data1 = data;
             Data2 = Data1.total.total;
@@ -194,198 +194,198 @@ $( document ).ready(function() {
     });
 
     //---------- week ----------
-    $('#rep_customer').html('loading...');
-    $('#new_rep_customer').html('loading...');
-    $('#engaged_customers').html('loading...');
-    $('#rep_ave').html('loading...');
-    $.ajax({
+    // $('#rep_customer').html('loading...');
+    // $('#new_rep_customer').html('loading...');
+    // $('#engaged_customers').html('loading...');
+    // $('#rep_ave').html('loading...');
+    // $.ajax({
 
-        url: pathname+'hipjam/chartJsondata',
-        type: 'get',
-        dataType: 'json',
-        data : { 'period':'this_week','scanner_type':'internal','venue':venuename ,'domain':domainname},
-        success: function(data) {
-            Data1 = data;
-            Data2 = Data1.total.total;
-            $('#new_week').html(Data1.total.new);
-            //for onchange function
-            week_data = data;
+    //     url: pathname+'hipjam/chartJsondata',
+    //     type: 'get',
+    //     dataType: 'json',
+    //     data : { 'period':'this_week','scanner_type':'internal','venue':venuename ,'domain':domainname},
+    //     success: function(data) {
+    //         Data1 = data;
+    //         Data2 = Data1.total.total;
+    //         $('#new_week').html(Data1.total.new);
+    //         //for onchange function
+    //         week_data = data;
 
-            $('#rep_customer').html(week_data.total.total);
-            $('#new_rep_customer').html(week_data.total.new);
-            $('#engaged_customers').html(week_data.total.engaged_customers);
-            $('#rep_ave').html(week_data.total.average_session);
-            $('#window_con').html(week_data.total.window_conversion + '%');
+    //         $('#rep_customer').html(week_data.total.total);
+    //         $('#new_rep_customer').html(week_data.total.new);
+    //         $('#engaged_customers').html(week_data.total.engaged_customers);
+    //         $('#rep_ave').html(week_data.total.average_session);
+    //         $('#window_con').html(week_data.total.window_conversion + '%');
 
-            $('#perHperiod').html('This Week');
-            $('#storeTrfc').html('This Week');
-            $('#storeTrfc').html('This Week');
+    //         $('#perHperiod').html('This Week');
+    //         $('#storeTrfc').html('This Week');
+    //         $('#storeTrfc').html('This Week');
 
-            //----------------------- week visit  -------
-            chartData_w1 = week_data.total.trends.dates;
-            jsonObj_w = [];
-            $.each(chartData_w1 , function (){
-                item_w = {} ;
-                item_w ["label"] = this.date;
-                item_w ["value"] = this.total;
+    //         //----------------------- week visit  -------
+    //         chartData_w1 = week_data.total.trends.dates;
+    //         jsonObj_w = [];
+    //         $.each(chartData_w1 , function (){
+    //             item_w = {} ;
+    //             item_w ["label"] = this.date;
+    //             item_w ["value"] = this.total;
 
-                jsonObj_w.push(item_w);
+    //             jsonObj_w.push(item_w);
 
-            });
-            var chartProperties = {
-                //"caption": "STORE TRAFFIC THIS WEEK",
-                "caption": "",
-                "xAxisName": "Date",
-                "yAxisName": "Customers",
-                "rotatevalues": "1",
-                "theme": "zune"
-            };
+    //         });
+    //         var chartProperties = {
+    //             //"caption": "STORE TRAFFIC THIS WEEK",
+    //             "caption": "",
+    //             "xAxisName": "Date",
+    //             "yAxisName": "Customers",
+    //             "rotatevalues": "1",
+    //             "theme": "zune"
+    //         };
 
-            apiChart = new FusionCharts({
-                type: 'column2d',
-                renderAt: 'date_week',
-                width: '400',
-                height: '350',
-                dataFormat: 'json',
-                dataSource: {
-                    "chart": chartProperties,
-                    "data": jsonObj_w
+    //         apiChart = new FusionCharts({
+    //             type: 'column2d',
+    //             renderAt: 'date_week',
+    //             width: '400',
+    //             height: '350',
+    //             dataFormat: 'json',
+    //             dataSource: {
+    //                 "chart": chartProperties,
+    //                 "data": jsonObj_w
 
-                }
-            });
-            apiChart.render();
+    //             }
+    //         });
+    //         apiChart.render();
 
-            //------------------------overall ----------
-            var chartProperties = {
-                //"caption": "OVERALL STORE TRAFFIC TREND",
-                "caption": "",
-                "xAxisName": "Month",
-                "yAxisName": "Customers",
-                "rotatevalues": "1",
-                "theme": "zune"
-            };
+    //         //------------------------overall ----------
+    //         var chartProperties = {
+    //             //"caption": "OVERALL STORE TRAFFIC TREND",
+    //             "caption": "",
+    //             "xAxisName": "Month",
+    //             "yAxisName": "Customers",
+    //             "rotatevalues": "1",
+    //             "theme": "zune"
+    //         };
 
-            apiChart = new FusionCharts({
-                type: 'line',
-                renderAt: 'chart-05',
-                width: '900',
-                height: '350',
-                dataFormat: 'json',
-                dataSource: {
-                    "chart": chartProperties,
-                    "data": jsonObj_w
+    //         apiChart = new FusionCharts({
+    //             type: 'line',
+    //             renderAt: 'chart-05',
+    //             width: '900',
+    //             height: '350',
+    //             dataFormat: 'json',
+    //             dataSource: {
+    //                 "chart": chartProperties,
+    //                 "data": jsonObj_w
 
-                }
-            });
-            apiChart.render();
+    //             }
+    //         });
+    //         apiChart.render();
 
-            //-----------------------overall traffic ( new/returning ) ----------
-            chartData2 = week_data.total.trends.weekdays;
-            jsonObj = [];
-            jsonCat = [];
+    //         //-----------------------overall traffic ( new/returning ) ----------
+    //         chartData2 = week_data.total.trends.weekdays;
+    //         jsonObj = [];
+    //         jsonCat = [];
 
-            jsonCat_s = {};
-            jsonCat_s["category"] = [];
+    //         jsonCat_s = {};
+    //         jsonCat_s["category"] = [];
 
-            jsonDat = [];
+    //         jsonDat = [];
 
-            item1 = {} ;
-            item1["seriesname"] = "new";
-            item1["data"] = [];
+    //         item1 = {} ;
+    //         item1["seriesname"] = "new";
+    //         item1["data"] = [];
 
-            data = [];
+    //         data = [];
 
-            $.each(chartData2 , function (){
-                item = {} ;
-                item ["label"] = this.weekday;
+    //         $.each(chartData2 , function (){
+    //             item = {} ;
+    //             item ["label"] = this.weekday;
 
-                jsonCat_s["category"].push(item);
+    //             jsonCat_s["category"].push(item);
 
-                itemsnew = {};
-                itemsnew ["value"] = this.new;
-                item1["data"].push(itemsnew);
+    //             itemsnew = {};
+    //             itemsnew ["value"] = this.new;
+    //             item1["data"].push(itemsnew);
 
-                item2 = {} ;
-                item2 ["value"] = this.total - this.new;
-                data.push(item2);
+    //             item2 = {} ;
+    //             item2 ["value"] = this.total - this.new;
+    //             data.push(item2);
 
-            });
-            jsonCat = jsonCat_s;
+    //         });
+    //         jsonCat = jsonCat_s;
 
-            jsonDat.push(item1);
+    //         jsonDat.push(item1);
 
-            item_r = {} ;
-            item_r["seriesname"] = "returning";
-            item_r["data"] = data;
-            jsonDat.push(item_r);
+    //         item_r = {} ;
+    //         item_r["seriesname"] = "returning";
+    //         item_r["data"] = data;
+    //         jsonDat.push(item_r);
 
-            var chartProperties = {
-                //"caption": "OVERALL STORE TRAFFIC (NEW vs. RETURNING)",
-                "caption": "",
-                "xAxisName": "Day",
-                "yAxisName": "Customers",
-                "rotatevalues": "1",
-                "theme": "zune"
-            };
+    //         var chartProperties = {
+    //             //"caption": "OVERALL STORE TRAFFIC (NEW vs. RETURNING)",
+    //             "caption": "",
+    //             "xAxisName": "Day",
+    //             "yAxisName": "Customers",
+    //             "rotatevalues": "1",
+    //             "theme": "zune"
+    //         };
 
-            apiChart = new FusionCharts({
-                type: 'msline',
-                renderAt: 'chart-06',
-                width: '900',
-                height: '350',
-                dataFormat: 'json',
-                dataSource: {
-                    "chart": chartProperties,
-                    "categories": jsonCat,
-                    "dataset" : jsonDat
+    //         apiChart = new FusionCharts({
+    //             type: 'msline',
+    //             renderAt: 'chart-06',
+    //             width: '900',
+    //             height: '350',
+    //             dataFormat: 'json',
+    //             dataSource: {
+    //                 "chart": chartProperties,
+    //                 "categories": jsonCat,
+    //                 "dataset" : jsonDat
 
-                }
-            });
-            apiChart.render();
+    //             }
+    //         });
+    //         apiChart.render();
 
 
-            //------------------- store traffic /hour -----------
-            chartData_t1 = week_data.total.trends.hours;
-            jsonObj = [];
-            $.each(chartData_t1 , function (){
-                item = {} ;
-                item ["label"] = this.hour;
-                item ["value"] = this.total;
+    //         //------------------- store traffic /hour -----------
+    //         chartData_t1 = week_data.total.trends.hours;
+    //         jsonObj = [];
+    //         $.each(chartData_t1 , function (){
+    //             item = {} ;
+    //             item ["label"] = this.hour;
+    //             item ["value"] = this.total;
 
-                jsonObj.push(item);
+    //             jsonObj.push(item);
 
-            });
-            var chartProperties = {
-                //"caption": "STORE TRAFFIC/HOUR week",
-                "caption": "",
-                "xAxisName": "Hours",
-                "yAxisName": "Customers",
-                "rotatevalues": "1",
-                "theme": "zune"
-            };
+    //         });
+    //         var chartProperties = {
+    //             //"caption": "STORE TRAFFIC/HOUR week",
+    //             "caption": "",
+    //             "xAxisName": "Hours",
+    //             "yAxisName": "Customers",
+    //             "rotatevalues": "1",
+    //             "theme": "zune"
+    //         };
 
-            apiChart = new FusionCharts({
-                type: 'column2d',
-                renderAt: 'chart-container',
-                width: '400',
-                height: '350',
-                dataFormat: 'json',
-                dataSource: {
-                    "chart": chartProperties,
-                    "data": jsonObj
+    //         apiChart = new FusionCharts({
+    //             type: 'column2d',
+    //             renderAt: 'chart-container',
+    //             width: '400',
+    //             height: '350',
+    //             dataFormat: 'json',
+    //             dataSource: {
+    //                 "chart": chartProperties,
+    //                 "data": jsonObj
 
-                }
-            });
-            apiChart.render();
+    //             }
+    //         });
+    //         apiChart.render();
 
-        },
-        error: function (error) {
-            $('#rep_customer').html('<span style="font-size: 35%;">Data not available</span>');
-            $('#new_rep_customer').html('<span style="font-size: 35%;">Data not available</span>');
-            $('#engaged_customers').html('<span style="font-size: 35%;">Data not available</span>');
-            $('#rep_ave').html('<span style="font-size: 35%;">Data not available</span>');
-        }
-    });
+    //     },
+    //     error: function (error) {
+    //         $('#rep_customer').html('<span style="font-size: 35%;">Data not available</span>');
+    //         $('#new_rep_customer').html('<span style="font-size: 35%;">Data not available</span>');
+    //         $('#engaged_customers').html('<span style="font-size: 35%;">Data not available</span>');
+    //         $('#rep_ave').html('<span style="font-size: 35%;">Data not available</span>');
+    //     }
+    // });
 
     //---------- OVERALL STORE TRAFFIC TREND ----------
     /*$.ajax({
@@ -727,35 +727,35 @@ $( document ).ready(function() {
     });*/
 
     //---------- month ----------
-    $.ajax({
+    // $.ajax({
 
-        url: pathname+'hipjam/chartJsondata',
-        type: 'get',
-        dataType: 'json',
-        data : { 'period':'this_month','scanner_type':'internal','venue':venuename ,'domain':domainname },
-        success: function(data) {
+    //     url: pathname+'hipjam/chartJsondata',
+    //     type: 'get',
+    //     dataType: 'json',
+    //     data : { 'period':'this_month','scanner_type':'internal','venue':venuename ,'domain':domainname },
+    //     success: function(data) {
 
-            month_data = data;
-            // alert(month_data);
+    //         month_data = data;
+    //         // alert(month_data);
 
-        }
-    });
+    //     }
+    // });
 
     //---------- last month ----------
-    $.ajax({
+    // $.ajax({
 
-        // url: pathname+'hipjam/customchartJsondata',
-        url: pathname+'hipjam/chartJsondata',
-        type: 'get',
-        dataType: 'json',
-        /*data : { 'period':'custom','scanner_type':'internal','start':'2016-06-01','end':'2016-06-30','venue':venuename },*/
-        data : { 'period':'last_month','scanner_type':'internal','venue':venuename ,'domain':domainname },
-        success: function(data) {
+    //     // url: pathname+'hipjam/customchartJsondata',
+    //     url: pathname+'hipjam/chartJsondata',
+    //     type: 'get',
+    //     dataType: 'json',
+    //     /*data : { 'period':'custom','scanner_type':'internal','start':'2016-06-01','end':'2016-06-30','venue':venuename },*/
+    //     data : { 'period':'last_month','scanner_type':'internal','venue':venuename ,'domain':domainname },
+    //     success: function(data) {
 
-            pre_month_data = data;
+    //         pre_month_data = data;
 
-        }
-    });
+    //     }
+    // });
 
 
 
