@@ -232,6 +232,7 @@
 
                     //selectedStoreID
 
+                    debugger;
                     $(`#selectedStore option[id="${data['selectedStoreID']}"]`);
 
                     $("#staff_select").val('0');
