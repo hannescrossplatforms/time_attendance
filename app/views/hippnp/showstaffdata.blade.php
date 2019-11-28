@@ -243,21 +243,15 @@
                         $("#selectedStore").append('<option value="' + value["id"] + '">' + value["sitename"] + '</option>');
                     });
 
-                    // allStaff
-
-                    // $('#staff_select').children().remove();
-                    // $("#staff_select").append('<option id="" value="" selected="selected">Please select</option>');
-                    // $.each(data["staff_select"], function(index, value) {
-                    //     $("#staff_select").append('<option value="' + value["id"] + '">' + value["sitename"] + '</option>');
-                    // });
-
-                    //selectedStoreID
-
-                    debugger;
                     $(`#selectedStore option[value='${data['selectedStoreID']}']`).attr("selected", "selected");
-                    // $(`#selectedStore option[id="${data['selectedStoreID']}"]`);
 
                     $("#staff_select").val('0');
+
+                    $('#staff_select').children().remove();
+                    $("#staff_select").append('<option id="" value="" selected="selected">Please select</option>');
+                    $.each(data["staff_select"], function(index, value) {
+                        $("#staff_select").append('<option value="' + value["id"] + '">' + value["name"] + " " + value["surname"] + '</option>');
+                    });
 
                     var chartProperties = {
                         "caption": "",
