@@ -225,7 +225,7 @@
                 success: function(data) {
 
                     $('#selectedStore').children().remove();
-                    $("#selectedStore").append('<option id="" selected="selected">Please select</option>');
+                    $("#selectedStore").append('<option id="" value="" selected="selected">Please select</option>');
                     $.each(data["storesForProvince"], function(index, value) {
                         $("#selectedStore").append('<option value="' + value["id"] + '">' + value["sitename"] + '</option>');
                     });
