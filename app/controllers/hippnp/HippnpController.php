@@ -378,7 +378,7 @@ class HippnpController extends \BaseController {
 
         };
 
-        $data['all_staff'] = $staffArray:
+        $data['all_staff'] = $staffArray;
 
         if (count($finalChartObjectStaff) > 0) {
             $data['time_list_data'] = $finalChartObjectStaff[count($finalChartObjectStaff)- 1];
