@@ -219,7 +219,8 @@
                 dataType: 'json',
                 data: {
                     'date': date,
-                    'province': province
+                    'province': province,
+                    'store': store
                 },
                 success: function(data) {
 
