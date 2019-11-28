@@ -208,11 +208,6 @@
 
         function getChartDetailsAccordingToFilters(){
 
-            let date = $('#selectedDate').val();
-            let province = $('#selectedProvince').val();
-            let store = $('#selectedStore').val();
-
-
             if (province == "" || province == undefined) {
                 $('#selectedStoreRow').hide();
                 $('#selectedStore').val('');
@@ -220,6 +215,13 @@
             else {
                 $('#selectedStoreRow').show();
             }
+
+            let date = $('#selectedDate').val();
+            let province = $('#selectedProvince').val();
+            let store = $('#selectedStore').val();
+
+
+
 
             pathname = $('#url').val();
 
