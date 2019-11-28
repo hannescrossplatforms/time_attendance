@@ -172,7 +172,7 @@ class Picknpay extends Eloquent {
         return EngagePicknPayCategory::raw("SELECT DISTINCT name FROM pnp_staff ORDER BY")->get();
     }
 
-    public static function fetchAllStaff($date, $startDate, $endDate, $storeID = null){
+    public static function fetchAllStaff($date, $startDate, $endDate, $storeID = null, $provinceID = null){
 
         if ($startDate == null && $endDate == null) {
 
@@ -182,24 +182,27 @@ class Picknpay extends Eloquent {
             $endDate = $dateRange['endDate'];
 
         }
-        //Was like this, change back to this if problems exist
-        // return Picknpay::raw("SELECT DISTINCT staff_id FROM picknpay WHERE DATE_FORMAT(created_at, '%Y-%m-%d') >= '$startDate' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '$endDate'")->get();
 
+        $query = Picknpay::select(DB::raw("DISTINCT staff_id"))
+        ->whereraw("store_id = '$storeID'")
 
-        // return Picknpay::select(DB::raw("DISTINCT staff_id"))
-        // ->where('end_time', "<=", $endDate)
-        // ->where('end_time', ">=", $startDate)
-        // ->get();
-
-        if ($storeID != null) {
-            return Picknpay::select(DB::raw("DISTINCT staff_id"))
-            ->whereraw("store_id = '$storeID'")
-            ->get();
+        if ($storeID != null && $storeID != "") {
+            $query = $query->whereraw("store_id = '$storeID'")
         }
-        else {
-            return Picknpay::select(DB::raw("DISTINCT staff_id"))
-            ->get();
+        if ($provinceID != null && $provinceID != "") {
+            $query = $query->whereraw("province_id = '$provinceID'")
         }
+        return $query->get();
+
+        // if ($storeID != null) {
+        //     return Picknpay::select(DB::raw("DISTINCT staff_id"))
+        //     ->whereraw("store_id = '$storeID'")
+        //     ->get();
+        // }
+        // else {
+        //     return Picknpay::select(DB::raw("DISTINCT staff_id"))
+        //     ->get();
+        // }
 
 
 

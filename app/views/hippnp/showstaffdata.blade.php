@@ -192,9 +192,10 @@
         });
 
         function getChartDetailsAccordingToFilters(){
-            debugger;
+
             let date = $('#selectedDate').val();
             let province = $('#selectedProvince').val();
+            let store = $('#selectedStore').val();
 
             pathname = $('#url').val();
 
@@ -207,7 +208,7 @@
                     'province': province
                 },
                 success: function(data) {
-
+                    debugger;
                     $("#staff_select").val('0');
 
                     var chartProperties = {

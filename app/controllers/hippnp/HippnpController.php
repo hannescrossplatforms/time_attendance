@@ -295,6 +295,8 @@ class HippnpController extends \BaseController {
         $data['report_period'] = 'today';
         $data['url'] = 'http://' . $_SERVER['SERVER_NAME'].'/';
         $dateSelected = Input::get('date');
+        $selectedProvince = Input::get('province');
+        $selectedStore = Input::get('store');
 
         $finalChartObjectStaff = array();
 
@@ -316,9 +318,10 @@ class HippnpController extends \BaseController {
 
         $startDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
         $endDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
-        $allStaff = \Picknpay::fetchAllStaff('today', $startDate, $endDate, null);
+        $allStaff = \Picknpay::fetchAllStaff('today', $startDate, $endDate, $selectedStore, $selectedProvince);
 
-        \Log::info("Hannes KOM HIER 0");
+        $data['storesForProvince'] = \Picknpay::storesForProvince($selectedProvince);
+
         foreach ($allStaff as $staff) {
 
             //Get staff memeber with all his details.
