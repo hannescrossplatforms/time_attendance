@@ -249,7 +249,7 @@
 
                     $('#staff_select').children().remove();
                     $("#staff_select").append('<option id="" value="" selected="selected">Please select</option>');
-                    $.each(data["staff_select"], function(index, value) {
+                    $.each(data["all_staff"], function(index, value) {
                         $("#staff_select").append('<option value="' + value["id"] + '">' + value["name"] + " " + value["surname"] + '</option>');
                     });
 
