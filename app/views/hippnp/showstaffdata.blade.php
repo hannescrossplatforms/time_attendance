@@ -210,6 +210,7 @@
             let province = $('#selectedProvince').val();
             let store = $('#selectedStore').val();
 
+            debugger;
             pathname = $('#url').val();
 
             $.ajax({
@@ -221,12 +222,9 @@
                     'province': province
                 },
                 success: function(data) {
-                    debugger;
 
                     $('#selectedStore').children().remove();
-
                     $("#selectedStore").append('<option id="" selected="selected">Please select</option>');
-
                     $.each(data["storesForProvince"], function(index, value) {
                         $("#selectedStore").append('<option value="' + value["id"] + '">' + value["sitename"] + '</option>');
                     });
