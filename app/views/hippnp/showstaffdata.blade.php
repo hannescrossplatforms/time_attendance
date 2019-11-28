@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" style="margin-bottom: 10px">
+            <div class="row" id="selectedStoreRow" style="margin-bottom: 10px">
                 <div class="col-md-4" style="width:30%;">
                     <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
                         <label>Store</label>
@@ -204,6 +204,8 @@
             getChartDetailsAccordingToFilters();
         });
 
+        $("#selectedStoreRow").hide();
+
         function getChartDetailsAccordingToFilters(){
 
             let date = $('#selectedDate').val();
@@ -212,10 +214,10 @@
 
 
             if (province == "" || province == undefined) {
-                $('#selectedStore').hide();
+                $('#selectedStoreRow').hide();
             }
             else {
-                $('#selectedStore').show();
+                $('#selectedStoreRow').show();
             }
 
             pathname = $('#url').val();
