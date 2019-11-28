@@ -210,7 +210,14 @@
             let province = $('#selectedProvince').val();
             let store = $('#selectedStore').val();
 
-            debugger;
+
+            if (province == "" || province == undefined) {
+                $('#selectedStore').hide();
+            }
+            else {
+                $('#selectedStore').show();
+            }
+
             pathname = $('#url').val();
 
             $.ajax({
