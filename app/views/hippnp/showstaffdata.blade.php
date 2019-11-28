@@ -215,6 +215,7 @@
 
             if (province == "" || province == undefined) {
                 $('#selectedStoreRow').hide();
+                $('#selectedStore').val('');
             }
             else {
                 $('#selectedStoreRow').show();
