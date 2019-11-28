@@ -184,8 +184,7 @@ class Picknpay extends Eloquent {
         }
 
         $query = Picknpay::select(DB::raw("DISTINCT staff_id"));
-        \Log::info("HANNES FILTERS HERE: store id: $storeID");
-        \Log::info("HANNES FILTERS HERE: provinc id: $provinceID");
+
         if ($storeID != null && $storeID != "") {
             $query = $query->whereraw("store_id = '$storeID'");
         }
