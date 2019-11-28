@@ -233,7 +233,8 @@
                     //selectedStoreID
 
                     debugger;
-                    $(`#selectedStore option[id="${data['selectedStoreID']}"]`);
+                    $(`selectedStore option[id='${data['selectedStoreID']']`).attr("selected", "selected");
+
 
                     $("#staff_select").val('0');
 
