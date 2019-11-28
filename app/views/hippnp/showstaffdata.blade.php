@@ -245,7 +245,7 @@
 
                     $(`#selectedStore option[value='${data['selectedStoreID']}']`).attr("selected", "selected");
 
-                    $("#staff_select").val('0');
+                    // $("#staff_select").val('0');
 
                     $('#staff_select').children().remove();
                     $("#staff_select").append('<option id="" value="" selected="selected">Please select</option>');
