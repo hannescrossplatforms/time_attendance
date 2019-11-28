@@ -63,9 +63,6 @@
                         <select id="selectedStore" onchange="getChartDetailsAccordingToFilters()" class="form-control"
                             name="brandprovince">
                             <option value="">Select</option>
-
-                            </option>
-                            @endforeach
                         </select>
                     </div>
                 </div>
