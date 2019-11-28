@@ -230,6 +230,10 @@
                         $("#selectedStore").append('<option value="' + value["id"] + '">' + value["sitename"] + '</option>');
                     });
 
+                    //selectedStoreID
+
+                    $(`#selectedStore option[id="${data['selectedStoreID']}"]`);
+
                     $("#staff_select").val('0');
 
                     var chartProperties = {

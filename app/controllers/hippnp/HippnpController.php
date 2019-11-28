@@ -321,6 +321,7 @@ class HippnpController extends \BaseController {
         $allStaff = \Picknpay::fetchAllStaff('today', $startDate, $endDate, $selectedStore, $selectedProvince);
 
         $data['storesForProvince'] = \Picknpay::storesForProvince($selectedProvince);
+        $data['selectedStoreID'] = $selectedStore;
 
         foreach ($allStaff as $staff) {
 
