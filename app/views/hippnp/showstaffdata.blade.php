@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-md-4" style="width:30%;">
                     <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
-                        <label>Province</label>
+                        <label>Store</label>
                     </div>
                     <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                         <select id="selectedStore" onchange="getChartDetailsAccordingToFilters()" class="form-control"

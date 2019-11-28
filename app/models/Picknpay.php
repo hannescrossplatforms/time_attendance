@@ -183,8 +183,7 @@ class Picknpay extends Eloquent {
 
         }
 
-        $query = Picknpay::select(DB::raw("DISTINCT staff_id"))
-        ->whereraw("store_id = '$storeID'");
+        $query = Picknpay::select(DB::raw("DISTINCT staff_id"));
 
         if ($storeID != null && $storeID != "") {
             $query = $query->whereraw("store_id = '$storeID'");
