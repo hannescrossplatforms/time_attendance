@@ -629,6 +629,33 @@ class HippnpController extends \BaseController {
 
         $data['time_list'] = json_encode($timeList);
 
+        //All stores
+        $allStores = \Picknpay::fetchAllStores($period, null, null, null);
+
+
+        $allProvinces = array();
+        foreach ($allStores as $store) {
+            $province = \Picknpay::fetchStoreForVenue($store);
+
+            $hasVal = false;
+            foreach ($allProvinces as $prov) {
+                if($prov->name == $province->name) {
+                    $hasVal = true;
+                }
+            }
+
+            if ($hasVal == false) {
+                array_push($allProvinces, $province);
+            }
+
+
+        }
+
+        $data['all_stores'] = $allStores;
+
+
+
+
         //All staff memebers present in database for selected period.
 
         $startDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'start');
