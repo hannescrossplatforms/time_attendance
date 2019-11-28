@@ -651,7 +651,7 @@ class HippnpController extends \BaseController {
 
         }
 
-        $data['all_stores'] = $allStores;
+        $data['all_provinces'] = $allProvinces;
 
 
 
