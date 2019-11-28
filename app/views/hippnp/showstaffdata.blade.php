@@ -24,9 +24,9 @@
           <h1 class="page-header">Staff Lookup</h1>
           <input type="hidden" id="url" name="" value={{$data['url']}}>
 
-            <div class="row">
+            <div class="row" style="margin-bottom: 10px">
                 <div class="col-md-6" style="width:30%;">
-                    <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
+                    <div class="col-md-4" style="width:41%; padding:6px 0px 0px 0px;">
                         <label>Report Period</label>
                     </div>
                     <div class="col-md-4" style="padding:0px 0px 0px 6px;">
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="margin-bottom: 10px">
                 <div class="col-md-4" style="width:30%;">
                     <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
                         <label>Province</label>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="margin-bottom: 10px">
                 <div class="col-md-4" style="width:30%;">
                     <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
                         <label>Store</label>
