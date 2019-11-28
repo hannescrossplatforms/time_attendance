@@ -320,8 +320,11 @@ class HippnpController extends \BaseController {
         $endDate = \Picknpay::getDateForTimeOfDayPerHour($dateSelected, 'allDay', 'end');
         $allStaff = \Picknpay::fetchAllStaff('today', $startDate, $endDate, $selectedStore, $selectedProvince);
 
+
         $data['storesForProvince'] = \Picknpay::storesForProvince($selectedProvince);
         $data['selectedStoreID'] = $selectedStore;
+
+        $staffArray = array();
 
         foreach ($allStaff as $staff) {
 
@@ -329,6 +332,8 @@ class HippnpController extends \BaseController {
             $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->staff_id);
             $stafId = $staff->staff_id;
             $staffName = $staffObj->name;
+
+            array_push($staffArray, $staffObj);
 
             $dataArray = array();
 
@@ -372,6 +377,8 @@ class HippnpController extends \BaseController {
             array_push($finalChartObjectStaff, $obj);
 
         };
+
+        $data['all_staff'] = $staffArray:
 
         if (count($finalChartObjectStaff) > 0) {
             $data['time_list_data'] = $finalChartObjectStaff[count($finalChartObjectStaff)- 1];
