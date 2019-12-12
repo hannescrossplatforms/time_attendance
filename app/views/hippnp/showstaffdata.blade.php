@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="staff_select_section" class="form-group">
                 <label>Staff member</label>
                 <select id="staff_select" name="store_id" onchange="get_staff_chart()" class="form-control" required>
                 <option value="0">Select</option>
@@ -198,6 +198,8 @@
             orientation: "right bottom"
         });
 
+        $("#staff_select_section").hide();
+
         $("#selectedDate").datepicker("setDate", new Date());
 
         $('#selectedDate').change(function () {
@@ -236,6 +238,8 @@
                     'store': store
                 },
                 success: function(data) {
+
+                    $("#staff_select_section").show();
 
                     $('#selectedStore').children().remove();
                     $("#selectedStore").append('<option id="" value="" selected="selected">Please select</option>');
