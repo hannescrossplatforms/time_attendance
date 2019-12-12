@@ -296,7 +296,7 @@
                                                                 <div class="row">
                                                                     <div class="col-sm-12">
                                                                         <div class="chart-stage">
-                                                                            <div id="date_week">Charts will render here</div>
+                                                                            <div id="chart-07">Charts will render here</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -467,7 +467,7 @@
                     firebase.initializeApp(config);
                     firebase.analytics();
 
-                    var db = firebase.firestore()
+                    this.db = firebase.firestore()
                     this.all = db.collection
                     this.venue = db.collection("{{$data['venue_id']}}");
 
@@ -516,16 +516,16 @@
                 return date_array;
             }
 
-            liveJam.retrieveNode = (node, callback) => {
-                 venue.doc(node).get()
+            liveJam.retrieveNode = (node) => {
+                 return venue.doc(node).get()
                     .then((doc) => {
                         if (doc.exists) {
-                            callback({
+                            return {
                                 date: node,
                                 data: doc.data()
-                            })
+                            }
                         } else {
-                            callback({
+                            return {
                                 date: node,
                                 data: {
                                     average_dwell: 0,
@@ -536,11 +536,11 @@
                                     new_customers_today: 0,
                                     type: ''
                                 }
-                            })
+                            }
                         }
                     })
                     .catch(function(error) {
-                        callback({
+                        return {
                             date: node,
                             data: {
                                 average_dwell: 0,
@@ -551,22 +551,31 @@
                                 new_customers_today: 0,
                                 type: ''
                             }
-                        })
+                        }
                     })
             }
 
             liveJam.compileData = (span, callback) => {
                 let nodes = liveJam.compileNodeArray(span);
+                let week_data_promises = [];
                 let week_data = [];
                 $.each(nodes, function(i, node) {
                     console.log('GETTING DATA FOR: ' + node);
-                    liveJam.retrieveNode(node, function(data) {
-                        week_data.push(data);
-                        if (i + 1 === nodes.length) {
-                            callback(week_data)
-                        }
-                    })
+                    week_data_promises.push(liveJam.retrieveNode(node));
+                
+        
+
+                    // liveJam.retrieveNode(node, function(data) {
+                        
+                    //     week_data.push(data);
+                    //     if (i + 1 === nodes.length) {
+                    //         callback(week_data)
+                    //     }
+                    // })
                 });
+                Promise.all(week_data_promises).then(function() {
+                    callback(arguments[0]);
+                })
             }
 
             liveJam.sortArray = (array) => {
@@ -580,6 +589,13 @@
                 })
             }
 
+            liveJam.sortArrayByKey = (array, key) => {
+                return array.sort(function (a, b) {
+                    var x = a[key]; var y = b[key];
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                });
+            }
+
             liveJam.graphSerializer = (raw_data) => {
                 raw_data.sort((a, b) => a.date.localeCompare(b.date));
                 return $.map( raw_data, function( d, i ) {
@@ -587,10 +603,10 @@
                 });
             }
 
-            liveJam.renderGraph = (data) => {
+            liveJam.renderStoreTrafficTrendGraph = (data) => {
                 var chartProperties = {
                 "caption": "OVERALL STORE TRAFFIC TREND",
-                "xAxisName": "Week",
+                "xAxisName": "Date",
                 "yAxisName": "Customers",
                 "rotatevalues": "1",
                 "theme": "zune"
@@ -599,7 +615,7 @@
             apiChart = new FusionCharts({
                 type: 'line',
                 renderAt: 'chart-05',
-                width: '50%',
+                width: '100%',
                 height: '350',
                 dataFormat: 'json',
                 dataSource: {
@@ -611,6 +627,104 @@
             apiChart.render();
             }
 
+            liveJam.renderStoreWeekTrafficGraph = (data) => {
+                var chartProperties = {
+                "caption": "STORE TRAFFIC THIS WEEK",
+                "xAxisName": "Date",
+                "yAxisName": "Customers",
+                "rotatevalues": "1",
+                "theme": "zune"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'line',
+                renderAt: 'chart-07',
+                width: '100%',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "data": liveJam.graphSerializer(data)
+
+                }
+            });
+                apiChart.render();
+            }
+
+            liveJam.renderNewVsReturningGraph = (data) => {
+                let dateCat = $.map( data, function( d, i ) {
+                    return {label: d.date}
+                });
+            
+
+                let new_data_set = $.map( data, function( d, i ) {
+                    return {value: d.data.new_customers_today}
+                });
+
+                let new_data_set_full = {seriesname: "New", data: new_data_set}
+
+                let returning_data_set = $.map( data, function( d, i ) {
+                    return {value: d.data.customers_in_store_today - d.data.new_customers_today}
+                });
+
+                let returning_data_set_full = {seriesname: "Returning", data: returning_data_set}
+                
+
+                var chartProperties = {
+                "caption": "OVERALL STORE TRAFFIC TREND",
+                "xAxisName": "Date",
+                "yAxisName": "Customers",
+                "rotatevalues": "1",
+                "theme": "zune"
+                };
+
+                apiChart = new FusionCharts({
+                    type: 'msline',
+                    renderAt: 'chart-06',
+                    width: '100%',
+                    height: '350',
+                    dataFormat: 'json',
+                    dataSource: {
+                        "chart": chartProperties,
+                        "categories": [{category: dateCat}],
+                        "dataset": [new_data_set_full, returning_data_set_full]
+                    }
+                });
+                apiChart.render();
+            }
+
+            liveJam.renderHourlyTrafficGraph = (data) => {
+                let current_date = new Date();
+                let node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}/hourly`;
+                db.collection(`{{$data['venue_id']}}/${node}`).get().then(function(querySnapshot) {
+                    let graph_data = [];
+                    querySnapshot.forEach(function(doc) {
+                        graph_data.push({label: parseInt(doc.id), value: doc.data().customers})
+                    });
+                    let ordered_data = liveJam.sortArrayByKey(graph_data, 'label')
+                    var chartProperties = {
+                            "caption": "Store Traffic/Hour Today",
+                            "xAxisName": "Hour",
+                            "yAxisName": "Customers",
+                            "rotatevalues": "1",
+                            "theme": "zune"
+                        };
+
+                        apiChart = new FusionCharts({
+                            type: 'line',
+                            renderAt: 'chart-container',
+                            width: '100%',
+                            height: '350',
+                            dataFormat: 'json',
+                            dataSource: {
+                                "chart": chartProperties,
+                                "data": ordered_data
+                            }
+                        });
+                        apiChart.render();
+                });               
+            }
+
             liveJam.initialize(() => {
                 liveJam.getVenueData();
                 liveJam.compileData('week', function (week_data) { 
@@ -620,27 +734,36 @@
                     var dwell = 0; 
                     var dwell_words = '';
                     var exposed_to_billboard = 0;
+                    debugger;
                     $.each(week_data, function(index, item) {
+                        dwell += item.data.average_dwell;
                         customers_in_store += item.data.customers_in_store_today;
                         new_customers_in_store += item.data.new_customers_today;
                         exposed_to_billboard = 0;
                     });
-                    
-                    dwell = time_since_opening / customers_in_store;
-                  
-
+                    dwell = (dwell / week_data.length) / 60
                     $('#rep_customer').html(customers_in_store);
                     $('#new_rep_customer').html(new_customers_in_store);
                     $('#engaged_customers').html(customers_in_store);
                     $('#rep_ave').html(Math.round(dwell));
                     $('#window_con').html('0');
 
-                    liveJam.renderGraph(week_data);
-                    debugger;
+                    liveJam.renderStoreTrafficTrendGraph(week_data);
+                    liveJam.renderHourlyTrafficGraph(week_data);
+                    liveJam.renderNewVsReturningGraph(week_data);
+                    liveJam.renderStoreWeekTrafficGraph(week_data);
                 });
 
             })
         </script>
+
+        <script>
+            if (window.location !== window.parent.location) {
+                $('.sidebar').remove();
+                $('.main').attr('style', 'width: 100% !important; margin: 0 !important;');
+            }
+        </script>
+
 
 </body>
 

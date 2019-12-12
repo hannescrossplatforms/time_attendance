@@ -2,131 +2,132 @@
 
 @section('content')
 
-  <body class="hipJAM">
-    <a id="buildtable"></a>
+<body class="hipJAM">
+  <a id="buildtable"></a>
 
-    <div class="container-fluid">
-      <div class="row">
+  <div class="container-fluid">
+    <div class="row">
 
-        @include('hipjam.sidebar')
+      @include('hipjam.sidebar')
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-            <h1 class="page-header">Dashboard</h1>
-          
-            
-            <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
-              <div id="map" style="width:100%; height: 500px;"></div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+        <h1 class="page-header">Dashboard</h1>
 
-              <div id="clear-button-div" style="display: none; float: right; margin-top: 10px;">
-                <a class="btn btn-default btn-sm">Clear</a>
+
+        <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
+        <div id="map" style="width:100%; height: 500px;"></div>
+
+        <div id="clear-button-div" style="display: none; float: right; margin-top: 10px;">
+          <a class="btn btn-default btn-sm">Clear</a>
+        </div>
+        <div id="ajax-venue-stats-page"></div>
+        <iframe style="width: 100%; height: 1880px; border: 0;" id="selected_venue_view"></iframe>
+
+        <div id="stats-and-graph-container">
+
+          <div style="width: 100%; margin-top: 15px;">
+            <div style="width:33%; display: inline-block; height:94px;">
+              <div style="background-color: #2e80e7; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                <i class="fa fa-map-signs" style="color: white; font-size: 41px; margin-top: 25px;"></i>
               </div>
-              <div id="ajax-venue-stats-page"></div>
-
-            <div id="stats-and-graph-container">
-
-              <div style="width: 100%; margin-top: 15px;">
-                <div style="width:33%; display: inline-block; height:94px;">
-                  <div style="background-color: #2e80e7; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                    <i class="fa fa-map-signs" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-                  </div>
-                  <div style="background-color: #5d9dec; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_billboards"]}}</p>
-                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of billboards</small>
-                  </div>
-                </div>
-
-                <div style="width:33%; display: inline-block; height:94px;">
-                  <div style="background-color: #2a9579; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                    <i class="fa fa-building" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-                  </div>
-                  <div style="background-color: #37bc9b; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_retail_venues"]}}</p>
-                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of retail venues</small>
-                  </div>
-                </div>
-
-                <div style="width:33%; display: inline-block; height:94px;">
-                  <div style="background-color: #574aa3; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                    <i class="fa fa-history" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-                  </div>
-                  <div style="background-color: #7d6dde; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_uniques_today">Loading...</p>
-                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Uniques today</small>
-                  </div>
-                </div>
-
-                <div style="width:33%; display: inline-block; height:94px;">
-                  <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                    <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-                  </div>
-                  <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_current">Loading...</p>
-                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed current</small>
-                  </div>
-                </div>
-
-                <div style="width:33%; display: inline-block; height:94px;">
-                  <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                    <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-                  </div>
-                  <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">Loading...</p>
-                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed today</small>
-                  </div>
-                </div>
-
-                <div style="width:33%; display: inline-block; height:94px;">
-                  <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                    <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-                  </div>
-                  <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                    <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">{{$data['avg_distance'][0]->distance}}km</p>
-                    <small style="color: white; padding-left: 15px; text-transform: uppercase;">Avg Distance Billboard / Retail</small>
-                  </div>
-                </div>
-
+              <div style="background-color: #5d9dec; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_billboards"]}}</p>
+                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of billboards</small>
               </div>
-
-              <div class="row">
-
-                <div class="graph-container" style="padding: 10px; width: 100%;">
-                  <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;margin-top: 20px;">
-                    <h1>Best Performance</h1>
-                    <div class="graphcell" style="padding: 1px;">
-                      <div id="chartcol1row1"></div>
-                    </div>
-                    <div class="graphcell">
-                      <div id="chartcol1row2"></div>
-                    </div>
-                    <div class="graphcell">
-                      <div id="chartcol1row3"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="graph-container" style="padding: 10px; width: 100%;">
-                  <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;">
-                    <h1>Worst Performance</h1>
-                    <div class="graphcell" style="padding: 1px;">
-                      <div id="chartcol2row1"></div>
-                    </div>
-                    <div class="graphcell">
-                      <div id="chartcol2row2"></div>
-                    </div>
-                    <div class="graphcell">
-                      <div id="chartcol2row3"></div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
             </div>
 
+            <div style="width:33%; display: inline-block; height:94px;">
+              <div style="background-color: #2a9579; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                <i class="fa fa-building" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+              </div>
+              <div style="background-color: #37bc9b; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_retail_venues"]}}</p>
+                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of retail venues</small>
+              </div>
+            </div>
+
+            <div style="width:33%; display: inline-block; height:94px;">
+              <div style="background-color: #574aa3; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                <i class="fa fa-history" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+              </div>
+              <div style="background-color: #7d6dde; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_uniques_today">Loading...</p>
+                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Uniques today</small>
+              </div>
+            </div>
+
+            <div style="width:33%; display: inline-block; height:94px;">
+              <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+              </div>
+              <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_current">Loading...</p>
+                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed current</small>
+              </div>
+            </div>
+
+            <div style="width:33%; display: inline-block; height:94px;">
+              <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+              </div>
+              <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">Loading...</p>
+                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed today</small>
+              </div>
+            </div>
+
+            <div style="width:33%; display: inline-block; height:94px;">
+              <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
+                <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
+              </div>
+              <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
+                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">{{$data['avg_distance'][0]->distance}}km</p>
+                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Avg Distance Billboard / Retail</small>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="graph-container" style="padding: 10px; width: 100%;">
+              <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;margin-top: 20px;">
+                <h1>Best Performance</h1>
+                <div class="graphcell" style="padding: 1px;">
+                  <div id="chartcol1row1"></div>
+                </div>
+                <div class="graphcell">
+                  <div id="chartcol1row2"></div>
+                </div>
+                <div class="graphcell">
+                  <div id="chartcol1row3"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="graph-container" style="padding: 10px; width: 100%;">
+              <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;">
+                <h1>Worst Performance</h1>
+                <div class="graphcell" style="padding: 1px;">
+                  <div id="chartcol2row1"></div>
+                </div>
+                <div class="graphcell">
+                  <div id="chartcol2row2"></div>
+                </div>
+                <div class="graphcell">
+                  <div id="chartcol2row3"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
 
 
 
-<!--
+
+        <!--
             Exposed visits today global view (Exposed to billboard)
 Exposed visits month (Exposed to billboard)
 Unexposed visits today (without being exposed to billboard)
@@ -135,121 +136,257 @@ Time spent in store (dwell) -->
 
 
 
-            <div class="table-responsive">
-                <table id="venueTable" class="table table-striped"> </table>
-            </div>
+        <div class="table-responsive">
+          <table id="venueTable" class="table table-striped"> </table>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Bootstrap core JavaScript
+  <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 
-    <script src="{{ asset('js/fusioncharts.js') }}"></script>
-    <script src="{{ asset('js/fusioncharts.charts.js') }}"></script>
-    <script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}"></script>
+  <script src="{{ asset('js/fusioncharts.js') }}"></script>
+  <script src="{{ asset('js/fusioncharts.charts.js') }}"></script>
+  <script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}"></script>
 
-    <script src="js/prefixfree.min.js"></script>
+  <script src="js/prefixfree.min.js"></script>
 
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
-    <script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDS0aGw5pQFy_dg8198J42w0EeuZtI2Wuk" type="text/javascript"></script>
-    <script>
+  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+  </script>
+  <script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDS0aGw5pQFy_dg8198J42w0EeuZtI2Wuk" type="text/javascript"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-analytics.js"></script>
+  <style>
+    #selected_venue_view {
+      display: none;
+    }
+  </style>
+  <script>
+    let venue_array = [];
+    let loaded_venues = {{$data['venuesJson']}};
+    let liveJam = {};
+    liveJam.initialize = (callback) => {
+      $.getScript('https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js', () => {
+        let config = {
+          apiKey: "AIzaSyDUxh-Quw0-D6V7Q2Pjcwgeco7R7x08hWw",
+          authDomain: "tracks-e61f4.firebaseapp.com",
+          databaseURL: "https://tracks-e61f4.firebaseio.com",
+          projectId: "tracks-e61f4",
+          storageBucket: "",
+          messagingSenderId: "798983478031",
+          appId: "1:798983478031:web:f81f6341211ab4dfd7bc7a",
+          measurementId: "G-9B1XXZ1MXG"
+        };
+        firebase.initializeApp(config);
+        firebase.analytics();
 
-    let venues = {{ $data['venuesJson'] }};
+        this.db = firebase.firestore()
+        this.all = db.collection
+
+        $.each(loaded_venues, function(i, v) {
+          venue_array.push(db.collection(v.id));
+        });
+
+
+
+        callback();
+      });
+    };
+
+    liveJam.getVenueData = () => {
+      let current_date = new Date();
+      let formatted_node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}`
+      let exposed_current = 0;
+      let exposed_today = 0;
+      let uniques_today = 0;
+      let venues_with_no_data = 0;
+
+      $.each(venue_array, function(i, v) {
+        v.doc(formatted_node).get()
+          .then((doc => {
+            console.log('Venue loaded')
+            if (doc.exists) {
+              exposed_current += doc.data().customers_in_store_now;
+              exposed_today += doc.data().customers_in_store_today;
+              uniques_today += doc.data().new_customers_today;
+            } else {
+              venues_with_no_data += 1;
+            }
+            $('#live_individuals_exposed_current').html(exposed_current.toString());
+            $('#live_individuals_exposed_today').html(exposed_today.toString());
+            $('#live_uniques_today').html(uniques_today.toString());
+          }))
+      });
+
+    }
+
+    function getIcon(venue, callback) {
+      let current_date = new Date();
+      let current_date_node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}`
+      db.collection(venue.id).doc(current_date_node).get()
+        .then((doc) => {
+          if (doc.exists) {
+            let venue_data = doc.data();
+            if (($.now() / 1000) - 300 < venue_data.last_seen) {
+              if (venue_data.type === null || venue_data.type === 'venue' || venue_data.type === '') {
+                callback('http://hiphub.hipzone.co.za/img/retail_marker.png');
+              } else {
+                callback('http://hiphub.hipzone.co.za/img/billboard_marker.png');
+              }
+            } else {
+              if (venue_data.type === null || venue_data.type === 'venue') {
+                callback('http://hiphub.hipzone.co.za/img/offline_retail_marker.gif');
+              } else {
+                callback('http://hiphub.hipzone.co.za/img/offline_billboard_marker.gif');
+              }
+            }
+          } else {
+            callback('http://hiphub.hipzone.co.za/img/offline_retail_marker.gif');
+          }
+        });
+    }
+
+    let venues = {{$data['venuesJson']}};
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 5,
       center: new google.maps.LatLng(-30.341529, 25.322594),
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles: [
-            {elementType: 'geometry', stylers: [{color: '#08304b'}]},
-            {elementType: 'labels.text.stroke', stylers: [{color: '#000000'}]},
-            {elementType: 'labels.text.fill', stylers: [{color: '#FFFFFF'}]},
-            {
-              featureType: 'administrative.locality',
-              elementType: 'labels.text.stroke',
-              stylers: [{color: '#000000'}]
-            },
-            {
-              featureType: 'administrative.locality',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'poi',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'geometry',
-              stylers: [{color: '#0e5064'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry',
-              stylers: [{color: '#165f71'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#165f71'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry',
-              stylers: [{color: '#165f71'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#165f71'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'transit',
-              elementType: 'geometry',
-              stylers: [{color: '#165f71'}]
-            },
-            {
-              featureType: 'transit.station',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'geometry',
-              stylers: [{color: '#9dd5ff'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.stroke',
-              stylers: [{color: '#000000'}]
-            }
-          ]
+      styles: [{
+          elementType: 'geometry',
+          stylers: [{
+            color: '#08304b'
+          }]
+        },
+        {
+          elementType: 'labels.text.stroke',
+          stylers: [{
+            color: '#000000'
+          }]
+        },
+        {
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'administrative.locality',
+          elementType: 'labels.text.stroke',
+          stylers: [{
+            color: '#000000'
+          }]
+        },
+        {
+          featureType: 'administrative.locality',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#0e5064'
+          }]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry.stroke',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'road',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry.stroke',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'transit.station',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#9dd5ff'
+          }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.stroke',
+          stylers: [{
+            color: '#000000'
+          }]
+        }
+      ]
     });
 
     var infowindow = new google.maps.InfoWindow();
@@ -257,204 +394,179 @@ Time spent in store (dwell) -->
     var marker, i;
     let markers = [];
     let no_lat_long_count = 0;
+    let venue_promises = [];
 
+    liveJam.initialize(function() {
+      liveJam.getVenueData();
+      $.each(venues, function(i, venue) {
 
-    $.each(venues, function(i, venue) {
-    
-      if ((venue.latitude === null || venue.latitude === '') || venue.ap_active === '0') {
-        no_lat_long_count++;
-      } else {
-        let ico = '';
-        if (venue.track_type === 'venue' || venue.track_type === '' || venue.track_type === null) {
-          console.log(venue.status.toLowerCase())
-          if (venue.status.toLowerCase().indexOf('inactive') === -1) {
-            ico = 'http://hiphub.hipzone.co.za/img/retail_marker.png'
-          } else {
-            ico = 'http://hiphub.hipzone.co.za/img/offline_retail_marker.gif'
-          }
+        if ((venue.latitude === null || venue.latitude === '') || venue.ap_active === '0') {
+          no_lat_long_count++;
         } else {
-          if (venue.status.toLowerCase().indexOf('inactive') === -1) {
-            ico = 'http://hiphub.hipzone.co.za/img/billboard_marker.png'
-          } else {
-            ico = 'http://hiphub.hipzone.co.za/img/offline_billboard_marker.gif'
-          }
-        }
+          getIcon(venue, function(ico) {
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(parseFloat(venue.latitude), parseFloat(venue.longitude)),
+                map: map,
+                icon: ico,
+                venue_id: venue.id
+              });
 
-        marker = new google.maps.Marker({
-          position: new google.maps.LatLng(parseFloat(venue.latitude),  parseFloat(venue.longitude)),
-          map: map,
-          icon: ico,
-          venue_id: venue.id
-        });
+              google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
 
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-      return function() {
+                  let venue_id = marker.venue_id;
 
-        let venue_id = marker.venue_id;
-        
-        $.ajax({
-            type: "GET",
-            dataType: 'html',
-            contentType: "application/json",
-            url: `hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za/json`,
-            success: function(response) {
+                  $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za`);
+                  $('#selected_venue_view').slideDown('fast')
 
-              $("#clear-button-div").css("display", 'initial');
-              $("#stats-and-graph-container").css("display", "none");
-              $("#ajax-venue-stats-page").html(response);
-            },
-            error: function(error){
+                  console.log(`marker clicked with id: ${venue_id}`);
+                }
+              })(marker, i));
 
-            }
-        });
+              markers.push(marker)
 
+              if (i + 1 === venues.length) {
+                var markerCluster = new MarkerClusterer(map, markers, {
+                  imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+                });
+              }
+            });
+          };
+      });
 
-        // http://hiphub.hipzone.co.za/hipjam_viewvenue/1346/tracks03.hipzone.co.za
-        // Route::get('hipjam_viewvenue/{id}/{name}/json', array('uses' => 'hipjam\HipjamController@viewVenueJson', 'as' => 'hipjam_viewvenuejson'))->before('auth');
-
-        console.log(`marker clicked with id: ${venue_id}`);
+      if (no_lat_long_count !== 0) {
+        $('#warn_no_locations_found').html(`<i class="fa fa-info-circle" style="margin-right: 10px"></i>${no_lat_long_count} venues do not have location data`)
+        $('#warn_no_locations_found').slideDown('fast');
       }
-      })(marker, i));
 
-        markers.push(marker)
-      }
-    });
+      
 
-    if (no_lat_long_count !== 0) {
-      $('#warn_no_locations_found').html(`<i class="fa fa-info-circle" style="margin-right: 10px"></i>${no_lat_long_count} venues do not have location data`)
-      $('#warn_no_locations_found').slideDown('fast');
-    }
 
-    var markerCluster = new MarkerClusterer(map, markers,
-          {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
-    
-
-      $("#clear-button-div").click(function(){
+      $("#clear-button-div").click(function() {
         $("#clear-button-div").css("display", 'none');
         $("#stats-and-graph-container").css("display", "initial");
         $("#ajax-venue-stats-page").html(null);
       });
+    });
+  </script>
 
-    </script>
-
-    <script>
-
+  <script>
     // $(function() {
     //   console.log("begin");
     //     showSelectedVenues();
     // });
 
 
-      $(document).ready(function(){
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            contentType: "application/json",
-            url: "{{ url('hipjam_load_customer_stats_for_dash'); }}",
-            success: function(response) {
+    // $(document).ready(function(){
+    //   $.ajax({
+    //       type: "GET",
+    //       dataType: 'json',
+    //       contentType: "application/json",
+    //       url: "{{ url('hipjam_load_customer_stats_for_dash'); }}",
+    //       success: function(response) {
 
 
-              $('#individuals_exposed_current').html(response.individualsExposedCurrent);
-              $('#individuals_exposed_today').html(response.individuals_exposed_today);
-              $('#uniques_today').html(response.uniques_today);
+    //         $('#individuals_exposed_current').html(response.individualsExposedCurrent);
+    //         $('#individuals_exposed_today').html(response.individuals_exposed_today);
+    //         $('#uniques_today').html(response.uniques_today);
 
-              $('#individuals_exposed_current').addClass( "font36" );
-              $('#individuals_exposed_today').addClass( "font36" );
-              $('#uniques_today').addClass( "font36" );
+    //         $('#individuals_exposed_current').addClass( "font36" );
+    //         $('#individuals_exposed_today').addClass( "font36" );
+    //         $('#uniques_today').addClass( "font36" );
 
-            },
-            error: function(error){
+    //       },
+    //       error: function(error){
 
-            }
-          });
+    //       }
+    //     });
 
-          $.ajax({
-            type: "GET",
-            dataType: 'json',
-            contentType: "application/json",
-            url: "{{ url('hipjam_graph_data'); }}",
-            success: function(brandjson) {
-              console.log(brandjson);
-              showBrandPerformanceGraphs(brandjson);
-            },
-            error: function(error) {
-              debugger;
-            }
-          });
-
-
-          function showBrandPerformanceGraphs(brandData) {
-
-            var highest5Sessions = new FusionCharts({
-              type: "column2d",
-              renderAt: "chartcol1row1",
-              width: "98%",
-              height: "300",
-              dataFormat: "json",
-              dataSource: brandData["highest5Sessions"]
-              });
-              highest5Sessions.render("chartcol1row1");
-
-              var lowest5session = new FusionCharts({
-              type: "column2d",
-              renderAt: "chartcol2row1",
-              width: "98%",
-              height: "300",
-              dataFormat: "json",
-              dataSource: brandData["lowest5Sessionsdata"]
-              });
-              lowest5session.render("chartcol2row1");
-
-            }
+    //     $.ajax({
+    //       type: "GET",
+    //       dataType: 'json',
+    //       contentType: "application/json",
+    //       url: "{{ url('hipjam_graph_data'); }}",
+    //       success: function(brandjson) {
+    //         console.log(brandjson);
+    //         showBrandPerformanceGraphs(brandjson);
+    //       },
+    //       error: function(error) {
+    //         debugger;
+    //       }
+    //     });
 
 
+    //     function showBrandPerformanceGraphs(brandData) {
 
-      })
+    //       var highest5Sessions = new FusionCharts({
+    //         type: "column2d",
+    //         renderAt: "chartcol1row1",
+    //         width: "98%",
+    //         height: "300",
+    //         dataFormat: "json",
+    //         dataSource: brandData["highest5Sessions"]
+    //         });
+    //         highest5Sessions.render("chartcol1row1");
+
+    //         var lowest5session = new FusionCharts({
+    //         type: "column2d",
+    //         renderAt: "chartcol2row1",
+    //         width: "98%",
+    //         height: "300",
+    //         dataFormat: "json",
+    //         dataSource: brandData["lowest5Sessionsdata"]
+    //         });
+    //         lowest5session.render("chartcol2row1");
+
+    //       }
 
 
-    venuesJson = {{ $data['venuesJson'] }};
 
-      $(function() {
-        $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+    // })
+
+
+    venuesJson = {{$data['venuesJson']}};
+
+    $(function() {
+      $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+    });
+
+    $(document).delegate('#buildtable', 'click', function() {
+      showVenuesTable(venuesJson);
+    });
+
+    $(document).delegate('#reset', 'click', function() {
+      showVenuesTable(venuesJson);
+    });
+
+    $(document).delegate('#filter', 'click', function(event) {
+
+      event.preventDefault();
+
+      sitename = $("#src-sitename").val();
+      macaddress = $("#src-macaddress").val();
+
+      $.ajax({
+        type: "GET",
+        dataType: 'json',
+        contentType: "application/json",
+        data: {
+          'sitename': sitename,
+          'macaddress': macaddress
+        },
+        url: "{{ url('lib_filterdvenues'); }}",
+        success: function(filteredVenuesjson) {
+          // alert("success");
+          showVenuesTable(filteredVenuesjson);
+        }
       });
+    });
 
-      $(document).delegate('#buildtable', 'click', function() {
-        showVenuesTable(venuesJson);
-      });
-
-      $(document).delegate('#reset', 'click', function() {
-        showVenuesTable(venuesJson);
-      });
-
-      $(document).delegate('#filter', 'click', function(event) {
-
-        event.preventDefault();
-
-        sitename = $( "#src-sitename" ).val();
-        macaddress = $( "#src-macaddress" ).val();
-
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            contentType: "application/json",
-            data: {
-              'sitename': sitename,
-              'macaddress': macaddress
-            },
-            url: "{{ url('lib_filterdvenues'); }}",
-            success: function(filteredVenuesjson) {
-              // alert("success");
-              showVenuesTable(filteredVenuesjson);
-            }
-         });
-      });
-
-      function showVenuesTable(venuesjson) {
-        // alert("showVenuesTable");
-        table = '';
-        rows = '';
-        beginTable = '\
+    function showVenuesTable(venuesjson) {
+      // alert("showVenuesTable");
+      table = '';
+      rows = '';
+      beginTable = '\
                 <table class="table table-striped">\n\
                   <thead>\n\
                     <tr>\n\
@@ -466,61 +578,62 @@ Time spent in store (dwell) -->
                     </tr>\n\
                   </thead>\n\
                   <tbody>  \n';
-        $.each(venuesjson, function(index, value) {
+      $.each(venuesjson, function(index, value) {
 
 
-            /*editbutton = '<a href="{{ url('hipwifi_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n';*/
-            if(value["apisitename"] != 'no_venue'){
-              viewbutton = '<a href="{{ url('hipjam_viewvenue'); }}/' + value["id"]+'/'+value["apisitename"] + '" class="btn btn-default btn-sm">view</a>\n';
-            } else {
-              viewbutton = '<a href="javascript:void(0);" onclick="alert_message()" class="btn btn-default btn-sm">view</a>\n';
-            }
+        /*editbutton = '<a href="{{ url('hipwifi_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n';*/
+        if (value["apisitename"] != 'no_venue') {
+        
+          viewbutton = '<a href="http://hiphub.hipzone.co.za/hipjam_viewvenue/' + value["id"] + '/' + value["apisitename"] + '" class="btn btn-default btn-sm">view</a>\n';
+        } else {
+          viewbutton = '<a href="javascript:void(0);" onclick="alert_message()" class="btn btn-default btn-sm">view</a>\n';
+        }
 
-            /*viewbutton = '<a href="{{ url('hipjam_viewvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">view</a>\n';*/
+        /*viewbutton = '<a href="{{ url('hipjam_viewvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">view</a>\n';*/
 
 
-            /*deletebutton = '<a class="btn btn-default btn-delete btn-sm" data-venueid = ' + value["id"] + ' href="#">delete</a>\n';*/
+        /*deletebutton = '<a class="btn btn-default btn-delete btn-sm" data-venueid = ' + value["id"] + ' href="#">delete</a>\n';*/
 
-            /*if(value["device_type"] == 'Mikrotik') {
-              redeploybutton = '<a href="{{ url('hipwifi_redeploymikrotikvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">redeploy</a>\n';
-            } else {
-              redeploybutton = '\n';
-            }*/
+        /*if(value["device_type"] == 'Mikrotik') {
+          redeploybutton = '<a href="{{ url('hipwifi_redeploymikrotikvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">redeploy</a>\n';
+        } else {
+          redeploybutton = '\n';
+        }*/
 
-            rows = rows + '\
+        rows = rows + '\
                     <tr>\n\
-                      <td> ' + value["sitename"]  + '</td>\n\
-                      <td> ' + value["location"]  + '</td>\n\
-                      <td> ' + value["contact"]  + '</td>\n\
+                      <td> ' + value["sitename"] + '</td>\n\
+                      <td> ' + value["location"] + '</td>\n\
+                      <td> ' + value["contact"] + '</td>\n\
                       <td> ' + viewbutton + '</td>\n\
                     </tr>\n\
                     ';
-        });
+      });
 
-        endTable = ' \
+      endTable = ' \
                   </tbody>\n\
                 </table>';
 
-        table = beginTable + rows + endTable;
-        $( "#venueTable" ).html( table );
-      }
+      table = beginTable + rows + endTable;
+      $("#venueTable").html(table);
+    }
 
-      function alert_message(venuesjson) {
-        alert('Track Venue Id has not been provided. Please configure in Track->Venue Management');
-      }
+    function alert_message(venuesjson) {
+      alert('Track Venue Id has not been provided. Please configure in Track->Venue Management');
+    }
 
-      $(document).delegate('.btn-delete', 'click', function() {
+    $(document).delegate('.btn-delete', 'click', function() {
       var venueId = this.getAttribute('data-venueid');
       swal({
-        title: "Are you sure?",
-        text: "Are you sure you want to delete this venue?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: '#DD6B55',
-        confirmButtonText: 'Yes, delete it!',
-        closeOnConfirm: false,
-      },
-        function(){
+          title: "Are you sure?",
+          text: "Are you sure you want to delete this venue?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: 'Yes, delete it!',
+          closeOnConfirm: false,
+        },
+        function() {
           swal("Deleted!", "Venue has been deleted!", "success");
           $.ajax({
             type: "GET",
@@ -533,92 +646,37 @@ Time spent in store (dwell) -->
             }
           });
         });
-      });
+    });
+  </script>
 
-    </script>
+  <style>
+    .dash-widget {
+      border: 1px solid #D1D1D1D1;
+      padding: 25px;
+      margin-right: 10px;
+      height: 142px;
+    }
 
-    <style>
+    @media only screen and (max-width: 1512px) {
       .dash-widget {
-        border: 1px solid #D1D1D1D1; padding: 25px;    margin-right: 10px;    height: 142px;
-      }
-      @media only screen and (max-width: 1512px) {
-        .dash-widget {
-          height: 182px !important;
-        }
-        .text-tracked{height: 45px;}
+        height: 182px !important;
       }
 
-      .font36{
-        font-size: 36px;
+      .text-tracked {
+        height: 45px;
       }
-      .graph-container{
-        display:inline;
-      }
-    </style>
-<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-analytics.js"></script>
-<script>
-            let liveJam = {};
-            let loaded_venues = {{$data['venuesJson']}};
-            let venue_array = [];
-          
-            liveJam.initialize = (callback) => {
-                $.getScript('https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js', () => {
-                    let config = {
-                        apiKey: "AIzaSyDUxh-Quw0-D6V7Q2Pjcwgeco7R7x08hWw",
-                        authDomain: "tracks-e61f4.firebaseapp.com",
-                        databaseURL: "https://tracks-e61f4.firebaseio.com",
-                        projectId: "tracks-e61f4",
-                        storageBucket: "",
-                        messagingSenderId: "798983478031",
-                        appId: "1:798983478031:web:f81f6341211ab4dfd7bc7a",
-                        measurementId: "G-9B1XXZ1MXG"
-                    };
-                    firebase.initializeApp(config);
-                    firebase.analytics();
+    }
 
-                    var db = firebase.firestore();
-                    this.all = db.collection;
-                    $.each(loaded_venues, function(i, v) {
-                      venue_array.push(db.collection(v.id));
-                    });
-                    
-                    callback();
-                });
-            };
+    .font36 {
+      font-size: 36px;
+    }
 
-            liveJam.getVenueData = () => {
-                let current_date = new Date();
-                let formatted_node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}`
-                let exposed_current = 0;
-                let exposed_today = 0;
-                let uniques_today = 0;
-                let venues_with_no_data = 0; 
+    .graph-container {
+      display: inline;
+    }
+  </style>
+  
 
-                $.each(venue_array, function(i, v) {
-                  v.doc(formatted_node).get()
-                    .then((doc => {
-                      console.log('Venue loaded')
-                      if (doc.exists) {
-                        exposed_current += doc.data().customers_in_store_now;
-                        exposed_today += doc.data().customers_in_store_today;
-                        uniques_today += doc.data().new_customers_today;
-                      } else {
-                        venues_with_no_data += 1;
-                      }
-                      $('#live_individuals_exposed_current').html(exposed_current.toString());
-                      $('#live_individuals_exposed_today').html(exposed_today.toString());
-                      $('#live_uniques_today').html(uniques_today.toString());
-                    }))
-                });
-                
-            }
-
-            liveJam.initialize(() => {
-                liveJam.getVenueData();
-            })
-        </script>
-
-  </body>
+</body>
 
 @stop
