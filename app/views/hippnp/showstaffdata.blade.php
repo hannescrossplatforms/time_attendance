@@ -87,28 +87,30 @@
                 </div>
             </div>
 
-            <div id="staff_select_section" class="form-group">
-                <label>Staff member</label>
-                <select id="staff_select" name="store_id" onchange="get_staff_chart()" class="form-control" required>
-                <option value="0">Select</option>
-                @foreach($data['staff'] as $staffMember)
-                    <option value="{{ $staffMember->id }}">
-                    {{ $staffMember->name }} {{ $staffMember->surname }}
-                    </option>
-                @endforeach
-                </select>
-            </div>
+            <div id="staff_select_section">
+                <div class="form-group">
+                    <label>Staff member</label>
+                    <select id="staff_select" name="store_id" onchange="get_staff_chart()" class="form-control" required>
+                    <option value="0">Select</option>
+                    @foreach($data['staff'] as $staffMember)
+                        <option value="{{ $staffMember->id }}">
+                        {{ $staffMember->name }} {{ $staffMember->surname }}
+                        </option>
+                    @endforeach
+                    </select>
+                </div>
 
-            <div id="fusion-chart">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="chart-wrapper">
-                            <div class="chart-title venuecolheading">Staff beacon activity</div>
-                            <div class="chart-stage">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="chart-stage">
-                                            <div id="single_staff_beacon_activity">Loading...</div>
+                <div id="fusion-chart">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="chart-wrapper">
+                                <div class="chart-title venuecolheading">Staff beacon activity</div>
+                                <div class="chart-stage">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="chart-stage">
+                                                <div id="single_staff_beacon_activity">Loading...</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +119,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
       </div>
