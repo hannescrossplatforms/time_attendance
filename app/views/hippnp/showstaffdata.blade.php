@@ -42,7 +42,7 @@
                         <label>Province</label>
                     </div>
                     <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                        <select id="selectedProvince" onchange="getChartDetailsAccordingToFilters()" class="form-control"
+                        <select id="selectedProvince" onchange="getChartDetailsAccordingToFilters('provinceSelected')" class="form-control"
                             name="brandprovince">
                             <option value="">Select</option>
                             @foreach($data['all_provinces'] as $province)
@@ -60,7 +60,7 @@
                         <label>Store</label>
                     </div>
                     <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                        <select id="selectedStore" onchange="getChartDetailsAccordingToFilters()" class="form-control"
+                        <select id="selectedStore" onchange="getChartDetailsAccordingToFilters('storeSelected')" class="form-control"
                             name="brandprovince">
                             <option value="">Select</option>
                         </select>
@@ -209,7 +209,7 @@
 
         $("#selectedStoreRow").hide();
 
-        function getChartDetailsAccordingToFilters(){
+        function getChartDetailsAccordingToFilters(changedFilter){
 
             let province = $('#selectedProvince').val();
 
@@ -224,7 +224,9 @@
             let date = $('#selectedDate').val();
             let store = $('#selectedStore').val();
 
-
+            if (changedFilter == "storeSelected") {
+                $("#staff_select_section").show();
+            }
 
 
             pathname = $('#url').val();
@@ -255,7 +257,7 @@
                     $.each(data["all_staff"], function(index, value) {
                         $("#staff_select").append('<option value="' + value["id"] + '">' + value["name"] + " " + value["surname"] + '</option>');
                     });
-                    $("#staff_select_section").show();
+
                     var chartProperties = {
                         "caption": "",
                         "xAxisName": "Time of day",
