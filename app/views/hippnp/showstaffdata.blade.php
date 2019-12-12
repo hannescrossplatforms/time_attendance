@@ -240,8 +240,6 @@
                 },
                 success: function(data) {
 
-                    $("#staff_select_section").show();
-
                     $('#selectedStore').children().remove();
                     $("#selectedStore").append('<option id="" value="" selected="selected">Please select</option>');
                     $.each(data["storesForProvince"], function(index, value) {
@@ -257,7 +255,7 @@
                     $.each(data["all_staff"], function(index, value) {
                         $("#staff_select").append('<option value="' + value["id"] + '">' + value["name"] + " " + value["surname"] + '</option>');
                     });
-
+                    $("#staff_select_section").show();
                     var chartProperties = {
                         "caption": "",
                         "xAxisName": "Time of day",
