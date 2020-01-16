@@ -497,6 +497,7 @@ function processBrandReports() {
     'to': to,
     'queryname': 'dwelltimebysessionduration'
   };
+  debugger;
   $.ajax({
     type: "GET",
     dataType: 'json',
