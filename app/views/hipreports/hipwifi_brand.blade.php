@@ -170,13 +170,13 @@
                         </a>
                       </div>
                     </div>
-                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                    <!-- <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;"> -->
                       <!-- <div class="modStat"> -->
                           <!-- <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Data Admin Usage</h3></div> -->
                           <!-- <div>No Data Available. <br> You are not using HipZone as your ISP.</div> -->
                           <!-- <div class="venuerow"><img src="/img/tmpcharts/3-4.PNG" width="100%"></div> -->
                       <!-- </div> -->
-                    </div>                    
+                    <!-- </div>                     -->
                   </div> 
                 </div>
                 <!-- section two end -->
