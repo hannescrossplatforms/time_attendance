@@ -1660,7 +1660,7 @@ class Reports extends Eloquent {
 
         // $sitename = preg_replace("/_/", " ", $nasid);
         $sitename = "KAUAI";
-        $venue = \Venue::where('sitename', 'like', $sitename)->first()->get();
+        $venue = \Venue::where('sitename', 'like', '')->first();
 
         \Log::info("Hannes reports: sitename: $sitename");
 
