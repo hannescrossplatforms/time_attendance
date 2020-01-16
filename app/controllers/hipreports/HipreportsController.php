@@ -255,7 +255,7 @@ class HipreportsController extends \BaseController {
 
         \Log::info("hipreports_hipwifi_branddatajsonsingle : brandname = $brandname");
 
-        error_log("hipreports_hipwifi_branddatajsonsingle : brandname = $brandname");
+        \Log::info("hipreports_hipwifi_branddatajsonsingle : brandname = $brandname");
         $reportperiod = \Input::get('reportperiod');
         $from = \Input::get('from');
         $to = \Input::get('to');
@@ -269,11 +269,11 @@ class HipreportsController extends \BaseController {
 
         \Log::info("hipreports_hipwifi_branddatajsonsingle : queryName = $queryname");
 
-        error_log("hipreports_hipwifi_branddatajsonsingle : reportperiod : $reportperiod");
-        error_log("hipreports_hipwifi_branddatajsonsingle : brand_id : $brand_id");
-        error_log("hipreports_hipwifi_branddatajsonsingle : brand_id : $brand_id");
-        error_log("hipreports_hipwifi_branddatajsonsingle : from : $from");
-        error_log("hipreports_hipwifi_branddatajsonsingle : to : $to");
+        \Log::info("hipreports_hipwifi_branddatajsonsingle : reportperiod : $reportperiod");
+        \Log::info("hipreports_hipwifi_branddatajsonsingle : brand_id : $brand_id");
+        \Log::info("hipreports_hipwifi_branddatajsonsingle : brand_id : $brand_id");
+        \Log::info("hipreports_hipwifi_branddatajsonsingle : from : $from");
+        \Log::info("hipreports_hipwifi_branddatajsonsingle : to : $to");
 
         // $data["highest5Sessions"] = $reportObj->gethighest5Sessions($brandcode, $reportperiod);
         // $data["highest5Uniquedata"] = $reportObj->gethighest5Uniquedata($brandcode, $reportperiod);
