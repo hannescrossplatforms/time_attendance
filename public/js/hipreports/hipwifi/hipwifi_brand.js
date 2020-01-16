@@ -504,7 +504,6 @@ function processBrandReports() {
     data: data,
     url: branddatasingleurl,
     success: function (dwelltimebysessionduration) {
-      debugger;
       showBrandDwellTimeBySessionDuration(dwelltimebysessionduration);
     }
   });
@@ -631,7 +630,7 @@ function showBrandVenueAvgTimePerSession(data) {
 }
 
 function showBrandDwellTimeBySessionDuration(branddwelltimebysessionduration) {
-
+  debugger;
   console.log("showDwellTimeBySessionDuration : " + branddwelltimebysessionduration);
   var age = new FusionCharts({
     type: "mscolumn2d",
