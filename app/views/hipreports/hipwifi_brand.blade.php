@@ -123,7 +123,7 @@
                 </div>
                 <!-- section one end -->
                 <!-- section two start -->
-                <!-- <div id="section_two">
+                <div id="section_two">
                   <div class="venuecol3" style=" float:left; width: 40%;margin-right: 20px;">
                     <div class="venuecolheading">Hipzone Wifi & Data Admin Usage Statistics</div>
                     <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
@@ -178,7 +178,7 @@
                       </div>
                     </div>                    
                   </div> 
-                </div> -->
+                </div>
                 <!-- section two end -->
 
               </div>
