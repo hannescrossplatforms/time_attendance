@@ -631,7 +631,6 @@ class Reports extends Eloquent {
             $data = DB::table($reportperiod)
             ->selectRaw('sitename as label, currentsessions as value')
             ->where('brandcode', 'like', $brandcode)
-            ->where()
             ->wherein('nasid', $activeVenues)
             ->orderby("currentsessions", "desc")
             ->limit(5)
