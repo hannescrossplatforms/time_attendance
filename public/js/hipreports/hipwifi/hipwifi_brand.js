@@ -227,7 +227,7 @@ function processBrandReports() {
       console.log('---------------');
       console.log(agedata);
       console.log('---------------');
-      debugger;
+
       showBrandAge(agedata);
     }
   });
@@ -374,7 +374,7 @@ function processBrandReports() {
     data: data,
     url: branddatasingleurl,
     success: function (data) {
-      debugger;
+
       console.log("brandtotalwifisessions : " + data);
       showBrandTotalWifiSessions(data);
     }
@@ -438,12 +438,12 @@ function processBrandReports() {
     data: data,
     url: branddatasingleurl,
     success: function (data) {
-      debugger;
+
       console.log("brandtotalfirsttimeusers : " + data);
       showBrandTotalFirstTimeUsers(data);
     },
     error: function (xhr, err) {
-      debugger;
+
     }
   });
 
@@ -615,7 +615,7 @@ function showBrandTotalNumberOfPeople(data) {
 
 function showBrandTotalFirstTimeUsers(data) {
   $("#brandtotalfirsttimeusers").html(data.total);
-  debugger;
+
   $("#brandavgfirsttimeusers").html(Math.round(data.avg));
 }
 
@@ -630,7 +630,7 @@ function showBrandVenueAvgTimePerSession(data) {
 }
 
 function showBrandDwellTimeBySessionDuration(branddwelltimebysessionduration) {
-  debugger;
+  debugger; // do not remove
   console.log("showDwellTimeBySessionDuration : " + branddwelltimebysessionduration);
   var age = new FusionCharts({
     type: "mscolumn2d",
@@ -660,7 +660,6 @@ function showBrandDwellTimeByHour(branddwelltimebyhour) {
 
 
 function showBrandPerformanceGraphs(brandData) {
-  debugger;
   var highest5Sessions = new FusionCharts({
     type: "column2d",
     renderAt: "chartcol1row1",
@@ -670,8 +669,6 @@ function showBrandPerformanceGraphs(brandData) {
     dataSource: brandData["highest5Sessions"]
   });
   highest5Sessions.render("chartcol1row1");
-
-  debugger
 
   var highest5Sessions = new FusionCharts({
     type: "column2d",
@@ -874,7 +871,7 @@ function showbrandLevelReport(brandData) {
   $("#brandavgnumberofpeople").html(Math.round(brandData.numberofpeople.avg));
 
   $("#brandtotalfirsttimeusers").html(brandData.firsttimeusers.total);
-  debugger;
+
   $("#brandavgfirsttimeusers").html(Math.round(brandData.firsttimeusers.avg));
 
   $("#brandvenueavgdatapersession").html(Math.round(brandData.avgdatapersession.venue));
@@ -897,8 +894,6 @@ function showbrandLevelReport(brandData) {
     dataSource: brandData["highest5Sessions"]
   });
   highest5Sessions.render("chartcol1row1");
-
-  debugger;
 
   var highest5Sessions = new FusionCharts({
     type: "column2d",
