@@ -346,14 +346,6 @@ class HipreportsController extends \BaseController {
         } else if ($queryname == "brandvenueavgtimepersession") {
             $data = $reportObj->getAvgTimePerSession($reportperiod, $from, $to, $nasid, $brandcodes);
         } else if ($queryname == "dwelltimebysessionduration") {
-            \Log::info("hipreports_hipwifi_branddatajsonsingle : HANNES STEPS IN");
-            \Log::info("hipreports_hipwifi_branddatajsonsingle : Hannes reportperiod: $reportperiod");
-            \Log::info("hipreports_hipwifi_branddatajsonsingle : Hannes from: $from");
-            \Log::info("hipreports_hipwifi_branddatajsonsingle : Hannes to: $to");
-            \Log::info("hipreports_hipwifi_branddatajsonsingle : Hannes nasid: $nasid");
-            \Log::info("hipreports_hipwifi_branddatajsonsingle : Hannes brandname: $brandname");
-            \Log::info("hipreports_hipwifi_branddatajsonsingle : Hannes 1: 1");
-            \Log::info("hipreports_hipwifi_branddatajsonsingle : HANNES DONE");
             $data = $reportObj->getDwellTimeBySessionDuration($reportperiod, $from, $to, $nasid, $brandname, 1);
         } else if ($queryname == "dwelltimebyhour") {
             $data = $reportObj->getCustomersByTimePeriod($reportperiod, $from, $to, $nasid, $brandname, 1);

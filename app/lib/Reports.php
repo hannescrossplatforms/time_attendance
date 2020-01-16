@@ -1547,7 +1547,11 @@ class Reports extends Eloquent {
         $categories = array(array("category" => $category));
 
         $sitename = preg_replace("/_/", " ", $nasid);
-        $venue = \Venue::where('sitename', 'like', $sitename)->first();
+
+        $str = $sitename;
+        $str = ltrim($str, 'X');
+        
+        $venue = \Venue::where('sitename', 'like', "%$str%")->first();
 
         if ($venue) {
           $remotedb_id = $venue->remotedb_id;
