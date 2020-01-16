@@ -1658,9 +1658,12 @@ class Reports extends Eloquent {
 
         $categories = array(array("category" => $category));
 
-        // $sitename = preg_replace("/_/", " ", $nasid);
-        $sitename = "KAUAI";
-        $venue = \Venue::where('sitename', 'like', "%$sitename%")->first();
+        $sitename = preg_replace("/_/", " ", $nasid);
+
+        $str = $sitename;
+        $str = ltrim($str, 'X');
+        
+        $venue = \Venue::where('sitename', 'like', "%$str%")->first();
 
         \Log::info("Hannes reports: sitename: $sitename");
 
