@@ -1640,8 +1640,6 @@ class Reports extends Eloquent {
 
     public function getDwellTimeBySessionDuration($reportperiod, $from, $to, $nasid, $brandname, $brandonly = null) {
 
-      \Log::info("Hannes reports: step in ");
-
         $statistics = new \Statistics();
 
         $durations =  array(array("min" => 0, "max" => 4),
@@ -1669,10 +1667,7 @@ class Reports extends Eloquent {
         
         $venue = \Venue::where('sitename', 'like', "%$str%")->first();
 
-        \Log::info("Hannes reports: sitename: $sitename");
-
         if ($venue) {
-          \Log::info("Hannes reports: in if venue");
           $remotedb_id = $venue->remotedb_id;
           // echo "brandname : $brandname";
           $remotedb = \DB::table('remotedbs')->select("dbconnection")->where('id', '=', $remotedb_id)->first();
@@ -1755,9 +1750,7 @@ class Reports extends Eloquent {
 
         return $chartData;
       }
-      else {
-        \Log::info("Hannes reports: in else venue");
-      }
+
     }
 
     public function getDwellTimeByHour($reportperiod, $from, $to, $nasid, $brandcodes) {
