@@ -15,6 +15,46 @@
 
 
         <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
+        <!-- FILTERS -->
+        <div class="row">
+          <!-- BRAND -->
+          <div class="col-md-4 text-center">
+            <small>Select Brand:</small> <br/>
+            <select id="sub_brand_select" class="form-control changable-filter">
+              <option value="global">Global</option>
+                @foreach ($data['sub_brands'] as $brand)
+                  <option value="{{$brand->id}}">{{$brand->name}}</option>
+                @endforeach
+            </select>
+          </div>
+
+          <!-- TYPE -->
+          <div class="col-md-4 text-center">
+            <small>Selected Type:</small> <br/>
+            <select id="type_select" class="form-control changable-filter">
+              <option value="global">Global</option>
+              <option value="billboard">Billboard</option>
+              <option value="venue">Venue</option>
+            </select>
+          </div>
+
+        <!-- DATE -->
+        <div class="col-md-4 text-center">
+            <small>Selected Date Span:</small> <br/>
+            <select id="date_select" class="form-control changable-filter">
+              <option value="yesterday">Yesterday</option>
+              <option value="today">Today</option>
+              <option value="this_week">This Week</option>
+              <option value="last_week">Last Week</option>
+              <option value="this_month">This Month</option>
+              <option value="last_month">Last Month</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+        </div>
+        <br />
+
+
         <div id="map" style="width:100%; height: 500px;"></div>
 
         <div id="clear-button-div" style="display: none; float: right; margin-top: 10px;">
@@ -94,7 +134,7 @@
               <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;margin-top: 20px;">
                 <h1>Best Performance</h1>
                 <div class="graphcell" style="padding: 1px;">
-                  <div id="chartcol1row1"></div>
+                  <div id="best-performing-chart"></div>
                 </div>
                 <div class="graphcell">
                   <div id="chartcol1row2"></div>
@@ -109,7 +149,7 @@
               <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;">
                 <h1>Worst Performance</h1>
                 <div class="graphcell" style="padding: 1px;">
-                  <div id="chartcol2row1"></div>
+                  <div id="worst-performing-chart"></div>
                 </div>
                 <div class="graphcell">
                   <div id="chartcol2row2"></div>
@@ -197,6 +237,14 @@ Time spent in store (dwell) -->
       });
     };
 
+    liveJam.graphSerializer = (raw_data) => {
+                raw_data.sort((a, b) => parseFloat(a.value) - parseFloat(b.value));
+                return $.map( raw_data, function( d, i ) {
+                    return {label: d.label, value: d.value}
+                });
+            }
+
+    
     liveJam.getVenueData = () => {
       let current_date = new Date();
       let formatted_node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}`
@@ -205,22 +253,86 @@ Time spent in store (dwell) -->
       let uniques_today = 0;
       let venues_with_no_data = 0;
 
-      $.each(venue_array, function(i, v) {
-        v.doc(formatted_node).get()
-          .then((doc => {
+      let promise_array = []; 
+
+      $.each(venue_array, (i, v) => {
+        
+        promise_array.push(v.doc(formatted_node).get()
+          .then(doc => {
             console.log('Venue loaded')
             if (doc.exists) {
               exposed_current += doc.data().customers_in_store_now;
               exposed_today += doc.data().customers_in_store_today;
               uniques_today += doc.data().new_customers_today;
+              // debugger;
+              // best_performing.push({label: 'test', value: doc.data().customers_in_store_today})
             } else {
               venues_with_no_data += 1;
             }
             $('#live_individuals_exposed_current').html(exposed_current.toString());
             $('#live_individuals_exposed_today').html(exposed_today.toString());
             $('#live_uniques_today').html(uniques_today.toString());
-          }))
+            if (doc.exists) {
+            return {label: 'test', value: doc.data().customers_in_store_today}
+            }
+          })
+          )
       });
+
+      Promise.all(promise_array).then(function(res) {
+        let all_venues = [];
+        $.each(res, function(i, obj) {
+          if (obj !== undefined) {
+            all_venues.push({label: loaded_venues[i].sitename, value: obj.value})
+          } else {
+            all_venues.push({label: loaded_venues[i].sitename, value: 0})
+          }
+        });
+
+          let test_data = liveJam.graphSerializer(all_venues).slice(0,5);
+
+        
+
+        //WORST
+        var dataSource = {
+                chart: {
+                  caption: "Best performing Venues",
+                  xaxisname: "Store",
+                  yaxisname: "Sessions",
+                  theme: "zune"
+                },
+                data: liveJam.graphSerializer(all_venues).slice(1).slice(-5)
+              };
+
+              var myChart = new FusionCharts({
+                type: "column2d",
+                renderAt: "best-performing-chart",
+                width: "100%",
+                height: "350",
+                dataFormat: "json",
+                dataSource
+              }).render();
+
+              dataSource = {
+                chart: {
+                  caption: "Worst performing Venues",
+                  xaxisname: "Store",
+                  yaxisname: "Sessions",
+                  theme: "zune"
+                },
+                data: test_data
+              };
+
+              myChart = new FusionCharts({
+                type: "column2d",
+                renderAt: "worst-performing-chart",
+                width: "100%",
+                height: "350",
+                dataFormat: "json",
+                dataSource
+              }).render();
+      })
+      
 
     }
 
@@ -396,7 +508,21 @@ Time spent in store (dwell) -->
     let no_lat_long_count = 0;
     let venue_promises = [];
 
-    liveJam.initialize(function() {
+    
+    // liveJam.compileData = (span, callback) => {
+    //     let nodes = liveJam.compileNodeArray(span);
+    //     let week_data_promises = [];
+    //     let week_data = [];
+    //     $.each(nodes, function(i, node) {
+    //         console.log('GETTING DATA FOR: ' + node);
+    //         week_data_promises.push(liveJam.retrieveNode(node));
+    //     });
+    //     Promise.all(week_data_promises).then(function() {
+    //         callback(arguments[0]);
+    //     })
+    // }
+
+    liveJam.initialize(() => {
       liveJam.getVenueData();
       $.each(venues, function(i, venue) {
 
@@ -415,8 +541,12 @@ Time spent in store (dwell) -->
                 return function() {
 
                   let venue_id = marker.venue_id;
+                  let url_parts = window.location.href.split('?');
+                  let filters = '';
+                  if (url_parts.length === 2) 
+                    filters = `?${url_parts[1]}`
 
-                  $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za`);
+                  $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${filters}`);
                   $('#selected_venue_view').slideDown('fast')
 
                   console.log(`marker clicked with id: ${venue_id}`);
@@ -432,6 +562,7 @@ Time spent in store (dwell) -->
               }
             });
           };
+
       });
 
       if (no_lat_long_count !== 0) {
@@ -448,6 +579,21 @@ Time spent in store (dwell) -->
         $("#stats-and-graph-container").css("display", "initial");
         $("#ajax-venue-stats-page").html(null);
       });
+
+      // liveJam.compileData('week', function (week_data) {
+        // setTimeout(
+        // function() 
+        // {
+        //   let best_performing_data = best_performing;
+                
+        // }, 5000);
+        
+      // })
+      
+            
+      
+
+
     });
   </script>
 
@@ -571,7 +717,6 @@ Time spent in store (dwell) -->
                   <thead>\n\
                     <tr>\n\
                       <th>Sitename</th>\n\
-                      <th>Location</th>\n\
                       <th>Contact</th>\n\
                       <th>\n\
                       </th>\n\
@@ -602,10 +747,9 @@ Time spent in store (dwell) -->
 
         rows = rows + '\
                     <tr>\n\
-                      <td> ' + value["sitename"] + '</td>\n\
-                      <td> ' + value["location"] + '</td>\n\
-                      <td> ' + value["contact"] + '</td>\n\
-                      <td> ' + viewbutton + '</td>\n\
+                      <td style="width: 20%; text-align: left;">' + value["sitename"] + '</td>\n\
+                      <td style="width: 20%"> ' + value["contact"] + '</td>\n\
+                      <td style="width: 60%; text-align: left;"> ' + viewbutton + '</td>\n\
                     </tr>\n\
                     ';
       });
@@ -647,6 +791,110 @@ Time spent in store (dwell) -->
           });
         });
     });
+  </script>
+<!-- FILTER SCRIPT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script>
+    load_presets();
+    getFilters(false);
+
+    $(document).on('change', '.changable-filter', function() {
+      getFilters(true);
+    })
+
+    function load_presets() {
+      let presets = get_presets();
+      if (presets !== null) {
+        $('#sub_brand_select').val(presets.brand_id);
+        $('#type_select').val(presets.type);
+        $('#date_select').val(presets.span);
+      } else {
+        $('#date_select').val('this_week');
+      }
+    }
+
+    function getFilters(must_redirect) {
+      let brand_id = $('#sub_brand_select').val();
+      let type = $('#type_select').val();
+      let span = $('#date_select').val();
+      let date_from = generate_date_from();
+      let date_to = generate_date_to();
+      
+      if (must_redirect)
+        window.location.href = `http://hiphub.hipzone.co.za/hipjam_showdashboard${generate_query_string(brand_id, type, span, date_from, date_to)}`
+    }
+
+    function generate_date_from() {
+      let selected_date_span = $('#date_select').val();
+      let today = moment();
+      switch(selected_date_span) {
+        case 'yesterday':
+          return today.subtract(1, 'day').format('YYYY-MM-DD');
+          break;
+        case 'today':
+          return today
+          break;
+        case 'this_week':
+          return today.startOf('week').format('YYYY-MM-DD');
+          break;
+        case 'last_week':
+          return today.startOf('week').subtract(1, 'day').startOf('week').format('YYYY-MM-DD');
+          break;
+        case 'this_month':
+          return today.startOf('month').format('YYYY-MM-DD');
+          break;
+        case 'last_month':
+          return today.startOf('month').subtract(1, 'day').startOf('month').format('YYYY-MM-DD');
+          break;
+        default:
+          return today.startOf('week').format('YYYY-MM-DD');
+      }
+    }
+
+    function generate_date_to() {
+      let selected_date_span = $('#date_select').val();
+      let today = moment();
+      switch(selected_date_span) {
+        case 'yesterday':
+          return today.subtract(1, 'day').format('YYYY-MM-DD');
+          break;
+        case 'today':
+          return today
+          break;
+        case 'this_week':
+          return today.endOf('week').format('YYYY-MM-DD');
+          break;
+        case 'last_week':
+          return today.startOf('week').subtract(1, 'day').endOf('week').format('YYYY-MM-DD');
+          break;
+        case 'this_month':
+          return today.endOf('month').format('YYYY-MM-DD');
+          break;
+        case 'last_month':
+          return today.startOf('month').subtract(1, 'day').endOf('month').format('YYYY-MM-DD');
+          break;
+        default:
+          return today.endOf('week').format('YYYY-MM-DD');
+      }
+    }
+
+    function generate_query_string(brand_id, type, span, date_from, date_to) {
+      return `?brand_id=${brand_id}&type=${type}&span=${span}&date_from=${date_from}&date_to=${date_to}`;
+    }
+
+    function get_query_string_key(key) {
+      key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+      var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+      return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+    }
+
+    function get_presets() {
+      let brand_id = get_query_string_key('brand_id');
+      if (brand_id === '' || brand_id === null || brand_id === undefined)
+        return null
+      return { brand_id: get_query_string_key('brand_id'), type: get_query_string_key('type'), span: get_query_string_key('span'),  date_from: get_query_string_key('date_from'), date_to: get_query_string_key('date_to') }
+    }
+
   </script>
 
   <style>

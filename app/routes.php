@@ -249,6 +249,7 @@ Route::any('/hipwifi_showstatistics/{json?}', array('uses' => 'hipwifi\HipwifiSt
 
 
 // HipJAM routes //////////////////////////////////////////////////////////////
+Route::any('/venue/{venue_id}', array('uses' => 'hipjam\HipjamController@venueDetails', 'as' => 'hipjam_get_venue'));
 Route::any('/hipjam_showdashboard', array('uses' => 'hipjam\HipjamController@showDashboard', 'as' => 'hipjam_showdashboard'))->before('auth');
 Route::any('/hipjam_load_customer_stats_for_dash', array('uses' => 'hipjam\HipjamController@loadCustomerStatsForDash', 'as' => 'hipjam_load_customer_stats_for_dash'))->before('auth');
 Route::get('/hipjam_graph_data', array('uses' => 'hipjam\HipjamController@graphData', 'as' => 'hipjam_graph_data'))->before('auth');
@@ -279,6 +280,7 @@ Route::get('hipjam_getinactivevenues/', array('uses' => 'hipjam\HipjamController
 Route::get('hipjam_activatevenue/{id}', array('uses' => 'hipjam\HipjamController@activateVenue', 'as' => 'hipjam_activatevenue'))->before('auth');
 Route::post('hipjam_activatevenue', array('uses' => 'hipjam\HipjamController@activateVenueSave', 'as' => 'hipjam_activatevenue'))->before('auth');
 Route::get('hipjam_venue_config/{id}', array('uses' => 'hipjam\HipjamController@venueConfig', 'as' => 'hipjam_venueconfig'));
+Route::get('hipjam_linked_billboards', array('uses' => 'hipjam\HipjamController@linkedBillboards', 'as' => 'hipjam_linkedbillboards'));
 
 
 Route::post('hipjam_addSensordata', array('uses' => 'hipjam\HipjamController@addSensordata', 'as' => 'hipjam_addSensordata'))->before('auth');

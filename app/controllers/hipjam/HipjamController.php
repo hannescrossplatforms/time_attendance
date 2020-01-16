@@ -11,6 +11,11 @@ use Session;
 class HipjamController extends \BaseController
 {
 
+    public function venueDetails($venue_id) {
+        $venue = \Venue::whereraw("id = $venue_id")->get();
+        return \Response::json($venue);
+    }
+
     /////////////////////// Venues /////////////////////////
     public function showDashboard($json = null)
     {
@@ -38,7 +43,7 @@ class HipjamController extends \BaseController
         $liveNumberOfBillboardsCount = count(\Venue::whereraw("track_type = 'billboard' AND brand_id IN ($brandIdsString) AND ap_active = 1")->get());
 
         if (\User::isVicinity()) {
-            $vicinity_brands = \Brand::where('parent_brand', '=', 165)->get();
+            $vicinity_brands = \Brand::whereRaw('parent_brand IN ('.$brandIdsString.')')->get();
             $vbrands = array();
             foreach ($vicinity_brands as $brand) {
                 array_push($vbrands, $brand->id);
@@ -46,6 +51,7 @@ class HipjamController extends \BaseController
             $vbrandsarray = implode(",", $vbrands);
             $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard' OR track_type IS NULL) AND ((brand_id = 165 OR brand_id IN ($vbrandsarray)) AND ap_active = true)")->get());
         } else {
+            $vicinity_brands = \Brand::whereRaw('parent_brand IN ('.$brandIdsString.')')->get();
             $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard' OR track_type IS NULL) AND (brand_id IN ($brandIdsString) AND ap_active = true)")->get());
         }
 
@@ -74,6 +80,7 @@ class HipjamController extends \BaseController
         ");
         $data['avg_distance'] = $avg_distance;
         $data['live_number_of_billboards'] = $liveNumberOfBillboardsCount;
+        $data['sub_brands'] = $vicinity_brands;
         
         \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
 
@@ -114,9 +121,54 @@ class HipjamController extends \BaseController
             // $venue["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $venue["sitename"]);
         }
 
-        $data['venuesJson'] = json_encode($venues);
+        // $data['venuesJson'] = json_encode($venues);
 
         $data['currentMenuItem'] = "Dashboard";
+
+
+        // FILTERS
+        $brand_id_filter = Input::get('brand_id');
+        $brand_type_filter = Input::get('type');
+        
+        if ($brand_id_filter != null) {
+            $venues = new \Venue();
+            if ($brand_id_filter != 'global') {
+                $venues = $venues->whereraw("brand_id = '$brand_id_filter' AND jam_activated = true");
+            } else {
+                $venues_id_array = array();
+                $original_venues = $venues->getVenuesForUser('hipjam', 1, null, null, "active");
+                
+                foreach ($original_venues as $v){
+                    array_push($venues_id_array, $v->id);
+                }
+
+
+                // $mapped_venues_ids_raw = array_map(create_function('$o', 'return $o->id;'), $original_venues);
+                $mapped_venues_ids = implode(',', $venues_id_array);
+                $venues = $venues->whereraw("id IN ($mapped_venues_ids)");
+            }
+
+            if ($brand_type_filter != 'global') {
+                $venues = $venues->whereraw("track_type = '$brand_type_filter'");
+            }
+    
+            $venues = $venues->get();
+            
+        }
+
+        $data['venuesJson'] = json_encode($venues);
+
+
+        $data['testi'] = $brand_type_filter;
+        
+        // if ($brand_id_filter != null && $brand_id_filter != 'global') {
+            
+        // }
+        
+
+
+
+
 
         if ($json) {
             error_log("showDashboard : returning json");
@@ -615,6 +667,11 @@ class HipjamController extends \BaseController
     public function venueConfig($id) {
         $venue =  \Venue::find($id);
         return \Response::json($venue);
+    }
+
+    public function linkedBillboards() {
+        $venues =  \Venue::whereRaw('linked_billboard != 0 AND linked_billboard IS NOT NULL')->get();
+        return \Response::json($venues);
     }
 
     public function updateVicinityVenue()

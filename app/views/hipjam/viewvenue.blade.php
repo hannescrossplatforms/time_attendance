@@ -83,8 +83,8 @@
                     </ul>
                     <br>
 
-                    <a href="{{ URL::previous() }}">
-                        << Back</a> <!-- Tab panes -->
+                    <!-- <a href="{{ URL::previous() }}">
+                        << Back</a> -->
                             <div class="tab-content">
                                 <div id="report_period"></div>
                                 <div role="tabpanel" class="tab-pane active" id="venue">
@@ -161,17 +161,17 @@
 
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-4" style="width:30%;">
+                                                    <!-- <div class="col-md-4" style="width:30%;">
                                                         <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
                                                             <label>Report Period</label>
                                                         </div>
                                                         <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
                                                             <select id="brandreportperiod" class="form-control" name="reportperiod">
-                                                                <!-- <option value="">Select</option> -->
-                                                                <!-- <option value="rep7day">This week</option>
+                                                                <option value="">Select</option>
+                                                                <option value="rep7day">This week</option>
                                         <option value="repthismonth">This month</option>
                                         <option value="replastmonth">Last month</option>
-                                        <option value="daterange">Custom range</option> -->
+                                        <option value="daterange">Custom range</option>
                                                                 <option value="this_week">This week</option>
                                                                 <option value="this_month">This month</option>
                                                                 <option value="last_month">Last month</option>
@@ -179,7 +179,7 @@
                                                             </select>
                                                         </div>
 
-                                                    </div>
+                                                    </div> -->
                                                     <div class="col-md-8" id="custom" style="display:none; width:70%;">
                                                         <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
                                                             <input type="text" class="form-control datepicker" name="venuefrom" id="venuefrom" placeholder="FromDate">
@@ -451,6 +451,12 @@
         <!-- <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script> -->
 
         <script>
+            function get_query_string_key(key) {
+                key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+                var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+                return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+            }
+
             let liveJam = {};
             liveJam.initialize = (callback) => {
                 $.getScript('https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js', () => {
@@ -508,7 +514,16 @@
             liveJam.compileNodeArray = (span) => {
                 let start = moment().startOf(span);
                 let end = moment().endOf(span);
+
+                let date_filter = get_query_string_key('date_from');
+                if (date_filter !== '' && date_filter !== null && date_filter !== undefined) {
+                    start = moment(date_filter);
+                    end = moment(get_query_string_key('date_to'));
+                }
+
                 let date_array = [];
+
+
                 while (start.format('YYYY-MM-DD') !== end.format('YYYY-MM-DD')) {
                     date_array.push(start.format('YYYY-MM-DD'))
                     start.add(1, 'days');
@@ -562,16 +577,6 @@
                 $.each(nodes, function(i, node) {
                     console.log('GETTING DATA FOR: ' + node);
                     week_data_promises.push(liveJam.retrieveNode(node));
-                
-        
-
-                    // liveJam.retrieveNode(node, function(data) {
-                        
-                    //     week_data.push(data);
-                    //     if (i + 1 === nodes.length) {
-                    //         callback(week_data)
-                    //     }
-                    // })
                 });
                 Promise.all(week_data_promises).then(function() {
                     callback(arguments[0]);
