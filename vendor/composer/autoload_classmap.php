@@ -288,6 +288,7 @@ return array(
     'Timeandattendance' => $baseDir . '/app/models/Timeandattendance.php',
     'Tna' => $baseDir . '/app/lib/Tna.php',
     'Tnasetting' => $baseDir . '/app/models/Tnasetting.php',
+    'TrackSeenMacAddress' => $baseDir . '/app/database/migrations/2020_01_16_212525_track_seen_mac_address.php',
     'Trigger' => $baseDir . '/app/models/Trigger.php',
     'User' => $baseDir . '/app/models/User.php',
     'Utils' => $baseDir . '/app/lib/Utils.php',

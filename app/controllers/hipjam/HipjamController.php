@@ -5,16 +5,73 @@ namespace hipjam;
 use Input;
 //use app\lib\Heatmap;
 use Session;
+use TrackSeenMacAddress;
 
 // use BaseController;
 
 class HipjamController extends \BaseController
 {
 
+    /////////////////////// TRACK API /////////////////////////
+    public function sortmymfarray($mac)
+    {
+      return($mac->mac_address);
+    }
+    
+    public function uploadSeenMacAddresses() {
+        $id = \Input::get('id');
+        $mac_addresses = \Input::get('mac_addresses');
+        $f_mac = array();
+        $f_mac = explode(",", $mac_addresses);
+        // $master_array = array();
+
+        $already_seen = \DB::select("
+        SELECT
+            mac_address
+        FROM 
+            track_seen_mac_address
+        WHERE
+            date_seen = '".date("Y-m-d")."'
+        AND venue_id = ".$id);
+
+        $asd = array_values($already_seen);
+        // return \Response::json($asd);
+        $already_seen = array_map(array($this, 'sortmymfarray'),$asd);
+        
+        $mac_addresses_to_create = array_diff($f_mac, $already_seen);
+
+        foreach ($mac_addresses_to_create as $mac_address)
+        {
+            \DB::table('track_seen_mac_address')->insert(
+                array(
+                       'venue_id' => $id, 
+                       'date_seen' => date("Y-m-d"),
+                       'mac_address' => $mac_address
+                )
+           );
+           
+        }
+        
+        // \TrackSeenMacAddress::insert($master_array);
+        // $x = \TrackSeenMacAddress::all();
+
+        $resp = array();
+        $resp['status'] = 'success';
+        $resp['message'] = count($mac_addresses_to_create).' entries created';
+
+        // $json = json_encode($resp);
+        return \Response::json($resp);
+        // print_r($json);
+    }
+
     public function venueDetails($venue_id) {
         $venue = \Venue::whereraw("id = $venue_id")->get();
         return \Response::json($venue);
     }
+
+    /////////////////////// -------- /////////////////////////
+
+
 
     /////////////////////// Venues /////////////////////////
     public function showDashboard($json = null)
@@ -1751,7 +1808,8 @@ class HipjamController extends \BaseController
         $data['currentMenuItem'] = "Dashboard";
         $data['apisitename'] = $name;
         $data['apivenueid'] = $json;
-        $venue = \DB::table('venues')->select("id", "sitename", "location", "track_slug")->where('id', '=', $json)->first();
+        $venue = \DB::table('venues')->select("id", "sitename", "location", "track_slug", "track_type", "linked_billboard")->where('id', '=', $json)->first();
+        $data['venue_type'] = $venue->track_type;
         $data['venue'] = $venue->sitename;
         $data['venue_id'] = $venue->id;
         $data['track_slugname'] = $venue->track_slug;
@@ -1759,6 +1817,17 @@ class HipjamController extends \BaseController
 
         $assetsdiry = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
         $data['fullpathimage'] = $assetsdiry->value . 'track/images/' . $venue->location . '.jpg';
+
+        $data['exposed_today'] = \DB::select("
+        SELECT count(id) count FROM track_seen_mac_address WHERE venue_id = ".$venue->id." and date_seen = CURDATE() AND mac_address IN (SELECT mac_address FROM track_seen_mac_address where venue_id = ".$venue->linked_billboard." and date_seen = CURDATE())");
+
+        $data['exposed_today'] = array_values($data['exposed_today']);
+
+        $data['exposed_week'] = \DB::select("
+        SELECT count(id) count FROM track_seen_mac_address WHERE venue_id = ".$venue->id." and date_seen BETWEEN (CURDATE() - INTERVAL 7 DAY) AND CURDATE() AND mac_address IN (SELECT mac_address FROM track_seen_mac_address where venue_id = ".$venue->linked_billboard." and date_seen BETWEEN (CURDATE() - INTERVAL 7 DAY) AND CURDATE())");
+        $data['exposed_week'] = array_values($data['exposed_week']);
+
+        
         // $venues = \Venue::all();
         /*$venue = new \Venue();
         $venues = $venue->getVenuesForUser('hipjam', 1);//print_r($venues); die();

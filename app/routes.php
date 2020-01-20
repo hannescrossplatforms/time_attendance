@@ -321,6 +321,9 @@ Route::get('vicinity/settings', array('uses' => 'hipjam\HipjamController@vicinit
 Route::get('vicinity/users/add', array('uses' => 'hipjam\HipjamController@vicinityAddUser', 'as' => 'hipjam_vicinityadduser'))->before('auth');
 
 
+Route::post('upload_seen_mac_addresses/venue', array('uses' => 'hipjam\HipjamController@uploadSeenMacAddresses', 'as' => 'hipjam_uploadSeenMacAddresses'));
+
+
 // END VICNITY CHANGES
 // updateVicinityVenue
 

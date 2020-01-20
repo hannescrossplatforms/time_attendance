@@ -101,7 +101,11 @@
                                                         <div class="venuerow">
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
-                                                                    <h3>Customers In Store Now</h3>
+                                                                    @if ($data['venue_type'] == 'billboard')
+                                                                        <h3>Individuals Exposed Current</h3>
+                                                                    @else
+                                                                        <h3>Customers In Store Now</h3>
+                                                                    @endif
                                                                 </div>
                                                                 <div id="live_customer_now" class="modStatspan">loading...</div>
                                                             </div>
@@ -112,7 +116,12 @@
                                                         <div class="venuerow">
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
-                                                                    <h3>Customers In Store Today</h3>
+                                                                @if ($data['venue_type'] == 'billboard')
+                                                                        <h3>Individuals Exposed Today</h3>
+                                                                    @else
+                                                                        <h3>Customers In Store Today</h3>
+                                                                    @endif
+                                                                    
                                                                 </div>
                                                                 <div id="live_customer_today" class="modStatspan">loading...</div>
                                                             </div>
@@ -123,7 +132,11 @@
                                                         <div class="venuerow">
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
-                                                                    <h3>New Customers Now</h3>
+                                                                    @if ($data['venue_type'] == 'billboard')
+                                                                        <h3>Uniques Current</h3>
+                                                                    @else
+                                                                        <h3>New Customers Now</h3>
+                                                                    @endif
                                                                 </div>
                                                                 <div id="live_new_now" class="modStatspan">loading...</div>
                                                             </div>
@@ -134,7 +147,12 @@
                                                         <div class="venuerow">
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
-                                                                    <h3>New Customers Today</h3>
+                                                                    @if ($data['venue_type'] == 'billboard')
+                                                                        <h3>Uniques Today</h3>
+                                                                    @else
+                                                                        <h3>New Customers Today</h3>
+                                                                    @endif
+                                                                    
                                                                 </div>
                                                                 <div id="live_new_today" class="modStatspan">loading...</div>
                                                             </div>
@@ -152,7 +170,7 @@
                                                                     @endif
 
                                                                 </div>
-                                                                <div id="live_window_today" class="modStatspan">loading...
+                                                                <div id="live_window_today" class="modStatspan">{{$data['exposed_today'][0]->count}}
                                                                     <!-- <span style="font-size: 35%;">Data Not Available</span> -->
                                                                 </div>
                                                             </div>
@@ -199,7 +217,11 @@
                                                         <div class="venuerow">
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
-                                                                    <h3>Customers In Store</h3>
+                                                                    @if ($data['venue_type'] == 'billboard')
+                                                                        <h3>Individuals Exposed</h3>
+                                                                    @else
+                                                                        <h3>Customers In Store</h3>
+                                                                    @endif
                                                                 </div>
                                                                 <div id="rep_customer" class="modStatspan">0</div>
                                                             </div>
@@ -210,25 +232,37 @@
                                                         <div class="venuerow">
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
-                                                                    <h3>New Customers In Store </h3>
+                                                                    @if ($data['venue_type'] == 'billboard')
+                                                                        <h3>Uniques</h3>
+                                                                    @else
+                                                                        <h3>New Customers In Store</h3>
+                                                                    @endif
                                                                 </div>
                                                                 <div id="new_rep_customer" class="modStatspan">0</div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
 
+                                                    @if ($data['venue_type'] == 'billboard')
+                                                        <div class="col-md-3" style="width: 20%;"></div>
+                                                    @else
                                                     <div class="col-md-3" style="width: 20%;">
                                                         <div class="venuerow">
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
-                                                                    <h3>Engaged Customers </h3>
+                                                                    <h3>Engaged Customers</h3>
                                                                 </div>
                                                                 <div id="engaged_customers" class="modStatspan">0</div>
                                                                 <!-- <div id="engaged_customer" class="modStatspan"><span style="font-size: 35%;">Data Not Available</span></div> -->
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @endif
 
+                                                    @if ($data['venue_type'] == 'billboard')
+                                                        <div class="col-md-3" style="width: 20%;"></div>
+                                                    @else
                                                     <div class="col-md-3" style="width: 20%;">
                                                         <div class="venuerow">
                                                             <div class="modStat">
@@ -240,6 +274,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @endif
+
+
+                                                    
 
                                                     <div class="col-md-3" style="width: 20%;">
                                                         <div class="venuerow">
@@ -251,7 +289,7 @@
                                                                     <h3>Window Conversion </h3>
                                                                     @endif
                                                                 </div>
-                                                                <div id="window_con" class="modStatspan">loading...
+                                                                <div id="window_con" class="modStatspan">{{$data['exposed_week'][0]->count}}
                                                                     <!-- <span style="font-size: 35%;">Data Not Available</span> -->
                                                                 </div>
                                                             </div>
@@ -420,6 +458,7 @@
                                 </div>
 
                             </div>
+                            <input id="hf_venue_type" type="hidden" value="{{$data['venue_type']}}" />
                             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
                             <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
                             <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -451,6 +490,8 @@
         <!-- <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script> -->
 
         <script>
+            var is_billboard = $('#hf_venue_type').val() === 'billboard';
+
             function get_query_string_key(key) {
                 key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
                 var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
@@ -484,7 +525,6 @@
             liveJam.getVenueData = () => {
                 let current_date = new Date();
                 let formatted_node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}`
-
                 venue.doc(formatted_node).get()
                     .then((doc) => {
                         if (doc.exists) {
@@ -493,7 +533,13 @@
                             $('#live_customer_today').html(venue_data.customers_in_store_today);
                             $('#live_new_now').html(venue_data.new_customers_now);
                             $('#live_new_today').html(venue_data.new_customers_today);
-                            $('#live_window_today').html('0');
+                            // $('#live_window_today').html('0');
+
+                            if (is_billboard) {
+                                $('#live_window_today').html(venue_data.customers_in_store_today);
+                            }
+
+                            
                         } else {
                             $('#live_customer_now').html('No data');
                             $('#live_customer_today').html('No data');
@@ -751,7 +797,10 @@
                     $('#new_rep_customer').html(new_customers_in_store);
                     $('#engaged_customers').html(customers_in_store);
                     $('#rep_ave').html(Math.round(dwell));
-                    $('#window_con').html('0');
+                    if (is_billboard)
+                        $('#window_con').html(customers_in_store);
+                    else
+                        // $('#window_con').html('0');
 
                     liveJam.renderStoreTrafficTrendGraph(week_data);
                     liveJam.renderHourlyTrafficGraph(week_data);
