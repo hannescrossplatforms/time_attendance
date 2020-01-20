@@ -1245,18 +1245,29 @@ class Reports extends Eloquent {
         return $data;
     }
 
-    public function getFirstTimeUsers($reportperiod, $from, $to, $nasid, $brandcodes, $brandonly = null) {
+    public function getFirstTimeUsers($reportperiod, $from, $to, $nasid, $brandcodes, $brandonly = null, $filterAllBrands = false) {
         $statistics = new \Statistics();
         $activeVenues = $statistics->getActiveVenues();
 
-
-        
-        
         $filteredId = str_replace('_', ' ', $nasid); 
 
-        \Log::info("hannes wifi: filteredID name= $filteredId");      
+        $venue = null;
 
-        $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($filteredId)."%'")->get()->first();
+        if($filterAllBrands) {
+
+          $brand = \Brand::where("code", "like", $filteredId)->first();
+          \Log::info("hannes wifi: filteredID name= $brand->name");
+          $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($filteredId)."%'")->get()->first();
+
+        }
+        else {
+          \Log::info("hannes wifi: filteredID name= $filteredId");      
+          $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($filteredId)."%'")->get()->first();
+        }
+        
+        
+
+        
         
 
         if ($venue) {
