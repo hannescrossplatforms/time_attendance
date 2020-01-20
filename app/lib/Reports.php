@@ -1256,12 +1256,10 @@ class Reports extends Eloquent {
         if($filterAllBrands) {
 
           $brand = \Brand::where("code", "like", $filteredId)->first();
-          \Log::info("hannes wifi: filteredID name= $brand->name");
           $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($brand->name)."%'")->get()->first();
 
         }
         else {
-          \Log::info("hannes wifi: filteredID name= $filteredId");      
           $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($filteredId)."%'")->get()->first();
         }
         
@@ -1683,18 +1681,6 @@ class Reports extends Eloquent {
             );
 
         $categories = array(array("category" => $category));
-
-        
-        // $sitename = preg_replace("/_/", " ", $nasid);
-
-        \Log::info("hannes wifi:brand name= $brand->name");
-
-        // $str = $sitename;
-        // $str = ltrim($str, 'X');
-        
-            
-
-
 
         $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
 
