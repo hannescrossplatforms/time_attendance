@@ -648,7 +648,7 @@ class Reports extends Eloquent {
 
         $chartData = array(
           'chart' => array(
-            'subCaption' => "Highest 5 Session Count",
+            'subCaption' => "Highest 5 Session Counts",
             'paletteColors' => "#70ad47",
             'showYAxisValues' => "0",
             'rotatelabels' => "1",
