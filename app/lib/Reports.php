@@ -673,7 +673,7 @@ class Reports extends Eloquent {
               ->where('brandcode', 'like', $brandcode)
               ->wherein('nasid', $activeVenues)
               ->orderby("currentunique", "desc")
-              ->limit(5)
+              ->limit(10)
               ->get();
 
         $data = $this->stripOutBrandFromGraphLabels($data);
