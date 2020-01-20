@@ -432,6 +432,9 @@ class HipreportsController extends \BaseController {
         \Log::info("hannes wifi: brandname = $brandname");
 
         $brand = \DB::table("brands")->where('name', 'like', $brandname . "%")->first();
+
+        \Log::info("hannes wifi: brandname = $brand->name");
+
         $brandcodes = array($brand->code);
 
         if($reportperiod == "daterange") {
