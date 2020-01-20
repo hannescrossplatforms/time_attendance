@@ -433,7 +433,7 @@ class HipreportsController extends \BaseController {
 
         $brand = \DB::table("brands")->where('name', 'like', $brandname . "%")->first();
 
-        \Log::info("hannes wifi: brandname = $brand->name");
+        \Log::info("hannes wifi:brand name= $brand->name");
 
         $brandcodes = array($brand->code);
 
