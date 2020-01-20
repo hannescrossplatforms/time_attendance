@@ -1251,7 +1251,7 @@ class Reports extends Eloquent {
 
 
         
-        $nasid = preg_replace("/ /", "_", $sitename);
+        
         $filteredId = preg_replace("_", "asdf", $nasid);
 
         \Log::info("hannes wifi: filteredID name= $filteredId");      
