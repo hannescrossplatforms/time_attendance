@@ -595,7 +595,7 @@ class Reports extends Eloquent {
 
     public function gethighest5Sessions($brandcode, $reportperiod, $brandCodesArray = null) {
 
-        
+
 
         error_log("gethighest5Sessions brandcode : $brandcode ---- reportperiod : $reportperiod");
         $statistics = new \Statistics();
@@ -619,7 +619,7 @@ class Reports extends Eloquent {
                       })
             ->wherein('nasid', $activeVenues)
             ->orderby("currentsessions", "desc")
-            ->limit(5)
+            ->limit(10)
             ->get();
           }
           
