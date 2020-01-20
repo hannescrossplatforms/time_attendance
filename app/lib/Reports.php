@@ -680,7 +680,7 @@ class Reports extends Eloquent {
 
         $chartData = array(
           'chart' => array(
-            'subCaption' => "Highest 5 Unique Count",
+            'subCaption' => "Highest 10 Unique Count",
             'paletteColors' => "#70ad47",
             'showYAxisValues' => "0",
             'rotatelabels' => "1",
@@ -702,14 +702,14 @@ class Reports extends Eloquent {
               ->where('brandcode', 'like', $brandcode)
               ->wherein('nasid', $activeVenues)
               ->orderby("currentminutes", "desc")
-              ->limit(5)
+              ->limit(10)
               ->get();
 
         $data = $this->stripOutBrandFromGraphLabels($data);
 
         $chartData = array(
           'chart' => array(
-            'subCaption' => "Highest 5 Avg. Dwell Time (Minutes)",
+            'subCaption' => "Highest 10 Avg. Dwell Time (Minutes)",
             'paletteColors' => "#70ad47",
             'showYAxisValues' => "0",
             'rotatelabels' => "1",
@@ -792,7 +792,7 @@ class Reports extends Eloquent {
 
         $chartData = array(
           'chart' => array(
-            'subCaption' => "Lowest 5 Unique Count",
+            'subCaption' => "Lowest 10 Unique Count",
             'paletteColors' => "#5b9bd5",
             'showYAxisValues' => "0",
             'rotatelabels' => "1",
@@ -815,14 +815,14 @@ class Reports extends Eloquent {
               ->where('brandcode', 'like', $brandcode)
               ->wherein('nasid', $activeVenues)
               ->orderby("currentminutes", "asc")
-              ->limit(5)
+              ->limit(10)
               ->get();
 
         $data = $this->stripOutBrandFromGraphLabels($data);
 
         $chartData = array(
           'chart' => array(
-            'subCaption' => "Lowest 5 Avg. Dwell Time (Minutes)",
+            'subCaption' => "Lowest 10 Avg. Dwell Time (Minutes)",
             'paletteColors' => "#5b9bd5",
             'showYAxisValues' => "0",
             'rotatelabels' => "1",
