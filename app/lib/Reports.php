@@ -619,7 +619,7 @@ class Reports extends Eloquent {
                       })
             ->wherein('nasid', $activeVenues)
             ->orderby("currentsessions", "desc")
-            ->limit(10)
+            ->limit(5)
             ->get();
           }
           
@@ -635,7 +635,7 @@ class Reports extends Eloquent {
             ->where('brandcode', 'like', $brandcode)
             ->wherein('nasid', $activeVenues)
             ->orderby("currentsessions", "desc")
-            ->limit(5)
+            ->limit(10)
             ->get();
           }
           
