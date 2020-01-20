@@ -1257,7 +1257,7 @@ class Reports extends Eloquent {
 
           $brand = \Brand::where("code", "like", $filteredId)->first();
           \Log::info("hannes wifi: filteredID name= $brand->name");
-          $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($filteredId)."%'")->get()->first();
+          $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($brand->name)."%'")->get()->first();
 
         }
         else {
