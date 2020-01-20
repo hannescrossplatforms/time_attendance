@@ -481,6 +481,7 @@ class HipreportsController extends \BaseController {
         } else if ($queryname == "numberofpeople") {
             $data = $reportObj->getNumberOfPeople($reportperiod, $from, $to, $nasid, $brandcodes);
         } else if ($queryname == "firsttimeusers") {
+            \Log::info("hannes wifi: firsttimeusers name= $brand->name");
             $data = $reportObj->getFirstTimeUsers($reportperiod, $from, $to, $nasid, $brandcodes);
         } else if ($queryname == "avgdatapersession") {
             $data = $reportObj->getAvgDataPerSession($reportperiod, $from, $to, $nasid, $brandcodes);

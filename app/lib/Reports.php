@@ -1249,6 +1249,10 @@ class Reports extends Eloquent {
         $statistics = new \Statistics();
         $activeVenues = $statistics->getActiveVenues();
 
+
+        \Log::info("hannes wifi: firsttimeusers name= $nasid");      
+        
+
         $venue = \Venue::whereRaw("LOWER(location) LIKE '%".strtolower($nasid)."%'")->get()->first();
         // $venue = \Venue::where('sitename', 'like', $nasid)->first();
 
