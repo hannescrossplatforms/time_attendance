@@ -1251,8 +1251,13 @@ class Reports extends Eloquent {
 
 
         
-        $venue = \Venue::whereRaw("LOWER(location) LIKE '%".strtolower($nasid)."%'")->get()->first();
-        // $venue = \Venue::where('sitename', 'like', $nasid)->first();
+        
+        $filteredId = str_replace('_', ' ', $nasid); 
+
+        \Log::info("hannes wifi: filteredID name= $filteredId");      
+
+        $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($filteredId)."%'")->get()->first();
+        
 
         if ($venue) {
           $macaddress = $venue->macaddress;
