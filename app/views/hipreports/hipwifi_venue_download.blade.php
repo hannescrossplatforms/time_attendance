@@ -162,7 +162,7 @@
                                       </div>
                                       <div class="venuerowright" style="  float: right; width: 50%; height: 100%; display: inline-block; height: auto; border: 1px solid #999999;">
                                         <div class="modStat">
-                                          <div class="modstattitle" ><h3>First Time Wifi Users2</h3></div>
+                                          <div class="modstattitle" ><h3>First Time Wifi Users</h3></div>
                                           <div id="totalfirsttimeusers" class="modStatspan">{{$totalTirstTimeUsers}}</div>
                                           <div id="avgfirsttimeusers">{{$avgFirstTimeUsers}}</div>
                                         </div>                      
