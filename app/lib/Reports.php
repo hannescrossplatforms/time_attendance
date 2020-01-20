@@ -1488,6 +1488,9 @@ class Reports extends Eloquent {
 
     public function getCustomersByTimePeriod($reportperiod, $from, $to, $nasid, $brandname, $brandonly = null) {
 
+
+        $brand = \Brand::where('code', 'like', "%$nasid%")->first();
+
         $statistics = new \Statistics();
 
         $durations =  array(
@@ -1546,12 +1549,12 @@ class Reports extends Eloquent {
 
         $categories = array(array("category" => $category));
 
-        $sitename = preg_replace("/_/", " ", $nasid);
+        // $sitename = preg_replace("/_/", " ", $nasid);
 
-        $str = $sitename;
-        $str = ltrim($str, 'X');
+        // $str = $sitename;
+        // $str = ltrim($str, 'X');
         
-        $venue = \Venue::where('sitename', 'like', "%$str%")->first();
+        $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
 
         if ($venue) {
           $remotedb_id = $venue->remotedb_id;
@@ -1639,11 +1642,6 @@ class Reports extends Eloquent {
     }
 
     public function getDwellTimeBySessionDuration($reportperiod, $from, $to, $nasid, $brandname, $brandonly = null) {
-
-      //Hannes hier
-
-      \Log::info("hannes wifi:nasid= $nasid");
-
 
       $brand = \Brand::where('code', 'like', "%$nasid%")->first();
 
