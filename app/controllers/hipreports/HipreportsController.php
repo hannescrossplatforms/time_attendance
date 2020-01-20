@@ -245,7 +245,6 @@ class HipreportsController extends \BaseController {
 
 
     public function hipreports_hipwifi_branddatajsonsingle() {
-        //Hannes hier
 
         $reportObj = new \Reports();
         $data = array();

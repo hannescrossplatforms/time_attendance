@@ -150,7 +150,7 @@
                           </div>
                           <div class="venuerowright">
                             <div class="modStat">
-                              <div class="modstattitle"><h3>First Time Wifi Users</h3></div>
+                              <div class="modstattitle"><h3>First Time Wifi Users3</h3></div>
                               <div id="totalfirsttimeusers" class="modStatspan"></div>
                               <div id="avgfirsttimeusers"></div>
                             </div>                      

@@ -149,7 +149,7 @@
                       </div>
                       <div class="venuerowright" style="width: 50%; height: 100%; float: left; height: auto; border-left: 1px solid #999999;">
                         <div class="modStat">
-                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>First Time Wifi Users</h3></div>
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>First Time Wifi Users1</h3></div>
                           <div id="brandavgfirsttimeusers" class="modStatspan"></div>
                         </div>                      
                       </div>
