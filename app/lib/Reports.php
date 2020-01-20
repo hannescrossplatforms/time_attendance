@@ -1644,6 +1644,10 @@ class Reports extends Eloquent {
 
       \Log::info("hannes wifi:nasid= $nasid");
 
+
+      $brand = \Brand::where('code', 'like', "%$nasid%")->first();
+
+
         $statistics = new \Statistics();
 
         $durations =  array(array("min" => 0, "max" => 4),
@@ -1665,18 +1669,18 @@ class Reports extends Eloquent {
         $categories = array(array("category" => $category));
 
         
-        $sitename = preg_replace("/_/", " ", $nasid);
+        // $sitename = preg_replace("/_/", " ", $nasid);
 
-        \Log::info("hannes wifi:sitename= $sitename");
+        \Log::info("hannes wifi:brand name= $brand->name");
 
-        $str = $sitename;
-        $str = ltrim($str, 'X');
+        // $str = $sitename;
+        // $str = ltrim($str, 'X');
         
             
 
 
 
-        $venue = \Venue::where('sitename', 'like', "%$str%")->first();
+        $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
 
         if ($venue) {
           $remotedb_id = $venue->remotedb_id;
