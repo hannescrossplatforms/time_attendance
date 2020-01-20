@@ -273,7 +273,6 @@ function processVenueReports() {
 
 
   //////// firsttimeusers ///
-  //Hannes hier
   data = {
     'venue_id': venue_id,
     'reportperiod': reportperiod,
@@ -518,8 +517,6 @@ function showVenueNumberofPeople(numberofpeople) {
 
 
 function showFirstTimeUsers(firsttimeusers) {
-  //Hannes hier
-  debugger;
   $("#totalfirsttimeusers").html(firsttimeusers.total);
   $("#avgfirsttimeusers").html("Brand Avg " + Math.round(firsttimeusers.avg));
 }

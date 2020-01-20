@@ -339,7 +339,6 @@ class HipreportsController extends \BaseController {
         } else if ($queryname == "brandtotalnumberofpeople") {
             $data = $reportObj->getNumberOfPeople($reportperiod, $from, $to, $nasid, $brandcodes, 1);
         } else if ($queryname == "brandtotalfirsttimeusers") {
-            \Log::info("hannes wifi: 1");      
             $data = $reportObj->getFirstTimeUsers($reportperiod, $from, $to, $nasid, $brandcodes, 1, true);
         } else if ($queryname == "brandvenueavgdatapersession") {
             $data = $reportObj->getAvgDataPerSession($reportperiod, $from, $to, $nasid, $brandcodes);
@@ -401,8 +400,6 @@ class HipreportsController extends \BaseController {
 
     public function hipreports_hipwifi_venuedatajsonsingle() {
 
-        //Hannes hier
-
         error_log("hipreports_hipwifi_venuedatajsonsingle");
         $reportObj = new \Reports();
 
@@ -430,11 +427,7 @@ class HipreportsController extends \BaseController {
 
         $brandname = preg_replace("/(^.*)(_)(.*$)/", "$1", $nasid);
 
-        \Log::info("hannes wifi: brandname = $brandname");
-
         $brand = \DB::table("brands")->where('name', 'like', $brandname . "%")->first();
-
-        \Log::info("hannes wifi:brand name= $brand->name");
 
         $brandcodes = array($brand->code);
 
@@ -470,8 +463,7 @@ class HipreportsController extends \BaseController {
         } else if ($queryname == "avgjamvenuedwelltime") {
             $data = $reportObj->getAveJamVenueDwellTime($reportperiod, $from, $to, $nasid);
         } else if ($queryname == "newvsreturning") {
-            $data["graph"] = $reportObj->getNewVsReturning($reportperiod, $from, $to, $nasid);
-            \Log::info("hannes wifi: 2");      
+            $data["graph"] = $reportObj->getNewVsReturning($reportperiod, $from, $to, $nasid);   
             $data["firsttimeusers"] = $reportObj->getFirstTimeUsers($reportperiod, $from, $to, $nasid, $brandcodes);
             $data["numberofpeople"] = $reportObj->getNumberOfPeople($reportperiod, $from, $to, $nasid, $brandcodes);
         } else if ($queryname == "storedwelltime") {
@@ -482,8 +474,7 @@ class HipreportsController extends \BaseController {
             $data = $reportObj->getWifiDataTotal($from, $to, $nasid, $brandcodes);
         } else if ($queryname == "numberofpeople") {
             $data = $reportObj->getNumberOfPeople($reportperiod, $from, $to, $nasid, $brandcodes);
-        } else if ($queryname == "firsttimeusers") {
-            \Log::info("hannes wifi: 3");      
+        } else if ($queryname == "firsttimeusers") { 
             $data = $reportObj->getFirstTimeUsers($reportperiod, $from, $to, $nasid, $brandcodes);
         } else if ($queryname == "avgdatapersession") {
             $data = $reportObj->getAvgDataPerSession($reportperiod, $from, $to, $nasid, $brandcodes);
