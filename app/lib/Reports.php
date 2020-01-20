@@ -1642,6 +1642,8 @@ class Reports extends Eloquent {
 
       //Hannes hier
 
+      \Log::info("hannes wifi:nasid= $nasid");
+
         $statistics = new \Statistics();
 
         $durations =  array(array("min" => 0, "max" => 4),
@@ -1662,6 +1664,7 @@ class Reports extends Eloquent {
 
         $categories = array(array("category" => $category));
 
+        
         $sitename = preg_replace("/_/", " ", $nasid);
 
         \Log::info("hannes wifi:sitename= $sitename");
