@@ -595,6 +595,8 @@ class Reports extends Eloquent {
 
     public function gethighest5Sessions($brandcode, $reportperiod, $brandCodesArray = null) {
 
+        
+
         error_log("gethighest5Sessions brandcode : $brandcode ---- reportperiod : $reportperiod");
         $statistics = new \Statistics();
         $activeVenues = $statistics->getActiveVenues();
@@ -648,7 +650,7 @@ class Reports extends Eloquent {
 
         $chartData = array(
           'chart' => array(
-            'subCaption' => "Highest 5 Session Counts",
+            'subCaption' => "Highest 5 Session Count",
             'paletteColors' => "#70ad47",
             'showYAxisValues' => "0",
             'rotatelabels' => "1",
