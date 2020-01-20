@@ -1640,6 +1640,8 @@ class Reports extends Eloquent {
 
     public function getDwellTimeBySessionDuration($reportperiod, $from, $to, $nasid, $brandname, $brandonly = null) {
 
+      //Hannes hier
+
         $statistics = new \Statistics();
 
         $durations =  array(array("min" => 0, "max" => 4),
@@ -1662,9 +1664,15 @@ class Reports extends Eloquent {
 
         $sitename = preg_replace("/_/", " ", $nasid);
 
+        \Log::info("hannes wifi:sitename= $sitename");
+
         $str = $sitename;
         $str = ltrim($str, 'X');
         
+            
+
+
+
         $venue = \Venue::where('sitename', 'like', "%$str%")->first();
 
         if ($venue) {

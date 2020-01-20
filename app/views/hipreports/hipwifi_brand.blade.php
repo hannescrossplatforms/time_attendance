@@ -197,7 +197,7 @@
                         <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
                           <div >                        
                             <div class="modStat">
-                                <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>% Customers by Dwell Time Periodss</h3></div>
+                                <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>% Customers by Dwell Time Period</h3></div>
                                 <div class="graphcell">
                                   <div id="branddwelltimebysessionduration"></div>
                                 </div>
