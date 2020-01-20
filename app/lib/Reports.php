@@ -1250,10 +1250,13 @@ class Reports extends Eloquent {
         $activeVenues = $statistics->getActiveVenues();
 
 
-        \Log::info("hannes wifi: firsttimeusers name= $nasid");      
         
 
-        $venue = \Venue::whereRaw("LOWER(location) LIKE '%".strtolower($nasid)."%'")->get()->first();
+        $filteredId = preg_replace("_", " ", $nasid);
+
+        \Log::info("hannes wifi: filteredID name= $filteredId");      
+
+        $venue = \Venue::whereRaw("LOWER(sitename) LIKE '%".strtolower($filteredId)."%'")->get()->first();
         // $venue = \Venue::where('sitename', 'like', $nasid)->first();
 
         if ($venue) {
