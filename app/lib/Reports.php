@@ -845,7 +845,7 @@ class Reports extends Eloquent {
           ->where('brandcode', 'like', $brandcode)
           ->wherein('nasid', $activeVenues)
           ->orderby("percentsessions", "desc")
-          ->limit(5)
+          ->limit(10)
           ->get();
 
         $data = $this->stripOutBrandFromGraphLabels($data);
@@ -877,7 +877,7 @@ class Reports extends Eloquent {
               ->where('brandcode', 'like', $brandcode)
               ->wherein('nasid', $activeVenues)
               ->orderby("percentunique", "desc")
-              ->limit(5)
+              ->limit(10)
               ->get();
 
         $data = $this->stripOutBrandFromGraphLabels($data);
@@ -935,7 +935,7 @@ class Reports extends Eloquent {
           ->where('brandcode', 'like', $brandcode)
           ->wherein('nasid', $activeVenues)
           ->orderby("percentsessions", "asc")
-          ->limit(5)
+          ->limit(10)
           ->get();
 
 
@@ -967,7 +967,7 @@ class Reports extends Eloquent {
               ->where('brandcode', 'like', $brandcode)
               ->wherein('nasid', $activeVenues)
               ->orderby("percentunique", "asc")
-              ->limit(5)
+              ->limit(10)
               ->get();
 
         $data = $this->stripOutBrandFromGraphLabels($data);
