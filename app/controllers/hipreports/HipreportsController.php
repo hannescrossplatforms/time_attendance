@@ -400,6 +400,8 @@ class HipreportsController extends \BaseController {
 
     public function hipreports_hipwifi_venuedatajsonsingle() {
 
+        //Hannes hier
+
         error_log("hipreports_hipwifi_venuedatajsonsingle");
         $reportObj = new \Reports();
 
@@ -426,6 +428,9 @@ class HipreportsController extends \BaseController {
         // If the brand belongs to an organisation then we compare to all venues within the organisation, else we compare to venues within the brand.
 
         $brandname = preg_replace("/(^.*)(_)(.*$)/", "$1", $nasid);
+
+        \Log::info("hannes wifi: brandname = $brandname");
+
         $brand = \DB::table("brands")->where('name', 'like', $brandname . "%")->first();
         $brandcodes = array($brand->code);
 

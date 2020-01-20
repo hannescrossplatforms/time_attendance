@@ -273,6 +273,7 @@ function processVenueReports() {
 
 
   //////// firsttimeusers ///
+  //Hannes hier
   data = {
     'venue_id': venue_id,
     'reportperiod': reportperiod,
