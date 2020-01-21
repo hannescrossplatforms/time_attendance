@@ -229,7 +229,7 @@
 
                 <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
                   <div class="graphcol" style="width: 20%; margin: 20px; float: left; border: 2px solid !important;">
-                    <h1>Best Performances</h1>
+                    <h1>Best Performance</h1>
                     <div class="graphcell">
                       <div id="chartcol1row1"></div>
                     </div>
@@ -252,6 +252,9 @@
                       <div id="chartcol2row3"></div>
                     </div>
                   </div>
+                </div> 
+
+                <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
                   <div class="graphcol" style=" width: 20%; margin: 20px; float: left; border: 2px solid !important;">
                     <h1>Biggest Improvement</h1>
                     <div class="graphcell">
@@ -283,6 +286,7 @@
                     </div>
                   </div>
                 </div> 
+
               </div>
               <!-- section three end -->
               
