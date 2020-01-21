@@ -1685,11 +1685,11 @@ class Reports extends Eloquent {
         $categories = array(array("category" => $category));
           
 
-        \Log::info("Hannes brandname = $brand->name");
+        
 
 
         if($brandonly) {
-          \Log::info("Hannes Is brand only");
+          
 
           $brand = \Brand::where('code', 'like', "%$nasid%")->first();
           $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
@@ -1699,7 +1699,7 @@ class Reports extends Eloquent {
           $name = str_replace('_', ' ', $nasid); 
           $venue = \Venue::where('sitename', 'like', "%$name%")->first();
   
-          \Log::info("Hannes Is NOT brand only");
+         
         }
 
         if ($venue) {
