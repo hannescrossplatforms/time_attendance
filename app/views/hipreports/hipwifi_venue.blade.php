@@ -209,7 +209,7 @@
                               </div>
                               <div >
                                 <div class="modStat">
-                                    <div class="modstattitle"><h3>% Customers by Hour</h3></div>
+                                    <div class="modstattitle"><h3>% Customers by Hours</h3></div>
                                     <div class="graphcell">
                                       <div id="dwelltimebyhour"></div>
                                     </div>
