@@ -1508,7 +1508,15 @@ class Reports extends Eloquent {
 
         \Log::info("Hannes hier log nasid: $nasid");
 
-        $brand = \Brand::where('code', 'like', "%$nasid%")->first();
+
+        if($brandonly) {
+          $brand = \Brand::where('code', 'like', "%$nasid%")->first();
+          $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
+        }
+        else {
+          $name = str_replace('_', ' ', $nasid); 
+          $venue = \Venue::where('sitename', 'like', "%$name%")->first();
+        }
 
         $statistics = new \Statistics();
 
@@ -1573,7 +1581,7 @@ class Reports extends Eloquent {
         // $str = $sitename;
         // $str = ltrim($str, 'X');
         
-        $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
+        // $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
 
         if ($venue) {
           $remotedb_id = $venue->remotedb_id;
