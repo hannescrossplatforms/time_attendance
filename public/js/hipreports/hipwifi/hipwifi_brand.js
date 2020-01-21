@@ -509,8 +509,6 @@ function processBrandReports() {
     }
   });
 
-  //Hannes hier
-  debugger;
   //////// dwelltimebyhour ///
   data = {
     'brand_id': brand_id,
