@@ -228,7 +228,7 @@
 
 
                 <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
-                  <div class="graphcol" style="width: 20%; margin: 20px; float: left; border: 2px solid !important;">
+                  <div class="graphcol" style="width: 45%; margin: 20px; float: left; border: 2px solid !important;">
                     <h1>Best Performance</h1>
                     <div class="graphcell">
                       <div id="chartcol1row1"></div>
@@ -240,7 +240,7 @@
                       <div id="chartcol1row3"></div>
                     </div>
                   </div>
-                  <div class="graphcol" style=" width: 20%; margin: 20px; float: left; border: 2px solid !important;">
+                  <div class="graphcol" style=" width: 45%; margin: 20px; float: left; border: 2px solid !important;">
                     <h1>Worst Performance</h1>
                     <div class="graphcell">
                       <div id="chartcol2row1"></div>
@@ -255,7 +255,7 @@
                 </div> 
 
                 <div class="graph-container" style=" clear: both; padding: 10px; width: 100%;">
-                  <div class="graphcol" style=" width: 20%; margin: 20px; float: left; border: 2px solid !important;">
+                  <div class="graphcol" style=" width: 45%; margin: 20px; float: left; border: 2px solid !important;">
                     <h1>Biggest Improvement</h1>
                     <div class="graphcell">
                       <div id="chartcol3row1"></div>
@@ -267,7 +267,7 @@
                       <div id="chartcol3row3"></div>
                     </div>
                   </div>
-                  <div class="graphcol" style=" width: 20%; margin: 20px; float: left; border: 2px solid !important;">
+                  <div class="graphcol" style=" width: 45%; margin: 20px; float: left; border: 2px solid !important;">
                     <h1>Biggest Falls</h1>
                     <div class="graphcell">
                       <div id="chartcol4row1"></div>
