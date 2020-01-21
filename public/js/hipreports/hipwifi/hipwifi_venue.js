@@ -397,6 +397,8 @@ function processVenueReports() {
     }
   });
 
+  //Hannes hier 2
+  debugger;
   //////// dwelltimebyhour ///
   data = {
     'venue_id': venue_id,

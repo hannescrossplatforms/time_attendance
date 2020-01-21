@@ -497,7 +497,7 @@ function processBrandReports() {
     'to': to,
     'queryname': 'dwelltimebysessionduration'
   };
-  debugger;
+
   $.ajax({
     type: "GET",
     dataType: 'json',
@@ -509,6 +509,8 @@ function processBrandReports() {
     }
   });
 
+  //Hannes hier
+  debugger;
   //////// dwelltimebyhour ///
   data = {
     'brand_id': brand_id,
