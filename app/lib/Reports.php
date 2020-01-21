@@ -1671,6 +1671,7 @@ class Reports extends Eloquent {
         \Log::info("Hannes Is NOT brand only");
       }
 
+      \Log::info("Hannes nasid 1 = $nasid");
 
       $brand = \Brand::where('code', 'like', "%$nasid%")->first();
 
@@ -1694,6 +1695,9 @@ class Reports extends Eloquent {
             );
 
         $categories = array(array("category" => $category));
+          
+
+        \Log::info("Hannes brandname = $brand->name");
 
         $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
 
