@@ -1661,19 +1661,7 @@ class Reports extends Eloquent {
 
     public function getDwellTimeBySessionDuration($reportperiod, $from, $to, $nasid, $brandname, $brandonly = null) {
 
-
-      \Log::info("Hannes getDwellTimeBySessionDuration nasid = $nasid");
-
-      if($brandonly) {
-        \Log::info("Hannes Is brand only");
-      }
-      else {
-        \Log::info("Hannes Is NOT brand only");
-      }
-
-      \Log::info("Hannes nasid 1 = $nasid");
-
-      $brand = \Brand::where('code', 'like', "%$nasid%")->first();
+      
 
 
         $statistics = new \Statistics();
@@ -1699,7 +1687,20 @@ class Reports extends Eloquent {
 
         \Log::info("Hannes brandname = $brand->name");
 
-        $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
+
+        if($brandonly) {
+          \Log::info("Hannes Is brand only");
+
+          $brand = \Brand::where('code', 'like', "%$nasid%")->first();
+          $venue = \Venue::where('sitename', 'like', "%$brand->name%")->first();
+        }
+        else {
+          // Fairview_BarleyBiltong
+          $name = str_replace('_', ' ', $nasid); 
+          $venue = \Venue::where('sitename', 'like', "%$name%")->first();
+  
+          \Log::info("Hannes Is NOT brand only");
+        }
 
         if ($venue) {
           $remotedb_id = $venue->remotedb_id;
