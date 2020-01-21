@@ -1506,6 +1506,7 @@ class Reports extends Eloquent {
 
     public function getCustomersByTimePeriod($reportperiod, $from, $to, $nasid, $brandname, $brandonly = null) {
 
+        \Log::info("Hannes hier log nasid: $nasid");
 
         $brand = \Brand::where('code', 'like', "%$nasid%")->first();
 
