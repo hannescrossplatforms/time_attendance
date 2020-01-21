@@ -201,7 +201,7 @@
                             <div class="venuerow">
                               <div >                        
                                 <div class="modStat">
-                                    <div class="modstattitle"><h3>% Customers by Dwell Time Periods</h3></div>
+                                    <div class="modstattitle"><h3>% Customers by Dwell Time Period</h3></div>
                                     <div class="graphcell">
                                       <div id="dwelltimebysessionduration"></div>
                                     </div>

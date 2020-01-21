@@ -1661,6 +1661,17 @@ class Reports extends Eloquent {
 
     public function getDwellTimeBySessionDuration($reportperiod, $from, $to, $nasid, $brandname, $brandonly = null) {
 
+
+      \Log::info("Hannes getDwellTimeBySessionDuration nasid = $nasid");
+
+      if($brandonly) {
+        \Log::info("Hannes Is brand only");
+      }
+      else {
+        \Log::info("Hannes Is NOT brand only");
+      }
+
+
       $brand = \Brand::where('code', 'like', "%$nasid%")->first();
 
 
