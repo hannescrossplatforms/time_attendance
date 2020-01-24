@@ -320,6 +320,9 @@ Route::post('vicinity/venue/{id}/update', array('uses' => 'hipjam\HipjamControll
 Route::get('vicinity/settings', array('uses' => 'hipjam\HipjamController@vicinitySettings', 'as' => 'hipjam_vicinitysettings'))->before('auth');
 Route::get('vicinity/users/add', array('uses' => 'hipjam\HipjamController@vicinityAddUser', 'as' => 'hipjam_vicinityadduser'))->before('auth');
 
+Route::get('hipjam_monitorsensors/{id}/turn_off', array('uses' => 'hipjam\HipjamController@turnOffVenue', 'as' => 'hipjam_turnoffvenue'));
+Route::get('hipjam_monitorsensors/{id}/turn_on', array('uses' => 'hipjam\HipjamController@turnOnVenue', 'as' => 'hipjam_turnonvenue'));
+
 
 Route::post('upload_seen_mac_addresses/venue', array('uses' => 'hipjam\HipjamController@uploadSeenMacAddresses', 'as' => 'hipjam_uploadSeenMacAddresses'));
 
