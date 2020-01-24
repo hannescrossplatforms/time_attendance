@@ -280,7 +280,7 @@
                     </div>
                   </div>
                   <div class="widegraph" style="clear: both; width: 100%;">
-                    <h1>Total Dwell Time (mins)</h1>
+                    <h1>Total Dwell Time (minss)</h1>
                     <div>
                       <div id="dwelltimeChart"></div>
                     </div>
