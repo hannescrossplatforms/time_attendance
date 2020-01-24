@@ -782,6 +782,7 @@ function showBrandPerformanceGraphs(brandData) {
   });
   biggestUniquesDecrease.render("chartcol4row2");
 
+  debugger;
   var biggestAdminIncrease = new FusionCharts({
     type: "column2d",
     renderAt: "chartcol3row3",
@@ -790,6 +791,7 @@ function showBrandPerformanceGraphs(brandData) {
     dataFormat: "json",
     dataSource: brandData["biggestAdminIncreasedata"]
   });
+
   biggestAdminIncrease.render("chartcol4row3");
 
   var totalDwellTime = new FusionCharts({
@@ -1007,6 +1009,7 @@ function showbrandLevelReport(brandData) {
   });
   biggestUniquesDecrease.render("chartcol4row2");
 
+  debugger;
   var biggestAdminIncrease = new FusionCharts({
     type: "column2d",
     renderAt: "chartcol3row3",
