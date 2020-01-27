@@ -979,15 +979,15 @@ function showbrandLevelReport(brandData) {
   });
   biggestUniquesIncrease.render("chartcol3row2");
 
-  var biggestAdminDrop = new FusionCharts({
-    type: "column2d",
-    renderAt: "chartcol3row3",
-    width: chartWidth,
-    height: chartHeight,
-    dataFormat: "json",
-    dataSource: brandData["biggestAdminDropdata"]
-  });
-  biggestAdminDrop.render("chartcol3row3");
+  // var biggestAdminDrop = new FusionCharts({
+  //   type: "column2d",
+  //   renderAt: "chartcol3row3",
+  //   width: chartWidth,
+  //   height: chartHeight,
+  //   dataFormat: "json",
+  //   dataSource: brandData["biggestAdminDropdata"]
+  // });
+  // biggestAdminDrop.render("chartcol3row3");
 
   var biggestSessionDecrease = new FusionCharts({
     type: "column2d",
@@ -1009,16 +1009,15 @@ function showbrandLevelReport(brandData) {
   });
   biggestUniquesDecrease.render("chartcol4row2");
 
-  debugger;
-  var biggestAdminIncrease = new FusionCharts({
-    type: "column2d",
-    renderAt: "chartcol3row3",
-    width: chartWidth,
-    height: chartHeight,
-    dataFormat: "json",
-    dataSource: brandData["biggestAdminIncreasedata"]
-  });
-  biggestAdminIncrease.render("chartcol4row3");
+  // var biggestAdminIncrease = new FusionCharts({
+  //   type: "column2d",
+  //   renderAt: "chartcol3row3",
+  //   width: chartWidth,
+  //   height: chartHeight,
+  //   dataFormat: "json",
+  //   dataSource: brandData["biggestAdminIncreasedata"]
+  // });
+  // biggestAdminIncrease.render("chartcol4row3");
 
   var totalDwellTime = new FusionCharts({
     type: "column2d",
