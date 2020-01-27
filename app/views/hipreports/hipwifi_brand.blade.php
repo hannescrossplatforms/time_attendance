@@ -263,9 +263,9 @@
                     <div class="graphcell">
                       <div id="chartcol3row2"></div>
                     </div>
-                    <div class="graphcell">
+                    <!-- <div class="graphcell">
                       <div id="chartcol3row3"></div>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="graphcol" style=" width: 45%; margin: 20px; float: left; border: 2px solid !important;">
                     <h1>Biggest Falls</h1>
@@ -275,9 +275,9 @@
                     <div class="graphcell">
                       <div id="chartcol4row2"></div>
                     </div>
-                    <div class="graphcell">
+                    <!-- <div class="graphcell">
                       <div id="chartcol4row3"></div>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="widegraph" style="clear: both; width: 100%;">
                     <h1>Total Dwell Time (mins)</h1>
