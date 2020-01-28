@@ -93,9 +93,14 @@
         });
         
         function initializeDatatable(){
-            $('#table-list-view').DataTable();
+            $('#table-list-view').DataTable({
+                "oLanguage": {
+                    "sSearch": "Filter results:"
+                }
+            });
             $('#table-list-view_filter input').addClass('form-control');
             $('#table-list-view_filter input').attr("placeholder", "Site Name");
+            table-list-view_filter
         }
 
         $("[id^=sensortable").click( function(){
