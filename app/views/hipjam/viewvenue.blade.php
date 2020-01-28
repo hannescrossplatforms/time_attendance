@@ -797,6 +797,7 @@
                     var exposed_to_billboard = 0;
                     debugger;
                     $.each(week_data, function(index, item) {
+                        console.log(week_data);
                         dwell += item.data.average_dwell;
                         customers_in_store += item.data.customers_in_store_today;
                         new_customers_in_store += item.data.new_customers_today;
