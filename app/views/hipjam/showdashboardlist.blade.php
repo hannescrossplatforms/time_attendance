@@ -102,7 +102,7 @@
               </div>
               <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
                 <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_current">Loading...</p>
-                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed current</small>
+                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Real-time Customers</small>
               </div>
             </div>
 
@@ -112,7 +112,7 @@
               </div>
               <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
                 <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">Loading...</p>
-                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Individuals exposed today</small>
+                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Real-time Customers Today</small>
               </div>
             </div>
 
@@ -546,7 +546,8 @@ Time spent in store (dwell) -->
                   if (url_parts.length === 2) 
                     filters = `?${url_parts[1]}`
 
-                  $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${filters}`);
+                  $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${filters}`);                  
+
                   $('#selected_venue_view').slideDown('fast')
 
                   console.log(`marker clicked with id: ${venue_id}`);
@@ -729,7 +730,7 @@ Time spent in store (dwell) -->
         /*editbutton = '<a href="{{ url('hipwifi_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n';*/
         if (value["apisitename"] != 'no_venue') {
         
-          viewbutton = '<a href="http://hiphub.hipzone.co.za/hipjam_viewvenue/' + value["id"] + '/' + value["apisitename"] + '" class="btn btn-default btn-sm">view</a>\n';
+          viewbutton = '<a href="http://hiphub.hipzone.co.za/hipjam_viewvenue/' + value["id"] + '/' + value["apisitename"] + '" class="btn btn-default btn-sm view-venue-button" data-venue-id=' + value["id"] + '>view</a>\n';
         } else {
           viewbutton = '<a href="javascript:void(0);" onclick="alert_message()" class="btn btn-default btn-sm">view</a>\n';
         }
@@ -894,6 +895,18 @@ Time spent in store (dwell) -->
         return null
       return { brand_id: get_query_string_key('brand_id'), type: get_query_string_key('type'), span: get_query_string_key('span'),  date_from: get_query_string_key('date_from'), date_to: get_query_string_key('date_to') }
     }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+      let presets = get_presets();
+      if (presets !== null) {
+        // Set the default filter for view venue buttons
+        $('.view-venue-button').each(function(i, obj) {
+            let venue_id = $(this).data('venue-id');
+            console.log(venue_id)
+            $(this).attr('href', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${generate_query_string(presets.brand_id, presets.type, presets.span, presets.date_from, presets.date_to)}`)
+        });
+      }
+    });
 
   </script>
 

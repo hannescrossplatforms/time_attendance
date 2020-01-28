@@ -12,6 +12,33 @@ use TrackSeenMacAddress;
 class HipjamController extends \BaseController
 {
 
+    // SONOFF EWELINK IOT
+    public function turnOnVenue($id) {
+        $venue = \Venue::find($id);
+        $venue->status = 'Online';
+        $venue->save();
+
+        $resp = array();
+        $resp['status'] = 'success';
+        $resp['message'] = 'Greenside turned on';
+
+    
+        return \Response::json($resp);
+    }
+
+    public function turnOffVenue($id) {
+        $venue = \Venue::find($id);
+        $venue->status = 'Offline';
+        $venue->save();
+
+        $resp = array();
+        $resp['status'] = 'success';
+        $resp['message'] = 'Greenside turned off';
+
+    
+        return \Response::json($resp);
+    }
+
     /////////////////////// TRACK API /////////////////////////
     public function sortmymfarray($mac)
     {
@@ -191,6 +218,8 @@ class HipjamController extends \BaseController
             $venues = new \Venue();
             if ($brand_id_filter != 'global') {
                 $venues = $venues->whereraw("brand_id = '$brand_id_filter' AND jam_activated = true");
+                $data['live_number_of_billboards'] = count(\Venue::whereraw("(track_type = 'billboard') AND ((brand_id = $brand_id_filter) AND ap_active = true)")->get());
+                $data['live_number_of_retail_venues'] = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND ((brand_id = $brand_id_filter) AND ap_active = true)")->get());
             } else {
                 $venues_id_array = array();
                 $original_venues = $venues->getVenuesForUser('hipjam', 1, null, null, "active");

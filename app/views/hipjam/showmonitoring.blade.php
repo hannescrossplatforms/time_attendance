@@ -35,7 +35,7 @@
                         <thead>
                             <th>Venue Names</th>
                             <th>Status</th>
-                            
+                            <th class="text-center">Actions</th>
                         </thead>
                         <tbody>
                             @foreach($data['venues'] as $venue)
@@ -46,7 +46,17 @@
                                 <td id="status{{$venue->id}}" class="" idval="{{$venue->id}}">
                                     
                                 </td>
-                                                                        
+                                <td class="text-center">
+                                    @if ($venue->id == 1476)
+                                        @if ($venue->status == 'Online')
+                                            <button class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br/> <small>Click to turn off</small></button>
+                                        @else
+                                            <button class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br/> <small>Click to turn on</small></button>
+                                        @endif
+                                    @else
+                                        <label class="label label-warning">N/A</label>    
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -265,6 +275,28 @@
 
     $('#listviewicon').click();
     	
+    </script>
+
+    <script>
+        $(document).on('click', '.turn-off-sensor', function() {
+            let venue_id = $(this).data('venue-id');
+            $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_off`, function(resp) {
+                $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                });
+                window.location.href = 'http://hiphub.hipzone.co.za/hipjam_monitorsensors';
+            });
+        })
+
+        $(document).on('click', '.turn-on-sensor', function() {
+            let venue_id = $(this).data('venue-id');
+            $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_on`, function(resp) {
+                $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                })
+                window.location.href = 'http://hiphub.hipzone.co.za/hipjam_monitorsensors';
+            });
+        })
     </script>
 </body>
 

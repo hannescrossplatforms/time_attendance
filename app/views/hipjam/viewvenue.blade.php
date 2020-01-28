@@ -164,11 +164,14 @@
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
                                                                     @if (\User::isVicinity())
-                                                                    <h3>Exposed to Billboard Today</h3>
+                                                                        @if ($data['venue_type'] == 'billboard')
+                                                                            <h3>Exposed to Billboard Today</h3>
+                                                                        @else
+                                                                            <h3>Conversions Today</h3>
+                                                                        @endif
                                                                     @else
-                                                                    <h3>Window Conversion Today</h3>
+                                                                        <h3>Window Conversion Today</h3>
                                                                     @endif
-
                                                                 </div>
                                                                 <div id="live_window_today" class="modStatspan">{{$data['exposed_today'][0]->count}}
                                                                     <!-- <span style="font-size: 35%;">Data Not Available</span> -->
@@ -178,26 +181,24 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="row">
-                                                    <!-- <div class="col-md-4" style="width:30%;">
+                                                <div class="row" id="report_date_filter">
+                                                    <div class="col-md-4" style="width:30%;">
                                                         <div class="col-md-4" style="width:43%; padding:6px 0px 0px 0px;">
                                                             <label>Report Period</label>
                                                         </div>
-                                                        <div class="col-md-4" style="width:57%;padding:0px 0px 0px 0px;">
-                                                            <select id="brandreportperiod" class="form-control" name="reportperiod">
-                                                                <option value="">Select</option>
-                                                                <option value="rep7day">This week</option>
-                                        <option value="repthismonth">This month</option>
-                                        <option value="replastmonth">Last month</option>
-                                        <option value="daterange">Custom range</option>
-                                                                <option value="this_week">This week</option>
-                                                                <option value="this_month">This month</option>
-                                                                <option value="last_month">Last month</option>
-                                                                <option value="custom">Custom range</option>
+                                                        <div class="col-md-4 text-center">
+                                                            <select id="date_select" class="form-control changable-filter">
+                                                            <option value="yesterday">Yesterday</option>
+                                                            <option value="today">Today</option>
+                                                            <option value="this_week">This Week</option>
+                                                            <option value="last_week">Last Week</option>
+                                                            <option value="this_month">This Month</option>
+                                                            <option value="last_month">Last Month</option>
+                                                            <option value="custom">Custom</option>
                                                             </select>
                                                         </div>
 
-                                                    </div> -->
+                                                    </div>
                                                     <div class="col-md-8" id="custom" style="display:none; width:70%;">
                                                         <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
                                                             <input type="text" class="form-control datepicker" name="venuefrom" id="venuefrom" placeholder="FromDate">
@@ -251,7 +252,12 @@
                                                         <div class="venuerow">
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
-                                                                    <h3>Engaged Customers</h3>
+                                                                        @if ($data['venue_type'] == 'billboard')
+                                                                            <h3>Engaged Customers</h3>
+                                                                        @else
+                                                                            <h3>High Dwell Customers</h3>
+                                                                        @endif
+                                                                    
                                                                 </div>
                                                                 <div id="engaged_customers" class="modStatspan">0</div>
                                                                 <!-- <div id="engaged_customer" class="modStatspan"><span style="font-size: 35%;">Data Not Available</span></div> -->
@@ -284,7 +290,11 @@
                                                             <div class="modStat">
                                                                 <div class="modstattitle">
                                                                     @if (\User::isVicinity())
-                                                                    <h3>Exposed to Billboard</h3>
+                                                                        @if ($data['venue_type'] == 'billboard')
+                                                                            <h3>Exposed to Billboard</h3>
+                                                                        @else
+                                                                            <h3>Total Conversions</h3>
+                                                                        @endif
                                                                     @else
                                                                     <h3>Window Conversion </h3>
                                                                     @endif
@@ -787,6 +797,7 @@
                     var exposed_to_billboard = 0;
                     debugger;
                     $.each(week_data, function(index, item) {
+                        console.log(week_data);
                         dwell += item.data.average_dwell;
                         customers_in_store += item.data.customers_in_store_today;
                         new_customers_in_store += item.data.new_customers_today;
@@ -815,9 +826,110 @@
             if (window.location !== window.parent.location) {
                 $('.sidebar').remove();
                 $('.main').attr('style', 'width: 100% !important; margin: 0 !important;');
+                $('#report_date_filter').remove();
             }
         </script>
+<script>
+load_presets();
+    getFilters(false);
 
+    $(document).on('change', '.changable-filter', function() {
+      getFilters(true);
+    })
+
+    function load_presets() {
+      let presets = get_presets();
+      if (presets !== null) {
+        $('#sub_brand_select').val(presets.brand_id);
+        $('#type_select').val(presets.type);
+        $('#date_select').val(presets.span);
+      } else {
+        $('#date_select').val('this_week');
+      }
+    }
+
+    function getFilters(must_redirect) {
+      let brand_id = $('#sub_brand_select').val();
+      let type = $('#type_select').val();
+      let span = $('#date_select').val();
+      let date_from = generate_date_from();
+      let date_to = generate_date_to();
+      
+      if (must_redirect)
+        window.location.href = `http://hiphub.hipzone.co.za/hipjam_viewvenue/1475/tracks03.hipzone.co.za${generate_query_string(brand_id, type, span, date_from, date_to)}`
+    }
+
+    function generate_date_from() {
+      let selected_date_span = $('#date_select').val();
+      let today = moment();
+      switch(selected_date_span) {
+        case 'yesterday':
+          return today.subtract(1, 'day').format('YYYY-MM-DD');
+          break;
+        case 'today':
+          return today
+          break;
+        case 'this_week':
+          return today.startOf('week').format('YYYY-MM-DD');
+          break;
+        case 'last_week':
+          return today.startOf('week').subtract(1, 'day').startOf('week').format('YYYY-MM-DD');
+          break;
+        case 'this_month':
+          return today.startOf('month').format('YYYY-MM-DD');
+          break;
+        case 'last_month':
+          return today.startOf('month').subtract(1, 'day').startOf('month').format('YYYY-MM-DD');
+          break;
+        default:
+          return today.startOf('week').format('YYYY-MM-DD');
+      }
+    }
+
+    function generate_date_to() {
+      let selected_date_span = $('#date_select').val();
+      let today = moment();
+      switch(selected_date_span) {
+        case 'yesterday':
+          return today.subtract(1, 'day').format('YYYY-MM-DD');
+          break;
+        case 'today':
+          return today
+          break;
+        case 'this_week':
+          return today.endOf('week').format('YYYY-MM-DD');
+          break;
+        case 'last_week':
+          return today.startOf('week').subtract(1, 'day').endOf('week').format('YYYY-MM-DD');
+          break;
+        case 'this_month':
+          return today.endOf('month').format('YYYY-MM-DD');
+          break;
+        case 'last_month':
+          return today.startOf('month').subtract(1, 'day').endOf('month').format('YYYY-MM-DD');
+          break;
+        default:
+          return today.endOf('week').format('YYYY-MM-DD');
+      }
+    }
+
+    function generate_query_string(brand_id, type, span, date_from, date_to) {
+      return `?brand_id=${brand_id}&type=${type}&span=${span}&date_from=${date_from}&date_to=${date_to}`;
+    }
+
+    function get_query_string_key(key) {
+      key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+      var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+      return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+    }
+
+    function get_presets() {
+      let brand_id = get_query_string_key('brand_id');
+      if (brand_id === '' || brand_id === null || brand_id === undefined)
+        return null
+      return { brand_id: get_query_string_key('brand_id'), type: get_query_string_key('type'), span: get_query_string_key('span'),  date_from: get_query_string_key('date_from'), date_to: get_query_string_key('date_to') }
+    }
+</script>
 
 </body>
 
