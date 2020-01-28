@@ -16,7 +16,7 @@
                     <label  class="sr-only" for="exampleInputEmail2">Site Name</label>
                 </form>
             </div>
-
+            </br>
             <div class="monitoring-icons">
               <a href="" id="listviewicon" title="List view"><i class="fa fa-align-justify fa-3x"></i></a>
               &nbsp;&nbsp;&nbsp;&nbsp;
