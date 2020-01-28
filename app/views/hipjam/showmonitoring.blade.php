@@ -2,6 +2,9 @@
 
 @section('content')
 
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" type="text/css">
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
 <body class="hipJAM">
     <a id="buildtable"></a>
 
@@ -73,6 +76,12 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
+
+
+        $(document).ready( function () {
+            $('#listview').DataTable();
+        } );
+
     	$('document').ready(function(){
     		$("[id^=sensors]").hide();
 		
