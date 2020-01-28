@@ -89,6 +89,7 @@
 
     	$('document').ready(function(){
             $('#table-list-view').DataTable();
+            $('#table-list-view input').addClass('form-control'); // <-- add this line add form control class
     		$("[id^=sensors]").hide();
 		
     	});
