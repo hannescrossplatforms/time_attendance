@@ -28,7 +28,7 @@
 
 			<div>
                 <div class="table-responsive clear" id="listview">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="table-list-view">
                         <thead>
                             <th>Venue Names</th>
                             <th>Status</th>
@@ -87,7 +87,7 @@
     <script>
 
     	$('document').ready(function(){
-            $('#listview').DataTable();
+            $('#table-list-view').DataTable();
     		$("[id^=sensors]").hide();
 		
     	});
