@@ -20,7 +20,7 @@
             <div class="monitoring-icons">
               <a href="" id="listviewicon" title="List view"><i class="fa fa-align-justify fa-3x"></i></a>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <!-- <a href="" id="gridviewicon" title="Grid view"><i class="fa fa-th fa-3x"></i></a> -->
+              <a href="" id="gridviewicon" title="Grid view"><i class="fa fa-th fa-3x"></i></a>
             </div>
 
 			<div>
