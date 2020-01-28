@@ -96,7 +96,8 @@
             $('#table-list-view').DataTable({
                 "oLanguage": {
                     "sSearch": ""
-                }
+                },
+                "pageLength": 100
             });
             $('#table-list-view_filter input').addClass('form-control');
             $('#table-list-view_filter input').attr("placeholder", "Site Name");
