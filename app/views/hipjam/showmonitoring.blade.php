@@ -95,7 +95,7 @@
         function initializeDatatable(){
             $('#table-list-view').DataTable({
                 "oLanguage": {
-                    "sSearch": "Filter results:"
+                    "sSearch": ""
                 }
             });
             $('#table-list-view_filter input').addClass('form-control');
