@@ -28,7 +28,7 @@
 
 			<div>
                 <div class="table-responsive clear" id="listview">
-                    <table class="table table-striped table-bordered dataTable" id="table-list-view">
+                    <table class="table table-striped dataTable" id="table-list-view">
                         <thead>
                             <th>Venue Names</th>
                             <th>Status</th>
