@@ -88,11 +88,15 @@
     <script>
 
     	$('document').ready(function(){
-            $('#table-list-view').DataTable();
-            $('#table-list-view_filter input').addClass('form-control'); // <-- add this line add form control class
+            initializeDatatable();
     		$("[id^=sensors]").hide();
-		
-    	});
+        });
+        
+        function initializeDatatable(){
+            $('#table-list-view').DataTable();
+            $('#table-list-view_filter input').addClass('form-control');
+            $('#table-list-view_filter input').attr("placeholder", "Site Name");
+        }
 
         $("[id^=sensortable").click( function(){
             id = $(this).attr("id");
