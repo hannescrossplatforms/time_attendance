@@ -62,7 +62,7 @@
 
                         @foreach($data['venues'] as $venue)
                             <div class="grid-tile" >
-                                {{$venue->id}}
+                                {{$venue->sitename}}
                             </div>
                         @endforeach
 
