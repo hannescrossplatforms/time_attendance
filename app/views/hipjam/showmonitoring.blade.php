@@ -233,23 +233,23 @@
                     let displayStatusForRow = "";
 
                     data.forEach(function(item, index){
-                        statuses.append(item.status)
+                        statuses.push(item.status);
                     });
 
                     if (statuses.every( (val, i, arr) => val === arr[0])) {
                         //All statuses is the same
                         if(statuses[0] == "Offline") {
                             //All statuses = offline
-                            displayStatusForRow = "offline"
+                            displayStatusForRow = "offline";
                         }
                         else {
                             //All statuses = online
-                            displayStatusForRow = "online"
+                            displayStatusForRow = "online";
                         }
                     }
                     else {
                         //They differ, show yellow status
-                        displayStatusForRow = "some_online"
+                        displayStatusForRow = "some_online";
                     }
 
                     setStatusForVenue(venueId, displayStatusForRow);
