@@ -91,13 +91,15 @@
 </div>
 
 <style>
-
-.grid-tile{
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-}
-
+    .grid-tile{
+        width: 150px;
+        display: inline-block;
+        padding:8px;
+        border: 2px solid black;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
 </style>
 
     <!-- Bootstrap core JavaScript
