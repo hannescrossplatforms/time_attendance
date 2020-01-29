@@ -69,11 +69,11 @@
                     <div class="row">
                         @foreach($data['venues'] as $venue)
                                 @if ($venue->status == "Online")
-                                <div class="grid-tile" style="background-color: green;" sitename={{$venue->sitename}}>
+                                <div class="grid-tile" style="background-color: green;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
                                         {{$venue->sitename}}
                                     </div>
                                 @else
-                                <div class="grid-tile" style="background-color: red;" sitename={{$venue->sitename}}>
+                                <div class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
                                         {{$venue->sitename}}
                                     </div>
                                 @endif
