@@ -69,7 +69,7 @@
                     <div class="row">
                         @foreach($data['venues'] as $venue)
                                 @if ($venue->status == "Online")
-                                <div class="grid-tile" style="background-color: green;" >
+                                <div class="grid-tile" style="background-color: green;" sitename={{$venue->sitename}}>
                                         {{$venue->sitename}}
                                     </div>
                                 @else
@@ -127,8 +127,8 @@
     <script>
 
     $('#grid-filter').on('input', function() {
-        debugger;
-        alert(this.value());
+        let textValue = this.value;
+        
     });
 
     	$('document').ready(function(){
