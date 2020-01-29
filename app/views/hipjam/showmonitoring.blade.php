@@ -57,7 +57,7 @@
                     </table>
                 </div>
 
-
+                </br>
                 <div class="row">
 
                         @foreach($data['venues'] as $venue)
