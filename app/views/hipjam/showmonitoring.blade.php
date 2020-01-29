@@ -105,15 +105,15 @@
         margin-bottom: -7px;
     }
     .online{
-        background-color:green;
+        background-color:green!important;
         color:white;
     }
     .offline{
-        background-color:red;
+        background-color:red!important;
         color:white;
     }
     .some-online{
-        background-color:yellow;
+        background-color:yellow!important;
         color:white;
     }
 </style>
