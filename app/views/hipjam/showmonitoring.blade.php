@@ -265,13 +265,13 @@
         function setStatusForVenue(venueId, status) {
             debugger;
             if (status == "some_online"){
-                $(`venue_status_${venueId}`).html("Some online");
+                $(`#venue_status_${venueId}`).html("Some online");
             }
             else if (status == "offline"){
-                $(`venue_status_${venueId}`).html("Offline");
+                $(`#venue_status_${venueId}`).html("Offline");
             }
             else {
-                $(`venue_status_${venueId}`).html("Online");
+                $(`#venue_status_${venueId}`).html("Online");
             }
 
 
