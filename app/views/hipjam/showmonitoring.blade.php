@@ -61,7 +61,7 @@
                 <div id="gridview">
 
                     <div class="row">
-                    <input style="width: 150px;" placeholder="Site Name" class="form-control"></input>
+                    <input id="grid-filter" style="width: 150px;" placeholder="Site Name" class="form-control"></input>
                     <br>
                     </div>
 
@@ -125,6 +125,10 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
     <script>
+
+    $('#grid-filter').on('input', function() {
+        alert(this.value());
+    });
 
     	$('document').ready(function(){
             initializeDatatable();
