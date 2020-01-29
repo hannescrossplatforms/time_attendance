@@ -128,7 +128,7 @@
 
     $('#grid-filter').on('input', function() {
         let textValue = this.value;
-        
+        $('.grid-tile').addClass("hidden");
     });
 
     	$('document').ready(function(){
