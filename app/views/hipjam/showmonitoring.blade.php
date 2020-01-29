@@ -275,9 +275,9 @@
         }
 
         function setStatusForVenue(venueId, status) {
-            debugger;
+        
             if (status == "some_online"){
-                $(`#venue_status_${venueId}`).html("Some online");
+                $(`#venue_status_${venueId}`).html("Varying");
                 $(`#venue_status_${venueId}`).addClass("some-online");
                 
             }
