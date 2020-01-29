@@ -162,7 +162,6 @@
             });
             $('#table-list-view_filter input').addClass('form-control');
             $('#table-list-view_filter input').attr("placeholder", "Site Name");
-            table-list-view_filter
         }
 
         $("[id^=sensortable").click( function(){
