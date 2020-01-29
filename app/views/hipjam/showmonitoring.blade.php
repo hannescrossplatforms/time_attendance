@@ -48,7 +48,7 @@
                                             <button class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br/> <small>Click to turn on</small></button>
                                         @endif
                                     @else
-                                        <label class="label label-warning">N/A</label>    
+                                        <label class="label label-warning">N/A</label>
                                     @endif
                                 </td>
                             </tr>
@@ -57,7 +57,22 @@
                     </table>
                 </div>
 
-                <div class="table-responsive clear" id="gridview">
+
+                <div class="row">
+
+                        @foreach($data['venues'] as $venue)
+                            <div class=col-md-1>
+                                {{$venue-id}}
+                            </div>
+                        @endforeach
+
+                    
+                </div>
+                <!-- <div class="table-responsive clear" id="gridview">
+
+             
+                    
+
                         @foreach($data['venues'] as $venue)
                             <div class="venuegrid-{{$venue->id}}">
                                     <span id="venuegrid{{$venue->id}}" idval="{{$venue->id}}">{{$venue->sitename}}</span>
@@ -65,7 +80,7 @@
                             </div>
                         @endforeach
                         <br class="clearBoth" />
-                </div>
+                </div> -->
 		    </div>	
 		</div>
 		<div>
