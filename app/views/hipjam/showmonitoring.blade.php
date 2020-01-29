@@ -128,7 +128,21 @@
 
     $('#grid-filter').on('input', function() {
         let textValue = this.value;
+
+        if (textValue == "") {
+            $('.grid-tile').removeClass("hidden");
+            return;
+        }
+
         $('.grid-tile').addClass("hidden");
+
+        $('.grid-tile').each(function(i, obj) {
+            let sitename = this.attr("sitename");
+            debugger;
+        });
+        
+        
+        
     });
 
     	$('document').ready(function(){
