@@ -61,9 +61,19 @@
                 <div class="row">
 
                         @foreach($data['venues'] as $venue)
-                            <div class="grid-tile" >
-                                {{$venue->sitename}}
-                            </div>
+
+                            @if ($venue->status == "Online")
+                            <div class="grid-tile" style="background-color: green;" >
+                                    {{$venue->sitename}}
+                                </div>
+                            @else
+                            <div class="grid-tile" style="background-color: red;">
+                                    {{$venue->sitename}}
+                                </div>
+                            @endif
+
+
+                            
                         @endforeach
 
                     
