@@ -104,6 +104,18 @@
         margin-left: -5px;
         margin-bottom: -7px;
     }
+    .online{
+        background-color:green;
+        color:white;
+    }
+    .offline{
+        background-color:red;
+        color:white;
+    }
+    .some-online{
+        background-color:yellow;
+        color:white;
+    }
 </style>
 
     <!-- Bootstrap core JavaScript
@@ -265,12 +277,14 @@
         function setStatusForVenue(venueId, status) {
             debugger;
             if (status == "some_online"){
+                $(`#venue_status_${venueId}`).addClass("some-online");
                 $(`#venue_status_${venueId}`).html("Some online");
             }
             else if (status == "offline"){
+                $(`#venue_status_${venueId}`).addClass("offline");
                 $(`#venue_status_${venueId}`).html("Offline");
             }
-            else {
+            else {$(`#venue_status_${venueId}`).addClass("online");
                 $(`#venue_status_${venueId}`).html("Online");
             }
 
