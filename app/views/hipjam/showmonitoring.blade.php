@@ -128,6 +128,7 @@
 
     $('#grid-filter').on('input', function() {
         let textValue = this.value;
+        textValue=textValue.replace(/ /g,"_");
 
         if (textValue == "") {
             $('.grid-tile').removeClass("hidden");
