@@ -278,17 +278,17 @@
             debugger;
             if (status == "some_online"){
                 $(`#venue_status_${venueId}`).html("Some online");
-                // $(`#venue_status_${venueId}`).addClass("some-online");
+                $(`#venue_status_${venueId}`).addClass("some-online");
                 
             }
             else if (status == "offline"){
                 $(`#venue_status_${venueId}`).html("Offline");
-                // $(`#venue_status_${venueId}`).addClass("offline");
+                $(`#venue_status_${venueId}`).addClass("offline");
                 
             }
             else {
                 $(`#venue_status_${venueId}`).html("Online");
-                // $(`#venue_status_${venueId}`).addClass("online");
+                $(`#venue_status_${venueId}`).addClass("online");
             }
 
 
