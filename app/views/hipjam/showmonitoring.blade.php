@@ -150,7 +150,7 @@
         function getSensorDataForAllVenues() {
             let venues = <?php echo json_encode($data['venues']) ?>;
             debugger;
-            venues.foreach(function(item, index){
+            venues.forEach(function(item, index){
                 getSensorInfo(item.id);
             });
 
