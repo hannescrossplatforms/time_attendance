@@ -110,6 +110,8 @@
         white-space: nowrap;
         overflow: hidden;
         color: black;
+        margin-left: -5px;
+        margin-bottom: -7px;
     }
 </style>
 
