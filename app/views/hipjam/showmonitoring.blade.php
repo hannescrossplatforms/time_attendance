@@ -137,8 +137,9 @@
         $('.grid-tile').addClass("hidden");
 
         $('.grid-tile').each(function(i, obj) {
-            let sitename = this.attr("sitename");
             debugger;
+            let sitename = obj.attr("sitename");
+            
         });
         
         
