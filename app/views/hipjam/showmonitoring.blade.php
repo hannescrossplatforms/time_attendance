@@ -216,9 +216,9 @@
 
         });
 
-        function getSensorInfo(){
+        function getSensorInfo(id){
             var url = '{{ URL::route('hipjam_getvenuesensors')}}';
-            sentData = JSON.stringify(id);
+            sentData = id;
         
             $.ajax({
                 type: "POST",
