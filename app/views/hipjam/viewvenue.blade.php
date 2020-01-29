@@ -324,7 +324,7 @@
 
                                                     <div class="col-sm-6">
                                                         <div class="chart-wrapper">
-                                                            <div class="chart-title venuecolheading">Store Traffic/Hour <span id="perHperiod">Today</span></div>
+                                                            <div class="chart-title venuecolheading">Store Traffic by Hour</div>
                                                             <div class="chart-stage">
                                                                 <div class="row">
                                                                     <div class="col-sm-12">
@@ -578,7 +578,7 @@
                 }
 
                 let date_array = [];
-                
+
                 // Multi Day i.e. this week / this month etc.
                 while (start.format('YYYY-MM-DD') !== end.format('YYYY-MM-DD')) {
                     date_array.push(start.format('YYYY-MM-DD'))
@@ -767,7 +767,7 @@
                     });
                     let ordered_data = liveJam.sortArrayByKey(graph_data, 'label')
                     var chartProperties = {
-                            "caption": "Store Traffic/Hour Today",
+                            "caption": "Store Traffic by Hour",
                             "xAxisName": "Hour",
                             "yAxisName": "Customers",
                             "rotatevalues": "1",

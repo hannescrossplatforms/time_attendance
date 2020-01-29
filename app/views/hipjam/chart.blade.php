@@ -185,7 +185,7 @@
 
         <div class="col-sm-6">
           <div class="chart-wrapper">
-              <div class="chart-title">STORE TRAFFIC/HOUR TODAY</div>
+              <div class="chart-title">STORE TRAFFIC BY HOUR</div>
             <div class="chart-stage">
                 <div class="tab-content">
                   <div id="chart-container">Loading...</div>
