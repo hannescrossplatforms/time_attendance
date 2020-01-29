@@ -127,6 +127,7 @@
     <script>
 
     $('#grid-filter').on('input', function() {
+        debugger;
         alert(this.value());
     });
 
