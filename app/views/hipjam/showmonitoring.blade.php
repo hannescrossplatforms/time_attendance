@@ -58,7 +58,7 @@
                 </div>
 
                 </br>
-                <div class="row">
+                <div class="row" id="gridview">
 
                         @foreach($data['venues'] as $venue)
 
