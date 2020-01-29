@@ -52,8 +52,8 @@
                                         <label class="label label-warning">N/A</label>
                                     @endif
                                 </td>
-                                <td id="venue_last_reported_{{$venue->id}}">Test</td>
-                                <td id="venue_status_{{$venue->id}}">test</td>
+                                <td id="venue_last_reported_{{$venue->id}}"></td>
+                                <td id="venue_status_{{$venue->id}}"></td>
                             </tr>
                             @endforeach
                         </tbody>
