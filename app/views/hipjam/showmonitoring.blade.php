@@ -58,25 +58,26 @@
                 </div>
 
                 </br>
-                <div class="row" id="gridview">
+                <div id="gridview">
 
+                    <div class="row">
+                    <input class="form-control"></input>
+                    </div>
+
+
+                    <div class="row">
                         @foreach($data['venues'] as $venue)
-
-                            @if ($venue->status == "Online")
-                            <div class="grid-tile" style="background-color: green;" >
-                                    {{$venue->sitename}}
-                                </div>
-                            @else
-                            <div class="grid-tile" style="background-color: red;">
-                                    {{$venue->sitename}}
-                                </div>
-                            @endif
-
-
-                            
-                        @endforeach
-
-                    
+                                @if ($venue->status == "Online")
+                                <div class="grid-tile" style="background-color: green;" >
+                                        {{$venue->sitename}}
+                                    </div>
+                                @else
+                                <div class="grid-tile" style="background-color: red;">
+                                        {{$venue->sitename}}
+                                    </div>
+                                @endif
+                            @endforeach
+                    </div>
                 </div>
                 <!-- <div class="table-responsive clear" id="gridview">
 
