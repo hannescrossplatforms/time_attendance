@@ -149,7 +149,10 @@
 
         function getSensorDataForAllVenues() {
             let venues = <?php echo json_encode($data['venues']) ?>;
-            debugger;
+
+            venues.foreach(function(item, index){
+                getSensorInfo(item.id);
+            });
 
         }
         
@@ -212,6 +215,56 @@
           window.location.replace("http://hiphub.local/index.php/hipjam_monitorsensors?search=" + search);
 
         });
+
+        function getSensorInfo(){
+            var url = '{{ URL::route('hipjam_getvenuesensors')}}';
+            sentData = JSON.stringify(id);
+        
+            $.ajax({
+                type: "POST",
+                data: "sentData="+sentData,
+                dataType: 'json',
+                url: url,
+                async:false,
+
+                success: function(data){
+
+                    debugger;
+                    // if(data.length == 0)  {
+                    //     container = $("There are no Sensors for this venue.");
+                    //     container.append("<span class='closex' id ='closex' >X</span>");
+                    // }
+                    // else{
+                    //     container = $("<div class='modal_holder'>");
+                    //     container .append("<table class="+"table table-striped" + "id=sensortable" + id + ">");
+                    //     container.append("<tr><th>Sensor Name</th><th>Sensor Location</th><th>Status</th><th>Last Reported In</th></tr>") 
+                    //         for (i=0;i<data.length;i++){
+                    //         if(data[i]["status"] == "Offline"){
+                    //                 container.append("<tr><td>"+ data[i]["name"] + "</td><td>" + data[i]["location"] + "</td><td class="+ data[i]["status"] + "Bg" +">"+ data[i]["status"] +"</td><td>"+ data[i]["lastreportedin"] + "</td></tr>");
+                    //         }
+                    //         else if (data[i]["status"] == "Online"){
+                    //             container.append("<tr><td>" + data[i]["name"] + "</td><td>" + data[i]["location"] + "</td><td  class=" + data[i]["status"]+"Bg" +">" + data[i]["status"] +"</td><td>"+ data[i]["lastreportedin"] + "</td></tr>");  
+                    //         }
+                    //         else {
+                    //             container.append("<tr><td>" + data[i]["name"] + "</td><td>" + data[i]["status"] +"</td><td></td></tr>");
+                    //         }
+                            
+                    //         //alert(data[i]["name"]);
+                    //         }
+                    //     container.append("</table>");
+                    //     container.append("<span class='closex' id ='closex' >X</span>");
+                    //     container.append("</div>");
+                        
+                    // }
+                    // $( '#viewVenueModalsTable' ).show();
+                    // $( '#viewVenueModalsTable' ).html(container);
+                },
+                error: function(){
+                    
+                }
+                
+            });
+        }
 
         function getModalSensorInfo(id){
             
