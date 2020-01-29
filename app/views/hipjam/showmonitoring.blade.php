@@ -30,6 +30,8 @@
                             <th>Venue Names</th>
                             <th>Status</th>
                             <th class="text-center">Actions</th>
+                            <th>Last Reported In</th>
+                            <th>Status</th>
                         </thead>
                         <tbody>
                             @foreach($data['venues'] as $venue)
@@ -64,8 +66,6 @@
                     <input id="grid-filter" style="width: 150px;" placeholder="Site Name" class="form-control"></input>
                     <br>
                     </div>
-
-
                     <div class="row">
                         @foreach($data['venues'] as $venue)
                                 @if ($venue->status == "Online")
@@ -80,19 +80,7 @@
                             @endforeach
                     </div>
                 </div>
-                <!-- <div class="table-responsive clear" id="gridview">
-
-             
-                    
-
-                        @foreach($data['venues'] as $venue)
-                            <div class="venuegrid-{{$venue->id}}">
-                                    <span id="venuegrid{{$venue->id}}" idval="{{$venue->id}}">{{$venue->sitename}}</span>
-                                    <ol id="sensors{{$venue->id}}"></ol>
-                            </div>
-                        @endforeach
-                        <br class="clearBoth" />
-                </div> -->
+                
 		    </div>	
 		</div>
 		<div>
@@ -154,8 +142,15 @@
 
     	$('document').ready(function(){
             initializeDatatable();
-    		$("[id^=sensors]").hide();
+            $("[id^=sensors]").hide();
+            getSensorDataForAllVenues();
         });
+
+        function getSensorDataForAllVenues() {
+            let venues = <?php echo json_encode($data['venues']) ?>;
+            debugger;
+
+        }
         
         function initializeDatatable(){
             $('#table-list-view').DataTable({
