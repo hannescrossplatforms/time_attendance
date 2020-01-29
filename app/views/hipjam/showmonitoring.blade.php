@@ -138,8 +138,13 @@
 
         $('.grid-tile').each(function(i, obj) {
             debugger;
-            let sitename = obj.attr("sitename");
+            let sitename = $(this).attr('sitename');
             
+            if (sitename.indexOf(textValue) >= 0){
+                $(this).removeClass("hidden");
+            }
+
+
         });
         
         
