@@ -28,7 +28,6 @@
                     <table class="table table-striped dataTable" id="table-list-view">
                         <thead>
                             <th>Venue Names</th>
-                            <th>Status</th>
                             <th class="text-center">Actions</th>
                             <th>Last Reported In</th>
                             <th>Status</th>
@@ -38,10 +37,10 @@
                             <tr>
                                 <td id="venue{{$venue->id}}" idval="{{$venue->id}}" class="sensorlist">{{$venue->sitename}} 
                                     <ol id="sensors{{$venue->id}}"></ol>
-                                </td>
-                                <td id="status{{$venue->id}}" class="" idval="{{$venue->id}}">
+                                <!-- </td> -->
+                                <!-- <td id="status{{$venue->id}}" class="" idval="{{$venue->id}}"> -->
                                     
-                                </td>
+                                <!-- </td> -->
                                 <td class="text-center">
                                     @if ($venue->id == 1476)
                                         @if ($venue->status == 'Online')
@@ -53,6 +52,8 @@
                                         <label class="label label-warning">N/A</label>
                                     @endif
                                 </td>
+                                <td>test</td>
+                                <td>test</td>
                             </tr>
                             @endforeach
                         </tbody>
