@@ -140,7 +140,7 @@
             debugger;
             let sitename = $(this).attr('sitename');
             
-            if (sitename.indexOf(textValue) >= 0){
+            if (sitenametoLowerCase().indexOf(textValue.toLowerCase()) >= 0){
                 $(this).removeClass("hidden");
             }
 
