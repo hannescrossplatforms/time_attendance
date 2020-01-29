@@ -62,7 +62,7 @@
 
                         @foreach($data['venues'] as $venue)
                             <div class=col-md-1>
-                                {{$venue-id}}
+                                {{$venue->id}}
                             </div>
                         @endforeach
 
