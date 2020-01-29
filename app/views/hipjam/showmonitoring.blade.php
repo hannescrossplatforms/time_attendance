@@ -73,7 +73,7 @@
                                         {{$venue->sitename}}
                                     </div>
                                 @else
-                                <div class="grid-tile" style="background-color: red;">
+                                <div class="grid-tile" style="background-color: red;" sitename={{$venue->sitename}}>
                                         {{$venue->sitename}}
                                     </div>
                                 @endif
