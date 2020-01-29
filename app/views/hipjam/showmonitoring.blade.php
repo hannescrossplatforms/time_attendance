@@ -52,8 +52,8 @@
                                         <label class="label label-warning">N/A</label>
                                     @endif
                                 </td>
-                                <td>test</td>
-                                <td>test</td>
+                                <td id="venue_last_reported_{{$venue->id}}">Test</td>
+                                <td id="venue_status_{{$venue->id}}">test</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -127,7 +127,7 @@
         $('.grid-tile').addClass("hidden");
 
         $('.grid-tile').each(function(i, obj) {
-            debugger;
+
             let sitename = $(this).attr('sitename');
             
             if (sitename.toLowerCase().indexOf(textValue.toLowerCase()) >= 0){
@@ -149,7 +149,7 @@
 
         function getSensorDataForAllVenues() {
             let venues = <?php echo json_encode($data['venues']) ?>;
-            debugger;
+            
             venues.forEach(function(item, index){
                 getSensorInfo(item.id);
             });
@@ -216,9 +216,9 @@
 
         });
 
-        function getSensorInfo(id){
+        function getSensorInfo(venueId){
             var url = '{{ URL::route('hipjam_getvenuesensors')}}';
-            sentData = id;
+            sentData = venueId;
         
             $.ajax({
                 type: "POST",
@@ -229,41 +229,54 @@
 
                 success: function(data){
 
-                    debugger;
-                    // if(data.length == 0)  {
-                    //     container = $("There are no Sensors for this venue.");
-                    //     container.append("<span class='closex' id ='closex' >X</span>");
-                    // }
-                    // else{
-                    //     container = $("<div class='modal_holder'>");
-                    //     container .append("<table class="+"table table-striped" + "id=sensortable" + id + ">");
-                    //     container.append("<tr><th>Sensor Name</th><th>Sensor Location</th><th>Status</th><th>Last Reported In</th></tr>") 
-                    //         for (i=0;i<data.length;i++){
-                    //         if(data[i]["status"] == "Offline"){
-                    //                 container.append("<tr><td>"+ data[i]["name"] + "</td><td>" + data[i]["location"] + "</td><td class="+ data[i]["status"] + "Bg" +">"+ data[i]["status"] +"</td><td>"+ data[i]["lastreportedin"] + "</td></tr>");
-                    //         }
-                    //         else if (data[i]["status"] == "Online"){
-                    //             container.append("<tr><td>" + data[i]["name"] + "</td><td>" + data[i]["location"] + "</td><td  class=" + data[i]["status"]+"Bg" +">" + data[i]["status"] +"</td><td>"+ data[i]["lastreportedin"] + "</td></tr>");  
-                    //         }
-                    //         else {
-                    //             container.append("<tr><td>" + data[i]["name"] + "</td><td>" + data[i]["status"] +"</td><td></td></tr>");
-                    //         }
-                            
-                    //         //alert(data[i]["name"]);
-                    //         }
-                    //     container.append("</table>");
-                    //     container.append("<span class='closex' id ='closex' >X</span>");
-                    //     container.append("</div>");
-                        
-                    // }
-                    // $( '#viewVenueModalsTable' ).show();
-                    // $( '#viewVenueModalsTable' ).html(container);
+                    let statuses = [];
+                    let displayStatusForRow = "";
+
+                    data.forEach(function(item, index){
+                        statuses.append(item.status)
+                    });
+
+                    if (statuses.every( (val, i, arr) => val === arr[0])) {
+                        //All statuses is the same
+                        if(statuses[0] == "Offline") {
+                            //All statuses = offline
+                            displayStatusForRow = "offline"
+                        }
+                        else {
+                            //All statuses = online
+                            displayStatusForRow = "online"
+                        }
+                    }
+                    else {
+                        //They differ, show yellow status
+                        displayStatusForRow = "some_online"
+                    }
+
+                    setStatusForVenue(venueId, displayStatusForRow);
+                
                 },
                 error: function(){
                     
                 }
                 
             });
+        }
+
+        function setStatusForVenue(venueId, status) {
+
+            if (status == "some_online"){
+                $(`venue_status_${venueId}`).html("Some online");
+            }
+            else if (status == "offline"){
+                $(`venue_status_${venueId}`).html("Offline");
+            }
+            else {
+                $(`venue_status_${venueId}`).html("Online");
+            }
+
+
+            // <td id="venue_last_reported_{{$venue->id}}">Test</td>
+            //                     <td id="venue_status_{{$venue->id}}">test</td>
         }
 
         function getModalSensorInfo(id){
