@@ -61,7 +61,7 @@
                 <div class="row">
 
                         @foreach($data['venues'] as $venue)
-                            <div style="width: 50px, height: 50px">
+                            <div class="grid-tile" >
                                 {{$venue->id}}
                             </div>
                         @endforeach
@@ -89,6 +89,16 @@
         </div>
 	</div>
 </div>
+
+<style>
+
+.grid-tile{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+</style>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
