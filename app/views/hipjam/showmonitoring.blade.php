@@ -61,7 +61,8 @@
                 <div id="gridview">
 
                     <div class="row">
-                    <input class="form-control"></input>
+                    <input style="width: 150px;" placeholder="Site Name" class="form-control"></input>
+                    <br>
                     </div>
 
 
