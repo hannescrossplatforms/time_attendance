@@ -28,18 +28,19 @@
                     <table class="table table-striped dataTable" id="table-list-view">
                         <thead>
                             <th>Venue Names</th>
-                            <th>Status</th>
                             <th class="text-center">Actions</th>
+                            <th>Last Reported In</th>
+                            <th>Status</th>
                         </thead>
                         <tbody>
                             @foreach($data['venues'] as $venue)
                             <tr>
                                 <td id="venue{{$venue->id}}" idval="{{$venue->id}}" class="sensorlist">{{$venue->sitename}} 
                                     <ol id="sensors{{$venue->id}}"></ol>
-                                </td>
-                                <td id="status{{$venue->id}}" class="" idval="{{$venue->id}}">
+                                <!-- </td> -->
+                                <!-- <td id="status{{$venue->id}}" class="" idval="{{$venue->id}}"> -->
                                     
-                                </td>
+                                <!-- </td> -->
                                 <td class="text-center">
                                     @if ($venue->id == 1476)
                                         @if ($venue->status == 'Online')
@@ -51,6 +52,8 @@
                                         <label class="label label-warning">N/A</label>
                                     @endif
                                 </td>
+                                <td>test</td>
+                                <td>test</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -64,8 +67,6 @@
                     <input id="grid-filter" style="width: 150px;" placeholder="Site Name" class="form-control"></input>
                     <br>
                     </div>
-
-
                     <div class="row">
                         @foreach($data['venues'] as $venue)
                                 @if ($venue->status == "Online")
@@ -80,19 +81,7 @@
                             @endforeach
                     </div>
                 </div>
-                <!-- <div class="table-responsive clear" id="gridview">
-
-             
-                    
-
-                        @foreach($data['venues'] as $venue)
-                            <div class="venuegrid-{{$venue->id}}">
-                                    <span id="venuegrid{{$venue->id}}" idval="{{$venue->id}}">{{$venue->sitename}}</span>
-                                    <ol id="sensors{{$venue->id}}"></ol>
-                            </div>
-                        @endforeach
-                        <br class="clearBoth" />
-                </div> -->
+                
 		    </div>	
 		</div>
 		<div>
@@ -154,8 +143,15 @@
 
     	$('document').ready(function(){
             initializeDatatable();
-    		$("[id^=sensors]").hide();
+            $("[id^=sensors]").hide();
+            getSensorDataForAllVenues();
         });
+
+        function getSensorDataForAllVenues() {
+            let venues = <?php echo json_encode($data['venues']) ?>;
+            debugger;
+
+        }
         
         function initializeDatatable(){
             $('#table-list-view').DataTable({
