@@ -7,6 +7,31 @@
 
 @include('hipjam.sidebar')
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            ...
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
@@ -25,33 +50,6 @@
             </br>
 			<div>
                 <div class="table-responsive clear" id="listview">
-
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
                     <table class="table table-striped dataTable" id="table-list-view">
                         <thead>
                             <th>Venue Names</th>
@@ -235,7 +233,7 @@
             $("[id^=sensors]").hide();
             getSensorDataForAllVenues();
 
-            // $("#exampleModal").show();
+            $("#exampleModal").show();
         });
 
         // $('#gridlinks').on('click', function(e){
