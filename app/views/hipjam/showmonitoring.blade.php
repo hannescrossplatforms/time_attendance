@@ -173,6 +173,30 @@
             alert('click');
         });
 
+        function createVenueModal(id, sitename, venuedata) {
+            //Hannes hier
+            modalhtml = 
+            '<div class="modal fade" id="modal_' + id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n\
+                <div class="modal-dialog">\n\
+                <div class="modal-content">\n\
+                    <div class="modal-header">\n\
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>\n\
+                    <h6 class="modal-title" id="myModalLabel">' + sitename + '</h6>\n\
+                    </div>\n\
+                    <div class="modal-body">\n\
+                    Status Comment : <b>' + venuedata["statuscomment"]  + '</b> <br> <br> \n\
+                    Today MB (Up/Down) : ' + venuedata["bytes"]  + ' <br> \n\
+                    Gateway IP : ' + venuedata["gateway"]  + ' <br> \n\
+                    Last Check in : ' + venuedata["lastcheckin"]  + ' <br> \n\
+                </div>\n\
+                </div>\n\
+            </div>\n\
+            </div>';
+
+            return modalhtml;
+
+            }
+
         function getSensorDataForAllVenues() {
             let venues = <?php echo json_encode($data['venues']) ?>;
             
@@ -289,7 +313,7 @@
                         }
                         
                     });
-
+                    debugger;
                     setStatusForVenue(venueId, displayStatusForRow);
                     setLastReportedForVenue(venueId, displayLastReportedForRow);
                 
