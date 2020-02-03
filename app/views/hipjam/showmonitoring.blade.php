@@ -113,8 +113,8 @@
                                         </a>
                                     </div>
                                 @else
-                                    <div class="grid-tile" style="background-color: red;" index={{$pos}} sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
-                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup">
+                                    <div class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
+                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup" index={{$pos}}>
                                             {{$venue->sitename}}
                                         </a>
                                     </div>
@@ -207,10 +207,7 @@
             // venues
             
             let venue = venues[parseInt($(this).attr("index"))];
-            debugger;
-            if (venue == undefined) {
-                venue = parseInt($(this)[0].attr("index"));
-            }
+            
             $("#modal-sitename").html(`${venue.sitename}`);
             getInfoForGridSensor(venue.id);
 
