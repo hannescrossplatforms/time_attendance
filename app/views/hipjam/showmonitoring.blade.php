@@ -204,13 +204,9 @@
 
         $('.gridlinks').on('click', function(e){
             e.preventDefault();
-            // venues
-            
             let venue = venues[parseInt($(this).attr("index"))];
-            
             $("#modal-sitename").html(`${venue.sitename}`);
             getInfoForGridSensor(venue.id);
-
         });
 
        
