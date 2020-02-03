@@ -187,7 +187,7 @@
                                                             <label>Report Period</label>
                                                         </div>
                                                         <div class="col-md-4 text-center">
-                                                            <select id="date_select" class="form-control changable-filter">
+                                                            <select id="date_select" class="form-control changable-filter" style="width: 150px;">
                                                             <option value="yesterday">Yesterday</option>
                                                             <option value="today">Today</option>
                                                             <option value="this_week">This Week</option>
@@ -324,7 +324,7 @@
 
                                                     <div class="col-sm-6">
                                                         <div class="chart-wrapper">
-                                                            <div class="chart-title venuecolheading">Store Traffic/Hour <span id="perHperiod">Today</span></div>
+                                                            <div class="chart-title venuecolheading">Store Traffic by Hour</div>
                                                             <div class="chart-stage">
                                                                 <div class="row">
                                                                     <div class="col-sm-12">
@@ -579,11 +579,14 @@
 
                 let date_array = [];
 
-
+                // Multi Day i.e. this week / this month etc.
                 while (start.format('YYYY-MM-DD') !== end.format('YYYY-MM-DD')) {
                     date_array.push(start.format('YYYY-MM-DD'))
                     start.add(1, 'days');
                 }
+                
+                // Add last day
+                date_array.push(start.format('YYYY-MM-DD'))
                 return date_array;
             }
 
@@ -755,16 +758,49 @@
             }
 
             liveJam.renderHourlyTrafficGraph = (data) => {
-                let current_date = new Date();
-                let node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}/hourly`;
-                db.collection(`{{$data['venue_id']}}/${node}`).get().then(function(querySnapshot) {
-                    let graph_data = [];
-                    querySnapshot.forEach(function(doc) {
-                        graph_data.push({label: parseInt(doc.id), value: doc.data().customers})
+                let node = `${moment().format('YYYY-MM-DD')}/hourly`;
+
+                let filters = get_presets();
+                if (filters === null) {
+                    filters = {date_from: moment().startOf('week'),
+                                date_to: moment().endOf('week')}
+                }
+                let start = moment(filters.date_from);
+                let end = moment(filters.date_to);
+                let date_array = [];
+
+                // Multi Day i.e. this week / this month etc.
+                while (start.format('YYYY-MM-DD') !== end.format('YYYY-MM-DD')) {
+                    date_array.push(start.format('YYYY-MM-DD'))
+                    start.add(1, 'days');
+                }
+                
+                // Add last day
+                date_array.push(start.format('YYYY-MM-DD'))
+
+                let data_promises = [];
+                $.each( date_array, function( key, node ) {
+                    data_promises.push(db.collection(`{{$data['venue_id']}}/${node}/hourly`).get());
+                });
+
+                let hourly_averages = {};
+                Promise.all(data_promises).then(function(doc) {
+                    
+                    doc.forEach(function(parent) {
+                        parent.docs.forEach(function(hours) {
+                            if (!hourly_averages.hasOwnProperty(hours.id)) {
+                                hourly_averages[hours.id] = parseInt(hours.data().customers);
+                            } else {
+                                hourly_averages[hours.id] = hourly_averages[hours.id] + parseInt(hours.data().customers);
+                            }
+                        }); 
                     });
-                    let ordered_data = liveJam.sortArrayByKey(graph_data, 'label')
+                    hourly_averages = $.map( hourly_averages, function( obj, key ) {
+                        return {label: key, value: Math.floor(obj / data_promises.length)};
+                    });
+
                     var chartProperties = {
-                            "caption": "Store Traffic/Hour Today",
+                            "caption": "Store Traffic by Hour",
                             "xAxisName": "Hour",
                             "yAxisName": "Customers",
                             "rotatevalues": "1",
@@ -779,11 +815,12 @@
                             dataFormat: 'json',
                             dataSource: {
                                 "chart": chartProperties,
-                                "data": ordered_data
+                                "data": hourly_averages
                             }
                         });
                         apiChart.render();
-                });               
+                });
+               
             }
 
             liveJam.initialize(() => {
@@ -795,18 +832,19 @@
                     var dwell = 0; 
                     var dwell_words = '';
                     var exposed_to_billboard = 0;
-                    debugger;
+                    var high_dwell_customers = 0;
+                    
                     $.each(week_data, function(index, item) {
-                        console.log(week_data);
                         dwell += item.data.average_dwell;
                         customers_in_store += item.data.customers_in_store_today;
                         new_customers_in_store += item.data.new_customers_today;
+                        high_dwell_customers += item.data.high_dwell_customers || 0;
                         exposed_to_billboard = 0;
                     });
                     dwell = (dwell / week_data.length) / 60
                     $('#rep_customer').html(customers_in_store);
                     $('#new_rep_customer').html(new_customers_in_store);
-                    $('#engaged_customers').html(customers_in_store);
+                    $('#engaged_customers').html(high_dwell_customers);
                     $('#rep_ave').html(Math.round(dwell));
                     if (is_billboard)
                         $('#window_con').html(customers_in_store);
@@ -820,6 +858,19 @@
                 });
 
             })
+
+            function get_query_string_key(key) {
+                key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+                var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+                return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+            }
+
+            function get_presets() {
+                let brand_id = get_query_string_key('brand_id');
+                if (brand_id === '' || brand_id === null || brand_id === undefined)
+                    return null
+                return { brand_id: get_query_string_key('brand_id'), type: get_query_string_key('type'), span: get_query_string_key('span'),  date_from: get_query_string_key('date_from'), date_to: get_query_string_key('date_to') }
+            }
         </script>
 
         <script>
@@ -856,7 +907,7 @@ load_presets();
       let date_to = generate_date_to();
       
       if (must_redirect)
-        window.location.href = `http://hiphub.hipzone.co.za/hipjam_viewvenue/1475/tracks03.hipzone.co.za${generate_query_string(brand_id, type, span, date_from, date_to)}`
+        window.location.href = `http://hiphub.hipzone.co.za/hipjam_viewvenue/{{$data['venue_id']}}/tracks03.hipzone.co.za${generate_query_string(brand_id, type, span, date_from, date_to)}`
     }
 
     function generate_date_from() {

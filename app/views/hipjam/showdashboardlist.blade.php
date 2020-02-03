@@ -200,6 +200,7 @@ Time spent in store (dwell) -->
   <script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDS0aGw5pQFy_dg8198J42w0EeuZtI2Wuk" type="text/javascript"></script>
   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-analytics.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/linq.min.js"></script>
   <style>
     #selected_venue_view {
       display: none;
@@ -245,21 +246,23 @@ Time spent in store (dwell) -->
             }
 
     
-    liveJam.getVenueData = () => {
+      liveJam.getVenueData = () => {
       let current_date = new Date();
-      let formatted_node = `${current_date.getFullYear()}-${('0'+(current_date.getMonth()+1)).slice(-2)}-${('0'+current_date.getDate()).slice(-2)}`
+      let formatted_node = moment().format('YYYY-MM-DD');
       let exposed_current = 0;
       let exposed_today = 0;
       let uniques_today = 0;
       let venues_with_no_data = 0;
 
+      let date_array = getDateArray();
       let promise_array = []; 
+      let all_venues = [];
 
       $.each(venue_array, (i, v) => {
-        
         promise_array.push(v.doc(formatted_node).get()
           .then(doc => {
-            console.log('Venue loaded')
+          
+            // console.log('Venue loaded')
             if (doc.exists) {
               exposed_current += doc.data().customers_in_store_now;
               exposed_today += doc.data().customers_in_store_today;
@@ -272,28 +275,66 @@ Time spent in store (dwell) -->
             $('#live_individuals_exposed_current').html(exposed_current.toString());
             $('#live_individuals_exposed_today').html(exposed_today.toString());
             $('#live_uniques_today').html(uniques_today.toString());
-            if (doc.exists) {
-            return {label: 'test', value: doc.data().customers_in_store_today}
-            }
-          })
-          )
+
+            
+
+        }))     
       });
 
-      Promise.all(promise_array).then(function(res) {
-        let all_venues = [];
-        $.each(res, function(i, obj) {
-          if (obj !== undefined) {
-            all_venues.push({label: loaded_venues[i].sitename, value: obj.value})
-          } else {
-            all_venues.push({label: loaded_venues[i].sitename, value: 0})
-          }
+      let best_worst_venue_promises = [];
+      let best_worst_data = {};
+      let running_total = 0;
+
+      let master_promise = null;
+      $.each(loaded_venues, (num, venue) => {
+        $.each(date_array, (n, date) => {
+          best_worst_venue_promises.push(
+            db.collection(venue.id).doc(date).get()
+              .then(doc => {
+                // debugger;
+                if (doc.data() !== undefined) {
+                  
+                  // console.log(doc.data().customers_in_store_today)
+                  return {label: venue.sitename, value: doc.data().customers_in_store_today};
+                }
+                else {
+                  return {label: venue.sitename, value: 0}; //running_total += 0;
+                }
+                  
+              })
+          )
+        })
+
+
+        master_promise = Promise.all(best_worst_venue_promises).then(function(res) {   
+          return res;
+          // all_venues =
+          // debugger;       
+          // all_venues.push({label: venue.sitename, value: eval(res.join("+"))});
+          // debugger;
         });
+      });
 
+      master_promise.then(function(b) { 
+// Promise.all(promise_array).then(function(res) {
+  all_venues = Enumerable.From(b)
+        .GroupBy("$.label", null,
+                 function (key, g) {
+                     return {
+                       label: key,
+                       value: g.Sum("$.value")
+                     }
+        })
+        .ToArray();
+  
+  debugger;
+  console.log('finished getting venue data')
+        debugger;
           let test_data = liveJam.graphSerializer(all_venues).slice(0,5);
-
+          // console.table(test_data)
         
 
-        //WORST
+        //BEST
         var dataSource = {
                 chart: {
                   caption: "Best performing Venues",
@@ -301,7 +342,7 @@ Time spent in store (dwell) -->
                   yaxisname: "Sessions",
                   theme: "zune"
                 },
-                data: liveJam.graphSerializer(all_venues).slice(1).slice(-5)
+                data: liveJam.graphSerializer(all_venues).slice(0).slice(-5)
               };
 
               var myChart = new FusionCharts({
@@ -312,7 +353,7 @@ Time spent in store (dwell) -->
                 dataFormat: "json",
                 dataSource
               }).render();
-
+//BEST
               dataSource = {
                 chart: {
                   caption: "Worst performing Venues",
@@ -331,7 +372,10 @@ Time spent in store (dwell) -->
                 dataFormat: "json",
                 dataSource
               }).render();
-      })
+      // })
+
+       })
+      
       
 
     }
@@ -596,6 +640,42 @@ Time spent in store (dwell) -->
 
 
     });
+
+    function getDateArray() {
+      let filters = get_presets();
+      if (filters === null) {
+          filters = {date_from: moment().startOf('week'),
+                      date_to: moment().endOf('week')}
+      }
+      let start = moment(filters.date_from);
+      let end = moment(filters.date_to);
+      let date_array = [];
+
+      // Multi Day i.e. this week / this month etc.
+      while (start.format('YYYY-MM-DD') !== end.format('YYYY-MM-DD')) {
+          date_array.push(start.format('YYYY-MM-DD'))
+          start.add(1, 'days');
+      }
+      
+      // Add last day
+      date_array.push(start.format('YYYY-MM-DD'));
+      return date_array;
+    }
+
+    
+    function get_query_string_key(key) {
+        key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+        var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+    }
+
+    function get_presets() {
+        let brand_id = get_query_string_key('brand_id');
+        if (brand_id === '' || brand_id === null || brand_id === undefined)
+            return null
+        return { brand_id: get_query_string_key('brand_id'), type: get_query_string_key('type'), span: get_query_string_key('span'),  date_from: get_query_string_key('date_from'), date_to: get_query_string_key('date_to') }
+    }
+        
   </script>
 
   <script>
