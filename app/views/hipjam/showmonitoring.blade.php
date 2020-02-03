@@ -14,7 +14,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h6 class="modal-title" id="myModalLabel">
-                <div>
+                <div style="display: inline">
                 ' + sitename + '
                 </div>
                 
@@ -22,15 +22,15 @@
             </div>
             <div class="modal-body">
                 Status Comment : <b>
-                <div>Test1</div>
+                <div style="display: inline">Test1</div>
                 </b>
                 <br>
                 <br> 
-                Today MB (Up/Down) : <div>Test2</div>
+                Today MB (Up/Down) : <div style="display: inline">Test2</div>
                 <br> 
-                Gateway IP : <div>Test3</div>
+                Gateway IP : <div style="display: inline">Test3</div>
                 <br> 
-                Last Check in : <div>Test4</div>
+                Last Check in : <div style="display: inline">Test4</div>
                 <br> 
             </div>
         </div>
