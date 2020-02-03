@@ -207,6 +207,9 @@
             // venues
             
             let venue = venues[parseInt($(this).attr("index"))];
+            if (venue == undefined) {
+                venue = parseInt($(this)[0].attr("index"));
+            }
             $("#modal-sitename").html(`${venue.sitename}`);
             getInfoForGridSensor(venue.id);
 
