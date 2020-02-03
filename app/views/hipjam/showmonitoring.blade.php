@@ -202,7 +202,7 @@
             getSensorDataForAllVenues();
         });
 
-        $('#gridlinks').on('click', function(e){
+        $('.gridlinks').on('click', function(e){
             e.preventDefault();
             // venues
             debugger;
