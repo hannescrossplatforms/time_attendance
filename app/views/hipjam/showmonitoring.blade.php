@@ -205,7 +205,10 @@
         $('.gridlinks').on('click', function(e){
             e.preventDefault();
             // venues
+            
+            let venue = venues[parseInt($(this).attr("index"))];
             debugger;
+            // $("#modal-sitename")
             // alert();
 
             // <!-- <div id="modal-sitename" style="display: inline">
@@ -257,9 +260,9 @@
 
         //     $( '#viewVenueModals' ).html(modalshtml);
         //     }
-            
+        let venues = null;
         function getSensorDataForAllVenues() {
-            let venues = <?php echo json_encode($data['venues']) ?>;
+            venues = <?php echo json_encode($data['venues']) ?>;
             
             venues.forEach(function(item, index){
                 getSensorInfo(item.id);
