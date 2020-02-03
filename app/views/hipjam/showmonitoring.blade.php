@@ -207,6 +207,7 @@
             // venues
             
             let venue = venues[parseInt($(this).attr("index"))];
+            debugger;
             if (venue == undefined) {
                 venue = parseInt($(this)[0].attr("index"));
             }
