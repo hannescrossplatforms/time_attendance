@@ -168,6 +168,11 @@
             getSensorDataForAllVenues();
         });
 
+        $('#gridlinks').on('click', function(e){
+            e.preventDefault();
+            alert('click');
+        });
+
         function getSensorDataForAllVenues() {
             let venues = <?php echo json_encode($data['venues']) ?>;
             
