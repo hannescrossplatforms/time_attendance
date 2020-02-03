@@ -207,59 +207,12 @@
             // venues
             
             let venue = venues[parseInt($(this).attr("index"))];
-            debugger;
-            // $("#modal-sitename")
-            // alert();
+            $("#modal-status").html(`${venue.status}`);
+            getInfoForGridSensor(venue.id);
 
-            // <!-- <div id="modal-sitename" style="display: inline">
-            //     ' + sitename + '
-            //     </div>
-                
-            //     </h6>
-            // </div>
-            // <div class="modal-body">
-            //     Status Comment : <b>
-            //     <div id="modal-status" style="display: inline">Test1</div>
-            //     </b>
-            //     <br>
-            //     <br> 
-            //     Today MB (Up/Down) : <div id="modal-bytes" style="display: inline">Test2</div>
-            //     <br> 
-            //     Gateway IP : <div id="modal-ip" style="display: inline">Test3</div>
-            //     <br> 
-            //     Last Check in : <div id="modal-check-in" style="display: inline">Test4</div> -->
-
-
-            // createVenueModal();
         });
 
-        // function createVenueModal(id, sitename, venuedata) {
-
-
-            
-        //     //Hannes hier
-        //     modalhtml = 
-        //     '<div class="modal fade" id="modal_' + id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n\
-        //         <div class="modal-dialog">\n\
-        //         <div class="modal-content">\n\
-        //             <div class="modal-header">\n\
-        //             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>\n\
-        //             <h6 class="modal-title" id="myModalLabel">' + sitename + '</h6>\n\
-        //             </div>\n\
-        //             <div class="modal-body">\n\
-        //             Status Comment : <b>' + venuedata["statuscomment"]  + '</b> <br> <br> \n\
-        //             Today MB (Up/Down) : ' + venuedata["bytes"]  + ' <br> \n\
-        //             Gateway IP : ' + venuedata["gateway"]  + ' <br> \n\
-        //             Last Check in : ' + venuedata["lastcheckin"]  + ' <br> \n\
-        //         </div>\n\
-        //         </div>\n\
-        //     </div>\n\
-        //     </div>';
-
-        //     return modalhtml;
-
-        //     $( '#viewVenueModals' ).html(modalshtml);
-        //     }
+       
         let venues = null;
         function getSensorDataForAllVenues() {
             venues = <?php echo json_encode($data['venues']) ?>;
@@ -329,6 +282,68 @@
           window.location.replace("http://hiphub.local/index.php/hipjam_monitorsensors?search=" + search);
 
         });
+
+        function getInfoForGridSensor(venueId) {
+
+            var url = '{{ URL::route('hipjam_getvenuesensors')}}';
+            sentData = venueId;
+        
+            $.ajax({
+                type: "POST",
+                data: "sentData="+sentData,
+                dataType: 'json',
+                url: url,
+                async:false,
+
+                success: function(data){
+
+                    let statuses = [];
+                    let lastReportedInTimes = [];
+                    let displayStatusForRow = "";
+                    let displayLastReportedForRow = "";
+
+                    data.forEach(function(item, index){
+                        statuses.push(item.status);
+                        lastReportedInTimes.push(item.lastreportedin);
+                    });
+
+                    if (statuses.every( (val, i, arr) => val === arr[0])) {
+                        //All statuses is the same
+                        if(statuses[0] == "Offline") {
+                            //All statuses = offline
+                            displayStatusForRow = "offline";
+                        }
+                        else {
+                            //All statuses = online
+                            displayStatusForRow = "online";
+                        }
+                    }
+                    else {
+                        //They differ, show yellow status
+                        displayStatusForRow = "some_online";
+                    }
+
+                    displayLastReportedForRow = lastReportedInTimes[0];
+                    lastReportedInTimes.forEach(function(item, index) {
+
+                        if (labelToNumberForComparrison(displayLastReportedForRow) < labelToNumberForComparrison(item)) {
+                            displayLastReportedForRow = item
+                        }
+                        
+                    });
+                    
+
+                    $("#modal-status").html(`${displayStatusForRow}`);
+                    $("#modal-check-in").html(`${displayLastReportedForRow}`);
+                
+                },
+                error: function(){
+                    
+                }
+                
+            });
+
+        }
 
         function getSensorInfo(venueId){
             var url = '{{ URL::route('hipjam_getvenuesensors')}}';
