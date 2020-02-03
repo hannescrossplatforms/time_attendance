@@ -82,8 +82,10 @@
                                         
                                     </div>
                                 @else
-                                <div class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
-                                        {{$venue->sitename}}
+                                    <div class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
+                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modal">
+                                            {{$venue->sitename}}
+                                        </a>
                                     </div>
                                 @endif
                             @endforeach
