@@ -99,7 +99,30 @@
         </div>
 	</div>
 </div>
-
+<div>
+    <div class="modal fade" id="modal_test" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h6 class="modal-title" id="myModalLabel">' + sitename + '</h6>
+                </div>
+                <div class="modal-body">
+                    Status Comment : <b>Test1
+                    </b>
+                    <br>
+                    <br> 
+                    Today MB (Up/Down) : Test2 
+                    <br> 
+                    Gateway IP : Test3
+                    <br> 
+                    Last Check in : Test4 
+                    <br> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <style>
     .grid-tile{
         width: 150px;
@@ -158,8 +181,6 @@
 
         });
         
-        
-        
     });
 
     	$('document').ready(function(){
@@ -168,35 +189,39 @@
             getSensorDataForAllVenues();
         });
 
-        $('#gridlinks').on('click', function(e){
-            e.preventDefault();
-            alert('click');
-        });
+        // $('#gridlinks').on('click', function(e){
+        //     e.preventDefault();
+        //     // createVenueModal();
+        // });
 
-        function createVenueModal(id, sitename, venuedata) {
-            //Hannes hier
-            modalhtml = 
-            '<div class="modal fade" id="modal_' + id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n\
-                <div class="modal-dialog">\n\
-                <div class="modal-content">\n\
-                    <div class="modal-header">\n\
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>\n\
-                    <h6 class="modal-title" id="myModalLabel">' + sitename + '</h6>\n\
-                    </div>\n\
-                    <div class="modal-body">\n\
-                    Status Comment : <b>' + venuedata["statuscomment"]  + '</b> <br> <br> \n\
-                    Today MB (Up/Down) : ' + venuedata["bytes"]  + ' <br> \n\
-                    Gateway IP : ' + venuedata["gateway"]  + ' <br> \n\
-                    Last Check in : ' + venuedata["lastcheckin"]  + ' <br> \n\
-                </div>\n\
-                </div>\n\
-            </div>\n\
-            </div>';
+        // function createVenueModal(id, sitename, venuedata) {
 
-            return modalhtml;
 
-            }
+            
+        //     //Hannes hier
+        //     modalhtml = 
+        //     '<div class="modal fade" id="modal_' + id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n\
+        //         <div class="modal-dialog">\n\
+        //         <div class="modal-content">\n\
+        //             <div class="modal-header">\n\
+        //             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>\n\
+        //             <h6 class="modal-title" id="myModalLabel">' + sitename + '</h6>\n\
+        //             </div>\n\
+        //             <div class="modal-body">\n\
+        //             Status Comment : <b>' + venuedata["statuscomment"]  + '</b> <br> <br> \n\
+        //             Today MB (Up/Down) : ' + venuedata["bytes"]  + ' <br> \n\
+        //             Gateway IP : ' + venuedata["gateway"]  + ' <br> \n\
+        //             Last Check in : ' + venuedata["lastcheckin"]  + ' <br> \n\
+        //         </div>\n\
+        //         </div>\n\
+        //     </div>\n\
+        //     </div>';
 
+        //     return modalhtml;
+
+        //     $( '#viewVenueModals' ).html(modalshtml);
+        //     }
+            
         function getSensorDataForAllVenues() {
             let venues = <?php echo json_encode($data['venues']) ?>;
             
