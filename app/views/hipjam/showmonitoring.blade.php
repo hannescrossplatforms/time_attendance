@@ -98,31 +98,26 @@
                     <br>
                     </div>
                     <div class="row">
-
-                    @foreach ($data['venues'] as $key => $venue)
-                        {{ $loop->iteration }}
-
-                        @if ($venue->status == "Online")
-                        <div class="grid-tile" style="background-color: green;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
+                        @foreach($data['venues'] as $venue)
+                                @if ($venue->status == "Online")
+                                <div class="grid-tile" style="background-color: green;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
 
 
-                        <!-- '<a href="#" class="gridlinks" data-toggle="modal" data-target="#modal_' + modal_id + '" title="' + index + '">'
-                            + venue_name + 
-                        '</a>\n\ -->
-                                <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup">
-                                    {{$venue->sitename}}
-                                </a>
-                            </div>
-                        @else
-                            <div class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
-                                <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup">
-                                    {{$venue->sitename}}
-                                </a>
-                            </div>
-                        @endif
-                    @endforeach
-
-                        
+                                <!-- '<a href="#" class="gridlinks" data-toggle="modal" data-target="#modal_' + modal_id + '" title="' + index + '">'
+                                  + venue_name + 
+                                '</a>\n\ -->
+                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup">
+                                            {{$venue->sitename}}
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
+                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup">
+                                            {{$venue->sitename}}
+                                        </a>
+                                    </div>
+                                @endif
+                            @endforeach
                     </div>
 
                 </div>
