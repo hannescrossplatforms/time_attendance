@@ -241,6 +241,8 @@
 
                 success: function(data){
 
+                    debugger;
+
                     let statuses = [];
                     let displayStatusForRow = "";
 
