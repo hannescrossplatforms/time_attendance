@@ -14,7 +14,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h6 class="modal-title" id="myModalLabel">
-                <div style="display: inline">
+                <div id="modal-sitename" style="display: inline">
                 ' + sitename + '
                 </div>
                 
@@ -22,15 +22,15 @@
             </div>
             <div class="modal-body">
                 Status Comment : <b>
-                <div style="display: inline">Test1</div>
+                <div id="modal-status" style="display: inline">Test1</div>
                 </b>
                 <br>
                 <br> 
-                Today MB (Up/Down) : <div style="display: inline">Test2</div>
+                Today MB (Up/Down) : <div id="modal-bytes" style="display: inline">Test2</div>
                 <br> 
-                Gateway IP : <div style="display: inline">Test3</div>
+                Gateway IP : <div id="modal-ip" style="display: inline">Test3</div>
                 <br> 
-                Last Check in : <div style="display: inline">Test4</div>
+                Last Check in : <div id="modal-check-in" style="display: inline">Test4</div>
                 <br> 
             </div>
         </div>
@@ -197,13 +197,34 @@
             initializeDatatable();
             $("[id^=sensors]").hide();
             getSensorDataForAllVenues();
-
         });
 
-        // $('#gridlinks').on('click', function(e){
-        //     e.preventDefault();
-        //     // createVenueModal();
-        // });
+        $('#gridlinks').on('click', function(e){
+            e.preventDefault();
+
+
+
+            // <!-- <div id="modal-sitename" style="display: inline">
+            //     ' + sitename + '
+            //     </div>
+                
+            //     </h6>
+            // </div>
+            // <div class="modal-body">
+            //     Status Comment : <b>
+            //     <div id="modal-status" style="display: inline">Test1</div>
+            //     </b>
+            //     <br>
+            //     <br> 
+            //     Today MB (Up/Down) : <div id="modal-bytes" style="display: inline">Test2</div>
+            //     <br> 
+            //     Gateway IP : <div id="modal-ip" style="display: inline">Test3</div>
+            //     <br> 
+            //     Last Check in : <div id="modal-check-in" style="display: inline">Test4</div> -->
+
+
+            // createVenueModal();
+        });
 
         // function createVenueModal(id, sitename, venuedata) {
 
