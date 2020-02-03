@@ -338,7 +338,7 @@
                         }
                         
                     });
-                    debugger;
+                    
                     setStatusForVenue(venueId, displayStatusForRow);
                     setLastReportedForVenue(venueId, displayLastReportedForRow);
                 
