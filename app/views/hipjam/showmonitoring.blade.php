@@ -21,15 +21,16 @@
                 </h6>
             </div>
             <div class="modal-body">
-                Status Comment : <b>Test1
+                Status Comment : <b>
+                <div>Test1</div>
                 </b>
                 <br>
                 <br> 
-                Today MB (Up/Down) : Test2 
+                Today MB (Up/Down) : <div>Test2</div>
                 <br> 
-                Gateway IP : Test3
+                Gateway IP : <div>Test3</div>
                 <br> 
-                Last Check in : Test4 
+                Last Check in : <div>Test4</div>
                 <br> 
             </div>
         </div>
