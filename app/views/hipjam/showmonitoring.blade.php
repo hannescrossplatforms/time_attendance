@@ -9,27 +9,32 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalPopup" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h6 class="modal-title" id="myModalLabel">' + sitename + '</h6>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h6 class="modal-title" id="myModalLabel">
+                <div>
+                ' + sitename + '
                 </div>
-                <div class="modal-body">
-                    Status Comment : <b>Test1
-                    </b>
-                    <br>
-                    <br> 
-                    Today MB (Up/Down) : Test2 
-                    <br> 
-                    Gateway IP : Test3
-                    <br> 
-                    Last Check in : Test4 
-                    <br> 
-                </div>
+                
+                </h6>
+            </div>
+            <div class="modal-body">
+                Status Comment : <b>Test1
+                </b>
+                <br>
+                <br> 
+                Today MB (Up/Down) : Test2 
+                <br> 
+                Gateway IP : Test3
+                <br> 
+                Last Check in : Test4 
+                <br> 
             </div>
         </div>
     </div>
+</div>
 
 <div class="container-fluid">
 	<div class="row">
