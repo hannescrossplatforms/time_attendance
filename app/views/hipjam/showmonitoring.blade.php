@@ -313,6 +313,9 @@
         }
 
         function setLastReportedForVenue(venueId, displayLastReportedForRow) {
+            if(displayLastReportedForRow == "00m") {
+                displayLastReportedForRow = "N/A"
+            }
             $(`#venue_last_reported_${venueId}`).html(displayLastReportedForRow);
         }
 
