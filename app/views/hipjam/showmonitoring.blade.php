@@ -203,9 +203,10 @@
         });
 
         $('#gridlinks').on('click', function(e){
-            // e.preventDefault();
-
-
+            e.preventDefault();
+            // venues
+            debugger;
+            // alert();
 
             // <!-- <div id="modal-sitename" style="display: inline">
             //     ' + sitename + '
