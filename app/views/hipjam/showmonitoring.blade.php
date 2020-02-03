@@ -22,15 +22,15 @@
             </div>
             <div class="modal-body">
                 Status Comment : <b>
-                <div id="modal-status" style="display: inline">Test1</div>
+                <div id="modal-status" style="display: inline"></div>
                 </b>
                 <br>
                 <br> 
-                Today MB (Up/Down) : <div id="modal-bytes" style="display: inline">Test2</div>
+                Today MB (Up/Down) : <div id="modal-bytes" style="display: inline"></div>
                 <br> 
-                Gateway IP : <div id="modal-ip" style="display: inline">Test3</div>
+                Gateway IP : <div id="modal-ip" style="display: inline"></div>
                 <br> 
-                Last Check in : <div id="modal-check-in" style="display: inline">Test4</div>
+                Last Check in : <div id="modal-check-in" style="display: inline"></div>
                 <br> 
             </div>
         </div>
