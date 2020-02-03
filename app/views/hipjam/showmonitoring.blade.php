@@ -232,6 +232,8 @@
             initializeDatatable();
             $("[id^=sensors]").hide();
             getSensorDataForAllVenues();
+
+            $("#exampleModal").show();
         });
 
         // $('#gridlinks').on('click', function(e){
