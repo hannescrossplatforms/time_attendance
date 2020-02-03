@@ -244,10 +244,13 @@
                     debugger;
 
                     let statuses = [];
+                    let lastReportedInTimes = [];
                     let displayStatusForRow = "";
+                    let displayLastReportedForRow = "";
 
                     data.forEach(function(item, index){
                         statuses.push(item.status);
+                        lastReportedInTimes.push(item.lastreportedin);
                     });
 
                     if (statuses.every( (val, i, arr) => val === arr[0])) {
@@ -266,7 +269,17 @@
                         displayStatusForRow = "some_online";
                     }
 
+                    displayLastReportedForRow = lastReportedInTimes[0];
+                    lastReportedInTimes.forEach(function(item, index) {
+
+                        if (labelToNumberForComparrison(displayLastReportedForRow) < labelToNumberForComparrison(item)) {
+                            displayLastReportedForRow = item
+                        }
+                        
+                    });
+
                     setStatusForVenue(venueId, displayStatusForRow);
+                    setLastReportedForVenue(venueId, displayLastReportedForRow);
                 
                 },
                 error: function(){
@@ -276,6 +289,10 @@
             });
         }
 
+        function labelToNumberForComparrison(stringToGetNumbersFrom){
+            return parseInt(stringToGetNumbersFrom.match(/\d+/));
+        }
+        
         function setStatusForVenue(venueId, status) {
         
             if (status == "some_online"){
@@ -293,9 +310,10 @@
                 $(`#venue_status_${venueId}`).addClass("online");
             }
 
+        }
 
-            // <td id="venue_last_reported_{{$venue->id}}">Test</td>
-            //                     <td id="venue_status_{{$venue->id}}">test</td>
+        function setLastReportedForVenue(venueId, displayLastReportedForRow) {
+            $(`#venue_last_reported_${venueId}`).html(displayLastReportedForRow);
         }
 
         function getModalSensorInfo(id){
