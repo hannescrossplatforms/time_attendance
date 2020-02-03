@@ -108,6 +108,7 @@
                                 '</a>\n\ -->
                                         <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup">
                                             {{$venue->sitename}}
+                                            {{ $loop->iteration }}
                                         </a>
                                     </div>
                                 @else
