@@ -71,7 +71,15 @@
                         @foreach($data['venues'] as $venue)
                                 @if ($venue->status == "Online")
                                 <div class="grid-tile" style="background-color: green;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
+
+
+                                <!-- '<a href="#" class="gridlinks" data-toggle="modal" data-target="#modal_' + modal_id + '" title="' + index + '">'
+                                  + venue_name + 
+                                '</a>\n\ -->
+                                    <a href="#" class="gridlinks" data-toggle="modal" data-target="#modal">
                                         {{$venue->sitename}}
+                                    </a>
+                                        
                                     </div>
                                 @else
                                 <div class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
@@ -240,8 +248,6 @@
                 async:false,
 
                 success: function(data){
-
-                    debugger;
 
                     let statuses = [];
                     let lastReportedInTimes = [];
