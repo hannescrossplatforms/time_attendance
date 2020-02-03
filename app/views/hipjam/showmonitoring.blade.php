@@ -76,13 +76,13 @@
                                 <!-- '<a href="#" class="gridlinks" data-toggle="modal" data-target="#modal_' + modal_id + '" title="' + index + '">'
                                   + venue_name + 
                                 '</a>\n\ -->
-                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modal">
+                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modal_test">
                                             {{$venue->sitename}}
                                         </a>
                                     </div>
                                 @else
                                     <div class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
-                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modal">
+                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modal_test">
                                             {{$venue->sitename}}
                                         </a>
                                     </div>
