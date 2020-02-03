@@ -235,7 +235,7 @@
             $("[id^=sensors]").hide();
             getSensorDataForAllVenues();
 
-            $("#exampleModal").show();
+            // $("#exampleModal").show();
         });
 
         // $('#gridlinks').on('click', function(e){
