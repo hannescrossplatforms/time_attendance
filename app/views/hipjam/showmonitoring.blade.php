@@ -96,7 +96,7 @@
                     <?php $pos=0 ?>
                         @foreach($data['venues'] as $venue)
                             <div id="grid_venue_status_{{$venue->id}}" class="grid-tile" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
-                                <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup" index={{$pos}}>
+                                <a href="#" class="gridlinks" style="color:black" data-toggle="modal" data-target="#modalPopup" index={{$pos}}>
                                     {{$venue->sitename}}
                                 </a>
                             </div>
