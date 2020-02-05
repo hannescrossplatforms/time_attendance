@@ -96,24 +96,21 @@
                     <?php $pos=0 ?>
                         @foreach($data['venues'] as $venue)
                         
-                                @if ($venue->status == "Online")
-                                <div class="grid-tile" style="background-color: green;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
+                        <!-- id="venue_status_{{$venue->id}}" -->
 
-
-                                <!-- '<a href="#" class="gridlinks" data-toggle="modal" data-target="#modal_' + modal_id + '" title="' + index + '">'
-                                  + venue_name + 
-                                '</a>\n\ -->
+                                <!-- @if ($venue->status == "Online") -->
+                                    <div id="grid_venue_status_{{$venue->id}}" class="grid-tile" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
                                         <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup" index={{$pos}}>
                                             {{$venue->sitename}}
                                         </a>
                                     </div>
-                                @else
-                                    <div class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
+                                <!-- @else -->
+                                    <!-- <div  class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
                                         <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup" index={{$pos}}>
                                             {{$venue->sitename}}
                                         </a>
-                                    </div>
-                                @endif
+                                    </div> -->
+                                <!-- @endif -->
                                 <?php $pos++ ?>
                             @endforeach
                     </div>
@@ -276,7 +273,7 @@
         });
 
         function getInfoForGridSensor(venueId) {
-            debugger;
+
             var url = '{{ URL::route('hipjam_getvenuesensors')}}';
             sentData = venueId;
         
@@ -404,17 +401,20 @@
         
             if (status == "some_online"){
                 $(`#venue_status_${venueId}`).html("Varying");
+                $(`#grid_venue_status_${venueId}`).addClass("some-online");
                 $(`#venue_status_${venueId}`).addClass("some-online");
                 
             }
             else if (status == "offline"){
                 $(`#venue_status_${venueId}`).html("Offline");
                 $(`#venue_status_${venueId}`).addClass("offline");
+                $(`#grid_venue_status_${venueId}`).addClass("offline");
                 
             }
             else {
                 $(`#venue_status_${venueId}`).html("Online");
                 $(`#venue_status_${venueId}`).addClass("online");
+                $(`#grid_venue_status_${venueId}`).addClass("online");
             }
 
         }
@@ -427,7 +427,7 @@
             
             var url = '{{ URL::route('hipjam_getvenuesensors')}}';
             sentData = JSON.stringify(id);
-            debugger;
+            
             $.ajax({
                 type: "POST",
                 data: "sentData="+sentData,
