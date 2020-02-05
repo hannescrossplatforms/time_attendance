@@ -276,7 +276,7 @@
         });
 
         function getInfoForGridSensor(venueId) {
-
+            debugger;
             var url = '{{ URL::route('hipjam_getvenuesensors')}}';
             sentData = venueId;
         
