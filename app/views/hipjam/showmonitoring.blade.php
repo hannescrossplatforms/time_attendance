@@ -25,11 +25,6 @@
                 <div id="modal-status" style="display: inline"></div>
                 </b>
                 <br>
-                <br> 
-                Today MB (Up/Down) : <div id="modal-bytes" style="display: inline"></div>
-                <br> 
-                Gateway IP : <div id="modal-ip" style="display: inline"></div>
-                <br> 
                 Last Check in : <div id="modal-check-in" style="display: inline"></div>
                 <br> 
             </div>
