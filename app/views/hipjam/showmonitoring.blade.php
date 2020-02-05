@@ -95,23 +95,12 @@
                     <div class="row">
                     <?php $pos=0 ?>
                         @foreach($data['venues'] as $venue)
-                        
-                        <!-- id="venue_status_{{$venue->id}}" -->
-
-                                <!-- @if ($venue->status == "Online") -->
-                                    <div id="grid_venue_status_{{$venue->id}}" class="grid-tile" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
-                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup" index={{$pos}}>
-                                            {{$venue->sitename}}
-                                        </a>
-                                    </div>
-                                <!-- @else -->
-                                    <!-- <div  class="grid-tile" style="background-color: red;" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
-                                        <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup" index={{$pos}}>
-                                            {{$venue->sitename}}
-                                        </a>
-                                    </div> -->
-                                <!-- @endif -->
-                                <?php $pos++ ?>
+                            <div id="grid_venue_status_{{$venue->id}}" class="grid-tile" sitename={{preg_replace('/\s+/', '_', $venue->sitename)}}>
+                                <a href="#" class="gridlinks" data-toggle="modal" data-target="#modalPopup" index={{$pos}}>
+                                    {{$venue->sitename}}
+                                </a>
+                            </div>
+                            <?php $pos++ ?>
                             @endforeach
                     </div>
 
