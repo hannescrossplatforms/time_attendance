@@ -427,7 +427,7 @@
             
             var url = '{{ URL::route('hipjam_getvenuesensors')}}';
             sentData = JSON.stringify(id);
-        
+            debugger;
             $.ajax({
                 type: "POST",
                 data: "sentData="+sentData,
