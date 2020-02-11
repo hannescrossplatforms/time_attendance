@@ -228,6 +228,7 @@ class Mikrotik extends Eloquent {
 
         // Set up the 951 script
         $source = $mikrotikdir->value . "deployment/templates/edit_venue_template";
+        \Log::info("HANNES EDIT VENUE source 1: $source");
         $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
         \Log::info("HANNES EDIT VENUE dest 1: $dest");
         copy($source, $dest);
@@ -236,6 +237,7 @@ class Mikrotik extends Eloquent {
         
         // Set up the cAP script
         $source = $mikrotikdir->value . "deployment/templates/edit_venue_template";
+        \Log::info("HANNES EDIT VENUE source 2: $source");
         $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_cAP-2n.rsc";
         \Log::info("HANNES EDIT VENUE dest 2: $dest");
         copy($source, $dest);
