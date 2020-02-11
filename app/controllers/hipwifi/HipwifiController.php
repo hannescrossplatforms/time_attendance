@@ -1648,90 +1648,90 @@ public function activateVenueSave()
     {
         \Log::info("HANNES EDIT VENUE: id = $id");
         $data = array();
-        $data['currentMenuItem'] = "Venue Management";
-        $data['edit'] = true;
-        $data['is_activation'] = false;
-        \Log::info("HANNES EDIT VENUE: id = $id");
-        $data['venue'] = \Venue::find($id);
-        //dd($id);
-        //dd($data['venue']);
-        \Log::info("HANNES EDIT VENUE: id = $id");
-        $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
-        $macaddress = $data['venue']->macaddress;
-       // $data['configfile'] =  $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
-        $data['rscfilemodtime'] =  \DB::table('venues')->where('id', '=', $id)->pluck('rscfilemodtime');
-        $data['submitbutton'] = '';
-        $data['device_type'] = $data['venue']->device_type;
+    //     $data['currentMenuItem'] = "Venue Management";
+    //     $data['edit'] = true;
+    //     $data['is_activation'] = false;
+    //     \Log::info("HANNES EDIT VENUE: id = $id");
+    //     $data['venue'] = \Venue::find($id);
+    //     //dd($id);
+    //     //dd($data['venue']);
+    //     \Log::info("HANNES EDIT VENUE: id = $id");
+    //     $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
+    //     $macaddress = $data['venue']->macaddress;
+    //    // $data['configfile'] =  $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
+    //     $data['rscfilemodtime'] =  \DB::table('venues')->where('id', '=', $id)->pluck('rscfilemodtime');
+    //     $data['submitbutton'] = '';
+    //     $data['device_type'] = $data['venue']->device_type;
         
-        if ($data['device_type'] == 'Mikrotik'){
-          // if(file_exists($data['configfile'])) {
-                $now = time();
-                    if (($now -  $data['rscfilemodtime']) > 300) {
-                        $data['submitbutton'] = 'on';
-                        }
-                    else {
-                             $data['submitbutton'] = 'off';
-                            }
-            //}
-         }
-        else {
-            $data['submitbutton'] = 'on';
-        }
-        
-        
-        
-        $data['old_sitename'] = $data['venue']["sitename"];
-        $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]); 
-        foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
-        $data['bypass'] = array();
-        for ($i=1; $i <= 10; $i++) { 
-            $mac = 'bypassmac'.$i;
-            $comment = 'bypasscomment'.$i;
-            $bypassmac = $data['venue']->$mac;
-            $bypasscomment = $data['venue']->$comment;
-            $array = array($bypassmac, $bypasscomment);
-            array_push($data['bypass'], $array);
-           }
-        $data["adminssid1"] = $data['venue']->adminssid1;
-        $data["adminssid2"] = $data['venue']->adminssid2;
-        $data["adminssid3"] = $data['venue']->adminssid3;
-        //$data["adminwifi"] = array($data["adminssid1"], $data["adminssid2"], $data["adminssid3"]);
-        /*$data["numadminwifi"] = 0; 
-        $i = 0;
-        foreach ($data["adminwifi"] as $configuredwifi) {
-             if  (!is_null($configuredwifi)){
-             $i += 1;
-           }
-        $data["numadminwifi" ] = $i;
-        }*/
+    //     if ($data['device_type'] == 'Mikrotik'){
+    //       // if(file_exists($data['configfile'])) {
+    //             $now = time();
+    //                 if (($now -  $data['rscfilemodtime']) > 300) {
+    //                     $data['submitbutton'] = 'on';
+    //                     }
+    //                 else {
+    //                          $data['submitbutton'] = 'off';
+    //                         }
+    //         //}
+    //      }
+    //     else {
+    //         $data['submitbutton'] = 'on';
+    //     }
         
         
-        if($data['venue']->ap_active == 1) {
-            $data['ap_active_checked'] = "checked";
-            $data['ap_inactive_checked'] = "";
-        } else {
-            $data['ap_active_checked'] = "";
-            $data['ap_inactive_checked'] = "checked";
-        }
         
-        if($data['venue']->device_type == "Mikrotik") {
-            $mikvars = array("name" => "Mikrotik", "selected" => "selected=\"selected\"");
-            $othervars = array("name" => "Other", "selected" => "");
-        } else {
-            $mikvars = array("name" => "Mikrotik", "selected" => "");
-            $othervars = array("name" => "Other", "selected" => "selected=\"selected\"");
-        }
-        $data["device_types"] = array($othervars, $mikvars);
+    //     $data['old_sitename'] = $data['venue']["sitename"];
+    //     $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]); 
+    //     foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
+    //     $data['bypass'] = array();
+    //     for ($i=1; $i <= 10; $i++) { 
+    //         $mac = 'bypassmac'.$i;
+    //         $comment = 'bypasscomment'.$i;
+    //         $bypassmac = $data['venue']->$mac;
+    //         $bypasscomment = $data['venue']->$comment;
+    //         $array = array($bypassmac, $bypasscomment);
+    //         array_push($data['bypass'], $array);
+    //        }
+    //     $data["adminssid1"] = $data['venue']->adminssid1;
+    //     $data["adminssid2"] = $data['venue']->adminssid2;
+    //     $data["adminssid3"] = $data['venue']->adminssid3;
+    //     //$data["adminwifi"] = array($data["adminssid1"], $data["adminssid2"], $data["adminssid3"]);
+    //     /*$data["numadminwifi"] = 0; 
+    //     $i = 0;
+    //     foreach ($data["adminwifi"] as $configuredwifi) {
+    //          if  (!is_null($configuredwifi)){
+    //          $i += 1;
+    //        }
+    //     $data["numadminwifi" ] = $i;
+    //     }*/
+        
+        
+    //     if($data['venue']->ap_active == 1) {
+    //         $data['ap_active_checked'] = "checked";
+    //         $data['ap_inactive_checked'] = "";
+    //     } else {
+    //         $data['ap_active_checked'] = "";
+    //         $data['ap_inactive_checked'] = "checked";
+    //     }
+        
+    //     if($data['venue']->device_type == "Mikrotik") {
+    //         $mikvars = array("name" => "Mikrotik", "selected" => "selected=\"selected\"");
+    //         $othervars = array("name" => "Other", "selected" => "");
+    //     } else {
+    //         $mikvars = array("name" => "Mikrotik", "selected" => "");
+    //         $othervars = array("name" => "Other", "selected" => "selected=\"selected\"");
+    //     }
+    //     $data["device_types"] = array($othervars, $mikvars);
 
-        $servers = \Server::All();
-        $data['allservers'] = $servers;
+    //     $servers = \Server::All();
+    //     $data['allservers'] = $servers;
 
-        $brand = new \Brand();
-        $data['brands'] = $brand->getBrandsForProduct('hipwifi');
+    //     $brand = new \Brand();
+    //     $data['brands'] = $brand->getBrandsForProduct('hipwifi');
 
-        //include Tabletpos printers configured for the venue;
-        $printer = new \Tabletposprinter();
-        $data['tabprinters'] = $printer->getPrintersForVenue($id);
+    //     //include Tabletpos printers configured for the venue;
+    //     $printer = new \Tabletposprinter();
+    //     $data['tabprinters'] = $printer->getPrintersForVenue($id);
 
 
         $encoded = json_encode($data);
