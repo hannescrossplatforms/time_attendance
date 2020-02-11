@@ -324,13 +324,14 @@
 
                                                     <div class="col-sm-6">
                                                         <div class="chart-wrapper">
-                                                            <div class="chart-title venuecolheading">Store Traffic by Hour</div>
+                                                            <div class="chart-title venuecolheading">Store Traffic by Hour<sup>*</sup></div>
                                                             <div class="chart-stage">
                                                                 <div class="row">
                                                                     <div class="col-sm-12">
                                                                         <div class="chart-stage">
                                                                             <div id="chart-container">Loading...</div>
                                                                         </div>
+                                                                        <small><sup>*</sup> Chart totals may differ from in store today customers because individual dwell time spans over mutiple hours.</small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -788,6 +789,8 @@
                     
                     doc.forEach(function(parent) {
                         parent.docs.forEach(function(hours) {
+                            if (hours.id == 10)
+                            console.log(`hour: ${hours.id} | customers: ${hours.data().customers}`)
                             if (!hourly_averages.hasOwnProperty(hours.id)) {
                                 hourly_averages[hours.id] = parseInt(hours.data().customers);
                             } else {
@@ -845,7 +848,12 @@
                     $('#rep_customer').html(customers_in_store);
                     $('#new_rep_customer').html(new_customers_in_store);
                     $('#engaged_customers').html(high_dwell_customers);
-                    $('#rep_ave').html(Math.round(dwell));
+                    if (dwell === null || dwell === undefined || dwell === '' || dwell.toString() === 'NaN') {
+                        $('#rep_ave').html('0');
+                    } else {
+                        $('#rep_ave').html(Math.round(dwell));
+                    }
+                    
                     if (is_billboard)
                         $('#window_con').html(customers_in_store);
                     else
