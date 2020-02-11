@@ -211,7 +211,7 @@ class Mikrotik extends Eloquent {
 
 
     public function updateVenue($venue, $old_sitename) {
-
+        \Log::info("HANNES EDIT VENUE old sitename: $old_sitename");
         // create an resc file for both 951 and cAP
         $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
         $macaddress = $venue->macaddress;
@@ -229,12 +229,14 @@ class Mikrotik extends Eloquent {
         // Set up the 951 script
         $source = $mikrotikdir->value . "deployment/templates/edit_venue_template";
         $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
+        \Log::info("HANNES EDIT VENUE dest 1: $dest");
         copy($source, $dest);
         $this->substituteInFile($dest, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
 
         // Set up the cAP script
         $source = $mikrotikdir->value . "deployment/templates/edit_venue_template";
         $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_cAP-2n.rsc";
+        \Log::info("HANNES EDIT VENUE dest 2: $dest");
         copy($source, $dest);
         $this->substituteInFile($dest, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
 
