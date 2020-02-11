@@ -1646,14 +1646,16 @@ public function activateVenueSave()
 
     public function editVenue($id)
     {
+        \Log::info("HANNES EDIT VENUE: id = $id");
         $data = array();
         $data['currentMenuItem'] = "Venue Management";
         $data['edit'] = true;
         $data['is_activation'] = false;
-
+        \Log::info("HANNES EDIT VENUE: id = $id");
         $data['venue'] = \Venue::find($id);
         //dd($id);
         //dd($data['venue']);
+        \Log::info("HANNES EDIT VENUE: id = $id");
         $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
         $macaddress = $data['venue']->macaddress;
        // $data['configfile'] =  $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
@@ -1677,7 +1679,7 @@ public function activateVenueSave()
         }
 
         
-
+        
         $data['old_sitename'] = $data['venue']["sitename"];
         $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]); 
         foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
