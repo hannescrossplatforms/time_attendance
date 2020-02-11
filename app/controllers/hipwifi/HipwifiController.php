@@ -1677,7 +1677,7 @@ public function activateVenueSave()
         else {
             $data['submitbutton'] = 'on';
         }
-
+        
         
         
         $data['old_sitename'] = $data['venue']["sitename"];
