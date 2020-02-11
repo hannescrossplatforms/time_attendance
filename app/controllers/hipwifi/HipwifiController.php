@@ -1741,6 +1741,8 @@ public function activateVenueSave()
     
     public function editVenueSave()
     {
+
+        \Log::info("HANNES EDIT VENUE SAVE: id = $id");
         $utils = new \Utils();
         $id = \Input::get('id');
         $servers = \Server::All();
