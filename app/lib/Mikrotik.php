@@ -253,8 +253,8 @@ class Mikrotik extends Eloquent {
         // Set up the cAP script
         
         $source = $mikrotikdir->value . "deployment/templates/edit_venue_template";
-        // $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_cAP-2n.rsc";
-        $dest = $mikrotikdir->value . "deployment/templates/test_destination_1";
+        $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_cAP-2n.rsc";
+        // $dest = $mikrotikdir->value . "deployment/templates/test_destination_1";
         copy($source, $dest);
         $this->substituteInFile($dest, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
         
