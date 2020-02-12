@@ -132,31 +132,49 @@ class Mikrotik extends Eloquent {
     public function deployRsc($venue, $scripttext, $overridersc, $scriptmenu="on") {
 
         \Log::info("HANNES KOM HIER: deployRsc _951-2n.rsc");
-        // $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
-        // $macaddress = $venue->macaddress;
+        $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
+        $macaddress = $venue->macaddress;
 
-        // $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
-        // $scripttext = str_replace("\x0D","",$scripttext); // Get rid of the ^M characters
+        $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
+        $dest2 = $mikrotikdir->value . "deployment/" . $macaddress .  "_cAP-2n.rsc";
+        $scripttext = str_replace("\x0D","",$scripttext); // Get rid of the ^M characters
 
-        // error_log("MIKROTIK : deployRsc : dest = $dest");
-        // error_log("MIKROTIK : deployRsc : scripttext = $scripttext");
+        error_log("MIKROTIK : deployRsc : dest = $dest");
+        error_log("MIKROTIK : deployRsc : scripttext = $scripttext");
 
        
-        //  if ($scriptmenu == "on"){
-        //  $lines = count(file($dest));
-        //      if($lines <= 1 or $overridersc == "on") {
-        //              file_put_contents($dest, $scripttext);
-        //              return "<div class='rscdeployed'>Your script has been deployed.</div>";
-        //             } 
-        //         else {
-        //             return "<div class='rscnotdeployed'>Your script has not been deployed. The existing destination file has not yet been read by the AP.</div>";
-        //         }
-        // }
-        // elseif ($scriptmenu == "off"){
-        //     $file = fopen($dest, 'a');
-        //     fwrite($file, $scripttext);            
-        //     fclose($file);
-        //     }
+         if ($scriptmenu == "on"){
+         $lines = count(file($dest));
+             if($lines <= 1 or $overridersc == "on") {
+                     file_put_contents($dest, $scripttext);
+                     return "<div class='rscdeployed'>Your script has been deployed.</div>";
+                    } 
+                else {
+                    return "<div class='rscnotdeployed'>Your script has not been deployed. The existing destination file has not yet been read by the AP.</div>";
+                }
+        }
+        elseif ($scriptmenu == "off"){
+            $file = fopen($dest, 'a');
+            fwrite($file, $scripttext);            
+            fclose($file);
+            }
+
+        if ($scriptmenu == "on"){
+            $lines = count(file($dest2));
+                if($lines <= 1 or $overridersc == "on") {
+                        file_put_contents($dest2, $scripttext);
+                        return "<div class='rscdeployed'>Your script has been deployed.</div>";
+                        } 
+                    else {
+                        return "<div class='rscnotdeployed'>Your script has not been deployed. The existing destination file has not yet been read by the AP.</div>";
+                    }
+            }
+            elseif ($scriptmenu == "off"){
+                $file = fopen($dest2, 'a');
+                fwrite($file, $scripttext);            
+                fclose($file);
+                }
+                
         return true;
     }
 
