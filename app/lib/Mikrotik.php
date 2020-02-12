@@ -249,7 +249,7 @@ class Mikrotik extends Eloquent {
         $this->substituteInFile($dest1, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
     
         \Log::info("HANNES EDIT VENUE source 1: $source1");
-        \Log::info("HANNES EDIT VENUE dest 1: $dest");
+        \Log::info("HANNES EDIT VENUE dest 1: $dest1");
         \Log::info("HANNES EDIT VENUE sub dest: $dest1, old nas id: $old_nasid, nasId: $nasid, radius ip: $radius_ip, hostname: $hostname, ssid: $ssid");
 
         // Set up the cAP script
