@@ -272,7 +272,7 @@ class Mikrotik extends Eloquent {
         copy($source, $dest);
         $this->substituteInFile($dest, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
         
-        
+        \Log::info("HANNES EDIT VENUE dest 2: $desasdft2");
         // $this->genTabletposcode($macaddress);
         
         return true;
