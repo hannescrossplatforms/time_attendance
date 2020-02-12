@@ -33,6 +33,18 @@ class Mikrotik extends Eloquent {
     }
 
     public function substituteInFile($file, $old_nasid, $nasid, $radius_ip, $hostname, $ssid) {
+
+
+        \Log::info("HANNES substituteInFile: file $file");
+        \Log::info("HANNES substituteInFile: file $old_nasid");
+        \Log::info("HANNES substituteInFile: file $nasid");
+        \Log::info("HANNES substituteInFile: file $radius_ip");
+        \Log::info("HANNES substituteInFile: file $hostname");
+        \Log::info("HANNES substituteInFile: file $ssid");
+
+
+
+
         $file_contents = file_get_contents($file);
         $file_contents = str_replace("[[nasid]]",$nasid,$file_contents);
         $file_contents = str_replace("[[radius_ip]]",$radius_ip,$file_contents);
