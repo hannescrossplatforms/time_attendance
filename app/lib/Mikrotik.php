@@ -131,6 +131,7 @@ class Mikrotik extends Eloquent {
 
     public function deployRsc($venue, $scripttext, $overridersc, $scriptmenu="on") {
 
+        \Log::info("HANNES KOM HIER: deployRsc _951-2n.rsc");
         $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
         $macaddress = $venue->macaddress;
 
@@ -272,7 +273,6 @@ class Mikrotik extends Eloquent {
         copy($source, $dest);
         $this->substituteInFile($dest, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
         
-        \Log::info("HANNES EDIT VENUE dest 2: $desasdft2");
         // $this->genTabletposcode($macaddress);
         
         return true;
@@ -435,6 +435,8 @@ class Mikrotik extends Eloquent {
     }
 
     public function genTabletposcode($macaddress){
+
+        \Log::info("HANNES KOM HIER: genTabletpostcode _951-2n.rsc");
         $mikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
 
         //fetch the main macaddress_rsc file and append the instruction for the AP to fetch the printer rsc and also create a scheduler for it.
