@@ -236,14 +236,15 @@ class Mikrotik extends Eloquent {
         \Log::info("HANNES EDIT VENUE sub dest: $dest, old nas id: $old_nasid, nasId: $nasid, radius ip: $radius_ip, hostname: $hostname, ssid: $ssid");
         
         // Set up the cAP script
-        $source = $mikrotikdir->value . "deployment/templates/edit_venue_template";
+        $source = "hannes test";
+        // $source = $mikrotikdir->value . "deployment/templates/edit_venue_template";
         \Log::info("HANNES EDIT VENUE source 2: $source");
         $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_cAP-2n.rsc";
         \Log::info("HANNES EDIT VENUE dest 2: $dest");
         copy($source, $dest);
         $this->substituteInFile($dest, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
         \Log::info("HANNES EDIT VENUE sub 2 dest: $dest, old nas id: $old_nasid, nasId: $nasid, radius ip: $radius_ip, hostname: $hostname, ssid: $ssid");
-
+        
         // Setup the login.html
         $source = $mikrotikdir->value . "deployment/templates/_login.html.template";
         $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_login.html";
