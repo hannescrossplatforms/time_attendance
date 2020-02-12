@@ -242,27 +242,28 @@ class Mikrotik extends Eloquent {
         $radius_ip = $server->ipaddress;
 
         // Set up the 951 script
-        $source = $mikrotikdir->value . "deployment/templates/test_source_1";
-        // $source = $mikrotikdir->value . "deployment/templates/edit_venue_template";
-        \Log::info("HANNES EDIT VENUE source 1: $source");
-        $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
+        $source1 = $mikrotikdir->value . "deployment/templates/edit_venue_template";
+        $dest1 = $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
+        copy($source1, $dest1);
+
+        $this->substituteInFile($dest1, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
+    
+        \Log::info("HANNES EDIT VENUE source 1: $source1");
         \Log::info("HANNES EDIT VENUE dest 1: $dest");
-        copy($source, $dest);
-        $this->substituteInFile($dest, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
-        \Log::info("HANNES EDIT VENUE sub dest: $dest, old nas id: $old_nasid, nasId: $nasid, radius ip: $radius_ip, hostname: $hostname, ssid: $ssid");
-        
+        \Log::info("HANNES EDIT VENUE sub dest: $dest1, old nas id: $old_nasid, nasId: $nasid, radius ip: $radius_ip, hostname: $hostname, ssid: $ssid");
+
         // Set up the cAP script
         
-        $source = $mikrotikdir->value . "deployment/templates/edit_venue_template";
-        $dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_cAP-2n.rsc";
-        // $dest = $mikrotikdir->value . "deployment/templates/test_destination_1";
-        copy($source, $dest);
-        $this->substituteInFile($dest, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
+        $source2 = $mikrotikdir->value . "deployment/templates/edit_venue_template";
+        $dest2 = $mikrotikdir->value . "deployment/" . $macaddress .  "_cAP-2n.rsc";
+        copy($source2, $dest2);
+
+        $this->substituteInFile($dest2, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
         
 
-        \Log::info("HANNES EDIT VENUE source 2: $source");
-        \Log::info("HANNES EDIT VENUE dest 2: $dest");
-        \Log::info("HANNES EDIT VENUE sub 2 dest: $dest, old nas id: $old_nasid, nasId: $nasid, radius ip: $radius_ip, hostname: $hostname, ssid: $ssid");
+        \Log::info("HANNES EDIT VENUE source 2: $source2");
+        \Log::info("HANNES EDIT VENUE dest 2: $dest2");
+        \Log::info("HANNES EDIT VENUE sub 2 dest: $dest2, old nas id: $old_nasid, nasId: $nasid, radius ip: $radius_ip, hostname: $hostname, ssid: $ssid");
         
 
         // Setup the login.html
