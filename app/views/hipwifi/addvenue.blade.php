@@ -415,7 +415,9 @@
                     </div>
 
                     <br> 
-                    <button id="submitform" class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary">Submit</button> 
+                    <!-- Hannes readd this -->
+                    <button id="submitform" class="btn btn-primary">Submit</button> 
                     <a href="{{ url('hipwifi_showvenues'); }}" class="btn btn-default">Cancel</a>
                     <br>
                     <p id="submitallowed" class="rscnotdeployed"> *** Previously submitted configuration yet to be applied, please try again in 5 minutes ***</p>
