@@ -1940,40 +1940,41 @@ public function activateVenueSave()
                         }
                     }
                     else {
+                        $shouldsave = true;
                         \Log::info("HANNES MUST SAVE");
                     }
                     
 
                 }
 
-                if($venue->bypassmac1 && $shouldsave) {
+                if($venue->bypassmac1 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac1, $venue->bypasscomment1);
                 }
-                if($venue->bypassmac2 && $shouldsave) {
+                if($venue->bypassmac2 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac2, $venue->bypasscomment2);
                 }
-                if($venue->bypassmac3 && $shouldsave) {
+                if($venue->bypassmac3 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac3, $venue->bypasscomment3);
                 }
-                if($venue->bypassmac4 && $shouldsave) {
+                if($venue->bypassmac4 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac4, $venue->bypasscomment4);
                 }
-                if($venue->bypassmac5 && $shouldsave) {
+                if($venue->bypassmac5 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac5, $venue->bypasscomment5);
                 }
-                if($venue->bypassmac6 && $shouldsave) {
+                if($venue->bypassmac6 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac6, $venue->bypasscomment6);
                 }
-                if($venue->bypassmac7 && $shouldsave) {
+                if($venue->bypassmac7 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac7, $venue->bypasscomment7);
                 }
-                if($venue->bypassmac8 && $shouldsave) {
+                if($venue->bypassmac8 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac8, $venue->bypasscomment8);
                 }
-                if($venue->bypassmac9 && $shouldsave) {
+                if($venue->bypassmac9 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac9, $venue->bypasscomment9);
                 }
-                if($venue->bypassmac10 && $shouldsave) {
+                if($venue->bypassmac10 && $shouldsave == true) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac10, $venue->bypasscomment10);
                 }
 
