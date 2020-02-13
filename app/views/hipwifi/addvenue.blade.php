@@ -448,19 +448,10 @@
           let adminId = $(this).attr("adminid");
           let venueId = $(this).attr("venueid");
 
-          let obj = {'adminId': adminId, venueId: 'venueId', 'action': 'delete'};
-          actionsQueue.push(obj);
+          actionsQueue.push({'adminId': adminId, venueId: 'venueId', 'action': 'delete'});
+          $(this).parent().parent().hide();
 
 
-
-
-
-
-
-
-          // venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}"
-
-          // let action = ""
 
 
 
