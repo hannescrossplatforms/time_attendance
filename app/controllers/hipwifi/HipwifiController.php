@@ -1741,6 +1741,7 @@ public function activateVenueSave()
     
     public function editVenueSave()
     {
+        //Hannes hier
         $utils = new \Utils();
         $id = \Input::get('id');
         $servers = \Server::All();
@@ -1752,6 +1753,9 @@ public function activateVenueSave()
         $sitename = \Input::get('sitename');
         $sitename = $brand_name . " " . $sitename;
         $input['sitename'] = $sitename;
+
+        $macs_to_delete = \Input::get('delete_macs');
+        \Log::info("HANNES MACS TO DELETE: $macs_to_delete");
 
         $timefrom = \Input::get('timefrom');
         $timeto = \Input::get('timeto');
@@ -2058,9 +2062,8 @@ public function activateVenueSave()
                 $printers = new \Tabletposprinter();
                 $printers = $printers->getPrintersForVenue($id);
                 if($printers){
-                    $macaddress = \Input::get('macaddress');
-                    $mikrotik->genTabletposRsc($printers, $macaddress);
-
+                  $macaddress = \Input::get('macaddress');
+                  $mikrotik->genTabletposRsc($printers, $macaddress);
                 }
                    
            }
@@ -2154,7 +2157,7 @@ public function activateVenueSave()
 
     public function deletemacbypass($id, $bypassmac)
     {
-        
+        //Hannes hier
         $venue = \Venue::find($id);
         $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
                                         $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];
