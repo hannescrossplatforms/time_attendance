@@ -1954,9 +1954,6 @@ public function activateVenueSave()
                         $venue->bypassmac8 == $value || 
                         $venue->bypassmac9 == $value || 
                         $venue->bypassmac10 == $value){
-                            
-                        }
-                        else {
                             if($venue->bypassmac1 && $shouldsave == true) {
                                 $mikrotik->addMacAddressBypass($venue, $venue->bypassmac1, $venue->bypasscomment1);
                             }
@@ -1987,6 +1984,9 @@ public function activateVenueSave()
                             if($venue->bypassmac10 && $shouldsave == true) {
                                 $mikrotik->addMacAddressBypass($venue, $venue->bypassmac10, $venue->bypasscomment10);
                             }
+                        }
+                        else {
+                            
                         }
 
 
