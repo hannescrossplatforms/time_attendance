@@ -446,7 +446,6 @@
           e.preventDefault();
           debugger;
 
-          // venueid="{{$data['venue']->id;}" bypassid="{{$data['bypass'][$i][0];}}"
 
           let bypassId = $(this).attr("bypassid");
           let venueId = $(this).attr("venueid");
