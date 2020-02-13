@@ -1947,6 +1947,16 @@ public function activateVenueSave()
 
                 if($value != null && $value != "") {
 
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac1");
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac2");
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac3");
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac4");
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac5");
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac6");
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac7");
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac8");
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac9");
+                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac10");
                     if($venue->bypassmac1 == $value || 
                     $venue->bypassmac2 == $value || 
                     $venue->bypassmac3 == $value || 
