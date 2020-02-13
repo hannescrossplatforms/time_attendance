@@ -1942,6 +1942,9 @@ public function activateVenueSave()
                 // }
                 
                 $shouldsave = true;
+
+                for($i=1; $i<=3; $i++){
+
                 $bypass = 'bypassmac' . $i;
                 $value = $input[$bypass];
                 \Log::info("HANNES TESTING: ORIGINAL VALUE IS: $value");
@@ -1971,6 +1974,7 @@ public function activateVenueSave()
                     }
 
                 }
+            }
 
 
                         
