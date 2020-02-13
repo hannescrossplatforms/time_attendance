@@ -60,7 +60,7 @@
                       {{ Form::hidden('brand_id', $data['venue']->brand_id, array('id' => 'brand_id')) }}
                       {{ Form::hidden('server_id', $data['venue']->server_id, array('id' => 'server_id')) }}
                       {{ Form::hidden('isp_id', $data['venue']->isp_id) }}
-                      {{ Form::hidden('delete_macs') }}
+                      {{ Form::hidden('delete_macs'), array('id' => 'hannes_test')) }}
 
 
                       @if ($edit)
