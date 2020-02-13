@@ -1910,7 +1910,10 @@ public function activateVenueSave()
                     }
                 }
                     //Bypass mac-address config writing to mac-address.rsc process begins
+                    //HERE HANNES
+                    
                  for($i=0; $i<=9; $i++){
+                    \Log::info("HANNES IN LOOP AT POS: $i");
                     $bypass = 'bypassmac' . $i;
                     $k = $i + 1;
                     $mac = 'bypassmac' . $k;

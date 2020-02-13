@@ -451,10 +451,10 @@
           actionsQueue.push({'adminId': adminId, venueId: 'venueId', 'action': 'delete'});
           $(this).parent().parent().hide();
 
+          
+          
 
-
-
-
+          
         });
 
 
