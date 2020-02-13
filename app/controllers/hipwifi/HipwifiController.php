@@ -1913,65 +1913,54 @@ public function activateVenueSave()
                     //HERE HANNES
                     
 
+                $shouldsave = true;
+                for($i=0; $i<=9; $i++){
+                    $bypass = 'bypassmac' . $i;
+                    $value = $input[$bypass];
+                    if($venue->bypassmac1 == $value || 
+                    $venue->bypassmac2 == $value || 
+                    $venue->bypassmac3 == $value || 
+                    $venue->bypassmac4 == $value || 
+                    $venue->bypassmac5 == $value || 
+                    $venue->bypassmac6 == $value || 
+                    $venue->bypassmac7 == $value || 
+                    $venue->bypassmac8 == $value || 
+                    $venue->bypassmac9 == $value || 
+                    $venue->bypassmac10 == $value){
+                        $shouldsave = false;
+                    }
 
-                if($venue->bypassmac1) {
-                    if($venue->bypassmac1 != $input["bypassmac1"]){
-                        \Log::info("HANNES COMPARE $venue->bypassmac1 with ". $input["bypassmac1"]." ");
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac1, $venue->bypasscomment1);
-                    }
                 }
-                if($venue->bypassmac2) {
-                    if($venue->bypassmac2 != $input["bypassmac2"]){
-                        \Log::info("HANNES COMPARE $venue->bypassmac2 with ". $input["bypassmac2"]." ");
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac2, $venue->bypasscomment2);
-                    }
+
+                if($venue->bypassmac1 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac1, $venue->bypasscomment1);
                 }
-                if($venue->bypassmac3) {
-                    if($venue->bypassmac3 != $input["bypassmac3"]){
-                        \Log::info("HANNES COMPARE $venue->bypassmac3 with ". $input["bypassmac3"]." ");
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac3, $venue->bypasscomment3);
-                    }
+                if($venue->bypassmac2 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac2, $venue->bypasscomment2);
                 }
-                if($venue->bypassmac4) {
-                    if($venue->bypassmac4 != $input["bypassmac4"]){
-                        \Log::info("HANNES COMPARE $venue->bypassmac4 with ". $input["bypassmac4"]." ");
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac4, $venue->bypasscomment4);
-                    }
+                if($venue->bypassmac3 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac3, $venue->bypasscomment3);
                 }
-                if($venue->bypassmac5) {
-                    if($venue->bypassmac5 != $input["bypassmac5"]){
-                        \Log::info("HANNES COMPARE $venue->bypassmac5 with ". $input["bypassmac5"]." ");
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac5, $venue->bypasscomment5);
-                    }
+                if($venue->bypassmac4 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac4, $venue->bypasscomment4);
                 }
-                if($venue->bypassmac6) {
-                    if($venue->bypassmac6 != $input["bypassmac6"]){
-                        \Log::info("HANNES COMPARE $venue->bypassmac6 with ". $input["bypassmac6"]." ");
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac6, $venue->bypasscomment6);
-                    }
+                if($venue->bypassmac5 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac5, $venue->bypasscomment5);
                 }
-                if($venue->bypassmac7) {
-                    if($venue->bypassmac7 != $input["bypassmac7"]){
-                        \Log::info("HANNES COMPARE $venue->bypassmac7 with ". $input["bypassmac7"]." ");
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac7, $venue->bypasscomment7);
-                    }
+                if($venue->bypassmac6 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac6, $venue->bypasscomment6);
                 }
-                if($venue->bypassmac8) {
-                    if($venue->bypassmac8 != $input["bypassmac8"]){
-                        \Log::info("HANNES COMPARE $venue->bypassmac8 with ". $input["bypassmac8"]." ");
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac8, $venue->bypasscomment8);
-                    }
+                if($venue->bypassmac7 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac7, $venue->bypasscomment7);
                 }
-                if($venue->bypassmac9) {
-                    if($venue->bypassmac9 != $input["bypassmac9"]){
-                        \Log::info("HANNES COMPARE $venue->bypassmac9 with ". $input["bypassmac9"]." ");
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac9, $venue->bypasscomment9);
-                    }
+                if($venue->bypassmac8 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac8, $venue->bypasscomment8);
                 }
-                if($venue->bypassmac10) {
-                    if($venue->bypassmac10 != $input[$bypass]){
-                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac10, $venue->bypasscomment10);
-                    }
+                if($venue->bypassmac9 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac9, $venue->bypasscomment9);
+                }
+                if($venue->bypassmac10 && $shouldsave) {
+                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac10, $venue->bypasscomment10);
                 }
 
 
