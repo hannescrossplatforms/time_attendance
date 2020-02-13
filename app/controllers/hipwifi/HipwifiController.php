@@ -1772,11 +1772,11 @@ public function activateVenueSave()
             // 'macaddress'     => 'required|macaddress_format|unique:venues,macaddress,'.$id,
         $rules = array(
             'adminssid1'     => 'min:5|max:20', 
-            'firstnetworkpassword'      => 'max:20',
+            'firstnetworkpassword'      => 'min:8|max:20',
             'adminssid2'     => 'min:5|max:20',
-            'secondnetworkpassword'      => 'max:20',
+            'secondnetworkpassword'      => 'min:8|max:20',
             'adminssid3'     => 'min:5|max:20', 
-            'thirdnetworkpassword'      => 'max:20',
+            'thirdnetworkpassword'      => 'min:8|max:20',
             'bypassmac0' => 'macaddress_format',
             'bypassmac1' => 'macaddress_format',
             'bypassmac2' => 'macaddress_format',
@@ -1789,6 +1789,7 @@ public function activateVenueSave()
             'bypassmac9' => 'macaddress_format',
             );
 
+            
         $validator = \Validator::make($input, $rules);
             
         if ($validator->fails()) {
@@ -1797,6 +1798,7 @@ public function activateVenueSave()
             return \Redirect::to('hipwifi_editvenue/'.$id)->withErrors($validator)->withInput();
         } else {
 
+            
             $id = \Input::get('id');
             $venue =  \Venue::find($id);
 
@@ -1868,19 +1870,23 @@ public function activateVenueSave()
             $venue->statuscomment = $input['statuscomment'];
             if (empty($adminssid1check) &&  $input['adminssid1'] !== ""){
                 $venue->adminssid1 = $input['adminssid1'];
+                
                 $venue->password1 = $input['firstnetworkpassword'];
+                \Log::info("HANNES firstnetworkpassword!!!! $venue->password1");
                 $venue->type1 = $input['type1'];
             }
 
             if (empty($adminssid2check) &&  $input['adminssid2'] !== ""){
                 $venue->adminssid2 = $input['adminssid2'];
                 $venue->password2 = $input['secondnetworkpassword'];
+                \Log::info("HANNES secondnetworkpassword!!!! $venue->password2");
                 $venue->type2 = $input['type2'];
             }
 
             if (empty($adminssid3check) &&  $input['adminssid3'] !== ""){
                 $venue->adminssid3 = $input['adminssid3'];
                 $venue->password3 = $input['thirdnetworkpassword'];
+                \Log::info("HANNES thirdnetworkpassword!!!! $venue->password3");
                 $venue->type3 = $input['type3'];
             }
             if($input['bypassmac0'] !== "") {
