@@ -442,8 +442,22 @@
         var actionsQueue = [];
 
 
-        $('.delete-btn').click(function() {
+        $('.delete-btn').click(function(e) {
+          e.preventDefault();
           debugger;
+          let adminId = $(this).attr("adminid");
+          let venueId = $(this).attr("venueid");
+
+          let obj = {'adminId': adminId, venueId: 'venueId', 'action': 'delete'};
+          actionsQueue.push(obj);
+
+
+
+
+
+
+
+
           // venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}"
 
           // let action = ""
