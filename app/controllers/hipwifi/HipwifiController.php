@@ -1922,7 +1922,7 @@ public function activateVenueSave()
                     \Log::info("HANNES IN LOOP input bypass: ". $input[$bypass] ." and should add mac address");
                      if($input[$bypass] !== "") {
                         \Log::info("HANNES IN LOOP and will save");
-                       $mikrotik->addMacAddressBypass($venue, $venue->$mac, $venue->$comment);
+                       $mikrotik->addMacAddressBypass($venue, $venue->$mac, $venue->$comment, 'off');
                     } 
                  }
 
