@@ -164,7 +164,7 @@ class Mikrotik extends Eloquent {
                 if($lines <= 1 or $overridersc == "on") {
                         file_put_contents($dest2, $scripttext);
                         return "<div class='rscdeployed'>Your script has been deployed.</div>";
-                        } 
+                        }
                     else {
                         return "<div class='rscnotdeployed'>Your script has not been deployed. The existing destination file has not yet been read by the AP.</div>";
                     }

@@ -154,21 +154,21 @@
                             <td>{{$data['venue']->adminssid1}}</td>
                             <td>{{$data['venue']->password1}}</td>
                             <td>{{$data['venue']->type1}}</td>
-                            <td><a class="btn btn-sm btn-danger" id="deletessid1" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid1;}}">Delete</a></td>
+                            <td><a class="delete-btn btn btn-sm btn-danger" id="deletessid1" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid1;}}">Delete</a></td>
                           </tr>
                           <tr id="configuredadminwifi2">
                             <td>2</td>
                             <td>{{$data['venue']->adminssid2}}</td>
                             <td>{{$data['venue']->password2}}</td>
                             <td>{{$data['venue']->type2}}</td>
-                            <td><a class="btn btn-sm btn-danger" id="deletessid2" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid2;}}">Delete</a></td>
+                            <td><a class="delete-btn btn btn-sm btn-danger" id="deletessid2" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid2;}}">Delete</a></td>
                           </tr>
                           <tr id="configuredadminwifi3">
                             <td>3</td>
                             <td>{{$data['venue']->adminssid3}}</td>
                             <td>{{$data['venue']->password3}}</td>
                             <td>{{$data['venue']->type3}}</td>
-                            <td><a class="btn btn-sm btn-danger"  id="deletessid3" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid3;}}">Delete</a></td>
+                            <td><a class="delete-btn btn btn-sm btn-danger"  id="deletessid3" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid3;}}">Delete</a></td>
                           </tr>
 
                           
@@ -438,6 +438,22 @@
     <script src="/js/jquery.timepicker.min.js"></script> 
 
     <script>
+
+        var actionsQueue = [];
+
+
+        $('.delete-btn').click(function() {
+          debugger;
+          // venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}"
+
+          // let action = ""
+
+
+
+        });
+
+
+
         $(document).ready( function() {
 
          $('#tabletpos_printers').hide();
