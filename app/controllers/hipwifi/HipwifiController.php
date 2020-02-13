@@ -1944,7 +1944,7 @@ public function activateVenueSave()
                 $shouldsave = true;
                 $bypass = 'bypassmac' . $i;
                 $value = $input[$bypass];
-
+                \Log::info("HANNES TESTING: ORIGINAL VALUE IS: $value");
                 if($value != null && $value != "") {
 
                     \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac1");
