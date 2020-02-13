@@ -1931,9 +1931,11 @@ public function activateVenueSave()
                     $venue->bypassmac9 == $value || 
                     $venue->bypassmac10 == $value){
                         $shouldsave = false;
+                        \Log::info("HANNES SHOULD NOT SAVE");
                     }
                     else {
                         $shouldsave = true;
+                        \Log::info("HANNES SHOULD SAVE");
                     }
 
                 }
