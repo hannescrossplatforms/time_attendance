@@ -183,10 +183,11 @@ class Mikrotik extends Eloquent {
         return true;
     }
 
-   public function addMacAddressBypass($venue, $bypassmac, $comment, $overridersc){
+   public function addMacAddressBypass($venue, $bypassmac, $comment){
 
     \Log::info("HANNES KOM HIER: addMacAddressBypass");
 
+         $overridersc = "on";
          $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
          //$macaddress = $venue->macaddress;
          //$dest = $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
