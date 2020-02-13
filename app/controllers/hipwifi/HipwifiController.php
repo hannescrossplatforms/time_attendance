@@ -1919,24 +1919,30 @@ public function activateVenueSave()
                     $bypass = 'bypassmac' . $i;
                     $value = $input[$bypass];
 
-                    \Log::info("HANNES INPUT IS: $value");
-                    if($venue->bypassmac1 == $value || 
-                    $venue->bypassmac2 == $value || 
-                    $venue->bypassmac3 == $value || 
-                    $venue->bypassmac4 == $value || 
-                    $venue->bypassmac5 == $value || 
-                    $venue->bypassmac6 == $value || 
-                    $venue->bypassmac7 == $value || 
-                    $venue->bypassmac8 == $value || 
-                    $venue->bypassmac9 == $value || 
-                    $venue->bypassmac10 == $value){
-                        $shouldsave = false;
-                        \Log::info("HANNES SHOULD NOT SAVE");
+                    if ($value != ""){
+                        \Log::info("HANNES INPUT IS: $value");
+                        if($venue->bypassmac1 == $value || 
+                        $venue->bypassmac2 == $value || 
+                        $venue->bypassmac3 == $value || 
+                        $venue->bypassmac4 == $value || 
+                        $venue->bypassmac5 == $value || 
+                        $venue->bypassmac6 == $value || 
+                        $venue->bypassmac7 == $value || 
+                        $venue->bypassmac8 == $value || 
+                        $venue->bypassmac9 == $value || 
+                        $venue->bypassmac10 == $value){
+                            $shouldsave = false;
+                            \Log::info("HANNES SHOULD NOT SAVE");
+                        }
+                        else {
+                            $shouldsave = true;
+                            \Log::info("HANNES SHOULD SAVE");
+                        }
                     }
                     else {
-                        $shouldsave = true;
-                        \Log::info("HANNES SHOULD SAVE");
+                        \Log::info("HANNES MUST SAVE");
                     }
+                    
 
                 }
 
