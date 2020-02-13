@@ -94,6 +94,7 @@ class Mikrotik extends Eloquent {
         }
         $readfile = file_get_contents($file);
         $readfile = str_replace("adminssid", $adminssid, $readfile);
+        \Log::info("HANNES PASSWORD!!!! $password");
         $readfile = str_replace("password", $password, $readfile);
         $readfile = str_replace("hide-ssid=no", $networktype, $readfile);
         file_put_contents($file, $readfile);
