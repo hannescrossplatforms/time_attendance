@@ -154,21 +154,21 @@
                             <td>{{$data['venue']->adminssid1}}</td>
                             <td>{{$data['venue']->password1}}</td>
                             <td>{{$data['venue']->type1}}</td>
-                            <td><a class="delete-btn btn btn-sm btn-danger" id="deletessid1" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid1;}}">Delete</a></td>
+                            <td><a class="btn btn-sm btn-danger" id="deletessid1" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid1;}}">Delete</a></td>
                           </tr>
                           <tr id="configuredadminwifi2">
                             <td>2</td>
                             <td>{{$data['venue']->adminssid2}}</td>
                             <td>{{$data['venue']->password2}}</td>
                             <td>{{$data['venue']->type2}}</td>
-                            <td><a class="delete-btn btn btn-sm btn-danger" id="deletessid2" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid2;}}">Delete</a></td>
+                            <td><a class="btn btn-sm btn-danger" id="deletessid2" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid2;}}">Delete</a></td>
                           </tr>
                           <tr id="configuredadminwifi3">
                             <td>3</td>
                             <td>{{$data['venue']->adminssid3}}</td>
                             <td>{{$data['venue']->password3}}</td>
                             <td>{{$data['venue']->type3}}</td>
-                            <td><a class="delete-btn btn btn-sm btn-danger"  id="deletessid3" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid3;}}">Delete</a></td>
+                            <td><a class="btn btn-sm btn-danger"  id="deletessid3" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid3;}}">Delete</a></td>
                           </tr>
 
                           
@@ -252,7 +252,7 @@
                                     <td>{{$i+1}}</td>
                                     <td>{{$data['bypass'][$i][0]}}</td>
                                     <td>{{$data['bypass'][$i][1]}}</td>
-                                    <td><a class="btn btn-sm btn-danger"  id="deletebypassmac1" href="{{ url('delmacbypass'); }}/{{$data['venue']->id;}}/{{$data['bypass'][$i][0];}}">Delete</a></td>
+                                    <td><a class="delete-btn btn btn-sm btn-danger" venueid="{{$data['venue']->id;}" bypassid="{{$data['bypass'][$i][0];}}"  id="deletebypassmac1" href="{{ url('delmacbypass'); }}/{{$data['venue']->id;}}/{{$data['bypass'][$i][0];}}">Delete</a></td>
                                 </tr>
                   @endfor
                       </table>
@@ -445,16 +445,19 @@
         $('.delete-btn').click(function(e) {
           e.preventDefault();
           debugger;
-          let adminId = $(this).attr("adminid");
+
+          // venueid="{{$data['venue']->id;}" bypassid="{{$data['bypass'][$i][0];}}"
+
+          let bypassId = $(this).attr("bypassid");
           let venueId = $(this).attr("venueid");
 
-          actionsQueue.push({'adminId': adminId, venueId: 'venueId', 'action': 'delete'});
+          actionsQueue.push({'bypassid': bypassId, 'venueid': venueId, 'action': 'delete'});
           $(this).parent().parent().hide();
 
-          
+          //On submit tapped, add new networks and also add the exisiting ones, then add the removed ones
           
 
-          
+
         });
 
 

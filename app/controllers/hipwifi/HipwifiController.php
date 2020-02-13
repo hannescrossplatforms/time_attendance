@@ -2037,12 +2037,8 @@ public function activateVenueSave()
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac10, $venue->bypasscomment10);
                 }
 
-                
-
-
-
-
-                 for($i=0; $i<=9; $i++){
+                for($i=0; $i<=9; $i++){
+                    
                     \Log::info("HANNES IN LOOP AT POS: $i");
                     $bypass = 'bypassmac' . $i;
                     $k = $i + 1;
@@ -2050,20 +2046,22 @@ public function activateVenueSave()
                     $comment = 'bypasscomment'. $k;
                     
                     \Log::info("HANNES IN LOOP input bypass: ". $input[$bypass] ." and should add mac address");
-                     if($input[$bypass] !== "") {
-                        \Log::info("HANNES IN LOOP and will save");
-                       $mikrotik->addMacAddressBypass($venue, $venue->$mac, $venue->$comment);
-                    } 
-                 }
 
-                 // check if the device has got any tabletpos printer configured then modify the file that it will use to monitor them.
-                  $printers = new \Tabletposprinter();
-                  $printers = $printers->getPrintersForVenue($id);
-                  if($printers){
+                    if($input[$bypass] !== "") {
+                        \Log::info("HANNES IN LOOP and will save");
+                        $mikrotik->addMacAddressBypass($venue, $venue->$mac, $venue->$comment);
+                    }
+
+                }
+
+                // check if the device has got any tabletpos printer configured then modify the file that it will use to monitor them.
+                $printers = new \Tabletposprinter();
+                $printers = $printers->getPrintersForVenue($id);
+                if($printers){
                     $macaddress = \Input::get('macaddress');
                     $mikrotik->genTabletposRsc($printers, $macaddress);
 
-                  }
+                }
                    
            }
             return \Redirect::route('hipwifi_showvenues');
