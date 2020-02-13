@@ -1915,8 +1915,11 @@ public function activateVenueSave()
 
                 $shouldsave = true;
                 for($i=0; $i<=9; $i++){
+                    
                     $bypass = 'bypassmac' . $i;
                     $value = $input[$bypass];
+
+                    \Log::info("HANNES INPUT IS: $value");
                     if($venue->bypassmac1 == $value || 
                     $venue->bypassmac2 == $value || 
                     $venue->bypassmac3 == $value || 
