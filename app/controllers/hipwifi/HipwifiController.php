@@ -1943,6 +1943,7 @@ public function activateVenueSave()
                     $password = 'password' . $i;
                     $type = 'type' . $i;
                     if($input[$adminssid] !== "") {
+                        \Log::info("HANNES PASSWORD 2!!!! $venue->$password");
                         $this->addAdminWifi($venue->id, $venue->$adminssid, $venue->$password, $venue->$type, $number = $i);
                     }
                 }
@@ -2143,7 +2144,7 @@ public function activateVenueSave()
         }
 
         $venue = \Venue::find($id);
-        
+        \Log::info("HANNES PASSWORD 1!!!! $password");
         
         $mikrotik = new \Mikrotik();
         $mikrotik->modifyAdminWifiTemplate($adminssid, $password, $type, $filename, $venue);

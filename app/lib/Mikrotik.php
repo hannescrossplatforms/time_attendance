@@ -58,6 +58,7 @@ class Mikrotik extends Eloquent {
     }
 
    public function modifyAdminWifiTemplate($adminssid, $password, $type, $filename, $venueobj){
+    \Log::info("HANNES PASSWORD ONE!!!! $password");
         /*This function copies an add_admin_ssid template file into a venue specific add_admin_ssid file and 
         then replaces the fields that are needed to be replaced
         variable explanations
