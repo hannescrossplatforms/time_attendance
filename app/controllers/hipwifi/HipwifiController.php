@@ -1915,34 +1915,54 @@ public function activateVenueSave()
 
 
                 if($venue->bypassmac1) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac1, $venue->bypasscomment1);
+                    if($venue->bypassmac1 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac1, $venue->bypasscomment1);
+                    }
                 }
                 if($venue->bypassmac2) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac2, $venue->bypasscomment2);
+                    if($venue->bypassmac2 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac2, $venue->bypasscomment2);
+                    }
                 }
                 if($venue->bypassmac3) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac3, $venue->bypasscomment3);
+                    if($venue->bypassmac3 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac3, $venue->bypasscomment3);
+                    }
                 }
                 if($venue->bypassmac4) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac4, $venue->bypasscomment4);
+                    if($venue->bypassmac4 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac4, $venue->bypasscomment4);
+                    }
                 }
                 if($venue->bypassmac5) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac5, $venue->bypasscomment5);
+                    if($venue->bypassmac5 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac5, $venue->bypasscomment5);
+                    }
                 }
                 if($venue->bypassmac6) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac6, $venue->bypasscomment6);
+                    if($venue->bypassmac6 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac6, $venue->bypasscomment6);
+                    }
                 }
                 if($venue->bypassmac7) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac7, $venue->bypasscomment7);
+                    if($venue->bypassmac7 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac7, $venue->bypasscomment7);
+                    }
                 }
                 if($venue->bypassmac8) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac8, $venue->bypasscomment8);
+                    if($venue->bypassmac8 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac8, $venue->bypasscomment8);
+                    }
                 }
                 if($venue->bypassmac9) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac9, $venue->bypasscomment9);
+                    if($venue->bypassmac9 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac9, $venue->bypasscomment9);
+                    }
                 }
                 if($venue->bypassmac10) {
-                    $mikrotik->addMacAddressBypass($venue, $venue->bypassmac10, $venue->bypasscomment10);
+                    if($venue->bypassmac10 != $input[$bypass]){
+                        $mikrotik->addMacAddressBypass($venue, $venue->bypassmac10, $venue->bypasscomment10);
+                    }
                 }
 
 
