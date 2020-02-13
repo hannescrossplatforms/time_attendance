@@ -1939,10 +1939,6 @@ public function activateVenueSave()
                             \Log::info("HANNES SHOULD SAVE");
                         }
                     }
-                    else {
-                        $shouldsave = false;
-                        \Log::info("HANNES MUST NOT SAVE");
-                    }
                     
 
                 }
