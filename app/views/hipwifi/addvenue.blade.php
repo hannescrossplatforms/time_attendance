@@ -60,7 +60,7 @@
                       {{ Form::hidden('brand_id', $data['venue']->brand_id, array('id' => 'brand_id')) }}
                       {{ Form::hidden('server_id', $data['venue']->server_id, array('id' => 'server_id')) }}
                       {{ Form::hidden('isp_id', $data['venue']->isp_id) }}
-                      {{ Form::hidden('delete_macs', "", array('id' => 'hannes_test')) }}
+                      {{ Form::hidden('delete_macs', "", array('id' => 'delete_macs')) }}
 
 
                       @if ($edit)
@@ -447,12 +447,12 @@
           e.preventDefault();
           debugger;
 
-
           let bypassId = $(this).attr("bypassid");
           let venueId = $(this).attr("venueid");
 
           actionsQueue.push({'bypassid': bypassId, 'venueid': venueId, 'action': 'delete'});
           $(this).parent().parent().hide();
+          $('#delete_macs').val(actionsQueue);
 
           //On submit tapped, add new networks and also add the exisiting ones, then add the removed ones
 
