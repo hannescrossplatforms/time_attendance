@@ -1912,16 +1912,16 @@ public function activateVenueSave()
                     //Bypass mac-address config writing to mac-address.rsc process begins
                     //HERE HANNES
                     
-                 for($i=0; $i<=9; $i++){
-                    \Log::info("HANNES IN LOOP AT POS: $i");
-                    $bypass = 'bypassmac' . $i;
-                    $k = $i + 1;
-                    $mac = 'bypassmac' . $k;
-                    $comment = 'bypasscomment'. $k;
-                     if($input[$bypass] !== "") {
-                       $mikrotik->addMacAddressBypass($venue, $venue->$mac, $venue->$comment);
-                    } 
-                 }
+                //  for($i=0; $i<=9; $i++){
+                //     \Log::info("HANNES IN LOOP AT POS: $i");
+                //     $bypass = 'bypassmac' . $i;
+                //     $k = $i + 1;
+                //     $mac = 'bypassmac' . $k;
+                //     $comment = 'bypasscomment'. $k;
+                //      if($input[$bypass] !== "") {
+                //        $mikrotik->addMacAddressBypass($venue, $venue->$mac, $venue->$comment);
+                //     } 
+                //  }
 
                  // check if the device has got any tabletpos printer configured then modify the file that it will use to monitor them.
                   $printers = new \Tabletposprinter();
