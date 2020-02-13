@@ -1919,7 +1919,7 @@ public function activateVenueSave()
                     $bypass = 'bypassmac' . $i;
                     $value = $input[$bypass];
 
-                    if ($value != ""){
+                    if ($value != "" && $value != null){
                         \Log::info("HANNES INPUT IS: $value");
                         if($venue->bypassmac1 == $value || 
                         $venue->bypassmac2 == $value || 
@@ -1940,8 +1940,8 @@ public function activateVenueSave()
                         }
                     }
                     else {
-                        $shouldsave = true;
-                        \Log::info("HANNES MUST SAVE");
+                        $shouldsave = false;
+                        \Log::info("HANNES MUST NOT SAVE");
                     }
                     
 
