@@ -1646,16 +1646,13 @@ public function activateVenueSave()
 
     public function editVenue($id)
     {
-        \Log::info("HANNES EDIT VENUE: id = $id");
         $data = array();
         $data['currentMenuItem'] = "Venue Management";
         $data['edit'] = true;
         $data['is_activation'] = false;
-        \Log::info("HANNES EDIT VENUE: id = $id");
         $data['venue'] = \Venue::find($id);
         //dd($id);
         //dd($data['venue']);
-        \Log::info("HANNES EDIT VENUE: id = $id");
         $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
         $macaddress = $data['venue']->macaddress;
        // $data['configfile'] =  $mikrotikdir->value . "deployment/" . $macaddress .  "_951-2n.rsc";
@@ -1806,7 +1803,6 @@ public function activateVenueSave()
             // Delete deleted venues
 
             $macs_to_delete = \Input::get('delete_macs');
-            \Log::info("HANNES MACS TO DELETE: $macs_to_delete");
             $macs_array = explode(',', $macs_to_delete);
 
             foreach ($macs_array as $bypassmac){ 
@@ -1872,21 +1868,18 @@ public function activateVenueSave()
                 $venue->adminssid1 = $input['adminssid1'];
                 
                 $venue->password1 = $input['firstnetworkpassword'];
-                \Log::info("HANNES firstnetworkpassword!!!! $venue->password1");
                 $venue->type1 = $input['type1'];
             }
 
             if (empty($adminssid2check) &&  $input['adminssid2'] !== ""){
                 $venue->adminssid2 = $input['adminssid2'];
                 $venue->password2 = $input['secondnetworkpassword'];
-                \Log::info("HANNES secondnetworkpassword!!!! $venue->password2");
                 $venue->type2 = $input['type2'];
             }
 
             if (empty($adminssid3check) &&  $input['adminssid3'] !== ""){
                 $venue->adminssid3 = $input['adminssid3'];
                 $venue->password3 = $input['thirdnetworkpassword'];
-                \Log::info("HANNES thirdnetworkpassword!!!! $venue->password3");
                 $venue->type3 = $input['type3'];
             }
             if($input['bypassmac0'] !== "") {
@@ -1949,80 +1942,13 @@ public function activateVenueSave()
                     $password = 'password' . $i;
                     $type = 'type' . $i;
                     if($input[$adminssid] !== "") {
-                        \Log::info("HANNES PASSWORD 2!!!! $venue->$password");
                         $this->addAdminWifi($venue->id, $venue->$adminssid, $venue->$password, $venue->$type, $number = $i);
                     }
                 }
                     //Bypass mac-address config writing to mac-address.rsc process begins
-                    //HERE HANNES
-                    
-
-                // $shouldsave = true;
-                // for($i=0; $i<=9; $i++){
-                    
-                //     $bypass = 'bypassmac' . $i;
-                //     $value = $input[$bypass];
-
-                //     if ($value != "" && $value != null){
-                //         \Log::info("HANNES INPUT IS: $value");
-                //         if($venue->bypassmac1 == $value || 
-                //         $venue->bypassmac2 == $value || 
-                //         $venue->bypassmac3 == $value || 
-                //         $venue->bypassmac4 == $value || 
-                //         $venue->bypassmac5 == $value || 
-                //         $venue->bypassmac6 == $value || 
-                //         $venue->bypassmac7 == $value || 
-                //         $venue->bypassmac8 == $value || 
-                //         $venue->bypassmac9 == $value || 
-                //         $venue->bypassmac10 == $value){
-                //             $shouldsave = false;
-                //             \Log::info("HANNES SHOULD NOT SAVE");
-                //         }
-                //         else {
-                //             $shouldsave = true;
-                //             \Log::info("HANNES SHOULD SAVE");
-                //         }
-                //     }
-                // }
-                
-                // $shouldsave = true;
-
-                // for($i=1; $i<=3; $i++){
-
-                //     $bypass = 'bypassmac' . $i;
-                //     $value = $input[$bypass];
-                //     \Log::info("HANNES TESTING: ORIGINAL VALUE IS: $value");
-                //     if($value != null && $value != "") {
-
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac1");
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac2");
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac3");
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac4");
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac5");
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac6");
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac7");
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac8");
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac9");
-                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac10");
-                //         if($venue->bypassmac1 == $value || 
-                //         $venue->bypassmac2 == $value || 
-                //         $venue->bypassmac3 == $value || 
-                //         $venue->bypassmac4 == $value || 
-                //         $venue->bypassmac5 == $value || 
-                //         $venue->bypassmac6 == $value || 
-                //         $venue->bypassmac7 == $value || 
-                //         $venue->bypassmac8 == $value || 
-                //         $venue->bypassmac9 == $value || 
-                //         $venue->bypassmac10 == $value){
-                //             $shouldsave = false;
-                //         }
-
-                //     }
-
-                // }
+                  
                     $nottosave = null;
                     for($i=0; $i<=9; $i++){
-                        \Log::info("HANNES ALL INPUTS AT POS: ".$input["bypassmac$i"]." ");
                         if($input["bypassmac$i"] != null && $input["bypassmac$i"] != "") {
                             if ($input["bypassmac$i"] == $venue->bypassmac1 || 
                             $input["bypassmac$i"] == $venue->bypassmac2 || 
@@ -2083,16 +2009,13 @@ public function activateVenueSave()
 
                 for($i=0; $i<=9; $i++){
                     
-                    \Log::info("HANNES IN LOOP AT POS: $i");
                     $bypass = 'bypassmac' . $i;
                     $k = $i + 1;
                     $mac = 'bypassmac' . $k;
                     $comment = 'bypasscomment'. $k;
                     
-                    \Log::info("HANNES IN LOOP input bypass: ". $input[$bypass] ." and should add mac address");
 
                     if($input[$bypass] !== "") {
-                        \Log::info("HANNES IN LOOP and will save");
                         $mikrotik->addMacAddressBypass($venue, $venue->$mac, $venue->$comment);
                     }
 
@@ -2150,7 +2073,6 @@ public function activateVenueSave()
         }
 
         $venue = \Venue::find($id);
-        \Log::info("HANNES PASSWORD 1!!!! $password");
         
         $mikrotik = new \Mikrotik();
         $mikrotik->modifyAdminWifiTemplate($adminssid, $password, $type, $filename, $venue);

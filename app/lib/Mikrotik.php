@@ -34,17 +34,6 @@ class Mikrotik extends Eloquent {
 
     public function substituteInFile($file, $old_nasid, $nasid, $radius_ip, $hostname, $ssid) {
 
-
-        \Log::info("HANNES substituteInFile: file $file");
-        \Log::info("HANNES substituteInFile: old_nasid $old_nasid");
-        \Log::info("HANNES substituteInFile: nasid $nasid");
-        \Log::info("HANNES substituteInFile: radius_ip $radius_ip");
-        \Log::info("HANNES substituteInFile: hostname $hostname");
-        \Log::info("HANNES substituteInFile: ssid $ssid");
-
-
-
-
         $file_contents = file_get_contents($file);
         $file_contents = str_replace("[[nasid]]",$nasid,$file_contents);
         $file_contents = str_replace("[[radius_ip]]",$radius_ip,$file_contents);
@@ -52,13 +41,11 @@ class Mikrotik extends Eloquent {
         $file_contents = str_replace("[[hostname]]",$hostname,$file_contents);
         $file_contents = str_replace("[[old_nasid]]",$old_nasid,$file_contents);
 
-        \Log::info("HANNES substituteInFile: file contents: $file_contents");
 
         file_put_contents($file, $file_contents);
     }
 
    public function modifyAdminWifiTemplate($adminssid, $password, $type, $filename, $venueobj){
-    \Log::info("HANNES PASSWORD ONE!!!! $password");
         /*This function copies an add_admin_ssid template file into a venue specific add_admin_ssid file and 
         then replaces the fields that are needed to be replaced
         variable explanations
@@ -95,7 +82,6 @@ class Mikrotik extends Eloquent {
         }
         $readfile = file_get_contents($file);
         $readfile = str_replace("adminssid", $adminssid, $readfile);
-        \Log::info("HANNES PASSWORD!!!! $password");
         $readfile = str_replace("password", $password, $readfile);
         $readfile = str_replace("hide-ssid=no", $networktype, $readfile);
         file_put_contents($file, $readfile);
@@ -133,7 +119,6 @@ class Mikrotik extends Eloquent {
 
     public function deployRsc($venue, $scripttext, $overridersc, $scriptmenu="on") {
 
-        \Log::info("HANNES KOM HIER: deployRsc _951-2n.rsc");
         $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
         $macaddress = $venue->macaddress;
 
@@ -146,7 +131,6 @@ class Mikrotik extends Eloquent {
 
        
          if ($scriptmenu == "on"){
-            \Log::info("HANNES KOM HIER: deployRsc scriptmenu is on");
          $lines = count(file($dest));
              if($lines <= 1 or $overridersc == "on") {
                      file_put_contents($dest, $scripttext);
@@ -157,14 +141,12 @@ class Mikrotik extends Eloquent {
                 }
         }
         elseif ($scriptmenu == "off"){
-            \Log::info("HANNES KOM HIER: deployRsc scriptmenu is off");
             $file = fopen($dest, 'a');
             fwrite($file, $scripttext);            
             fclose($file);
             }
 
         if ($scriptmenu == "on"){
-            \Log::info("HANNES KOM HIER: deployRsc scriptmenu is on2");
             $lines = count(file($dest2));
                 if($lines <= 1 or $overridersc == "on") {
                         file_put_contents($dest2, $scripttext);
@@ -176,7 +158,6 @@ class Mikrotik extends Eloquent {
 
             }
             elseif ($scriptmenu == "off"){
-                \Log::info("HANNES KOM HIER: deployRsc scriptmenu is off 2");
                 $file = fopen($dest2, 'a');
                 fwrite($file, $scripttext);            
                 fclose($file);
@@ -187,7 +168,6 @@ class Mikrotik extends Eloquent {
 
    public function addMacAddressBypass($venue, $bypassmac, $comment){
 
-    \Log::info("HANNES KOM HIER: addMacAddressBypass");
 
          $overridersc = "on";
          $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
@@ -255,7 +235,6 @@ class Mikrotik extends Eloquent {
 
 
     public function updateVenue($venue, $old_sitename) {
-        \Log::info("HANNES EDIT VENUE old sitename: $old_sitename");
         // create an resc file for both 951 and cAP
         $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
         $macaddress = $venue->macaddress;
@@ -277,10 +256,6 @@ class Mikrotik extends Eloquent {
 
         $this->substituteInFile($dest1, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
     
-        \Log::info("HANNES EDIT VENUE source 1: $source1");
-        \Log::info("HANNES EDIT VENUE dest 1: $dest1");
-        \Log::info("HANNES EDIT VENUE sub dest: $dest1, old nas id: $old_nasid, nasId: $nasid, radius ip: $radius_ip, hostname: $hostname, ssid: $ssid");
-
         // Set up the cAP script
         
         $source2 = $mikrotikdir->value . "deployment/templates/edit_venue_template";
@@ -288,11 +263,6 @@ class Mikrotik extends Eloquent {
         copy($source2, $dest2);
 
         $this->substituteInFile($dest2, $old_nasid, $nasid, $radius_ip, $hostname, $ssid);
-        
-
-        \Log::info("HANNES EDIT VENUE source 2: $source2");
-        \Log::info("HANNES EDIT VENUE dest 2: $dest2");
-        \Log::info("HANNES EDIT VENUE sub 2 dest: $dest2, old nas id: $old_nasid, nasId: $nasid, radius ip: $radius_ip, hostname: $hostname, ssid: $ssid");
         
 
         // Setup the login.html
@@ -464,7 +434,6 @@ class Mikrotik extends Eloquent {
 
     public function genTabletposcode($macaddress){
 
-        \Log::info("HANNES KOM HIER: genTabletpostcode _951-2n.rsc");
         $mikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
 
         //fetch the main macaddress_rsc file and append the instruction for the AP to fetch the printer rsc and also create a scheduler for it.

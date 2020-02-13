@@ -42,7 +42,6 @@ class HippnpController extends \BaseController {
 
         foreach ($allStaff as $staff) {
             // Sometimes staff gets deleted and then this throws an error. So on delete staff we need to remove entries in the pnp table too.
-            \Log::info("HANNES LOG: staff id = $staff->staff_id");
 
             $staffObj = \EngagePicknPayStaff::getStaffWithID($staff->staff_id);
             $stafId = $staffObj->id;
