@@ -1753,10 +1753,6 @@ public function activateVenueSave()
         $sitename = \Input::get('sitename');
         $sitename = $brand_name . " " . $sitename;
         $input['sitename'] = $sitename;
-
-        $macs_to_delete = \Input::get('delete_macs');
-        \Log::info("HANNES MACS TO DELETE: $macs_to_delete");
-
         $timefrom = \Input::get('timefrom');
         $timeto = \Input::get('timeto');
 
@@ -1803,6 +1799,43 @@ public function activateVenueSave()
 
             $id = \Input::get('id');
             $venue =  \Venue::find($id);
+
+
+            // Delete deleted venues
+
+            $macs_to_delete = \Input::get('delete_macs');
+            \Log::info("HANNES MACS TO DELETE: $macs_to_delete");
+            $macs_array = explode(',', $macs_to_delete);
+
+            foreach ($macs_to_delete as $bypassmac){ 
+                $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
+                                        $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];
+                $mikrotik = new \Mikrotik();
+                $mikrotik->deletebypassmac($venue, $bypassmac);
+                for ($i=0; $i <=9; $i++) { 
+                    if ($bypassmacarray[$i] == $bypassmac){
+                        $index = $i + 1;
+                        \DB::table('venues')->where('id', '=', $id)->update(array('bypassmac'.$index => NULL, 'bypasscomment'.$index => NULL));
+                    }
+                
+                }
+                
+            }
+
+            
+
+            // Done with deleting deleted venues
+
+
+
+
+
+
+
+
+
+
+
             $adminssid1check = $venue->adminssid1;
             $adminssid2check= $venue->adminssid2;
             $adminssid3check = $venue->adminssid3;
