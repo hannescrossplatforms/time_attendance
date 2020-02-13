@@ -1932,6 +1932,9 @@ public function activateVenueSave()
                     $venue->bypassmac10 == $value){
                         $shouldsave = false;
                     }
+                    else {
+                        $shouldsave = true;
+                    }
 
                 }
 
