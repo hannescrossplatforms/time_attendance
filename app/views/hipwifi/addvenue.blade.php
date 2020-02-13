@@ -252,7 +252,7 @@
                                     <td>{{$i+1}}</td>
                                     <td>{{$data['bypass'][$i][0]}}</td>
                                     <td>{{$data['bypass'][$i][1]}}</td>
-                                    <td><a class="delete-btn btn btn-sm btn-danger" venueid="{{$data['venue']->id;}" bypassid="{{$data['bypass'][$i][0];}}"  id="deletebypassmac1" href="{{ url('delmacbypass'); }}/{{$data['venue']->id;}}/{{$data['bypass'][$i][0];}}">Delete</a></td>
+                                    <td><a class="delete-btn btn btn-sm btn-danger" venueid="{{$data['venue']->id;}}" bypassid="{{$data['bypass'][$i][0];}}"  id="deletebypassmac1" href="{{ url('delmacbypass'); }}/{{$data['venue']->id;}}/{{$data['bypass'][$i][0];}}">Delete</a></td>
                                 </tr>
                   @endfor
                       </table>
@@ -455,7 +455,7 @@
           $(this).parent().parent().hide();
 
           //On submit tapped, add new networks and also add the exisiting ones, then add the removed ones
-          
+
 
 
         });
