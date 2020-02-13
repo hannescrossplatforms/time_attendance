@@ -450,7 +450,8 @@
           let bypassId = $(this).attr("bypassid");
           let venueId = $(this).attr("venueid");
 
-          actionsQueue.push({'bypassid': bypassId, 'venueid': venueId, 'action': 'delete'});
+          actionsQueue.push(bypassId);
+          // actionsQueue.push({'bypassid': bypassId, 'venueid': venueId, 'action': 'delete'});
           $(this).parent().parent().hide();
           $('#delete_macs').val(actionsQueue);
 
