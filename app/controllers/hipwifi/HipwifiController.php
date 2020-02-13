@@ -1941,73 +1941,83 @@ public function activateVenueSave()
                 //     }
                 // }
                 
-                $shouldsave = true;
+                // $shouldsave = true;
 
-                for($i=1; $i<=3; $i++){
+                // for($i=1; $i<=3; $i++){
 
-                $bypass = 'bypassmac' . $i;
-                $value = $input[$bypass];
-                \Log::info("HANNES TESTING: ORIGINAL VALUE IS: $value");
-                if($value != null && $value != "") {
+                //     $bypass = 'bypassmac' . $i;
+                //     $value = $input[$bypass];
+                //     \Log::info("HANNES TESTING: ORIGINAL VALUE IS: $value");
+                //     if($value != null && $value != "") {
 
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac1");
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac2");
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac3");
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac4");
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac5");
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac6");
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac7");
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac8");
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac9");
-                    \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac10");
-                    if($venue->bypassmac1 == $value || 
-                    $venue->bypassmac2 == $value || 
-                    $venue->bypassmac3 == $value || 
-                    $venue->bypassmac4 == $value || 
-                    $venue->bypassmac5 == $value || 
-                    $venue->bypassmac6 == $value || 
-                    $venue->bypassmac7 == $value || 
-                    $venue->bypassmac8 == $value || 
-                    $venue->bypassmac9 == $value || 
-                    $venue->bypassmac10 == $value){
-                        $shouldsave = false;
-                    }
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac1");
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac2");
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac3");
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac4");
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac5");
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac6");
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac7");
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac8");
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac9");
+                //         \Log::info("HANNES TESTING: value: $value, bypass is $venue->bypassmac10");
+                //         if($venue->bypassmac1 == $value || 
+                //         $venue->bypassmac2 == $value || 
+                //         $venue->bypassmac3 == $value || 
+                //         $venue->bypassmac4 == $value || 
+                //         $venue->bypassmac5 == $value || 
+                //         $venue->bypassmac6 == $value || 
+                //         $venue->bypassmac7 == $value || 
+                //         $venue->bypassmac8 == $value || 
+                //         $venue->bypassmac9 == $value || 
+                //         $venue->bypassmac10 == $value){
+                //             $shouldsave = false;
+                //         }
 
-                }
-            }
+                //     }
+
+                // }
 
 
                         
 
-
-                if($venue->bypassmac1 && $shouldsave == true) {
+                $value = $input['bypassmac1'];
+                if($venue->bypassmac1 && $value != $venue->bypassmac1 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac1, $venue->bypasscomment1);
                 }
-                if($venue->bypassmac2 && $shouldsave == true) {
+                $value = $input['bypassmac2'];
+                if($venue->bypassmac2 && $value != $venue->bypassmac2 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac2, $venue->bypasscomment2);
                 }
-                if($venue->bypassmac3 && $shouldsave == true) {
+                $value = $input['bypassmac3'];
+                if($venue->bypassmac3 && $value != $venue->bypassmac3 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac3, $venue->bypasscomment3);
                 }
-                if($venue->bypassmac4 && $shouldsave == true) {
+                $value = $input['bypassmac4'];
+                if($venue->bypassmac4 && $value != $venue->bypassmac4 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac4, $venue->bypasscomment4);
                 }
-                if($venue->bypassmac5 && $shouldsave == true) {
+                $value = $input['bypassmac5'];
+                if($venue->bypassmac5 && $value != $venue->bypassmac5 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac5, $venue->bypasscomment5);
                 }
-                if($venue->bypassmac6 && $shouldsave == true) {
+                $value = $input['bypassmac6'];
+                if($venue->bypassmac6 && $value != $venue->bypassmac6 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac6, $venue->bypasscomment6);
                 }
-                if($venue->bypassmac7 && $shouldsave == true) {
+                $value = $input['bypassmac7'];
+                if($venue->bypassmac7 && $value != $venue->bypassmac7 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac7, $venue->bypasscomment7);
                 }
-                if($venue->bypassmac8 && $shouldsave == true) {
+                $value = $input['bypassmac8'];
+                if($venue->bypassmac8 && $value != $venue->bypassmac8 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac8, $venue->bypasscomment8);
                 }
-                if($venue->bypassmac9 && $shouldsave == true) {
+                $value = $input['bypassmac9'];
+                if($venue->bypassmac9 && $value != $venue->bypassmac9 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac9, $venue->bypasscomment9);
                 }
-                if($venue->bypassmac10 && $shouldsave == true) {
+                $value = $input['bypassmac10'];
+                if($venue->bypassmac10 && $value != $venue->bypassmac10 && $value) {
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac10, $venue->bypasscomment10);
                 }
 
