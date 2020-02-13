@@ -144,6 +144,7 @@ class Mikrotik extends Eloquent {
 
        
          if ($scriptmenu == "on"){
+            \Log::info("HANNES KOM HIER: deployRsc scriptmenu is on");
          $lines = count(file($dest));
              if($lines <= 1 or $overridersc == "on") {
                      file_put_contents($dest, $scripttext);
@@ -154,12 +155,14 @@ class Mikrotik extends Eloquent {
                 }
         }
         elseif ($scriptmenu == "off"){
+            \Log::info("HANNES KOM HIER: deployRsc scriptmenu is off");
             $file = fopen($dest, 'a');
             fwrite($file, $scripttext);            
             fclose($file);
             }
 
         if ($scriptmenu == "on"){
+            \Log::info("HANNES KOM HIER: deployRsc scriptmenu is on2");
             $lines = count(file($dest2));
                 if($lines <= 1 or $overridersc == "on") {
                         file_put_contents($dest2, $scripttext);
@@ -168,8 +171,10 @@ class Mikrotik extends Eloquent {
                     else {
                         return "<div class='rscnotdeployed'>Your script has not been deployed. The existing destination file has not yet been read by the AP.</div>";
                     }
+
             }
             elseif ($scriptmenu == "off"){
+                \Log::info("HANNES KOM HIER: deployRsc scriptmenu is off 2");
                 $file = fopen($dest2, 'a');
                 fwrite($file, $scripttext);            
                 fclose($file);
