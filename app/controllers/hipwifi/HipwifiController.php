@@ -1977,22 +1977,22 @@ public function activateVenueSave()
 
                 // }
                     $savemac = true;
-                    for($i=0; $i<=9; $i++){
-                        if($input["bypassmac$i"] != null && $input["bypassmac$i"] != "") {
-                            if ($input["bypassmac$i"] == $venue->bypassmac1 || 
-                            $input["bypassmac$i"] == $venue->bypassmac2 || 
-                            $input["bypassmac$i"] == $venue->bypassmac3 || 
-                            $input["bypassmac$i"] == $venue->bypassmac4 || 
-                            $input["bypassmac$i"] == $venue->bypassmac5 || 
-                            $input["bypassmac$i"] == $venue->bypassmac6 || 
-                            $input["bypassmac$i"] == $venue->bypassmac7 || 
-                            $input["bypassmac$i"] == $venue->bypassmac8 || 
-                            $input["bypassmac$i"] == $venue->bypassmac9 || 
-                            $input["bypassmac$i"] == $venue->bypassmac10){
-                                $savemac = false;
-                            }    
-                        }
-                    }
+                    // for($i=0; $i<=9; $i++){
+                    //     if($input["bypassmac$i"] != null && $input["bypassmac$i"] != "") {
+                    //         if ($input["bypassmac$i"] == $venue->bypassmac1 || 
+                    //         $input["bypassmac$i"] == $venue->bypassmac2 || 
+                    //         $input["bypassmac$i"] == $venue->bypassmac3 || 
+                    //         $input["bypassmac$i"] == $venue->bypassmac4 || 
+                    //         $input["bypassmac$i"] == $venue->bypassmac5 || 
+                    //         $input["bypassmac$i"] == $venue->bypassmac6 || 
+                    //         $input["bypassmac$i"] == $venue->bypassmac7 || 
+                    //         $input["bypassmac$i"] == $venue->bypassmac8 || 
+                    //         $input["bypassmac$i"] == $venue->bypassmac9 || 
+                    //         $input["bypassmac$i"] == $venue->bypassmac10){
+                    //             $savemac = false;
+                    //         }    
+                    //     }
+                    // }
                         
 
                 $value = $input['bypassmac0'];
