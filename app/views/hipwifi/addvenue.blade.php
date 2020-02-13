@@ -442,20 +442,20 @@
         var actionsQueue = [];
 
 
-        $('.delete-btn').click(function(e) {
-          e.preventDefault();
-          debugger;
-          let adminId = $(this).attr("adminid");
-          let venueId = $(this).attr("venueid");
+        // $('.delete-btn').click(function(e) {
+          // e.preventDefault();
+          // debugger;
+          // let adminId = $(this).attr("adminid");
+          // let venueId = $(this).attr("venueid");
 
-          actionsQueue.push({'adminId': adminId, venueId: 'venueId', 'action': 'delete'});
-          $(this).parent().parent().hide();
-
-
+          // actionsQueue.push({'adminId': adminId, venueId: 'venueId', 'action': 'delete'});
+          // $(this).parent().parent().hide();
 
 
 
-        });
+
+
+        // });
 
 
 
