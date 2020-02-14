@@ -416,6 +416,7 @@
                     </div>
 
                     <br> 
+                    <button id="" class="btn btn-primary">Submit</button> 
                     <button id="submitform" class="btn btn-primary">Submit</button> 
                     <a href="{{ url('hipwifi_showvenues'); }}" class="btn btn-default">Cancel</a>
                     <br>
