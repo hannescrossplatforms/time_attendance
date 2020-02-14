@@ -1946,8 +1946,8 @@ public function activateVenueSave()
                     }
                 }
                     //Bypass mac-address config writing to mac-address.rsc process begins
-                  
-                    $nottosave = null;
+
+                    $nottosave = array();
                     for($i=0; $i<=9; $i++){
                         if($input["bypassmac$i"] != null && $input["bypassmac$i"] != "") {
                             if ($input["bypassmac$i"] == $venue->bypassmac1 || 
@@ -1960,7 +1960,8 @@ public function activateVenueSave()
                             $input["bypassmac$i"] == $venue->bypassmac8 || 
                             $input["bypassmac$i"] == $venue->bypassmac9 || 
                             $input["bypassmac$i"] == $venue->bypassmac10){
-                                $nottosave = $input["bypassmac$i"];
+                                array_push($nottosave, $input["bypassmac$i"]);
+                                // $nottosave = $input["bypassmac$i"];
                                 \Log::info("HANNES should not save this one: $nottosave");
                             }    
                         }
@@ -1970,52 +1971,55 @@ public function activateVenueSave()
                 
 
                 $value = $input['bypassmac0'];
-                if($venue->bypassmac1 && $nottosave && $venue->bypassmac1 != $nottosave) {
+
+                $is_in_list = in_array($venue->bypassmac1, $nottosave);
+
+                if($venue->bypassmac1 && !$is_in_list) {
                     \Log::info("HANNES 1 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac1, $venue->bypasscomment1);
                 }
                 $value = $input['bypassmac1'];
-                if($venue->bypassmac2 && $nottosave && $venue->bypassmac2 != $nottosave) {
+                if($venue->bypassmac2 && !$is_in_list) {
                     \Log::info("HANNES 2 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac2, $venue->bypasscomment2);
                 }
                 $value = $input['bypassmac2'];
-                if($venue->bypassmac3 && $nottosave && $venue->bypassmac3 != $nottosave) {
+                if($venue->bypassmac3 && !$is_in_list) {
                     \Log::info("HANNES 3 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac3, $venue->bypasscomment3);
                 }
                 $value = $input['bypassmac3'];
-                if($venue->bypassmac4 && $nottosave && $venue->bypassmac4 != $nottosave) {
+                if($venue->bypassmac4 && !$is_in_list) {
                     \Log::info("HANNES 4 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac4, $venue->bypasscomment4);
                 }
                 $value = $input['bypassmac4'];
-                if($venue->bypassmac5 && $nottosave && $venue->bypassmac5 != $nottosave) {
+                if($venue->bypassmac5 && !$is_in_list) {
                     \Log::info("HANNES 5 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac5, $venue->bypasscomment5);
                 }
                 $value = $input['bypassmac5'];
-                if($venue->bypassmac6 && $nottosave && $venue->bypassmac6 != $nottosave) {
+                if($venue->bypassmac6 && !$is_in_list) {
                     \Log::info("HANNES 6 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac6, $venue->bypasscomment6);
                 }
                 $value = $input['bypassmac6'];
-                if($venue->bypassmac7 && $nottosave && $venue->bypassmac7 != $nottosave) {
+                if($venue->bypassmac7 && !$is_in_list) {
                     \Log::info("HANNES 7 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac7, $venue->bypasscomment7);
                 }
                 $value = $input['bypassmac7'];
-                if($venue->bypassmac8 && $nottosave && $venue->bypassmac8 != $nottosave) {
+                if($venue->bypassmac8 && !$is_in_list) {
                     \Log::info("HANNES 8 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac8, $venue->bypasscomment8);
                 }
                 $value = $input['bypassmac8'];
-                if($venue->bypassmac9 && $nottosave && $venue->bypassmac9 != $nottosave) {
+                if($venue->bypassmac9 && !$is_in_list) {
                     \Log::info("HANNES 9 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac9, $venue->bypasscomment9);
                 }
                 $value = $input['bypassmac9'];
-                if($venue->bypassmac10 && $nottosave && $venue->bypassmac10 != $nottosave) {
+                if($venue->bypassmac10 && !$is_in_list) {
                     \Log::info("HANNES 10 add");
                     $mikrotik->addMacAddressBypass($venue, $venue->bypassmac10, $venue->bypasscomment10);
                 }
