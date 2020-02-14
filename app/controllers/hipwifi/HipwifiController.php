@@ -1960,8 +1960,8 @@ public function activateVenueSave()
                             $input["bypassmac$i"] == $venue->bypassmac8 || 
                             $input["bypassmac$i"] == $venue->bypassmac9 || 
                             $input["bypassmac$i"] == $venue->bypassmac10){
-                                \Log::info("HANNES should not save this one: $nottosave");
                                 $nottosave = $input["bypassmac$i"];
+                                \Log::info("HANNES should not save this one: $nottosave");
                             }    
                         }
                     }
