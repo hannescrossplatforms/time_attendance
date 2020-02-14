@@ -126,6 +126,8 @@ class Mikrotik extends Eloquent {
         $dest2 = $mikrotikdir->value . "deployment/" . $macaddress .  "_cAP-2n.rsc";
         $scripttext = str_replace("\x0D","",$scripttext); // Get rid of the ^M characters
 
+        \Log::info("HANNES DESTINATION: $dest");
+
         error_log("MIKROTIK : deployRsc : dest = $dest");
         error_log("MIKROTIK : deployRsc : scripttext = $scripttext");
 
