@@ -527,12 +527,13 @@
 
       if (edit ==1){
       var checkmac = <?php echo json_encode($data['bypass'])?>;
+      let hasAValue = false;
        for (var i = 0; i <= 9; i++) {
         $('#bypassmacentry' + i).hide();
         
       //the if statement below fetches the content of checkmac, if the mac and comment are both null, only ',' is present in an index, then it hides the entry for that in // //the table.
           debugger;
-          let hasAValue = false;
+          
               if (checkmac[i] == ',') {
                   $('#mac' + i).hide();
                   $('#bypassmacentry' + i).show();
