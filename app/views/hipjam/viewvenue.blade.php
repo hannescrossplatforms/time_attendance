@@ -197,7 +197,6 @@
                                                             <option value="custom">Custom</option>
                                                             </select>
                                                         </div>
-
                                                     </div>
                                                     <div class="col-md-8" id="custom" style="display:none; width:70%;">
                                                         <div class="col-md-2" style="width:25%; padding:0px 0px 0px 0px;">
@@ -509,6 +508,11 @@
                 return match && decodeURIComponent(match[1].replace(/\+/g, " "));
             }
 
+            function remove_future_dates(parsed_date) {
+                let current_date = moment().format('YYYY-MM-DD');
+                return moment(parsed_date).isBefore(current_date) || current_date === parsed_date;
+            }
+
             let liveJam = {};
             liveJam.initialize = (callback) => {
                 $.getScript('https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js', () => {
@@ -772,12 +776,20 @@
 
                 // Multi Day i.e. this week / this month etc.
                 while (start.format('YYYY-MM-DD') !== end.format('YYYY-MM-DD')) {
-                    date_array.push(start.format('YYYY-MM-DD'))
+                    date_array.push(start.format('YYYY-MM-DD'));
                     start.add(1, 'days');
                 }
                 
                 // Add last day
                 date_array.push(start.format('YYYY-MM-DD'))
+
+                // console.log(`--- BEFORE ---`)
+                // console.log(date_array);
+
+                date_array = date_array.filter(remove_future_dates);
+
+                // console.log(`--- AFTER ---`)
+                // console.log(date_array);
 
                 let data_promises = [];
                 $.each( date_array, function( key, node ) {
@@ -786,11 +798,8 @@
 
                 let hourly_averages = {};
                 Promise.all(data_promises).then(function(doc) {
-                    
                     doc.forEach(function(parent) {
                         parent.docs.forEach(function(hours) {
-                            if (hours.id == 10)
-                            console.log(`hour: ${hours.id} | customers: ${hours.data().customers}`)
                             if (!hourly_averages.hasOwnProperty(hours.id)) {
                                 hourly_averages[hours.id] = parseInt(hours.data().customers);
                             } else {
@@ -799,8 +808,11 @@
                         }); 
                     });
                     hourly_averages = $.map( hourly_averages, function( obj, key ) {
-                        return {label: key, value: Math.floor(obj / data_promises.length)};
+                        // console.log(`${key} (${hourly_averages.length}): ${obj} / ${data_promises.length} = ${obj / data_promises.length}`)
+                        return {label: key, value: Math.ceil(obj / data_promises.length)};
                     });
+
+                    
 
                     var chartProperties = {
                             "caption": "Store Traffic by Hour",
@@ -926,7 +938,7 @@ load_presets();
           return today.subtract(1, 'day').format('YYYY-MM-DD');
           break;
         case 'today':
-          return today
+          return today.format('YYYY-MM-DD')
           break;
         case 'this_week':
           return today.startOf('week').format('YYYY-MM-DD');
@@ -953,7 +965,7 @@ load_presets();
           return today.subtract(1, 'day').format('YYYY-MM-DD');
           break;
         case 'today':
-          return today
+          return today.format('YYYY-MM-DD')
           break;
         case 'this_week':
           return today.endOf('week').format('YYYY-MM-DD');

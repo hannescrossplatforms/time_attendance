@@ -237,6 +237,12 @@ class AdminController extends \BaseController {
 
         if($brand) {
 
+            $ids = $brand->venues()->pluck('id');
+            $ids_param = implode(',', $ids);
+
+            
+
+            // http://tracks03.hipzone.co.za/remove_venues?ids=1423
             $brand->users()->detach();
 
             $brand->medias()->delete();
@@ -246,6 +252,8 @@ class AdminController extends \BaseController {
             \Engagebrand::where('code', 'like', $brand->code)->delete();
 
             $brand->delete();
+
+            file_get_contents('http://tracks03.hipzone.co.za/remove_venues?ids=' + $ids_param);
 
             // Delete the nastypes and naslookups in hipwifi
             \DB::connection($connection)->table("nastype")->where('type', 'like' , "%" . $brand->code)->delete();

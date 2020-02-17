@@ -82,6 +82,25 @@
                                 value="{{$data['venue']->track_password}}"
                                 required>
                       </div>
+                      <div class="form-group">
+                  <label for="billboard_retail">Billboard / Retail</label>
+                  <select class="form-control" name="track_type" id="track_type" data-default-selected="{{$data['venue']->track_type}}">
+                    <option value="venue">Venue</option>
+                    <option value="billboard">Billboard</option>
+                  </select>
+                </div>
+                        <div class="form-group" id="linked_billboard_container" style="display: none;">
+                          <label for="track_linked_billboard">Linked Billboard</label>
+                          <select class="form-control" name="linked_billboard" id="track_linked_billboard" value="{{$data['venue']->linked_billboard}}">
+                          <option>Unlinked</option>
+                          <?php foreach ($data['billboards'] as $billboard) { ?>
+                                        <option value="{{$billboard->id}}">{{$billboard->sitename}}</option>
+                                    <?php  }
+                                    ?>
+                          </select>
+                          <!-- <input id="linked_billboard" type="text" class="form-control" name="track_ssid" placeholder="" value="{{$data['venue']->track_ssid}}" required> -->
+                        </div>
+                    
 
                       <div class="form-group">
                         <label for="track_password">Time Zone</label>
@@ -1014,6 +1033,7 @@ function drawCoordinatespreview(x,y){
           newrecord['track_max_power'] = $('#track_max_power'+updateNum).val(); 
           newrecord['venue_id'] = "{{$data['venue']->id}}";
           newrecord['venue_location'] = "{{$data['venue']->location}}";
+          newrecord['track_type'] = $('#track_type').val();
 
           var url = '{{ URL::route('hipjam_updateSvrScannerdata')}}';
           //console.log(newrecord);
@@ -1404,6 +1424,31 @@ function drawCoordinatespreview(x,y){
           $('#sun_to').show();
         }
       });
+
+    </script>
+
+    <script>
+      let default_selection = $('#track_type').data('default-selected');
+      if (default_selection !== '')
+        $('#track_type').val(default_selection);
+showLinkVenueToBillboard();
+function showLinkVenueToBillboard() {
+  let selected_track_id = $('#track_type').val();
+        let linked_billboard_container = $('#linked_billboard_container');
+        if (selected_track_id === 'venue') {
+          linked_billboard_container.slideDown('fast');
+        } else {
+          linked_billboard_container.slideUp('fast');
+        }
+}
+
+        
+
+
+        $(document).on('change', '#track_type', function() {
+          showLinkVenueToBillboard();
+        });
+
 
     </script>
 

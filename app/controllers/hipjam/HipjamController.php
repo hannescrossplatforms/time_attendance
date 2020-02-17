@@ -1028,6 +1028,7 @@ class HipjamController extends \BaseController
         $assetsdir = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
         $destinationPath = $assetsdir->value . 'track/images';
         $data['previewurl'] = $destinationPath;
+        $data['billboards'] = \Venue::where('track_type', '=', "billboard")->get();
 
         $sensors =  \Sensor::where("venue_id", "like", $data['venue']["id"])->orderBy('id', 'DESC')->get();
         $data['sensors'] = $sensors;
@@ -1322,8 +1323,7 @@ class HipjamController extends \BaseController
         $sensor = new \Sensor();
         $data['currentMenuItem'] = "Sensor Monitoring";
         $venue = new \Venue();
-        $venues = $venue->getVenuesForUser('hipjam', null, null, null, "active");
-        $data['venues'] = $venues;
+        $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active");
         //dd(count($data['details']['sensors']));
         //$brandnames = array();
 
@@ -1848,15 +1848,35 @@ class HipjamController extends \BaseController
         $assetsdiry = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
         $data['fullpathimage'] = $assetsdiry->value . 'track/images/' . $venue->location . '.jpg';
 
-        $data['exposed_today'] = \DB::select("
+        if ($venue->linked_billboard != '' && $venue->linked_billboard != null) {
+            $data['exposed_today'] = \DB::select("
         SELECT count(id) count FROM track_seen_mac_address WHERE venue_id = ".$venue->id." and date_seen = CURDATE() AND mac_address IN (SELECT mac_address FROM track_seen_mac_address where venue_id = ".$venue->linked_billboard." and date_seen = CURDATE())");
 
         $data['exposed_today'] = array_values($data['exposed_today']);
 
-        $data['exposed_week'] = \DB::select("
-        SELECT count(id) count FROM track_seen_mac_address WHERE venue_id = ".$venue->id." and date_seen BETWEEN (CURDATE() - INTERVAL 7 DAY) AND CURDATE() AND mac_address IN (SELECT mac_address FROM track_seen_mac_address where venue_id = ".$venue->linked_billboard." and date_seen BETWEEN (CURDATE() - INTERVAL 7 DAY) AND CURDATE())");
-        $data['exposed_week'] = array_values($data['exposed_week']);
 
+        $date_from = \Input::get('date_from');
+        $date_to = \Input::get('date_to');
+
+        if ($date_from == null) {
+            $date_from = date('Y-m-d',strtotime('last sunday'));
+        }
+
+        if ($date_to == null) {
+            $date_to = date('Y-m-d',strtotime('next saturday'));
+        }
+
+         $data['exposed_week'] = \DB::select("SELECT count(id) count FROM track_seen_mac_address WHERE venue_id = ".$venue->id." and date_seen BETWEEN '$date_from' AND '$date_to' AND mac_address IN (SELECT mac_address FROM track_seen_mac_address where venue_id = ".$venue->linked_billboard." and date_seen BETWEEN '$date_from' AND '$date_to')");
+        $data['exposed_week'] = array_values($data['exposed_week']);
+        } else {
+            $data['exposed_today'] = \DB::select("SELECT 0 as count");
+            $data['exposed_week'] = \DB::select("SELECT 0 as count");
+        }
+        
+
+        
+
+        
         
         // $venues = \Venue::all();
         /*$venue = new \Venue();

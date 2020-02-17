@@ -164,6 +164,8 @@
 
         </div>
 
+        <input type="hidden" id="focused_venue"/>
+
 
 
 
@@ -593,6 +595,7 @@ Time spent in store (dwell) -->
                   $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${filters}`);                  
 
                   $('#selected_venue_view').slideDown('fast')
+                  $('#focused_venue').val(venue_id);
 
                   console.log(`marker clicked with id: ${venue_id}`);
                 }
@@ -889,6 +892,12 @@ Time spent in store (dwell) -->
         $('#sub_brand_select').val(presets.brand_id);
         $('#type_select').val(presets.type);
         $('#date_select').val(presets.span);
+        $('#focused_venue').val(presets.venue_id);
+        debugger;
+        if (presets.venue_id !== '' && presets.venue_id !== null) {
+          $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${presets.venue_id}/tracks03.hipzone.co.za${getFilters(false)}`);                  
+          $('#selected_venue_view').slideDown('fast');
+        }
       } else {
         $('#date_select').val('this_week');
       }
@@ -903,6 +912,8 @@ Time spent in store (dwell) -->
       
       if (must_redirect)
         window.location.href = `http://hiphub.hipzone.co.za/hipjam_showdashboard${generate_query_string(brand_id, type, span, date_from, date_to)}`
+      else
+        return generate_query_string(brand_id, type, span, date_from, date_to)
     }
 
     function generate_date_from() {
@@ -960,7 +971,10 @@ Time spent in store (dwell) -->
     }
 
     function generate_query_string(brand_id, type, span, date_from, date_to) {
-      return `?brand_id=${brand_id}&type=${type}&span=${span}&date_from=${date_from}&date_to=${date_to}`;
+      let venue_ammend = '';
+      if ($('#focused_venue').val() !== '')
+        venue_ammend = `&venue_id=${$('#focused_venue').val()}`;
+      return `?brand_id=${brand_id}&type=${type}&span=${span}&date_from=${date_from}&date_to=${date_to}${venue_ammend}`;
     }
 
     function get_query_string_key(key) {
@@ -973,7 +987,7 @@ Time spent in store (dwell) -->
       let brand_id = get_query_string_key('brand_id');
       if (brand_id === '' || brand_id === null || brand_id === undefined)
         return null
-      return { brand_id: get_query_string_key('brand_id'), type: get_query_string_key('type'), span: get_query_string_key('span'),  date_from: get_query_string_key('date_from'), date_to: get_query_string_key('date_to') }
+      return { brand_id: get_query_string_key('brand_id'), type: get_query_string_key('type'), span: get_query_string_key('span'),  date_from: get_query_string_key('date_from'), date_to: get_query_string_key('date_to'), venue_id: get_query_string_key('venue_id') }
     }
 
     window.addEventListener('DOMContentLoaded', (event) => {
