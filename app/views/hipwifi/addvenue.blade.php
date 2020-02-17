@@ -531,18 +531,29 @@
         $('#bypassmacentry' + i).hide();
         
       //the if statement below fetches the content of checkmac, if the mac and comment are both null, only ',' is present in an index, then it hides the entry for that in // //the table.
-      debugger;
-        if (checkmac[i] == ',') {
-            $('#mac' + i).hide();
-            $('#bypassmacentry' + i).show();
+          debugger;
+          let hasAValue = false;
+              if (checkmac[i] == ',') {
+                  $('#mac' + i).hide();
+                  $('#bypassmacentry' + i).show();
+              }
+              else {
+                hasAValue = true;
+              }
+                // else{
+                //   $('#bypassmacentry' + i).show();
+                // }
+              // if (checkmac[0] == ','){
+              //   $('#display_bypass_mac_addresses').hide();
+              // }
             }
-            else{
-              $('#bypassmacentry' + i).show();
+
+            if (hasAValue) {
+              $('#display_bypass_mac_addresses').show();
             }
-          if (checkmac[0] == ','){
-            $('#display_bypass_mac_addresses').hide();
-          }
-       }  
+            else {
+              $('#display_bypass_mac_addresses').hide();
+            }
        }   
                 
       
