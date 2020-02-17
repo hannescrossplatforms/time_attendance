@@ -539,9 +539,9 @@
             else{
               $('#bypassmacentry' + i).show();
             }
-            if (checkmac[0] == ','){
-              $('#display_bypass_mac_addresses').hide();
-            }
+          if (checkmac[0] == ','){
+            $('#display_bypass_mac_addresses').hide();
+          }
        }  
        }   
                 
