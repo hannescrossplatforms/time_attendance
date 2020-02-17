@@ -112,6 +112,7 @@ class Mikrotik extends Eloquent {
         $mikrotikdir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
         $srcfile = $mikrotikdir->value . "deployment/templates/extravenueconfigtemplates/deletebypassmac.rsc";
         $readfile = file_get_contents($srcfile);
+        \Log::info("HANNES deleting bypassmac:$bypassmac");
         $readfile = str_replace('bypassmacaddress', $bypassmac, $readfile);
         $this->deployRsc($venue, $readfile, $overidersc, $scriptmenu="off");
 

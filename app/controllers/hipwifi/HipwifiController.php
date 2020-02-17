@@ -1803,9 +1803,13 @@ public function activateVenueSave()
             // Delete deleted venues
 
             $macs_to_delete = \Input::get('delete_macs');
-            $macs_array = explode(',', $macs_to_delete);
 
+
+
+            $macs_array = explode(',', $macs_to_delete);
+            \Log::info("HANNES macs_to_delete: $macs_to_delete");
             foreach ($macs_array as $bypassmac){ 
+                \Log::info("HANNES deleting mac");
                 $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
                                         $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];
                 $mikrotik = new \Mikrotik();
