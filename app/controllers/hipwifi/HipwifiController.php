@@ -1799,33 +1799,6 @@ public function activateVenueSave()
             $id = \Input::get('id');
             $venue =  \Venue::find($id);
 
-
-            // Delete deleted venues
-
-            $macs_to_delete = \Input::get('delete_macs');
-
-
-
-            $macs_array = explode(',', $macs_to_delete);
-            \Log::info("HANNES macs_to_delete: $macs_to_delete");
-            foreach ($macs_array as $bypassmac){ 
-                \Log::info("HANNES deleting mac");
-                $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
-                                        $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];
-                $mikrotik = new \Mikrotik();
-                $mikrotik->deletebypassmac($venue, $bypassmac);
-                for ($i=0; $i <=9; $i++) { 
-                    if ($bypassmacarray[$i] == $bypassmac){
-                        $index = $i + 1;
-                        \DB::table('venues')->where('id', '=', $id)->update(array('bypassmac'.$index => NULL, 'bypasscomment'.$index => NULL));
-                    }
-                
-                }
-
-            }
-
-            
-
             // Done with deleting deleted venues
 
             $adminssid1check = $venue->adminssid1;
@@ -1939,6 +1912,8 @@ public function activateVenueSave()
                         $this->addAdminWifi($venue->id, $venue->$adminssid, $venue->$password, $venue->$type, $number = $i);
                     }
                 }
+
+                
                     //Bypass mac-address config writing to mac-address.rsc process begins
 
                     // $nottosave = array();
@@ -2036,6 +2011,28 @@ public function activateVenueSave()
 
                     if($input[$bypass] !== "") {
                         $mikrotik->addMacAddressBypass($venue, $venue->$mac, $venue->$comment);
+                    }
+
+                }
+
+                // Delete deleted venues
+
+                $macs_to_delete = \Input::get('delete_macs');
+
+                $macs_array = explode(',', $macs_to_delete);
+                \Log::info("HANNES macs_to_delete: $macs_to_delete");
+                foreach ($macs_array as $bypassmac){ 
+                    \Log::info("HANNES should delete mac");
+                    $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
+                                            $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];
+                    $mikrotik = new \Mikrotik();
+                    $mikrotik->deletebypassmac($venue, $bypassmac);
+                    for ($i=0; $i <=9; $i++) { 
+                        if ($bypassmacarray[$i] == $bypassmac){
+                            $index = $i + 1;
+                            \DB::table('venues')->where('id', '=', $id)->update(array('bypassmac'.$index => NULL, 'bypasscomment'.$index => NULL));
+                        }
+                    
                     }
 
                 }
