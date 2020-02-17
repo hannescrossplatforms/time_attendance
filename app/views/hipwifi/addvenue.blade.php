@@ -531,6 +531,7 @@
         $('#bypassmacentry' + i).hide();
         
       //the if statement below fetches the content of checkmac, if the mac and comment are both null, only ',' is present in an index, then it hides the entry for that in // //the table.
+      debugger;
         if (checkmac[i] == ',') {
             $('#mac' + i).hide();
             $('#bypassmacentry' + i).show();

@@ -1681,6 +1681,8 @@ public function activateVenueSave()
         $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]); 
         foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
         $data['bypass'] = array();
+
+        //hannes hier
         for ($i=1; $i <= 10; $i++) {
             $mac = 'bypassmac'.$i;
             $comment = 'bypasscomment'.$i;
@@ -1931,11 +1933,7 @@ public function activateVenueSave()
                $mikrotik = new \Mikrotik();
                $mikrotik->updateVenue($venue, $old_sitename);
 
-
-
                $macs_to_delete = \Input::get('delete_macs');
-
-
 
                $macs_array = explode(',', $macs_to_delete);
                \Log::info("HANNES macs_to_delete: $macs_to_delete");
@@ -1955,19 +1953,7 @@ public function activateVenueSave()
                     }
                    }
                    
-                   
-   
                }
-
-
-
-
-
-
-
-
-
-
 
                // admin wifi config writing to mac-address.rsc process begins.
                for($i=1; $i<=3; $i++){
