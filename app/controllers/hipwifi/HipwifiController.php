@@ -1944,14 +1944,18 @@ public function activateVenueSave()
                    $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
                                            $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];
                    $mikrotik = new \Mikrotik();
-                   $mikrotik->deletebypassmac($venue, $bypassmac);
-                   for ($i=0; $i <=9; $i++) { 
-                       if ($bypassmacarray[$i] == $bypassmac){
-                           $index = $i + 1;
-                           \DB::table('venues')->where('id', '=', $id)->update(array('bypassmac'.$index => NULL, 'bypasscomment'.$index => NULL));
-                       }
-                   
+                   if ($bypassmac != "") {
+                    $mikrotik->deletebypassmac($venue, $bypassmac);
+                    for ($i=0; $i <=9; $i++) { 
+                        if ($bypassmacarray[$i] == $bypassmac){
+                            $index = $i + 1;
+                            \DB::table('venues')->where('id', '=', $id)->update(array('bypassmac'.$index => NULL, 'bypasscomment'.$index => NULL));
+                        }
+                    
+                    }
                    }
+                   
+                   
    
                }
 
