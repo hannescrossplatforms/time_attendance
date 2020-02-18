@@ -152,15 +152,15 @@
               numitems++;
               modal_id = numitems-1;
 
-              $('#modal_' + index).on('hidden', function () {
-                // do something…
-                debugger;
-                selectedModalId = null;
-            });
-            $('#modal_' + id).on('hidden.bs.modal', function () {
-                debugger;
-                selectedModalId = null;
-            });
+            //   $('#modal_' + index).on('hidden', function () {
+            //     // do something…
+            //     debugger;
+            //     selectedModalId = null;
+            // });
+            // $('#modal_' + id).on('hidden.bs.modal', function () {
+            //     debugger;
+            //     selectedModalId = null;
+            // });
 
               searchstring = $( "#src-sitename" ).val();
               regexp = new RegExp(searchstring,"gi");
