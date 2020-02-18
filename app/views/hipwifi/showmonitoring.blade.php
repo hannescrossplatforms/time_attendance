@@ -46,6 +46,7 @@
                 window.scrollTo(0, scrollPosition);
                 if(selectedModalId != null) {
                   if(!$(selectedModalId).hasClass('in')){
+                    debugger;
                     $(selectedModalId).modal('show');
                   }
                   
