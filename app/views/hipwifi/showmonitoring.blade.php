@@ -33,7 +33,6 @@
             success: function(result) {
               debugger;
                 $("#page-replace-div").html(result);
-
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               debugger;

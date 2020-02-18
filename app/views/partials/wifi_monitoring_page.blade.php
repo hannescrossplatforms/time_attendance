@@ -43,7 +43,7 @@
 <div class="modal" id="tabletposprinter"></div>
 
 <script>
-
+        debugger
         venuesJson = {{ $data['venuesJson'] }};
         console.log(venuesJson);
 
