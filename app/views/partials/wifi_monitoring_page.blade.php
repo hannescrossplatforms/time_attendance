@@ -109,10 +109,10 @@
 
         function createVenueModal(id, sitename, venuedata) {
 
-        $('#modal_' + id).on('hidden.bs.modal', function () {
-            debugger;
-            selectedModalId = null;
-        });
+            $('#modal_' + id).on('hidden.bs.modal', function () {
+                debugger;
+                selectedModalId = null;
+            });
 
         modalhtml = 
         '<div class="modal" id="modal_' + id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n\
