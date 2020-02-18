@@ -29,7 +29,7 @@
       $.ajax({
         url: pathname + 'hipwifi/hipwifi_populatemonitoring',
             type: 'get',
-            dataType: 'html'
+            dataType: 'html',
             success: function(result) {
               debugger;
                 $("#page-replace-div").html(result);
