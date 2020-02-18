@@ -276,11 +276,11 @@
 
       }
 
-      $('#venueTable').DataTable({
-            "oLanguage": {
-                "sSearch": ""
-            },
-            "pageLength": 100
-      });
+    //   $('#venueTable').DataTable({
+    //         "oLanguage": {
+    //             "sSearch": ""
+    //         },
+    //         "pageLength": 100
+    //   });
 
   </script>
