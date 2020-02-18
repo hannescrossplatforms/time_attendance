@@ -108,17 +108,7 @@
         });
 
         function createVenueModal(id, sitename, venuedata) {
-            debugger;
-            $('#modal_' + id).on('hidden', function () {
-                // do something…
-                debugger;
-                selectedModalId = null;
-            });
-            $('#modal_' + id).on('hidden.bs.modal', function () {
-                debugger;
-                selectedModalId = null;
-            });
-
+           
         modalhtml = 
         '<div class="modal" id="modal_' + id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n\
             <div class="modal-dialog">\n\
@@ -161,6 +151,16 @@
               modalshtml = modalshtml + createVenueModal(numitems, index, value);
               numitems++;
               modal_id = numitems-1;
+
+              $('#modal_' + index).on('hidden', function () {
+                // do something…
+                debugger;
+                selectedModalId = null;
+            });
+            $('#modal_' + id).on('hidden.bs.modal', function () {
+                debugger;
+                selectedModalId = null;
+            });
 
               searchstring = $( "#src-sitename" ).val();
               regexp = new RegExp(searchstring,"gi");
