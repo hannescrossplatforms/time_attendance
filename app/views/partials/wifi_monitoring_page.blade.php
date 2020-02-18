@@ -54,10 +54,10 @@
 
         // $(document).delegate('#buildtable', 'click', function(event) {
         //   event.preventDefault();
-          showVenuesTable(venuesJson);
-          showVenuesGrid(venuesJson);
+        //   showVenuesTable(venuesJson);
+        //   showVenuesGrid(venuesJson);
 
-          debugger;
+        //   debugger;
         $('#venueTable').DataTable({
             "oLanguage": {
                 "sSearch": ""
