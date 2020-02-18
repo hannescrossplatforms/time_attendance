@@ -58,7 +58,7 @@
           showVenuesGrid(venuesJson);
 
           debugger;
-        $('#listview').DataTable({
+        $('#venueTable').DataTable({
             "oLanguage": {
                 "sSearch": ""
             },
