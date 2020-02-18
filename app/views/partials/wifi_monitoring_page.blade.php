@@ -43,8 +43,8 @@
 <div class="modal" id="tabletposprinter"></div>
 
 <script>
-        
-        venuesJson = {{ $data['venuesJsonReloaded'] }};
+        venuesJson = $data['venuesJsonReloaded'];
+        debugger        
         console.log(venuesJson);
 
         $(function() {
