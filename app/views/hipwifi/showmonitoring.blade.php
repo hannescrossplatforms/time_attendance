@@ -25,6 +25,7 @@
 
   <script>
 
+    $('document').ready(function(){
       $.ajax({
         url: pathname + 'hipwifi/hipwifi_populatemonitoring',
             type: 'get',
@@ -38,6 +39,9 @@
               debugger;
             }
         });
+    });
+
+      
 
   </script>
 
