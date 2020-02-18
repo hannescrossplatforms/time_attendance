@@ -20,8 +20,12 @@
       ================================================== --> 
   <!-- Placed at the end of the document so the pages load faster --> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
   <script src="js/bootstrap.min.js"></script> 
   <script src="js/prefixfree.min.js"></script>
+
+  
 
   <script>
 
