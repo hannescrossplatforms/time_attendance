@@ -39,13 +39,19 @@
             type: 'get',
             dataType: 'html',
             success: function(result) {
+
+              let shouldShow = true;
+              if(!$(selectedModalId).hasClass('in')){
+                shouldShow = false;
+              }
+
                 if(selectedModalId != null) {
                     $(selectedModalId).modal('hide');
                 }
                 $("#page-replace-div").html(result);
                 window.scrollTo(0, scrollPosition);
                 if(selectedModalId != null) {
-                  if(!$(selectedModalId).hasClass('in')){
+                  if(shouldShow){
                     debugger;
                     $(selectedModalId).modal('show');
                   }
