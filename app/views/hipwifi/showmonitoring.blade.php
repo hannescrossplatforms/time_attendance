@@ -32,6 +32,7 @@
       (function loop() {
         setTimeout(function () {
           refreshPage();
+          debugger;
           loop()
         }, 15000);
       }());
