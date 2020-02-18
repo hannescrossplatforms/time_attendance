@@ -45,7 +45,6 @@
 <script>
         venuesJson = <?php echo $data['venuesJsonReloaded']; ?>;       
         console.log(venuesJson);
-    debugger;
         if(selectedToShow == 0) {
             $('#listview').show();
             $('#gridview').hide();
@@ -72,7 +71,7 @@
 
         $(document).delegate('#filter', 'click', function(event) {
           event.preventDefault();
-
+        debugger;
           showVenuesTable(venuesJson);
           showVenuesGrid(venuesJson);
         });
