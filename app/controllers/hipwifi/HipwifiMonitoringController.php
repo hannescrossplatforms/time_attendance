@@ -33,7 +33,7 @@ class HipwifiMonitoringController extends \BaseController {
         return \View::make('hipwifi.showmonitoring')->with('data', $data);
     }
 
-    public function populateMonitoringPage($json = null) {
+    public function populateMonitoringPage() {
 
         $data = array();
         $data['currentMenuItem'] = "Venue Monitoring";
@@ -45,15 +45,15 @@ class HipwifiMonitoringController extends \BaseController {
         $data['venuesJson'] = json_encode($venues);
         //dd($data['venuesJson']);
 
-        if($json) {
-            error_log("showMonitoring : returning json" );
-            return \Response::json($data['venuesJason']);
+        // if($json) {
+        //     error_log("showMonitoring : returning json" );
+        //     return \Response::json($data['venuesJason']);
 
-        } else {
-            error_log("showMonitoring : returning NON json" );
-            return \View::make('partials.wifi_monitoring_page')->with('data', $data);
+        // } else {
+        //     error_log("showMonitoring : returning NON json" );
+        //     return \View::make('partials.wifi_monitoring_page')->with('data', $data);
             
-        }
+        // }
 
         return \View::make('partials.wifi_monitoring_page')->with('data', $data);
     }
