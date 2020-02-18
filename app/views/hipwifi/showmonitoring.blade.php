@@ -27,11 +27,11 @@
 
     $('document').ready(function(){
       
-      refreshPage()
+      this.refreshPage();
       
       (function loop() {
         setTimeout(function () {
-          refreshPage();
+          this.refreshPage();
           debugger;
           loop()
         }, 15000);
