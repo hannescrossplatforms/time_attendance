@@ -33,7 +33,7 @@ class HipwifiMonitoringController extends \BaseController {
         return \View::make('hipwifi.showmonitoring')->with('data', $data);
     }
 
-    public function populateMonitoringPage() {
+    public function populateMonitoringPage($json = null) {
 
         $data = array();
         $data['currentMenuItem'] = "Venue Monitoring";
