@@ -45,6 +45,10 @@
 <script>
         venuesJson = <?php echo $data['venuesJsonReloaded']; ?>;       
         console.log(venuesJson);
+
+        $('#src-sitename').val(searchText);
+
+
         if(selectedToShow == 0) {
             $('#listview').show();
             $('#gridview').hide();
@@ -53,6 +57,13 @@
             $('#listview').hide();
             $('#gridview').show();
         }
+
+        $('#src-sitename').on("input", function() {
+            searchText = $(this).val();
+            showVenuesTable(venuesJson);
+            showVenuesGrid(venuesJson);
+        });
+
         // $(function() {
         //   $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
 
