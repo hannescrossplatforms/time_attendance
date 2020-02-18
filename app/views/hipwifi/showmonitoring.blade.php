@@ -25,21 +25,6 @@
 
   <script>
 
-    $('document').ready(function(){
-      
-      this.refreshPage();
-      
-      (function loop() {
-        setTimeout(function () {
-          this.refreshPage();
-          debugger;
-          loop()
-        }, 15000);
-      }());
-
-
-    });
-
     function refreshPage() {
       $.ajax({
         url: 'http://hiphub.hipzone.co.za/hipwifi_populatemonitoring',
@@ -54,7 +39,22 @@
         });
     }
 
+    $('document').ready(function(){
       
+      refreshPage();
+      
+      (function loop() {
+        setTimeout(function () {
+          this.refreshPage();
+          debugger;
+          loop()
+        }, 15000);
+      }());
+
+
+    });
+
+    
 
   </script>
 
