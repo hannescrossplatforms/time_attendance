@@ -43,8 +43,7 @@
 <div class="modal" id="tabletposprinter"></div>
 
 <script>
-        venuesJson = <?php echo $data['venuesJsonReloaded']; ?>;       
-        console.log(venuesJson);
+        venuesJson = <?php echo $data['venuesJsonReloaded']; ?>;
 
         $('#src-sitename').val(searchText);
         if (searchText != null) {
