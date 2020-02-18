@@ -47,6 +47,9 @@
         console.log(venuesJson);
 
         $('#src-sitename').val(searchText);
+        if (searchText != null) {
+            $('#src-sitename').focus();
+        }
 
 
         if(selectedToShow == 0) {
