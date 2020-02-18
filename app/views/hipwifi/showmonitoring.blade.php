@@ -33,14 +33,15 @@
     let searchText = null;
     let selectedModalId = null;
     function refreshPage() {
-      if(selectedModalId != null) {
-        $(selectedModalId).modal('hide');
-      }
+      
       $.ajax({
         url: 'http://hiphub.hipzone.co.za/hipwifi_populatemonitoring',
             type: 'get',
             dataType: 'html',
             success: function(result) {
+                if(selectedModalId != null) {
+                  $(selectedModalId).modal('hide');
+                }
                 $("#page-replace-div").html(result);
                 window.scrollTo(0, scrollPosition);
                 if(selectedModalId != null) {
