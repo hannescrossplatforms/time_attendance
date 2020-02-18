@@ -43,8 +43,7 @@
 <div class="modal" id="tabletposprinter"></div>
 
 <script>
-        venuesJson = <?php echo $data['venuesJsonReloaded']; ?>;
-        debugger        
+        venuesJson = <?php echo $data['venuesJsonReloaded']; ?>;       
         console.log(venuesJson);
 
         $(function() {
@@ -108,7 +107,7 @@
         }
         
         function showVenuesGrid(venuesjson) {
-            debugger;
+            
           table = ''; rows = '';
           beginTable = '\
                   <table class="table-venuegrid">\n\
@@ -158,7 +157,6 @@
 
         function showVenuesTable(venuesjson) {
           // alert("In showVenuesTable");
-          debugger;
           table = '';
           rows = '';
           beginTable = '\
