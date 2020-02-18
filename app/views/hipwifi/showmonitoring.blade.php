@@ -27,7 +27,7 @@
 
     $('document').ready(function(){
       $.ajax({
-        url: pathname + 'hipwifi/hipwifi_populatemonitoring',
+        url: 'http://hiphub.hipzone.co.za/hipwifi/hipwifi_populatemonitoring',
             type: 'get',
             dataType: 'html',
             success: function(result) {
