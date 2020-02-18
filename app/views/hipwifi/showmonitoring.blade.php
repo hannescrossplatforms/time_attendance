@@ -28,7 +28,7 @@
   
 
   <script>
-
+    let scrollPosition = 0;
     function refreshPage() {
       $.ajax({
         url: 'http://hiphub.hipzone.co.za/hipwifi_populatemonitoring',
@@ -36,6 +36,7 @@
             dataType: 'html',
             success: function(result) {
                 $("#page-replace-div").html(result);
+                window.scrollTo(scrollPosition, 0);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
 
@@ -57,7 +58,10 @@
 
     });
 
-    
+    $(window).scroll(function(){
+        var scrollPos = $(document).scrollTop();
+        console.log(scrollPos);
+    });    
 
   </script>
 
