@@ -46,12 +46,14 @@
         venuesJson = <?php echo $data['venuesJsonReloaded']; ?>;       
         console.log(venuesJson);
     debugger;
-        // if(selectedToShow == 0) {
-        //     $('#buildtable').click();
-        // }
-        // else {
-        //     $('#gridviewicon').click();
-        // }
+        if(selectedToShow == 0) {
+            $('#listview').show();
+            $('#gridview').hide();
+        }
+        else {
+            $('#listview').hide();
+            $('#gridview').show();
+        }
         // $(function() {
         //   $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
 
