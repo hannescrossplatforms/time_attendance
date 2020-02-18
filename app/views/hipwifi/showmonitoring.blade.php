@@ -8,7 +8,7 @@
     <div class="row">
       @include('hipwifi.sidebar')
         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-          	<h1 class="page-header">Venue Monitoring</h1>
+          	<h1 class="page-header">Venue Monitorings</h1>
 
             <div class="form-group monitoring-form">
                 <form class="form-inline" role="form" style="margin-bottom: 15px;">
