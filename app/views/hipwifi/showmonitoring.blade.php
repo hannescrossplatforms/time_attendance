@@ -40,12 +40,15 @@
             dataType: 'html',
             success: function(result) {
                 if(selectedModalId != null) {
-                  $(selectedModalId).modal('hide');
+                    $(selectedModalId).modal('hide');
                 }
                 $("#page-replace-div").html(result);
                 window.scrollTo(0, scrollPosition);
                 if(selectedModalId != null) {
-                  $(selectedModalId).modal('show');
+                  if(!$(selectedModalId).hasClass('in')){
+                    $(selectedModalId).modal('show');
+                  }
+                  
                 }         
                 
             },
