@@ -40,6 +40,10 @@
             success: function(result) {
                 $("#page-replace-div").html(result);
                 window.scrollTo(0, scrollPosition);
+                if(selectedModalId != null) {
+                  $(selectedModalId).modal('hide');
+                }
+                
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
 
