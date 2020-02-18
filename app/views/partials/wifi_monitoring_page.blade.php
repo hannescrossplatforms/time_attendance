@@ -108,6 +108,7 @@
         });
 
         function createVenueModal(id, sitename, venuedata) {
+            debugger;
             $('#modal_' + id).on('hidden', function () {
                 // do something…
                 debugger;
