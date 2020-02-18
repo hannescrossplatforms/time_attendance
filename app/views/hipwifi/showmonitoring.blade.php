@@ -61,6 +61,7 @@
 
     $(window).scroll(function(){
         var scrollPos = $(document).scrollTop();
+        scrollPosition = scrollPos;
         console.log(scrollPos);
     });    
 
