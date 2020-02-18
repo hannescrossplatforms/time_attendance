@@ -10,7 +10,7 @@ class HipwifiMonitoringController extends \BaseController {
     {
 
         $data = array();
-        $data['currentMenuItem'] = "Venue Monitoring";
+        $data['currentMenuItem'] = "Venue Monitorings";
 
         $mikrotik = new \Mikrotik();
         $venues = $mikrotik->getVenueMonitoringForUser();
