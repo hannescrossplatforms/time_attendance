@@ -37,7 +37,6 @@
             dataType: 'html',
             success: function(result) {
                 $("#page-replace-div").html(result);
-                debugger;
                 window.scrollTo(0, scrollPosition);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -62,7 +61,6 @@
     $(window).scroll(function(){
         var scrollPos = $(document).scrollTop();
         scrollPosition = scrollPos;
-        console.log(scrollPos);
     });    
 
   </script>
