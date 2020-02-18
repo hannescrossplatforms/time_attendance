@@ -46,11 +46,17 @@
         venuesJson = <?php echo $data['venuesJsonReloaded']; ?>;       
         console.log(venuesJson);
 
-        $(function() {
-          $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+        if(selectedToShow == 0) {
+            $('#buildtable').click();
+        }
+        else {
+            $('#gridviewicon').click();
+        }
+        // $(function() {
+        //   $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
 
-          $('#gridviewicon').click();
-        });
+        //   $('#gridviewicon').click();
+        // });
 
         // $(document).delegate('#buildtable', 'click', function(event) {
         //   event.preventDefault();
