@@ -54,16 +54,16 @@
 
         // $(document).delegate('#buildtable', 'click', function(event) {
         //   event.preventDefault();
-        //   showVenuesTable(venuesJson);
-        //   showVenuesGrid(venuesJson);
+          showVenuesTable(venuesJson);
+          showVenuesGrid(venuesJson);
 
-        //   debugger;
-        $('#venueTable').DataTable({
-            "oLanguage": {
-                "sSearch": ""
-            },
-            "pageLength": 100
-        });
+          debugger;
+        // $('#venueTable').DataTable({
+        //     "oLanguage": {
+        //         "sSearch": ""
+        //     },
+        //     "pageLength": 100
+        // });
         // });
 
         $(document).delegate('#reset', 'click', function() {}); // For some reason refreshes the page - but it works
@@ -76,7 +76,7 @@
         
         $( document ).on( 'click', '#listviewicon', function (event) {
           event.preventDefault();
-
+            debugger;
           $('#listview').show();
           $('#gridview').hide();
 
