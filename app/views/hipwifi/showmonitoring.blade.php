@@ -52,7 +52,6 @@
                 window.scrollTo(0, scrollPosition);
                 if(selectedModalId != null) {
                   if(shouldShow){
-                    debugger;
                     $(selectedModalId).modal('show');
                   }
                   

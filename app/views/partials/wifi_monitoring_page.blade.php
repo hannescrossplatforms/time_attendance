@@ -85,7 +85,6 @@
 
         $(document).delegate('#filter', 'click', function(event) {
           event.preventDefault();
-        debugger;
           showVenuesTable(venuesJson);
           showVenuesGrid(venuesJson);
         });
@@ -299,8 +298,7 @@
 
       }
 
-      $('.gridlinks').click(function(){
-        debugger;
+      $('.gridlinks').click(function(){        
         selectedModalId = $(this).attr('data-target');
       });
 
