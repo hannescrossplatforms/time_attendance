@@ -56,6 +56,14 @@
         //   event.preventDefault();
           showVenuesTable(venuesJson);
           showVenuesGrid(venuesJson);
+
+          debugger;
+        $('#listview').DataTable({
+            "oLanguage": {
+                "sSearch": ""
+            },
+            "pageLength": 100
+        });
         // });
 
         $(document).delegate('#reset', 'click', function() {}); // For some reason refreshes the page - but it works
