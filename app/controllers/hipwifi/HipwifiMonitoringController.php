@@ -42,7 +42,7 @@ class HipwifiMonitoringController extends \BaseController {
         $venues = $mikrotik->getVenueMonitoringForUser();
         // Add code do delete comments for all online venues
 
-        $data['venuesJson'] = json_encode($venues);
+        $data['venuesJsonReloaded'] = json_encode($venues);
         //dd($data['venuesJson']);
 
         // if($json) {
