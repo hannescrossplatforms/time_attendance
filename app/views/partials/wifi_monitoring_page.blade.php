@@ -283,4 +283,9 @@
     //         "pageLength": 100
     //   });
 
+    $(window).scroll(function(){
+        var scrollPos = $(document).scrollTop();
+        console.log(scrollPos);
+    });    
+
   </script>
