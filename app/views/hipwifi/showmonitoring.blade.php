@@ -36,7 +36,8 @@
             dataType: 'html',
             success: function(result) {
                 $("#page-replace-div").html(result);
-                window.scrollTo(scrollPosition, 0);
+                debugger;
+                window.scrollTo(0, scrollPosition);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
 
