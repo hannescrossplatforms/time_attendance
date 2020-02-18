@@ -243,7 +243,7 @@ Route::post('hipwifi_editwifiuser', array('uses' => 'hipwifi\HipwifiController@e
 Route::get('hipwifi_deletewifiuser/{id}', array('uses' => 'hipwifi\HipwifiController@deleteWifiuser', 'as' => 'hipwifi_deletewifiuser'))->before('auth');
 // Venue Monitoring
 Route::any('/hipwifi_showmonitoring', array('uses' => 'hipwifi\HipwifiMonitoringController@showMonitoring', 'as' => 'hipwifi_showmonitoring'))->before('auth');
-Route::any('/hipwifi_populatemonitoring', array('uses' => 'hipwifi\HipwifiMonitoringController@populateMonitoring', 'as' => 'hipwifi_populatemonitoring'))->before('auth');
+Route::any('/hipwifi_populatemonitoring', array('uses' => 'hipwifi\HipwifiMonitoringController@populateMonitoringPage', 'as' => 'hipwifi_populatemonitoring'))->before('auth');
 // Statistics
 Route::post('/hipwifi_showstatistics/requestStatsData', array('uses' => 'hipwifi\HipwifiStatisticsController@requestStatsData', 'as' => 'hipwifi_requeststatsdata'))->before('auth');
 Route::any('/hipwifi_showstatistics/{json?}', array('uses' => 'hipwifi\HipwifiStatisticsController@showStatistics', 'as' => 'hipwifi_showstatistics'))->before('auth');
