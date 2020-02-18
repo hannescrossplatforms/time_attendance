@@ -301,6 +301,7 @@
 
       $('.gridlinks').click(function(){
         debugger;
+        selectedModalId = $(this).attr('data-target');
       });
 
     //   $('#venueTable').DataTable({
