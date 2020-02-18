@@ -29,6 +29,7 @@
 
   <script>
     let scrollPosition = 0;
+    let selectedToShow = 0;
     function refreshPage() {
       $.ajax({
         url: 'http://hiphub.hipzone.co.za/hipwifi_populatemonitoring',
@@ -45,7 +46,7 @@
         });
     }
 
-    $('document').ready(function(){
+    $('document').ready(function() {
       
       refreshPage();
       
@@ -55,7 +56,6 @@
           loop()
         }, 15000);
       }());
-
 
     });
 

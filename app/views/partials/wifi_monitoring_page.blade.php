@@ -64,13 +64,15 @@
 
         $(document).delegate('#filter', 'click', function(event) {
           event.preventDefault();
+
           showVenuesTable(venuesJson);
           showVenuesGrid(venuesJson);
         });
         
         $( document ).on( 'click', '#listviewicon', function (event) {
           event.preventDefault();
-            debugger;
+            
+            selectedToShow = 0;
           $('#listview').show();
           $('#gridview').hide();
 
@@ -78,7 +80,7 @@
 
         $( document ).on( 'click', '#gridviewicon', function (event) {
           event.preventDefault();
-
+          selectedToShow = 1;
           $('#listview').hide();
           $('#gridview').show();
 
