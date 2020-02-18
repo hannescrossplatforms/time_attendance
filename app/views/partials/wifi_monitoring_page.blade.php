@@ -45,7 +45,7 @@
 <script>
         venuesJson = <?php echo $data['venuesJsonReloaded']; ?>;       
         console.log(venuesJson);
-
+    debugger;
         if(selectedToShow == 0) {
             $('#buildtable').click();
         }
