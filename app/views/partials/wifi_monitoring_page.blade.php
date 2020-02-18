@@ -299,6 +299,10 @@
 
       }
 
+      $('.gridlinks').click(function(){
+        debugger;
+      });
+
     //   $('#venueTable').DataTable({
     //         "oLanguage": {
     //             "sSearch": ""

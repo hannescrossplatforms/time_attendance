@@ -31,6 +31,7 @@
     let scrollPosition = 0;
     let selectedToShow = 0;
     let searchText = null;
+    let selectedModalId = null;
     function refreshPage() {
       $.ajax({
         url: 'http://hiphub.hipzone.co.za/hipwifi_populatemonitoring',
