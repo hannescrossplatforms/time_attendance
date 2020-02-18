@@ -21,7 +21,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="needed-mheader" aria-hidden="true">
+<div class="modal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="needed-mheader" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -110,7 +110,7 @@
         function createVenueModal(id, sitename, venuedata) {
 
           modalhtml = 
-            '<div class="modal fade" id="modal_' + id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n\
+            '<div class="modal" id="modal_' + id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n\
               <div class="modal-dialog">\n\
                 <div class="modal-content">\n\
                   <div class="modal-header">\n\
