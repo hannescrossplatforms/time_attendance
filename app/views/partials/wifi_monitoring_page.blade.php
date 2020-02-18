@@ -13,7 +13,7 @@
 <a href="" id="gridviewicon" title="Grid view"><i class="fa fa-th fa-3x"></i></a>
 </div>
 
-<div class="table-responsive clear" id="listview">
+<div class="table-responsive dataTable clear" id="listview">
     <table id="venueTable" class="table table-striped"> </table>
 </div>
 <!-- Button trigger modal -->
