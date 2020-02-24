@@ -35,7 +35,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-			<h3 class="page-header">Sensor Monitoring</h3>
+			<h3 class="page-header">Sensors Monitoring</h3>
             <div class="form-group monitoring-form">
                 <form class="form-inline" role="form" style="margin-bottom: 15px;">
                     <label  class="sr-only" for="exampleInputEmail2">Site Name</label>
