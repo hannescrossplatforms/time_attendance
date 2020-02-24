@@ -403,7 +403,13 @@
 
         function labelToNumberForComparrison(stringToGetNumbersFrom){
             debugger
-            return parseInt(stringToGetNumbersFrom.match(/\d+/));
+            if (Array.isArray(stringToGetNumbersFrom.match(/\d+/))) {
+                return parseInt(stringToGetNumbersFrom.match(/\d+/)[0]);
+            }
+            else {
+                return parseInt(stringToGetNumbersFrom.match(/\d+/));
+            }
+            
         }
         
         function setStatusForVenue(venueId, status) {
