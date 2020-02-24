@@ -81,7 +81,7 @@
                 <i class="fa fa-building" style="color: white; font-size: 41px; margin-top: 25px;"></i>
               </div>
               <div style="background-color: #37bc9b; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_retail_venues"]}}</p>
+                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data['live_number_of_retail_venues']}}</p>
                 <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of retail venues</small>
               </div>
             </div>

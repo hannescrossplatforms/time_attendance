@@ -174,9 +174,11 @@
                                         <td class="track_max_power"> 
                                           <input id="track_max_power{{$sensor->id}}" name="track_max_power" value="{{$sensor->max_power}}" class="form-control no-radius" placeholder="Max Power" type="text" > 
                                         </td>
+                                        @if ($sensor->vpnip) 
                                         <td class="sensor_vpnip"> 
                                           <input id="sensor_vpnip" name="vpnip" value="{{$sensor->vpnip->ip_address}}" class="form-control no-radius" placeholder="vpnip" type="text" readonly="readonly"> 
                                         </td>
+                                        @endif
                                         <td width="17%">
                                           <a onclick="updateServerRow({{$sensor->id}});" class="btn btn-primary no-radius btn-delete btn-sm">Update</a>
                                           <a href="javascript:void(0);" onclick="removeServerRow({{$sensor->id}});" class="btn btn-primary no-radius btn-delete btn-sm" >Delete</a>

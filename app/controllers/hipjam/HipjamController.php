@@ -133,10 +133,10 @@ class HipjamController extends \BaseController
                 array_push($vbrands, $brand->id);
             }
             $vbrandsarray = implode(",", $vbrands);
-            $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard' OR track_type IS NULL) AND ((brand_id = 165 OR brand_id IN ($vbrandsarray)) AND ap_active = true)")->get());
+            $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard') AND ((brand_id = 165 OR brand_id IN ($vbrandsarray)))")->get());
         } else {
             $vicinity_brands = \Brand::whereRaw('parent_brand IN ('.$brandIdsString.')')->get();
-            $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard' OR track_type IS NULL) AND (brand_id IN ($brandIdsString) AND ap_active = true)")->get());
+            $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard') AND (brand_id IN ($brandIdsString))")->get());
         }
 
         $avg_distance = \DB::select("
@@ -175,9 +175,9 @@ class HipjamController extends \BaseController
                 array_push($vbrands, $brand->id);
             }
             $vbrandsarray = implode(",", $vbrands);
-            $liveNumberOfRetailVenuesCount = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND ((brand_id = 165 OR brand_id IN ($vbrandsarray)) AND ap_active = true)")->get());
+            $liveNumberOfRetailVenuesCount = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND ((brand_id = 165 OR brand_id IN ($vbrandsarray)) AND jam_activated = true)")->get());
         } else {
-            $liveNumberOfRetailVenuesCount = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND (brand_id IN ($brandIdsString) AND ap_active = true)")->get());
+            $liveNumberOfRetailVenuesCount = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND (brand_id IN ($brandIdsString) AND jam_activated = true)")->get());
         }
         
         $data['live_number_of_retail_venues'] = $liveNumberOfRetailVenuesCount;
@@ -218,8 +218,8 @@ class HipjamController extends \BaseController
             $venues = new \Venue();
             if ($brand_id_filter != 'global') {
                 $venues = $venues->whereraw("brand_id = '$brand_id_filter' AND jam_activated = true");
-                $data['live_number_of_billboards'] = count(\Venue::whereraw("(track_type = 'billboard') AND ((brand_id = $brand_id_filter) AND ap_active = true)")->get());
-                $data['live_number_of_retail_venues'] = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND ((brand_id = $brand_id_filter) AND ap_active = true)")->get());
+                $data['live_number_of_billboards'] = count(\Venue::whereraw("(track_type = 'billboard') AND ((brand_id = $brand_id_filter) AND jam_activated = true)")->get());
+                $data['live_number_of_retail_venues'] = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND ((brand_id = $brand_id_filter) AND jam_activated = true)")->get());
             } else {
                 $venues_id_array = array();
                 $original_venues = $venues->getVenuesForUser('hipjam', 1, null, null, "active");
@@ -1092,7 +1092,7 @@ class HipjamController extends \BaseController
         $assetsdir = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
         $destinationPath = $assetsdir->value . 'track/images';
         $data['previewurl'] = $destinationPath;
-
+        $data['billboards'] = \Venue::where('track_type', '=', "billboard")->get();
         $data['timezoneselect'] = $this->getTimezoneSelect($data['venue']['timezone']);
 
         $sensors =  \Sensor::where("venue_id", "like", $data['venue']["id"])->orderBy('id', 'DESC')->get();
