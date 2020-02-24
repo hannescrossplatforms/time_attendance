@@ -324,7 +324,6 @@
                     lastReportedInTimes.forEach(function(item, index) {
 
                         if (labelToNumberForComparrison(displayLastReportedForRow) < labelToNumberForComparrison(item)) {
-                            debugger
                             displayLastReportedForRow = item
                         }
                         
@@ -403,6 +402,7 @@
         }
 
         function labelToNumberForComparrison(stringToGetNumbersFrom){
+            debugger
             return parseInt(stringToGetNumbersFrom.match(/\d+/));
         }
         
