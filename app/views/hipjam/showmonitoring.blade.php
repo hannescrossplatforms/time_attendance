@@ -322,7 +322,6 @@
 
                     displayLastReportedForRow = lastReportedInTimes[0];
                     lastReportedInTimes.forEach(function(item, index) {
-                        debugger;
                         if (labelToNumberForComparrison(displayLastReportedForRow) < labelToNumberForComparrison(item)) {
                             displayLastReportedForRow = item
                         }
@@ -383,7 +382,7 @@
 
                     displayLastReportedForRow = lastReportedInTimes[0];
                     lastReportedInTimes.forEach(function(item, index) {
-                        debugger;
+
                         if (labelToNumberForComparrison(displayLastReportedForRow) < labelToNumberForComparrison(item)) {
                             displayLastReportedForRow = item
                         }
