@@ -189,16 +189,11 @@
 
         // getModalSensorInfo
         // getSensorDataForAllVenues
-        function getAllVenueData() {
-            
-            alert('hier');
-            
-            
+        function process(){
+            Console.log("Hannes hier");
+            setTimeout(function(){
+                process();},3000);
         }
-        debugger
-        $(function () {
-            setInterval(getAllVenueData, 15000);
-        });
 
 
 
