@@ -401,20 +401,13 @@
         }
 
         function labelToNumberForComparrison(stringToGetNumbersFrom){
-            debugger
-            if (stringToGetNumbersFrom.match(/\d+/) != null) {
+            
+            if (stringToGetNumbersFrom != null) {
                 return parseInt(stringToGetNumbersFrom.match(/\d+/));
             }
             else {
-                return 0;
+                return 99999999;
             }
-            
-            // if (Array.isArray(stringToGetNumbersFrom.match(/\d+/))) {
-            //     return parseInt(stringToGetNumbersFrom.match(/\d+/)[0]);
-            // }
-            // else {
-            //     return parseInt(stringToGetNumbersFrom.match(/\d+/));
-            // }
             
         }
         
