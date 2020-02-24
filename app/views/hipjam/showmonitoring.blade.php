@@ -183,7 +183,7 @@
 
 
         function process(){
-            Console.log("Hannes hier");
+            console.log("Hannes hier");
             setTimeout(function(){
                 process();},3000);
         }
