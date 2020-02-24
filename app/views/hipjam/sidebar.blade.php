@@ -60,7 +60,7 @@
             <!-- <li @if ( $data['currentMenuItem'] == "User Management" ) class="active" @endif><a href="{{ url('hipjam_showusers'); }}"><i class="fa fa-users"></i>User Management</a></li> -->
 
             <!-- <li @if ( $data['currentMenuItem'] == "Brand Management" ) class="active" @endif><a href="{{ url('hipjam_showbrands'); }}"><i class="fa fa-rocket"></i>Brand Management</a></li> -->
-            {{-- Sensor Monitoring branch content --}}
+            {{-- Sensor Monitoring1 branch content --}}
             {{-- <li @if ( $data['currentMenuItem'] == "Store Management" ) class="active" @endif><a href="{{ url('hipjam_showstores'); }}"><i class="fa fa-home"></i>Venue Management</a></li> --}}
 
             @if (\User::hasAccess("superadmin") || \User::hasAccess("brandadmin") || \User::hasAccess("reseller") || \User::hasAccess("admin"))
@@ -68,7 +68,7 @@
             <li @if ( $data['currentMenuItem']=="Venue Management" ) class="active" @endif><a href="{{ url('hipjam_showvenues'); }}"><i class="fa fa-home"></i>Venue Management</a></li>
 
             @endif
-            <li @if ( $data['currentMenuItem']=="Sensor Monitoring" ) class="active" @endif><a href="{{ url('hipjam_monitorsensors'); }}"><i class="fa fa-laptop"></i>Sensor Monitoring</a></li>
+            <li @if ( $data['currentMenuItem']=="Sensor Monitoring2" ) class="active" @endif><a href="{{ url('hipjam_monitorsensors'); }}"><i class="fa fa-laptop"></i>Sensor Monitoring</a></li>
             @if ((\User::hasAccess("superadmin") || \User::hasAccess("brandadmin") || \User::hasAccess("reseller") || \User::hasAccess("admin")) && \User::isVicinity())
             <!-- <li @if ( $data['currentMenuItem']=="Settings" ) class="active" @endif><a href="/vicinity/settings"><i class="fa fa-gear"></i>Settings</a></li> -->
             @endif

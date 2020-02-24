@@ -1321,12 +1321,12 @@ class HipjamController extends \BaseController
     {
         $data = array();
         $sensor = new \Sensor();
-        $data['currentMenuItem'] = "Sensor Monitorings";
+        $data['currentMenuItem'] = "Sensor Monitoring";
         $venue = new \Venue();
         $data['venues'] = $venue->getVenuesForUser('hipjam', null, null, null, "active");
         //dd(count($data['details']['sensors']));
         //$brandnames = array();
-
+        \Log::info("HANNES SENSOR MONITORING!");
         return \View::make('hipjam.showmonitoring')->with('data', $data);
     }
 
