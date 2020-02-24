@@ -187,6 +187,21 @@
             getSensorDataForAllVenues();
         });
 
+        // getModalSensorInfo
+        // getSensorDataForAllVenues
+        function getAllVenueData() {
+            
+            alert('hier');
+            
+            
+        }
+
+        $(function () {
+            setInterval(getAllVenueData, 15000);
+        });
+
+
+
         $('.gridlinks').on('click', function(e){
             e.preventDefault();
             let venue = venues[parseInt($(this).attr("index"))];
@@ -309,6 +324,7 @@
                     lastReportedInTimes.forEach(function(item, index) {
 
                         if (labelToNumberForComparrison(displayLastReportedForRow) < labelToNumberForComparrison(item)) {
+                            debugger
                             displayLastReportedForRow = item
                         }
                         
@@ -569,18 +585,7 @@
         })
 
 
-        // getModalSensorInfo
-        // getSensorDataForAllVenues
-        function getAllVenueData() {
-            
-            alert('hier');
-            
-            
-        }
-
-        $(function () {
-            setInterval(getAllVenueData, 15000);
-        });
+        
 
     </script>
 </body>
