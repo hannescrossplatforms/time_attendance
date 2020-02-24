@@ -182,20 +182,23 @@
     });
 
 
-        function process(){
-            console.log("Hannes hier");
+        function updateViewDataOnTimer(){
+            getSensorDataForAllVenues();
+            
+// getModalSensorInfo
+        // getSensorDataForAllVenues
+
             setTimeout(function(){
-                process();},3000);
+                updateViewDataOnTimer();},15000);
         }
     	$('document').ready(function(){
             initializeDatatable();
             $("[id^=sensors]").hide();
             getSensorDataForAllVenues();
-            process();
+            updateViewDataOnTimer();
         });
 
-        // getModalSensorInfo
-        // getSensorDataForAllVenues
+        
         
 
 
