@@ -181,19 +181,22 @@
         
     });
 
-    	$('document').ready(function(){
-            initializeDatatable();
-            $("[id^=sensors]").hide();
-            getSensorDataForAllVenues();
-        });
 
-        // getModalSensorInfo
-        // getSensorDataForAllVenues
         function process(){
             Console.log("Hannes hier");
             setTimeout(function(){
                 process();},3000);
         }
+    	$('document').ready(function(){
+            initializeDatatable();
+            $("[id^=sensors]").hide();
+            getSensorDataForAllVenues();
+            process();
+        });
+
+        // getModalSensorInfo
+        // getSensorDataForAllVenues
+        
 
 
 
