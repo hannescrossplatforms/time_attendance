@@ -574,7 +574,7 @@
         function getAllVenueData() {
             
             alert('hier');
-
+            
             
         }
 
