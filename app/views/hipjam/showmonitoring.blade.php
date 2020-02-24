@@ -195,7 +195,7 @@
             
             
         }
-
+        debugger
         $(function () {
             setInterval(getAllVenueData, 15000);
         });
