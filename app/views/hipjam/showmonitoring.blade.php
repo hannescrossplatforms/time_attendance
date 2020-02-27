@@ -73,42 +73,42 @@
                                         @else
                                             <button venuename='greenside' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br/> <small>Click to turn on</small></button>
                                         @endif
-                                    @elsif($venue->id == 1481) 
+                                    @elseif($venue->id == 1481) 
                                     <!-- Vicinity alpha -->
                                     @if ($venue->status == 'Online')
                                             <button venuename='alpha' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br/> <small>Click to turn off</small></button>
                                         @else
                                             <button venuename='alpha' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br/> <small>Click to turn on</small></button>
                                         @endif
-                                    @elsif($venue->id == 1482) 
+                                    @elseif($venue->id == 1482) 
                                     <!-- Vicinity bravo -->
                                     @if ($venue->status == 'Online')
                                             <button venuename='bravo' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br/> <small>Click to turn off</small></button>
                                         @else
                                             <button venuename='bravo' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br/> <small>Click to turn on</small></button>
                                         @endif
-                                    @elsif($venue->id == 1483) 
+                                    @elseif($venue->id == 1483) 
                                     <!-- Vicinity charlie -->
                                     @if ($venue->status == 'Online')
                                             <button venuename='charlie' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br/> <small>Click to turn off</small></button>
                                         @else
                                             <button venuename='charlie' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br/> <small>Click to turn on</small></button>
                                         @endif
-                                    @elsif($venue->id == 1484) 
+                                    @elseif($venue->id == 1484) 
                                     <!-- Vicinity randhill -->
                                     @if ($venue->status == 'Online')
                                             <button venuename='randhill' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br/> <small>Click to turn off</small></button>
                                         @else
                                             <button venuename='randhill' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br/> <small>Click to turn on</small></button>
                                         @endif
-                                    @elsif($venue->id == 1485) 
+                                    @elseif($venue->id == 1485) 
                                     <!-- Vicinity curatio house -->
                                     @if ($venue->status == 'Online')
                                             <button venuename='curatiohouse' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br/> <small>Click to turn off</small></button>
                                         @else
                                             <button venuename='curatiohouse' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br/> <small>Click to turn on</small></button>
                                         @endif
-                                    @elsif($venue->id == 1486) 
+                                    @elseif($venue->id == 1486) 
                                     <!-- Vicinity sandton close -->
                                     @if ($venue->status == 'Online')
                                             <button venuename='sandtonclose' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br/> <small>Click to turn off</small></button>
