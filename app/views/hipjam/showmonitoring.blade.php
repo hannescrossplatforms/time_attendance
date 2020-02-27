@@ -625,37 +625,37 @@
                 }
                 else if (venue_id == 1481) {
                     //Alpha
-                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_alpha/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
                 else if (venue_id == 1482) {
                     //Bravo
-                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_bravo/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
                 else if (venue_id == 1483) {
                     //Charlie
-                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_charlie/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
                 else if (venue_id == 1484){
                     //Randhill
-                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_randhill/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
                 else if (venue_id == 1485){
                     //Curatio house
-                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
                 else if (venue_id == 1486){
                     //Sandton Close
-                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_sandtonclose/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
@@ -686,31 +686,31 @@
                 }
                 else if (venue_id == 1482) {
                     //Bravo
-                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_bravo/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
                 else if (venue_id == 1483) {
                     //Charlie
-                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_charlie/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
                 else if (venue_id == 1484){
                     //Randhill
-                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_randhill/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
                 else if (venue_id == 1485){
                     //Curatio house
-                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
                 else if (venue_id == 1486){
                     //Sandton Close
-                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_sandtonclose/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
                     });
                 }
