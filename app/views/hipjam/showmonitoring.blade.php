@@ -614,10 +614,54 @@
     <script>
         $(document).on('click', '.turn-off-sensor', function() {
             let venue_id = $(this).data('venue-id');
+            debugger;
             $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_off`, function(resp) {
-                $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+
+                if(venue_id == 1476){
+                // Greenside
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
-                });
+                    });
+                }
+                else if (venue_id == 1481) {
+                    //Alpha
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1482) {
+                    //Bravo
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1483) {
+                    //Charlie
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1484){
+                    //Randhill
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1485){
+                    //Curatio house
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1486){
+                    //Sandton Close
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+
+
+                
                 window.location.href = 'http://hiphub.hipzone.co.za/hipjam_monitorsensors';
             });
         })
@@ -625,9 +669,55 @@
         $(document).on('click', '.turn-on-sensor', function() {
             let venue_id = $(this).data('venue-id');
             $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_on`, function(resp) {
-                $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+
+
+
+                if(venue_id == 1476){
+                // Greenside
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
                     
-                })
+                    });
+                }
+                else if (venue_id == 1481) {
+                    //Alpha
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_alpha/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1482) {
+                    //Bravo
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1483) {
+                    //Charlie
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1484){
+                    //Randhill
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1485){
+                    //Curatio house
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+                else if (venue_id == 1486){
+                    //Sandton Close
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+                    
+                    });
+                }
+
+
+
+                
                 window.location.href = 'http://hiphub.hipzone.co.za/hipjam_monitorsensors';
             });
         })
