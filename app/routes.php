@@ -50,10 +50,14 @@ Route::post('login', function () {
     // error_log("In POST login : " . print_r($user, true));
     print_r($user, true);
 
-        if (Auth::attempt($user)) {
+    if (Auth::attempt($user)) {
+        if (\User::isVicinity()) {
+            return Redirect::route('hipjam_showdashboard');
+        } else {
             return Redirect::route('dashboard')
-                ->with('flash_notice', 'You are successfully logged in.');
+            ->with('flash_notice', 'You are successfully logged in.');
         }
+    }
 
         // authentication failure! lets go back to the login page
         return Redirect::route('login')

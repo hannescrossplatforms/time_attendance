@@ -1,54 +1,58 @@
-@extends('layout')
-
+@extends('angle_wifi_layout')
 <?php $edit = $data["edit"] ?>
-
 @section('content')
 
-  <body class="hipWifi">
-
-              <form role="form" id="useradmin-form" method="post" 
-                    action=" @if ($edit) {{ url('hipwifi_editserver'); }} @else {{ url('hipwifi_addserver'); }} @endif ">
-    <div class="container-fluid">
-      <div class="row">
-
-        @include('hipwifi.sidebar')
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main"> 
-            <h1 class="page-header">Add Server</h1>
-            @if ($errors->has())
-              <div class="alert alert-danger">
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>Add Server<small data-localize="dashboard.WELCOME"></small></div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              Server Details
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                @if ($errors->has())
+                <div class="alert alert-danger">
                   @foreach ($errors->all() as $error)
-                      {{ $error }}<br>        
+                  {{ $error }}<br>
                   @endforeach
+                </div>
+                @endif
               </div>
-            @endif
-          <div class="row">
-              <div class="col-md-12">
-
-<!-- form was here -->
-
+            </div>
+            <form role="form" id="useradmin-form" method="post" action=" @if ($edit) {{ url('hipwifi_editserver'); }} @else {{ url('hipwifi_addserver'); }} @endif ">
+              <div class="row">
+                <div class="col-12">
                   {{ Form::hidden('id', $data['server']->id) }}
                   <div class="form-group">
                     <label for="exampleInputEmail1">Server Hostname</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" 
-                        name="hostname" placeholder="" 
-                        value="@if(Input::old('hostname')){{Input::old('hostname')}}@else{{$data['server']->hostname;}}@endif">
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="hostname" placeholder="" value="@if(Input::old('hostname')){{Input::old('hostname')}}@else{{$data['server']->hostname;}}@endif">
                   </div>
                   @if ($edit)
                   <div class="form-group">
                     <label>Database</label>
-                    <input type="text" class="form-control" name="code" 
-                           value="{{$data['database']->name}}" disabled>
+                    <input type="text" class="form-control" name="code" value="{{$data['database']->name}}" disabled>
                   </div>
                   @else
                   <div class="form-group">
                     <label>Database</label>
                     <select id="databaselist" name="remotedb_id" class="form-control no-radius">
                       @foreach($data['databases'] as $database)
-                        <option value="{{ $database->id }}">
-                          {{ $database->name }}
-                        </option>
-                      @endforeach 
+                      <option value="{{ $database->id }}">
+                        {{ $database->name }}
+                      </option>
+                      @endforeach
                     </select>
                   </div>
                   @endif
@@ -56,41 +60,28 @@
                   <label for="exampleInputEmail1">Brands</label>
                   <div class="table-responsive">
                     <table id="brandManagementTable" class="table table-striped"></table>
-                    </div>
                   </div>
+
 
                   <div class="form-group">
                     <label for="exampleInputEmail1">Notes</label>
-                    <input type="text" class="form-control" rows="2" id="exampleInputEmail1" 
-                        name="notes" placeholder="" value="{{ $data['server']->notes }}">
+                    <input type="text" class="form-control" rows="2" id="exampleInputEmail1" name="notes" placeholder="" value="{{ $data['server']->notes }}">
                   </div>
 
-                  <br> 
+                  <br>
                   <button class="btn btn-primary">Submit</button>
                   <a href="{{ url('hipwifi_showservers'); }}" class="btn btn-default">Cancel</a>
-                    <!-- form ended here -->
                 </div>
-            </div>
-
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-    
-  <!-- Page Modals
-    ================================================== -->
-    
-    
-     
-    </form>
+  </div>
+</section>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/prefixfree.min.js"></script>
-    
-   <script>
+<script>
   
     $(function() {
       @if($edit)
@@ -173,5 +164,5 @@
 
     </script>
 
-  </body>
+
 @stop

@@ -1,34 +1,41 @@
-@extends('layout')
-
+@extends('angle_admin_layout')
 <?php $edit = $data["edit"] ?>
-
 @section('content')
 
-  <body class="HipADMIN">
-
-              <form role="form" id="useradmin-form" method="post" 
-                    action=" @if ($edit) {{ url('useradmin_edit'); }} @else {{ url('useradmin_add'); }} @endif ">
-    <div class="container-fluid">
-      <div class="row">
-
-        @include('admin.sidebar')
-
-        <!-- <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"> -->
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-            <h1 class="page-header">@if ($edit) Edit @else Add @endif User</h1>
-            @if ($errors->has())
-              <div class="alert alert-danger">
-                  @foreach ($errors->all() as $error)
-                      {{ $error }}<br>        
-                  @endforeach
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>@if ($edit) Edit @else Add @endif User</div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              User Information
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                @if ($errors->has())
+                  <div class="alert alert-danger">
+                      @foreach ($errors->all() as $error)
+                          {{ $error }}<br>        
+                      @endforeach
+                  </div>
+                @endif
               </div>
-            @endif
-          <div class="row">
-              <div class="col-md-12">
-
-<!-- form was here -->
-
-                  {{ Form::hidden('id', $data['user']->id) }}
+            </div>
+            <form role="form" id="useradmin-form" method="post" 
+                    action=" @if ($edit) {{ url('useradmin_edit'); }} @else {{ url('useradmin_add'); }} @endif ">
+            <div class="row">
+              <div class="col-12">
+              {{ Form::hidden('id', $data['user']->id) }}
                 	<div class="form-group">
                     <label for="exampleInputEmail1">Full Name</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" 
@@ -47,6 +54,7 @@
                         name="password" placeholder="" 
                         @if(!$edit) required @endif>
                   </div>
+                  <hr />
                   <h2 class="sub-header">Access Level</h2>
                   @if (\User::hasAccess("superadmin")) 
               		<div class="radio">
@@ -97,7 +105,7 @@
                     </label>
                   </div>  
                   @endif
-
+                  <hr />
                   <h2 class="sub-header">Brands Managed</h2>
                   <div class="table-responsive">
                     <table id="brandManagementTable" class="table table-striped"></table>
@@ -114,7 +122,7 @@
                   </div>
                   <!-- <div class="table-responsive"></div> -->
 
-
+                  <hr />
                   <h2 style="{{\User::isVicinity() ? 'display:none' : ''}}" class="sub-header">Product Access</h2>
                   <div style="{{\User::isVicinity() ? 'display:none' : ''}}"  class="checkbox">
                     <label>
@@ -165,184 +173,23 @@
                   <button id="submitform" class="btn btn-primary">Submit</button>
                   <a href="{{ url('useradmin_showusers'); }}" class="btn btn-default">Cancel</a>
                     <!-- form ended here -->
-            
-            
-                </div>
+                    </form>
+              </div>
             </div>
+            
 
-        </div>
-      </div>
-    </div>
-    
-  <!-- Page Modals
-    ================================================== -->
-    
-    <!-- Add Brand Modal -->
-    <div class="modal fade" id="addBrandModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h6 class="modal-title" id="myModalLabel">Add a brand</h6>
-          </div>
-          <div class="modal-body">
 
-                  <div class="form-group">
-                    <label>Brand Name </label>
-                    <select id="brandlist" name="brand_id" class="form-control no-radius" ></select>
-                  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                  <div class="form-group">
-                  <label>Country</label>
-                  <select id="countrielist" class="form-control">
-                      @foreach($data['countries'] as $countrie)
-                        <option value="{{ $countrie->id }}">{{ $countrie->name }}</option>
-                      @endforeach 
-                  </select>                        
-                </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button id="savebrands" type="button" class="btn btn-primary">Add</button>
-          </div>
-        </div>
-      </div>
-    </div>
     
-    <!-- hipRM Modal -->
-    <div class="modal fade" id="hipRMModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h6 class="modal-title" id="myModalLabel">HipWIFI Admins - View/Change Settings</h6>
-          </div>
-          <div class="modal-body">
-                <!-- <form role="form"> -->
-                    <div class="checkbox">
-                      <label>
-<!--                         <input type="checkbox" name="permission_ids[]" value="1">
- -->                        {{ Form::checkbox('permission_ids[]', 1, $data['permissions']['ques_rw']) }}
-                          Add/Remove Questions
-                      </label>
-                    </div>
-                    <div class="checkbox">
-                      <label>
-<!--                         <input type="checkbox" name="permission_ids[]" value="2">
- -->                        {{ Form::checkbox('permission_ids[]', 2, $data['permissions']['media_rw']) }}
-                          Manage Media Backgrounds
-                      </label>
-                    </div>
-                    <div class="checkbox">
-                      <label>
-<!--                         <input type="checkbox" name="permission_ids[]" value="3">
- -->                        {{ Form::checkbox('permission_ids[]', 3, $data['permissions']['uru_rw']) }}
-                        Change User Redirect URL
-                      </label>
-                    </div>
-                    <div class="checkbox">
-                      <label>
-                        <!-- <input type="checkbox" name="permission_ids[]" value="4"> -->
-                            {{ Form::checkbox('permission_ids[]', 4, $data['permissions']['rep_rw']) }}
-                        Access Reports Server
-                      </label>
-                    </div>
-                <!-- </form> -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- hipWIFI Modal -->
-    <div class="modal fade" id="hipWIFIModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h6 class="modal-title" id="myModalLabel">HipRM Admins - View/Change Settings</h6>
-          </div>
-          <div class="modal-body">
-                <p>content needed</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- hipJAM Modal -->
-    <div class="modal fade" id="hipJAMModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h6 class="modal-title" id="myModalLabel">HipJAM Admins - View/Change Settings</h6>
-          </div>
-          <div class="modal-body">
-                <p>content needed</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- hipLOYALTY Modal -->
-    <div class="modal fade" id="hipLOYALTYModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h6 class="modal-title" id="myModalLabel">HipLOYALTY Admins - View/Change Settings</h6>
-          </div>
-          <div class="modal-body">
-                <p>content needed</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  
 
-        <!-- hipTnA Modal -->
-    <div class="modal fade" id="hipTnAModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h6 class="modal-title" id="myModalLabel">HipTnA - View/Change Roles</h6>
-          </div>
-          <div class="modal-body">
-                <select id="tnapermissions" class="form-control"></select>
-                <button id="addtnapermission" type="button" class="btn btn-primary">Add</button>
-          </div>
-          <div id="usertnapermissions"></div>
-          <div>
-            <table id="tnaRolesTable" class="table table-striped"></table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/prefixfree.min.js') }}"></script>
 
     @if (\User::isVicinity())
     <script>
@@ -520,7 +367,7 @@
                     <tr>\
                       <td> <input type="hidden" name="brand_ids[]" value="' + brandId + '">'  + value["name"]  + ' </td>\
                       <td> ' + value["countrie"] + '</td>\
-                      <td> <btn data-brand-id="' + brandId + '" class="btn btn-default btn-delete btn-sm"> delete </btn></td>\
+                      <td> <btn data-brand-id="' + brandId + '" class="btn btn-danger btn-delete btn-sm"> delete </btn></td>\
                     </tr>\
                   ';
             selectedBrands = selectedBrands + row;
@@ -628,5 +475,178 @@
     </script>
     
                 </form>
-  </body>
+
+                <style>
+                  .sub-header {
+                    font-size: 18px;
+
+                  }
+                </style>
+
 @stop
+
+@section('modals')
+<!-- Page Modals
+    ================================================== -->
+    
+    <!-- Add Brand Modal -->
+    <div class="modal fade" id="addBrandModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add a Brand</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+                  <div class="form-group">
+                    <label>Brand Name </label>
+                    <select id="brandlist" name="brand_id" class="form-control no-radius" ></select>
+                  </div>
+
+                  <div class="form-group">
+                  <label>Country</label>
+                  <select id="countrielist" class="form-control">
+                      @foreach($data['countries'] as $countrie)
+                        <option value="{{ $countrie->id }}">{{ $countrie->name }}</option>
+                      @endforeach 
+                  </select>                        
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="savebrands" type="button" class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- hipRM Modal -->
+    <div class="modal fade" id="hipRMModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h6 class="modal-title" id="myModalLabel">HipWIFI Admins - View/Change Settings</h6>
+          </div>
+          <div class="modal-body">
+                <!-- <form role="form"> -->
+                    <div class="checkbox">
+                      <label>
+<!--                         <input type="checkbox" name="permission_ids[]" value="1">
+ -->                        {{ Form::checkbox('permission_ids[]', 1, $data['permissions']['ques_rw']) }}
+                          Add/Remove Questions
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+<!--                         <input type="checkbox" name="permission_ids[]" value="2">
+ -->                        {{ Form::checkbox('permission_ids[]', 2, $data['permissions']['media_rw']) }}
+                          Manage Media Backgrounds
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+<!--                         <input type="checkbox" name="permission_ids[]" value="3">
+ -->                        {{ Form::checkbox('permission_ids[]', 3, $data['permissions']['uru_rw']) }}
+                        Change User Redirect URL
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <!-- <input type="checkbox" name="permission_ids[]" value="4"> -->
+                            {{ Form::checkbox('permission_ids[]', 4, $data['permissions']['rep_rw']) }}
+                        Access Reports Server
+                      </label>
+                    </div>
+                <!-- </form> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- hipWIFI Modal -->
+    <div class="modal fade" id="hipWIFIModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h6 class="modal-title" id="myModalLabel">HipRM Admins - View/Change Settings</h6>
+          </div>
+          <div class="modal-body">
+                <p>content needed</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- hipJAM Modal -->
+    <div class="modal fade" id="hipJAMModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h6 class="modal-title" id="myModalLabel">HipJAM Admins - View/Change Settings</h6>
+          </div>
+          <div class="modal-body">
+                <p>content needed</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- hipLOYALTY Modal -->
+    <div class="modal fade" id="hipLOYALTYModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h6 class="modal-title" id="myModalLabel">HipLOYALTY Admins - View/Change Settings</h6>
+          </div>
+          <div class="modal-body">
+                <p>content needed</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- hipTnA Modal -->
+    <div class="modal fade" id="hipTnAModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h6 class="modal-title" id="myModalLabel">HipTnA - View/Change Roles</h6>
+          </div>
+          <div class="modal-body">
+                <select id="tnapermissions" class="form-control"></select>
+                <button id="addtnapermission" type="button" class="btn btn-primary">Add</button>
+          </div>
+          <div id="usertnapermissions"></div>
+          <div>
+            <table id="tnaRolesTable" class="table table-striped"></table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    @stop

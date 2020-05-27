@@ -1,6 +1,4 @@
-@extends('layout')
-
-
+@extends('angle_admin_layout')
 <?php $edit = $data["edit"] ; 
     if (!$edit) {
       $editval = 0;
@@ -25,21 +23,36 @@
        //$numadminwifi = 0;
     }?>
 
-
-
 @section('content')
 
-  <body class="HipADMIN">
-
-    <form role="form" id="useradmin-form" method="post" 
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>@if ($edit) Edit @else Add @endif  Venue</div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              Venue Information
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+              <form role="form" id="useradmin-form" method="post" 
         action=" @if ($edit) {{ url('admin_editvenue'); }} @else {{ url('admin_addvenue'); }} @endif ">
     <div class="container-fluid">
       <div class="row">
 
-        @include('admin.sidebar')
+        
 
         <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main"> 
-            <h1 class="page-header">@if ($edit) Edit @else Add @endif  Venue</h1>
             @if ($errors->has())
               <div class="alert alert-danger">
                   @foreach ($errors->all() as $error)
@@ -162,24 +175,35 @@
 
                     </div>
 
-                    <br> 
-                    <button id="submitform" class="btn btn-primary">Submit</button>
-                    <a href="{{ url('hipwifi_showvenues'); }}" class="btn btn-default">Cancel</a>
+                    <!-- <br>  -->
+                    <button id="submitform" class="btn btn-primary" style="margin-left: 25px">Submit</button>
+                    <button onclick="history.go(-1)" href="{{ url('hipwifi_showvenues'); }}" class="btn btn-warning">Cancel</button>
                     <br>
                 </div>
             </div>
         </div>
       </div>
   </form>
-     
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/prefixfree.min.js"></script>
-    <script src="/js/jquery.timepicker.min.js"></script> 
+
+
+
+
+
+
+
+
+
+
+
 
     <script>
 
@@ -453,5 +477,5 @@
 
     </script>
 
-  </body>
+
 @stop

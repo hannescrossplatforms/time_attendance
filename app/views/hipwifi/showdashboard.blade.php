@@ -1,27 +1,100 @@
-@extends('layout')
+@extends('angle_wifi_layout')
 
 @section('content')
 
-<body class="hipWifi">
-<div class="container-fluid">
-  <div class="row">
-    @include('hipwifi.sidebar')
+<section class="section-container">
+  <div class="content-wrapper">
 
-    <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-      <h1 class="page-header">Dashboard</h1>
-      <div class="row">
-        <div class="col-md-4">
-          <h3 class="mod-title"><strong>Users</strong></h3>
-          <div class="modStat">
-            <h3>Registered</h3>
-            <span id='wifi_total_users'></span>
-            <h3 style="margin-top: 20px">Online</h3> 
-            <span id='wifi_online_users'></span>
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-danger" id="warn_no_lat_long" style="display: none;"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-default card-demo" id="cardChart9">
+        <div class="card-header"><a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+        <a class="float-right" href="javascript:void(0);" data-tool="card-collapse" data-toggle="tooltip" title="" data-original-title="Collapse card"><em class="fa fa-minus"></em></a>
+          <!-- <div class="card-title">Inbound visitor statistics</div> -->
+        </div>
+        <div class="card-wrapper">
+          <div class="card-body">
+            <div id="map" style="width:100%; height: 300px;"></div>
           </div>
         </div>
-        <div class="col-md-8">
-          <h3 class="mod-title"><strong>Venues</strong></h3>
-          <div class="table-responsive">
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+
+      <div class="col-xl-2 col-md-6">
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary rounded-right">
+            <div class="h2 mt-0" id="usersthismonth"></div>
+            <small id="userslastmonth"></small>
+            <div class="text-uppercase">Users</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-2 col-md-6">
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-purple rounded-right">
+            <div class="h2 mt-0" id="newusersthismonth"></div>
+            <small id="newuserslastmonth"></small>
+            <div class="text-uppercase">New Users</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-2 col-lg-6 col-md-12">
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-green-dark justify-content-center rounded-left"><em class="fas fa-history fa-3x"></em></div>
+          <div class="col-8 py-3 bg-green rounded-right">
+            <div class="h2 mt-0" id="sessionsthismonth"></div>
+            <small id="sessionslastmonth"></small>
+            <div class="text-uppercase">Sessions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-2 col-lg-6 col-md-12">
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-info justify-content-center rounded-left"><em class="fas fa-vector-square fa-3x"></em></div>
+          <div class="col-8 py-3 bg-info-dark rounded-right">
+            <div class="h2 mt-0" id="dwelltimethismonth"></div>
+            <small id="dwelltimelastmonth"></small>
+            <div class="text-uppercase">Avg Dwell (min)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-2 col-md-6">
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-danger justify-content-center rounded-left"><em class="fas fa-clock fa-3x"></em></div>
+          <div class="col-8 py-3 bg-danger-dark rounded-right">
+            <div class="h2 mt-0" id="datausedthismonth"></div>
+            <small id="datausedlastmonth"></small>
+            <div class="text-uppercase">Data Used (Gb)</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo" id="cardChart9">
+          <div class="card-header">
+          <a class="float-right" href="javascript:void(0);" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+          <a class="float-right" href="javascript:void(0);" data-tool="card-collapse" data-toggle="tooltip" title="" data-original-title="Collapse card"><em class="fa fa-minus"></em></a>
+            <div class="card-title">Venues</div>
+          </div>
+          <div class="card-body">
+            <div class="card-wrapper no-overflow">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -36,131 +109,21 @@
                   <tr>
                     <td>{{ $brand }}</td> 
                     <td>{{ $count[array_search($brand, $brands)] }} </td> 
-                    <td class="success">{{ $onlinevenues[array_search($brand, $brands)] }}</td>
-                    <td class="danger">{{ $offlinevenues[array_search($brand, $brands)] }}</td>
+                    <td> <span class="badge badge-success">{{ $onlinevenues[array_search($brand, $brands)] }}</span></td>
+                    <td><span class="badge badge-danger">{{ $offlinevenues[array_search($brand, $brands)] }}</span></td>
                   </tr>
                 @endforeach
                 </tbody>
             </table>
-             </div>
+            </div>
           </div>
-        </div>
-      
-      
-          
-          
-      <br>
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="mod-title"><strong>Statistics: </strong>This Month</h3>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-2 col-md-offset-1">
-          <div class="dashboardstat">
-            <div class="modStat">
-              <div class="dashboardmodstattitle">
-                <h6>Users</h6>
-              </div>
-            </div>
-            <div class="dashboardtextalign">
-              <div id="usersthismonth" class="dashboardmodStatspan"></div>
-              <div id="userslastmonth"></div> 
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2">
-          <div class="dashboardstat">
-            <div class="modStat">
-              <div class="dashboardmodstattitle">
-                <h6>New Users</h6>
-              </div>
-            </div>
-            <div class="dashboardtextalign">
-              <div id="newusersthismonth" class="dashboardmodStatspan"></div>
-              <div id="newuserslastmonth"></div> 
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2">
-          <div class="dashboardstat">
-            <div class="modStat">
-              <div class="dashboardmodstattitle">
-                <h6>Sessions</h6>
-              </div>
-            </div>
-            <div class="dashboardtextalign">
-              <div id="sessionsthismonth" class="dashboardmodStatspan"></div>
-              <div id="sessionslastmonth"></div> 
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-2">
-          <div class="dashboardstat">
-            <div class="modStat">
-              <div class="dashboardmodstattitle">
-                <h6>Avg Dwell (min)</h6>
-              </div>
-            </div>
-            <div class="dashboardtextalign">
-              <div id="dwelltimethismonth" class="dashboardmodStatspan"></div>
-              <div id="dwelltimelastmonth"></div> 
-            </div>
-          </div>
-        </div>
-
-     
-
-   
-        <div class="col-md-2">
-          <div class="dashboardstat">
-            <div class="modStat">
-              <div class="dashboardmodstattitle">
-                <h6>Data used (Gb)</h6>
-              </div>
-            </div>
-            <div class="dashboardtextalign">
-              <div id="datausedthismonth" class="dashboardmodStatspan"></div>
-              <div id="datausedlastmonth"></div> 
-            </div>
-          </div>
-        </div>
     </div>
 
-
-
-
-
-      
-              
-            
-         
   </div>
-  </div>
-     
-      
+</section>
 
-  
-          
-
-</div>
-
-
-        
-
-    
-
-
-<!-- Bootstrap core JavaScript
-    ================================================== --> 
-<!-- Placed at the end of the document so the pages load faster --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/prefixfree.min.js"></script>
 
 <script type="text/javascript">
   
@@ -227,7 +190,177 @@ function get_dashboard_details2() {
    
 </script>
 
-</body>
+
+<script>
+  var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 5,
+      center: new google.maps.LatLng(-30.341529, 25.322594),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: [{
+          elementType: 'geometry',
+          stylers: [{
+            color: '#08304b'
+          }]
+        },
+        {
+          elementType: 'labels.text.stroke',
+          stylers: [{
+            color: '#000000'
+          }]
+        },
+        {
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'administrative.locality',
+          elementType: 'labels.text.stroke',
+          stylers: [{
+            color: '#000000'
+          }]
+        },
+        {
+          featureType: 'administrative.locality',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#0e5064'
+          }]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry.stroke',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'road',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry.stroke',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#165f71'
+          }]
+        },
+        {
+          featureType: 'transit.station',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'geometry',
+          stylers: [{
+            color: '#9dd5ff'
+          }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.fill',
+          stylers: [{
+            color: '#FFFFFF'
+          }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.stroke',
+          stylers: [{
+            color: '#000000'
+          }]
+        }
+      ]
+    });
+
+    var map_brands = {{$data['mapVenues']}};
+    var no_lat_long_count = 0;
+    var markers = [];
+    
+    $.each(map_brands[0], function(i, venue) {
+        
+      if ((venue.latitude === null || venue.latitude === '')) {
+        no_lat_long_count++;
+      } else {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(parseFloat(venue.latitude), parseFloat(venue.longitude)),
+          map: map,
+          icon: (($.now() / 1000) - 300 < venue.last_seen) ? 'http://hiphub.hipzone.co.za/img/retail_marker.png' : 'http://hiphub.hipzone.co.za/img/offline_retail_marker.gif',
+          venue_id: venue.id
+        });
+        markers.push(marker);
+      }
+          
+    });
+
+    var markerCluster = new MarkerClusterer(map, markers, {
+                  imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+                });
+
+    if (no_lat_long_count > 0) {
+      $('#warn_no_lat_long').html(`<i class="fas fa-exclamation" style="margin-right: 10px;"></i>${no_lat_long_count} venues do not have location data.`)
+      $('#warn_no_lat_long').slideDown('fast');
+    }
+
+
+</script>
+
 @stop
 
 

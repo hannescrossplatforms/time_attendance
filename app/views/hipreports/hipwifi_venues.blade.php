@@ -11,7 +11,7 @@
                       </div>
 
                       <button id="filter" type="submit" class="btn btn-primary">Filter</button>
-                      <button id="reset" type="submit" class="btn btn-default">Reset</button>
+                      <button id="reset" type="submit" class="btn btn-warning">Reset</button>
                     </form>
 
                     <div class="table-responsive">

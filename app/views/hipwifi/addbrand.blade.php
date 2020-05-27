@@ -1,32 +1,45 @@
-@extends('layout')
-
+@extends('angle_wifi_layout')
 <?php 
 error_log("Edit is " . $data["edit"]);
 
 $edit = $data["edit"] ;
 if($data["is_activation"]) { $is_activation = 1; } else { $is_activation = 0; };
 ?>
-
 @section('content')
 
-  <body class="hipWifi">
+<section class="section-container">
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>@if ($is_activation) Activate @else Edit @endif Brand<small data-localize="dashboard.WELCOME"></small></div>
+    </div>
 
-    <div class="container-fluid">
-      <div class="row">
-
-        @include('hipwifi.sidebar')
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-          	<h1 class="page-header">@if ($is_activation) Activate @else Edit @endif Brand</h1>
-            @if ($errors->has())
-              <div class="alert alert-danger">
-                  @foreach ($errors->all() as $error)
-                  <?php error_log("here 20 : $error"); ?>
-                      {{ $error }}<br>        
-                  @endforeach
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              Brand Information
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+              @if ($errors->has())
+                  <div class="alert alert-danger">
+                      @foreach ($errors->all() as $error)
+                      <?php error_log("here 20 : $error"); ?>
+                          {{ $error }}<br>        
+                      @endforeach
+                  </div>
+                @endif
               </div>
-            @endif
-            <form role="form" method="post" id="mainform" action="@if ($is_activation) {{ url('hipwifi_activatebrand'); }} @else {{ url('hipwifi_editbrand'); }} @endif">
+            </div>
+            <div class="row">
+              <div class="col-12">
+              <form role="form" method="post" id="mainform" action="@if ($is_activation) {{ url('hipwifi_activatebrand'); }} @else {{ url('hipwifi_editbrand'); }} @endif">
               {{ Form::hidden('id', $data['brand']->id) }}
               {{ Form::hidden('oldbrandcode', $data['brand']->code) }}
               {{ Form::hidden('is_activation', $is_activation) }}
@@ -100,7 +113,7 @@ if($data["is_activation"]) { $is_activation = 1; } else { $is_activation = 0; };
               </div>
               <div class="form-group">
                   <div class="input-group">
-                    <a id="configButton" href="#" class="btn btn-default" data-toggle="modal" data-target="#configureZeroRegModal"><i class="fa fa-gears"></i> Configure Fields For Zero Registration</a>
+                    <a id="configButton" href="#" class="btn btn-default" data-toggle="modal" data-target="#configureZeroRegModal"><i class="fas fa-cog"></i> Configure Fields For Zero Registration</a>
                     </a>
                   </div>
               </div>
@@ -181,226 +194,15 @@ if($data["is_activation"]) { $is_activation = 1; } else { $is_activation = 0; };
 
             <button class="btn btn-primary">Submit</button>
             <a href="{{ url('hipwifi_showbrands'); }}" class="btn btn-default">Cancel</a>
-            </form>          
-        </div>
-      </div>
-    </div>
-
-      <!-- Page Modals
-    ================================================== -->
-    
-    <!-- Configure zeroreg fields Modal -->
-    <div class="modal fade" id="configureZeroRegModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog configureZeroRegModalClass">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h6 class="modal-title" id="myModalLabel">Configure Fields For Zero Registration</h6>
-          </div>
-
-          @if (\User::hasAccess("superadmin")) 
-          <div class="zonein_btn_text" ?>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Zone In Button Text</label>
-              <input form="mainform" type="text" class="form-control" name="zonein_btn_text" 
-                     value="@if(Input::old('zonein_btn_text')){{Input::old('zonein_btn_text')}}@else{{$data['brand']->zonein_btn_text;}}@endif"
-                      id="" >
+            </form>   
+              </div>
             </div>
-          </div>
-          @else
-              {{ Form::hidden('zonein_btn_text', 'Zone In', array("form" => "mainform")) }}
-          @endif
-
-          <div class="table-responsive">
-              <table class="table table-striped" id="userTable">                
-                  <thead>
-                    <tr>
-                      <th class="centered-cell">Field</th>
-                      <th>Type</th>
-                      <th>Field Config</th>
-                      <th class="centered-cell">Registration</th>
-                      <th class="centered-cell">Show</th>
-                    </tr>
-                  </thead>
-                  <tbody>  
-                    
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Cellphone    
-                        <input form="mainform" type="hidden" name="f1_type" value="cellphone" />           
-                      </td>
-                      <td><input form="mainform" type="text" class="form-control" name="f1_placeholder" 
-                          value="{{$data['field_configuration']['f1_placeholder']}}" placeholder="Enter field text for cell phone">
-                      </td>
-                      <td class="centered-cell"><input form="mainform" type="radio" name="register_field" value="1" 
-                        @if($data['field_configuration']['register_field'] == 1)checked @endif >
-                      </td>
-                      <td class="centered-cell"><input form="mainform" type="checkbox" name="f1_display" value="show" 
-                        @if($data['field_configuration']['f1_display'] == "show")checked @endif >
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Email Address             
-                        <input form="mainform" type="hidden" name="f2_type" value="email" />          
-                      </td>
-                      <td><input form="mainform" type="text" class="form-control" name="f2_placeholder" 
-                      value="{{$data['field_configuration']['f2_placeholder']}}" placeholder="Enter field text for email address">
-                      </td>
-                      <td class="centered-cell"><input form="mainform" type="radio" name="register_field" value="2"
-                        @if($data['field_configuration']['register_field'] == 2)checked @endif>
-                      </td>
-                      <td class="centered-cell"><input form="mainform" type="checkbox" name="f2_display" value="show" form="mainform"
-                        @if($data['field_configuration']['f2_display'] == "show")checked @endif>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Voucher     
-                        <input form="mainform" type="hidden" name="f3_type" value="voucher" />           
-                      </td>
-                      <td><input form="mainform" type="text" class="form-control" name="f3_placeholder" 
-                        value="{{$data['field_configuration']['f3_placeholder']}}" placeholder="Enter field text for voucher">
-                      </td>
-                      <td class="centered-cell"><input form="mainform" type="radio" name="register_field" value="3" form="mainform"
-                        @if($data['field_configuration']['register_field'] == 3)checked @endif
-                        ></td>
-                      <td class="centered-cell"><input form="mainform" type="checkbox" name="f3_display" 
-                        value="show" @if($data['field_configuration']['f3_display'] == "show")checked @endif>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Age Gate     
-                        <input form="mainform" type="hidden" name="f4_type" value="agegate" />           
-                      </td>
-                      <td><input form="mainform" type="text" class="form-control" name="f4_agegate" 
-                        value="{{$data['field_configuration']['f4_agegate']}}" placeholder="Enter minimum age">
-                      </td>
-                      <td class="centered-cell"></td>
-                      <td class="centered-cell"><input form="mainform" type="checkbox" name="f4_display" 
-                        value="show" @if($data['field_configuration']['f4_display'] == "show")checked @endif>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Firstname</td>
-                      <td class="left-cell">
-                        <input form="mainform" type="checkbox" name="firstname_capture" value="1" 
-                          @if($data['firstname_capture']) checked @endif > Capture 
-                        
-                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        <input form="mainform" type="checkbox" name="firstname_display" value="1" 
-                          @if($data['firstname_display']) checked @endif > Display
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Social Media Heading Text</td>
-                      <td><input form="mainform" type="text" class="form-control" name="sm_text" 
-                        value="{{$data['brand']['sm_text']}}" placeholder="Enter text">
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Social Media Heading Color</td>
-                      <td class="left-cell">
-                        <input form="mainform" class="input-left" id="sm_color" name="sm_color" type="color" value='{{$data['brand']["sm_color"]}}'>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Social Media Button Size</td>
-                      <td class="left-cell">
-                        <input form="mainform" type="radio" name="sm_buttonsize" value="small" 
-                          @if($data['sm_buttonsize'] == "small") checked @endif > Small 
-                        
-                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        <input form="mainform" type="radio" name="sm_buttonsize" value="large" 
-                          @if($data['sm_buttonsize'] == "large") checked @endif > Large
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Facebook Login     
-                        <input form="mainform" type="hidden" name="f5_type" value="facebook" />           
-                      </td>
-                      <td></td>
-                      <td class="centered-cell"></td>
-                      <td class="centered-cell"><input form="mainform" type="checkbox" name="f5_display" 
-                        value="show" @if($data['field_configuration']['f5_display'] == "show")checked @endif>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                        <input form="mainform" type="hidden" name="f7_placeholder" value="f7_placeholder" />           
-                      <td> Instagram Login     
-                        <input form="mainform" type="hidden" name="f7_type" value="instagram" />           
-                      </td>
-                      <td></td>
-                      <td class="centered-cell"></td>
-                      <td class="centered-cell"><input form="mainform" type="checkbox" name="f7_display" 
-                        value="show" @if($data['field_configuration']['f7_display'] == "show")checked @endif>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                        <input form="mainform" type="hidden" name="f8_placeholder" value="f8_placeholder" />           
-                      <td> Twitter Login     
-                        <input form="mainform" type="hidden" name="f8_type" value="twitter" />           
-                      </td>
-                      <td></td>
-                      <td class="centered-cell"></td>
-                      <td class="centered-cell"><input form="mainform" type="checkbox" name="f8_display" 
-                        value="show" @if($data['field_configuration']['f8_display'] == "show")checked @endif>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="centered-cell"></td>
-                      <td> Custom Button     
-                        <input form="mainform" type="hidden" name="f6_type" value="custombutton" />           
-                      </td>
-                      <td><input form="mainform" type="text" class="form-control" name="f6_placeholder" 
-                        value="{{$data['field_configuration']['f6_placeholder']}}" placeholder="Enter button text"><br>
-                        <input form="mainform" type="text" class="form-control" name="f6_url" 
-                        value="{{$data['field_configuration']['f6_url']}}" placeholder="Enter url for button link">
-                      </td>
-                      <td class="centered-cell"></td>
-                      <td class="centered-cell"><input form="mainform" type="checkbox" name="f6_display" 
-                        value="show" @if($data['field_configuration']['f6_display'] == "show")checked @endif>
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-            </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
-
           </div>
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/prefixfree.min.js"></script>
-    
+  </div>
+</section>
     <script>
 
     $( "#login_process" ).change(function(){
@@ -495,6 +297,212 @@ if($data["is_activation"]) { $is_activation = 1; } else { $is_activation = 0; };
 
 
     </script>
+@stop
 
-  </body>
+@section('modals')
+    <div class="modal fade" id="configureZeroRegModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog configureZeroRegModalClass modal-lg">
+        <div class="modal-content" style="padding: 10px;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel">Configure Fields For Zero Registration</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          @if (\User::hasAccess("superadmin")) 
+          <div class="zonein_btn_text" ?>
+            <div class="form-group">
+              <label for="exampleInputEmail1" style="font-weight: 700; margin-top: 10px;">Zone In Button Text</label>
+              <input form="mainform" type="text" class="form-control" name="zonein_btn_text" 
+                     value="@if(Input::old('zonein_btn_text')){{Input::old('zonein_btn_text')}}@else{{$data['brand']->zonein_btn_text;}}@endif"
+                      id="" >
+            </div>
+          </div>
+          @else
+              {{ Form::hidden('zonein_btn_text', 'Zone In', array("form" => "mainform")) }}
+          @endif
+
+          <div class="table-responsive">
+              <table class="table table-striped" id="userTable">                
+                  <thead>
+                    <tr>
+                      <th class="text-center">Field</th>
+                      <th>Type</th>
+                      <th>Field Config</th>
+                      <th class="text-center">Registration</th>
+                      <th class="text-center">Show</th>
+                    </tr>
+                  </thead>
+                  <tbody>  
+                    
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Cellphone    
+                        <input form="mainform" type="hidden" name="f1_type" value="cellphone" />           
+                      </td>
+                      <td><input form="mainform" type="text" class="form-control" name="f1_placeholder" 
+                          value="{{$data['field_configuration']['f1_placeholder']}}" placeholder="Enter field text for cell phone">
+                      </td>
+                      <td class="text-center"><input form="mainform" type="radio" name="register_field" value="1" 
+                        @if($data['field_configuration']['register_field'] == 1)checked @endif >
+                      </td>
+                      <td class="text-center"><input form="mainform" type="checkbox" name="f1_display" value="show" 
+                        @if($data['field_configuration']['f1_display'] == "show")checked @endif >
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Email Address             
+                        <input form="mainform" type="hidden" name="f2_type" value="email" />          
+                      </td>
+                      <td><input form="mainform" type="text" class="form-control" name="f2_placeholder" 
+                      value="{{$data['field_configuration']['f2_placeholder']}}" placeholder="Enter field text for email address">
+                      </td>
+                      <td class="text-center"><input form="mainform" type="radio" name="register_field" value="2"
+                        @if($data['field_configuration']['register_field'] == 2)checked @endif>
+                      </td>
+                      <td class="text-center"><input form="mainform" type="checkbox" name="f2_display" value="show" form="mainform"
+                        @if($data['field_configuration']['f2_display'] == "show")checked @endif>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Voucher     
+                        <input form="mainform" type="hidden" name="f3_type" value="voucher" />           
+                      </td>
+                      <td><input form="mainform" type="text" class="form-control" name="f3_placeholder" 
+                        value="{{$data['field_configuration']['f3_placeholder']}}" placeholder="Enter field text for voucher">
+                      </td>
+                      <td class="text-center"><input form="mainform" type="radio" name="register_field" value="3" form="mainform"
+                        @if($data['field_configuration']['register_field'] == 3)checked @endif
+                        ></td>
+                      <td class="text-center"><input form="mainform" type="checkbox" name="f3_display" 
+                        value="show" @if($data['field_configuration']['f3_display'] == "show")checked @endif>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Age Gate     
+                        <input form="mainform" type="hidden" name="f4_type" value="agegate" />           
+                      </td>
+                      <td><input form="mainform" type="text" class="form-control" name="f4_agegate" 
+                        value="{{$data['field_configuration']['f4_agegate']}}" placeholder="Enter minimum age">
+                      </td>
+                      <td class="text-center"></td>
+                      <td class="text-center"><input form="mainform" type="checkbox" name="f4_display" 
+                        value="show" @if($data['field_configuration']['f4_display'] == "show")checked @endif>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Firstname</td>
+                      <td class="left-cell">
+                        <input form="mainform" type="checkbox" name="firstname_capture" value="1" 
+                          @if($data['firstname_capture']) checked @endif > Capture 
+                        
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <input form="mainform" type="checkbox" name="firstname_display" value="1" 
+                          @if($data['firstname_display']) checked @endif > Display
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Social Media Heading Text</td>
+                      <td><input form="mainform" type="text" class="form-control" name="sm_text" 
+                        value="{{$data['brand']['sm_text']}}" placeholder="Enter text">
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Social Media Heading Color</td>
+                      <td class="left-cell">
+                        <input form="mainform" class="input-left" id="sm_color" name="sm_color" type="color" value='{{$data['brand']["sm_color"]}}'>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Social Media Button Size</td>
+                      <td class="left-cell">
+                        <input form="mainform" type="radio" name="sm_buttonsize" value="small" 
+                          @if($data['sm_buttonsize'] == "small") checked @endif > Small 
+                        
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <input form="mainform" type="radio" name="sm_buttonsize" value="large" 
+                          @if($data['sm_buttonsize'] == "large") checked @endif > Large
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Facebook Login     
+                        <input form="mainform" type="hidden" name="f5_type" value="facebook" />           
+                      </td>
+                      <td></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"><input form="mainform" type="checkbox" name="f5_display" 
+                        value="show" @if($data['field_configuration']['f5_display'] == "show")checked @endif>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                        <input form="mainform" type="hidden" name="f7_placeholder" value="f7_placeholder" />           
+                      <td> Instagram Login     
+                        <input form="mainform" type="hidden" name="f7_type" value="instagram" />           
+                      </td>
+                      <td></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"><input form="mainform" type="checkbox" name="f7_display" 
+                        value="show" @if($data['field_configuration']['f7_display'] == "show")checked @endif>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                        <input form="mainform" type="hidden" name="f8_placeholder" value="f8_placeholder" />           
+                      <td> Twitter Login     
+                        <input form="mainform" type="hidden" name="f8_type" value="twitter" />           
+                      </td>
+                      <td></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"><input form="mainform" type="checkbox" name="f8_display" 
+                        value="show" @if($data['field_configuration']['f8_display'] == "show")checked @endif>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"></td>
+                      <td> Custom Button     
+                        <input form="mainform" type="hidden" name="f6_type" value="custombutton" />           
+                      </td>
+                      <td><input form="mainform" type="text" class="form-control" name="f6_placeholder" 
+                        value="{{$data['field_configuration']['f6_placeholder']}}" placeholder="Enter button text"><br>
+                        <input form="mainform" type="text" class="form-control" name="f6_url" 
+                        value="{{$data['field_configuration']['f6_url']}}" placeholder="Enter url for button link">
+                      </td>
+                      <td class="text-center"></td>
+                      <td class="text-center"><input form="mainform" type="checkbox" name="f6_display" 
+                        value="show" @if($data['field_configuration']['f6_display'] == "show")checked @endif>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+            </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
 @stop

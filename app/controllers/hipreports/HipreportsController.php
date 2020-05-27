@@ -95,7 +95,7 @@ class HipreportsController extends \BaseController {
     public function hipWifi()
     {
         $data = array();
-        $data['currentMenuItem'] = "HipWifi";
+        $data['currentMenuItem'] = "REPORTS";
 
         $brandObj = new \Brand();
         $reportObj = new \Reports();

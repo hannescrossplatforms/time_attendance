@@ -1,26 +1,28 @@
-                <div class="venuefilterform">
-                  <form id="venuefilterform" class="form-inline" role="form" style="margin-bottom: 15px;" action=" {{ url('hipreports_hipwifi'); }}  ">
-                    <div id="venueheader" class="venueheader">
-                      <div class="form-group">
-                        <div class="venueperiod">
-                          <span id="sitename" class="sitename"></span>
-                          <span id="reportperiod" class="reportperiod">Report Period</span>
-                          <select id="venuereportperiod" name="reportperiod" class="form-control">
-                              <option value="rep7day" <?php if($data['reportperiod'] == "rep7day") echo "selected"; ?>>7 days</option>
-                              <option value="repthismonth" <?php if($data['reportperiod'] == "repthismonth") echo "selected"; ?>>This month</option>
-                              <option value="replastmonth" <?php if($data['reportperiod'] == "replastmonth") echo "selected"; ?>>Last month</option>
-                            <option value="daterange" <?php if($data['reportperiod'] == "daterange") echo "selected"; ?>>Custom range</option>
-                          </select>
-                        </div>
-                        <div  id="venuedaterange" class="venuedaterange">
-                          <div class="form-group">
-                            {{ Form::text('date', null, 
+<div class="row">
+  <div class="col-4 text-left">
+    <h3 id="sitename" class="sitename"></h3>
+    <span id="reportperiod" class="reportperiod">Report Period</span>
+    <select id="venuereportperiod" name="reportperiod" class="form-control">
+      <option value="rep7day" <?php if ($data['reportperiod'] == "rep7day") echo "selected"; ?>>7 days</option>
+      <option value="repthismonth" <?php if ($data['reportperiod'] == "repthismonth") echo "selected"; ?>>This month</option>
+      <option value="replastmonth" <?php if ($data['reportperiod'] == "replastmonth") echo "selected"; ?>>Last month</option>
+      <option value="daterange" <?php if ($data['reportperiod'] == "daterange") echo "selected"; ?>>Custom range</option>
+    </select>
+  </div>
+  <div class="col-8 text-right">
+    <a style="margin-right:25px;" href="#showvenues" aria-controls="showvenues" data-toggle="tab">
+      << Back to list</a> <button type="button" class="btn btn-primary" onclick="printVenuePreview()">View Printable Page</button>
+  </div>
+  <div class="col-4 text-right">
+    <div id="venuedaterange" class="venuedaterange" style="margin-top: 15px;">
+      <div class="form-group">
+        {{ Form::text('date', null, 
                             array('name' => 'from', 'type' => 'text', 'data-date-format' => "dd/mm/yyyy", '
                               class' => 'form-control datepicker schedulecell','placeholder' => 'From Date', 'id' => 'venuefrom')) }}
-                          </div>
+      </div>
 
-                          <div class="form-group">
-                            {{ Form::text('date', null, 
+      <div class="form-group">
+        {{ Form::text('date', null, 
                             array('name' => 'to', 'type' => 'text', 'data-date-format' => "dd/mm/yyyy", 
                               'class' => 'form-control datepicker','placeholder' => 'To Date', 'id' => 'venueto')) }}
                           </div>

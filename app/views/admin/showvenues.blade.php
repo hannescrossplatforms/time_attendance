@@ -1,18 +1,28 @@
-@extends('layout')
+@extends('angle_admin_layout')
 
 @section('content')
 
-<body class="HipADMIN">
-<div class="container-fluid">
-  <a id="buildtable"></a>
-
-  <div class="row">
-    @include('admin.sidebar')
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-            <h1 class="page-header">Venue Management</h1>
-
-            <form class="form-inline" role="form" style="margin-bottom: 15px;">
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>Venue Management</div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              All Venues
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+              <form class="form-inline" role="form" style="margin-bottom: 15px;">
               <div class="form-group">
                 <label  class="sr-only" for="exampleInputEmail2">Site Name</label>
                 <input type="text" class="form-control" id="src-sitename" placeholder="Site Name">
@@ -22,29 +32,35 @@
                 <input type="text" class="form-control" id="src-macaddress" placeholder="Mac Address">
               </div>
 
-              <button id="filter" type="submit" class="btn btn-primary">Filter</button>
-              <button id="reset" type="submit" class="btn btn-default">Reset</button>
+              <button id="filter" type="submit" class="btn btn-info">Filter</button>
+              <button id="reset" type="submit" class="btn btn-warning">Reset</button>
               <div class="add-venue">
                   <a href="{{ url('admin_addvenue'); }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Venue</a>
               </div>
             </form>
 
             <div class="table-responsive">
-                <table id="venueTable" class="table table-striped"> </table>
+              <table id="venueTable" class="table table-striped">
+                <thead>
+                    <tr>
+                      <th>Sitename</th>
+                      <th>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="venue_table_body"></tbody>
+                </table>
+              
             </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-
+      </div>
+    </div>
   </div>
+</section>
 
-</div>
-
-<!-- Bootstrap core JavaScript
-    ================================================== --> 
-<!-- Placed at the end of the document so the pages load faster --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/prefixfree.min.js"></script>
 
 
 
@@ -55,10 +71,8 @@
       $(function() {
         $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
       });
-
-      $(document).delegate('#buildtable', 'click', function() {
-        showVenuesTable(venuesJason);
-      });
+      showVenuesTable(venuesJason);
+    
 
       $(document).delegate('#reset', 'click', function() {
         showVenuesTable(venuesJason);
@@ -87,38 +101,22 @@
       });
 
       function showVenuesTable(venuesjson) {
-        table = '';
-        rows = '';
-        beginTable = '\
-                <table class="table table-striped">\n\
-                  <thead>\n\
-                    <tr>\n\
-                      <th>Sitename</th>\n\
-                      <th>\n\
-                      </th>\n\
-                    </tr>\n\
-                  </thead>\n\
-                  <tbody>  \n';
+        let table_html = '';
+        let tbody = $('#venue_table_body');
+
         $.each(venuesjson, function(index, value) {
-
-            editbutton = '<a href="{{ url('admin_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n';
-
-            deletebutton = '<a class="btn btn-default btn-delete btn-sm" data-venueid = ' + value["id"] + ' href="#">delete</a>\n';
-
-            rows = rows + '\
-                    <tr>\n\
-                      <td> ' + value["sitename"]  + '</td>\n\
-                      <td> ' + editbutton + deletebutton + '</td>\n\
-                    </tr>\n\
-                    ';
-
-        	endTable = ' \
-                  </tbody>\n\
-                </table>';
-
-	        table = beginTable + rows + endTable;
-	        $( "#venueTable" ).html( table );
-	    });
+          table_html += `
+            <tr>
+              <td>${value["sitename"]}</td>
+              <td>
+                <a href="http://hiphub.hipzone.co.za/admin_editvenue/${value['id']}" class="btn btn-primary btn-sm">edit</a>
+                <a class="btn btn-danger btn-delete btn-sm" data-venueid='${value['id']}' href="#">delete</a>
+              </td>
+            </tr>          
+        
+          `;
+        });
+        tbody.html(table_html);
   	  }
 
       $(document).delegate('.btn-delete', 'click', function() {
@@ -131,8 +129,10 @@
         confirmButtonColor: '#DD6B55',
         confirmButtonText: 'Yes, delete it!',
         closeOnConfirm: false,
-      },
-        function(){
+      })
+      .then((willDelete) => {
+        // function(){
+          if (willDelete) {
           swal("Deleted!", "Venue has been deleted!", "success");
           $.ajax({
             type: "GET",
@@ -145,6 +145,7 @@
               showVenuesTable(venuesjson);
             }
           });
+        }
         });
       });
 	

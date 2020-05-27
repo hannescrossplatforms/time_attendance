@@ -1,29 +1,43 @@
-@extends('layout')
-
+@extends('angle_admin_layout')
 <?php 
 error_log("Edit is " . $data["edit"]);
 
 $edit = $data["edit"] ;
 ?>
-
 @section('content')
 
-  <body class="HipADMIN">
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>@if ($edit) Edit @else Add @endif Brand</div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              Brand Information
 
-    <div class="container-fluid">
-      <div class="row">
-
-        @include('admin.sidebar')
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-          	<h1 class="page-header">@if ($edit) Edit @else Add @endif Brand</h1>
-            @if ($errors->has())
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                @if ($errors->has())
               <div class="alert alert-danger">
                   @foreach ($errors->all() as $error)
                       {{ $error }}<br>        
                   @endforeach
               </div>
             @endif
+              </div>
+            </div>
+          <div class="row">
+            <div class="col-12">
             <form role="form" method="post" id="mainform"
                   action=" @if ($edit) {{ url('admin_editbrand'); }} @else {{ url('admin_addbrand'); }} @endif ">
               @if ($edit) {{ Form::hidden('id', $data['brand']->id) }} @endif
@@ -47,7 +61,7 @@ $edit = $data["edit"] ;
                 <input type="text" class="form-control" id="brand_name_input" placeholder="" 
                         name="name" 
                         value="@if(Input::old('name')){{Input::old('name')}}@else{{$data['brand']->name;}}@endif"
-                        maxlength="8">
+                        maxlength="20">
               </div>
               <p id="brand_already_exists" style="color: red; font-size: 12px; display:none;">A brand with this name already exists.</p>
               <div class="form-group" style="{{\User::isVicinity() ? 'display:none' : ''}}">
@@ -92,29 +106,29 @@ $edit = $data["edit"] ;
             @endif
             <button class="btn btn-primary" id="admin_add_brand_button" type="button">Submit</button>
             <a href="{{ url('admin_showbrands'); }}" class="btn btn-default">Cancel</a>
-            </form>          
+            </form> 
+            </div>
+          </div>
+
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-  
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/prefixfree.min.js"></script>
 
-    @if(\User::isVicinity())
+
+    
     <script>
       $(document).on('input', '#brand_name_input', function() {
-        let sub = $('#brand_name_input').val().substring(0, 6)
+        let sub = $('#brand_name_input').val().substring(0, 19)
         $('#brand_code_input').val(sub)
       });
     </script>
-    @endif
+    
 
     <script>
     $(document).on('click', '#admin_add_brand_button', function() {
@@ -153,5 +167,5 @@ $edit = $data["edit"] ;
 	    	
     </script>
 
-  </body>
+
 @stop

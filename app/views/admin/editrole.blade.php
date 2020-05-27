@@ -1,26 +1,27 @@
-@extends('layout')
-
-<?php /*$edit = $data["edit"]*/ ?>
+@extends('angle_admin_layout')
 
 @section('content')
 
-  <body class="HipADMIN">
-
-<!--              <form role="form" id="useradmin-form" method="post" 
-                    action=" {{ url('useradmin_edit'); }} >
-    <div class="container-fluid">-->
-      <div class="row">
-
-        @include('admin.sidebar')
-
-        <!-- <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"> -->
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-            <h1 class="page-header"> Edit Role</h1>
-            
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>Edit Role</div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              Role Information
+            </div>
+          </div>
+          <div class="card-body">
           <div class="row">
               <div class="col-md-12">
-
-<!-- form was here -->
 
                   @foreach($data['roleDetails'] as $roleDetails)
                   <div class="form-group">
@@ -58,7 +59,8 @@
                          required> -->
                   </div>
                 @endforeach 
-                <h2 class="sub-header">Access Permissions</h2>
+                <hr />
+                <h2 class="sub-header" style="font-size: 16px">Access Permissions</h2>
                 <select id="rolepermission" class="form-control">
                     <option>Select Permissions</option>
                   @foreach($data['permission'] as $permission)
@@ -72,7 +74,7 @@
                 <div class="form-group">
                     <div id="add_permission_list">
                         @foreach($data['added_permission'] as $permission_list)
-                        <span id="permission_list_span_{{ $permission_list->id }}">{{ $permission_list->name }} <a data-permisssiontext="{{ $permission_list->name }}" data-permisssionid="{{ $permission_list->id }}" data-target="#" data-toggle="modal" class="remove_permission" href="#"><i class="fa fa-trash-o fa-lg "></i></a><br></span>
+                        <span id="permission_list_span_{{ $permission_list->id }}">{{ $permission_list->name }} <a data-permisssiontext="{{ $permission_list->name }}" data-permisssionid="{{ $permission_list->id }}" data-target="#" data-toggle="modal" class="remove_permission" href="#"><i class="fas fa-trash fa-lg "></i></a><br></span>
                          @endforeach 
                         
                     </div>
@@ -92,24 +94,13 @@
             
                 </div>
             </div>
-
+          </div>
         </div>
       </div>
     </div>
-    
-  <!-- Page Modals
-    ================================================== -->
-    
-    
-    
+  </div>
+</section>
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/prefixfree.min.js"></script>
     
   <script>
       $(document).ready(function(){
@@ -145,7 +136,7 @@
         
         $.each(role_permission_text_arr,function(permissiontextindex,permisssiontextvalue) {
             $.each(role_permission_id_arr,function(permissionidindex,permisssionidvalue) {
-         rows = rows + '<span id="permission_list_span_' + permisssionidvalue + '">' + permisssiontextvalue +' <a href="#" class="remove_permission" data-toggle="modal" data-target="#" data-permisssionid ="' + permisssionidvalue + '" data-permisssiontext ="' + permisssiontextvalue + '"><i class="fa fa-trash-o fa-lg " ></i></a><br></span>';
+         rows = rows + '<span id="permission_list_span_' + permisssionidvalue + '">' + permisssiontextvalue +' <a href="#" class="remove_permission" data-toggle="modal" data-target="#" data-permisssionid ="' + permisssionidvalue + '" data-permisssiontext ="' + permisssiontextvalue + '"><i class="fas fa-trash " ></i></a><br></span>';
            }); 
         });
         

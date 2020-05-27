@@ -1,49 +1,55 @@
-@extends('layout')
+@extends('angle_wifi_layout')
 
 @section('content')
 
-  <body class="hipWifi">
-    <a id="buildtable"></a>
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>Server Management<small data-localize="dashboard.WELCOME"></small></div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              All Servers
 
-    <div class="container-fluid">
-      <div class="row">
-
-        @include('hipwifi.sidebar')
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-          	<h1 class="page-header">Server Management</h1>
-
-            <form class="form-inline" role="form" style="margin-bottom: 15px;">
-              <div class="form-group">
-                <label  class="sr-only">Hostname</label>
-                <input type="text" class="form-control" id="src-hostname" placeholder="Hostname">
-              </div>
-              <div class="form-group">
-                <label class="sr-only">Brand</label>
-                <input type="text" class="form-control" id="src-brand" placeholder="Brand">
-              </div>
-
-              <button id="filter" type="submit" class="btn btn-primary">Filter</button>
-              <button id="reset" type="submit" class="btn btn-default">Reset</button>
-            </form>
-
-			      <form role="form">
-            </form>
-            <div class="table-responsive">
-                <table id="serverTable" class="table table-striped"> </table>
             </div>
-            <a href="{{ url('hipwifi_addserver'); }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Server</a>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <form class="form-inline" role="form" style="margin-bottom: 15px;">
+                  <div class="form-group">
+                    <label  class="sr-only">Hostname</label>
+                    <input type="text" class="form-control" id="src-hostname" placeholder="Hostname">
+                  </div>
+                  <div class="form-group">
+                    <label class="sr-only">Brand</label>
+                    <input type="text" class="form-control" id="src-brand" placeholder="Brand">
+                  </div>
+
+                  <button id="filter" type="submit" class="btn btn-primary">Filter</button>
+                  <button id="reset" type="submit" class="btn btn-warning">Reset</button>
+                </form>
+              </div>
+              <div class="col-6 text-right">
+                <a href="{{ url('hipwifi_addserver'); }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Server</a>
+              </div>
+              <div class="col-12">
+                <table id="serverTable" class="table table-striped"> </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    
-    <script src="js/prefixfree.min.js"></script> 
+  </div>
+</section> 
     
     <script>
 
@@ -55,9 +61,7 @@
 
     serversJason = {{ $data['serversJason'] }};
 
-      $(function() {
-        $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
-      });
+    showServersTable(serversJason);
 
       $(document).delegate('#buildtable', 'click', function() {
         showServersTable(serversJason);
@@ -112,8 +116,8 @@
                       <td> ' + value["serverHostname"]  + '</td>\n\
                       <td> ' + value["brandName"]  + '</td>\n\
                       <td> ' + value["countryName"]  + '</td>\n\
-                      <td><a href="{{ url('hipwifi_editserver'); }}/' + value["serverId"] + '" class="btn btn-default btn-sm">edit</a>\n\
-                          <a class="btn btn-default btn-delete btn-sm" data-serverid = ' + value["serverId"] + ' href="#">delete</a>\n\
+                      <td><a href="{{ url('hipwifi_editserver'); }}/' + value["serverId"] + '" class="btn btn-info btn-sm">edit</a>\n\
+                          <a class="btn btn-default btn-danger btn-sm" data-serverid = ' + value["serverId"] + ' href="#">delete</a>\n\
                       </td>\n\
                     </tr>\n\
                     ';
@@ -158,6 +162,6 @@
 
     </script>
 
-  </body>
+
 
 @stop

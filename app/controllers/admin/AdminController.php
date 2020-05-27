@@ -120,12 +120,11 @@ class AdminController extends \BaseController {
             'name.alpha_num_dash_spaces' => 'The full name can only contain letters, numbers, dashes and spaces',
             'code.required' => 'The brand code is required',
             'code.unique' => 'The brand code is already taken',
-            'code.size' => 'The brand code must be 6 characters in length',
         );
 
         $rules = array(
             'name'          => 'required|alpha_num_dash_spaces|unique:brands',
-            'code'          => 'required|unique:brands|size:6',
+            'code'          => 'required|unique:brands',
         );
 
         $validator = \Validator::make($input, $rules, $messages);
@@ -232,13 +231,21 @@ class AdminController extends \BaseController {
     {
         error_log("deleteBrand");
         $brand = \Brand::find($id);
-    
-        $connection = $brand->remotedb->dbconnection;
+        
+        $remdb = $brand->remotedb;
+        $connection = null;
+        if ($remdb) {
+            $connection = $brand->remotedb->dbconnection;
+        }
 
         if($brand) {
 
             $ids = $brand->venues()->pluck('id');
-            $ids_param = implode(',', $ids);
+            $ids_param = null;
+            if ($ids) {
+                $ids_param = implode(',', $ids);
+            }
+            
 
             
 
@@ -253,11 +260,15 @@ class AdminController extends \BaseController {
 
             $brand->delete();
 
-            file_get_contents('http://tracks03.hipzone.co.za/remove_venues?ids=' + $ids_param);
+            if ($ids_param != null) {
+                file_get_contents('http://tracks03.hipzone.co.za/remove_venues?ids=' + $ids_param);
+            }
 
-            // Delete the nastypes and naslookups in hipwifi
-            \DB::connection($connection)->table("nastype")->where('type', 'like' , "%" . $brand->code)->delete();
-            \DB::connection($connection)->table("naslookup")->where('location', 'like' , "___" . $brand->code . "%")->delete();
+            if ($connection != null) {
+                // Delete the nastypes and naslookups in hipwifi
+                \DB::connection($connection)->table("nastype")->where('type', 'like' , "%" . $brand->code)->delete();
+                \DB::connection($connection)->table("naslookup")->where('location', 'like' , "___" . $brand->code . "%")->delete();
+            }
         }
 
         return \Redirect::route('admin_showbrands', ['json' => 1]);
@@ -533,7 +544,7 @@ error_log("admin_editVenueSave 10");
     {
 //        echo $roleId;die("here");
         $data = array();
-        $data['currentMenuItem'] = "Venues";
+        $data['currentMenuItem'] = "Roles and Permissions";
         $data['product'] = \Product::get();
         //$data['permission'] =  \Permission::get();
         $data['roleDetails'] =  \Role::where('id',$roleId)->get();
