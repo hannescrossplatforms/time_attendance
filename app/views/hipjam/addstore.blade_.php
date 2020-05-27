@@ -169,216 +169,81 @@
 
 
         
-
-          <div class="row">
-              <div class="col-md-12">
-
-                      {{ Form::hidden('id', $data['venue']->id) }}
-                      {{ Form::hidden('countrie_id', $data['venue']->countrie_id) }}
-                      {{ Form::hidden('province_id', $data['venue']->province_id) }}
-                      {{ Form::hidden('citie_id', $data['venue']->citie_id) }}
-                      {{ Form::hidden('brand_id', $data['venue']->brand_id, array('id' => 'brand_id')) }}
-                      {{ Form::hidden('server_id', $data['venue']->server_id, array('id' => 'server_id')) }}
-                      {{ Form::hidden('isp_id', $data['venue']->isp_id) }}
-
-
-                      @if ($edit)
-                        {{ Form::hidden('old_sitename', $data['old_sitename']) }}
-                      @endif
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Sitename* </label>
-                        <input  id="sitename" type="text" class="form-control" id="exampleInputEmail1"
-                                name="sitename" placeholder=""
-                                value="@if(Input::old('sitename')){{Input::old('sitename')}}@else{{$data['venue']->sitename}}@endif"
-                                required disabled>
-                      </div>
-
-                    <!--   @if ($edit)
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Venue ID</label>
-                        <input  id="venue_id" type="text" class="form-control" id="exampleInputEmail1"
-                                name="venue_id" placeholder=""
-                                value="{{$data['venue']->track_venue_id}}"
-                                required>
-                      </div>
-                      @endif  -->
-
-                      @if (!$edit)
-                      <div class="form-group">
-                        <label>Country*</label>
-                        <select id="countrielist" name="countrie_id" class="form-control">
-                          @foreach($data['allcountries'] as $countrie)
-                            <option value="{{ $countrie->id }}">
-                              {{ $countrie->name }}
-                            </option>
-                          @endforeach
-                        </select>
-                      </div>
-
-                      <div class="form-group">
-                        <label>Province*</label>
-                        <select id="provincelist" name="province_id" class="form-control no-radius" required></select>
-                      </div>
-
-                      <div class="form-group">
-                        <label>City*</label>
-                        <select id="citielist" name="citie_id" class="form-control no-radius" placeholder"First select province" required>
-                          <option selected="selected">First select province</option>
-                        </select>
-                      </div>
-
-                      <div class="form-group">
-                        <label>Brand*</label>
-                        <select id="brandlist" name="brand_id" class="form-control no-radius">
-                            @foreach($data['brands'] as $brand)
-                              <option name="brand_id" value="{{ $brand->id }}">
-                                {{ $brand->name }}
-                              </option>
-                            @endforeach
-                        </select>
-                      </div>
-                      @endif
-
-
-                      <div id="fp_ext_div" name="fp_ext" style="display:none"></div>
-                      <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">Floorplan Image</div>
-              <div class="panel-body">
+            <h1 class="page-header">Add Store</h1>
+          <form>
+              <div class="form-group">
+                  <label>Choose Brand</label>
+                    <select class="form-control">
+                      <option>Brand Name</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                </div>
                 <div class="form-group">
-                  <div class="row">
-                    <div class="col-md-4">
+                  <label>Store Name/number</label>
+                    <input class="form-control" placeholder="" type="text">
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">Store Location</div>
+                  <div class="panel-body">
                       <div class="form-group">
-                        <label>Floorplan Background</label>
-                        
-                        <input type="hidden" name="venue_location" id="venue_location" value="{{$data['venue']->location}}" form="fpimageform" >
-                        <div id="dtboxlink"></div>
-                        <div id="fpmsg" style="color: red; "></div>
-                        <input id="fpimage" type="file" name="fpimage" form="fpimageform" style="display: none; ">
-                          <a  id="fp-file" href="#" class="btn btn-default btn-sm  btn-block " 
-                              data-toggle="modal" data-target="#desktopBgModal"  > 
-                              Upload new image
-                          </a>
-                        </input>
-                        <div id="imagedisplayfp" style="display:none"></div>
-
-                        <div id="previewdt">
-                          <a id="dtpreview" href="javascript:void(0);" class="btn btn-default btn-sm  btn-block" >
-                            Preview Floorplan
-                          </a>
-                          <!-- <a id="dtpreview" href="{{$data['previewurl']}}.'/'.$data['venue']->location.'.jpg'" class="btn btn-default btn-sm  btn-block" >
-                            Preview Floorplan
-                          </a> -->
-                          <!-- <a id="dtpreview" href="{{url('assets/track/images/'.$data['venue']->location.'.jpg')}}" class="btn btn-default btn-sm  btn-block" >
-                            Preview Floorplan
-                          </a> -->
-                          <!-- <a id="dtpreview" href="{{url('assets/track/images/HIPALSHAYMOTHERCA01KWIXKUKW.jpg')}}" class="btn btn-default btn-sm  btn-block" >
-                            Preview Background
-                          </a> -->
-                          <!-- <a id="single_image" href="image_big.jpg"><img src="image_small.jpg" alt=""/></a> -->
+                            <label>Country</label>
+                            <select class="form-control">
+                              <option>South Africa</option>
+                              <option>2</option>
+                            </select>
                         </div>
-
-                      </div>
-                    </div>
+                        <div class="form-group">
+                            <label>Province/State</label>
+                            <select class="form-control">
+                              <option>Western Cape</option>
+                           <option>2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <select class="form-control">
+                              <option>Cape Town</option>
+                              <option>2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Area/Town</label>
+                            <select class="form-control">
+                              <option>Gardens</option>
+                              <option>2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                  <label>Timezone</label>
+                    <select class="form-control">
+                              <option>(GMT +2) South Africa</option>
+                              <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label>Location Code</label>
+                    <input class="form-control" placeholder="eg MOTPNPLIQCANALWLKWWCPTXWCZA" type="text">
+                </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-                    <!-- <div class="row">
-                      <div class="col-md-12">
-                        <div class="panel panel-default">
-                          
-                          <a id="view" class="btn btn-default btn-sm  btn-block" target="blank">
-                            Display Floorplan
-                          </a>
-                        </div>
-                      </div>
-                    </div> -->
-
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="panel panel-default">
-                          <div class="panel-heading">Set Sensor Coordinates</div>
-                          <div class="panel-body">
-
-                            <div class="form-group">
-                              <div class="table-responsive">
-
-                                <table class="tnastafftable" id="sensortable">
-                                  <thead>
-                                    <tr>
-                                      <th class="sensor_name" style="width:16%;" >Name  </th>
-                                      <th class="sensor_location" style="width:16%;" > Location  </th>
-                                      <th class="sensor_mac" style="width:16%;" > Mac Address  </th>
-                                      <!-- <th class="sensor_id" style="width:16%;" >Sensor ID  </th> -->
-                                      <th class="x_cordinate" style="width:16%;" >X Cordinate  </th>
-                                      <th class="y_cordinate" style="width:16%;" >Y Cordinate  </th>
-
-                                      <th class="tnastafftd_add_update" style="width:16%;"> <!-- <a id="addreportuser"  class="btn btn-default btn-delete btn-sm" href="javascript:void(0);" onclick="addMoreRows(this.form);" >Add</a> --> </th>
-                                      
-                                    </tr>
-                                  </thead>
-
-                                  <tbody>
-                                    
-                                    <!-- <td class="sensor_id"> 
-                                          <input id="sensor_id" name="sensor_id" class="form-control no-radius" placeholder="Sensor ID" value="" type="text"> 
-                                        </td>
-                                        <a href="javascript:void(0);" onclick="removeRow(0);" class="btn btn-default btn-delete btn-sm" >Delete</a> -->
-
-                              <?php if(!empty($data['sensors'])){ foreach ($data['sensors'] as $sensor)  { ?>
-                                      <tr id="rowCount{{$sensor->id}}"><td class="sensor_name">  
-                                          <div id="add_name{{$sensor->id}}" class="form-control no-radius">{{$sensor->name}}</div>
-                                        </td>
-                                        <td class="sensor_location"> 
-                                          <div id="sensor_location{{$sensor->id}}" class="form-control no-radius">{{$sensor->location}}</div> 
-                                        </td>
-                                        <td class="sensor_mac"> 
-                                          <div id="senso_mac{{$sensor->id}}" class="form-control no-radius">{{$sensor->mac}}</div>  
-                                        </td>
-                                        
-                                        <td class="x_cordinate"> 
-                                          <input id="x_cordinate{{$sensor->id}}" name="x_cordinate" class="form-control no-radius" value="{{$sensor->xcoord}}" placeholder="X Cordinate" type="text" readonly> 
-                                        </td>
-                                        <td class="y_cordinate"> 
-                                          <input id="y_cordinate{{$sensor->id}}" name="y_cordinate" value="{{$sensor->ycoord}}" class="form-control no-radius" placeholder="Y Cordinate" type="text" readonly> 
-                                        </td>
-                                        <td>
-                                          <a onclick="setxyImage({{$sensor->id}})" class="btn btn-default btn-delete btn-sm">Set XY</a>
-                                          <a id="addreportuser" onclick="updateRow({{$sensor->id}});" class="btn btn-default btn-delete btn-sm">Update</a>
-                                          
-                                        </td>
-                                      </tr>  
-                              <?php  }
-                              } ?>
-                                  </tbody>
-                                </table>
-                                  <input type="hidden" id="setxy" rownum="0">
-                                    <div id="tableview"></div>
-
-                                    </tbody>
-                                  </table>
-
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                
+                <div class="panel panel-default">
+                  <div class="panel-heading">Opening Hours</div>
+                  <div class="panel-body">
+                    <div class="form-group">
+                  <label>From</label>
+                    <input class="form-control" placeholder="" type="text">
+                  </div>
+                    <div class="form-group">
+                  <label>To</label>
+                    <input class="form-control" placeholder="" type="text">
+                  </div>
+                  </div>
 
 
-
-
-                    </div>
-
-                    <br>
-                    <button id="submitform" class="btn btn-primary">Update</button>
-                    <a href="{{ url('hipjam_showstores'); }}" class="btn btn-default">Cancel</a>
-                    <a href="{{ url('hipjam_showstores'); }}" class="btn btn-primary pull-right">Done</a>
 
 
 <input type="hidden" name="x_cordi" id="x_cordi" value="0">
