@@ -210,7 +210,6 @@
 
           
 
-<!-- <<<<<<< HEAD -->
           <div class="row">
               <div class="col-md-12">
 
@@ -388,81 +387,6 @@
                     @if ($edit)
                     <a href="{{ url('hipjam_showvenues'); }}" class="btn btn-primary pull-right">Done</a>
                     @endif
-<!-- =======
-            <h1 class="page-header">Add Venue</h1>
-          <form>
-              <div class="form-group">
-                  <label>Choose Brand</label>
-                    <select class="form-control">
-                      <option>Brand Name</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                  <label>Venue Name/number</label>
-                    <input class="form-control" placeholder="" type="text">
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading">Venue Location</div>
-                  <div class="panel-body">
-                      <div class="form-group">
-                            <label>Country</label>
-                            <select class="form-control">
-                              <option>South Africa</option>
-                              <option>2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Province/State</label>
-                            <select class="form-control">
-                              <option>Western Cape</option>
-                           <option>2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>City</label>
-                            <select class="form-control">
-                              <option>Cape Town</option>
-                              <option>2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Area/Town</label>
-                            <select class="form-control">
-                              <option>Gardens</option>
-                              <option>2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                  <label>Timezone</label>
-                    <select class="form-control">
-                              <option>(GMT +2) South Africa</option>
-                              <option>2</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                  <label>Location Code</label>
-                    <input class="form-control" placeholder="eg MOTPNPLIQCANALWLKWWCPTXWCZA" type="text">
-                </div>
-                  </div>
-                </div>
-                
-                <div class="panel panel-default">
-                  <div class="panel-heading">Opening Hours</div>
-                  <div class="panel-body">
-                    <div class="form-group">
-                  <label>From</label>
-                    <input class="form-control" placeholder="" type="text">
-                  </div>
-                    <div class="form-group">
-                  <label>To</label>
-                    <input class="form-control" placeholder="" type="text">
-                  </div>
-                  </div>
->>>>>>> implement_admin_wifi -->
 
 
 
