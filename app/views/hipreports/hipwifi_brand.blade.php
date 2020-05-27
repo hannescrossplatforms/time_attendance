@@ -129,7 +129,7 @@
                     <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
                       <div class="venuerowleft" style=" width: 50%; height: 100%; float: left; height: auto; border-right: 1px solid #999999;">
                         <div class="modStat">
-                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Total Wifi Sessions</h3> </div>
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Total Wifi Sessionss</h3> </div>
                           <div id="brandavgwifisessions" class="modStatspan"></div>
                         </div>
                       </div>

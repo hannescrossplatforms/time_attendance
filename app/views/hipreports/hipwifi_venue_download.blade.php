@@ -139,7 +139,7 @@
                                     <div class="venuerow" style=" float: inherit; margin: 10px 0;  background-color: #ffffff;">
                                       <div class="venuerowleft" style=" float: left; width: 50%; height: 100%;  display: inline-block; height: auto; border: 1px solid #999999;">
                                         <div class="modStat">
-                                          <div class="modstattitle" style="background-color: #FFCC29; height: 45px; padding: 10px;"><h3>Total Wifi Sessions</h3> </div>
+                                          <div class="modstattitle" style="background-color: #FFCC29; height: 45px; padding: 10px;"><h3>Total Wifi Sessions1</h3> </div>
                                           <div id="totalwifisessions" class="modStatspan">{{$totalWifiSessions}}</div>
                                           <div id="avgwifisessions">{{$avgWifiSessions}}</div>
                                         </div>

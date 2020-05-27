@@ -127,7 +127,7 @@
                         <div class="venuerow">
                           <div class="venuerowleft">
                             <div class="modStat">
-                              <div class="modstattitle"><h3>Total Wifi Sessions</h3> </div>
+                              <div class="modstattitle"><h3>Total Wifi Sessions2</h3> </div>
                               <div id="totalwifisessions" class="modStatspan"></div>
                               <div id="avgwifisessions"></div>
                             </div>
