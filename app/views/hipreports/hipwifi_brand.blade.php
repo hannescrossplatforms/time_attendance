@@ -1,4 +1,189 @@
+<<<<<<< HEAD
 <div id="hipwifi_brand">
+=======
+           
+<div id="hipwifi_brand">                
+                                
+                  <form id="brandfilterform" class="form-inline" role="form" style="margin-bottom: 15px;" action=" {{ url('hipreports_hipwifi'); }}  ">
+                    <div class="form-group">
+                      <div class="brandperiod">
+                        <label>Brand</label>
+                        <select id="brandlist" name="brand_id" class="form-control no-radius">
+                            <option id="brand_id" name="brand_id" value="">Select a brand</option>
+                            @foreach($data['brands'] as $brand)
+
+                              <option name="brand_id" value="{{ $brand->id }}" <?php if($brand->id == $data['brand_id']) echo "selected"; ?> 
+                                      data-userdatabtn='{{ $brand->userdatabtn }}' data-logindatabtn='{{ $brand->logindatabtn }}'> 
+                                {{ $brand->name }}
+                              </option>
+
+                            @endforeach 
+                        </select>
+                        &nbsp; &nbsp; &nbsp;
+                        <label>Report Period</label>
+                        <select id="brandreportperiod" name="reportperiod" class="form-control">
+                            <option value="rep7day" <?php if($data['reportperiod'] == "rep7day") echo "selected"; ?>>7 days</option>
+                            <option value="repthismonth">This month</option>
+                            <option value="replastmonth" <?php if($data['reportperiod'] == "replastmonth") echo "selected"; ?>>Last month</option>
+                            <option value="daterange" <?php if($data['reportperiod'] == "daterange") echo "selected"; ?>>Custom range</option>
+                        </select>
+                      </div>
+                      <div  id="branddaterange" class="branddaterange">
+                        <div class="form-group">
+                          {{ Form::text('date', null, 
+                          array('name' => 'from', 'type' => 'text', 'data-date-format' => "dd/mm/yyyy", '
+                            class' => 'form-control datepicker','placeholder' => 'From Date', 'id' => 'brandfrom')) }}
+                        </div>
+
+                        <div class="form-group">
+                          {{ Form::text('date', null, 
+                          array('name' => 'to', 'type' => 'text', 'data-date-format' => "dd/mm/yyyy", 
+                            'class' => 'form-control datepicker','placeholder' => 'To Date', 'id' => 'brandto')) }}
+                        </div>
+                        <div class="form-group">
+                          <button id="submitdaterange" type="submit" class="btn btn-default">Submit Date Range</button>
+                        </div>
+                      </div>
+
+                      <div id="userdatabtn" class="userdatabtn form-group">
+                        <button id="downloaduserprofiledata" type="submit" class="btn btn-default" title="Download user profile data">User Profile Data &darr;</button>
+                      </div>
+
+                      <div id="logindatabtn" class="logindatabtn form-group">
+                        <button id="downloadlistcustomerusage" type="submit" class="btn btn-default" title="List customer usage">Customer Login Data &darr;</button>
+                      </div>
+
+                      <iframe id="my_iframe" style="display:none;"></iframe> <!-- This is for the file download -->
+
+                    </div>
+                  </form>
+                  <!--        printpreview button start-->
+                   <div id="printButton" class="col-md-4" style="width:30%; float: right;">
+                      <button type="button" class="btn btn-primary" onclick="printpreview()">View Printable Page</button>
+                  </div> 
+                  <!--        print preview button end-->
+                
+                
+                
+
+
+              <!-- BEGIN DEMOGRAPHICS AND USAGE -->
+              <div class="venuereports">
+                <!-- section one start -->
+                <div id="section_one" >
+                  <div class="venuecol1 svgimg"  style=" float:left; width: 25%; margin-right: 20px;">
+                    <div class="venuecolheading">Customer Demographics</div>
+                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                      <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Age</h3></div>
+                          <div class="graphcell">
+                            <div id="brandage"></div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                      <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Gender</h3></div>
+                          <div class="graphcell">
+                            <div id="brandgender"></div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                      <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Income</h3></div>
+                          <div class="graphcell">
+                            <div id="brandincome"></div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="venuecol2 svgimg" style="float:left; width: 25%; margin-right: 20px;">
+                    <div class="venuecolheading">Venue Performance Data</div>
+                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                      <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>% Uptime</h3> </div>
+                          <div id="brandavguptime" class="modStatspan"></div>
+                      </div>
+                    </div>
+                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                      <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Avg Venue Dwell Time (mins)</h3></div>
+                          <div id="brandavgjamvenuedwelltime" class="modStatspan"></div>
+                          <div>Information provided by HipJAM sensors</div>
+                      </div>
+                    </div>
+                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                      <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>New vs. Returning Customers</h3></div>
+                          <div class="graphcell">
+                            <div id="brandnewvsreturning"></div>
+                          </div>
+                          <!-- <div class="venuerow"><img src="/img/tmpcharts/1_3.PNG" width="100%"></div> -->
+                      </div>
+                    </div>
+                  </div>                  
+                </div>
+                <!-- section one end -->
+                <!-- section two start -->
+                <div id="section_two">
+                  <div class="venuecol3" style=" float:left; width: 40%;margin-right: 20px;">
+                    <div class="venuecolheading">Hipzone Wifi & Data Admin Usage Statistics</div>
+                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                      <div class="venuerowleft" style=" width: 50%; height: 100%; float: left; height: auto; border-right: 1px solid #999999;">
+                        <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Total Wifi Sessionss</h3> </div>
+                          <div id="brandavgwifisessions" class="modStatspan"></div>
+                        </div>
+                      </div>
+                      <div class="venuerowright" style="width: 50%; height: 100%; float: left; height: auto; border-left: 1px solid #999999;">
+                        <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Wifi Data (Total Consumption Gb)</h3> </div>
+                          <div id="brandavgwifidatatotal" class="modStatspan"></div>
+                        </div>                      
+                      </div>
+                    </div>
+                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                      <div class="venuerowleft" style=" width: 50%; height: 100%; float: left; height: auto; border-right: 1px solid #999999;">                        
+                        <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Number of Unique Customers</h3> </div>
+                          <div id="brandavgnumberofpeople" class="modStatspan"></div>
+                        </div>  
+                      </div>
+                      <div class="venuerowright" style="width: 50%; height: 100%; float: left; height: auto; border-left: 1px solid #999999;">
+                        <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>First Time Wifi Users</h3></div>
+                          <div id="brandavgfirsttimeusers" class="modStatspan"></div>
+                        </div>                      
+                      </div>
+                    </div>
+                    <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;">
+                      <div class="venuerowleft" style=" width: 50%; height: 100%; float: left; height: auto; border-right: 1px solid #999999;">
+                        <div class="modStat">
+                          <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"> <h3>Wifi Data (Avg Per Session Mb)</h3> </div>
+                          <div id="brandbrandavgdatapersession" class="modStatspan"></div>
+                        </div>
+                      </div>
+                      <div class="venuerowright" style="width: 50%; height: 100%; float: left; height: auto; border-left: 1px solid #999999;">
+                        <a class="modal-link" href="#" id="brandCustomerDwellTimeLink" data-toggle="modal" data-target="#brandCustomerDwellTimeModal">
+                          <div class="modStat">
+                            <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"> <h3>Wifi Dwell Time</h3> </div>
+                            <div id="brandbrandavgtimepersession" class="modStatspan"></div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <!-- <div class="venuerow" style="border: 1px solid #999999; margin: 10px 0; overflow:auto; background-color: #ffffff;"> -->
+                      <!-- <div class="modStat"> -->
+                          <!-- <div class="modstattitle" style="background-color: #FFCC29; height: 60px; padding: 10px;"><h3>Data Admin Usage</h3></div> -->
+                          <!-- <div>No Data Available. <br> You are not using HipZone as your ISP.</div> -->
+                          <!-- <div class="venuerow"><img src="/img/tmpcharts/3-4.PNG" width="100%"></div> -->
+                      <!-- </div> -->
+                    <!-- </div>                     -->
+                  </div> 
+                </div>
+                <!-- section two end -->
+>>>>>>> 74d0f9603847f8fd11dfb8665c1f662ba2872533
 
   <div class="row">
     <!-- FILTER -->
