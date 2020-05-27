@@ -1,214 +1,235 @@
-@extends('layout')
+@extends('angle_layout')
 
 @section('content')
 
-<body class="hipJAM">
-  <a id="buildtable"></a>
-
-  <div class="container-fluid">
-    <div class="row">
-
-      @include('hipjam.sidebar')
-
-      <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-        <h1 class="page-header">Dashboard</h1>
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
 
 
-        <div class="alert alert-danger" id="warn_no_locations_found" style="display: none;">X venues do not have location data</div>
-        <!-- FILTERS -->
-        <div class="row">
-          <!-- BRAND -->
-          <div class="col-md-4 text-center">
-            <small>Select Brand:</small> <br/>
-            <select id="sub_brand_select" class="form-control changable-filter">
-              <option value="global">Global</option>
-                @foreach ($data['sub_brands'] as $brand)
-                  <option value="{{$brand->id}}">{{$brand->name}}</option>
-                @endforeach
-            </select>
-          </div>
+  
 
-          <!-- TYPE -->
-          <div class="col-md-4 text-center">
-            <small>Selected Type:</small> <br/>
-            <select id="type_select" class="form-control changable-filter">
-              <option value="global">Global</option>
-              <option value="billboard">Billboard</option>
-              <option value="venue">Venue</option>
-            </select>
-          </div>
-
-        <!-- DATE -->
-        <div class="col-md-4 text-center">
-            <small>Selected Date Span:</small> <br/>
-            <select id="date_select" class="form-control changable-filter">
-              <option value="yesterday">Yesterday</option>
-              <option value="today">Today</option>
-              <option value="this_week">This Week</option>
-              <option value="last_week">Last Week</option>
-              <option value="this_month">This Month</option>
-              <option value="last_month">Last Month</option>
-              <option value="custom">Custom</option>
-            </select>
-          </div>
+  <div class="row" id="filter_container">
+    <div class="col-12">
+      <div class="card card-default card-demo">
+        <div class="card-header">
+          <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+          <div class="card-title">Filter</div>
         </div>
-        <br />
+    
+          <div class="card-body">
+            <div class="row">
 
+              <div class="col-4">
+                <small>Select Brand:</small> <br/>
+                <select id="sub_brand_select" class="form-control changable-filter">
+                  <option value="global">Global</option>
+                    @foreach ($data['sub_brands'] as $brand)
+                      <option value="{{$brand->id}}">{{isset($brand->friendly_name) ? $brand->friendly_name : $brand->name}}</option>
+                    @endforeach
+                </select>
+              </div>          
 
-        <div id="map" style="width:100%; height: 500px;"></div>
-
-        <div id="clear-button-div" style="display: none; float: right; margin-top: 10px;">
-          <a class="btn btn-default btn-sm">Clear</a>
-        </div>
-        <div id="ajax-venue-stats-page"></div>
-        <iframe style="width: 100%; height: 1880px; border: 0;" id="selected_venue_view"></iframe>
-
-        <div id="stats-and-graph-container">
-
-          <div style="width: 100%; margin-top: 15px;">
-            <div style="width:33%; display: inline-block; height:94px;">
-              <div style="background-color: #2e80e7; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                <i class="fa fa-map-signs" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-              </div>
-              <div style="background-color: #5d9dec; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data["live_number_of_billboards"]}}</p>
-                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of billboards</small>
-              </div>
+            <div class="col-4">
+              <small>Selected Type:</small> <br/>
+              <select id="type_select" class="form-control changable-filter">
+                <option value="global">Global</option>
+                <option value="billboard">OOH Site</option>
+                <option value="venue">Venue</option>
+              </select>
             </div>
 
-            <div style="width:33%; display: inline-block; height:94px;">
-              <div style="background-color: #2a9579; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                <i class="fa fa-building" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-              </div>
-              <div style="background-color: #37bc9b; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;">{{$data['live_number_of_retail_venues']}}</p>
-                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Live number of retail venues</small>
-              </div>
-            </div>
-
-            <div style="width:33%; display: inline-block; height:94px;">
-              <div style="background-color: #574aa3; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                <i class="fa fa-history" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-              </div>
-              <div style="background-color: #7d6dde; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_uniques_today">Loading...</p>
-                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Uniques today</small>
-              </div>
-            </div>
-
-            <div style="width:33%; display: inline-block; height:94px;">
-              <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-              </div>
-              <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_current">Loading...</p>
-                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Real-time Customers</small>
-              </div>
-            </div>
-
-            <div style="width:33%; display: inline-block; height:94px;">
-              <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-              </div>
-              <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">Loading...</p>
-                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Real-time Customers Today</small>
-              </div>
-            </div>
-
-            <div style="width:33%; display: inline-block; height:94px;">
-              <div style="background-color: #e72e2e; width: 33%; display: inline-block; float:left; height: 100%; border-radius: 5px 0 0 5px; text-align: center;">
-                <i class="fa fa-eye" style="color: white; font-size: 41px; margin-top: 25px;"></i>
-              </div>
-              <div style="background-color: #ec5d5d; width: 67%; display: inline-block; float:right; height: 100%; border-radius: 0 5px 5px 0;">
-                <p style="color: white;font-size: 30px; margin-top: 20px; padding-left: 15px; margin-bottom: 9px;" id="live_individuals_exposed_today">{{$data['avg_distance'][0]->distance}}km</p>
-                <small style="color: white; padding-left: 15px; text-transform: uppercase;">Avg Distance Billboard / Retail</small>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-
-            <div class="graph-container" style="padding: 10px; width: 100%;">
-              <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;margin-top: 20px;">
-                <h1>Best Performance</h1>
-                <div class="graphcell" style="padding: 1px;">
-                  <div id="best-performing-chart"></div>
-                </div>
-                <div class="graphcell">
-                  <div id="chartcol1row2"></div>
-                </div>
-                <div class="graphcell">
-                  <div id="chartcol1row3"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="graph-container" style="padding: 10px; width: 100%;">
-              <div class="graphcol" style="width: 50%; margin: 0; float: left; border: 1px solid !important;">
-                <h1>Worst Performance</h1>
-                <div class="graphcell" style="padding: 1px;">
-                  <div id="worst-performing-chart"></div>
-                </div>
-                <div class="graphcell">
-                  <div id="chartcol2row2"></div>
-                </div>
-                <div class="graphcell">
-                  <div id="chartcol2row3"></div>
+            <div class="col-4">
+              <small>Selected Date Span:</small> <br/>
+              <select id="date_select" class="form-control changable-filter">
+                <option value="yesterday">Yesterday</option>
+                <option value="today">Today</option>
+                <option value="this_week">This Week</option>
+                <option value="last_week">Last Week</option>
+                <option value="this_month">This Month</option>
+                <option value="last_month">Last Month</option>
+                <option value="custom">Custom</option>
+              </select>
+              <div id="custom_date_filter" style="display: none;">
+                <div class="row" style="margin-top: 10px;">
+                  <div class="col-5 text-center">
+                    <input class="form-control" type="date" placeholder="yyyy/mm/dd" id="custom_filter_date_from"/>
+                  </div>
+                  <div class="col-5 text-center">
+                    <input class="form-control" type="date" placeholder="yyyy/mm/dd" id="custom_filter_date_to" />
+                  </div>
+                  <div class="col-2 text-center">
+                    <button class="btn btn-primary" id="apply_custom_date_filter">Apply</button>
+                  </div>
                 </div>
               </div>
             </div>
 
           </div>
-
-        </div>
-
-        <input type="hidden" id="focused_venue"/>
-
-
-
-
-        <!--
-            Exposed visits today global view (Exposed to billboard)
-Exposed visits month (Exposed to billboard)
-Unexposed visits today (without being exposed to billboard)
-Unexposed visits month (without being exposed to billboard)
-Time spent in store (dwell) -->
-
-
-
-        <div class="table-responsive">
-          <table id="venueTable" class="table table-striped"> </table>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
 
-  <script src="{{ asset('js/fusioncharts.js') }}"></script>
-  <script src="{{ asset('js/fusioncharts.charts.js') }}"></script>
-  <script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}"></script>
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-default card-demo" id="cardChart9">
+        <div class="card-header"><a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+        <a class="float-right" href="javascript:void(0);" data-tool="card-collapse" data-toggle="tooltip" title="" data-original-title="Collapse card"><em class="fa fa-minus"></em></a>
+          <!-- <div class="card-title">Inbound visitor statistics</div> -->
+        </div>
+        <div class="card-wrapper">
+          <div class="card-body">
+            <div id="map" style="width:100%; height: 300px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <script src="js/prefixfree.min.js"></script>
+  <div class="row" id="selected_venue_view_container" style="display:none;">
+    <div class="col-12">
+      <div class="card card-default card-demo" id="cardChart9">
+        <div class="card-header"><a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+          <!-- <div class="card-title">Inbound visitor statistics</div> -->
+        </div>
+        
+          <div class="card-body">
+          <iframe style="width: 100%; height: 1880px; border: 0;" id="selected_venue_view"></iframe>
+          </div>
+        
+      </div>
+    </div>
+  </div>
 
-  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-  </script>
-  <script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDS0aGw5pQFy_dg8198J42w0EeuZtI2Wuk" type="text/javascript"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-analytics.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/linq.min.js"></script>
-  <style>
-    #selected_venue_view {
-      display: none;
-    }
-  </style>
-  <script>
+  
+    
+    <div class="row">
+      <div class="col-xl-2 col-md-6">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary rounded-right">
+            <div class="h2 mt-0" id="live_nr_billboard_count"></div>
+            <div class="text-uppercase">Live number of OOH Sites</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-6">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-purple rounded-right">
+            <div class="h2 mt-0" id="live_nr_retail_count"></div>
+            <div class="text-uppercase">Live number of retail venues</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-green-dark justify-content-center rounded-left"><em class="fas fa-history fa-3x"></em></div>
+          <div class="col-8 py-3 bg-green rounded-right">
+            <div class="h2 mt-0" id=live_uniques_today>Loading...</div>
+            <div class="text-uppercase">Uniques today</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-info justify-content-center rounded-left"><em class="fas fa-vector-square fa-3x"></em></div>
+          <div class="col-8 py-3 bg-info-dark rounded-right">
+            <div class="h2 mt-0">{{$data['avg_distance'][0]->distance}} km</div>
+            <div class="text-uppercase">Avg Distance OOH Site / Retail</div>
+          </div>
+        </div>
+      </div>
+    <!-- </div>END cards box -->
+
+    <!-- <div class="row"> -->
+      <div class="col-xl-2 col-md-6">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-danger justify-content-center rounded-left"><em class="fas fa-clock fa-3x"></em></div>
+          <div class="col-8 py-3 bg-danger-dark rounded-right">
+            <div class="h2 mt-0" id="live_individuals_exposed_current">Loading...</div>
+            <div class="text-uppercase">Real-time Customers</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-6">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-warning justify-content-center rounded-left"><em class="fas fa-calendar fa-3x"></em></div>
+          <div class="col-8 py-3 bg-warning-dark rounded-right">
+            <div class="h2 mt-0" id="live_individuals_exposed_today">Loading...</div>
+            <div class="text-uppercase">Real-time Customers Today</div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+      
+    <!-- </div>END cards box -->
+
+
+    <div class="row">
+      <div class="col-6">
+        <div class="card card-default card-demo" id="cardChart9">
+          <div class="card-header">
+          <a class="float-right" href="javascript:void(0);" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+          <a class="float-right" href="javascript:void(0);" data-tool="card-collapse" data-toggle="tooltip" title="" data-original-title="Collapse card"><em class="fa fa-minus"></em></a>
+            <div class="card-title">Best Performance</div>
+          </div>
+          <!-- <div class="card-wrapper"> -->
+            <div class="card-body">
+            <div class="card-wrapper no-overflow">
+              <canvas id="best-performing-chart"></canvas>
+            </div>
+            </div>
+          <!-- </div> -->
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="card card-default card-demo" id="cardChart9">
+          <div class="card-header"><a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+          <a class="float-right" href="javascript:void(0);" data-tool="card-collapse" data-toggle="tooltip" title="" data-original-title="Collapse card"><em class="fa fa-minus"></em></a>
+            <div class="card-title">Worst Performance</div>
+          </div>
+          <!-- <div class="card-wrapper"> -->
+            <div class="card-body">
+            <div class="card-wrapper no-overflow">
+            <canvas height="150" id="worst-performing-chart"></canvas>
+            </div>
+            </div>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo" id="cardChart9">
+          <div class="card-header"><a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+          <a class="float-right" href="javascript:void(0);" data-tool="card-collapse" data-toggle="tooltip" title="" data-original-title="Collapse card"><em class="fa fa-minus"></em></a>
+          
+            <div class="card-title">Venue Selection</div>
+          </div>
+          <div class="card-body">
+          <div class="card-wrapper">
+            <div id="venueTable"> 
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- Page footer-->
+<input type="hidden" id="focused_venue"/>
+<script>
     let venue_array = [];
     let loaded_venues = {{$data['venuesJson']}};
     let liveJam = {};
@@ -240,6 +261,21 @@ Time spent in store (dwell) -->
       });
     };
 
+    liveJam.orderAndSortData = (raw_data) => {
+      raw_data.sort((a, b) => parseFloat(a.y) - parseFloat(b.y));
+      return {
+        labels: $.map( raw_data, function( d, i ) {
+                    return d.x
+                }),
+        data: $.map( raw_data, function( d, i ) {
+                    return d.y
+                })
+      }
+      // return $.map( raw_data, function( d, i ) {
+      //               return {label: d.label, value: d.value}
+      //           });
+    }
+
     liveJam.graphSerializer = (raw_data) => {
                 raw_data.sort((a, b) => parseFloat(a.value) - parseFloat(b.value));
                 return $.map( raw_data, function( d, i ) {
@@ -269,7 +305,7 @@ Time spent in store (dwell) -->
               exposed_current += doc.data().customers_in_store_now;
               exposed_today += doc.data().customers_in_store_today;
               uniques_today += doc.data().new_customers_today;
-              // debugger;
+              
               // best_performing.push({label: 'test', value: doc.data().customers_in_store_today})
             } else {
               venues_with_no_data += 1;
@@ -293,14 +329,15 @@ Time spent in store (dwell) -->
           best_worst_venue_promises.push(
             db.collection(venue.id).doc(date).get()
               .then(doc => {
-                // debugger;
+                
                 if (doc.data() !== undefined) {
                   
                   // console.log(doc.data().customers_in_store_today)
-                  return {label: venue.sitename, value: doc.data().customers_in_store_today};
+                  debugger;
+                  return {label: (venue.friendly_brandname !== null ? (`${venue.friendly_brandname} ${venue.sitename.split(' ')[1]}`) : venue.sitename), value: doc.data().customers_in_store_today};
                 }
                 else {
-                  return {label: venue.sitename, value: 0}; //running_total += 0;
+                  return {label: (venue.friendly_brandname !== null ? (`${venue.friendly_brandname} ${venue.sitename.split(' ')[1]}`) : venue.sitename), value: 0}; //running_total += 0;
                 }
                   
               })
@@ -311,70 +348,59 @@ Time spent in store (dwell) -->
         master_promise = Promise.all(best_worst_venue_promises).then(function(res) {   
           return res;
           // all_venues =
-          // debugger;       
+           
           // all_venues.push({label: venue.sitename, value: eval(res.join("+"))});
-          // debugger;
+          
         });
       });
 
       master_promise.then(function(b) { 
-// Promise.all(promise_array).then(function(res) {
-  all_venues = Enumerable.From(b)
-        .GroupBy("$.label", null,
-                 function (key, g) {
-                     return {
-                       label: key,
-                       value: g.Sum("$.value")
-                     }
-        })
-        .ToArray();
+      all_venues = Enumerable.From(b)
+            .GroupBy("$.label", null,
+                    function (key, g) {
+                        return {
+                          x: key,
+                          y: g.Sum("$.value")
+                        }
+            })
+            .ToArray();
   
-  debugger;
-  console.log('finished getting venue data')
-        debugger;
-          let test_data = liveJam.graphSerializer(all_venues).slice(0,5);
-          // console.table(test_data)
         
+          let test_data = liveJam.graphSerializer(all_venues).slice(0,5);
 
-        //BEST
-        var dataSource = {
-                chart: {
-                  caption: "Best performing Venues",
-                  xaxisname: "Store",
-                  yaxisname: "Sessions",
-                  theme: "zune"
-                },
-                data: liveJam.graphSerializer(all_venues).slice(0).slice(-5)
-              };
-
-              var myChart = new FusionCharts({
-                type: "column2d",
-                renderAt: "best-performing-chart",
-                width: "100%",
-                height: "350",
-                dataFormat: "json",
-                dataSource
-              }).render();
-//BEST
-              dataSource = {
-                chart: {
-                  caption: "Worst performing Venues",
-                  xaxisname: "Store",
-                  yaxisname: "Sessions",
-                  theme: "zune"
-                },
-                data: test_data
-              };
-
-              myChart = new FusionCharts({
-                type: "column2d",
-                renderAt: "worst-performing-chart",
-                width: "100%",
-                height: "350",
-                dataFormat: "json",
-                dataSource
-              }).render();
-      // })
+      
+        let top_venues = liveJam.orderAndSortData(all_venues);
+        let canvas = document.getElementById('best-performing-chart');
+        let ctx = canvas.getContext("2d");
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: top_venues.labels.slice(0).slice(-5),
+              datasets: [{
+                  label: '# of Sessions',
+                  data: top_venues.data.slice(0).slice(-5),
+                  borderColor: "green",
+                  backgroundColor: "rgba(55,188,155,1)"
+                }]
+              },
+              options: global_chart_options
+        });
+        //WORST
+        canvas = document.getElementById('worst-performing-chart');
+        ctx = canvas.getContext("2d");
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: top_venues.labels.slice(0).slice(0,5),
+              datasets: [{
+                  label: '# of Sessions',
+                  data: top_venues.data.slice(0).slice(0,5),
+                  borderColor: "red",
+                  backgroundColor: "rgba(236,33,33,1)"
+                }]
+              },
+              options: global_chart_options
+        });
 
        })
       
@@ -550,10 +576,11 @@ Time spent in store (dwell) -->
     var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
-    let markers = [];
+    var markers = [];
     let no_lat_long_count = 0;
     let venue_promises = [];
 
+    var venue_count = 0;
     
     // liveJam.compileData = (span, callback) => {
     //     let nodes = liveJam.compileNodeArray(span);
@@ -574,6 +601,7 @@ Time spent in store (dwell) -->
 
         if ((venue.latitude === null || venue.latitude === '') || venue.ap_active === '0') {
           no_lat_long_count++;
+          venue_count++;
         } else {
           getIcon(venue, function(ico) {
               marker = new google.maps.Marker({
@@ -589,21 +617,25 @@ Time spent in store (dwell) -->
                   let venue_id = marker.venue_id;
                   let url_parts = window.location.href.split('?');
                   let filters = '';
+                  let host = `http://${window.location.host}/`;
                   if (url_parts.length === 2) 
                     filters = `?${url_parts[1]}`
+                  window.open(`${host}hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${filters}`)
+                  
 
-                  $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${filters}`);                  
+                  // $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${filters}`);                  
 
-                  $('#selected_venue_view').slideDown('fast')
+                  // $('#selected_venue_view').slideDown('fast')
+                  // $('#selected_venue_view_container').slideDown('fast');
                   $('#focused_venue').val(venue_id);
 
                   console.log(`marker clicked with id: ${venue_id}`);
                 }
               })(marker, i));
-
+              venue_count++;
               markers.push(marker)
-
-              if (i + 1 === venues.length) {
+              if (venue_count === venues.length) {
+                debugger;
                 var markerCluster = new MarkerClusterer(map, markers, {
                   imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
                 });
@@ -647,8 +679,8 @@ Time spent in store (dwell) -->
     function getDateArray() {
       let filters = get_presets();
       if (filters === null) {
-          filters = {date_from: moment().startOf('week'),
-                      date_to: moment().endOf('week')}
+          filters = {date_from: moment().startOf('week').add(1,'day'),
+                      date_to: moment().endOf('week').add(1,'day')}
       }
       let start = moment(filters.date_from);
       let end = moment(filters.date_to);
@@ -721,7 +753,7 @@ Time spent in store (dwell) -->
     //         showBrandPerformanceGraphs(brandjson);
     //       },
     //       error: function(error) {
-    //         debugger;
+    
     //       }
     //     });
 
@@ -757,9 +789,7 @@ Time spent in store (dwell) -->
 
     venuesJson = {{$data['venuesJson']}};
 
-    $(function() {
-      $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
-    });
+    showVenuesTable(venuesJson);
 
     $(document).delegate('#buildtable', 'click', function() {
       showVenuesTable(venuesJson);
@@ -786,14 +816,15 @@ Time spent in store (dwell) -->
         },
         url: "{{ url('lib_filterdvenues'); }}",
         success: function(filteredVenuesjson) {
-          // alert("success");
           showVenuesTable(filteredVenuesjson);
         }
       });
     });
 
     function showVenuesTable(venuesjson) {
-      // alert("showVenuesTable");
+      let host = `http://${window.location.host}/`;
+      let live_number_of_retail = 0;
+      let live_number_of_billboard = 0;
       table = '';
       rows = '';
       beginTable = '\
@@ -801,6 +832,7 @@ Time spent in store (dwell) -->
                   <thead>\n\
                     <tr>\n\
                       <th>Sitename</th>\n\
+                      <th>Type</th>\n\
                       <th>Contact</th>\n\
                       <th>\n\
                       </th>\n\
@@ -808,32 +840,24 @@ Time spent in store (dwell) -->
                   </thead>\n\
                   <tbody>  \n';
       $.each(venuesjson, function(index, value) {
-
-
-        /*editbutton = '<a href="{{ url('hipwifi_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n';*/
         if (value["apisitename"] != 'no_venue') {
-        
-          viewbutton = '<a href="http://hiphub.hipzone.co.za/hipjam_viewvenue/' + value["id"] + '/' + value["apisitename"] + '" class="btn btn-default btn-sm view-venue-button" data-venue-id=' + value["id"] + '>view</a>\n';
+          viewbutton = '<a href="' + host + 'hipjam_viewvenue/' + value["id"] + '/' + value["apisitename"] + '" class="btn btn-primary btn-sm view-venue-button" data-venue-id=' + value["id"] + '>view</a>\n';
         } else {
           viewbutton = '<a href="javascript:void(0);" onclick="alert_message()" class="btn btn-default btn-sm">view</a>\n';
         }
 
-        /*viewbutton = '<a href="{{ url('hipjam_viewvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">view</a>\n';*/
-
-
-        /*deletebutton = '<a class="btn btn-default btn-delete btn-sm" data-venueid = ' + value["id"] + ' href="#">delete</a>\n';*/
-
-        /*if(value["device_type"] == 'Mikrotik') {
-          redeploybutton = '<a href="{{ url('hipwifi_redeploymikrotikvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">redeploy</a>\n';
+        if (value["track_type"] === 'billboard') {
+          live_number_of_billboard += 1;
         } else {
-          redeploybutton = '\n';
-        }*/
-
+          live_number_of_retail += 1;
+        }
+        let friendly_name = value['friendly_brandname'] + ' ' + value["sitename"].split(' ')[1];
         rows = rows + '\
                     <tr>\n\
-                      <td style="width: 20%; text-align: left;">' + value["sitename"] + '</td>\n\
-                      <td style="width: 20%"> ' + value["contact"] + '</td>\n\
-                      <td style="width: 60%; text-align: left;"> ' + viewbutton + '</td>\n\
+                      <td style="width: 20%; text-align: left;">' + (value['friendly_brandname'] !== null ? friendly_name : value["sitename"]) + '</td>\n\
+                      <td style="width:15%">' + (value["track_type"] === 'billboard' ? 'OOH Site' : 'Venue') + '</td>\n\
+                      <td style="width: 15%"> ' + value["contact"] + '</td>\n\
+                      <td style="width: 50%; text-align: left;"> ' + viewbutton + '</td>\n\
                     </tr>\n\
                     ';
       });
@@ -843,6 +867,11 @@ Time spent in store (dwell) -->
                 </table>';
 
       table = beginTable + rows + endTable;
+
+      $('#live_nr_retail_count').html(live_number_of_retail)
+      $('#live_nr_billboard_count').html(live_number_of_billboard)
+
+      
       $("#venueTable").html(table);
     }
 
@@ -880,23 +909,52 @@ Time spent in store (dwell) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script>
     load_presets();
-    getFilters(false);
+    if ($('#date_select').val() !== 'custom') {
+      getFilters(false);  
+    } else {
+      showCustomDateRange();
+    }
+    
 
     $(document).on('change', '.changable-filter', function() {
-      getFilters(true);
+      let date_filter = $('#date_select');
+      if (date_filter.val() !== 'custom') {
+        getFilters(true);
+      } else {
+        showCustomDateRange();
+      }
+      
     })
+
+    function showCustomDateRange() {
+      let container = $('#custom_date_filter');
+      let date_from = $('#custom_filter_date_from');
+      let date_to = $('#custom_filter_date_to');
+
+    
+      date_from.val(get_query_string_key('date_from'));
+      date_to.val(get_query_string_key('date_to'))
+
+      container.slideDown('fast');
+    }
+
+    $(document).on('click', '#apply_custom_date_filter', function () {
+      getFilters(true);
+    });
 
     function load_presets() {
       let presets = get_presets();
+      let host = `http://${window.location.host}/`;
       if (presets !== null) {
         $('#sub_brand_select').val(presets.brand_id);
         $('#type_select').val(presets.type);
         $('#date_select').val(presets.span);
         $('#focused_venue').val(presets.venue_id);
-        debugger;
+        
         if (presets.venue_id !== '' && presets.venue_id !== null) {
-          $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${presets.venue_id}/tracks03.hipzone.co.za${getFilters(false)}`);                  
+          $('#selected_venue_view').attr('src', `${host}hipjam_viewvenue/${presets.venue_id}/tracks03.hipzone.co.za${getFilters(false)}`);                  
           $('#selected_venue_view').slideDown('fast');
+          $('#selected_venue_view_container').slideDown('fast');
         }
       } else {
         $('#date_select').val('this_week');
@@ -904,6 +962,7 @@ Time spent in store (dwell) -->
     }
 
     function getFilters(must_redirect) {
+      let host = `http://${window.location.host}/`;
       let brand_id = $('#sub_brand_select').val();
       let type = $('#type_select').val();
       let span = $('#date_select').val();
@@ -911,7 +970,7 @@ Time spent in store (dwell) -->
       let date_to = generate_date_to();
       
       if (must_redirect)
-        window.location.href = `http://hiphub.hipzone.co.za/hipjam_showdashboard${generate_query_string(brand_id, type, span, date_from, date_to)}`
+        window.location.replace(`${host}hipjam_showdashboard${generate_query_string(brand_id, type, span, date_from, date_to)}`)
       else
         return generate_query_string(brand_id, type, span, date_from, date_to)
     }
@@ -927,10 +986,10 @@ Time spent in store (dwell) -->
           return today
           break;
         case 'this_week':
-          return today.startOf('week').format('YYYY-MM-DD');
+          return today.startOf('week').add(1,'day').format('YYYY-MM-DD');
           break;
         case 'last_week':
-          return today.startOf('week').subtract(1, 'day').startOf('week').format('YYYY-MM-DD');
+          return today.startOf('week').subtract(1, 'day').startOf('week').add(1,'day').format('YYYY-MM-DD');
           break;
         case 'this_month':
           return today.startOf('month').format('YYYY-MM-DD');
@@ -938,8 +997,11 @@ Time spent in store (dwell) -->
         case 'last_month':
           return today.startOf('month').subtract(1, 'day').startOf('month').format('YYYY-MM-DD');
           break;
+        case 'custom':
+          return $('#custom_filter_date_from').val();
+          break;
         default:
-          return today.startOf('week').format('YYYY-MM-DD');
+          return today.startOf('week').add(1,'day').format('YYYY-MM-DD');
       }
     }
 
@@ -954,10 +1016,10 @@ Time spent in store (dwell) -->
           return today
           break;
         case 'this_week':
-          return today.endOf('week').format('YYYY-MM-DD');
+          return today.endOf('week').add(1,'day').format('YYYY-MM-DD');
           break;
         case 'last_week':
-          return today.startOf('week').subtract(1, 'day').endOf('week').format('YYYY-MM-DD');
+          return today.startOf('week').subtract(1, 'day').endOf('week').add(1,'day').format('YYYY-MM-DD');
           break;
         case 'this_month':
           return today.endOf('month').format('YYYY-MM-DD');
@@ -965,8 +1027,11 @@ Time spent in store (dwell) -->
         case 'last_month':
           return today.startOf('month').subtract(1, 'day').endOf('month').format('YYYY-MM-DD');
           break;
+        case 'custom':
+          return $('#custom_filter_date_to').val();
+          break;
         default:
-          return today.endOf('week').format('YYYY-MM-DD');
+          return today.endOf('week').add(1,'day').format('YYYY-MM-DD');
       }
     }
 
@@ -992,46 +1057,63 @@ Time spent in store (dwell) -->
 
     window.addEventListener('DOMContentLoaded', (event) => {
       let presets = get_presets();
+      let host = `http://${window.location.host}/`;
       if (presets !== null) {
         // Set the default filter for view venue buttons
         $('.view-venue-button').each(function(i, obj) {
             let venue_id = $(this).data('venue-id');
             console.log(venue_id)
-            $(this).attr('href', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${generate_query_string(presets.brand_id, presets.type, presets.span, presets.date_from, presets.date_to)}`)
+            $(this).attr('href', `${host}hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${generate_query_string(presets.brand_id, presets.type, presets.span, presets.date_from, presets.date_to)}`)
         });
       }
     });
 
   </script>
 
+  <script>
+    if (window.location.href.indexOf('brand_id') !== -1)
+      $('#filter_container').slideDown('fast');
+    $(document).on('click', '#filter_button', function () {
+      let container = $('#filter_container');
+      if (container.is(':visible'))
+        container.stop().slideUp('fast');
+      else
+        container.stop().slideDown('fast');
+    });
+
+
+    // if ( $('[type="date"]').prop('type') != 'date' ) {
+     $('[type="date"]').datepicker({ dateFormat: 'yy/mm/dd' });
+    // }
+  </script>
+
   <style>
-    .dash-widget {
-      border: 1px solid #D1D1D1D1;
-      padding: 25px;
-      margin-right: 10px;
-      height: 142px;
-    }
-
-    @media only screen and (max-width: 1512px) {
-      .dash-widget {
-        height: 182px !important;
-      }
-
-      .text-tracked {
-        height: 45px;
+    @media screen and (max-width: 2131px) {
+      .align-items-center {
+        min-height: 100px !important;
       }
     }
 
-    .font36 {
-      font-size: 36px;
+    @media screen and (max-width: 1514px) {
+      .align-items-center {
+        min-height: 117px !important;
+      }
     }
 
-    .graph-container {
-      display: inline;
+    /* 1514 */
+        /* min-height: 100px !important; */
+    /* .align-items-center {
+      min-height: 118px !important;
+    } */
+    .text-uppercase {
+      font-size: 11px;
+    }
+    .h2 {
+      font-size: 24px;
+    }
+    .no-overflow {
+        max-height: none !important;
     }
   </style>
-  
-
-</body>
 
 @stop

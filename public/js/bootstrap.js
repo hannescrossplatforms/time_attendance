@@ -872,7 +872,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     this.isShown = true
 
     this.checkScrollbar()
-    this.$body.addClass('modal-open')
+    // this.$body.addClass('modal-open')
 
     this.setScrollbar()
     this.escape()

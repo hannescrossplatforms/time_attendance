@@ -1,65 +1,92 @@
-@extends('layout')
+@extends('angle_dashboard_layout')
 
 @section('content')
+<section class="section-container">
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>Products</div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
 
-<body class="dashboard">
-<div class="container-fluid">
-  <div class="row">
-    @include('sidebar')
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h1 class="page-header">Dashboard</h1>
-      <section id="dashLinks" class="row">
-        @if (\User::hasProduct("HipWIFI") || \User::hasAccess("superadmin")) 
-        <div class="col-md-2"> 
-          <a href="{{ url('hipwifi_showdashboard'); }}" class="icon-button dashwifi">
-              <i class="fa fa-wifi"></i>
-                <h4><span></span>WIFI</h4>
-            </a>
-        </div>
-        @endif
-        @if (\User::hasProduct("HipRM") || \User::hasAccess("superadmin")) 
-        <div class="col-md-2">
-          <a href="{{ url('hiprm_showdashboard'); }}" class="icon-button dashrm">
-              <i class="fa fa-credit-card"></i>
-                <h4><span></span>SURVEYS</h4>
-            </a>
-        </div>
-        @endif
-        @if (\User::hasProduct("HipJAM") || \User::hasAccess("superadmin")) 
-        <div class="col-md-2">
-          <a href="{{ url('hipjam_showdashboard'); }}" class="icon-button dashjam">
-              <i class="fa fa-shopping-cart"></i>
-                <h4><span></span>TRACK</strong></h4>
-            </a>
-        </div>
-        @endif
-        @if (\User::hasProduct("HipENGAGE") || \User::hasAccess("superadmin")) 
-        <div class="col-md-2">
-          <a href="{{ url('hipengage_showevents'); }}" class="icon-button dashengage">
-              <i class="fa fa-bullhorn"></i>
-                <h4><span></span>ENGAGE</strong></h4>
-          </a>
-        </div>
-        @endif
-        @if (\User::hasProduct("HipREPORTS") || \User::hasAccess("superadmin")) 
-        <div class="col-md-2">
-          <a href="{{ url('hipreports_showdashboard'); }}" class="icon-button dashreports">
-              <i class="fa fa-bar-chart"></i>
-                <h4><span></span>REPORTS</strong></h4>
-          </a>
-        </div>
-        @endif
-      </section>
+
+    @if (\User::hasProduct("HipWIFI") || \User::hasAccess("superadmin")) 
+    <div class="col-xl-4">
+      <!-- START card-->
+      <div class="card">
+        <div class="row row-flush">
+          <div class="col-5 d-flex align-items-center justify-content-center" style="background: url('http://hiphub.hipzone.co.za/img/connect_banner.jpg');background-size: cover;"></div>
+          <div class="col-7">
+            <div class="p-3">
+              <div class="float-right"><a class="btn btn-primary btn-sm" href="http://hiphub.hipzone.co.za/hipwifi_showdashboard">Open</a></div>
+              <p><span class="text-lg" style="font-size: 2rem">CONNECT</span></p>
+              <p><strong>Premium Hospitality WiFi</strong></p>
+              <!-- <p>Donec posuere neque in elit luctus tempor consequat enim egestas. Nulla dictum egestas leo at lobortis.</p> -->
+            </div>
+          </div>
+        </div><!-- END card-->
+      </div>
+    </div>
+    @endif
+
+    @if (\User::hasProduct("HipJAM") || \User::hasAccess("superadmin")) 
+    <div class="col-xl-4">
+      <!-- START card-->
+      <div class="card">
+        <div class="row row-flush">
+          <div class="col-5 d-flex align-items-center justify-content-center" style="background: url('http://hiphub.hipzone.co.za/img/track_banner.png');background-size: cover;"></div>
+          <div class="col-7">
+            <div class="p-3">
+              <div class="float-right"><a class="btn btn-primary btn-sm" href="/hipjam_showdashboard">Open</a></div>
+              <p><span class="text-lg" style="font-size: 2rem">TRACK</span></p>
+              <p><strong>Retail/Consumer Intelligence</strong></p>
+              <!-- <p>Donec posuere neque in elit luctus tempor consequat enim egestas. Nulla dictum egestas leo at lobortis.</p> -->
+            </div>
+          </div>
+        </div><!-- END card-->
+      </div>
+    </div>
+    @endif
+
+    @if (\User::hasProduct("HipENGAGE") || \User::hasAccess("superadmin")) 
+    <div class="col-xl-4">
+      <!-- START card-->
+      <div class="card">
+        <div class="row row-flush">
+          <div class="col-5 d-flex align-items-center justify-content-center" style="background: url('http://hiphub.hipzone.co.za/img/engage_banner.png');background-size: cover;"></div>
+          <div class="col-7">
+            <div class="p-3">
+              <div class="float-right"><a class="btn btn-primary btn-sm" href="http://hiphub.hipzone.co.za/hipengage_showevents">Open</a></div>
+              <p><span class="text-lg" style="font-size: 2rem">ENGAGE</span></p>
+              <p><strong>Campaign / Event Management</strong></p>
+              <!-- <p>Donec posuere neque in elit luctus tempor consequat enim egestas. Nulla dictum egestas leo at lobortis.</p> -->
+            </div>
+          </div>
+        </div><!-- END card-->
+      </div>
+    </div>
+    @endif
+
+    @if (\User::hasProduct("HipTnA") || \User::hasAccess("superadmin")) 
+    <div class="col-xl-4">
+      <!-- START card-->
+      <div class="card">
+        <div class="row row-flush">
+          <div class="col-5 d-flex align-items-center justify-content-center" style="background: url('http://hiphub.hipzone.co.za/img/ta_banner.jpg');background-size: cover;"></div>
+          <div class="col-7">
+            <div class="p-3">
+              <div class="float-right"><a class="btn btn-primary btn-sm" href="http://hiphub.hipzone.co.za/hiptna_showdashboard">Open</a></div>
+              <p><span class="text-lg" style="font-size: 2rem">STAFF TRACKER</span></p>
+              <p><strong>App and Beacon based Time & Attendance</strong></p>
+              <!-- <p>Donec posuere neque in elit luctus tempor consequat enim egestas. Nulla dictum egestas leo at lobortis.</p> -->
+            </div>
+          </div>
+        </div><!-- END card-->
+      </div>
+    </div>
+    @endif
     </div>
   </div>
-</div>
+</section>
 
-<!-- Bootstrap core JavaScript
-    ================================================== --> 
-<!-- Placed at the end of the document so the pages load faster --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-<script src="/js/bootstrap.min.js"></script> 
-<script src="/js/prefixfree.min.js"></script>
-</body>
 
 @stop

@@ -1,44 +1,49 @@
-      <div class="panel panel-default">
-          <div class="panel-heading">Add Permissions</div>
+<div class="card card-default card-demo">
+  <div class="card-header">
+    <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+      <em class="fas fa-sync"></em>
+    </a>
+    <div class="card-title">
+      Add Permissions
+    </div>
+  </div>
+  <div class="card-body">
+  <div class="table-responsive">
 
-            <div class="panel-body">
+<table class="tnastafftable">
+  <thead>
+    <tr>
+      <th class="tnastafftd_name">  </th>
+      <th class="tnastafftd_email">  </th>
+      <th class="tnastafftableheader"></th>
+      <th class="tnastafftableheader"></th>
+      <th class="tnastafftableheader"></th>
+      <th class="tnastafftableheader"></th>
+    </tr>
+  </thead>
 
-              <div class="form-group">
-                <div class="table-responsive">
+  <tbody>
+    <tr>
+      <td class="tnastafftd_name"> <input id="permission_name" class="form-control no-radius" placeholder="Name"  type="text"> </td>
+      <td class="tnastafftd_name"> <input id="permission_code" class="form-control no-radius" placeholder="Code"  type="text"> </td>
+      <td class="tnastafftd_name"> <input id="permission_description" class="form-control no-radius" placeholder="Description"  type="text"> </td>
+      <td class="tnastafftd_name"> <select id="permission_product_id" class="form-control no-radius product_code">
+        <option>Product Code</option>
 
-                      <table class="tnastafftable">
-                        <thead>
-                          <tr>
-                            <th class="tnastafftd_name">  </th>
-                            <th class="tnastafftd_email">  </th>
-                            <th class="tnastafftableheader"></th>
-                            <th class="tnastafftableheader"></th>
-                            <th class="tnastafftableheader"></th>
-                            <th class="tnastafftableheader"></th>
-                          </tr>
-                        </thead>
+      </select> </td>
+      <td class="tnastafftd_add_update" style="width:16%;"> <a id="addpermission"  class="btn btn-primary btn-delete btn-sm addpermission" style="color: white">Add</a> </td>
+      <td class="tnastafftd5">  </td>
+    </tr>
+  </tbody>
+</table>
 
-                        <tbody>
-                          <tr>
-                            <td class="tnastafftd_name"> <input id="permission_name" class="form-control no-radius" placeholder="Name"  type="text"> </td>
-                            <td class="tnastafftd_name"> <input id="permission_code" class="form-control no-radius" placeholder="Code"  type="text"> </td>
-                            <td class="tnastafftd_name"> <input id="permission_description" class="form-control no-radius" placeholder="Description"  type="text"> </td>
-                            <td class="tnastafftd_name"> <select id="permission_product_id" class="form-control no-radius product_code">
-                              <option>Product Code</option>
+<div id="permissiontableview"></div>
 
-                            </select> </td>
-                            <td class="tnastafftd_add_update" style="width:16%;"> <a id="addpermission"  class="btn btn-default btn-delete btn-sm addpermission">Add</a> </td>
-                            <td class="tnastafftd5">  </td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                      <div id="permissiontableview"></div>
-
-                </div>
-              </div>
-            </div>
-          </div>
+</div>
+  </div>
+</div>
+        
+    
 
 <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -121,7 +126,7 @@
               rows = rows+'<option value="' + row["id"] + '"' + option_selected + '>'+row["name"] + '</option>';
             });
 
-rows = rows + '</select></td>\<td class="tnastafftd_add_update" style="width:17%;"> <a id="updatePermissionDetails_'+ value["id"] +'" class="btn btn-default btn-delete btn-sm" onclick="updatePermissionDetails('+ value["id"] +');">Update</a> <a id="deletePermissionDetails_'+ value["id"] +'" class="btn btn-default btn-delete btn-sm" onclick="deletePermissionDetails('+ value["id"] +');">Delete</a></td>\
+rows = rows + '</select></td>\<td class="tnastafftd_add_update" style="width:17%;"> <a style="color: white" id="updatePermissionDetails_'+ value["id"] +'" class="btn btn-primary btn-delete btn-sm" onclick="updatePermissionDetails('+ value["id"] +');">Update</a> <a style="color: white" id="deletePermissionDetails_'+ value["id"] +'" class="btn btn-danger btn-delete btn-sm" onclick="deletePermissionDetails('+ value["id"] +');">Delete</a></td>\
                           <td></td>\
                         </tr>\
                     ';

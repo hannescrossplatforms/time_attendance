@@ -65,7 +65,7 @@
                       <td> ' + value["location"]  + '</td>\n\
                       <td> ' + value["hostname"]  + '</td>\n\
                       <td> ' + value["contact"]  + '</td>\n\
-                      <td> <a id="xxxx" href="#showvenue" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-showvenue"  data-venueid = ' + value["id"] + ' >Show Venue </a></td>\n\
+                      <td> <a id="xxxx" href="#showvenue" role="tab" data-toggle="tab" class="btn btn-primary btn-sm btn-showvenue"  data-venueid = ' + value["id"] + ' >Show Venue </a></td>\n\
                     </tr>\n\
                     ';
         });

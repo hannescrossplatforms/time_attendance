@@ -1,39 +1,53 @@
-@extends('layout')
+@extends('angle_admin_layout')
 
 @section('content')
 
-  <body class="HipADMIN">
-    <a id="buildtable"></a>
-
-    <div class="container-fluid">
-      <div class="row">
-
-        @include('admin.sidebar')
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-          	<h1 class="page-header">Brand Management</h1>
-			      <form role="form">
-<!--               <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="start typing brand name to filter">
-              </div> -->
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>Brand Management</div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              All Brands
+            </div>
+          </div>
+          <div class="card-body">
+            <form role="form">
                 @if (\User::hasAccess("superadmin") || \User::hasAccess("admin") || \User::hasAccess("reseller"))
                   <a href="{{ url('admin_addbrand'); }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Brand</a>
                 @endif
             </form>
             <div class="table-responsive">
-                <table id="brandTable" class="table table-striped"> </table>
+              <table id="brandTable" class="table table-striped">
+                <thead>
+                    <tr>
+                      <th>Brand Name</th>
+                      <th>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="brand_table_body"></tbody>
+                </table>
+              
             </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    
-    <script src="js/prefixfree.min.js"></script> 
+
+
+
     
     <script>
 
@@ -48,41 +62,24 @@
       $(function() {
         $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
       });
-
-      $(document).delegate('#buildtable', 'click', function() {
-        showBrandsTable(brandsJason);
-      });
+      showBrandsTable(brandsJason);
 
       function showBrandsTable(brandsjson) {
-        table = '';
-        rows = '';
-        beginTable = '\
-                <table class="table table-striped">\n\
-                  <thead>\n\
-                    <tr>\n\
-                      <th>Brand Name</th>\n\
-                      <th>\n\
-                      </th>\n\
-                    </tr>\n\
-                  </thead>\n\
-                  <tbody>  \n';
+
+        let table_html = '';
+        let tbody = $('#brand_table_body');
         $.each(brandsjson, function(index, value) {
-            rows = rows + '\
-                    <tr>\n\
-                      <td> ' + value["name"]  + '</td>\n\
-                      <td><a href="{{ url('admin_editbrand'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n\
-                          <a class="btn btn-default btn-delete btn-sm" data-brandid = ' + value["id"] + ' href="#">delete</a>\n\
-                      </td>\n\
-                    </tr>\n\
-                    ';
+          table_html += `
+            <tr>
+              <td>${value["name"]}</td>
+              <td>
+                <a href="http://hiphub.hipzone.co.za/admin_editbrand/${value['id']}" class="btn btn-primary btn-sm">edit</a>
+                <a class="btn btn-danger btn-delete btn-sm" data-brandid=${value["id"]} href="#">delete</a>
+              </td>
+            </tr>
+          `;
         });
-
-        endTable = ' \
-                  </tbody>\n\
-                </table>';
-
-        table = beginTable + rows + endTable;
-        $( "#brandTable" ).html( table );
+        tbody.html(table_html);
       }
 
         $(document).delegate('.btn-delete', 'click', function() {
@@ -96,19 +93,21 @@
           confirmButtonText: 'Yes, delete it!',
           closeOnConfirm: false,
           //closeOnCancel: false
-        },
-          function(){
-            swal("Deleted!", "Brand has been deleted!", "success");
-            $.ajax({
-              type: "GET",
-              dataType: 'json',
-              contentType: "application/json",
-              url: "{{ url('admin_deletebrand/" + brandid + "'); }}",
-              success: function(brands) {
-                var brandsjson = JSON.parse(brands); 
-                showBrandsTable(brandsjson);
-              }
-            });
+        }).then((willDelete) => {
+        
+            if (willDelete) {
+              swal("Deleted!", "Brand has been deleted!", "success");
+              $.ajax({
+                type: "GET",
+                dataType: 'json',
+                contentType: "application/json",
+                url: "{{ url('admin_deletebrand/" + brandid + "'); }}",
+                success: function(brands) {
+                  var brandsjson = JSON.parse(brands); 
+                  showBrandsTable(brandsjson);
+                }
+              });
+            }
           });
       });
 	
@@ -117,6 +116,6 @@
 
     </script>
 
-  </body>
+
 
 @stop

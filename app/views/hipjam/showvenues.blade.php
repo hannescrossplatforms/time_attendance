@@ -1,52 +1,62 @@
-@extends('layout')
+@extends('angle_layout')
 
 @section('content')
 
-  <body class="hipJAM">
-    <a id="buildtable"></a>
 
-    <div class="container-fluid">
-      <div class="row">
 
-        @include('hipjam.sidebar')
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-            <h1 class="page-header">Venue Management</h1>
 
-            <form class="form-inline" role="form" style="margin-bottom: 15px;">
-<!--               <div class="form-group">
-                <label  class="sr-only" for="exampleInputEmail2">Site Name</label>
-                <input type="text" class="form-control" id="src-sitename" placeholder="Site Name">
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>Venue Management</div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              All Venues
+
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                @if (\User::hasAccess("superadmin") || \User::hasAccess("admin") || \User::hasAccess("reseller"))
+                <form class="form-inline" role="form" style="margin-bottom: 15px;">
+                  <div class="form-group">
+                    <label style="margin-right: 10px;">Select a venue for activation</label>
+                    <select style="margin-right: 10px;" id="venuelist" name="venue_id" class="form-control no-radius" required></select>
+                  </div>
+                  <a id="activatevenue" class="btn btn-primary" style="color: white;"><i class="fas fa-plus"></i> Activate Venue</a>
+                </form>
+                @endif
               </div>
-              <button id="filter" type="submit" class="btn btn-primary">Filter</button>
-              <button id="reset" type="submit" class="btn btn-default">Reset</button> -->
-              @if (\User::hasAccess("superadmin") || \User::hasAccess("admin") || \User::hasAccess("reseller"))
-              <div class="form-group">
-                <label>Select a venue for activation</label>
-                <select id="venuelist" name="venue_id" class="form-control no-radius" required></select>
+              <div class="col-12">
+                <table id="venueTable" class="table table-striped">
+                <thead>
+                    <tr>
+                      <th>Brand Name</th>
+                      <th>Venue Type</th>
+                      <th>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="venue_table_body"></tbody>
+                </table>
               </div>
-                <a id="activatevenue" class="btn btn-primary"><i class="fa fa-plus"></i> Activate Venue</a>
-              @endif
-              <div class="table-responsive">
-                  <table id="venueTable" class="table table-striped"> </table>
-              </div>
-
-              <div class="add-venue">
-                  <!-- <a href="{{ url('hipjam_addvenue'); }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Venue</a> -->
-              </div>
-            </form>
-
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
-    <script src="js/prefixfree.min.js"></script>
+  </div>
+</section>
 
     @if (\User::isVicinity())
   <script>
@@ -99,9 +109,7 @@ debugger;
       });
     }
 
-      $(function() {
-        $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
-      });
+      showVenuesTable(venuesJson);
 
       $(document).delegate('#buildtable', 'click', function() {
         showVenuesTable(venuesJson);
@@ -134,13 +142,15 @@ debugger;
 
       function showVenuesTable(venuesjson) {
         // alert("showVenuesTable");
-        table = '';
-        rows = '';
-        beginTable = '\
+        let table = '';
+        let rows = '';
+        let editbutton = '';
+        let beginTable = '\
                 <table class="table table-striped">\n\
                   <thead>\n\
                     <tr>\n\
                       <th>Venue Name</th>\n\
+                      <th>Type</th>\n\
                       <th>\n\
                       </th>\n\
                     </tr>\n\
@@ -149,13 +159,13 @@ debugger;
         $.each(venuesjson, function(index, value) {
 
           if(("{{$data['user']}}" != "superadmin") && (value["track_slug"] == "" || value["track_server_location"] == "" ) ) {  
-            editbutton = '<a href="javascript:void(0)" onclick="alert(\'Track Venue Id and Track Server need to be set by a super admin before you can continue.\');" class="btn btn-default btn-sm">edit</a>\n';
+            editbutton = '<a href="javascript:void(0)" onclick="alert(\'Track Venue Id and Track Server need to be set by a super admin before you can continue.\');" class="btn btn-primary btn-sm">edit</a>\n';
           } else {
-            editbutton = '<a href="{{ url('hipjam_editvenue'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n';
+            editbutton = '<a href="{{ url('hipjam_editvenue'); }}/' + value["id"] + '" class="btn btn-primary btn-sm">edit</a>\n';
           }
           console.log("{{$data['is_vicinity']}}")
           if ("{{$data['is_vicinity']}}") {
-            editbutton = `<a href="/vicinity/venue/${value["id"]}" class="btn btn-default btn-sm">edit</a>\n`
+            editbutton = `<a href="/vicinity/venue/${value["id"]}" class="btn btn-primary btn-sm">edit</a>\n`
           }
 
 
@@ -163,13 +173,14 @@ debugger;
 
             rows = rows + '\
                     <tr>\n\
-                      <td> ' + value["sitename"]  + '</td>\n\
-                      <td> ' + editbutton  + '</td>\n\
+                      <td style="width: 20%;"> ' + value["sitename"]  + '</td>\n\
+                      <td style="width: 15%;"> ' + (value["track_type"] === 'billboard' ? 'OOH Site' : 'Venue')  + '</td>\n\
+                      <td style="width: 65%"> ' + editbutton  + '</td>\n\
                     </tr>\n\
                     ';
         });
 
-        endTable = ' \
+        let endTable = ' \
                   </tbody>\n\
                 </table>';
 
@@ -208,6 +219,5 @@ debugger;
 
     </script>
 
-  </body>
 
 @stop

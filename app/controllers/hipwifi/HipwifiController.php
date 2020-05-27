@@ -27,15 +27,18 @@ class HipwifiController extends \BaseController {
         $activeVenueCount = array();
         $onlineVenueCount = array();
         $offlineVenueCount = array();
+        $venue_map_data = array();
         foreach ($brands as $brand) {
+            $venue_map_data_this_brand = \DB::table('venues')->where('location', 'like', '%'.$brand->code.'%')->where('ap_active', '=', 1)->where('device_type', '=', 'Mikrotik')->whereNull('deleted_at')->get();
             $activeVenuesPerBrand = \DB::table('venues')->where('location', 'like', '%'.$brand->code.'%')->where('ap_active', '=', 1)->where('device_type', '=', 'Mikrotik')->whereNull('deleted_at')->count();
             $onlineVenuesPerBrand = \DB::table('venues')->where('location', 'like', '%'.$brand->code.'%')->where('status', '=', 'online')->where('ap_active', '=', 1)->whereNull('deleted_at')->count();
             $offlineVenuesPerBrand = \DB::table('venues')->where('location', 'like', '%'.$brand->code.'%')->where('status', '=', 'offline')->where('ap_active', '=', 1)->whereNull('deleted_at')->count();
+            array_push($venue_map_data, $venue_map_data_this_brand);
             array_push($activeVenueCount, $activeVenuesPerBrand);
             array_push($onlineVenueCount, $onlineVenuesPerBrand);
             array_push($offlineVenueCount, $offlineVenuesPerBrand);
         }
-        
+        $data['mapVenues'] = json_encode($venue_map_data);
         
         return \View::make('hipwifi.showdashboard')->with(['data' => $data, 'brands' => $brandnames, 'count' => $activeVenueCount, 'onlinevenues' => $onlineVenueCount, 'offlinevenues' => $offlineVenueCount]);
     }
@@ -1922,6 +1925,12 @@ public function activateVenueSave()
             $venue->bypassmac10 = $input['bypassmac9'];
             $venue->bypasscomment10 = $input['bypasscomment9'];
             }
+
+            $venue->send_alert_emails = $input['send_alert_emails'];
+            $venue->alert_email_address_1 = $input['alert_email_address_1'];
+            $venue->alert_email_address_2 = $input['alert_email_address_2'];
+            $venue->alert_email_address_3 = $input['alert_email_address_3'];
+
             $venue->save();
 
             $venue = $venue->refreshMediaLocation($venue);

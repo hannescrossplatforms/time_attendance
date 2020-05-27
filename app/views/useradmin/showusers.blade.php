@@ -1,97 +1,106 @@
-@extends('layout')
+@extends('angle_admin_layout')
 
 @section('content')
 
-  <body class="HipADMIN">
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>User Admin</div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              All Users
 
-    <div class="container-fluid">
-      <div class="row">
-        
-        @include('admin.sidebar')
-
-        <!-- <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">  -->
-    <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-            <h1 class="page-header">User Admin</h1>
-            <a id="buildtable"></a> <!-- Needed to trigger click to build table -->
-            <form action=" {{ url('useradmin_showusers'); }}"  class="form-inline" role="form" style="margin-bottom: 15px;" >
-              <div class="form-group">
-                <label class="sr-only">Full Name</label>
-                <input class="form-control" id="fullname" placeholder="Full Name" name="fullname">
-              </div>
-              <div class="form-group">
-                <label class="sr-only">Email Address</label>
-                <input class="form-control" id="email" placeholder="Email Address" name="email">
-              </div>
-              <button type="submit" class="btn btn-primary" name="filter" value="on">Filter</button>
-              <button type="submit" class="btn btn-default" name="filter" value="off">Reset</button>
-             
-              <a href="{{ url('useradmin_add'); }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</a>
-           
-            </form>
-
-            <div class="table-responsive">
-              <table id="userTable" class="table table-striped"> </table>
             </div>
+          </div>
+          <div class="card-body">
+          <a id="buildtable"></a>
+            <div class="row">
+              <div class="col-12">
+                <form action=" {{ url('useradmin_showusers'); }}"  class="form-inline" role="form" style="margin-bottom: 15px;" >
+                <div class="form-group">
+                  <label class="sr-only">Full Name</label>
+                  <input class="form-control" id="fullname" placeholder="Full Name" name="fullname">
+                </div>
+                <div class="form-group">
+                  <label class="sr-only">Email Address</label>
+                  <input class="form-control" id="email" placeholder="Email Address" name="email">
+                </div>
+                <button type="submit" class="btn btn-info" name="filter" value="on">Filter</button>
+                <button type="submit" class="btn btn-warning" name="filter" value="off">Reset</button>
+              
+                <a href="{{ url('useradmin_add'); }}" class="btn btn-primary" style="float: right"><i class="fa fa-plus"></i> Add User</a>
+            
+              </form>
+              <br />
+              <div class="col-12">
+                <table id="userTable" class="table table-striped">
+                <thead>
+                    <tr>
+                      <th>Full Name</th>
+                      <th>Email Address</th>
+                      <th>Access Level</th>
+                      <th>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="user_table_body"></tbody>
+                </table>
+              </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    
-    <script src="/js/prefixfree.min.js"></script> 
+
     <script>
 
-      usersJason = {{ $data['usersJason'] }};
+      let usersJason = {{$data['usersJason']}};
 
-      $(function() {
-        $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
-      });
-
-      $(document).delegate('#buildtable', 'click', function() {
-        showUsersTable(usersJason);
-      });
+      // $(function() {
+      //   $('#buildtable').click(); // Need to go indirectly via a simulated click because can't do document delegate on page load
+      // });
+      // showUsersTable(usersJason);
+      // $(document).delegate('#buildtable', 'click', function() {
+      //   showUsersTable(usersJason);
+      // });
 
       function showUsersTable(usersjson) {
-        table = '';
-        rows = '';
-        beginTable = '\
-                <table class="table table-striped">\n\
-                  <thead>\n\
-                    <tr>\n\
-                      <th>Full Name</th>\n\
-                      <th>Email Address</th>\n\
-                      <th>Access Level</th>\n\
-                      <th>\n\
-                      </th>\n\
-                    </tr>\n\
-                  </thead>\n\
-                  <tbody>  \n';
+        let table_html = '';
+        let tbody = $('#user_table_body');
+        debugger;
         $.each(usersjson, function() {
+          debugger;
           $.each(this, function(name, value) {
-            rows = rows + '\
-                    <tr>\n\
-                      <td> ' + value["fullname"]  + '</td>\n\
-                      <td> ' + value["email"]  + '</td>\n\
-                      <td> ' + value["level_name"]  + '</td>\n\
-                      <td><a href="{{ url('useradmin_edit'); }}/' + value["id"] + '" class="btn btn-default btn-sm">edit</a>\n\
-                          <a class="btn btn-default btn-delete btn-sm" data-userid = ' + value["id"] + ' href="#">delete</a>\n\
-                      </td>\n\
-                    </tr>\n\
-                    ';
+            table_html += `
+            <tr>
+              <td>${value["fullname"]}</td>
+              <td>${value["email"]}</td>
+              <td>${value["level_name"]}</td>
+              <td>
+                <a href="http://hiphub.hipzone.co.za/useradmin_edit/${value['id']}" class="btn btn-primary btn-sm">edit</a>
+                <a class="btn btn-danger btn-delete btn-sm" data-userid='${value["id"]}' href="#">delete</a>
+              </td>
+            </tr>
+            `
           });
         });
 
-        endTable = ' \
-                  </tbody>\n\
-                </table>';
-
-        table = beginTable + rows + endTable;
-        $( "#userTable" ).html( table );
+        tbody.html(table_html);
       }
+      showUsersTable(usersJason);
 
       $(document).delegate('.btn-delete', 'click', function() {
         var userid = this.getAttribute('data-userid');

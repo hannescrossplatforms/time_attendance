@@ -1,7 +1,14 @@
-<!-- <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main"> -->
-	<div>
-            <!-- <h1 class="page-header">User Admin</h1> -->
-            <a id="buildtable"></a> <!-- Needed to trigger click to build table -->
+<div class="card card-default card-demo">
+  <div class="card-header">
+    <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+      <em class="fas fa-sync"></em>
+    </a>
+    <div class="card-title">
+      Roles Information
+    </div>
+  </div>
+  <div class="card-body">
+  <a id="buildtable"></a> <!-- Needed to trigger click to build table -->
             <form  class="form-inline" role="form" style="margin-bottom: 15px;" >
               <div class="form-group">
                 <label class="sr-only">Name</label>
@@ -38,15 +45,11 @@
                   </tbody>
               </table>
             </div>
-        </div>
+  </div>
+</div>
 
-<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
 
-    <script src="/js/prefixfree.min.js"></script>
+
 
 <script type="text/javascript">
     usersJason = [{'fullname':'anusha','email':'hghgh@fj.bhh'}];
@@ -102,8 +105,8 @@
                        rows = rows + product_name ;
                     });
 
-        rows = rows + '</td><td><a href="'+ href +'" class="btn btn-default btn-sm">Edit</a>\
-                    <a id="btn_delete_' + rolevalue["id"] + '" class="btn btn-default btn-delete btn-sm" data-roleid = "' + rolevalue["id"] + '" href="#">Delete</a>\
+        rows = rows + '</td><td><a href="'+ href +'" class="btn btn-primary btn-sm" style="color: white;">Edit</a>\
+                    <a  style="color: white;" id="btn_delete_' + rolevalue["id"] + '" class="btn btn-danger btn-delete btn-sm" data-roleid = "' + rolevalue["id"] + '" href="#">Delete</a>\
                 </td>';
                 });
 
@@ -151,7 +154,7 @@
                   </thead>\n\
                   <tbody>  \n';
         $.each(usersjson, function() {
-          alert(usersjson);
+        
             $.each(this, function(name, value) {
                 rows = rows + '\
                         <tr>\n\

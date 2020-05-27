@@ -1,31 +1,38 @@
-@extends('layout')
+@extends('angle_wifi_layout')
 
 @section('content')
 
-<body class="hipWifi">
-  <div id="buildtable"></div>
-  <div class="container-fluid">
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>Venue Monitoring<small data-localize="dashboard.WELCOME"></small></div><!-- START Language list-->
+    </div><!-- START cards box-->
     <div class="row">
-      @include('hipwifi.sidebar')
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-          	<h1 class="page-header">Venue Monitoring</h1>
-            <div id="page-replace-div"></div>
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              All Venues
+
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+              <div id="page-replace-div"></div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
   </div>
-
-  <div id="viewVenueModals"><span id="closeViewModal">x</span></div>
-
-  <!-- Bootstrap core JavaScript
-      ================================================== --> 
-  <!-- Placed at the end of the document so the pages load faster --> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-  <script src="js/bootstrap.min.js"></script> 
-  <script src="js/prefixfree.min.js"></script>
-
-  
+</section>
+<div id="viewVenueModals"><span id="closeViewModal">x</span></div>  
 
   <script>
     let scrollPosition = 0;
@@ -83,6 +90,4 @@
     });    
 
   </script>
-
-</body>
 @stop

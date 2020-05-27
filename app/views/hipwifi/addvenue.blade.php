@@ -1,5 +1,4 @@
-@extends('layout')
-
+@extends('angle_wifi_layout')
 
 <?php $edit = $data["edit"] ; 
     if (!$edit) {$editval = 0; } else{$editval = 1; }
@@ -23,34 +22,41 @@
        //$numadminwifi = 0;
     }?>
 
-
-
 @section('content')
 
-  <body class="hipWifi">
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+    <div class="content-heading">
+      <div>@if($is_activation) Activate @else Edit @endif  Venue<small data-localize="dashboard.WELCOME"></small></div><!-- START Language list-->
+    </div><!-- START cards box-->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default card-demo">
+          <div class="card-header">
+            <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card">
+              <em class="fas fa-sync"></em>
+            </a>
+            <div class="card-title">
+              Venue Details
 
-    <form role="form" id="useradmin-form" method="post" 
-        action=" @if ($is_activation) {{ url('hipwifi_activatevenue'); }} @else {{ url('hipwifi_editvenue'); }} @endif ">
-    <div class="container-fluid">
-      <div class="row">
-
-        @include('hipwifi.sidebar')
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main"> 
-            <h1 class="page-header">@if($is_activation) Activate @else Edit @endif  Venue</h1>
-            @if ($errors->has())
-              <div class="alert alert-danger">
-                  @foreach ($errors->all() as $error)
-                      {{ $error }}<br>        
-                  @endforeach
+            </div>
+          </div>
+          <div class="card-body">
+            <form role="form" id="useradmin-form" method="post" action=" @if ($is_activation) {{ url('hipwifi_activatevenue'); }} @else {{ url('hipwifi_editvenue'); }} @endif ">
+              <div class="row">
+                <div class="col-12">
+                  @if ($errors->has())
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                            {{ $error }}<br>        
+                        @endforeach
+                    </div>
+                  @endif
+                  <div  id="printererror"> </div>
+                </div>
               </div>
-            @endif
-
-            <div  id="printererror"> </div>
-                  
-            
-
-          <div class="row">
+              <div class="row">
               <div class="col-md-12">
 
                       {{ Form::hidden('id', $data['venue']->id) }}
@@ -413,6 +419,24 @@
                             name="statuscomment" placeholder="" value="{{$data['venue']->statuscomment}}">
                       </div> 
 
+                      <div class="form-group">
+                        <input type="checkbox" id="alert_email_check" />
+                        <label for="alert_email_check">Send status alert emails</label><br>
+                        <small>If this option is selected an email will be sent to the email address below notifying them that the sensor is offline.</small>
+                      </div> 
+
+                      <div class="form-group" id="status_alert_container" style="display:none;">
+                        <label for="status_alert_email">Status alert email address</label>
+                        <input type="text" class="form-control" id="status_alert_email" 
+                            name="alert_email_address_1" placeholder="Email Address 1" value="{{$data['venue']->alert_email_address_1}}">
+                        <input type="text" class="form-control" id="status_alert_email_2" 
+                        name="alert_email_address_2" placeholder="Email Address 2" value="{{$data['venue']->alert_email_address_2}}">
+                        <input type="text" class="form-control" id="status_alert_email_3" 
+                        name="alert_email_address_3" placeholder="Email Address 3" value="{{$data['venue']->alert_email_address_3}}">
+                      </div> 
+
+                      <input type="hidden" id="hf_send_alert_emails" name="send_alert_emails"  value="{{$data['venue']->send_alert_emails}}"/>
+
                     </div>
 
                     <br> 
@@ -423,18 +447,36 @@
                 </div>
             </div>
         </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </form>
-     
+  </div>
+</section>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/prefixfree.min.js"></script>
-    <script src="/js/jquery.timepicker.min.js"></script> 
+<script defer>
+  console.log($('#hf_send_alert_emails').val() === '1')
+  if ($('#hf_send_alert_emails').val() === '1') {
+    $('#alert_email_check')[0].checked = true;
+  } else {
+    $('#alert_email_check')[0].checked = false;
+  }
+
+  if ($('#alert_email_check').is(":checked")) {
+    $('#status_alert_container').slideDown('fast');
+  }
+
+  $(document).on('change', '#alert_email_check', function () {
+    if ($('#alert_email_check').is(":checked")) {
+      $('#status_alert_container').slideDown('fast');
+      $('#hf_send_alert_emails').val('1');
+    } else {
+      $('#status_alert_container').slideUp('fast');
+      $('#hf_send_alert_emails').val('0');
+    }
+  });
+</script>
 
     <script>
 
@@ -522,6 +564,12 @@
       else if (submitbutton == 'on'){
         document.getElementById('submitform').disabled = false;
         $('#submitallowed').hide();
+      }
+
+      if ($('#hf_send_alert_emails').val() === '1') {
+        $('#alert_email_check')[0].checked = true;
+      } else {
+        $('#alert_email_check')[0].checked = false;
       }
 
       if (edit ==1){
@@ -1042,7 +1090,7 @@
         if($('#sat_from').val() == "Closed") { $('#sat_to').hide(); };
         if($('#sun_from').val() == "Closed") { $('#sun_to').hide(); };
 
-
+        $('#mon_to').timepicker({});
         $('#mon_to, #tue_to, #wed_to, #thu_to, #fri_to, #sat_to, #sun_to').timepicker({ 'timeFormat': 'H:i' });
 
       });
@@ -1124,6 +1172,25 @@
 
 
     </script>
+<style>
+  .dayofweek {
+  width: 90px;
+  margin-right: 10px;
+  font-size: 14px;
+  /*font-weight: bold;*/
+}
 
-  </body>
+.datefromto,
+.datefromtoheader {
+  width: 250px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.datefromtoheader {
+}
+</style>
+
 @stop
