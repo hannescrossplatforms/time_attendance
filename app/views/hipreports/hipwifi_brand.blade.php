@@ -158,7 +158,7 @@
       <div class="card card-default card-demo">
         <div class="card-header">
           <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
-          <div class="card-title">New vs. Returning Customers2</div>
+          <div class="card-title">New vs. Returning Customers</div>
         </div>
         <div class="card-body">
           <div class="row">
