@@ -246,6 +246,8 @@ class HipreportsController extends \BaseController {
 
     public function hipreports_hipwifi_branddatajsonsingle() {
 
+        \Log::info("HANNES - START NOW");
+
         $reportObj = new \Reports();
         $data = array();
         $brand_id = \Input::get('brand_id');
@@ -253,8 +255,7 @@ class HipreportsController extends \BaseController {
         $brandname = \Brand::find($brand_id)->name;
 
         \Log::info("hipreports_hipwifi_branddatajsonsingle : brandname = $brandname");
-
-        \Log::info("hipreports_hipwifi_branddatajsonsingle : brandname = $brandname");
+        
         $reportperiod = \Input::get('reportperiod');
         $from = \Input::get('from');
         $to = \Input::get('to');
@@ -267,7 +268,6 @@ class HipreportsController extends \BaseController {
         $queryname = \Input::get('queryname');
 
         \Log::info("hipreports_hipwifi_branddatajsonsingle : queryName = $queryname");
-
         \Log::info("hipreports_hipwifi_branddatajsonsingle : reportperiod : $reportperiod");
         \Log::info("hipreports_hipwifi_branddatajsonsingle : brand_id : $brand_id");
         \Log::info("hipreports_hipwifi_branddatajsonsingle : brand_id : $brand_id");
@@ -351,6 +351,8 @@ class HipreportsController extends \BaseController {
         } else if ($queryname == "brandavguptime") {
             $data = $reportObj->getBrandUptime($reportperiod, $from, $to, $nasid, $brandname, 1);
         }
+
+        \Log::info("HANNES - DONE AND RETURN NOW");
 
         return \Response::json($data);
 
