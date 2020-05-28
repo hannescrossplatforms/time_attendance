@@ -121,7 +121,11 @@ function processVenueReports() {
     data: data,
     url: venuedatasingleurl,
     success: function (venuedetailsdata) {
+      $("#loadingModal").modal('hide');
       showVenueDetails(venuedetailsdata);
+    },
+    error: function () {
+      $("#loadingModal").modal('hide');
     }
   });
 
