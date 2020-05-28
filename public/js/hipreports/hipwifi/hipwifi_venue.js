@@ -10,7 +10,7 @@ $(document).on('click', '#submitvenuedaterange', function (event) {
 });
 
 $(document).on('change', '#venuereportperiod, #venuelist', function () {
-
+  debugger;
   if ($("#venuereportperiod").val() == "daterange") {
     $("#venuedaterange").show();
   } else {
