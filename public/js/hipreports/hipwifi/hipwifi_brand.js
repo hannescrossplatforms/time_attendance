@@ -21,7 +21,6 @@ $(document).on('click', '#submitdaterange', function (event) {
   brand_id = $('#brandlist').val();
   event.preventDefault();
 
-  debugger;
   $("#loadingModal").modal('show');
 
   if ($('#brandtab').hasClass('active')) {
@@ -136,7 +135,7 @@ function buildDateRangeReportTableBrand(report) {
       processBrandReports();
     },
     error: function (e) {
-      debugger;
+      $("#loadingModal").modal('hide');
     }
   });
 }
@@ -206,7 +205,7 @@ function processBrandReports() {
   $("#brandavguptime").html("Loading...");
 
   //Hannes hier
-  debugger;
+
   $.ajax({
     type: "GET",
     dataType: 'json',
