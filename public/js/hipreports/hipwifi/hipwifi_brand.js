@@ -44,7 +44,7 @@ $(document).on('change', '#brandreportperiod, #brandlist', function () {
     $("#branddaterange").show();
   } else {
     $("#branddaterange").hide();
-    debugger;
+    // debugger;
     processBrandReports();
   }
 
@@ -640,7 +640,7 @@ function showBrandVenueAvgTimePerSession(data) {
 }
 
 function showBrandDwellTimeBySessionDuration(branddwelltimebysessionduration) {
-  debugger; // do not remove
+  // debugger; // do not remove
   console.log("showDwellTimeBySessionDuration : " + branddwelltimebysessionduration);
   var age = new FusionCharts({
     type: "mscolumn2d",
@@ -791,7 +791,7 @@ function showBrandPerformanceGraphs(brandData) {
   });
   biggestUniquesDecrease.render("chartcol4row2");
 
-  debugger;
+  // debugger;
   var biggestAdminIncrease = new FusionCharts({
     type: "column2d",
     renderAt: "chartcol3row3",
