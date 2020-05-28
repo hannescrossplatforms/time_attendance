@@ -20,6 +20,7 @@ $(document).on('click', '#submitdaterange', function (event) {
   to = $("#brandto").val();
   event.preventDefault();
 
+  debugger;
   $("#loadingModal").modal('show');
   buildDateRangeReportTableBrand("brand");
 
