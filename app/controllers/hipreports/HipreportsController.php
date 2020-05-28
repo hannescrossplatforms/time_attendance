@@ -360,6 +360,7 @@ class HipreportsController extends \BaseController {
 
     public function hipreports_hipwifi_branddatajson() {
 
+        \Log::info("HANNES - hipreports_hipwifi_branddatajson");
 
         $reportObj = new \Reports();
         $data = array();
@@ -401,7 +402,7 @@ class HipreportsController extends \BaseController {
     ////////////////////////////////// VENUE //////////////////////////////////
 
     public function hipreports_hipwifi_venuedatajsonsingle() {
-
+        \Log::info("HANNES - hipreports_hipwifi_venuedatajsonsingle");
         error_log("hipreports_hipwifi_venuedatajsonsingle");
         $reportObj = new \Reports();
 
