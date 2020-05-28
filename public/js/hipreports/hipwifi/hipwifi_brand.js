@@ -220,11 +220,13 @@ function processBrandReports() {
     url: branddataurl,
     success: function (brandjson) {
       debugger;
+      $("#loadingModal").modal('hide');
       console.log(brandjson);
       showBrandPerformanceGraphs(brandjson);
     },
     error: function (e) {
       //Error hannes
+      $("#loadingModal").modal('hide');
       debugger;
     }
   });
