@@ -245,7 +245,7 @@ class HipreportsController extends \BaseController {
 
 
     public function hipreports_hipwifi_branddatajsonsingle() {
-
+        \Log::info("HANNES - hipreports_hipwifi_branddatajsonsingle");
         \Log::info("HANNES - START NOW");
 
         $reportObj = new \Reports();
@@ -312,7 +312,7 @@ class HipreportsController extends \BaseController {
             $txt .= "\n to: ".$to;
             $txt .= "\n brandcode: ".$brandcode;
 
-            // $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
             $data = $reportObj->getAge($reportperiod, $from, $to, $nasid, $brandcodes, 1);
 
@@ -320,7 +320,7 @@ class HipreportsController extends \BaseController {
 
             \Log::info("hipreports_hipwifi_branddatajsonsingle : age report filtered data = $txt");
 
-            // $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+            $myfile = file_put_contents('hipreports_logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 
         } else if ($queryname == "gender") {
             $data = $reportObj->getGender($reportperiod, $from, $to, $nasid, $brandcodes, 1);
@@ -402,7 +402,7 @@ class HipreportsController extends \BaseController {
     ////////////////////////////////// VENUE //////////////////////////////////
 
     public function hipreports_hipwifi_venuedatajsonsingle() {
-        \Log::info("HANNES - hipreports_hipwifi_venuedatajsonsingle");
+        
         error_log("hipreports_hipwifi_venuedatajsonsingle");
         $reportObj = new \Reports();
 
