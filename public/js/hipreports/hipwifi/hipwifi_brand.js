@@ -23,7 +23,14 @@ $(document).on('click', '#submitdaterange', function (event) {
 
   debugger;
   $("#loadingModal").modal('show');
-  buildDateRangeReportTableBrand("brand");
+
+  if ($('#brandtab').hasClass('active')) {
+    processBrandReports();
+  }
+  else {
+    buildDateRangeReportTableBrand("brand");
+  }
+
 
 });
 
