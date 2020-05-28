@@ -5,7 +5,8 @@ $(document).on('click', '#submitvenuedaterange', function (event) {
   event.preventDefault();
 
   $("#loadingModal").modal('show');
-  buildDateRangeReportTableVenue("venue");
+  // buildDateRangeReportTableVenue("venue"); //This is how it was, we changed it to processVenueReports();
+  processVenueReports();
 
 });
 
@@ -20,28 +21,28 @@ $(document).on('change', '#venuereportperiod, #venuelist', function () {
 
 });
 
-function buildDateRangeReportTableVenue(report) {
+// function buildDateRangeReportTableVenue(report) {
 
-  data = {
-    'venue_id': venue_id,
-    'reportperiod': "daterange",
-    'from': from,
-    'to': to,
-    'queryname': 'builddaterangereporttable'
-  };
+//   data = {
+//     'venue_id': venue_id,
+//     'reportperiod': "daterange",
+//     'from': from,
+//     'to': to,
+//     'queryname': 'builddaterangereporttable'
+//   };
 
-  $.ajax({
-    type: "GET",
-    dataType: 'json',
-    contentType: "application/json",
-    data: data,
-    url: venuedatasingleurl,
-    success: function () {
-      $("#loadingModal").modal('hide');
-      processVenueReports();
-    }
-  });
-}
+//   $.ajax({
+//     type: "GET",
+//     dataType: 'json',
+//     contentType: "application/json",
+//     data: data,
+//     url: venuedatasingleurl,
+//     success: function () {
+//       $("#loadingModal").modal('hide');
+//       processVenueReports();
+//     }
+//   });
+// }
 
 function processVenueReports() {
 
