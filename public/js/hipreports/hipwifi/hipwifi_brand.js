@@ -127,6 +127,9 @@ function buildDateRangeReportTableBrand(report) {
     success: function () {
       $("#loadingModal").modal('hide');
       processBrandReports();
+    },
+    error: function (e) {
+      debugger;
     }
   });
 }
