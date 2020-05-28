@@ -25,6 +25,7 @@ $(document).on('click', '#submitdaterange', function (event) {
 
 });
 
+//Hannes hier
 $(document).on('change', '#brandreportperiod, #brandlist', function () {
 
   if ($('#brandlist option:selected').data('userdatabtn')) {
@@ -43,6 +44,7 @@ $(document).on('change', '#brandreportperiod, #brandlist', function () {
     $("#branddaterange").show();
   } else {
     $("#branddaterange").hide();
+    debugger;
     processBrandReports();
   }
 
@@ -191,6 +193,8 @@ function processBrandReports() {
 
   $("#brandavguptime").html("Loading...");
 
+  //Hannes hier
+  debugger;
   $.ajax({
     type: "GET",
     dataType: 'json',
