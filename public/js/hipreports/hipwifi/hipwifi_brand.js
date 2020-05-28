@@ -18,6 +18,7 @@ $(document).on('click', '#downloadlistcustomerusage', function (event) {
 $(document).on('click', '#submitdaterange', function (event) {
   from = $("#brandfrom").val();
   to = $("#brandto").val();
+  brand_id = $('#brandlist').val();
   event.preventDefault();
 
   debugger;
