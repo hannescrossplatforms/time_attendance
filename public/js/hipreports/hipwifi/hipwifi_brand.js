@@ -211,7 +211,7 @@ function processBrandReports() {
       console.log(brandjson);
       showBrandPerformanceGraphs(brandjson);
     },
-    error: function () {
+    error: function (e) {
       //Error hannes
       debugger;
     }
