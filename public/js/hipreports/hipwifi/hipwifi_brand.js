@@ -207,6 +207,7 @@ function processBrandReports() {
     },
     url: branddataurl,
     success: function (brandjson) {
+      debugger;
       console.log(brandjson);
       showBrandPerformanceGraphs(brandjson);
     }
