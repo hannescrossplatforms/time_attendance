@@ -667,8 +667,20 @@
 
                     });
                 }
+                else if (venue_id == 1489) {
+                    //Guerilla Randhill
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_guerilla_randhill/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
 
+                    });
+                }
+                else if (venue_id == 1488) {
+                    //Guerilla sandton close
+                    $.post(`https://maker.ifttt.com/trigger/turn_off_guerilla_sandton_close/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
 
+                    });
+                }
+
+                
 
                 window.location.href = 'http://hiphub.hipzone.co.za/hipjam_monitorsensors';
             });
@@ -713,6 +725,17 @@
                 } else if (venue_id == 1486) {
                     //Sandton Close
                     $.post(`https://maker.ifttt.com/trigger/turn_on_sandtonclose/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+
+                    });
+                }
+                else if (venue_id == 1489) {
+                    //Guerilla Randhill
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_guerilla_randhill/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
+
+                    });
+                } else if (venue_id == 1488) {
+                    //Guerilla sandton close
+                    $.post(`https://maker.ifttt.com/trigger/turn_on_guerilla_sandton_close/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
 
                     });
                 }
