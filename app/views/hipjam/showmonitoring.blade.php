@@ -628,13 +628,13 @@
     <script>
         $(document).on('click', '.turn-off-sensor', function() {
             let venue_id = $(this).data('venue-id');
-            debugger;
+            
             $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_off`, function(resp) {
 
                 if (venue_id == 1476) {
                     // Greenside
                     $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
-
+                        debugger;
                     });
                 } else if (venue_id == 1481) {
                     //Alpha
@@ -670,13 +670,13 @@
                 else if (venue_id == 1489) {
                     //Guerilla Randhill
                     $.post(`https://maker.ifttt.com/trigger/turn_off_guerilla_randhill/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
-
+                        debugger;
                     });
                 }
                 else if (venue_id == 1488) {
                     //Guerilla sandton close
                     $.post(`https://maker.ifttt.com/trigger/turn_off_guerilla_sandton_close/with/key/bAelf-3oTw4zsZBRxZzvrIL9ILmVSuIkdy_s9Gx4co8`, function(res) {
-
+                        debugger;
                     });
                 }
 
