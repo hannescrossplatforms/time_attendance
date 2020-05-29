@@ -121,6 +121,20 @@
                                                     @else
                                                     <button venuename='sandtonclose' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
                                                     @endif
+                                                    @elseif($venue->id == 1489)
+                                                    <!-- Guerilla Randhill -->
+                                                    @if ($venue->status == 'Online')
+                                                    <button venuename='alpha' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
+                                                    @else
+                                                    <button venuename='alpha' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
+                                                    @endif
+                                                    @elseif($venue->id == 1488)
+                                                    <!-- Guerilla SandtonClose -->
+                                                    @if ($venue->status == 'Online')
+                                                    <button venuename='alpha' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
+                                                    @else
+                                                    <button venuename='alpha' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
+                                                    @endif
                                                     @else
                                                     <label class="label label-warning">N/A</label>
                                                     @endif
