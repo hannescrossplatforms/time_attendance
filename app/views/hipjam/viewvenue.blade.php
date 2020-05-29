@@ -92,91 +92,245 @@
                                                 <hr />
                                             </div>
                                         </div>
+                                        <!-- ##################################################################################################################################################################### -->
+                                        <!-- BILLBOARD METRICS -->
+                                        <!-- ##################################################################################################################################################################### -->
+                                        @if ($data['venue_type'] == 'billboard')
                                         <div class="row">
 
-                                            <div class="col-xl-2 col-md-6">
+                                            <!-- <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
-                                                    <div class="col-4 d-flex align-items-center bg-danger-dark justify-content-center rounded-left"><em class="fas fa-clock fa-3x"></em></div>
+                                                    <div class="col-4 d-flex align-items-center bg-danger-dark justify-content-center rounded-left"><em class="fas fa-calendar fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-danger rounded-right">
-                                                        <div class="h2 mt-0" id="live_customer_now">Loading...</div>
-                                                        @if ($data['venue_type'] == 'billboard')
-                                                        <div class="text-uppercase">Real-time Reach</div>
-                                                        @else
-                                                        <div class="text-uppercase">Real-time Customers</div>
-                                                        @endif
+                                                        <div class="h2 mt-0" id="live_customer_today">Loading...</div>
+                                                        <div class="text-uppercase">Individuals Exposed Today</div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-
+                                            </div> -->
 
                                             <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
-                                                    <div class="col-4 d-flex align-items-center bg-warning-dark justify-content-center rounded-left"><em class="fas fa-calendar fa-3x"></em></div>
+                                                    <div class="col-4 d-flex align-items-center bg-warning-dark justify-content-center rounded-left"><em class="fas fa-clock fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-warning rounded-right">
-                                                        <div class="h2 mt-0" id="live_customer_today">Loading...</div>
-                                                        @if ($data['venue_type'] == 'billboard')
-                                                        <div class="text-uppercase">Individuals Exposed Today</div>
-                                                        @else
-                                                        <div class="text-uppercase">Customers In Store Today</div>
-                                                        @endif
+                                                        <div class="h2 mt-0" id="live_customer_now">Loading...</div>
+                                                        <div class="text-uppercase">Real-time Reach</div>
                                                     </div>
                                                 </div>
                                             </div>
 
-
-
-
-
-
-                                            <div class="col-xl-2 col-md-6">
+                                            <!-- <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-history fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-success rounded-right">
                                                         <div class="h2 mt-0" id="live_new_now">Loading...</div>
-                                                        @if ($data['venue_type'] == 'billboard')
                                                         <div class="text-uppercase">Uniques Current</div>
-                                                        @else
-                                                        <div class="text-uppercase">New Customers Now</div>
-                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
-
 
                                             <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-calendar-plus fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-purple rounded-right">
                                                         <div class="h2 mt-0" id="live_new_today">Loading...</div>
-                                                        @if ($data['venue_type'] == 'billboard')
                                                         <div class="text-uppercase">Uniques Today</div>
-                                                        @else
-                                                        <div class="text-uppercase">New Customers Today</div>
-                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-hourglass-half fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-purple rounded-right">
+                                                        <div class="h2 mt-0" id="average_time_spent_in_store_today">Loading...</div>
+                                                        <div class="text-uppercase">AVERAGE DWELL TIME</div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
-                                                    <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-cash-register fa-3x"></em></div>
-                                                    <div class="col-8 py-3 bg-primary rounded-right">
-                                                        <div class="h2 mt-0" id="live_window_today">{{$data['exposed_today'][0]->count}}</div>
-                                                        
-                                                            @if ($data['venue_type'] == 'billboard')
-                                                                <div class="text-uppercase">Exposed to OOH Site Today</div>
-                                                            @else
-                                                                <div class="text-uppercase">Conversions Today</div>
-                                                            @endif
-                                                        
+                                                    <div class="col-4 d-flex align-items-center bg-danger justify-content-center rounded-left"><em class="fas fa-broadcast-tower fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-danger-dark rounded-right">
+                                                        <div class="h2 mt-0" id="strike_rate_today">0</div>
+                                                        <div class="text-uppercase">Strike Rate</div>
                                                     </div>
                                                 </div>
                                             </div>
 
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-warning justify-content-center rounded-left"><em class="fas fa-broadcast-tower fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-warning-dark rounded-right">
+                                                        <div class="h2 mt-0" id="strike_time">
+                                                        <small>{{$data['strike_time_today'][0]->hours}} Hours</small> <br />
+                                                            <small>{{$data['strike_time_today'][0]->minutes}} Minutes</small>
+                                                        </div>
+                                                        <div class="text-uppercase">Strike Time</div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-success rounded-right">
+                                                        <div class="h2 mt-0" id="strike_distance_today">{{$data['strike_distance'][0]->distance}}KM</div>
+                                                        <div class="text-uppercase">Strike Distance</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-purple rounded-right">
+                                                        <div class="h2 mt-0" id="strike_distance">R {{$data['potential_sales_today']}}</div>
+                                                        <div class="text-uppercase">Potential Sales</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-danger justify-content-center rounded-left"><em class="fas fa-broadcast-tower fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-danger-dark rounded-right">
+                                                        <div class="h2 mt-0" id="roi_today">{{$data['roi_today']}}%</div>
+                                                        <div class="text-uppercase">ROI (%)</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-primary rounded-right">
+                                                        <div class="h2 mt-0" id="cpa_today">R {{$data['cpa_today']}}</div>
+                                                        <div class="text-uppercase">CPA (Cost per Acquisition)</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-cash-register fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-primary rounded-right">
+                                                        <div class="h2 mt-0" id="live_window_today">{{$data['exposed_today'][0]->count}}</div>
+                                                        <div class="text-uppercase">Exposed to OOH Site Today</div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        @else
+                                        <!-- ##################################################################################################################################################################### -->
+                                        <!-- VENUE METRICS -->
+                                        <!-- ##################################################################################################################################################################### -->
+                                        <div class="row">
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-danger-dark justify-content-center rounded-left"><em class="fas fa-calendar fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-danger rounded-right">
+                                                        <div class="h2 mt-0" id="live_customer_today">Loading...</div>
+                                                        <div class="text-uppercase">Total Customers In Store</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-warning-dark justify-content-center rounded-left"><em class="fas fa-clock fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-warning rounded-right">
+                                                        <div class="h2 mt-0" id="live_customer_now">Loading...</div>
+                                                        <div class="text-uppercase">Real-time Customers</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-sign-out-alt fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-success rounded-right">
+                                                        <div class="h2 mt-0" id="bounce_rate_today">Loading...</div>
+                                                        <div class="text-uppercase">Bounce Rate</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-hourglass-end fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-success rounded-right">
+                                                        <div class="h2 mt-0" id="high_dwell_today">0</div>     
+                                                        <div class="text-uppercase">High Dwell Customers</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-history fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-success rounded-right">
+                                                        <div class="h2 mt-0" id="live_new_now">Loading...</div>
+                                                        <div class="text-uppercase">New Customers Now</div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <!-- <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-calendar-plus fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-purple rounded-right">
+                                                        <div class="h2 mt-0" id="live_new_today">Loading...</div>
+                                                        <div class="text-uppercase">New Customers Today</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         -->
+                                            
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-hourglass-half fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-purple rounded-right">
+                                                        <div class="h2 mt-0" id="average_time_spent_in_store_today">Loading...</div>
+                                                        <div class="text-uppercase">Average Time Spent in Store</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-cash-register fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-primary rounded-right">
+                                                        <div class="h2 mt-0" id="live_window_today">{{$data['exposed_today'][0]->count}}</div>
+                                                        <div class="text-uppercase">Total Conversions</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-md-6">
+                                            </div>
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-warning justify-content-center rounded-left"><em class="fas fa-cart-plus fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-warning-dark rounded-right">
+                                                        <div class="h2 mt-0" id="conversion_rate_today">0</div>
+                                                        <div class="text-uppercase">Conversion Rate</div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
+                                        @endif
+
+                                        
+
+
+
+                                        <!-- START FILTERABLE METRICS -->
 
                                         <div class="row" id="report_date_filter">
                                             <div class="col-12">
@@ -241,6 +395,7 @@
                                                 </div>
                                             </div>
 
+                                            @if ($data['venue_type'] != 'billboard')
                                             <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-warning justify-content-center rounded-left"><em class="fas fa-star fa-3x"></em></div>
@@ -254,6 +409,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endif
 
                                             @if ($data['venue_type'] == 'venue')
                                             <div class="col-xl-2 col-md-6">
@@ -267,6 +423,7 @@
                                             </div>
                                             @endif
                                             
+                                            @if ($data['venue_type'] != 'billboard')
                                             <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-success justify-content-center rounded-left"><em class="fas fa-hourglass-end fa-3x"></em></div>
@@ -280,7 +437,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+                                            @endif
 
 
                                             <div class="col-xl-2 col-md-6">
@@ -300,24 +457,21 @@
 
 
 
-
-                                            <div class="col-xl-2 col-md-6">
-                                                <div class="card flex-row align-items-center align-items-stretch border-0">
-                                                    <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-wallet fa-3x"></em></div>
-                                                    <div class="col-8 py-3 bg-primary-dark rounded-right">
-                                                        <div class="h2 mt-0" id="window_con">{{$data['exposed_week'][0]->count}}</div>
-
-                                                        
-                                                        @if ($data['venue_type'] == 'billboard')
-                                                        <div class="text-uppercase">Exposed to OOH Site</div>
-                                                        @else
-                                                        <div class="text-uppercase">Total Conversions</div>
-                                                        @endif
-                                                        
+                                            @if ($data['venue_type'] != 'billboard')
+                                                <div class="col-xl-2 col-md-6">
+                                                    <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                        <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-cash-register fa-3x"></em></div>
+                                                        <div class="col-8 py-3 bg-primary-dark rounded-right">
+                                                            <div class="h2 mt-0" id="window_con">{{$data['exposed_week'][0]->count}}</div>
+                                                            @if ($data['venue_type'] == 'billboard')
+                                                                <div class="text-uppercase">Exposed to OOH Site</div>
+                                                            @else
+                                                                <div class="text-uppercase">Total Conversions</div>
+                                                            @endif
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
+                                            @endif
                                         
                                         
                                         
@@ -407,6 +561,8 @@
                                             </div>
                                         @endif
                                     <input type="hidden" id="hf_total_conversions" value="{{$data['total_conversions']}}"/>
+                                    <input type="hidden" id="hf_total_conversions_today" value="{{$data['total_conversions_today']}}"/>
+                                    
                                             
                                         </div>
                                         <div class="row">
@@ -732,11 +888,19 @@
             .then((doc) => {
                 if (doc.exists) {
                     let venue_data = doc.data();
+                    let conversions_today = $('#hf_total_conversions_today').val();
                     $('#live_customer_now').html(venue_data.customers_in_store_now);
                     $('#live_customer_today').html(venue_data.customers_in_store_today);
                     $('#live_new_now').html(venue_data.new_customers_now);
                     $('#live_new_today').html(venue_data.new_customers_today);
-                    // $('#live_window_today').html('0');
+                    // UPDATES
+                    $('#high_dwell_today').html(venue_data.high_dwell_customers);
+                    console.table(venue_data);
+                    $('#average_time_spent_in_store_today').html(Math.round(venue_data.average_dwell / 60));
+                    $('#bounce_rate_today').html(`${Math.round(venue_data.bounce_rate)}%`);
+                    $('#conversion_rate_today').html(`${ Math.round((conversions_today / venue_data.customers_in_store_today) * 100)}%`);
+                    $('#strike_rate_today').html(`${((conversions_today / venue_data.customers_in_store_today) * 100).toFixed(2)}%`);
+                    
 
                     if (is_billboard) {
                         $('#live_window_today').html(venue_data.customers_in_store_today);

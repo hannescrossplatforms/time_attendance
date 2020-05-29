@@ -1917,6 +1917,30 @@ class HipjamController extends \BaseController
                                                     tsma.venue_id = ".$venue->id."
                                                     AND tsma.date_seen BETWEEN '$date_from'
                                                     AND '$date_to'")[0]->total_conversions;
+
+        $data['total_conversions_today'] = \DB::select("SELECT
+                                                    count(id) total_conversions
+                                                FROM
+                                                    track_seen_mac_address tsma
+                                                    INNER JOIN ( SELECT DISTINCT
+                                                            mac_address mac_addresses_seen_by_venues
+                                                        FROM
+                                                            track_seen_mac_address tsmaINNER
+                                                            INNER JOIN (
+                                                                SELECT
+                                                                    id linked_venue_id
+                                                                FROM
+                                                                    venues iv
+                                                                WHERE
+                                                                    linked_billboard = ".$venue->id.") INQ1 ON INQ1.linked_venue_id = tsmaINNER.venue_id
+                                                            WHERE
+                                                                tsmaINNER.date_seen = CURDATE()) INQ2 ON INQ2.mac_addresses_seen_by_venues = tsma.mac_address
+                                                WHERE
+                                                    tsma.venue_id = ".$venue->id."
+                                                    AND tsma.date_seen = CURDATE()")[0]->total_conversions;
+                                                    
+
+        
         $linked_venues = \Venue::where('linked_billboard', '=', $venue->id)->pluck('id');
        if (!$linked_venues) { 
         $linked_venues = 0;
@@ -1950,6 +1974,33 @@ class HipjamController extends \BaseController
             ) INQ3
             ");
 
+            $data['strike_time_today'] = \DB::select("
+            SELECT 
+                ROUND(AVG(time_taken_to_convert) / 60,2) minutes,
+                ROUND(AVG(time_taken_to_convert) / 3600,2) hours
+            FROM (
+                SELECT 
+                    TIMESTAMPDIFF(SECOND, seen_by_billboard, seen_by_venue) time_taken_to_convert
+                FROM (
+                    SELECT
+                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id = ".$venue->id." AND date_seen = INQ.date_seen) seen_by_billboard,
+                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id IN (".$linked_venues.") AND date_seen = INQ.date_seen) seen_by_venue
+                    FROM (
+                        SELECT 
+                            count(*) seen_times, 
+                            mac_address,
+                            date_seen
+                        FROM 
+                            track_seen_mac_address tsma
+                        WHERE 
+                            (venue_id = ".$venue->id." OR venue_id IN (".$linked_venues.")) 
+                        AND (date_seen = CURDATE())
+                        GROUP BY mac_address,date_seen HAVING seen_times > 1
+                    ) INQ
+                ) INQ2 HAVING time_taken_to_convert > 0
+            ) INQ3
+            ");
+
             $data['strike_distance'] = \DB::select("
             SELECT 
                 ROUND(IFNULL(AVG( 6371 * acos (cos ( radians(billboard_latitude))
@@ -1975,16 +2026,23 @@ class HipjamController extends \BaseController
 
         $data['avg_basket_value'] = \Brand::find($venue->brand_id)->avg_basket_value;
         $data['potential_sales'] = $data['total_conversions'] * $data['avg_basket_value'];
+
+        $data['potential_sales_today'] = $data['total_conversions_today'] * $data['avg_basket_value'];
+
         if ($data['total_conversions'] != 0) {
             $data['cpa'] = round($venue->advertising_cost / $data['total_conversions'], 2);
+            $data['cpa_today'] = round(($venue->advertising_cost / 31) / $data['total_conversions_today'], 2);
         } else {
             $data['cpa'] = 'N/A';
+            $data['cpa_today'] = 'N/A';
         }
 
         if ($venue->advertising_cost && $venue->advertising_cost != 0) {
             $data['roi'] = round(($data['potential_sales'] / $venue->advertising_cost) * 100, 2);
+            $data['roi_today'] = round(($data['potential_sales_today'] / ($venue->advertising_cost / 31)) * 100, 2);
         } else {
             $data['roi'] = 'N/A';
+            $data['roi_today'] = 'N/A';
         }
         
         
