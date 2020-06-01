@@ -441,9 +441,66 @@
 
 
                                             <div class="col-xl-2 col-md-6">
+                                                
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-purple justify-content-center rounded-left"><em class="fas fa-hourglass-half fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-purple-dark rounded-right">
+                                                        <div class="float-right btn-group">
+                                                        <select name="dwell_time_time" id="dwell_time_time">
+                                                            <option value="volvo">All Time</option>
+                                                            <option value="1:00">1:00</option>
+                                                            <option value="2:00">2:00</option>
+                                                            <option value="3:00">3:00</option>
+                                                            <option value="4:00">4:00</option>
+                                                            <option value="5:00">5:00</option>
+                                                            <option value="6:00">6:00</option>
+                                                            <option value="7:00">7:00</option>
+                                                            <option value="8:00">8:00</option>
+                                                            <option value="9:00">9:00</option>
+                                                            <option value="10:00">10:00</option>
+                                                            <option value="11:00">11:00</option>
+                                                            <option value="12:00">12:00</option>
+                                                            <option value="13:00">13:00</option>
+                                                            <option value="14:00">14:00</option>
+                                                            <option value="15:00">15:00</option>
+                                                            <option value="16:00">16:00</option>
+                                                            <option value="17:00">17:00</option>
+                                                            <option value="18:00">18:00</option>
+                                                            <option value="19:00">19:00</option>
+                                                            <option value="20:00">20:00</option>
+                                                            <option value="21:00">21:00</option>
+                                                            <option value="22:00">22:00</option>
+                                                            <option value="23:00">23:00</option>
+                                                            <option value="24:00">24:00</option>
+                                                        </select>
+                                                            <!-- <button class="dropdown-toggle dropdown-toggle-nocaret btn btn-secondary btn-sm" type="button" data-toggle="dropdown" aria-expanded="false">All Time</button>
+                                                            <div class="dropdown-menu dropdown-menu-right-forced fadeInLeft animated" role="menu" style="">
+                                                                <a class="dropdown-item" href="#">01:00</a>
+                                                                <a class="dropdown-item" href="#">02:00</a>
+                                                                <a class="dropdown-item" href="#">03:00</a>
+                                                                <a class="dropdown-item" href="#">04:00</a>
+                                                                <a class="dropdown-item" href="#">05:00</a>
+                                                                <a class="dropdown-item" href="#">06:00</a>
+                                                                <a class="dropdown-item" href="#">07:00</a>
+                                                                <a class="dropdown-item" href="#">08:00</a>
+                                                                <a class="dropdown-item" href="#">09:00</a>
+                                                                <a class="dropdown-item" href="#">10:00</a>
+                                                                <a class="dropdown-item" href="#">11:00</a>
+                                                                <a class="dropdown-item" href="#">12:00</a>
+                                                                <a class="dropdown-item" href="#">13:00</a>
+                                                                <a class="dropdown-item" href="#">14:00</a>
+                                                                <a class="dropdown-item" href="#">15:00</a>
+                                                                <a class="dropdown-item" href="#">16:00</a>
+                                                                <a class="dropdown-item" href="#">17:00</a>
+                                                                <a class="dropdown-item" href="#">18:00</a>
+                                                                <a class="dropdown-item" href="#">19:00</a>
+                                                                <a class="dropdown-item" href="#">20:00</a>
+                                                                <a class="dropdown-item" href="#">21:00</a>
+                                                                <a class="dropdown-item" href="#">22:00</a>
+                                                                <a class="dropdown-item" href="#">23:00</a>
+                                                                <a class="dropdown-item" href="#">24:00</a>
+                                                            </div> -->
+                                                        </div>
                                                         <div class="h2 mt-0" id="rep_ave">0</div>
                                                         @if ($data['venue_type'] == 'billboard')
                                                         <div class="text-uppercase">Average Dwell Time</div>
@@ -1274,6 +1331,8 @@
 
     }
 
+    var hourly = {};
+
     liveJam.initialize(() => {
         liveJam.getVenueData();
         liveJam.compileData('week', function(week_data) {
@@ -1293,6 +1352,7 @@
             var total_returning = 0;
 
             $.each(week_data, function(index, item) {
+                debugger;
                 dwell += item.data.average_dwell;
                 customers_in_store += item.data.customers_in_store_today;
                 new_customers_in_store += item.data.new_customers_today;
