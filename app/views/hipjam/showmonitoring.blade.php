@@ -364,7 +364,7 @@
                 data: "sentData=" + sentData,
                 dataType: 'json',
                 url: url,
-                async: false,
+                async: true,
 
                 success: function(data) {
 
@@ -422,7 +422,7 @@
                 data: "sentData=" + sentData,
                 dataType: 'json',
                 url: url,
-                async: false,
+                async: true,
 
                 success: function(data) {
 
@@ -514,7 +514,7 @@
                 data: "sentData=" + sentData,
                 dataType: 'json',
                 url: url,
-                async: false,
+                async: true,
 
                 success: function(data) {
 
@@ -564,7 +564,7 @@
                 data: "sentData=" + sentData,
                 dataType: 'json',
                 url: url,
-                async: false,
+                async: true,
 
                 success: function(data) {
                     if (data.length == 0) {
@@ -598,7 +598,7 @@
                 data: "sentData=" + sentData,
                 dataType: 'json',
                 url: url,
-                async: false,
+                async: true,
 
                 success: function(data) {
 
