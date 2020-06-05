@@ -630,7 +630,7 @@
             let venue_id = $(this).data('venue-id');
             
             $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_off`, function(resp) {
-
+                debugger;
                 if (venue_id == 1476) {
                     // Greenside
                     $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
