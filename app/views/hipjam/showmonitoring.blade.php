@@ -79,15 +79,15 @@
                                                     @else
                                                     <button venuename='greenside' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
                                                     @endif
-                                                    @elseif($venue->id == 1481)
-                                                    <!-- Vicinity alpha -->
+                                                    @elseif($venue->id == 1490)
+                                                    <!-- Guerilla alpha alpha -->
                                                     @if ($venue->status == 'Online')
                                                     <button venuename='alpha' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
                                                     @else
                                                     <button venuename='alpha' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
                                                     @endif
-                                                    @elseif($venue->id == 1482)
-                                                    <!-- Vicinity bravo -->
+                                                    @elseif($venue->id == 1491)
+                                                    <!-- Guerilla bravo -->
                                                     @if ($venue->status == 'Online')
                                                     <button venuename='bravo' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
                                                     @else
@@ -636,14 +636,14 @@
                     $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
                         debugger;
                     });
-                } else if (venue_id == 1481) {
-                    //Alpha
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                } else if (venue_id == 1490) {
+                    //Guerilla Alpha
+                    $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
                     });
-                } else if (venue_id == 1482) {
-                    //Bravo
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                } else if (venue_id == 1491) {
+                    //Guerilla Bravo
+                    $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
                     });
                 } else if (venue_id == 1483) {
@@ -697,14 +697,14 @@
                     $.get(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
                     });
-                } else if (venue_id == 1481) {
-                    //Alpha
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                } else if (venue_id == 1490) {
+                    //Guerilla Alpha
+                    $.get(`https://maker.ifttt.com/trigger/turn_on_guerilla_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
                     });
-                } else if (venue_id == 1482) {
-                    //Bravo
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                } else if (venue_id == 1491) {
+                    //Guerilla Bravo
+                    $.get(`https://maker.ifttt.com/trigger/turn_on_guerilla_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
                     });
                 } else if (venue_id == 1483) {
