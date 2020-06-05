@@ -689,7 +689,7 @@
         $(document).on('click', '.turn-on-sensor', function() {
             let venue_id = $(this).data('venue-id');
             $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_on`, function(resp) {
-
+                debugger;
 
 
                 if (venue_id == 1476) {
