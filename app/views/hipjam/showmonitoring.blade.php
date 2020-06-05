@@ -639,12 +639,15 @@
                 } else if (venue_id == 1490) {
                     //Guerilla Alpha
                     $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
+                        debugger;
+                        var a = 3;
+                        
                     });
                 } else if (venue_id == 1491) {
                     //Guerilla Bravo
                     $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
+                        debugger;
+                        var a = 3;
                     });
                 } else if (venue_id == 1483) {
                     //Charlie
