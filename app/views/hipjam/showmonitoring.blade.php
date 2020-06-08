@@ -107,8 +107,8 @@
                                                     @else
                                                     <button venuename='randhill' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
                                                     @endif
-                                                    @elseif($venue->id == 1485)
-                                                    <!-- Vicinity curatio house -->
+                                                    @elseif($venue->id == 1493)
+                                                    <!-- Guerrilla curatio house -->
                                                     @if ($venue->status == 'Online')
                                                     <button venuename='curatiohouse' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
                                                     @else
@@ -659,9 +659,9 @@
                     $.get(`https://maker.ifttt.com/trigger/turn_off_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
                     });
-                } else if (venue_id == 1485) {
+                } else if (venue_id == 1493) {
                     //Curatio house
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                    $.get(`https://maker.ifttt.com/trigger/turn_off_guerrilla_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
                     });
                 } else if (venue_id == 1486) {
@@ -720,9 +720,9 @@
                     $.get(`https://maker.ifttt.com/trigger/turn_on_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
                     });
-                } else if (venue_id == 1485) {
+                } else if (venue_id == 1493) {
                     //Curatio house
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                    $.get(`https://maker.ifttt.com/trigger/turn_on_guerrilla_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
                     });
                 } else if (venue_id == 1486) {
