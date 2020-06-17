@@ -57,7 +57,7 @@
     //   console.log("begin");
     //     showSelectedServers();
     // });
-    addDeleteFunctionality();
+
 
     serversJason = {{ $data['serversJason'] }};
 
@@ -117,7 +117,7 @@
                       <td> ' + value["brandName"]  + '</td>\n\
                       <td> ' + value["countryName"]  + '</td>\n\
                       <td><a href="{{ url('hipwifi_editserver'); }}/' + value["serverId"] + '" class="btn btn-info btn-sm">edit</a>\n\
-                          <a class="btn btn-default btn-danger btn-sm btn-delete" data-serverid = ' + value["serverId"] + ' href="#">delete</a>\n\
+                          <a class="btn btn-default btn-danger btn-sm" data-serverid = ' + value["serverId"] + ' href="#">delete</a>\n\
                       </td>\n\
                     </tr>\n\
                     ';
@@ -129,17 +129,19 @@
 
         table = beginTable + rows + endTable;
         $( "#serverTable" ).html( table );
-
-        addDeleteFunctionality();
       }
 
       function addDeleteFunctionality(){
+
         $(document).delegate('.btn-delete', 'click', function() {
+          testSwal();
+        });
 
-          debugger;
-      var serverId = this.getAttribute('data-serverid');
+        
+      }
 
-      testSwal();
+      // $(document).delegate('.btn-delete', 'click', function() {
+      // var serverId = this.getAttribute('data-serverid');
       // swal({
       //   title: "Are you sure?",
       //   text: "Are you sure you want to delete this server?",
@@ -149,23 +151,21 @@
       //   confirmButtonText: 'Yes, delete it!',
       //   closeOnConfirm: false,
       // },
-        // function(){
-        //   swal("Deleted!", "Server has been deleted!", "success");
-        //   $.ajax({
-        //     type: "GET",
-        //     dataType: 'json',
-        //     contentType: "application/json",
-        //     url: "{{ url('hipwifi_deleteserver/" + serverId + "'); }}",
-        //     success: function(servers) {
-        //       var serversjson = JSON.parse(servers); 
-        //       showServersTable(serversjson);
-        //     }
-        //   });
-        // });
+      //   function(){
+      //     swal("Deleted!", "Server has been deleted!", "success");
+      //     $.ajax({
+      //       type: "GET",
+      //       dataType: 'json',
+      //       contentType: "application/json",
+      //       url: "{{ url('hipwifi_deleteserver/" + serverId + "'); }}",
+      //       success: function(servers) {
+      //         var serversjson = JSON.parse(servers); 
+      //         showServersTable(serversjson);
+      //       }
+      //     });
+      //   });
       // });
-      });
-      )
-
+	
       function testSwal(){
         swal({   
 				title: "Success",  
@@ -175,12 +175,10 @@
 				}, 
 				
 				function(isConfirm){   if (isConfirm) {  
-					
+					window.location.href = '{{ url('login'); }}';   
 				} 
 				});
       }
-	
-
 
 
     </script>
