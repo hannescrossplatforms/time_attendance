@@ -176,9 +176,8 @@
 				confirmButtonText: "Return to login"
 				}, 
 				
-				function(isConfirm){   if (isConfirm) {  
+				function() {  
 					window.location.href = '{{ url('login'); }}';   
-				} 
 				});
       }
 
