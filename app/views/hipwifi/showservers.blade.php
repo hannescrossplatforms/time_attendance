@@ -169,16 +169,19 @@
       // });
 	
       function testSwal(){
-        swal({   
-				title: "Success",  
-				type: "success", 
-				text: "We have sent {email address} an email with reset instructions.",   
-				confirmButtonText: "Return to login"
-				}, 
-				
-				function() {  
-					window.location.href = '{{ url('login'); }}';   
-				});
+          swal({
+          title: "Are you sure?",
+          text: "Are you sure you want to delete this brand?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: 'Yes, delete it!',
+          closeOnConfirm: false,
+          //closeOnCancel: false
+        },
+        function(){
+          swal("Deleted!", "Brand has been deleted!", "success");
+        });
       }
 
 
