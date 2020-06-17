@@ -135,46 +135,14 @@
       function addDeleteFunctionality(){
 
         $(document).delegate('.btn-delete', 'click', function() {
-          debugger;
-          deleteServer();
+          var serverId = this.getAttribute('data-serverid');
+          deleteServer(serverId);
         });
 
         
       }
 
-      // $(document).delegate('.btn-delete', 'click', function() {
-      // var serverId = this.getAttribute('data-serverid');
-      // swal({
-      //   title: "Are you sure?",
-      //   text: "Are you sure you want to delete this server?",
-      //   type: "warning",
-      //   showCancelButton: true,
-      //   confirmButtonColor: '#DD6B55',
-      //   confirmButtonText: 'Yes, delete it!',
-      //   closeOnConfirm: false,
-      // },
-      //   function(){
-      //     swal("Deleted!", "Server has been deleted!", "success");
-      //     $.ajax({
-      //       type: "GET",
-      //       dataType: 'json',
-      //       contentType: "application/json",
-      //       url: "{{ url('hipwifi_deleteserver/" + serverId + "'); }}",
-      //       success: function(servers) {
-      //         var serversjson = JSON.parse(servers); 
-      //         showServersTable(serversjson);
-      //       }
-      //     });
-      //   });
-      // });
-  
-      
-      // title: "Are you sure ??",
-      //       text: 'asdf', 
-      //       icon: "warning",
-      //       buttons: true,
-      //       dangerMode: true,
-      function deleteServer(){
+      function deleteServer(serverId){
         swal({
           title: "Are you sure?",
           text: "Are you sure you want to delete this server?",
@@ -187,7 +155,7 @@
         })
         .then((willDelete) => {
           if (willDelete) {
-            var serverId = this.getAttribute('data-serverid');
+            
             swal("Deleted!", "Server has been deleted!", "success");
           $.ajax({
             type: "GET",
