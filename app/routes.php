@@ -331,6 +331,18 @@ Route::get('hipjam_monitorsensors/{id}/turn_on', array('uses' => 'hipjam\HipjamC
 
 Route::post('upload_seen_mac_addresses/venue', array('uses' => 'hipjam\HipjamController@uploadSeenMacAddresses', 'as' => 'hipjam_uploadSeenMacAddresses'));
 
+// DASHBOARD
+Route::get('get_billboard_infoview/{id}', array('uses' => 'hipjam\HipjamController@getBillboardInfoview', 'as' => 'hipjam_get_billboard_infoview'));
+Route::get('get_venue_infoview/{id}', array('uses' => 'hipjam\HipjamController@getVenueInfoview', 'as' => 'hipjam_get_venue_infoview'));
+Route::get('update_all_sensor_statuses', array('uses' => 'hipjam\HipjamController@updateAllSensorStatuses', 'as' => 'hipjam_update_all_sensor_statuses'));
+Route::get('check_and_send_status_emails', array('uses' => 'hipjam\HipjamController@checkAndSendStatusEmails', 'as' => 'hipjam_check_and_send_status_emails'));
+Route::get('get_ooh_site_data', array('uses' => 'hipjam\HipjamController@getOohSiteData', 'as' => 'hipjam_get_ooh_site_data'));
+
+Route::get('get_ids', array('uses' => 'hipjam\HipjamController@getIds', 'as' => 'hipjam_get_ids'));
+Route::get('get_ids_with_name', array('uses' => 'hipjam\HipjamController@getIdsWithName', 'as' => 'hipjam_get_ids_with_name'));
+
+
+
 
 // END VICNITY CHANGES
 // updateVicinityVenue

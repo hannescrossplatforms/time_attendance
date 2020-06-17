@@ -1,0 +1,1 @@
+echo "$1 ($2) has been offline for $3" | mail -s "$1 is offline" -a "From: support@hipzone.com" $4

@@ -1,0 +1,10 @@
+#!/usr/local/rvm/rubies/ruby-2.6.5/bin/ruby
+require 'rubygems'
+require 'json'
+require 'yaml'
+require 'time'
+require 'net/http'
+require 'open-uri'
+
+MAC_ADDRESSES_BY_DATE = JSON.parse(File.read('/home/pi/track/config/seen_mac_addresses.json'))
+puts MAC_ADDRESSES_BY_DATE#MAC_ADDRESSES_BY_DATE.select{|key, hash| hash["date"] == "2020-01-17"}

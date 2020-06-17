@@ -446,32 +446,32 @@
                                                     <div class="col-4 d-flex align-items-center bg-purple justify-content-center rounded-left"><em class="fas fa-hourglass-half fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-purple-dark rounded-right">
                                                         <div class="float-right btn-group">
-                                                        <select name="dwell_time_time" id="dwell_time_time">
-                                                            <option value="volvo">All Time</option>
-                                                            <option value="1:00">1:00</option>
-                                                            <option value="2:00">2:00</option>
-                                                            <option value="3:00">3:00</option>
-                                                            <option value="4:00">4:00</option>
-                                                            <option value="5:00">5:00</option>
-                                                            <option value="6:00">6:00</option>
-                                                            <option value="7:00">7:00</option>
-                                                            <option value="8:00">8:00</option>
-                                                            <option value="9:00">9:00</option>
-                                                            <option value="10:00">10:00</option>
-                                                            <option value="11:00">11:00</option>
-                                                            <option value="12:00">12:00</option>
-                                                            <option value="13:00">13:00</option>
-                                                            <option value="14:00">14:00</option>
-                                                            <option value="15:00">15:00</option>
-                                                            <option value="16:00">16:00</option>
-                                                            <option value="17:00">17:00</option>
-                                                            <option value="18:00">18:00</option>
-                                                            <option value="19:00">19:00</option>
-                                                            <option value="20:00">20:00</option>
-                                                            <option value="21:00">21:00</option>
-                                                            <option value="22:00">22:00</option>
-                                                            <option value="23:00">23:00</option>
-                                                            <option value="24:00">24:00</option>
+                                                        <select data-all-time="" name="dwell_time_time" id="dwell_time_time">
+                                                            <option value="alltime">All Time</option>
+                                                            <option value="1">1:00</option>
+                                                            <option value="2">2:00</option>
+                                                            <option value="3">3:00</option>
+                                                            <option value="4">4:00</option>
+                                                            <option value="5">5:00</option>
+                                                            <option value="6">6:00</option>
+                                                            <option value="7">7:00</option>
+                                                            <option value="8">8:00</option>
+                                                            <option value="9">9:00</option>
+                                                            <option value="10">10:00</option>
+                                                            <option value="11">11:00</option>
+                                                            <option value="12">12:00</option>
+                                                            <option value="13">13:00</option>
+                                                            <option value="14">14:00</option>
+                                                            <option value="15">15:00</option>
+                                                            <option value="16">16:00</option>
+                                                            <option value="17">17:00</option>
+                                                            <option value="18">18:00</option>
+                                                            <option value="19">19:00</option>
+                                                            <option value="20">20:00</option>
+                                                            <option value="21">21:00</option>
+                                                            <option value="22">22:00</option>
+                                                            <option value="23">23:00</option>
+                                                            <option value="24">24:00</option>
                                                         </select>
                                                             <!-- <button class="dropdown-toggle dropdown-toggle-nocaret btn btn-secondary btn-sm" type="button" data-toggle="dropdown" aria-expanded="false">All Time</button>
                                                             <div class="dropdown-menu dropdown-menu-right-forced fadeInLeft animated" role="menu" style="">
@@ -588,7 +588,7 @@
                                                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-success rounded-right">
                                                         <div class="h2 mt-0" id="reach_frequency">{{$data['reach_frequency'][0]->avg_seen_times}}</div>
-                                                        <div class="text-uppercase">Reach Frequency</div>
+                                                        <div class="text-uppercase">Frequency</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -739,7 +739,7 @@
                                     <div class="card-wrapper">
                                         <div class="row">
                                             <div class="col-12" style="height: 15vw;">
-                                                <canvas id="chart-05" height="50">Charts will render here</canvas>
+                                                <div id="chart-05" style="height: 100%;">Charts will render here</div>
                                             </div>
                                         </div>
                                     </div>
@@ -763,7 +763,7 @@
                                     <div class="card-wrapper">
                                         <div class="row">
                                             <div class="col-12" style="height: 22.5vw;">
-                                                <canvas id="chart-container">Charts will render here</canvas>
+                                                <div id="chart-container" style="height: 100%;">Charts will render here</div>
                                                 <small><sup>*</sup> Chart totals may differ from in store today customers because individual dwell time spans over mutiple hours.</small>
                                             </div>
                                         </div>
@@ -786,7 +786,7 @@
                                     <div class="card-wrapper">
                                         <div class="row">
                                         <div class="col-12" style="height: 22.5vw;">
-                                                <canvas id="chart-07">Charts will render here</canvas>
+                                                <div id="chart-07" style="height: 100%;">Charts will render here</div>
                                             </div>
                                         </div>
                                     </div>
@@ -810,7 +810,7 @@
                                     <div class="card-wrapper">
                                         <div class="row">
                                         <div class="col-12" style="height: 15vw;">
-                                                <canvas height="50" id="chart-06">Charts will render here</canvas>
+                                                <div height="50" id="chart-06" style="height: 100%;">Charts will render here</div>
                                             </div>
                                         </div>
                                     </div>
@@ -978,9 +978,6 @@
             })
     }
 
-    liveJam.getVenueDataWeek = () => {
-
-    }
     liveJam.compileNodeArray = (span) => {
         let start = moment().startOf(span);
         let end = moment().endOf(span);
@@ -1073,6 +1070,10 @@
       }
     }
 
+    liveJam.retrieveAvgDwellForHour = function(nodes, hour) {
+        liveJam.venue.doc('2020-06-01').collection('hourly').doc('10')
+    }
+
     liveJam.sortArray = (array) => {
         array.sort(function(a, b) {
             var nameA = a.date.toLowerCase(),
@@ -1104,135 +1105,309 @@
     }
 
     liveJam.renderStoreTrafficTrendGraph = (data) => {
-        let graph_data = liveJam.graphSerializer(data);
-        let canvas = document.getElementById('chart-05');
-        let ctx = canvas.getContext("2d");
-        var myBarChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: graph_data.map((gd, i) => {return gd.label}),
-              datasets: [{
-                  label: '# of Sessions',
-                  data: graph_data.map((gd, i) => {return gd.value}),
-                  borderColor: "purple",
-                  backgroundColor: "rgba(114,102,186,0.4)"
-                }]
-              },
-              options: global_chart_options
-        });
+        // debugger;
+        liveJam.renderAMChart('chart-05', liveJam.AMChartSerializer(data));
+
+        // let graph_data = liveJam.graphSerializer(data);
+        // let canvas = document.getElementById('chart-05');
+        // let ctx = canvas.getContext("2d");
+        // var myBarChart = new Chart(ctx, {
+        //     type: 'line',
+        //     data: {
+        //       labels: graph_data.map((gd, i) => {return gd.label}),
+        //       datasets: [{
+        //           label: '# of Sessions',
+        //           data: graph_data.map((gd, i) => {return gd.value}),
+        //           borderColor: "purple",
+        //           backgroundColor: "rgba(114,102,186,0.4)"
+        //         }]
+        //       },
+        //       options: global_chart_options
+        // });
         
     }
 
-    liveJam.renderStoreWeekTrafficGraph = (data) => {
-        let graph_data = liveJam.graphSerializer(data);
-        let canvas = document.getElementById('chart-07');
-        let ctx = canvas.getContext("2d");
-        var myBarChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: graph_data.map((gd, i) => {return gd.label}),
-              datasets: [{
-                  label: '# of Sessions',
-                  data: graph_data.map((gd, i) => {return gd.value}),
-                  borderColor: "orange",
-                  backgroundColor: "rgba(247,118,0,0.4)"
-                }]
-              },
-              options: global_chart_options
+    liveJam.AMChartSerializer = (data) => {
+        return data.map(function(x,y) {return {date: new Date(x.date), value: x.data.customers_in_store_today}});
+    };
+
+    liveJam.AMGenericChartSerializer = (data) => {
+        return data.map(function(x,y) {return {x: parseInt(x.label), y: x.value}});
+    };
+
+    liveJam.renderAMChart = (id, data) => {
+        am4core.ready(function() {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create(id, am4charts.XYChart);
+        chart.paddingRight = 30;
+
+        chart.data = data;
+
+        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        var series = chart.series.push(new am4charts.LineSeries());
+
+        series.dataFields.dateX = "date";
+        series.dataFields.valueY = "value";
+        series.strokeWidth = 2;
+        series.fillOpacity = 0.3;
+        series.tooltipText = "# of Sessions: {valueY}, Prev Day Change: {valueY.previousChange}";
+        series.propertyFields.stroke = "color";
+
+        chart.cursor = new am4charts.XYCursor();
+
         });
+    };
+
+    liveJam.renderGenericAMChart = (id, data) => {
+        // debugg?er;
+        am4core.ready(function() {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create(id, am4charts.XYChart);
+        chart.paddingRight = 30;
+
+        chart.data = data;
+
+        var xaxis = chart.xAxes.push(new am4charts.ValueAxis());
+        xaxis.min = 0;
+        xaxis.max = 23;
+        xaxis.strictMinMax = true;
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        var series = chart.series.push(new am4charts.LineSeries());
+
+        series.dataFields.valueX = "x";
+        series.dataFields.valueY = "y";
+        series.strokeWidth = 2;
+        series.fillOpacity = 0.3;
+        series.tooltipText = "# of Sessions: {valueY}";
+        series.propertyFields.stroke = "color";
+
+        chart.cursor = new am4charts.XYCursor();
+
+        });
+    };
+
+    liveJam.renderDoubleSeriesAMChart = (id, data) => {
+        am4core.ready(function() {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create(id, am4charts.XYChart);
+        chart.paddingRight = 30;
+
+        chart.data = data;
+
+        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        var series = chart.series.push(new am4charts.LineSeries());
+
+        series.dataFields.dateX = "date";
+        series.dataFields.valueY = "value";
+        series.strokeWidth = 2;
+        series.fillOpacity = 0.3;
+        series.tooltipText = "# of Sessions: {valueY}, Prev Day Change: {valueY.previousChange}";
+        series.propertyFields.stroke = "color";
+
+        chart.cursor = new am4charts.XYCursor();
+
+        });
+    };
+
+    liveJam.renderStoreWeekTrafficGraph = (data) => {
+        liveJam.renderAMChart('chart-07', liveJam.AMChartSerializer(data));
     }
+//     function generateChartData() {
+//   var chartData = [];
+//   var firstDate = new Date();
+//   firstDate.setDate(firstDate.getDate() - 100);
+//   firstDate.setHours(0, 0, 0, 0);
+
+//   var visits = 1600;
+//   var hits = 2900;
+//   var views = 8700;
+
+//   for (var i = 0; i < 15; i++) {
+//     // we create date objects here. In your data, you can have date strings
+//     // and then set format of your dates using chart.dataDateFormat property,
+//     // however when possible, use date objects, as this will speed up chart rendering.
+//     var newDate = new Date(firstDate);
+//     newDate.setDate(newDate.getDate() + i);
+
+//     visits += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
+//     hits += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
+//     views += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
+
+//     chartData.push({
+//       date: newDate,
+//       visits: visits,
+//       hits: hits,
+//       views: views
+//     });
+//   }
+//   return chartData;
+// }
+  
 
     liveJam.renderNewVsReturningGraph = (data) => {
         // let graph_data = liveJam.graphSerializer(data);
-    
-
-        let dateCat = $.map(data, function(d, i) {
-            return {
-                label: d.date
-            }
-        });
 
 
-        let new_data_set = $.map(data, function(d, i) {
-            return {
-                value: d.data.new_customers_today
-            }
-        });
+        let series_data = data.map(function(d) { return {date: new Date(d.date), ses_returning: (d.data.customers_in_store_today - d.data.new_customers_today), ses_new: d.data.new_customers_today} })
+        console.log(series_data);
+        am4core.ready(function() {
 
-        let new_data_set_full = {
-            seriesname: "New",
-            data: new_data_set
-        }
-
-        let returning_data_set = $.map(data, function(d, i) {
-            return {
-                value: d.data.customers_in_store_today - d.data.new_customers_today
-            }
-        });
-
-        let returning_data_set_full = {
-            seriesname: "Returning",
-            data: returning_data_set
-        }
-
-
-
-
+            am4core.useTheme(am4themes_animated);
         
-        let canvas = document.getElementById('chart-06');
-        let ctx = canvas.getContext("2d");
-        
-        var myBarChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: data.map((d, i) => {return d.date}),
-              datasets: [{
-                  label: 'New',
-                  data: new_data_set.map((nds, i) => {return nds.value}),
-                  borderColor: "purple",
-                  backgroundColor: "rgba(144,102,186,0)"
-                },
-                {
-                  label: 'Returning',
-                  data: returning_data_set.map((rds, i) => {return rds.value}),
-                  borderColor: "green",
-                  backgroundColor: "rgba(116,236,78,0)"
-                }]
-              },
-              options: global_chart_options
+            var chart = am4core.create('chart-06', am4charts.XYChart);
+            chart.colors.step = 2;
+            chart.data = series_data;
+
+            var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+            var seriesNew = chart.series.push(new am4charts.LineSeries());
+            seriesNew.dataFields.valueY = "ses_new";
+            seriesNew.dataFields.dateX = "date";
+            seriesNew.name = "New Sessions";
+            seriesNew.tooltipText = "{name}: [bold]{valueY}[/]";
+
+            var seriesReturning = chart.series.push(new am4charts.LineSeries());
+            seriesReturning.dataFields.valueY = "ses_returning";
+            seriesReturning.dataFields.dateX = "date";
+            seriesReturning.name = "Returning Sessions";
+            seriesReturning.tooltipText = "{name}: [bold]{valueY}[/]";
+            // dateAxis.renderer.minGridDistance = 50;
+
+            // var valueAxisNew = chart.yAxes.push(new am4charts.ValueAxis());
+            // if(chart.yAxes.indexOf(valueAxisNew) != 0){
+            //     valueAxisNew.syncWithAxis = chart.yAxes.getIndex(0);
+            // }
+            // var seriesNew = chart.series.push(new am4charts.LineSeries());
+            // seriesNew.dataFields.valueY = 'ses_new';
+            // seriesNew.dataFields.dateX = "date";
+            // seriesNew.strokeWidth = 2;
+            // seriesNew.yAxis = valueAxisNew;
+            // seriesNew.name = 'New Sessions';
+            // seriesNew.tooltipText = "{name}: [bold]{valueY}[/]";
+            // // seriesNew.tensionX = 0.8;
+            // seriesNew.showOnInit = true;
+            // var interfaceColorsN = new am4core.InterfaceColorSet();
+            // valueAxisNew.renderer.line.strokeOpacity = 1;
+            // valueAxisNew.renderer.line.strokeWidth = 2;
+            // valueAxisNew.renderer.line.stroke = seriesNew.stroke;
+            // valueAxisNew.renderer.labels.template.fill = seriesNew.stroke;
+            // valueAxisNew.renderer.opposite = false;
+
+
+
+            // var valueAxisReturning = chart.yAxes.push(new am4charts.ValueAxis());
+            // if(chart.yAxes.indexOf(valueAxisReturning) != 0){
+            //     valueAxisReturning.syncWithAxis = chart.yAxes.getIndex(0);
+            // }
+            // var seriesReturning = chart.series.push(new am4charts.LineSeries());
+            // seriesReturning.dataFields.valueY = 'ses_returning';
+            // seriesReturning.dataFields.dateX = "date";
+            // seriesReturning.strokeWidth = 2;
+            // seriesReturning.yAxis = valueAxisReturning;
+            // seriesReturning.name = 'Returning Sessions';
+            // seriesNew.tooltipText = "{name}: [bold]{valueY}[/]";
+            // // seriesNew.tensionX = 0.8;
+            // seriesNew.showOnInit = true;
+            // var interfaceColorsR = new am4core.InterfaceColorSet();
+            // valueAxisReturning.renderer.line.strokeOpacity = 1;
+            // valueAxisReturning.renderer.line.strokeWidth = 2;
+            // valueAxisReturning.renderer.line.stroke = seriesReturning.stroke;
+            // valueAxisReturning.renderer.labels.template.fill = seriesReturning.stroke;
+            // valueAxisReturning.renderer.opposite = false;
+
+            // createAxisAndSeries(chart,'new', 'New Sessions', true);
+            // createAxisAndSeries(chart,'returning', 'Returning Sessions', true);
+
+            // var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            // var series = chart.series.push(new am4charts.LineSeries());
+
+            // series.dataFields.dateX = "date";
+            // series.dataFields.valueY = "value";
+            // series.strokeWidth = 2;
+            // series.fillOpacity = 0.3;
+            // series.tooltipText = "# of Sessions: {valueY}, Prev Day Change: {valueY.previousChange}";
+            // series.propertyFields.stroke = "color";
+
+            chart.legend = new am4charts.Legend();
+            chart.cursor = new am4charts.XYCursor();
+
         });
 
-
-
-
-
-
-
-        // var chartProperties = {
-        //     "caption": "",
-        //     "xAxisName": "Date",
-        //     "yAxisName": "Customers",
-        //     "rotatevalues": "1",
-        //     "theme": "zune"
-        // };
-
-        // apiChart = new FusionCharts({
-        //     type: 'msline',
-        //     renderAt: 'chart-06',
-        //     width: '100%',
-        //     height: '350',
-        //     dataFormat: 'json',
-        //     dataSource: {
-        //         "chart": chartProperties,
-        //         "categories": [{
-        //             category: dateCat
-        //         }],
-        //         "dataset": [new_data_set_full, returning_data_set_full]
+        // debugger;
+        // let dateCat = $.map(data, function(d, i) {
+        //     return {
+        //         label: d.date
         //     }
         // });
-        // apiChart.render();
+
+
+        // let new_data_set = $.map(data, function(d, i) {
+        //     return {
+        //         value: d.data.new_customers_today
+        //     }
+        // });
+
+        // let new_data_set_full = {
+        //     seriesname: "New",
+        //     data: new_data_set
+        // }
+
+        // let returning_data_set = $.map(data, function(d, i) {
+        //     return {
+        //         value: d.data.customers_in_store_today - d.data.new_customers_today
+        //     }
+        // });
+
+        // let returning_data_set_full = {
+        //     seriesname: "Returning",
+        //     data: returning_data_set
+        // }
+
+
+
+
+        
+        // let canvas = document.getElementById('chart-06');
+        // let ctx = canvas.getContext("2d");
+        
+        // var myBarChart = new Chart(ctx, {
+        //     type: 'line',
+        //     data: {
+        //       labels: data.map((d, i) => {return d.date}),
+        //       datasets: [{
+        //           label: 'New',
+        //           data: new_data_set.map((nds, i) => {return nds.value}),
+        //           borderColor: "purple",
+        //           backgroundColor: "rgba(144,102,186,0)"
+        //         },
+        //         {
+        //           label: 'Returning',
+        //           data: returning_data_set.map((rds, i) => {return rds.value}),
+        //           borderColor: "green",
+        //           backgroundColor: "rgba(116,236,78,0)"
+        //         }]
+        //       },
+        //       options: global_chart_options
+        // });
     }
 
+
+    var hourly_averages_for_avg_dwell = {};
     liveJam.renderHourlyTrafficGraph = (data) => {
         let node = `${moment().format('YYYY-MM-DD')}/hourly`;
 
@@ -1288,24 +1463,26 @@
                 };
             });
 
+            hourly_averages_for_avg_dwell = hourly_averages;
 
 
+            liveJam.renderGenericAMChart('chart-container', liveJam.AMGenericChartSerializer(hourly_averages));
         
-            let canvas = document.getElementById('chart-container');
-            let ctx = canvas.getContext("2d");
-            var myBarChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                labels: hourly_averages.map((ha, i) => {return ha.label}),
-                datasets: [{
-                    label: '# of Sessions',
-                    data: hourly_averages.map((ha, i) => {return ha.value}),
-                    borderColor: "blue",
-                    backgroundColor: "rgba(47,128,231,0.4)"
-                    }]
-                },
-                options: global_chart_options
-            });
+            // let canvas = document.getElementById('chart-container');
+            // let ctx = canvas.getContext("2d");
+            // var myBarChart = new Chart(ctx, {
+            //     type: 'line',
+            //     data: {
+            //     labels: hourly_averages.map((ha, i) => {return ha.label}),
+            //     datasets: [{
+            //         label: '# of Sessions',
+            //         data: hourly_averages.map((ha, i) => {return ha.value}),
+            //         borderColor: "blue",
+            //         backgroundColor: "rgba(47,128,231,0.4)"
+            //         }]
+            //     },
+            //     options: global_chart_options
+            // });
 
             // var chartProperties = {
             //     "caption": "",
@@ -1352,7 +1529,7 @@
             var total_returning = 0;
 
             $.each(week_data, function(index, item) {
-                debugger;
+                
                 dwell += item.data.average_dwell;
                 customers_in_store += item.data.customers_in_store_today;
                 new_customers_in_store += item.data.new_customers_today;
@@ -1383,6 +1560,7 @@
                 $('#rep_ave').html('0');
             } else {
                 $('#rep_ave').html(Math.round(dwell));
+                $('#dwell_time_time').data('all-time', Math.round(dwell));
             }
 
             if (is_billboard)
@@ -1397,6 +1575,19 @@
         });
 
     })
+
+    $(document).on('change', '#dwell_time_time', function() {
+        let hour_selected = $(this).val();
+        let all_time = $(this).data('all-time');
+        let avg_dwell_display = $('#rep_ave');
+
+        if (hour_selected === 'alltime') {
+            avg_dwell_display.html(all_time)
+        } else {
+            avg_dwell_display.html(((hourly_averages_for_avg_dwell[parseInt(hour_selected)].value)/60).toFixed(2));
+        }
+        
+    });
 
     function get_query_string_key(key) {
         key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars

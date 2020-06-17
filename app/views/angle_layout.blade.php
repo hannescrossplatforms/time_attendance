@@ -19,7 +19,6 @@
   <link rel="stylesheet" href="{{asset('theme/vendor/weather-icons/css/weather-icons.css') }}">
   <link rel="stylesheet" href="{{asset('theme/css/bootstrap.css') }}" id="bscss">
   <link rel="stylesheet" href="{{asset('theme/css/app.css') }}" id="maincss">
-  <link rel="stylesheet" href="{{asset('theme/css/style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -150,17 +149,20 @@
    <script src="{{asset('theme/vendor/jquery.flot.spline/jquery.flot.spline.js')}}"></script><!-- EASY PIE CHART-->
    <script src="{{asset('theme/vendor/easy-pie-chart/dist/jquery.easypiechart.js')}}"></script><!-- MOMENT JS-->
    <script src="{{asset('theme/vendor/moment/min/moment-with-locales.js')}}"></script><!-- =============== APP SCRIPTS ===============-->
-   <script src="{{asset('theme/js/app.js')}}"></script>
-   <script src="{{ asset('js/fusioncharts.js') }}" defer></script>
-  <script src="{{ asset('js/fusioncharts.charts.js') }}" defer></script>
-  <script src="{{ asset('js/themes/fusioncharts.theme.zune.js') }}" defer></script>
    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-  <script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDS0aGw5pQFy_dg8198J42w0EeuZtI2Wuk" type="text/javascript"></script>
+  <script src="http://maps.google.com/maps/api/js?key=AIzaSyB5WpGnCln1Y_nuB930tQso-DTLjvMx2x0" type="text/javascript"></script>
   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-analytics.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/linq.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+   <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+   <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+   <script src="{{ asset('js/dashboard_master_chart.js') }}"></script>
+   <!-- <script src="https://www.amcharts.com/lib/4/lang/de_DE.js"></script>
+   <script src="https://www.amcharts.com/lib/4/geodata/germanyLow.js"></script>
+   <script src="https://www.amcharts.com/lib/4/fonts/notosans-sc.js"></script> -->
   <script>
      var global_chart_options = {
                       scales: {

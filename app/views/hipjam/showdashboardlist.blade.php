@@ -6,8 +6,8 @@
   <!-- Page content-->
   <div class="content-wrapper">
 
-
-  
+  <input type="hidden" id="hf_conversions", value="{{$data['conversions']}}"/>
+  <input type="hidden" id="hf_conversions_today", value="{{$data['conversions_today']}}"/>
 
   <div class="row" id="filter_container">
     <div class="col-12">
@@ -103,72 +103,387 @@
     </div>
   </div>
 
+<!-- ================================================================================================================================================================================================ -->
+<!-- MASTER CHART -->
+<!-- ================================================================================================================================================================================================ -->
+
+  <div class="row">
+    <div class='col-xl-12 col-md-12'>
+          <div class="card card-default card-demo">
+            <div class="card-header"><a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+              <div class="card-title">Metrics</div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                
+                  <div class="col-xl-2 col-lg-2 col-md-4">
+                    <small>Type:</small> <br/>
+                    <select id="master_graph_type" class="form-control">
+                      <option value="ooh">OOH Site</option>
+                      <option value="venue">Venue</option>
+                    </select>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-4">
+                    <small>Span:</small> <br/>
+                    <select id="master_graph_span" class="form-control">
+                    <option value="this_week">This Week</option>
+                      <option value="yesterday">Yesterday</option>
+                      <option value="today">Today</option>
+                      <option value="last_week">Last Week</option>
+                      <option value="this_month">This Month</option>
+                      <option value="last_month">Last Month</option>
+                      <option value="custom">Custom</option>
+                    </select>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-4">
+                    <small>View By:</small> <br/>
+                    <select id="master_graph_view_by" class="form-control">
+                      <option value="date">Date</option>
+                      <option value="hour">Hour of Day</option>
+                      <option value="day">Day of Week</option>
+                      <option value="month">Month</option>
+                      <option value="year">Year</option>
+                    </select>
+                  </div>
+
+                  <div class="col-xl-2 col-lg-2 col-md-4">
+                    <small>Chart Type:</small> <br/>
+                    <select id="master_graph_chart_type" class="form-control">
+                      <option value="line">Line</option>
+                      <option value="bar">Bar</option>
+                    </select>
+                  </div>
+
+              </div>
+
+              <hr />
+              <div class="row">
+                <div class="col-1">
+                  <p>Selected Metrics</p>
+                </div>
+                <div id='ooh_metric_options' class="col-11">
+                  <input data-data-type="int" class="selectable-metric" id="total_reach" type="checkbox" value="total_reach" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Total Reach</span>
+                  <input data-data-type="perc" class="selectable-metric" id="new_reach_rate" type="checkbox" value="new_reach_rate" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">New Reach Rate</span>
+                  <input data-data-type="perc" class="selectable-metric" id="return_reach_rate" type="checkbox" value="return_reach_rate" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Return Reach Rate</span>
+                  <input data-data-type="int" class="selectable-metric" id="reach_frequency" type="checkbox" value="reach_frequency" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Reach Frequency</span>
+                  <input data-data-type="int" class="selectable-metric" id="gross_rate_point" type="checkbox" value="gross_rate_point" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Gross Rate Point</span>
+                  <input data-data-type="int" class="selectable-metric" id="average_dwell_time" type="checkbox" value="average_dwell_time" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Average Dwell Time</span> <br />
+                  <input data-data-type="perc" class="selectable-metric" id="strike_rate" type="checkbox" value="strike_rate" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Strike Rate</span>
+                  <input data-data-type="int" class="selectable-metric" id="strike_time" type="checkbox" value="strike_time" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Strike Time</span>
+                  <input data-data-type="int" class="selectable-metric" id="strike_distance" type="checkbox" value="strike_distance" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Strike Distance</span>
+                  <input data-data-type="int" class="selectable-metric" id="potential_sales" type="checkbox" value="potential_sales" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Potential Sales</span>
+                  <input data-data-type="perc" class="selectable-metric" id="roi" type="checkbox" value="roi" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">ROI</span>
+                  <input data-data-type="int" class="selectable-metric" id="cpa" type="checkbox" value="cpa" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">CPA</span>
+                  
+                </div>
+
+                <div id='venue_metric_options' class="col-11" style="display: none;">
+                  <input data-data-type="int" class="selectable-metric" id="total_customers_in_store" type="checkbox" value="total_customers_in_store" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Total Custmers in Store</span>
+                  <input data-data-type="int" class="selectable-metric" id="new_customers_in_store" type="checkbox" value="new_customers_in_store" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">New Custmers in Store</span>
+                  <input data-data-type="int" class="selectable-metric" id="returning_customers_in_store" type="checkbox" value="returning_customers_in_store" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Returning Customers in Store</span>
+                  <input data-data-type="int" class="selectable-metric" id="total_conversions" type="checkbox" value="total_conversions" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Total Conversions</span>
+                  <input data-data-type="perc" class="selectable-metric" id="conversion_rate" type="checkbox" value="conversion_rate" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Conversion Rate</span>
+                  <input data-data-type="perc" class="selectable-metric" id="bounce_rate" type="checkbox" value="bounce_rate" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Bounce Rate</span>
+                  <input data-data-type="int" class="selectable-metric" id="high_dwell_customers" type="checkbox" value="high_dwell_customers" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">High Dwell Customers</span>
+                  <input data-data-type="int" class="selectable-metric" id="average_time_spent_in_store" type="checkbox" value="average_time_spent_in_store" style="margin-right:4px;"><span style="margin-right: 10px; position: relative; top: -2px;">Average Time Spent in Store</span>
+                </div>
+              </div>
+
+
+                <hr />
+
+
+                <div class="row">
+                  <div class="col-12">
+                    <div id="dashboard_master_chart" style="height:500px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+<!-- ================================================================================================================================================================================================ -->
+<!-- END MASTER CHART -->
+<!-- ================================================================================================================================================================================================ -->
+
   
     
     <div class="row">
-      <div class="col-xl-2 col-md-6">
-        <!-- START card-->
-        <div class="card flex-row align-items-center align-items-stretch border-0">
-          <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
-          <div class="col-8 py-3 bg-primary rounded-right">
-            <div class="h2 mt-0" id="live_nr_billboard_count"></div>
-            <div class="text-uppercase">Live number of OOH Sites</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-2 col-md-6">
-        <!-- START card-->
-        <div class="card flex-row align-items-center align-items-stretch border-0">
-          <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
-          <div class="col-8 py-3 bg-purple rounded-right">
-            <div class="h2 mt-0" id="live_nr_retail_count"></div>
-            <div class="text-uppercase">Live number of retail venues</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-2 col-lg-6 col-md-12">
-        <!-- START card-->
-        <div class="card flex-row align-items-center align-items-stretch border-0">
-          <div class="col-4 d-flex align-items-center bg-green-dark justify-content-center rounded-left"><em class="fas fa-history fa-3x"></em></div>
-          <div class="col-8 py-3 bg-green rounded-right">
-            <div class="h2 mt-0" id=live_uniques_today>Loading...</div>
-            <div class="text-uppercase">Uniques today</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-2 col-lg-6 col-md-12">
-        <!-- START card-->
-        <div class="card flex-row align-items-center align-items-stretch border-0">
-          <div class="col-4 d-flex align-items-center bg-info justify-content-center rounded-left"><em class="fas fa-vector-square fa-3x"></em></div>
-          <div class="col-8 py-3 bg-info-dark rounded-right">
-            <div class="h2 mt-0">{{$data['avg_distance'][0]->distance}} km</div>
-            <div class="text-uppercase">Avg Distance OOH Site / Retail</div>
-          </div>
-        </div>
-      </div>
-    <!-- </div>END cards box -->
 
-    <!-- <div class="row"> -->
-      <div class="col-xl-2 col-md-6">
+      <div class='col-xl-6 col-md-12'>
+        <div class="card card-default card-demo" id="cardChart9">
+          <div class="card-header"><a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+            <div class="card-title">OOH Site Performance</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+          <!-- BILLBOARD METRICS -->
+
+          <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+            <div class="card flex-row align-items-center align-items-stretch border-0">
+              <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+              <div class="col-8 py-3 bg-success rounded-right">
+                <div class="h2 mt-0" id="live_nr_billboard_count"><i class='fas fa-spinner fa-spin'></i></div>
+                <div class="text-uppercase">Live OOH Sites</div>
+              </div>
+            </div>
+          </div>
+
+
+      <div class="col-xl-4 col-md-12">
         <!-- START card-->
         <div class="card flex-row align-items-center align-items-stretch border-0">
-          <div class="col-4 d-flex align-items-center bg-danger justify-content-center rounded-left"><em class="fas fa-clock fa-3x"></em></div>
-          <div class="col-8 py-3 bg-danger-dark rounded-right">
-            <div class="h2 mt-0" id="live_individuals_exposed_current">Loading...</div>
+          <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-success rounded-right">
+            <div class="h2 mt-0" id="real_time_reach"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Real-time Reach</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-success rounded-right">
+            <div class="h2 mt-0" id="avg_dwell_time"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Average Dwell Time</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-success rounded-right">
+            <div class="h2 mt-0" id="strike_rate"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Strike Rate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-success rounded-right">
+            <div class="h2 mt-0" id="strike_time">
+              <small style="font-size: 11px;">{{$data['strike_time'][0]->days}} Days</small> |
+              <small style="font-size: 11px;">{{$data['strike_time'][0]->hours}} Hours</small> |
+              <small style="font-size: 11px;">{{$data['strike_time'][0]->minutes}} Minutes</small>
+            </div>
+            <div class="text-uppercase">Strike Time</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-success rounded-right">
+            <div class="h2 mt-0" id="strike_distance">{{$data['strike_distance'][0]->distance}}KM</div>
+            <div class="text-uppercase">Strike Distance</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-success rounded-right">
+            <div class="h2 mt-0" id="potential_sales">R {{$data['potential_sales']}}</div>
+            <div class="text-uppercase">Potential Sales</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-success rounded-right">
+            <div class="h2 mt-0" id="potential_sales">R {{$data['roi']}}</div>
+            <div class="text-uppercase">ROI</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+          <div class="col-8 py-3 bg-success rounded-right">
+            <div class="h2 mt-0" id="potential_sales">R {{$data['cpa']}}</div>
+            <div class="text-uppercase">CPA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class='col-xl-6 col-md-12'>
+        <div class="card card-default card-demo" id="cardChart9">
+          <div class="card-header"><a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
+            <div class="card-title">Venue Performance</div>
+          </div>
+          <div class="card-body">
+          <!-- VENUE METRICS -->
+            <div class="row">
+            <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary rounded-right">
+            <div class="h2 mt-0" id="live_nr_retail_count"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Live venues</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary-dark rounded-right">
+            <div class="h2 mt-0" id="real_time_customers"><i class='fas fa-spinner fa-spin'></i></div>
             <div class="text-uppercase">Real-time Customers</div>
           </div>
         </div>
       </div>
-      <div class="col-xl-2 col-md-6">
+
+      <div class="col-xl-4 col-md-12">
         <!-- START card-->
         <div class="card flex-row align-items-center align-items-stretch border-0">
-          <div class="col-4 d-flex align-items-center bg-warning justify-content-center rounded-left"><em class="fas fa-calendar fa-3x"></em></div>
-          <div class="col-8 py-3 bg-warning-dark rounded-right">
-            <div class="h2 mt-0" id="live_individuals_exposed_today">Loading...</div>
-            <div class="text-uppercase">Real-time Customers Today</div>
+          <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary-dark rounded-right">
+            <div class="h2 mt-0" id="total_customers_in_store"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Total Customers in Store</div>
           </div>
         </div>
       </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary-dark rounded-right">
+            <div class="h2 mt-0" id="conversions_today"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Conversions Today</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary-dark rounded-right">
+            <div class="h2 mt-0" id="total_conversions"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Total Conversions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary-dark rounded-right">
+            <div class="h2 mt-0" id="conversion_rate"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Conversion Rate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary-dark rounded-right">
+            <div class="h2 mt-0" id="high_dwell_customers"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">High Dwell Customers</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary-dark rounded-right">
+            <div class="h2 mt-0" id="avg_time_spent_in_store"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Average Time Spent is Store</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xl-4 col-md-12">
+        <!-- START card-->
+        <div class="card flex-row align-items-center align-items-stretch border-0">
+          <div class="col-4 d-flex align-items-center bg-primary justify-content-center rounded-left"><em class="fas fa-building fa-3x"></em></div>
+          <div class="col-8 py-3 bg-primary-dark rounded-right">
+            <div class="h2 mt-0" id="bounce_rate"><i class='fas fa-spinner fa-spin'></i></div>
+            <div class="text-uppercase">Bounce Rate</div>
+          </div>
+        </div>
+      </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+    </div>
+    <!-- ####################################################################################################################################### -->
+    <!-- ############################################################ VENUE METRICS ############################################################ -->
+    <!-- ####################################################################################################################################### -->
+      <div class="row">
+
+
+      
+      
+      
+      
+
+
+
+      
 
       </div>
       
@@ -185,8 +500,8 @@
           </div>
           <!-- <div class="card-wrapper"> -->
             <div class="card-body">
-            <div class="card-wrapper no-overflow">
-              <canvas id="best-performing-chart"></canvas>
+            <div class="card-wrapper">
+              <div id="best-performing-chart" style="height: 250px;"></div>
             </div>
             </div>
           <!-- </div> -->
@@ -201,8 +516,8 @@
           </div>
           <!-- <div class="card-wrapper"> -->
             <div class="card-body">
-            <div class="card-wrapper no-overflow">
-            <canvas height="150" id="worst-performing-chart"></canvas>
+            <div class="card-wrapper">
+            <div id="worst-performing-chart" style="height: 250px;"></div>
             </div>
             </div>
           <!-- </div> -->
@@ -232,7 +547,7 @@
 <script>
     let venue_array = [];
     let loaded_venues = {{$data['venuesJson']}};
-    let liveJam = {};
+    var liveJam = {};
     liveJam.initialize = (callback) => {
       $.getScript('https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js', () => {
         let config = {
@@ -255,6 +570,8 @@
           venue_array.push(db.collection(v.id));
         });
 
+        loadBillboardWidgets();
+        loadVenueWidgets();
 
 
         callback();
@@ -333,12 +650,12 @@
                 if (doc.data() !== undefined) {
                   
                   // console.log(doc.data().customers_in_store_today)
-                  debugger;
+                  // debugger;
                   return {label: (venue.friendly_brandname !== null ? (`${venue.friendly_brandname} ${venue.sitename.split(' ')[1]}`) : venue.sitename), value: doc.data().customers_in_store_today};
                 }
                 else {
                   return {label: (venue.friendly_brandname !== null ? (`${venue.friendly_brandname} ${venue.sitename.split(' ')[1]}`) : venue.sitename), value: 0}; //running_total += 0;
-                }
+                } 
                   
               })
           )
@@ -364,48 +681,87 @@
                         }
             })
             .ToArray();
-  
-        
-          let test_data = liveJam.graphSerializer(all_venues).slice(0,5);
+            
+      all_venues.sort(function(a,b){return parseFloat(a.y) - parseFloat(b.y)}).reverse;
+        let top_venues = all_venues.slice(0).slice(-5);
+        let bottom_venues = all_venues.slice(0).slice(0,5);
 
-      
-        let top_venues = liveJam.orderAndSortData(all_venues);
-        let canvas = document.getElementById('best-performing-chart');
-        let ctx = canvas.getContext("2d");
-        var myBarChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: top_venues.labels.slice(0).slice(-5),
-              datasets: [{
-                  label: '# of Sessions',
-                  data: top_venues.data.slice(0).slice(-5),
-                  borderColor: "green",
-                  backgroundColor: "rgba(55,188,155,1)"
-                }]
-              },
-              options: global_chart_options
+        am4core.ready(function() {
+          am4core.useTheme(am4themes_animated);
+          renderChart('best-performing-chart', '# of Sessions', top_venues);
+          renderChart('worst-performing-chart', '# of Sessions', bottom_venues);
         });
+
+
+// debugger;
+
+        // let canvas = document.getElementById('best-performing-chart');
+        // let ctx = canvas.getContext("2d");
+        // var myBarChart = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: {
+        //       labels: top_venues.labels.slice(0).slice(-5),
+        //       datasets: [{
+        //           label: '# of Sessions',
+        //           data: top_venues.data.slice(0).slice(-5),
+        //           borderColor: "green",
+        //           backgroundColor: "rgba(55,188,155,1)"
+        //         }]
+        //       },
+        //       options: global_chart_options
+        // });
         //WORST
-        canvas = document.getElementById('worst-performing-chart');
-        ctx = canvas.getContext("2d");
-        var myBarChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: top_venues.labels.slice(0).slice(0,5),
-              datasets: [{
-                  label: '# of Sessions',
-                  data: top_venues.data.slice(0).slice(0,5),
-                  borderColor: "red",
-                  backgroundColor: "rgba(236,33,33,1)"
-                }]
-              },
-              options: global_chart_options
-        });
+        // canvas = document.getElementById('worst-performing-chart');
+        // ctx = canvas.getContext("2d");
+        // var myBarChart = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: {
+        //       labels: top_venues.labels.slice(0).slice(0,5),
+        //       datasets: [{
+        //           label: '# of Sessions',
+        //           data: top_venues.data.slice(0).slice(0,5),
+        //           borderColor: "red",
+        //           backgroundColor: "rgba(236,33,33,1)"
+        //         }]
+        //       },
+        //       options: global_chart_options
+        // });
 
        })
       
       
 
+    }
+
+    function renderChart(id, series_name, data) {
+      var chart = am4core.create(id, am4charts.XYChart);
+      chart.data = data;
+
+      var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+      categoryAxis.dataFields.category = "x";
+      categoryAxis.renderer.grid.template.location = 0;
+      categoryAxis.renderer.minGridDistance = 30;
+
+      categoryAxis.renderer.labels.template.adapter.add("dy", function(dy, target) {
+        if (target.dataItem && target.dataItem.index & 2 == 2) {
+          return dy + 25;
+        }
+        return dy;
+      });
+
+      var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+      // Create series
+      var series = chart.series.push(new am4charts.ColumnSeries());
+      series.dataFields.valueY = "y";
+      series.dataFields.categoryX = "x";
+      series.name = series_name;
+      series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+      series.columns.template.fillOpacity = .8;
+
+      var columnTemplate = series.columns.template;
+      columnTemplate.strokeWidth = 2;
+      columnTemplate.strokeOpacity = 1;
     }
 
     function getIcon(venue, callback) {
@@ -594,8 +950,10 @@
     //         callback(arguments[0]);
     //     })
     // }
+    var active_infowindow = null;
 
     liveJam.initialize(() => {
+      
       liveJam.getVenueData();
       $.each(venues, function(i, venue) {
 
@@ -604,38 +962,48 @@
           venue_count++;
         } else {
           getIcon(venue, function(ico) {
-              marker = new google.maps.Marker({
-                position: new google.maps.LatLng(parseFloat(venue.latitude), parseFloat(venue.longitude)),
-                map: map,
-                icon: ico,
-                venue_id: venue.id
-              });
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(parseFloat(venue.latitude), parseFloat(venue.longitude)),
+              map: map,
+              icon: ico,
+              venue_id: venue.id
+            });
 
               google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
 
-                  let venue_id = marker.venue_id;
-                  let url_parts = window.location.href.split('?');
-                  let filters = '';
-                  let host = `http://${window.location.host}/`;
-                  if (url_parts.length === 2) 
-                    filters = `?${url_parts[1]}`
-                  window.open(`${host}hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${filters}`)
-                  
 
-                  // $('#selected_venue_view').attr('src', `http://hiphub.hipzone.co.za/hipjam_viewvenue/${venue_id}/tracks03.hipzone.co.za${filters}`);                  
-
-                  // $('#selected_venue_view').slideDown('fast')
-                  // $('#selected_venue_view_container').slideDown('fast');
-                  $('#focused_venue').val(venue_id);
-
-                  console.log(`marker clicked with id: ${venue_id}`);
+                  getInfoViewData(marker.venue_id, venue.track_type, function(infoview_content) {
+                      let info_window = new google.maps.InfoWindow({
+                                    content: infoview_content
+                                  });
+                                  info_window.open(map, marker);
+                    });
                 }
               })(marker, i));
+
+              // INFOWINDOW POPUP
+              google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+                return function() {
+                    getInfoViewData(marker.venue_id, venue.track_type, function(infoview_content) {
+                      let info_window = new google.maps.InfoWindow({
+                                    content: infoview_content
+                                  });
+                                  info_window.open(map, marker);
+                                  active_infowindow = info_window;
+                    });
+                }
+              
+              })(marker, i));
+              marker.addListener('mouseout', function() {
+                active_infowindow.close();
+              });
+
+
               venue_count++;
               markers.push(marker)
               if (venue_count === venues.length) {
-                debugger;
+                // debugger;
                 var markerCluster = new MarkerClusterer(map, markers, {
                   imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
                 });
@@ -675,6 +1043,192 @@
 
 
     });
+
+    var current_sensor_data = null;
+    function getInfoViewData(id, type, callback) {
+      let today = new Date().toJSON().slice(0,10);
+      firebase.firestore().collection(id).doc(today).get().then(function(doc) {
+          if (doc.exists) {
+            current_sensor_data = doc.data();
+            if (type === 'billboard') {
+              $.get(`/get_billboard_infoview/${id}`, function(resp) {
+                let info_window = `
+                                    <div>
+                                      <strong>OOH Site Name:</strong> ${resp.site_name} <br />
+                                      <strong>Total Reach:</strong> ${current_sensor_data.customers_in_store_today} <br />
+                                      <strong>Strike Rate:</strong> ${((parseFloat(resp.conversions) / current_sensor_data.customers_in_store_today) * 100).toFixed(2)}% <br />
+                                      <strong>ROI:</strong> R ${resp.roi} <br />
+                                      <strong>CPA:</strong> R ${resp.cpa} <br />
+                                    </div>
+                                  `;
+                  callback(info_window);
+              });
+            } else {
+              $.get(`/get_venue_infoview/${id}`, function(resp) {
+                let info_window = `
+                                  <div>
+                                    <strong>Venue Name:</strong> ${resp.site_name} <br />
+                                    <strong>Total Customers in Store:</strong> ${current_sensor_data.customers_in_store_today} <br />
+                                    <strong>Total Conversions:</strong> ${resp.conversions} <br />
+                                    <strong>Conversion Rate:</strong> ${parseFloat(resp.conversions) / current_sensor_data.customers_in_store_today}% <br />
+                                    <strong>Bounce Rate:</strong> ${Math.round(current_sensor_data.bounce_rate)}% <br />
+                                  </div>
+                                  `;
+                  callback(info_window);
+              });
+            }
+          } else {
+            if (type === 'billboard') {
+              $.get(`/get_billboard_infoview/${id}`, function(resp) {
+                let info_window = `
+                                    <div>
+                                      <strong>OOH Site Name:</strong> ${resp.site_name} <br />
+                                      <strong>Total Reach:</strong> 0 <br />
+                                      <strong>Strike Rate:</strong> 0% <br />
+                                      <strong>ROI:</strong> R 0 <br />
+                                      <strong>CPA:</strong> R 0 <br />
+                                    </div>
+                                  `;
+                  callback(info_window);
+              });
+            } else {
+              $.get(`/get_venue_infoview/${id}`, function(resp) {
+                let info_window = `
+                                  <div>
+                                    <strong>Venue Name:</strong> ${resp.site_name} <br />
+                                    <strong>Total Customers in Store:</strong> 0 <br />
+                                    <strong>Total Conversions:</strong> 0 <br />
+                                    <strong>Conversion Rate:</strong> 0% <br />
+                                    <strong>Bounce Rate:</strong> 0% <br />
+                                  </div>
+                                  `;
+                  callback(info_window);
+              });
+            }
+          }
+      })
+    }
+
+    
+
+    function loadBillboardWidgets() {
+      // CHANGES
+      let sensors = loaded_venues;
+      let dates = getDateArray();
+      let promise_array = [];
+      let conversions = parseInt($('#hf_conversions').val());
+
+      let ooh_total_reach = 0;
+      let ooh_real_time_reach = 0;
+      let ooh_avg_dwell_time = 0; 
+      let ooh_strike_rate = 0; 
+      let ooh_strike_time = 0; 
+      let ooh_strike_distance = 0; 
+      let ooh_potential_sales = 0;
+      let ooh_roi = 0;
+      let ooh_cpa = 0;
+      
+      $.each(sensors, function(i_s, sensor) {
+          if (sensor.track_type === 'billboard') {
+            $.each(dates, function(i_d, date) {
+              promise_array.push(firebase.firestore().collection(sensor.id).doc(date).get().then(function(doc) {
+                if (doc.exists) {
+                  let ooh_data = doc.data();
+                  ooh_total_reach += ooh_data.customers_in_store_today;
+                  ooh_real_time_reach += ooh_data.customers_in_store_now;
+                  ooh_avg_dwell_time += isNaN(ooh_data.average_dwell) ? 0 : ooh_data.average_dwell;
+                }
+              }))
+            });
+          }
+      });
+
+      Promise.allSettled(promise_array).then(([result]) => {
+        $('#real_time_reach').html(ooh_real_time_reach);
+        $('#avg_dwell_time').html(Math.round((ooh_avg_dwell_time / (dates.length * sensors.length)) / 60))
+        $('#strike_rate').html(`${Math.round((conversions / ooh_total_reach) * 100)}%`)
+      });
+    }
+
+    function dump_data(id) {
+      let promise_array = [];
+      let date_array = [];
+      let dates = ['2020-05-01','2020-05-02','2020-05-03','2020-05-04','2020-05-05','2020-05-06','2020-05-07','2020-05-08','2020-05-09','2020-05-10','2020-05-11','2020-05-12',
+      '2020-05-13','2020-05-14','2020-05-15','2020-05-16','2020-05-17','2020-05-18','2020-05-19','2020-05-20','2020-05-21','2020-05-22','2020-05-23','2020-05-24','2020-05-25',
+      '2020-05-26','2020-05-27','2020-05-28','2020-05-29','2020-05-30','2020-05-31',]
+      $.each(dates, function(i_d, date) {
+        promise_array.push(firebase.firestore().collection(id).doc(date).get().then(function(doc) {
+          if (doc.exists) {
+            let ooh_data = doc.data();
+
+            promise_array.push(firebase.firestore().collection(id).doc(date).collection('hourly').get().then(function(col) {
+              let hourly = {hourly: $.map( col.docs, function( d, i ) {
+                return {[d.id]: d.data()}
+              })};
+              // let hourly = {hourly: col.docs.map(d => d.data() )};
+              date_array.push($.extend({},{[date]: ooh_data}, hourly) );
+            }));
+
+            
+          }
+        }))
+      });
+
+      Promise.allSettled(promise_array).then(([result]) => {
+        setTimeout(function() {
+          $('body').html(JSON.stringify({id: id, date_array}));
+        }, 5000)
+        
+      });
+    }
+
+
+    function loadVenueWidgets() {
+      // CHANGES
+      let sensors = loaded_venues;
+      let dates = getDateArray();
+      let promise_array = [];
+      let conversions = parseInt($('#hf_conversions').val());
+      let conversions_today = parseInt($('#hf_conversions_today').val());
+
+      let real_time_customers = 0;
+      let total_customers_in_store = 0;
+      let high_dwell = 0;
+      let avg_time_spent_in_store = 0;
+      let bounces = 0;
+      
+      $.each(sensors, function(i_s, sensor) {
+          if (sensor.track_type !== 'billboard') {
+            $.each(dates, function(i_d, date) {
+              promise_array.push(firebase.firestore().collection(sensor.id).doc(date).get().then(function(doc) {
+                if (doc.exists) {
+                  let venue_data = doc.data();
+                  real_time_customers += venue_data.customers_in_store_now;
+                  total_customers_in_store += venue_data.customers_in_store_today;
+                  high_dwell += (venue_data.high_dwell_customers === undefined ? 0 : venue_data.high_dwell_customers);
+                  avg_time_spent_in_store += venue_data.average_dwell;
+                  bounces += (venue_data.bounces === undefined ? 0 : venue_data.bounces);
+                }
+              }))
+            });
+          }
+      });
+
+      Promise.allSettled(promise_array).then(([result]) => {
+        $('#real_time_customers').html(real_time_customers);
+        $('#total_customers_in_store').html(total_customers_in_store);
+        $('#conversions_today').html(conversions_today);
+        $('#total_conversions').html(conversions);
+        $('#conversion_rate').html(`${ conversions === 0 ? 0 : Math.round((conversions / total_customers_in_store) * 100)}%`);
+        $('#high_dwell_customers').html(high_dwell);
+        $('#avg_time_spent_in_store').html(Math.round((avg_time_spent_in_store / (dates.length * sensors.length)) / 60));
+        $('#bounce_rate').html(`${Math.round((bounces / total_customers_in_store) * 100)}%`);
+        
+      });
+    }
+
+
+    
 
     function getDateArray() {
       let filters = get_presets();

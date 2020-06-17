@@ -98,8 +98,243 @@ class HipjamController extends \BaseController
         return \Response::json($venue);
     }
 
+    public function updateAllSensorStatuses() {
+        $sensors = \Sensor::all();
+        foreach($sensors as $sensor) {
+                $sensor->updateSensorStatus();
+        }
+        $resp = array();
+        $resp['status'] = 'success';
+        return \Response::json($resp);
+    }
+
+    public static function sendMail($to, $subject, $body) {             
+        $data = array();
+        $data['email_text'] = $body;
+
+        $returnVals = \Mail::send('sensor_down_email', $data, function($message) use($to, $subject)
+        {
+            $message->to($to)->subject($subject);
+        });
+
+    }
+
+    public function checkAndSendStatusEmails() {
+        // SELECT GROUP_CONCAT(id SEPARATOR ', ') ids FROM venues where send_alert_emails = 1
+        $venue_ids = \DB::select("SELECT GROUP_CONCAT(id SEPARATOR ', ') ids FROM venues where send_alert_emails = 1")[0]->ids;
+        $sensors = \Sensor::whereRaw('venue_id IN ('.$venue_ids.') AND status != "Online"')->get();
+        $resp = array();
+        foreach($sensors as $sensor) {
+                $venue = \Venue::find($sensor->venue_id);
+                $subject = $venue->sitename.' is offline';
+                $body = $venue->sitename.' ('.$sensor->mac.') has been offline for '.$sensor->lastreportedin;
+
+                if (isset($venue->alert_email_address_1) && $venue->alert_email_address_1 != '') {
+                    \hipjam\HipjamController::sendMail($venue->alert_email_address_1, $subject, $body);
+                }
+                if (isset($venue->alert_email_address_2) && $venue->alert_email_address_2 != '') {
+                    \hipjam\HipjamController::sendMail($venue->alert_email_address_2, $subject, $body);
+                }
+                if (isset($venue->alert_email_address_3) && $venue->alert_email_address_3 != '') {
+                    \hipjam\HipjamController::sendMail($venue->alert_email_address_3, $subject, $body);
+                }
+        }
+        
+        $resp['status'] = 'success';
+        $resp['venues'] = $venue_ids;
+        $resp['sensors'] = $sensors;
+        return \Response::json($resp);
+    }
+
+
+
     /////////////////////// -------- /////////////////////////
 
+
+    public function getBillboardInfoview($id) {
+            $venue = \Venue::find($id);
+            $data = array();
+            $data['avg_basket_value'] = \Brand::find($venue->brand_id)->avg_basket_value;
+            $data['conversions'] = \DB::select("SELECT
+                                                    count(id) total_conversions
+                                                FROM
+                                                    track_seen_mac_address tsma
+                                                    INNER JOIN ( SELECT DISTINCT
+                                                            mac_address mac_addresses_seen_by_venues
+                                                        FROM
+                                                            track_seen_mac_address tsmaINNER
+                                                            INNER JOIN (
+                                                                SELECT
+                                                                    id linked_venue_id
+                                                                FROM
+                                                                    venues iv
+                                                                WHERE
+                                                                    linked_billboard = ".$venue->id.") INQ1 ON INQ1.linked_venue_id = tsmaINNER.venue_id
+                                                            WHERE
+                                                                tsmaINNER.date_seen = CURDATE()) INQ2 ON INQ2.mac_addresses_seen_by_venues = tsma.mac_address
+                                                WHERE
+                                                    tsma.venue_id = ".$venue->id."
+                                                    AND tsma.date_seen = CURDATE()")[0]->total_conversions;
+            $data['potential_sales'] = $data['conversions'] * $data['avg_basket_value'];
+             
+        if ($data['conversions'] != 0) {
+            $data['cpa'] = round(($venue->advertising_cost / 31) / $data['conversions'], 2);
+        } else {
+            $data['cpa'] = 'N/A';
+        }
+
+        if ($venue->advertising_cost && $venue->advertising_cost != 0) {
+            $data['roi'] = round(($data['potential_sales'] / ($venue->advertising_cost / 31)) * 100, 2);
+        } else {
+            $data['roi'] = 'N/A';
+        }       
+
+        $data['site_name'] = $venue->sitename;
+        return \Response::json($data);
+    }
+
+
+
+    public function getVenueInfoview($id) {
+        $venue = \Venue::find($id);
+        $data = array();
+        $data['conversions'] = \DB::select("SELECT
+                                                count(id) total_conversions
+                                            FROM
+                                                track_seen_mac_address tsma
+                                                INNER JOIN ( SELECT DISTINCT
+                                                        mac_address mac_addresses_seen_by_venues
+                                                    FROM
+                                                        track_seen_mac_address tsmaINNER
+                                                        INNER JOIN (
+                                                            SELECT
+                                                                id linked_venue_id
+                                                            FROM
+                                                                venues iv
+                                                            WHERE
+                                                                linked_billboard = ".$venue->id.") INQ1 ON INQ1.linked_venue_id = tsmaINNER.venue_id
+                                                        WHERE
+                                                            tsmaINNER.date_seen = CURDATE()) INQ2 ON INQ2.mac_addresses_seen_by_venues = tsma.mac_address
+                                            WHERE
+                                                tsma.venue_id = ".$venue->id."
+                                                AND tsma.date_seen = CURDATE()")[0]->total_conversions;
+               
+
+    $data['site_name'] = $venue->sitename;
+    return \Response::json($data);
+}
+
+public static function createDateRangeArray($strDateFrom,$strDateTo)
+{
+    // takes two dates formatted as YYYY-MM-DD and creates an
+    // inclusive array of the dates between the from and to dates.
+
+    // could test validity of dates here but I'm already doing
+    // that in the main script
+
+    $aryRange=array();
+
+    $iDateFrom=mktime(1,0,0,substr($strDateFrom,5,2),     substr($strDateFrom,8,2),substr($strDateFrom,0,4));
+    $iDateTo=mktime(1,0,0,substr($strDateTo,5,2),     substr($strDateTo,8,2),substr($strDateTo,0,4));
+
+    if ($iDateTo>=$iDateFrom)
+    {
+        array_push($aryRange,date('Y-m-d',$iDateFrom)); // first entry
+        while ($iDateFrom<$iDateTo)
+        {
+            $iDateFrom+=86400; // add 24 hours
+            array_push($aryRange,date('Y-m-d',$iDateFrom));
+        }
+    }
+    return $aryRange;
+}
+
+public function getIds() {
+    $type = \Input::get('type');
+    $data = array();
+    $brands = \DB::select("SELECT GROUP_CONCAT(id) brand_ids FROM brands where parent_brand = 165")[0]->brand_ids;
+    if ($type == 'ooh') {
+        $data['ids'] = \DB::select("SELECT GROUP_CONCAT(id SEPARATOR ',') ids FROM venues where track_type = 'billboard' AND brand_id IN (".$brands.")")[0]->ids;
+    } else {
+        $data['ids'] = \DB::select("SELECT GROUP_CONCAT(id SEPARATOR ',') ids FROM venues where track_type != 'billboard' AND brand_id IN (".$brands.") ")[0]->ids;
+    }
+    return \Response::json($data['ids']);
+}
+
+public function getIdsWithName() {
+    $type = \Input::get('type');
+    $data = array();
+    $brands = \DB::select("SELECT GROUP_CONCAT(id) brand_ids FROM brands where parent_brand = 165")[0]->brand_ids.',165';
+    if ($type == 'ooh') {
+        $data['ids'] = \DB::select("SELECT id, IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1))) name FROM venues WHERE track_type = 'billboard' AND brand_id IN (".$brands.")");
+    } else {
+        $data['ids'] = \DB::select("SELECT id, IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1))) name FROM venues WHERE track_type != 'billboard' AND brand_id IN (".$brands.")");
+    }
+    return \Response::json($data['ids']);
+}
+
+public function getOohSiteData() {
+    $date_from = \Input::get('date_from');
+    $date_to = \Input::get('date_to');
+    $span = \Input::get('span');
+    $view = \Input::get('view');
+
+    $period = \hipjam\HipjamController::createDateRangeArray($date_from,$date_to);
+    
+
+    $all = \Venue::all();
+    $billboards = \Venue::whereRaw('track_type = "billboard"')->get();
+    $raw = array();
+    $formatted_data = array();
+    $master_array = array();
+
+    foreach ($all as $venue) {
+        if ($venue->track_type == 'venue' && isset($venue->linked_billboard) && $venue->linked_billboard != 0) {
+            $conversions = \DB::select("SELECT 
+                                            tsma.date_seen,
+                                            count(*) total_conversions
+                                        FROM
+                                            track_seen_mac_address tsma
+                                        INNER JOIN (
+                                            SELECT 
+                                                date_seen,
+                                                mac_address
+                                            FROM 
+                                                track_seen_mac_address
+                                            WHERE 
+                                                date_seen BETWEEN '".$date_from."' AND '".$date_to."'
+                                            AND venue_id = ".$venue->linked_billboard." -- bbid
+                                        ) seen_by_billboard ON tsma.mac_address = seen_by_billboard.mac_address
+                                        WHERE tsma.venue_id = ".$venue->id." -- vid
+                                        AND tsma.date_seen BETWEEN '".$date_from."' AND '".$date_to."'
+                                        AND seen_by_billboard.date_seen < tsma.date_seen GROUP BY tsma.date_seen");
+                array_push($raw,$conversions);
+        }
+    }
+
+    foreach ($period as $value) {
+        $formatted_data['date'] = $value;
+        foreach ($billboards as $billboard) {
+            if (count($raw) != 0) {
+                foreach ($raw as $metrics) {
+                    foreach ($metrics as $conv) {
+                        if ($conv->date_seen == $value) {
+                            $formatted_data[$billboard->id.'_conversions'] = $conv->total_conversions;
+                        } else {
+                            $formatted_data[$billboard->id.'_conversions'] = 0;
+                        }
+                    }
+                } 
+            } else {
+                // $formatted_data[$billboard->id.'_conversions'] = 0;
+            }
+              
+        }
+        array_push($master_array, $formatted_data);
+    }
+    return \Response::json($master_array);
+}
+    
 
 
     /////////////////////// Venues /////////////////////////
@@ -187,6 +422,7 @@ class HipjamController extends \BaseController
         $venue = new \Venue();
         // $venues = $venue->getVenuesForUser('hipjam', 1);
         $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
+        // $data['billboards'] =  $venues::where('track_type', '=', 'billboard');
 
         foreach ($venues as $venue) {
             if ($venue->ap_active == 0) {
@@ -249,13 +485,132 @@ class HipjamController extends \BaseController
 
         $data['testi'] = $brand_type_filter;
         
-        // if ($brand_id_filter != null && $brand_id_filter != 'global') {
-            
-        // }
+    // FILTERS
+    $date_from = \Input::get('date_from');
+    $date_to = \Input::get('date_to');
+
+    if ($date_from == null) {
+        $date_from = date('Y-m-d',strtotime('last monday'));
+    }
+
+    if ($date_to == null) {
+        $date_to = date('Y-m-d',strtotime('next sunday'));
+    }
+
+    $billboards = \Venue::where('track_type', '=', 'billboard')->pluck('id');
+    $venues_with_billboards = \Venue::where('linked_billboard', 'in', $billboards)->pluck('id');
+    // ADDITIONAL METRICS
+    $data['conversions'] = \DB::select("SELECT
+                                            count(id) total_conversions
+                                        FROM
+                                            track_seen_mac_address tsma
+                                            INNER JOIN ( SELECT DISTINCT
+                                                    mac_address mac_addresses_seen_by_venues
+                                                FROM
+                                                    track_seen_mac_address tsmaINNER
+                                                    INNER JOIN (
+                                                        SELECT
+                                                            id linked_venue_id
+                                                        FROM
+                                                            venues iv
+                                                        WHERE
+                                                            linked_billboard IN (".$billboards.")) INQ1 ON INQ1.linked_venue_id = tsmaINNER.venue_id
+                                                    WHERE
+                                                        tsmaINNER.date_seen BETWEEN '$date_from'
+                                                        AND '$date_to') INQ2 ON INQ2.mac_addresses_seen_by_venues = tsma.mac_address
+                                        WHERE
+                                            tsma.venue_id IN (".$billboards.")
+                                            AND tsma.date_seen BETWEEN '$date_from'
+                                            AND '$date_to'")[0]->total_conversions;
+
+    $data['conversions_today'] = \DB::select("SELECT
+                                            count(id) total_conversions
+                                        FROM
+                                            track_seen_mac_address tsma
+                                            INNER JOIN ( SELECT DISTINCT
+                                                    mac_address mac_addresses_seen_by_venues
+                                                FROM
+                                                    track_seen_mac_address tsmaINNER
+                                                    INNER JOIN (
+                                                        SELECT
+                                                            id linked_venue_id
+                                                        FROM
+                                                            venues iv
+                                                        WHERE
+                                                            linked_billboard IN (".$billboards.")) INQ1 ON INQ1.linked_venue_id = tsmaINNER.venue_id
+                                                    WHERE
+                                                        tsmaINNER.date_seen = CURDATE()) INQ2 ON INQ2.mac_addresses_seen_by_venues = tsma.mac_address
+                                        WHERE
+                                            tsma.venue_id IN (".$billboards.")
+                                            AND tsma.date_seen  = CURDATE()")[0]->total_conversions;
         
+    $data['strike_time'] = \DB::select("
+                                            SELECT 
+                                                ROUND(AVG(time_taken_to_convert) / 60,2) minutes,
+                                                ROUND(AVG(time_taken_to_convert) / 3600,2) hours,
+                                                ROUND(AVG(time_taken_to_convert) / 86400,2) days
+                                            FROM (
+                                                SELECT 
+                                                    TIMESTAMPDIFF(SECOND, seen_by_billboard, seen_by_venue) time_taken_to_convert
+                                                FROM (
+                                                    SELECT
+                                                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id  IN (".$billboards.") AND date_seen = INQ.date_seen) seen_by_billboard,
+                                                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id IN (".$venues_with_billboards.") AND date_seen = INQ.date_seen) seen_by_venue
+                                                    FROM (
+                                                        SELECT 
+                                                            count(*) seen_times, 
+                                                            mac_address,
+                                                            date_seen
+                                                        FROM 
+                                                            track_seen_mac_address tsma
+                                                        WHERE 
+                                                            (venue_id IN (".$billboards.") OR venue_id IN (".$venues_with_billboards.")) 
+                                                        AND (date_seen BETWEEN '$date_from' AND '$date_to')
+                                                        GROUP BY mac_address,date_seen HAVING seen_times > 1
+                                                    ) INQ
+                                                ) INQ2 HAVING time_taken_to_convert > 0
+                                            ) INQ3
+                                            ");
 
+    $data['strike_distance'] = \DB::select("
+                                            SELECT 
+                                                ROUND(IFNULL(AVG( 6371 * acos (cos ( radians(billboard_latitude))
+                                                                * cos( radians( venue_latitude ) )
+                                                                * cos( radians( venue_logitude ) - radians(billboard_longitude) )
+                                                                + sin ( radians(billboard_latitude) )
+                                                                * sin( radians( venue_latitude ) )
+                                                                )
+                                                            ), 0), 2) as distance
+                                            FROM 
+                                                (
+                                                    SELECT 
+                                                        (SELECT latitude FROM venues WHERE id = v.linked_billboard) as billboard_latitude,
+                                                        (SELECT longitude FROM venues WHERE id = v.linked_billboard) as billboard_longitude,
+                                                        latitude as venue_latitude,
+                                                        longitude as venue_logitude
+                                                    FROM 
+                                                        venues v
+                                                    WHERE 
+                                                        linked_billboard in (".$billboards.")
+                                                ) as inq
+                                        ");     
+                                        
+        $data['avg_basket_value'] = \DB::select("SELECT sum(avg_basket_value) total_avg_basket_value FROM brands WHERE id = 165 OR parent_brand = 165")[0]->total_avg_basket_value;
+        $data['potential_sales'] = $data['conversions'] * $data['avg_basket_value'];
+        $data['advertising_cost'] = \DB::select("SELECT sum(advertising_cost) adv_cost FROM venues WHERE id IN (".$billboards.")")[0]->adv_cost;
 
+        if ($data['conversions'] != 0) {
+            $data['cpa'] = round($data['advertising_cost'] / $data['conversions'], 2);
+        } else {
+            $data['cpa'] = 'N/A';            
+        }
 
+        if ($venue->advertising_cost && $venue->advertising_cost != 0) {
+            $data['roi'] = round(($data['potential_sales'] / $data['advertising_cost']) * 100, 2);
+        } else {
+            $data['roi'] = 'N/A';
+        }
+        
 
 
         if ($json) {
@@ -701,8 +1056,8 @@ class HipjamController extends \BaseController
 
         $sanitized_sitename = \Venue::find($id)->sitename;
         $split_for_count = explode(' ', $sanitized_sitename);
-            $brand_concat = substr($split_for_count[0], 0, 8);
-            $venue_concat = substr($split_for_count[1], 0, 10);
+            $brand_concat = substr($split_for_count[0], 0, 10);
+            $venue_concat = substr($split_for_count[1], 0, 15);
         if ($sensors->count() == 0) {
             $data['sensor_name'] = $brand_concat.$venue_concat;
         } else {
@@ -759,8 +1114,11 @@ class HipjamController extends \BaseController
     }
 
     public function venueConfig($id) {
+        $obj = [];
         $venue =  \Venue::find($id);
-        return \Response::json($venue);
+        $obj['venue'] = $venue;
+        $obj['brand'] = $venue->brand;
+        return \Response::json($obj);
     }
 
     public function linkedBillboards() {
