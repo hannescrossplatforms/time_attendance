@@ -33,7 +33,6 @@ $(document).on('click', '#submitdaterange', function (event) {
 
 });
 
-//Hannes hier
 $(document).on('change', '#brandreportperiod, #brandlist', function () {
 
   if ($('#brandlist option:selected').data('userdatabtn')) {
@@ -204,7 +203,6 @@ function processBrandReports() {
 
   $("#brandavguptime").html("Loading...");
 
-  //Hannes hier
 
   $.ajax({
     type: "GET",

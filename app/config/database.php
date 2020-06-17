@@ -140,6 +140,16 @@ return array(
 			'prefix'    => '',
 		),
 
+		'radius_newspot' => array(
+			'driver'    => 'mysql',
+			'host'      => '13.245.28.177',
+			'database'  => 'radius',
+			'username'  => 'root',
+			'password'  => 'H1pz0n3P@ss',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
 
 		'tmpspot' => array(
 			'driver'    => 'mysql',

@@ -1079,7 +1079,7 @@ private function getActivateRules() {
             return \Redirect::to('hipwifi_addserver')->withErrors($validator)->withInput();
 
         } else {  
-
+            // Hannes hier
             $server->hostname = \Input::get('hostname');
             $server->notes = \Input::get('notes');
             $server->remotedb_id = \Input::get('remotedb_id');
@@ -1685,7 +1685,6 @@ public function activateVenueSave()
         foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
         $data['bypass'] = array();
 
-        //hannes hier
         for ($i=1; $i <= 10; $i++) {
             $mac = 'bypassmac'.$i;
             $comment = 'bypasscomment'.$i;
@@ -1743,7 +1742,6 @@ public function activateVenueSave()
     
     public function editVenueSave()
     {
-        //Hannes hier
         $utils = new \Utils();
         $id = \Input::get('id');
         $servers = \Server::All();
@@ -2172,7 +2170,6 @@ public function activateVenueSave()
 
     public function deletemacbypass($id, $bypassmac)
     {
-        //Hannes hier
         $venue = \Venue::find($id);
         $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
                                         $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];

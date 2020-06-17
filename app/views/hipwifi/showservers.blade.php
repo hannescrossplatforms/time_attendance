@@ -57,7 +57,7 @@
     //   console.log("begin");
     //     showSelectedServers();
     // });
-
+    addDeleteFunctionality();
 
     serversJason = {{ $data['serversJason'] }};
 
@@ -129,9 +129,12 @@
 
         table = beginTable + rows + endTable;
         $( "#serverTable" ).html( table );
+
+        addDeleteFunctionality();
       }
 
-      $(document).delegate('.btn-delete', 'click', function() {
+      function addDeleteFunctionality(){
+        $(document).delegate('.btn-delete', 'click', function() {
       var serverId = this.getAttribute('data-serverid');
       swal({
         title: "Are you sure?",
@@ -156,6 +159,9 @@
           });
         });
       });
+      }
+
+      
 	
 
 
