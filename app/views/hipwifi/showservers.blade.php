@@ -58,6 +58,8 @@
     //     showSelectedServers();
     // });
 
+    addDeleteFunctionality();
+
 
     serversJason = {{ $data['serversJason'] }};
 
@@ -131,15 +133,11 @@
         $( "#serverTable" ).html( table );
       }
 
-      addDeleteFunctionality();
       function addDeleteFunctionality(){
-
         $(document).delegate('.btn-delete', 'click', function() {
           var serverId = this.getAttribute('data-serverid');
           deleteServer(serverId);
         });
-
-        
       }
 
       function deleteServer(serverId){
@@ -155,9 +153,7 @@
         })
         .then((willDelete) => {
           if (willDelete) {
-            
             swal("Deleted!", "Server has been deleted!", "success");
-            debugger;
           $.ajax({
             type: "GET",
             dataType: 'json',
