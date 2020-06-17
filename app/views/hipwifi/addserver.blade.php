@@ -85,7 +85,6 @@
   
     $(function() {
       @if($edit)
-      alert("changed");
         showBrandsForDatabase({{ $data['database']->id }});
       @else
         $('#databaselist').change();
@@ -98,7 +97,7 @@
     });
 
     function showBrandsForDatabase(remotedb_id) {
-
+      alert('change');
       $.ajax({
         type: "GET",
         dataType: 'json',
