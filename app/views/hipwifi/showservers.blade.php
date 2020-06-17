@@ -167,16 +167,23 @@
       //     });
       //   });
       // });
-	
+  
+      
+      // title: "Are you sure ??",
+      //       text: 'asdf', 
+      //       icon: "warning",
+      //       buttons: true,
+      //       dangerMode: true,
       function deleteServer(){
         swal({
           title: "Are you sure?",
-        text: "Are you sure you want to delete this server?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: '#DD6B55',
-        confirmButtonText: 'Yes, delete it!',
-        closeOnConfirm: false
+          text: "Are you sure you want to delete this server?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: 'Yes, delete it!',
+          closeOnConfirm: false
         })
         .then((willDelete) => {
           if (willDelete) {
