@@ -169,18 +169,22 @@
       // });
 	
       function testSwal(){
-          swal({
-          title: "Are you sure?",
-          text: "Are you sure you want to delete this brand?",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: '#DD6B55',
-          confirmButtonText: 'Yes, delete it!',
-          closeOnConfirm: false,
-          //closeOnCancel: false
-        },
-        function(){
-          swal("Deleted!", "Brand has been deleted!", "success");
+        swal({
+            title: "Are you sure ??",
+            text: 'asdf', 
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Poof! Your imaginary file has been deleted!", {
+              icon: "success",
+            });
+            
+          } else {
+            swal("Your imaginary file is safe!");
+          }
         });
       }
 
