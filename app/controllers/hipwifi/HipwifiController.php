@@ -493,9 +493,15 @@ private function getActivateRules() {
 
             $record = $this->constructNastypeRecord($type, $brand);
             $connection = $brand->remotedb->dbconnection;
+
+
             \Log::info("HipwifiController: KOM 1");
             \Log::info("HipwifiController: connection = $connection");
             \Log::info("HipwifiController: KOM 2");
+
+
+
+            
             \DB::connection($connection)->table("nastype")->insert($record);
             \Log::info("HipwifiController: KOM 3");
             $brand->insertUserGroupInHipWifi($brand->code, $brand->limit_type, $brand->limit, $connection);

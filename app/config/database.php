@@ -118,12 +118,23 @@ return array(
 			'prefix'    => '',
 		),
 
+		// 'radius_newspot' => array(
+		// 	'driver'    => 'mysql',
+		// 	'host'      => 'newspot.hipzone.co.za',
+		// 	'database'  => 'radius',
+		// 	'username'  => 'hipzone',
+		// 	'password'  => 'aRhpf3aTu',
+		// 	'charset'   => 'utf8',
+		// 	'collation' => 'utf8_unicode_ci',
+		// 	'prefix'    => '',
+		// ),
+
 		'radius_newspot' => array(
 			'driver'    => 'mysql',
-			'host'      => 'newspot.hipzone.co.za',
+			'host'      => '13.245.28.177',
 			'database'  => 'radius',
 			'username'  => 'hipzone',
-			'password'  => 'aRhpf3aTu',
+			'password'  => 'H1pz0n3P@ss',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -135,17 +146,6 @@ return array(
 			'database'  => 'radius',
 			'username'  => 'hipzone',
 			'password'  => 'aRhpf3aTu',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-		),
-
-		'radius_newspot' => array(
-			'driver'    => 'mysql',
-			'host'      => '13.245.28.177',
-			'database'  => 'radius',
-			'username'  => 'root',
-			'password'  => 'H1pz0n3P@ss',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
