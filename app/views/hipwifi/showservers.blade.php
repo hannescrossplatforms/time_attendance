@@ -157,6 +157,7 @@
           if (willDelete) {
             
             swal("Deleted!", "Server has been deleted!", "success");
+            debugger;
           $.ajax({
             type: "GET",
             dataType: 'json',
