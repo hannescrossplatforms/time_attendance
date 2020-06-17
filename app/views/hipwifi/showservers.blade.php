@@ -117,7 +117,7 @@
                       <td> ' + value["brandName"]  + '</td>\n\
                       <td> ' + value["countryName"]  + '</td>\n\
                       <td><a href="{{ url('hipwifi_editserver'); }}/' + value["serverId"] + '" class="btn btn-info btn-sm">edit</a>\n\
-                          <a class="btn btn-default btn-danger btn-sm" data-serverid = ' + value["serverId"] + ' href="#">delete</a>\n\
+                          <a class="btn btn-default btn-danger btn-sm btn-delete" data-serverid = ' + value["serverId"] + ' href="#">delete</a>\n\
                       </td>\n\
                     </tr>\n\
                     ';
@@ -135,6 +135,8 @@
 
       function addDeleteFunctionality(){
         $(document).delegate('.btn-delete', 'click', function() {
+
+          debugger;
       var serverId = this.getAttribute('data-serverid');
       swal({
         title: "Are you sure?",
