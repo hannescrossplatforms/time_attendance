@@ -97,7 +97,7 @@
     });
 
     function showBrandsForDatabase(remotedb_id) {
-      alert('change');
+      
       $.ajax({
         type: "GET",
         dataType: 'json',
