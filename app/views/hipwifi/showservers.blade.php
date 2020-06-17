@@ -138,32 +138,46 @@
 
           debugger;
       var serverId = this.getAttribute('data-serverid');
-      swal({
-        title: "Are you sure?",
-        text: "Are you sure you want to delete this server?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: '#DD6B55',
-        confirmButtonText: 'Yes, delete it!',
-        closeOnConfirm: false,
-      },
-        function(){
-          swal("Deleted!", "Server has been deleted!", "success");
-          $.ajax({
-            type: "GET",
-            dataType: 'json',
-            contentType: "application/json",
-            url: "{{ url('hipwifi_deleteserver/" + serverId + "'); }}",
-            success: function(servers) {
-              var serversjson = JSON.parse(servers); 
-              showServersTable(serversjson);
-            }
-          });
-        });
-      });
+
+      testSwal();
+      // swal({
+      //   title: "Are you sure?",
+      //   text: "Are you sure you want to delete this server?",
+      //   type: "warning",
+      //   showCancelButton: true,
+      //   confirmButtonColor: '#DD6B55',
+      //   confirmButtonText: 'Yes, delete it!',
+      //   closeOnConfirm: false,
+      // },
+        // function(){
+        //   swal("Deleted!", "Server has been deleted!", "success");
+        //   $.ajax({
+        //     type: "GET",
+        //     dataType: 'json',
+        //     contentType: "application/json",
+        //     url: "{{ url('hipwifi_deleteserver/" + serverId + "'); }}",
+        //     success: function(servers) {
+        //       var serversjson = JSON.parse(servers); 
+        //       showServersTable(serversjson);
+        //     }
+        //   });
+        // });
+      // });
       }
 
-      
+      function testSwal(){
+        swal({   
+				title: "Success",  
+				type: "success", 
+				text: "We have sent {email address} an email with reset instructions.",   
+				confirmButtonText: "Return to login"
+				}, 
+				
+				function(isConfirm){   if (isConfirm) {  
+					
+				} 
+				});
+      }
 	
 
 
