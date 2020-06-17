@@ -85,6 +85,7 @@
   
     $(function() {
       @if($edit)
+      alert("changed");
         showBrandsForDatabase({{ $data['database']->id }});
       @else
         $('#databaselist').change();
