@@ -163,7 +163,8 @@
         //   });
         // });
       // });
-      }
+      });
+      )
 
       function testSwal(){
         swal({   
