@@ -136,7 +136,7 @@
 
         $(document).delegate('.btn-delete', 'click', function() {
           debugger;
-          testSwal();
+          deleteServer();
         });
 
         
@@ -168,22 +168,32 @@
       //   });
       // });
 	
-      function testSwal(){
+      function deleteServer(){
         swal({
-            title: "Are you sure ??",
-            text: 'asdf', 
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
+          title: "Are you sure?",
+        text: "Are you sure you want to delete this server?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Yes, delete it!',
+        closeOnConfirm: false
         })
         .then((willDelete) => {
           if (willDelete) {
-            swal("Poof! Your imaginary file has been deleted!", {
-              icon: "success",
-            });
+            swal("Deleted!", "Server has been deleted!", "success");
+          $.ajax({
+            type: "GET",
+            dataType: 'json',
+            contentType: "application/json",
+            url: "{{ url('hipwifi_deleteserver/" + serverId + "'); }}",
+            success: function(servers) {
+              var serversjson = JSON.parse(servers); 
+              showServersTable(serversjson);
+            }
+          });
             
           } else {
-            swal("Your imaginary file is safe!");
+            swal("The server has not been deleted!");
           }
         });
       }
