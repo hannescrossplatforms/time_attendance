@@ -131,6 +131,7 @@
         $( "#serverTable" ).html( table );
       }
 
+      addDeleteFunctionality();
       function addDeleteFunctionality(){
 
         $(document).delegate('.btn-delete', 'click', function() {
