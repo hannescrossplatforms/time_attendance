@@ -187,6 +187,7 @@
         })
         .then((willDelete) => {
           if (willDelete) {
+            var serverId = this.getAttribute('data-serverid');
             swal("Deleted!", "Server has been deleted!", "success");
           $.ajax({
             type: "GET",
