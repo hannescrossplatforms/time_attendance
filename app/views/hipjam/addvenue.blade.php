@@ -142,8 +142,15 @@ if ($data["is_activation"]) {
                             @endif
                           </div>
                         </div>
+                        @if ($data['venue']->track_slug == 'SBOutdoorMeadowdaleR24' || 
+                        $data['venue']->track_slug == 'SBOutdoorMichelleAve' ||
+                        $data['venue']->track_slug == 'PWC' || 
+                        $data['venue']->track_slug == 'SBOutdoorRandViewCentre' || 
+                        $data['venue']->track_slug == 'SBOutdoorSephakoMakgathoDr' || 
+                        $data['venue']->track_slug == 'SBOutdoorStoneridgeDrive')
                         <div class="col-6">
                         </div>
+                        @endif
 
                         <div class="col-6">
                           <div class="form-group">
