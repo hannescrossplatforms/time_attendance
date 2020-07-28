@@ -114,8 +114,6 @@ if ($data["is_activation"]) {
 
                         <div class="col-6">
                           <div class="form-group">
-                          
-
                             @if ($data['venue']->track_slug == 'SBOutdoorMeadowdaleR24')
                             <label for="track_slug">Reset Board UUID</label>
                             <input disabled id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="c37e6ff3-d3ed-4e63-8732-aeb26b856799">
@@ -138,6 +136,29 @@ if ($data["is_activation"]) {
                           </div>
                         </div>
 
+                        <div class="col-6">
+                          <div class="form-group">
+                          @if ($data['venue']->track_slug == 'SBOutdoorMeadowdaleR24')
+                            <label for="track_slug">Reset Board Auth Key</label>
+                            <input disabled id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="0b8926df-7a59-4b4c-95ae-2d4d6b40c40d">
+                            @elseif ($data['venue']->track_slug == 'SBOutdoorMichelleAve')
+                            <label for="track_slug">Reset Board Auth Key</label>
+                            <input disabled id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="2f352d4f-d189-40a9-8477-4782a2fcb13a">
+                            @elseif ($data['venue']->track_slug == 'PWC')
+                            <label for="track_slug">Reset Board Auth Key</label>
+                            <input disabled id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="968357ac-102b-4e99-91cf-d151e180556b">
+                            @elseif ($data['venue']->track_slug == 'SBOutdoorRandViewCentre')
+                            <label for="track_slug">Reset Board Auth Key</label>
+                            <input disabled id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="59dc065f-788c-47d9-8a9c-519f2e035701">
+                            @elseif ($data['venue']->track_slug == 'SBOutdoor SephakoMakgathoDr')
+                            <label for="track_slug">Reset Board Auth Key</label>
+                            <input disabled id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="78bc98fa-86ab-4854-8c78-8f0869faceff">
+                            @elseif ($data['venue']->track_slug == 'SBOutdoorStoneridgeDrive')
+                            <label for="track_slug">Reset Board Auth Key</label>
+                            <input disabled id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="b5763e8d-3e28-40c8-9af9-e48d540cd9a7">
+                            @endif
+                          </div>
+                        </div>
                         <div class="col-6">
                           <div class="form-group">
                           @if ($data['venue']->track_slug == 'SBOutdoorMeadowdaleR24')
