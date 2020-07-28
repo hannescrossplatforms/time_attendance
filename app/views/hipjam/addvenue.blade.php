@@ -101,7 +101,7 @@ if ($data["is_activation"]) {
 
                         <div class="col-6">
                           <div class="form-group">
-                            <label for="billboard_retail">OOH Site / Retail</label>
+                            <label for="billboard_retail">OOH Site / Retailss</label>
                             <select class="form-control" name="track_type" id="track_type" data-default-selected="{{$data['venue']->track_type}}">
                               <option value="venue">Venue</option>
                               <option value="billboard">OOH Site</option>
