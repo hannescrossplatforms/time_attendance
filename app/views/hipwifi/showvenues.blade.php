@@ -210,8 +210,8 @@
       //   });
       // });
 	
-      $(document).delegate('.btn-disable', 'click', function() {
-      var venueId = this.getAttribute('data-venueid');
+    $(document).on('click', '.btn-disable', function () {
+      var venueId = $(this).data('venueid');
       swal({
         title: "Are you sure?",
         text: "Are you sure you want to disable this venue?",
@@ -220,22 +220,23 @@
         confirmButtonColor: '#DD6B55',
         confirmButtonText: 'Yes, disable it!',
         closeOnConfirm: false,
-      },
-        function(){
-          swal("Disabled!", "Venue has been disabled!", "success");
-          $.ajax({
-            type: "GET",
-            dataType: 'json',
-            contentType: "application/json",
-            url: "{{ url('hipwifi_disablevenue/" + venueId + "'); }}",
-            success: function(venues) {
-              var venuesjson = JSON.parse(venues); 
-              showVenuesTable(venuesjson);
-              buildVenueList();
-            }
-          });
-        });
-      });
+      }).then((willDelete) => {
+          if (willDelete) {
+            swal("Disabled!", "Venue has been disabled!", "success");
+            $.ajax({
+              type: "GET",
+              dataType: 'json',
+              contentType: "application/json",
+              url: "{{ url('hipwifi_disablevenue/" + venueId + "'); }}",
+              success: function(venues) {
+                var venuesjson = JSON.parse(venues); 
+                showVenuesTable(venuesjson);
+                buildVenueList();
+              }
+            });
+          }
+      });  
+    });
 
 
     </script>

@@ -310,6 +310,17 @@ Route::get('hipjam/getWindowconversion','hipjam\HipjamController@getWindowconver
 /*Route::get('hipjam_viewvenue/{id}', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');*/
 Route::get('hipjam_viewvenue/{id}', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');
 Route::get('hipjam_viewvenue/{id}/{name}', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');
+
+// ============================================================================================================================ \\
+// ================================================= NEW VICNITY SPLIT ROUTES ================================================= \\
+// ============================================================================================================================ \\
+Route::any('vicinity/dashboard', array('uses' => 'hipjam\HipjamController@showVicinityDashboard', 'as' => 'hipjam_showvicinitydashboard'))->before('auth');
+
+Route::get('vicinity/view/venue/{id}', array('uses' => 'hipjam\HipjamController@viewVicinityVenue', 'as' => 'hipjam_viewvicinityvenue'))->before('auth');
+Route::get('vicinity/view/venue/{id}/{name}', array('uses' => 'hipjam\HipjamController@viewVicinityVenue', 'as' => 'hipjam_viewvicinityvenue'))->before('auth');
+// ============================================================================================================================ \\
+// ============================================================================================================================ \\
+// ============================================================================================================================ \\
 Route::get('hipjam_viewvenue/{id}/{name}/json', array('uses' => 'hipjam\HipjamController@viewVenueJson', 'as' => 'hipjam_viewvenuejson'))->before('auth');
 Route::get('hipjam_viewvenue', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');
 Route::get('hipjam/chartJsondata','hipjam\HipjamController@chartJsondata');
@@ -340,6 +351,8 @@ Route::get('get_ooh_site_data', array('uses' => 'hipjam\HipjamController@getOohS
 
 Route::get('get_ids', array('uses' => 'hipjam\HipjamController@getIds', 'as' => 'hipjam_get_ids'));
 Route::get('get_ids_with_name', array('uses' => 'hipjam\HipjamController@getIdsWithName', 'as' => 'hipjam_get_ids_with_name'));
+Route::get('get_ids_with_region', array('uses' => 'hipjam\HipjamController@getIdsWithRegion', 'as' => 'hipjam_get_ids_with_region'));
+
 
 
 

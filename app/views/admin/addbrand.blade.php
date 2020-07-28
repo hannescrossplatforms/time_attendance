@@ -131,18 +131,26 @@ $edit = $data["edit"] ;
     
 
     <script>
+    var old_brand_name = $('#brand_name_input').val();
     $(document).on('click', '#admin_add_brand_button', function() {
-      $.post('/admin_check_if_brand_exists', {name: $('#brand_name_input').val()}, function(b) {
-        let brand = JSON.parse(b);
-        if (brand.exists) {
-          $('#brand_name_container').addClass('has-error');
-          $('#brand_already_exists').slideDown('fast');
-        } else {
-          $('#brand_name_container').removeClass('has-error');
-          $('#brand_already_exists').slideUp('fast');
-          $('#mainform').submit();
-        }
-      })
+      var new_brand_name = $('#brand_name_input').val();
+        if (old_brand_name !== new_brand_name) {
+          $.post('/admin_check_if_brand_exists', {name: $('#brand_name_input').val()}, function(b) {
+          let brand = JSON.parse(b);
+          if (brand.exists) {
+            $('#brand_name_container').addClass('has-error');
+            $('#brand_already_exists').slideDown('fast');
+          } else {
+            $('#brand_name_container').removeClass('has-error');
+            $('#brand_already_exists').slideUp('fast');
+            $('#mainform').submit();
+          }
+        })
+      } else {
+        $('#brand_already_exists').slideUp('fast');
+        $('#mainform').submit();
+      }
+      
     });
     </script>
     

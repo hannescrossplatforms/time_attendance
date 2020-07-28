@@ -43,14 +43,14 @@
                 <hr />
                 <div class="row">
                   {{ Form::hidden('id', $data['venue']->id) }}
-                  
+
                     <div class="col-6 text-left">
                       <div class="form-group">
                         <label for="track_slug">Track Venue ID</label>
-                        @if (empty($data['venue']->track_slug))
-                        <input id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="{{$data['venue']->sitename}}" required>
-                        @else
+                        @if ($data['venue']->track_slug)
                         <input id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="{{$data['venue']->track_slug}}" required>
+                        @else
+                        <input id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="{{$data['sitename']}}" required>
                         @endif
                       </div>
                     </div>
@@ -63,8 +63,8 @@
                         </select>
                       </div>
                     </div>
-                  
-                  
+
+
                     <div class="col-md-6 text-left">
                       <div class="form-group">
                         <label for="track_server_location">Vicinity Server ID</label>
@@ -91,7 +91,7 @@
                       </div>
 
                     </div>
-                  
+
                     <div class="col-md-6 text-left">
                       <div class="form-group">
                         <label for="track_ssid">Track WiFi SSID</label>
@@ -112,8 +112,8 @@
                         @endif
                       </div>
                     </div>
-                  
-                  
+
+
                     <div class="col-md-6 text-left">
                       <div class="form-group">
                         <label for="latitude">Venue Latitude (GPS co-ord)</label>
@@ -126,7 +126,7 @@
                         <input id="longitude" type="text" class="form-control" name="longitude" placeholder="e.g. 18.510610" value="{{$data['venue']->longitude}}" required>
                       </div>
                     </div>
-                  
+
                     <div class="col-md-6 text-left">
                       <div class="form-group">
                         <label for="track_password">Time Zone</label>
@@ -152,21 +152,21 @@
                         <input type="checkbox" id="alert_email_check" />
                         <label for="alert_email_check">Send status alert emails</label><br>
                         <small>If this option is selected an email will be sent to the email address below notifying them that the sensor is offline.</small>
-                      </div> 
+                      </div>
 
                       <div class="form-group" id="status_alert_container" style="display:none;">
                         <label for="status_alert_email">Status alert email address</label>
-                        <input type="text" class="form-control" id="status_alert_email" 
+                        <input type="text" class="form-control" id="status_alert_email"
                             name="alert_email_address_1" placeholder="Email Address 1" value="{{$data['venue']->alert_email_address_1}}">
-                        <input type="text" class="form-control" id="status_alert_email_2" 
+                        <input type="text" class="form-control" id="status_alert_email_2"
                         name="alert_email_address_2" placeholder="Email Address 2" value="{{$data['venue']->alert_email_address_2}}">
-                        <input type="text" class="form-control" id="status_alert_email_3" 
+                        <input type="text" class="form-control" id="status_alert_email_3"
                         name="alert_email_address_3" placeholder="Email Address 3" value="{{$data['venue']->alert_email_address_3}}">
-                      </div> 
+                      </div>
 
                       <input type="hidden" id="hf_send_alert_emails" name="send_alert_emails"  value="{{$data['venue']->send_alert_emails}}"/>
                     </div>
-                  
+
 
                   <div class="col-md-6 text-left">
                     <button id="update_vicinity_venue" class="btn btn-primary" type="button"> Submit </button>

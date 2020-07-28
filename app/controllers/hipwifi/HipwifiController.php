@@ -7,9 +7,9 @@ namespace hipwifi;
 
 class HipwifiController extends \BaseController {
 
-    public function showDashboard() 
+    public function showDashboard()
     {
-       
+
         $brand = new \Brand();
         $brands = $brand->getBrandsForUser(\Auth::user()->id);
         $brandnames = array();
@@ -19,11 +19,11 @@ class HipwifiController extends \BaseController {
             array_push($brandnames, $name);
         }
 
-        
+
         $data = array();
         $data['currentMenuItem'] = "Dashboard";
         $checkVenues = new \Mikrotik();
-        $writeVenueStatusToDb = $checkVenues->getAllVenueMonitoringData();      
+        $writeVenueStatusToDb = $checkVenues->getAllVenueMonitoringData();
         $activeVenueCount = array();
         $onlineVenueCount = array();
         $offlineVenueCount = array();
@@ -39,7 +39,7 @@ class HipwifiController extends \BaseController {
             array_push($offlineVenueCount, $offlineVenuesPerBrand);
         }
         $data['mapVenues'] = json_encode($venue_map_data);
-        
+
         return \View::make('hipwifi.showdashboard')->with(['data' => $data, 'brands' => $brandnames, 'count' => $activeVenueCount, 'onlinevenues' => $onlineVenueCount, 'offlinevenues' => $offlineVenueCount]);
     }
 
@@ -52,7 +52,7 @@ class HipwifiController extends \BaseController {
         $brand = new \Brand();
         $wifibrands = $brand->getWifiBrandsForUser(\Auth::user()->id, "active");
 
-        $data['brandsStruct'] = $wifibrands;    
+        $data['brandsStruct'] = $wifibrands;
         $brandsJason = json_encode($wifibrands);
         $data['brandsJason'] = $brandsJason;
 
@@ -80,12 +80,12 @@ class HipwifiController extends \BaseController {
         return \Response::json($brandsJason);
     }
 
-    function getFieldConfiguration($brand = null) 
+    function getFieldConfiguration($brand = null)
     {
 
         $data = array();
 
-        if($brand) { 
+        if($brand) {
 
             $data['register_field'] = $brand->register_field;
 
@@ -122,7 +122,7 @@ class HipwifiController extends \BaseController {
             $data['f8_placeholder'] = $brand->f8_placeholder;
             $data['f8_type'] = $brand->f8_type;
 
-        } else { // Use defaults            
+        } else { // Use defaults
 
             $data['register_field'] = 1;
 
@@ -136,15 +136,15 @@ class HipwifiController extends \BaseController {
 
             $data['f3_display'] = "hide";
             $data['f3_placeholder'] = "";
-            $data['f3_type'] = "voucher";  
-            
+            $data['f3_type'] = "voucher";
+
             $data['f4_display'] = "hide";
             $data['f4_agegate'] = "";
-            $data['f4_type'] = "voucher"; 
+            $data['f4_type'] = "voucher";
 
             $data['f5_display'] = "hide";
             $data['f5_placeholder'] = "";
-            $data['f5_type'] = "facebook"; 
+            $data['f5_type'] = "facebook";
 
             $data['f6_display'] = "hide";
             $data['f6_placeholder'] = "";
@@ -157,7 +157,7 @@ class HipwifiController extends \BaseController {
 
             $data['f8_display'] = "hide";
             $data['f8_placeholder'] = "";
-            $data['f8_type'] = "twitter";            
+            $data['f8_type'] = "twitter";
         }
 
         // Build array lists for select dropdowns - currently not used
@@ -258,7 +258,7 @@ class HipwifiController extends \BaseController {
         return $brand;
     }
 
-    public function constructNastypeRecord($type, $brand) 
+    public function constructNastypeRecord($type, $brand)
     {
 
         error_log("brand->firstname_capture = " . $brand->firstname_capture);
@@ -372,7 +372,7 @@ class HipwifiController extends \BaseController {
     //     $exists = \Brand::where("name", "like", $name)->withTrashed()->first();
     //     if(! is_null($exists)) {
     //         $exists->forceDelete();
-    //     } 
+    //     }
 
     //     $messages = array(
     //         'name.required' => 'The brand name is required',
@@ -390,13 +390,13 @@ class HipwifiController extends \BaseController {
     //     );
 
     //     $rules = array(
-    //         'name'          => 'required|alpha_num_dash_spaces|unique:brands',  
-    //         'code'          => 'required|unique:brands|size:6', 
-    //         'welcome'       => 'required',  
-    //         'ssid'          => 'required',  
-    //         'uru'           => 'url|required',  
-    //         'limit'         => 'required',   
-    //         // 'servercount'   => 'array_not_null',                       
+    //         'name'          => 'required|alpha_num_dash_spaces|unique:brands',
+    //         'code'          => 'required|unique:brands|size:6',
+    //         'welcome'       => 'required',
+    //         'ssid'          => 'required',
+    //         'uru'           => 'url|required',
+    //         'limit'         => 'required',
+    //         // 'servercount'   => 'array_not_null',
     //     );
 
     //     $validator = \Validator::make($input, $rules, $messages);
@@ -404,7 +404,7 @@ class HipwifiController extends \BaseController {
     //         $messages = $validator->messages();
     //         return \Redirect::to('hipwifi_addbrand')->withErrors($validator)->withInput();
 
-    //     } else {        
+    //     } else {
 
     //         $brand = $this->constructBrandRecord($brand, $input, true);
     //         $brand->save();
@@ -450,11 +450,11 @@ private function getErrorActivateMessages() {
 
 private function getActivateRules() {
     return array(
-            'welcome'       => 'required',  
-            'ssid'          => 'required',  
-            'uru'           => 'url|required',  
-            'limit'         => 'required',   
-            // 'servercount'   => 'array_not_null',                       
+            'welcome'       => 'required',
+            'ssid'          => 'required',
+            'uru'           => 'url|required',
+            'limit'         => 'required',
+            // 'servercount'   => 'array_not_null',
         );
 }
 
@@ -479,7 +479,7 @@ private function getActivateRules() {
             $messages = $validator->messages();
             return \Redirect::to('hipwifi_activatebrand/' . $id)->withErrors($validator)->withInput();
 
-        } else {        
+        } else {
 
             $brand = $this->constructBrandRecord($brand, $input, true);
             $brand->save();
@@ -501,7 +501,7 @@ private function getActivateRules() {
 
 
 
-            
+
             \DB::connection($connection)->table("nastype")->insert($record);
             \Log::info("HipwifiController: KOM 3");
             $brand->insertUserGroupInHipWifi($brand->code, $brand->limit_type, $brand->limit, $connection);
@@ -605,7 +605,7 @@ private function getActivateRules() {
         } else {
             $data['data_checked'] = "";
             $data['time_checked'] = "checked";
-        } 
+        }
 
         if($data['brand']->terms_type == "custom") {
             $data['custom_terms_checked'] = "checked";
@@ -613,7 +613,7 @@ private function getActivateRules() {
         } else {
             $data['custom_terms_checked'] = "";
             $data['standard_terms_checked'] = "checked";
-        } 
+        }
 
         $data['field_configuration'] = $this->getFieldConfiguration($data['brand']);
 
@@ -630,7 +630,7 @@ private function getActivateRules() {
         if($data['brand']->userdatabtn) $data['brand']->userdatabtn = "checked";
         if($data['brand']->logindatabtn) $data['brand']->logindatabtn = "checked";
 
-        $data['sm_buttonsize'] = $data['brand']->sm_buttonsize; //Doing this because for some reason couldn't read $data['brand'] in the view 
+        $data['sm_buttonsize'] = $data['brand']->sm_buttonsize; //Doing this because for some reason couldn't read $data['brand'] in the view
 
         $data['firstname_capture'] = $data['brand']->firstname_capture;
         $data['firstname_display'] = $data['brand']->firstname_display;
@@ -668,14 +668,14 @@ private function getActivateRules() {
             // 'servercount.array_not_null' => 'You must select at least one server',
         );
 
-            // 'name'      => 'required|alpha_num_dash_spaces|unique:brands,name,'.$id,  
-            // 'code'      => 'required|size:6|unique:brands,code,'.$id, 
+            // 'name'      => 'required|alpha_num_dash_spaces|unique:brands,name,'.$id,
+            // 'code'      => 'required|size:6|unique:brands,code,'.$id,
         $rules = array(
-            'welcome'   => 'required',  
-            'ssid'      => 'required',  
-            'uru'       => 'required',  
-            'limit'     => 'required',   
-            // 'servercount'    => 'array_not_null',                       
+            'welcome'   => 'required',
+            'ssid'      => 'required',
+            'uru'       => 'required',
+            'limit'     => 'required',
+            // 'servercount'    => 'array_not_null',
         );
 
         $validator = \Validator::make($input, $rules, $messages);
@@ -688,7 +688,7 @@ private function getActivateRules() {
             }
 
 
-        } else { 
+        } else {
 
             $brand = $this->constructBrandRecord($brand, $input, false);
 
@@ -705,7 +705,7 @@ private function getActivateRules() {
             //     $engagebrand->auth_token = $brand->auth_token;
             //     $engagebrand->active = $brand->hipengage;
             // }
-            
+
             $brand->save();
             // $engagebrand->save();
 
@@ -731,7 +731,7 @@ private function getActivateRules() {
             if($engagebrand) {
                 $engagebrand->auth_token = $brand->auth_token;
                 $engagebrand->save();
-            }             
+            }
 
         }
 
@@ -754,7 +754,7 @@ private function getActivateRules() {
 
             \Engagebrand::where('code', 'like', $brand->code)->delete();
 
-            $brand->delete(); 
+            $brand->delete();
 
             // Delete the nastypes and naslookups in hipwifi
             \DB::connection($connection)->table("nastype")->where('type', 'like' , "%" . $brand->code)->delete();
@@ -792,7 +792,7 @@ private function getActivateRules() {
         if($json) {
             return \Response::json($usersJason);
         } else {
-            return \View::make('hipwifi.showusers')->with('data', $data);            
+            return \View::make('hipwifi.showusers')->with('data', $data);
         }
 
     }
@@ -850,11 +850,11 @@ private function getActivateRules() {
         );
 
         $rules = array(
-            'fullname'      => 'required|alpha_num_dash_spaces',  
-            'email'         => 'required|email|unique:users',  
-            'password'      => 'alpha_num|min:6',                       
-            'brandcount'    => 'array_not_null',                       
-            'productcount'  => 'array_not_null',                       
+            'fullname'      => 'required|alpha_num_dash_spaces',
+            'email'         => 'required|email|unique:users',
+            'password'      => 'alpha_num|min:6',
+            'brandcount'    => 'array_not_null',
+            'productcount'  => 'array_not_null',
         );
 
         $validator = \Validator::make($input, $rules, $messages);
@@ -903,11 +903,11 @@ private function getActivateRules() {
         $data['brandArray'] = array();
         $brands = \Brand::All();
         $data['allbrands'] = $brands;
-        foreach ($data['user']->brands as $brand) {   
+        foreach ($data['user']->brands as $brand) {
             $countrie_id = $brand->countrie_id;
             $countrie = \Countrie::find($countrie_id);
-            $data['brandArray'][$brand->id]["name"] = $brand->name;   
-            $data['brandArray'][$brand->id]["countrie"] = $countrie["name"];   
+            $data['brandArray'][$brand->id]["name"] = $brand->name;
+            $data['brandArray'][$brand->id]["countrie"] = $countrie["name"];
         }
 
         $data['products']['HipWifi'] = false;
@@ -918,7 +918,7 @@ private function getActivateRules() {
         $data['permissions']['media_rw'] = false;
         $data['permissions']['uru_rw'] = false;
         $data['permissions']['rep_rw'] = false;
-        
+
         $data['countries'] = \Countrie::All();
 
         foreach ($data['user']->products as $product) {
@@ -949,10 +949,10 @@ private function getActivateRules() {
         );
 
         $rules = array(
-            'fullname'      => 'required|alpha_num_dash_spaces',  
+            'fullname'      => 'required|alpha_num_dash_spaces',
             'email'         => 'required|email|unique:users,email,'.$id,
-            'brandcount'    => 'array_not_null',                       
-            'productcount'  => 'array_not_null',                       
+            'brandcount'    => 'array_not_null',
+            'productcount'  => 'array_not_null',
         );
 
         if($password) {
@@ -972,11 +972,11 @@ private function getActivateRules() {
             return \Redirect::to('hipwifi_edituser/' . $id)->withErrors($validator)->withInput();
 
         } else {
-     
+
             $user->fullname = \Input::get('fullname');
             $user->email = \Input::get('email');
             if($password) {
-                $user->password = \Hash::make($password); 
+                $user->password = \Hash::make($password);
             }
             $user->level_code = \Input::get('level_code');
 
@@ -985,12 +985,12 @@ private function getActivateRules() {
 
             $user->brands()->detach();
             $brand_ids = \Input::get('brand_ids');
-            if($brand_ids) {   
+            if($brand_ids) {
                 foreach($brand_ids as $brand_id) {
                     $user->brands()->attach($brand_id);
                 }
             }
-            
+
             }
 
             // $user->permissions()->detach();
@@ -1001,9 +1001,9 @@ private function getActivateRules() {
             //         error_log("permission_ids " . $permission_id);
             //     }
             // }
-    
 
-      return \Redirect::route('hipwifi_showusers');  
+
+      return \Redirect::route('hipwifi_showusers');
     }
 
     public function deleteUser($id)
@@ -1019,7 +1019,7 @@ private function getActivateRules() {
 
             $user->permissions()->detach();
 
-            $user->delete();  
+            $user->delete();
         }
 
         return \Redirect::route('hipwifi_showusers', ['json' => 1]);
@@ -1049,7 +1049,7 @@ private function getActivateRules() {
 
         } else {
             return \View::make('hipwifi.showservers')->with('data', $data);
-            
+
         }
     }
 
@@ -1061,7 +1061,7 @@ private function getActivateRules() {
         $data['edit'] = false;
 
         $data['databases'] = \Remotedb::All();
-        $data['currentMenuItem'] = "Server Management";        
+        $data['currentMenuItem'] = "Server Management";
 
         return \View::make('hipwifi.addserver')->with('data', $data);
     }
@@ -1080,7 +1080,7 @@ private function getActivateRules() {
         );
 
         $rules = array(
-            'hostname'          => 'required|unique:servers',    
+            'hostname'          => 'required|unique:servers',
         );
 
         $validator = \Validator::make($input, $rules, $messages);
@@ -1088,7 +1088,7 @@ private function getActivateRules() {
             $messages = $validator->messages();
             return \Redirect::to('hipwifi_addserver')->withErrors($validator)->withInput();
 
-        } else {  
+        } else {
             // Hannes hier
             $server->hostname = \Input::get('hostname');
             $server->notes = \Input::get('notes');
@@ -1128,8 +1128,8 @@ private function getActivateRules() {
         );
 
         $rules = array(
-            'hostname'          => 'required|unique:servers',    
-            // 'brandcount'   => 'array_not_null',                       
+            'hostname'          => 'required|unique:servers',
+            // 'brandcount'   => 'array_not_null',
         );
 
         $validator = \Validator::make($input, $rules, $messages);
@@ -1138,7 +1138,7 @@ private function getActivateRules() {
 
             return \Redirect::to('hipwifi_addserver')->withErrors($validator)->withInput();
 
-        } else { 
+        } else {
 
             $server->hostname = \Input::get('hostname');
             $server->notes = \Input::get('notes');
@@ -1163,7 +1163,7 @@ private function getActivateRules() {
         $server = \Server::find($id);
 
         if($server) {
-            $server->delete();  
+            $server->delete();
         }
 
         return \Redirect::route('hipwifi_showservers', ['json' => 1]);
@@ -1215,7 +1215,7 @@ private function getActivateRules() {
                 $venue["hostname"] = "Server No longer exists";
             }
         }
-        
+
         $data['venuesJason'] = json_encode($venues);
         error_log("showVenues venuesJason = " . $data['venuesJason']);
 
@@ -1228,7 +1228,7 @@ private function getActivateRules() {
         } else {
             error_log("showDashboard : returning NON json" );
             return \View::make('hipwifi.showvenues')->with('data', $data);
-            
+
         }
     }
 
@@ -1242,17 +1242,17 @@ private function getActivateRules() {
         $data['message'] = "";
 
         $data['venue'] = \Venue::find($id);
-        $data['venue']["sitename"] = preg_replace("/ /", "_",$data['venue']->sitename); 
-        $rscfile =  $dir->value . "deployment/exports/" .  $data['venue']["sitename"] . ".rsc"; 
+        $data['venue']["sitename"] = preg_replace("/ /", "_",$data['venue']->sitename);
+        $rscfile =  $dir->value . "deployment/exports/" .  $data['venue']["sitename"] . ".rsc";
         if (file_exists($rscfile)) {
             $data['rscconfig'] = file($rscfile);
         }  else {
             $data['rscconfig'] = ["Configuration file not found!"];
         }
 
-           
 
-        
+
+
         foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
 
         return \View::make('hipwifi.deployrsc')->with('data', $data);
@@ -1287,7 +1287,7 @@ private function getActivateRules() {
     public function showRunningRsc()
     {
         $id = \Input::get('id');
-       
+
         //$dir = \DB::table('systemconfig')->select("*")->where('name', '=', "mikrotikdir")->first();
         //$rscfile =  $dir->value . "deployment/" .  $sitenameFormatted . ".rsc";
         //$readrsc = file($rscfile);
@@ -1305,7 +1305,7 @@ private function getActivateRules() {
         $data = array();
         $data['currentMenuItem'] = "Venue Management";
         $data['edit'] = false;
-        $data['adminssidpresent'] = 0; 
+        $data['adminssidpresent'] = 0;
         $data['numadminwifi'] = 0;
         $data['submitbutton'] = '';
         $data['bypass'] = array();
@@ -1356,7 +1356,7 @@ private function getActivateRules() {
         $data['rscfilemodtime'] =  \DB::table('venues')->where('id', '=', $id)->pluck('rscfilemodtime');
         $data['submitbutton'] = '';
         $data['device_type'] = $data['venue']->device_type;
-        
+
         if ($data['device_type'] == 'Mikrotik'){
           // if(file_exists($data['configfile'])) {
                 $now = time();
@@ -1372,13 +1372,13 @@ private function getActivateRules() {
             $data['submitbutton'] = 'on';
         }
 
-        
+
 
         $data['old_sitename'] = $data['venue']["sitename"];
-        $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]); 
+        $data['venue']["sitename"] = explode(' ', $data['venue']["sitename"])[1];
         foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
         $data['bypass'] = array();
-        for ($i=1; $i <= 10; $i++) { 
+        for ($i=1; $i <= 10; $i++) {
             $mac = 'bypassmac'.$i;
             $comment = 'bypasscomment'.$i;
             $bypassmac = $data['venue']->$mac;
@@ -1390,7 +1390,7 @@ private function getActivateRules() {
         $data["adminssid2"] = $data['venue']->adminssid2;
         $data["adminssid3"] = $data['venue']->adminssid3;
         //$data["adminwifi"] = array($data["adminssid1"], $data["adminssid2"], $data["adminssid3"]);
-        /*$data["numadminwifi"] = 0; 
+        /*$data["numadminwifi"] = 0;
         $i = 0;
         foreach ($data["adminwifi"] as $configuredwifi) {
              if  (!is_null($configuredwifi)){
@@ -1398,8 +1398,8 @@ private function getActivateRules() {
            }
         $data["numadminwifi" ] = $i;
         }*/
-        
-        
+
+
         if($data['venue']->ap_active == 1) {
             $data['ap_active_checked'] = "checked";
             $data['ap_inactive_checked'] = "";
@@ -1407,7 +1407,7 @@ private function getActivateRules() {
             $data['ap_active_checked'] = "";
             $data['ap_inactive_checked'] = "checked";
         }
-        
+
         if($data['venue']->device_type == "Mikrotik") {
             $mikvars = array("name" => "Mikrotik", "selected" => "selected=\"selected\"");
             $othervars = array("name" => "Other", "selected" => "");
@@ -1450,18 +1450,18 @@ public function activateVenueSave()
         $timefrom = \Input::get('timefrom');
         $timeto = \Input::get('timeto');
 
-        
+
 
         error_log( "addVenueSave : timefrom = $timefrom ======= timeto = $timeto");
 
         // $sitename_exists = \Venue::where("sitename", "like", $sitename)->withTrashed()->first();
         // if(! is_null($sitename_exists)) {
         //     $sitename_exists->forceDelete();
-        // } 
+        // }
         // $macaddress_exists = \Venue::where("macaddress", "like", $macaddress)->withTrashed()->first();
         // if(! is_null($macaddress_exists)) {
         //     $macaddress_exists->forceDelete();
-        // } 
+        // }
 
         $ssid = \Input::get('ssid');
         error_log("editVenueSave : 111 ssid : $ssid");
@@ -1472,8 +1472,8 @@ public function activateVenueSave()
         }
 
         $rules = array(
-            // 'sitename'       => 'required|alpha_num_dash_spaces|unique:venues',                        
-            'macaddress'     => 'required|macaddress_format|unique:venues',          
+            // 'sitename'       => 'required|alpha_num_dash_spaces|unique:venues',
+            'macaddress'     => 'required|macaddress_format|unique:venues',
         );
 
         $validator = \Validator::make($input, $rules, $messages);
@@ -1484,7 +1484,7 @@ public function activateVenueSave()
 
         } else {
             $utils = new \Utils();
-            
+
             $venue = \Venue::find($id);
             error_log("activateVenueSave : id = $id");
             error_log("activateVenueSave : sitename = " . $sitename);
@@ -1587,11 +1587,11 @@ public function activateVenueSave()
         $sitename_exists = \Venue::where("sitename", "like", $sitename)->first();
         if(! is_null($sitename_exists)) {
             $sitename_exists->forceDelete();
-        } 
+        }
         $macaddress_exists = \Venue::where("macaddress", "like", $macaddress)->first();
         if(! is_null($macaddress_exists)) {
             $macaddress_exists->forceDelete();
-        } 
+        }
 
         $ssid = \Input::get('ssid');
         error_log("editVenueSave : 111 ssid : $ssid");
@@ -1602,8 +1602,8 @@ public function activateVenueSave()
         }
 
         $rules = array(
-            'sitename'       => 'required|alpha_num_dash_spaces|unique:venues',                        
-            'macaddress'     => 'required|macaddress_format|unique:venues',          
+            'sitename'       => 'required|alpha_num_dash_spaces|unique:venues',
+            'macaddress'     => 'required|macaddress_format|unique:venues',
         );
 
         $validator = \Validator::make($input, $rules, $messages);
@@ -1614,7 +1614,7 @@ public function activateVenueSave()
 
         } else {
             $utils = new \Utils();
-            
+
             $venue = \Venue::find(\Input::get('id'));
             $venue->sitename = $input['sitename'];
             $venue->location = $input['location'];
@@ -1672,7 +1672,7 @@ public function activateVenueSave()
         $data['rscfilemodtime'] =  \DB::table('venues')->where('id', '=', $id)->pluck('rscfilemodtime');
         $data['submitbutton'] = '';
         $data['device_type'] = $data['venue']->device_type;
-        
+
         if ($data['device_type'] == 'Mikrotik'){
           // if(file_exists($data['configfile'])) {
                 $now = time();
@@ -1687,11 +1687,11 @@ public function activateVenueSave()
         else {
             $data['submitbutton'] = 'on';
         }
-        
-        
-        
+
+
+
         $data['old_sitename'] = $data['venue']["sitename"];
-        $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]); 
+        $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
         foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
         $data['bypass'] = array();
 
@@ -1707,7 +1707,7 @@ public function activateVenueSave()
         $data["adminssid2"] = $data['venue']->adminssid2;
         $data["adminssid3"] = $data['venue']->adminssid3;
         //$data["adminwifi"] = array($data["adminssid1"], $data["adminssid2"], $data["adminssid3"]);
-        /*$data["numadminwifi"] = 0; 
+        /*$data["numadminwifi"] = 0;
         $i = 0;
         foreach ($data["adminwifi"] as $configuredwifi) {
              if  (!is_null($configuredwifi)){
@@ -1715,8 +1715,8 @@ public function activateVenueSave()
            }
         $data["numadminwifi" ] = $i;
         }*/
-        
-        
+
+
         if($data['venue']->ap_active == 1) {
             $data['ap_active_checked'] = "checked";
             $data['ap_inactive_checked'] = "";
@@ -1724,7 +1724,7 @@ public function activateVenueSave()
             $data['ap_active_checked'] = "";
             $data['ap_inactive_checked'] = "checked";
         }
-        
+
         if($data['venue']->device_type == "Mikrotik") {
             $mikvars = array("name" => "Mikrotik", "selected" => "selected=\"selected\"");
             $othervars = array("name" => "Other", "selected" => "");
@@ -1749,7 +1749,7 @@ public function activateVenueSave()
         return \View::make('hipwifi.addvenue')->with('data', $data);
     }
 
-    
+
     public function editVenueSave()
     {
         $utils = new \Utils();
@@ -1778,14 +1778,14 @@ public function activateVenueSave()
         error_log("editVenueSave : 222 ssid : $ssid");
 
         $macaddress = \Input::get('macaddress');
-            // 'sitename'       => 'required|alpha_num_dash_spaces|unique:venues,sitename,'.$id,                        
+            // 'sitename'       => 'required|alpha_num_dash_spaces|unique:venues,sitename,'.$id,
             // 'macaddress'     => 'required|macaddress_format|unique:venues,macaddress,'.$id,
         $rules = array(
-            'adminssid1'     => 'min:5|max:20', 
+            'adminssid1'     => 'min:5|max:20',
             'firstnetworkpassword'      => 'min:8|max:12',
             'adminssid2'     => 'min:5|max:20',
             'secondnetworkpassword'      => 'min:8|max:12',
-            'adminssid3'     => 'min:5|max:20', 
+            'adminssid3'     => 'min:5|max:20',
             'thirdnetworkpassword'      => 'min:8|max:12',
             'bypassmac0' => 'macaddress_format',
             'bypassmac1' => 'macaddress_format',
@@ -1799,16 +1799,16 @@ public function activateVenueSave()
             'bypassmac9' => 'macaddress_format',
             );
 
-            
+
         $validator = \Validator::make($input, $rules);
-            
+
         if ($validator->fails()) {
             $messages = $validator->messages();
 
             return \Redirect::to('hipwifi_editvenue/'.$id)->withErrors($validator)->withInput();
         } else {
 
-            
+
             $id = \Input::get('id');
             $venue =  \Venue::find($id);
 
@@ -1821,23 +1821,23 @@ public function activateVenueSave()
 
             // $macs_array = explode(',', $macs_to_delete);
             // \Log::info("HANNES macs_to_delete: $macs_to_delete");
-            // foreach ($macs_array as $bypassmac){ 
+            // foreach ($macs_array as $bypassmac){
             //     \Log::info("HANNES should delete mac");
-            //     $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
+            //     $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5,
             //                             $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];
             //     $mikrotik = new \Mikrotik();
             //     $mikrotik->deletebypassmac($venue, $bypassmac);
-            //     for ($i=0; $i <=9; $i++) { 
+            //     for ($i=0; $i <=9; $i++) {
             //         if ($bypassmacarray[$i] == $bypassmac){
             //             $index = $i + 1;
             //             \DB::table('venues')->where('id', '=', $id)->update(array('bypassmac'.$index => NULL, 'bypasscomment'.$index => NULL));
             //         }
-                
+
             //     }
 
             // }
 
-            
+
 
             // Done with deleting deleted venues
 
@@ -1873,7 +1873,7 @@ public function activateVenueSave()
             $venue->statuscomment = $input['statuscomment'];
             if (empty($adminssid1check) &&  $input['adminssid1'] !== ""){
                 $venue->adminssid1 = $input['adminssid1'];
-                
+
                 $venue->password1 = $input['firstnetworkpassword'];
                 $venue->type1 = $input['type1'];
             }
@@ -1893,7 +1893,7 @@ public function activateVenueSave()
             $venue->bypassmac1 = $input['bypassmac0'];
             $venue->bypasscomment1 = $input['bypasscomment0'];
             }
-            
+
             if($input['bypassmac1'] !== "") {
             $venue->bypassmac2 = $input['bypassmac1'];
             $venue->bypasscomment2 = $input['bypasscomment1'];
@@ -1944,7 +1944,7 @@ public function activateVenueSave()
             $venue = $venue->refreshMediaLocation($venue);
             $venue->updateVenueInRadius($venue, $remotedb_id);
         }
-       
+
         // Update the AP
             if($input['device_type'] == "Mikrotik") {
                $mikrotik = new \Mikrotik();
@@ -1954,22 +1954,22 @@ public function activateVenueSave()
 
                $macs_array = explode(',', $macs_to_delete);
                \Log::info("HANNES macs_to_delete: $macs_to_delete");
-               foreach ($macs_array as $bypassmac){ 
+               foreach ($macs_array as $bypassmac){
                    \Log::info("HANNES should delete mac");
-                   $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
+                   $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5,
                                            $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];
                    $mikrotik = new \Mikrotik();
                    if ($bypassmac != "") {
                     $mikrotik->deletebypassmac($venue, $bypassmac);
-                    for ($i=0; $i <=9; $i++) { 
+                    for ($i=0; $i <=9; $i++) {
                         if ($bypassmacarray[$i] == $bypassmac){
                             $index = $i + 1;
                             \DB::table('venues')->where('id', '=', $id)->update(array('bypassmac'.$index => NULL, 'bypasscomment'.$index => NULL));
                         }
-                    
+
                     }
                    }
-                   
+
                }
 
                // admin wifi config writing to mac-address.rsc process begins.
@@ -1986,25 +1986,25 @@ public function activateVenueSave()
                     // $nottosave = array();
                     // for($i=0; $i<=9; $i++){
                     //     if($input["bypassmac$i"] != null && $input["bypassmac$i"] != "") {
-                    //         if ($input["bypassmac$i"] == $venue->bypassmac1 || 
-                    //         $input["bypassmac$i"] == $venue->bypassmac2 || 
-                    //         $input["bypassmac$i"] == $venue->bypassmac3 || 
-                    //         $input["bypassmac$i"] == $venue->bypassmac4 || 
-                    //         $input["bypassmac$i"] == $venue->bypassmac5 || 
-                    //         $input["bypassmac$i"] == $venue->bypassmac6 || 
-                    //         $input["bypassmac$i"] == $venue->bypassmac7 || 
-                    //         $input["bypassmac$i"] == $venue->bypassmac8 || 
-                    //         $input["bypassmac$i"] == $venue->bypassmac9 || 
+                    //         if ($input["bypassmac$i"] == $venue->bypassmac1 ||
+                    //         $input["bypassmac$i"] == $venue->bypassmac2 ||
+                    //         $input["bypassmac$i"] == $venue->bypassmac3 ||
+                    //         $input["bypassmac$i"] == $venue->bypassmac4 ||
+                    //         $input["bypassmac$i"] == $venue->bypassmac5 ||
+                    //         $input["bypassmac$i"] == $venue->bypassmac6 ||
+                    //         $input["bypassmac$i"] == $venue->bypassmac7 ||
+                    //         $input["bypassmac$i"] == $venue->bypassmac8 ||
+                    //         $input["bypassmac$i"] == $venue->bypassmac9 ||
                     //         $input["bypassmac$i"] == $venue->bypassmac10){
                     //             array_push($nottosave, $input["bypassmac$i"]);
                     //             // $nottosave = $input["bypassmac$i"];
                     //             // \Log::info("HANNES should not save this one: $nottosave");
-                    //         }    
+                    //         }
                     //     }
                     // }
-                        
 
-                
+
+
 
                 // $value = $input['bypassmac0'];
 
@@ -2069,12 +2069,12 @@ public function activateVenueSave()
                 // }
 
                 for($i=0; $i<=9; $i++){
-                    
+
                     $bypass = 'bypassmac' . $i;
                     $k = $i + 1;
                     $mac = 'bypassmac' . $k;
                     $comment = 'bypasscomment'. $k;
-                    
+
 
                     if($input[$bypass] !== "") {
                         $mikrotik->addMacAddressBypass($venue, $venue->$mac, $venue->$comment);
@@ -2089,14 +2089,14 @@ public function activateVenueSave()
                   $macaddress = \Input::get('macaddress');
                   $mikrotik->genTabletposRsc($printers, $macaddress);
                 }
-                   
+
            }
             return \Redirect::route('hipwifi_showvenues');
-}      
+}
 
 
-    
-    
+
+
      public function disableVenue($id)
     {
         error_log("disableVenue");
@@ -2107,7 +2107,7 @@ public function activateVenueSave()
 
         if($venue) {
 
-            \Venue::where("id", "=", $id)->update(['wifi_activated' => 0, 'macaddress' => '']);
+            \Venue::where("id", "=", $id)->update(['wifi_activated' => 0, 'jam_activated' => 0, 'macaddress' => '']);
             $venue->deleteVenueInRadius($venue, $remotedb_id);
             $media->where("venue_id", "=", $id)->delete();
             $mikrotik = new \Mikrotik();
@@ -2134,7 +2134,7 @@ public function activateVenueSave()
         }
 
         $venue = \Venue::find($id);
-        
+
         $mikrotik = new \Mikrotik();
         $mikrotik->modifyAdminWifiTemplate($adminssid, $password, $type, $filename, $venue);
     }
@@ -2155,7 +2155,7 @@ public function activateVenueSave()
                  \DB::table('venues')->where('id', '=', $id)->update(array('adminssid1' => NULL));
                  \DB::table('venues')->where('id', '=', $id)->update(array('password1' => NULL));
                  \DB::table('venues')->where('id', '=', $id)->update(array('type1' => NULL));
-                 
+
                 break;
 
             case "$adminssid2":
@@ -2174,29 +2174,29 @@ public function activateVenueSave()
              return \Redirect::to('hipwifi_editvenue/'.$id);
 
 
-        
+
 
     }
 
     public function deletemacbypass($id, $bypassmac)
     {
         $venue = \Venue::find($id);
-        $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5, 
+        $bypassmacarray = [$venue->bypassmac1, $venue->bypassmac2, $venue->bypassmac3, $venue->bypassmac4, $venue->bypassmac5,
                                         $venue->bypassmac6, $venue->bypassmac7, $venue->bypassmac8, $venue->bypassmac9, $venue->bypassmac10];
         $mikrotik = new \Mikrotik();
         $mikrotik->deletebypassmac($venue, $bypassmac);
-        for ($i=0; $i <=9; $i++) { 
+        for ($i=0; $i <=9; $i++) {
             if ($bypassmacarray[$i] == $bypassmac){
                 $index = $i + 1;
                 \DB::table('venues')->where('id', '=', $id)->update(array('bypassmac'.$index => NULL, 'bypasscomment'.$index => NULL));
             }
-           
+
         }
         return \Redirect::to('hipwifi_editvenue/'.$id);
     }
-       
 
-    
+
+
      public function redeployMikrotikVenue($id)    {
         error_log("redeployMikrotikVenue");
         $venue = \Venue::find($id);
@@ -2219,17 +2219,17 @@ public function activateVenueSave()
     //     $data['id'] = $id;
     //     $data['message'] = "";
     //     $data['venue'] = \Venue::find($id);
-    //     $data['venue']["sitename"] = preg_replace("/ /", "_",$data['venue']->sitename); 
-    //     $rscfile =  $dir->value . "deployment/exports" .  $data['venue']["sitename"] . ".rsc"; 
+    //     $data['venue']["sitename"] = preg_replace("/ /", "_",$data['venue']->sitename);
+    //     $rscfile =  $dir->value . "deployment/exports" .  $data['venue']["sitename"] . ".rsc";
     //     if (file_exists($rscfile)) {
     //         $data['rscconfig'] = file($rscfile);
     //     }  else {
     //         $data['rscconfig'] = ["Configuration file not found!"];
     //     }
 
-           
 
-        
+
+
     //     foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
 
     //     return \View::make('hipwifi.deployrsc')->with('data', $data);
@@ -2259,7 +2259,7 @@ public function activateVenueSave()
 
     //     return \View::make('hipwifi.deployrsc')->with('data', $data);
     // }
-      
+
 
     public function editWifiuser($id)
     {
@@ -2301,12 +2301,12 @@ public function activateVenueSave()
                                         <td><a href="javascript:void(0);"  dbid="'.$entryid.'" class="btn btn-small btn-default">Update</a></td>
                                         <td><a href="javascript:void(0);"  dbid="'.$entryid.'" class="btn btn-small btn-default btn-danger">Delete</a></td>
                                         </tr>';
-                                    
+
                         return $row;
                  }
             }
 
-      
+
 
     }
 
@@ -2357,17 +2357,17 @@ public function activateVenueSave()
     }
 
 
- 
+
 
 
 }
 
 
-   
 
-  
 
-   
 
-   
-  
+
+
+
+
+

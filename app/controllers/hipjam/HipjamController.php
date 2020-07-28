@@ -22,7 +22,7 @@ class HipjamController extends \BaseController
         $resp['status'] = 'success';
         $resp['message'] = 'Greenside turned on';
 
-    
+
         return \Response::json($resp);
     }
 
@@ -35,7 +35,7 @@ class HipjamController extends \BaseController
         $resp['status'] = 'success';
         $resp['message'] = 'Greenside turned off';
 
-    
+
         return \Response::json($resp);
     }
 
@@ -44,7 +44,7 @@ class HipjamController extends \BaseController
     {
       return($mac->mac_address);
     }
-    
+
     public function uploadSeenMacAddresses() {
         $id = \Input::get('id');
         $mac_addresses = \Input::get('mac_addresses');
@@ -55,7 +55,7 @@ class HipjamController extends \BaseController
         $already_seen = \DB::select("
         SELECT
             mac_address
-        FROM 
+        FROM
             track_seen_mac_address
         WHERE
             date_seen = '".date("Y-m-d")."'
@@ -64,23 +64,23 @@ class HipjamController extends \BaseController
         $asd = array_values($already_seen);
         // return \Response::json($asd);
         $already_seen = array_map(array($this, 'sortmymfarray'),$asd);
-        
+
         $mac_addresses_to_create = array_diff($f_mac, $already_seen);
 
         foreach ($mac_addresses_to_create as $mac_address)
         {
             \DB::table('track_seen_mac_address')->insert(
                 array(
-                       'venue_id' => $id, 
+                       'venue_id' => $id,
                        'date_seen' => date("Y-m-d"),
                        'created_at' => date('Y-m-d H:i:s', strtotime('+2 hours')),
                        'updated_at' => date('Y-m-d H:i:s', strtotime('+2 hours')),
                        'mac_address' => $mac_address
                 )
            );
-           
+
         }
-        
+
         // \TrackSeenMacAddress::insert($master_array);
         // $x = \TrackSeenMacAddress::all();
 
@@ -108,7 +108,7 @@ class HipjamController extends \BaseController
         return \Response::json($resp);
     }
 
-    public static function sendMail($to, $subject, $body) {             
+    public static function sendMail($to, $subject, $body) {
         $data = array();
         $data['email_text'] = $body;
 
@@ -139,7 +139,7 @@ class HipjamController extends \BaseController
                     \hipjam\HipjamController::sendMail($venue->alert_email_address_3, $subject, $body);
                 }
         }
-        
+
         $resp['status'] = 'success';
         $resp['venues'] = $venue_ids;
         $resp['sensors'] = $sensors;
@@ -176,7 +176,7 @@ class HipjamController extends \BaseController
                                                     tsma.venue_id = ".$venue->id."
                                                     AND tsma.date_seen = CURDATE()")[0]->total_conversions;
             $data['potential_sales'] = $data['conversions'] * $data['avg_basket_value'];
-             
+
         if ($data['conversions'] != 0) {
             $data['cpa'] = round(($venue->advertising_cost / 31) / $data['conversions'], 2);
         } else {
@@ -187,7 +187,7 @@ class HipjamController extends \BaseController
             $data['roi'] = round(($data['potential_sales'] / ($venue->advertising_cost / 31)) * 100, 2);
         } else {
             $data['roi'] = 'N/A';
-        }       
+        }
 
         $data['site_name'] = $venue->sitename;
         return \Response::json($data);
@@ -218,7 +218,7 @@ class HipjamController extends \BaseController
                                             WHERE
                                                 tsma.venue_id = ".$venue->id."
                                                 AND tsma.date_seen = CURDATE()")[0]->total_conversions;
-               
+
 
     $data['site_name'] = $venue->sitename;
     return \Response::json($data);
@@ -262,15 +262,79 @@ public function getIds() {
 }
 
 public function getIdsWithName() {
+    $locations = \Input::get('location');
     $type = \Input::get('type');
     $data = array();
     $brands = \DB::select("SELECT GROUP_CONCAT(id) brand_ids FROM brands where parent_brand = 165")[0]->brand_ids.',165';
     if ($type == 'ooh') {
-        $data['ids'] = \DB::select("SELECT id, IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1))) name FROM venues WHERE track_type = 'billboard' AND brand_id IN (".$brands.")");
+        if ($locations != '0' && $locations != '') {
+            $data['ids'] = \DB::select("SELECT id, IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1))) name FROM venues WHERE track_type = 'billboard' AND id IN (".$locations.") AND brand_id IN (".$brands.")");
+        } else {
+            $data['ids'] = \DB::select("SELECT id, IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1))) name FROM venues WHERE track_type = 'billboard' AND brand_id IN (".$brands.")");
+        }
     } else {
-        $data['ids'] = \DB::select("SELECT id, IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1))) name FROM venues WHERE track_type != 'billboard' AND brand_id IN (".$brands.")");
+        if ($locations != '0' && $locations != '') {
+            $data['ids'] = \DB::select("SELECT id, IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1))) name FROM venues WHERE track_type != 'billboard' AND id IN (".$locations.") AND brand_id IN (".$brands.")");
+        } else {
+            $data['ids'] = \DB::select("SELECT id, IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1))) name FROM venues WHERE track_type != 'billboard' AND brand_id IN (".$brands.")");
+        }
+
     }
     return \Response::json($data['ids']);
+
+}
+
+public function getIdsWithRegion() {
+    $type = \Input::get('type');
+    $group = \Input::get('group');
+    $data = array();
+    if ($type == 'ooh') {
+        if ($group == 'province') {
+            $data['data'] = \DB::select("
+            SELECT GROUP_CONCAT(IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1)))) venue_name, GROUP_CONCAT(venues.id) ids, cities.name city_name, provinces.name province_name FROM venues
+            INNER JOIN cities ON venues.citie_id = cities.id
+            INNER JOIN provinces ON venues.province_id = provinces.id
+            WHERE
+                track_type = 'billboard'
+            AND brand_id IN (SELECT id FROM brands where id = 165 OR parent_brand = 165)
+            GROUP BY provinces.name
+            ");
+        } else {
+            $data['data'] = \DB::select("
+            SELECT GROUP_CONCAT(IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1)))) venue_name, GROUP_CONCAT(venues.id) ids, cities.name city_name, provinces.name province_name FROM venues
+            INNER JOIN cities ON venues.citie_id = cities.id
+            INNER JOIN provinces ON venues.province_id = provinces.id
+            WHERE
+                track_type = 'billboard'
+            AND brand_id IN (SELECT id FROM brands where id = 165 OR parent_brand = 165)
+            GROUP BY cities.name
+            ");
+        }
+    } else {
+        if ($group == 'province') {
+            $data['data'] = \DB::select("
+            SELECT GROUP_CONCAT(IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1)))) venue_name, GROUP_CONCAT(venues.id) ids, cities.name city_name, provinces.name province_name FROM venues
+            INNER JOIN cities ON venues.citie_id = cities.id
+            INNER JOIN provinces ON venues.province_id = provinces.id
+            WHERE
+                track_type != 'billboard'
+            AND brand_id IN (SELECT id FROM brands where id = 165 OR parent_brand = 165)
+            GROUP BY provinces.name
+            ");
+        } else {
+            $data['data'] = \DB::select("
+            SELECT GROUP_CONCAT(IF(friendly_brandname IS NULL, sitename, CONCAT(friendly_brandname, ' ', SUBSTRING_INDEX(sitename,' ',-1)))) venue_name, GROUP_CONCAT(venues.id) ids, cities.name city_name, provinces.name province_name FROM venues
+            INNER JOIN cities ON venues.citie_id = cities.id
+            INNER JOIN provinces ON venues.province_id = provinces.id
+            WHERE
+                track_type != 'billboard'
+            AND brand_id IN (SELECT id FROM brands where id = 165 OR parent_brand = 165)
+            GROUP BY cities.name
+            ");
+        }
+
+    }
+    return \Response::json($data['data']);
 }
 
 public function getOohSiteData() {
@@ -280,7 +344,7 @@ public function getOohSiteData() {
     $view = \Input::get('view');
 
     $period = \hipjam\HipjamController::createDateRangeArray($date_from,$date_to);
-    
+
 
     $all = \Venue::all();
     $billboards = \Venue::whereRaw('track_type = "billboard"')->get();
@@ -290,18 +354,18 @@ public function getOohSiteData() {
 
     foreach ($all as $venue) {
         if ($venue->track_type == 'venue' && isset($venue->linked_billboard) && $venue->linked_billboard != 0) {
-            $conversions = \DB::select("SELECT 
+            $conversions = \DB::select("SELECT
                                             tsma.date_seen,
                                             count(*) total_conversions
                                         FROM
                                             track_seen_mac_address tsma
                                         INNER JOIN (
-                                            SELECT 
+                                            SELECT
                                                 date_seen,
                                                 mac_address
-                                            FROM 
+                                            FROM
                                                 track_seen_mac_address
-                                            WHERE 
+                                            WHERE
                                                 date_seen BETWEEN '".$date_from."' AND '".$date_to."'
                                             AND venue_id = ".$venue->linked_billboard." -- bbid
                                         ) seen_by_billboard ON tsma.mac_address = seen_by_billboard.mac_address
@@ -324,17 +388,17 @@ public function getOohSiteData() {
                             $formatted_data[$billboard->id.'_conversions'] = 0;
                         }
                     }
-                } 
+                }
             } else {
                 // $formatted_data[$billboard->id.'_conversions'] = 0;
             }
-              
+
         }
         array_push($master_array, $formatted_data);
     }
     return \Response::json($master_array);
 }
-    
+
 
 
     /////////////////////// Venues /////////////////////////
@@ -349,12 +413,12 @@ public function getOohSiteData() {
         $userObj = \Auth::user();
 
         if (\User::hasAccess("superadmin")) {
-            $allowedbrands = \Brand::All();  
+            $allowedbrands = \Brand::All();
         } else {
             error_log("getBrandsForDatabase : NOT superadmin");
-            $allowedbrands = $userObj->brands;  
+            $allowedbrands = $userObj->brands;
         }
-    
+
 
         foreach ($allowedbrands as $brand) {
             array_push($brandIds, $brand->id);
@@ -377,7 +441,7 @@ public function getOohSiteData() {
         }
 
         $avg_distance = \DB::select("
-            SELECT 
+            SELECT
                 ROUND(IFNULL(AVG( 6371 * acos (cos ( radians(billboard_latitude))
                                 * cos( radians( venue_latitude ) )
                                 * cos( radians( venue_logitude ) - radians(billboard_longitude) )
@@ -385,24 +449,24 @@ public function getOohSiteData() {
                                 * sin( radians( venue_latitude ) )
                                 )
                             ), 0), 2) as distance
-            FROM 
+            FROM
                 (
-                    SELECT 
+                    SELECT
                         (SELECT latitude FROM venues WHERE id = v.linked_billboard) as billboard_latitude,
                         (SELECT longitude FROM venues WHERE id = v.linked_billboard) as billboard_longitude,
                         latitude as venue_latitude,
                         longitude as venue_logitude
-                    FROM 
+                    FROM
                         venues v
-                    WHERE 
-                        linked_billboard IS NOT NULL 
+                    WHERE
+                        linked_billboard IS NOT NULL
                     AND linked_billboard != 0
                 ) as inq
         ");
         $data['avg_distance'] = $avg_distance;
         $data['live_number_of_billboards'] = $liveNumberOfBillboardsCount;
         $data['sub_brands'] = $vicinity_brands;
-        
+
         \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
 
         if (\User::isVicinity()) {
@@ -416,7 +480,7 @@ public function getOohSiteData() {
         } else {
             $liveNumberOfRetailVenuesCount = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND (brand_id IN ($brandIdsString) AND jam_activated = true)")->get());
         }
-        
+
         $data['live_number_of_retail_venues'] = $liveNumberOfRetailVenuesCount;
 
         $venue = new \Venue();
@@ -451,7 +515,7 @@ public function getOohSiteData() {
         // FILTERS
         $brand_id_filter = Input::get('brand_id');
         $brand_type_filter = Input::get('type');
-        
+
         if ($brand_id_filter != null) {
             $venues = new \Venue();
             if ($brand_id_filter != 'global') {
@@ -461,7 +525,7 @@ public function getOohSiteData() {
             } else {
                 $venues_id_array = array();
                 $original_venues = $venues->getVenuesForUser('hipjam', 1, null, null, "active");
-                
+
                 foreach ($original_venues as $v){
                     array_push($venues_id_array, $v->id);
                 }
@@ -475,16 +539,16 @@ public function getOohSiteData() {
             if ($brand_type_filter != 'global') {
                 $venues = $venues->whereraw("track_type = '$brand_type_filter'");
             }
-    
+
             $venues = $venues->get();
-            
+
         }
 
         $data['venuesJson'] = json_encode($venues);
 
 
         $data['testi'] = $brand_type_filter;
-        
+
     // FILTERS
     $date_from = \Input::get('date_from');
     $date_to = \Input::get('date_to');
@@ -496,7 +560,7 @@ public function getOohSiteData() {
     if ($date_to == null) {
         $date_to = date('Y-m-d',strtotime('next sunday'));
     }
-
+    $billboard_objects = \Venue::where('track_type', '=', 'billboard');
     $billboards = \Venue::where('track_type', '=', 'billboard')->pluck('id');
     $venues_with_billboards = \Venue::where('linked_billboard', 'in', $billboards)->pluck('id');
     // ADDITIONAL METRICS
@@ -543,28 +607,28 @@ public function getOohSiteData() {
                                         WHERE
                                             tsma.venue_id IN (".$billboards.")
                                             AND tsma.date_seen  = CURDATE()")[0]->total_conversions;
-        
+
     $data['strike_time'] = \DB::select("
-                                            SELECT 
+                                            SELECT
                                                 ROUND(AVG(time_taken_to_convert) / 60,2) minutes,
                                                 ROUND(AVG(time_taken_to_convert) / 3600,2) hours,
                                                 ROUND(AVG(time_taken_to_convert) / 86400,2) days
                                             FROM (
-                                                SELECT 
+                                                SELECT
                                                     TIMESTAMPDIFF(SECOND, seen_by_billboard, seen_by_venue) time_taken_to_convert
                                                 FROM (
                                                     SELECT
                                                         (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id  IN (".$billboards.") AND date_seen = INQ.date_seen) seen_by_billboard,
                                                         (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id IN (".$venues_with_billboards.") AND date_seen = INQ.date_seen) seen_by_venue
                                                     FROM (
-                                                        SELECT 
-                                                            count(*) seen_times, 
+                                                        SELECT
+                                                            count(*) seen_times,
                                                             mac_address,
                                                             date_seen
-                                                        FROM 
+                                                        FROM
                                                             track_seen_mac_address tsma
-                                                        WHERE 
-                                                            (venue_id IN (".$billboards.") OR venue_id IN (".$venues_with_billboards.")) 
+                                                        WHERE
+                                                            (venue_id IN (".$billboards.") OR venue_id IN (".$venues_with_billboards."))
                                                         AND (date_seen BETWEEN '$date_from' AND '$date_to')
                                                         GROUP BY mac_address,date_seen HAVING seen_times > 1
                                                     ) INQ
@@ -573,7 +637,7 @@ public function getOohSiteData() {
                                             ");
 
     $data['strike_distance'] = \DB::select("
-                                            SELECT 
+                                            SELECT
                                                 ROUND(IFNULL(AVG( 6371 * acos (cos ( radians(billboard_latitude))
                                                                 * cos( radians( venue_latitude ) )
                                                                 * cos( radians( venue_logitude ) - radians(billboard_longitude) )
@@ -581,20 +645,20 @@ public function getOohSiteData() {
                                                                 * sin( radians( venue_latitude ) )
                                                                 )
                                                             ), 0), 2) as distance
-                                            FROM 
+                                            FROM
                                                 (
-                                                    SELECT 
+                                                    SELECT
                                                         (SELECT latitude FROM venues WHERE id = v.linked_billboard) as billboard_latitude,
                                                         (SELECT longitude FROM venues WHERE id = v.linked_billboard) as billboard_longitude,
                                                         latitude as venue_latitude,
                                                         longitude as venue_logitude
-                                                    FROM 
+                                                    FROM
                                                         venues v
-                                                    WHERE 
+                                                    WHERE
                                                         linked_billboard in (".$billboards.")
                                                 ) as inq
-                                        ");     
-                                        
+                                        ");
+
         $data['avg_basket_value'] = \DB::select("SELECT sum(avg_basket_value) total_avg_basket_value FROM brands WHERE id = 165 OR parent_brand = 165")[0]->total_avg_basket_value;
         $data['potential_sales'] = $data['conversions'] * $data['avg_basket_value'];
         $data['advertising_cost'] = \DB::select("SELECT sum(advertising_cost) adv_cost FROM venues WHERE id IN (".$billboards.")")[0]->adv_cost;
@@ -602,7 +666,7 @@ public function getOohSiteData() {
         if ($data['conversions'] != 0) {
             $data['cpa'] = round($data['advertising_cost'] / $data['conversions'], 2);
         } else {
-            $data['cpa'] = 'N/A';            
+            $data['cpa'] = 'N/A';
         }
 
         if ($venue->advertising_cost && $venue->advertising_cost != 0) {
@@ -610,7 +674,9 @@ public function getOohSiteData() {
         } else {
             $data['roi'] = 'N/A';
         }
-        
+
+        $data['all_venues'] = $venues;
+
 
 
         if ($json) {
@@ -619,6 +685,291 @@ public function getOohSiteData() {
         } else {
             error_log("showDashboard : returning NON json");
             return \View::make('hipjam.showdashboardlist')->with('data', $data);
+        }
+    }
+
+    public function showVicinityDashboard($json = null) {
+        error_log("showDashboard");
+
+        $data = array();
+        $data['currentMenuItem'] = "Venue Management";
+
+        $brandIds = array();
+        $userObj = \Auth::user();
+
+        if (\User::hasAccess("superadmin")) {
+            $allowedbrands = \Brand::All();
+        } else {
+            error_log("getBrandsForDatabase : NOT superadmin");
+            $allowedbrands = $userObj->brands;
+        }
+
+
+        foreach ($allowedbrands as $brand) {
+            array_push($brandIds, $brand->id);
+        }
+
+        $brandIdsString = implode(",", $brandIds);
+        $liveNumberOfBillboardsCount = count(\Venue::whereraw("track_type = 'billboard' AND brand_id IN ($brandIdsString) AND ap_active = 1")->get());
+
+        if (\User::isVicinity()) {
+            $vicinity_brands = \Brand::whereRaw('parent_brand IN ('.$brandIdsString.')')->get();
+            $vbrands = array();
+            foreach ($vicinity_brands as $brand) {
+                array_push($vbrands, $brand->id);
+            }
+            $vbrandsarray = implode(",", $vbrands);
+            $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard') AND ((brand_id = 165 OR brand_id IN ($vbrandsarray)))")->get());
+        } else {
+            $vicinity_brands = \Brand::whereRaw('parent_brand IN ('.$brandIdsString.')')->get();
+            $liveNumberOfBillboardsCount = count(\Venue::whereraw("(track_type = 'billboard') AND (brand_id IN ($brandIdsString))")->get());
+        }
+
+        $avg_distance = \DB::select("
+            SELECT
+                ROUND(IFNULL(AVG( 6371 * acos (cos ( radians(billboard_latitude))
+                                * cos( radians( venue_latitude ) )
+                                * cos( radians( venue_logitude ) - radians(billboard_longitude) )
+                                + sin ( radians(billboard_latitude) )
+                                * sin( radians( venue_latitude ) )
+                                )
+                            ), 0), 2) as distance
+            FROM
+                (
+                    SELECT
+                        (SELECT latitude FROM venues WHERE id = v.linked_billboard) as billboard_latitude,
+                        (SELECT longitude FROM venues WHERE id = v.linked_billboard) as billboard_longitude,
+                        latitude as venue_latitude,
+                        longitude as venue_logitude
+                    FROM
+                        venues v
+                    WHERE
+                        linked_billboard IS NOT NULL
+                    AND linked_billboard != 0
+                ) as inq
+        ");
+        $data['avg_distance'] = $avg_distance;
+        $data['live_number_of_billboards'] = $liveNumberOfBillboardsCount;
+        $data['sub_brands'] = $vicinity_brands;
+
+        \Log::info("[HipjamController  showDashboard] - live_number_of_billboards is: $liveNumberOfBillboardsCount");
+
+        if (\User::isVicinity()) {
+            $vicinity_brands = \Brand::where('parent_brand', '=', 165)->get();
+            $vbrands = array();
+            foreach ($vicinity_brands as $brand) {
+                array_push($vbrands, $brand->id);
+            }
+            $vbrandsarray = implode(",", $vbrands);
+            $liveNumberOfRetailVenuesCount = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND ((brand_id = 165 OR brand_id IN ($vbrandsarray)) AND jam_activated = true)")->get());
+        } else {
+            $liveNumberOfRetailVenuesCount = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND (brand_id IN ($brandIdsString) AND jam_activated = true)")->get());
+        }
+
+        $data['live_number_of_retail_venues'] = $liveNumberOfRetailVenuesCount;
+
+        $venue = new \Venue();
+        // $venues = $venue->getVenuesForUser('hipjam', 1);
+        $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
+        // $data['billboards'] =  $venues::where('track_type', '=', 'billboard');
+
+        foreach ($venues as $venue) {
+            if ($venue->ap_active == 0) {
+                $venue["status"] = '<span style="color:red">Inactive</span>';
+            } else {
+                $venue["status"] = '<span style="color:green">Active</span>';
+            }
+            if ($venue->server) {
+                $venue["hostname"] = $venue->server->hostname;
+            } else {
+                $venue["hostname"] = "Server No longer exists";
+            }
+            //$sitename = strtolower($venue["sitename"]);
+            //$sitename = str_replace(" ","-",$sitename);
+            /*$venue["apisitename"] = $venue["track_venue_id"] != '' ? $venue["track_venue_id"] : 'no_venue' ;*/
+            $venue["apisitename"] = $venue["track_server_location"] != '' ? $venue["track_server_location"] : 'no_venue';
+            $venue["track_slugname"] = $venue["track_slug"] != '' ? $venue["track_slug"] : 'no_venue';
+            // $venue["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $venue["sitename"]);
+        }
+
+        // $data['venuesJson'] = json_encode($venues);
+
+        $data['currentMenuItem'] = "Dashboard";
+
+
+        // FILTERS
+        $brand_id_filter = Input::get('brand_id');
+        $brand_type_filter = Input::get('type');
+
+        if ($brand_id_filter != null) {
+            $venues = new \Venue();
+            if ($brand_id_filter != 'global') {
+                $venues = $venues->whereraw("brand_id = '$brand_id_filter' AND jam_activated = true");
+                $data['live_number_of_billboards'] = count(\Venue::whereraw("(track_type = 'billboard') AND ((brand_id = $brand_id_filter) AND jam_activated = true)")->get());
+                $data['live_number_of_retail_venues'] = count(\Venue::whereraw("(track_type = 'venue' OR track_type IS NULL) AND ((brand_id = $brand_id_filter) AND jam_activated = true)")->get());
+            } else {
+                $venues_id_array = array();
+                $original_venues = $venues->getVenuesForUser('hipjam', 1, null, null, "active");
+
+                foreach ($original_venues as $v){
+                    array_push($venues_id_array, $v->id);
+                }
+
+
+                // $mapped_venues_ids_raw = array_map(create_function('$o', 'return $o->id;'), $original_venues);
+                $mapped_venues_ids = implode(',', $venues_id_array);
+                $venues = $venues->whereraw("id IN ($mapped_venues_ids)");
+            }
+
+            if ($brand_type_filter != 'global') {
+                $venues = $venues->whereraw("track_type = '$brand_type_filter'");
+            }
+
+            $venues = $venues->get();
+
+        }
+
+        $data['venuesJson'] = json_encode($venues);
+
+
+        $data['testi'] = $brand_type_filter;
+
+    // FILTERS
+    $date_from = \Input::get('date_from');
+    $date_to = \Input::get('date_to');
+
+    if ($date_from == null) {
+        $date_from = date('Y-m-d',strtotime('last monday'));
+    }
+
+    if ($date_to == null) {
+        $date_to = date('Y-m-d',strtotime('next sunday'));
+    }
+    $billboard_objects = \Venue::where('track_type', '=', 'billboard');
+    $billboards = \Venue::where('track_type', '=', 'billboard')->pluck('id');
+    $venues_with_billboards = \Venue::where('linked_billboard', 'in', $billboards)->pluck('id');
+    // ADDITIONAL METRICS
+    $data['conversions'] = \DB::select("SELECT
+                                            count(id) total_conversions
+                                        FROM
+                                            track_seen_mac_address tsma
+                                            INNER JOIN ( SELECT DISTINCT
+                                                    mac_address mac_addresses_seen_by_venues
+                                                FROM
+                                                    track_seen_mac_address tsmaINNER
+                                                    INNER JOIN (
+                                                        SELECT
+                                                            id linked_venue_id
+                                                        FROM
+                                                            venues iv
+                                                        WHERE
+                                                            linked_billboard IN (".$billboards.")) INQ1 ON INQ1.linked_venue_id = tsmaINNER.venue_id
+                                                    WHERE
+                                                        tsmaINNER.date_seen BETWEEN '$date_from'
+                                                        AND '$date_to') INQ2 ON INQ2.mac_addresses_seen_by_venues = tsma.mac_address
+                                        WHERE
+                                            tsma.venue_id IN (".$billboards.")
+                                            AND tsma.date_seen BETWEEN '$date_from'
+                                            AND '$date_to'")[0]->total_conversions;
+
+    $data['conversions_today'] = \DB::select("SELECT
+                                            count(id) total_conversions
+                                        FROM
+                                            track_seen_mac_address tsma
+                                            INNER JOIN ( SELECT DISTINCT
+                                                    mac_address mac_addresses_seen_by_venues
+                                                FROM
+                                                    track_seen_mac_address tsmaINNER
+                                                    INNER JOIN (
+                                                        SELECT
+                                                            id linked_venue_id
+                                                        FROM
+                                                            venues iv
+                                                        WHERE
+                                                            linked_billboard IN (".$billboards.")) INQ1 ON INQ1.linked_venue_id = tsmaINNER.venue_id
+                                                    WHERE
+                                                        tsmaINNER.date_seen = CURDATE()) INQ2 ON INQ2.mac_addresses_seen_by_venues = tsma.mac_address
+                                        WHERE
+                                            tsma.venue_id IN (".$billboards.")
+                                            AND tsma.date_seen  = CURDATE()")[0]->total_conversions;
+
+    $data['strike_time'] = \DB::select("
+                                            SELECT
+                                                ROUND(AVG(time_taken_to_convert) / 60,2) minutes,
+                                                ROUND(AVG(time_taken_to_convert) / 3600,2) hours,
+                                                ROUND(AVG(time_taken_to_convert) / 86400,2) days
+                                            FROM (
+                                                SELECT
+                                                    TIMESTAMPDIFF(SECOND, seen_by_billboard, seen_by_venue) time_taken_to_convert
+                                                FROM (
+                                                    SELECT
+                                                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id  IN (".$billboards.") AND date_seen = INQ.date_seen) seen_by_billboard,
+                                                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id IN (".$venues_with_billboards.") AND date_seen = INQ.date_seen) seen_by_venue
+                                                    FROM (
+                                                        SELECT
+                                                            count(*) seen_times,
+                                                            mac_address,
+                                                            date_seen
+                                                        FROM
+                                                            track_seen_mac_address tsma
+                                                        WHERE
+                                                            (venue_id IN (".$billboards.") OR venue_id IN (".$venues_with_billboards."))
+                                                        AND (date_seen BETWEEN '$date_from' AND '$date_to')
+                                                        GROUP BY mac_address,date_seen HAVING seen_times > 1
+                                                    ) INQ
+                                                ) INQ2 HAVING time_taken_to_convert > 0
+                                            ) INQ3
+                                            ");
+
+    $data['strike_distance'] = \DB::select("
+                                            SELECT
+                                                ROUND(IFNULL(AVG( 6371 * acos (cos ( radians(billboard_latitude))
+                                                                * cos( radians( venue_latitude ) )
+                                                                * cos( radians( venue_logitude ) - radians(billboard_longitude) )
+                                                                + sin ( radians(billboard_latitude) )
+                                                                * sin( radians( venue_latitude ) )
+                                                                )
+                                                            ), 0), 2) as distance
+                                            FROM
+                                                (
+                                                    SELECT
+                                                        (SELECT latitude FROM venues WHERE id = v.linked_billboard) as billboard_latitude,
+                                                        (SELECT longitude FROM venues WHERE id = v.linked_billboard) as billboard_longitude,
+                                                        latitude as venue_latitude,
+                                                        longitude as venue_logitude
+                                                    FROM
+                                                        venues v
+                                                    WHERE
+                                                        linked_billboard in (".$billboards.")
+                                                ) as inq
+                                        ");
+
+        $data['avg_basket_value'] = \DB::select("SELECT sum(avg_basket_value) total_avg_basket_value FROM brands WHERE id = 165 OR parent_brand = 165")[0]->total_avg_basket_value;
+        $data['potential_sales'] = $data['conversions'] * $data['avg_basket_value'];
+        $data['advertising_cost'] = \DB::select("SELECT sum(advertising_cost) adv_cost FROM venues WHERE id IN (".$billboards.")")[0]->adv_cost;
+
+        if ($data['conversions'] != 0) {
+            $data['cpa'] = round($data['advertising_cost'] / $data['conversions'], 2);
+        } else {
+            $data['cpa'] = 'N/A';
+        }
+
+        if ($venue->advertising_cost && $venue->advertising_cost != 0) {
+            $data['roi'] = round(($data['potential_sales'] / $data['advertising_cost']) * 100, 2);
+        } else {
+            $data['roi'] = 'N/A';
+        }
+
+        $data['all_venues'] = $venues;
+
+
+
+        if ($json) {
+            error_log("showDashboard : returning json");
+            return \Response::json($data['venuesJson']);
+        } else {
+            error_log("showDashboard : returning NON json");
+            return \View::make('hipjam.vicinitydashboard')->with('data', $data);
         }
     }
 
@@ -942,7 +1293,7 @@ public function getOohSiteData() {
                 array_push($vbrands, $brand->id);
             }
             $vbrandsarray = implode(",", $vbrands);
-            $venues = \Venue::whereRaw("brand_id IN ($vbrandsarray) AND jam_activated = 1 ")->get();
+            $venues = \Venue::whereRaw("brand_id IN ($vbrandsarray) AND jam_activated = 1 ")->orderBy('sitename', 'ASC')->get();
 
         } else {
             $venues = $venue->getVenuesForUser('hipjam', 1, null, null, "active");
@@ -1037,6 +1388,7 @@ public function getOohSiteData() {
 
         $sensors =  \Sensor::where("venue_id", "like", $data['venue']["id"])->orderBy('id', 'DESC')->get();
         $data['sensors'] = $sensors;
+        $data['sitename'] = $venue->sitename;
 
 
 
@@ -1046,7 +1398,7 @@ public function getOohSiteData() {
             $data['ap_inactive_checked'] = "";
         } else {
             $data['ap_active_checked'] = "";
-            $data['ap_inactive_checked'] = "checked"; 
+            $data['ap_inactive_checked'] = "checked";
         }
         $data['timezoneselect'] = $this->getTimezoneSelect($data['venue']['timezone']);
 
@@ -1056,12 +1408,12 @@ public function getOohSiteData() {
 
         $sanitized_sitename = \Venue::find($id)->sitename;
         $split_for_count = explode(' ', $sanitized_sitename);
-            $brand_concat = substr($split_for_count[0], 0, 10);
-            $venue_concat = substr($split_for_count[1], 0, 15);
+            $brand_concat = substr($split_for_count[0], 0, 15);
+            $venue_concat = substr($split_for_count[1], 0, 20);
         if ($sensors->count() == 0) {
             $data['sensor_name'] = $brand_concat.$venue_concat;
         } else {
-            $data['sensor_name'] = $brand_concat.$venue_concat.$sensors->count();
+            $data['sensor_name'] = $brand_concat.$venue_concat;
         }
 
         return \View::make('hipjam.vicinityvenue')->with('data', $data);
@@ -1078,6 +1430,7 @@ public function getOohSiteData() {
         //$data['vpnips']  = $vpnip->getVpnips();
         $data['venue'] = \Venue::find($id);
         $data['old_sitename'] = $data['venue']["sitename"];
+        $data['sitename'] = preg_replace("/_| /", '', $data['venue']['sitename']);
         $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
         foreach ($data['venue'] as $key => $value) {
             error_log("TTT : $key => $value");
@@ -1089,6 +1442,7 @@ public function getOohSiteData() {
 
         $sensors =  \Sensor::where("venue_id", "like", $data['venue']["id"])->orderBy('id', 'DESC')->get();
         $data['sensors'] = $sensors;
+
 
         $data['timezoneselect'] = $this->getTimezoneSelect($data['venue']['timezone']);
 
@@ -1102,7 +1456,7 @@ public function getOohSiteData() {
             $data['ap_inactive_checked'] = "";
         } else {
             $data['ap_active_checked'] = "";
-            $data['ap_inactive_checked'] = "checked"; 
+            $data['ap_inactive_checked'] = "checked";
         }
         if ($sensors->count() == 0) {
             $data['sensor_name'] = $sanitized_sitename;
@@ -1491,7 +1845,7 @@ public function getOohSiteData() {
         $sitename = \Input::get('sitename');
         $sitename = $brand_name . " " . $sitename;
         $input['sitename'] = $sitename;
-        
+
 
         $remotedb_id = \Brand::find($brand_id)->remotedb_id;
 
@@ -1776,8 +2130,9 @@ public function getOohSiteData() {
         }
         $venueObj = $venue->find($objReport->venue_id);
         $track_slug = $venueObj->track_slug;
+        $track_yml_venue = str_replace(' ', '', $venueObj->sitename);
         $configyml = file_get_contents('/home/mikrotik/deployment/templates/sensors/configyml');
-        $first = str_replace("venuename", $track_slug, $configyml);
+        $first = str_replace("venuename", $track_yml_venue, $configyml);
 
         $second = str_replace("wifissid", $venueObj->track_ssid, $first);
         $third = str_replace("wifipassword", $venueObj->track_password, $second);
@@ -2233,15 +2588,15 @@ public function getOohSiteData() {
 
         if ($venue->linked_billboard != '' && $venue->linked_billboard != null) {
             $data['exposed_today'] = \DB::select("
-            SELECT count(id) count FROM track_seen_mac_address tsma 
+            SELECT count(id) count FROM track_seen_mac_address tsma
             INNER JOIN (SELECT mac_address FROM track_seen_mac_address where venue_id = ".$venue->linked_billboard." and date_seen = CURDATE()) INQ ON tsma.mac_address = INQ.mac_address
             WHERE tsma.venue_id = ".$venue->id." and tsma.date_seen = CURDATE()
             ");
 
             $data['exposed_today'] = array_values($data['exposed_today']);
-  
+
             $data['exposed_week'] = \DB::select("
-            SELECT count(id) count FROM track_seen_mac_address tsma 
+            SELECT count(id) count FROM track_seen_mac_address tsma
             INNER JOIN (SELECT mac_address FROM track_seen_mac_address where venue_id = ".$venue->linked_billboard." and date_seen BETWEEN '$date_from' AND '$date_to') INQ ON tsma.mac_address = INQ.mac_address
             WHERE tsma.venue_id = ".$venue->id." and tsma.date_seen BETWEEN '$date_from' AND '$date_to'
             ");
@@ -2296,35 +2651,35 @@ public function getOohSiteData() {
                                                 WHERE
                                                     tsma.venue_id = ".$venue->id."
                                                     AND tsma.date_seen = CURDATE()")[0]->total_conversions;
-                                                    
 
-        
+
+
         $linked_venues = \Venue::where('linked_billboard', '=', $venue->id)->pluck('id');
-       if (!$linked_venues) { 
+       if (!$linked_venues) {
         $linked_venues = 0;
        }
 
         $data['strike_time'] = \DB::select("
-            SELECT 
+            SELECT
                 ROUND(AVG(time_taken_to_convert) / 60,2) minutes,
                 ROUND(AVG(time_taken_to_convert) / 3600,2) hours,
                 ROUND(AVG(time_taken_to_convert) / 86400,2) days
             FROM (
-                SELECT 
+                SELECT
                     TIMESTAMPDIFF(SECOND, seen_by_billboard, seen_by_venue) time_taken_to_convert
                 FROM (
                     SELECT
                         (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id = ".$venue->id." AND date_seen = INQ.date_seen) seen_by_billboard,
                         (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id IN (".$linked_venues.") AND date_seen = INQ.date_seen) seen_by_venue
                     FROM (
-                        SELECT 
-                            count(*) seen_times, 
+                        SELECT
+                            count(*) seen_times,
                             mac_address,
                             date_seen
-                        FROM 
+                        FROM
                             track_seen_mac_address tsma
-                        WHERE 
-                            (venue_id = ".$venue->id." OR venue_id IN (".$linked_venues.")) 
+                        WHERE
+                            (venue_id = ".$venue->id." OR venue_id IN (".$linked_venues."))
                         AND (date_seen BETWEEN '$date_from' AND '$date_to')
                         GROUP BY mac_address,date_seen HAVING seen_times > 1
                     ) INQ
@@ -2333,25 +2688,25 @@ public function getOohSiteData() {
             ");
 
             $data['strike_time_today'] = \DB::select("
-            SELECT 
+            SELECT
                 ROUND(AVG(time_taken_to_convert) / 60,2) minutes,
                 ROUND(AVG(time_taken_to_convert) / 3600,2) hours
             FROM (
-                SELECT 
+                SELECT
                     TIMESTAMPDIFF(SECOND, seen_by_billboard, seen_by_venue) time_taken_to_convert
                 FROM (
                     SELECT
                         (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id = ".$venue->id." AND date_seen = INQ.date_seen) seen_by_billboard,
                         (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id IN (".$linked_venues.") AND date_seen = INQ.date_seen) seen_by_venue
                     FROM (
-                        SELECT 
-                            count(*) seen_times, 
+                        SELECT
+                            count(*) seen_times,
                             mac_address,
                             date_seen
-                        FROM 
+                        FROM
                             track_seen_mac_address tsma
-                        WHERE 
-                            (venue_id = ".$venue->id." OR venue_id IN (".$linked_venues.")) 
+                        WHERE
+                            (venue_id = ".$venue->id." OR venue_id IN (".$linked_venues."))
                         AND (date_seen = CURDATE())
                         GROUP BY mac_address,date_seen HAVING seen_times > 1
                     ) INQ
@@ -2360,7 +2715,7 @@ public function getOohSiteData() {
             ");
 
             $data['strike_distance'] = \DB::select("
-            SELECT 
+            SELECT
                 ROUND(IFNULL(AVG( 6371 * acos (cos ( radians(billboard_latitude))
                                 * cos( radians( venue_latitude ) )
                                 * cos( radians( venue_logitude ) - radians(billboard_longitude) )
@@ -2368,16 +2723,16 @@ public function getOohSiteData() {
                                 * sin( radians( venue_latitude ) )
                                 )
                             ), 0), 2) as distance
-            FROM 
+            FROM
                 (
-                    SELECT 
+                    SELECT
                         (SELECT latitude FROM venues WHERE id = v.linked_billboard) as billboard_latitude,
                         (SELECT longitude FROM venues WHERE id = v.linked_billboard) as billboard_longitude,
                         latitude as venue_latitude,
                         longitude as venue_logitude
-                    FROM 
+                    FROM
                         venues v
-                    WHERE 
+                    WHERE
                         linked_billboard = ".$venue->id."
                 ) as inq
         ");
@@ -2402,13 +2757,13 @@ public function getOohSiteData() {
             $data['roi'] = 'N/A';
             $data['roi_today'] = 'N/A';
         }
-        
-        
 
-        
 
-        
-        
+
+
+
+
+
         // $venues = \Venue::all();
         /*$venue = new \Venue();
         $venues = $venue->getVenuesForUser('hipjam', 1);//print_r($venues); die();
@@ -2437,6 +2792,258 @@ public function getOohSiteData() {
         error_log("showDashboard : returning NON json");
         //return \View::make('hipjam.showvenues')->with('data', $data);
         return \View::make('hipjam.viewvenue')->with('data', $data);
+        //return \Redirect::route('hipjam_showdashboard', ['json' => 1]);
+
+        /*}*/
+    }
+
+    public function viewVicinityVenue($json = null, $name = null) {
+         /*$data = array();
+        //$data['edit'] = false;
+        $data['currentMenuItem'] = "Dashboard";
+
+        return \View::make('hipjam.viewvenue')->with('data', $data);*/
+        //return \View::make('hipjam.chart')->with('data', $data);
+
+        /*$data = array();
+        $data['currentMenuItem'] = "Dashboard";
+
+
+        return \View::make('hipjam.showdashboard')->with('data', $data);*/
+
+        error_log("showVenues");
+
+        $data = array();
+        $data['currentMenuItem'] = "Dashboard";
+        $data['apisitename'] = $name;
+        $data['apivenueid'] = $json;
+        $venue = \DB::table('venues')->select("id", "sitename", "location", "track_slug", "track_type", "linked_billboard", "brand_id", "advertising_cost")->where('id', '=', $json)->first();
+        $data['venue_type'] = $venue->track_type;
+        $data['venue'] = $venue->sitename;
+        $data['venue_id'] = $venue->id;
+        $data['track_slugname'] = $venue->track_slug;
+        //$data['location'] = $venue->location;
+
+        $assetsdiry = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
+        $data['fullpathimage'] = $assetsdiry->value . 'track/images/' . $venue->location . '.jpg';
+
+        $date_from = \Input::get('date_from');
+        $date_to = \Input::get('date_to');
+
+        if ($date_from == null) {
+            $date_from = date('Y-m-d',strtotime('last monday'));
+        }
+
+        if ($date_to == null) {
+            $date_to = date('Y-m-d',strtotime('next sunday'));
+        }
+
+        if ($venue->linked_billboard != '' && $venue->linked_billboard != null) {
+            $data['exposed_today'] = \DB::select("
+            SELECT count(id) count FROM track_seen_mac_address tsma
+            INNER JOIN (SELECT mac_address FROM track_seen_mac_address where venue_id = ".$venue->linked_billboard." and date_seen = CURDATE()) INQ ON tsma.mac_address = INQ.mac_address
+            WHERE tsma.venue_id = ".$venue->id." and tsma.date_seen = CURDATE()
+            ");
+
+            $data['exposed_today'] = array_values($data['exposed_today']);
+
+            $data['exposed_week'] = \DB::select("
+            SELECT count(id) count FROM track_seen_mac_address tsma
+            INNER JOIN (SELECT mac_address FROM track_seen_mac_address where venue_id = ".$venue->linked_billboard." and date_seen BETWEEN '$date_from' AND '$date_to') INQ ON tsma.mac_address = INQ.mac_address
+            WHERE tsma.venue_id = ".$venue->id." and tsma.date_seen BETWEEN '$date_from' AND '$date_to'
+            ");
+            $data['exposed_week'] = array_values($data['exposed_week']);
+
+        } else {
+            $data['exposed_today'] = \DB::select("SELECT 0 as count");
+            $data['exposed_week'] = \DB::select("SELECT 0 as count");
+        }
+
+        $data['reach_frequency'] = \DB::select("SELECT ROUND(COALESCE(AVG(seen_times), 0), 2) avg_seen_times FROM (SELECT count(id) seen_times, mac_address, venue_id from track_seen_mac_address where venue_id = ".$venue->id." AND mac_address<>'' AND date_seen BETWEEN '$date_from' AND '$date_to' GROUP BY mac_address) INQ");
+        $data['total_conversions'] = \DB::select("SELECT
+                                                    count(id) total_conversions
+                                                FROM
+                                                    track_seen_mac_address tsma
+                                                    INNER JOIN ( SELECT DISTINCT
+                                                            mac_address mac_addresses_seen_by_venues
+                                                        FROM
+                                                            track_seen_mac_address tsmaINNER
+                                                            INNER JOIN (
+                                                                SELECT
+                                                                    id linked_venue_id
+                                                                FROM
+                                                                    venues iv
+                                                                WHERE
+                                                                    linked_billboard = ".$venue->id.") INQ1 ON INQ1.linked_venue_id = tsmaINNER.venue_id
+                                                            WHERE
+                                                                tsmaINNER.date_seen BETWEEN '$date_from'
+                                                                AND '$date_to') INQ2 ON INQ2.mac_addresses_seen_by_venues = tsma.mac_address
+                                                WHERE
+                                                    tsma.venue_id = ".$venue->id."
+                                                    AND tsma.date_seen BETWEEN '$date_from'
+                                                    AND '$date_to'")[0]->total_conversions;
+
+        $data['total_conversions_today'] = \DB::select("SELECT
+                                                    count(id) total_conversions
+                                                FROM
+                                                    track_seen_mac_address tsma
+                                                    INNER JOIN ( SELECT DISTINCT
+                                                            mac_address mac_addresses_seen_by_venues
+                                                        FROM
+                                                            track_seen_mac_address tsmaINNER
+                                                            INNER JOIN (
+                                                                SELECT
+                                                                    id linked_venue_id
+                                                                FROM
+                                                                    venues iv
+                                                                WHERE
+                                                                    linked_billboard = ".$venue->id.") INQ1 ON INQ1.linked_venue_id = tsmaINNER.venue_id
+                                                            WHERE
+                                                                tsmaINNER.date_seen = CURDATE()) INQ2 ON INQ2.mac_addresses_seen_by_venues = tsma.mac_address
+                                                WHERE
+                                                    tsma.venue_id = ".$venue->id."
+                                                    AND tsma.date_seen = CURDATE()")[0]->total_conversions;
+
+
+
+        $linked_venues = \Venue::where('linked_billboard', '=', $venue->id)->pluck('id');
+       if (!$linked_venues) {
+        $linked_venues = 0;
+       }
+
+        $data['strike_time'] = \DB::select("
+            SELECT
+                ROUND(AVG(time_taken_to_convert) / 60,2) minutes,
+                ROUND(AVG(time_taken_to_convert) / 3600,2) hours,
+                ROUND(AVG(time_taken_to_convert) / 86400,2) days
+            FROM (
+                SELECT
+                    TIMESTAMPDIFF(SECOND, seen_by_billboard, seen_by_venue) time_taken_to_convert
+                FROM (
+                    SELECT
+                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id = ".$venue->id." AND date_seen = INQ.date_seen) seen_by_billboard,
+                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id IN (".$linked_venues.") AND date_seen = INQ.date_seen) seen_by_venue
+                    FROM (
+                        SELECT
+                            count(*) seen_times,
+                            mac_address,
+                            date_seen
+                        FROM
+                            track_seen_mac_address tsma
+                        WHERE
+                            (venue_id = ".$venue->id." OR venue_id IN (".$linked_venues."))
+                        AND (date_seen BETWEEN '$date_from' AND '$date_to')
+                        GROUP BY mac_address,date_seen HAVING seen_times > 1
+                    ) INQ
+                ) INQ2 HAVING time_taken_to_convert > 0
+            ) INQ3
+            ");
+
+            $data['strike_time_today'] = \DB::select("
+            SELECT
+                ROUND(AVG(time_taken_to_convert) / 60,2) minutes,
+                ROUND(AVG(time_taken_to_convert) / 3600,2) hours
+            FROM (
+                SELECT
+                    TIMESTAMPDIFF(SECOND, seen_by_billboard, seen_by_venue) time_taken_to_convert
+                FROM (
+                    SELECT
+                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id = ".$venue->id." AND date_seen = INQ.date_seen) seen_by_billboard,
+                        (SELECT created_at FROM track_seen_mac_address WHERE mac_address = INQ.mac_address AND venue_id IN (".$linked_venues.") AND date_seen = INQ.date_seen) seen_by_venue
+                    FROM (
+                        SELECT
+                            count(*) seen_times,
+                            mac_address,
+                            date_seen
+                        FROM
+                            track_seen_mac_address tsma
+                        WHERE
+                            (venue_id = ".$venue->id." OR venue_id IN (".$linked_venues."))
+                        AND (date_seen = CURDATE())
+                        GROUP BY mac_address,date_seen HAVING seen_times > 1
+                    ) INQ
+                ) INQ2 HAVING time_taken_to_convert > 0
+            ) INQ3
+            ");
+
+            $data['strike_distance'] = \DB::select("
+            SELECT
+                ROUND(IFNULL(AVG( 6371 * acos (cos ( radians(billboard_latitude))
+                                * cos( radians( venue_latitude ) )
+                                * cos( radians( venue_logitude ) - radians(billboard_longitude) )
+                                + sin ( radians(billboard_latitude) )
+                                * sin( radians( venue_latitude ) )
+                                )
+                            ), 0), 2) as distance
+            FROM
+                (
+                    SELECT
+                        (SELECT latitude FROM venues WHERE id = v.linked_billboard) as billboard_latitude,
+                        (SELECT longitude FROM venues WHERE id = v.linked_billboard) as billboard_longitude,
+                        latitude as venue_latitude,
+                        longitude as venue_logitude
+                    FROM
+                        venues v
+                    WHERE
+                        linked_billboard = ".$venue->id."
+                ) as inq
+        ");
+
+        $data['avg_basket_value'] = \Brand::find($venue->brand_id)->avg_basket_value;
+        $data['potential_sales'] = $data['total_conversions'] * $data['avg_basket_value'];
+
+        $data['potential_sales_today'] = $data['total_conversions_today'] * $data['avg_basket_value'];
+
+        if ($data['total_conversions'] != 0) {
+            $data['cpa'] = round($venue->advertising_cost / $data['total_conversions'], 2);
+            $data['cpa_today'] = round(($venue->advertising_cost / 31) / $data['total_conversions_today'], 2);
+        } else {
+            $data['cpa'] = 'N/A';
+            $data['cpa_today'] = 'N/A';
+        }
+
+        if ($venue->advertising_cost && $venue->advertising_cost != 0) {
+            $data['roi'] = round(($data['potential_sales'] / $venue->advertising_cost) * 100, 2);
+            $data['roi_today'] = round(($data['potential_sales_today'] / ($venue->advertising_cost / 31)) * 100, 2);
+        } else {
+            $data['roi'] = 'N/A';
+            $data['roi_today'] = 'N/A';
+        }
+
+
+
+
+
+
+
+        // $venues = \Venue::all();
+        /*$venue = new \Venue();
+        $venues = $venue->getVenuesForUser('hipjam', 1);//print_r($venues); die();
+
+        foreach($venues as $venue) {
+            if($venue->ap_active == 0) {
+                $venue["status"] = '<span style="color:red">Inactive</span>';
+            } else {
+                $venue["status"] = '<span style="color:green">Active</span>';
+            }
+            if($venue->server) {
+                $venue["hostname"] = $venue->server->hostname;
+            } else {
+                $venue["hostname"] = "Server No longer exists";
+            }
+            // $venue["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $venue["sitename"]);
+        }
+
+        $data['venuesJson'] = json_encode($venues);*/
+
+        /*if($json) {
+            error_log("showDashboard : returning json" );
+            return \Response::json($data['venuesJson']);
+
+        } else {*/
+        error_log("showDashboard : returning NON json");
+        //return \View::make('hipjam.showvenues')->with('data', $data);
+        return \View::make('hipjam.vicinityviewvenue')->with('data', $data);
         //return \Redirect::route('hipjam_showdashboard', ['json' => 1]);
 
         /*}*/

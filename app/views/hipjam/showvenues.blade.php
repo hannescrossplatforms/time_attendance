@@ -88,7 +88,7 @@
           url: "{{ url('hipjam_getinactivevenues'); }}",
           success: function(venues) {
             debugger;
-            var venuesjson = JSON.parse(venues); 
+            var venuesjson = JSON.parse(venues);
             console.log("venues : " + venues);
 
             openSelect = '<select id="venuelist" name="venue_id" class="form-control">';
@@ -151,6 +151,7 @@ debugger;
                     <tr>\n\
                       <th>Venue Name</th>\n\
                       <th>Type</th>\n\
+                      <th>Status</th>\n\
                       <th>\n\
                       </th>\n\
                     </tr>\n\
@@ -158,7 +159,7 @@ debugger;
                   <tbody>  \n';
         $.each(venuesjson, function(index, value) {
 
-          if(("{{$data['user']}}" != "superadmin") && (value["track_slug"] == "" || value["track_server_location"] == "" ) ) {  
+          if(("{{$data['user']}}" != "superadmin") && (value["track_slug"] == "" || value["track_server_location"] == "" ) ) {
             editbutton = '<a href="javascript:void(0)" onclick="alert(\'Track Venue Id and Track Server need to be set by a super admin before you can continue.\');" class="btn btn-primary btn-sm">edit</a>\n';
           } else {
             editbutton = '<a href="{{ url('hipjam_editvenue'); }}/' + value["id"] + '" class="btn btn-primary btn-sm">edit</a>\n';
@@ -170,12 +171,16 @@ debugger;
 
 
             /*deletebutton = '<a class="btn btn-default btn-delete btn-sm" data-venueid = ' + value["id"] + ' href="#">delete</a>\n';*/
+            let status_row = value['ap_active'] === '0' ? '<span class="badge badge-danger">INACTIVE</span>' : '<span class="badge badge-success">ACTIVE</span>'
 
+            // console.log(`[${value['id']}] ${value["sitename"]} => VALUE: ${value['jam_activated']}; is_active: ${value['jam_activated'] === '1'}; is_false: ${value['jam_activated'] === '0'}`);
+            // debugger;
             rows = rows + '\
                     <tr>\n\
                       <td style="width: 20%;"> ' + value["sitename"]  + '</td>\n\
                       <td style="width: 15%;"> ' + (value["track_type"] === 'billboard' ? 'OOH Site' : 'Venue')  + '</td>\n\
-                      <td style="width: 65%"> ' + editbutton  + '</td>\n\
+                      <td>' + status_row + '</td>\n\
+                      <td style="width: 65%"> ' + editbutton  + '<button class="btn btn-danger btn-disable" data-venueid="' + value["id"] + '">disable</button></td>\n\
                     </tr>\n\
                     ';
         });
@@ -213,6 +218,34 @@ debugger;
           });
         });
       });
+
+      $(document).on('click', '.btn-disable', function () {
+      var venueId = $(this).data('venueid');
+      swal({
+        title: "Are you sure?",
+        text: "Are you sure you want to disable this venue?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Yes, disable it!',
+        closeOnConfirm: false,
+      }).then((willDelete) => {
+          if (willDelete) {
+            swal("Disabled!", "Venue has been disabled!", "success");
+            $.ajax({
+              type: "GET",
+              dataType: 'json',
+              contentType: "application/json",
+              url: "{{ url('hipwifi_disablevenue/" + venueId + "'); }}",
+              success: function(venues) {
+                var venuesjson = JSON.parse(venues);
+                showVenuesTable(venuesjson);
+                buildVenueList();
+              }
+            });
+          }
+      });
+    });
 
 
 

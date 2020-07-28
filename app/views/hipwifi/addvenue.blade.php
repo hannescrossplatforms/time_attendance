@@ -1,6 +1,6 @@
 @extends('angle_wifi_layout')
 
-<?php $edit = $data["edit"] ; 
+<?php $edit = $data["edit"] ;
     if (!$edit) {$editval = 0; } else{$editval = 1; }
     if($data["is_activation"]) { $is_activation = 1; } else { $is_activation = 0; };
 ?>
@@ -49,7 +49,7 @@
                   @if ($errors->has())
                     <div class="alert alert-danger">
                         @foreach ($errors->all() as $error)
-                            {{ $error }}<br>        
+                            {{ $error }}<br>
                         @endforeach
                     </div>
                   @endif
@@ -71,13 +71,20 @@
 
                       @if ($edit)
                         {{ Form::hidden('old_sitename', $data['old_sitename']) }}
-                      @endif 
+                      @endif
                       <div class="form-group">
                         <label for="exampleInputEmail1">Sitename* </label>
-                        <input  id="sitename" type="text" class="form-control" id="exampleInputEmail1" 
-                                name="sitename" placeholder="" 
-                                value="@if(Input::old('sitename')){{Input::old('sitename')}}@else{{$data['venue']->sitename}}@endif" 
+                        @if ($is_activation)
+                        <input  id="sitename" type="text" class="form-control" id="exampleInputEmail1"
+                                name="sitename" placeholder=""
+                                value="{{$data['venue']->sitename}}"
                                 required disabled>
+                          @else
+                          <input  id="sitename" type="text" class="form-control" id="exampleInputEmail1"
+                                name="sitename" placeholder=""
+                                value="@if(Input::old('sitename')){{Input::old('sitename')}}@else{{$data['venue']->sitename}}@endif"
+                                required disabled>
+                          @endif
                       </div>
 
 
@@ -85,12 +92,12 @@
                         <label for="exampleInputEmail1">Location</label>
                         <div id="locationCodeHidden"></div>
                         <div id="locationCodeDisplayed">
-                            @if (\User::hasAccess("superadmin")) 
-                            <input  id="locationcode" name="location" class="form-control" type="text" 
-                                    value="{{$data['venue']->location}}" 
+                            @if (\User::hasAccess("superadmin"))
+                            <input  id="locationcode" name="location" class="form-control" type="text"
+                                    value="{{$data['venue']->location}}"
                                     placeholder="This field autocompletes - please complete all fields above" required>
                             @else
-                            <input  id="" name="" class="form-control" type="text" 
+                            <input  id="" name="" class="form-control" type="text"
                                     value="{{$data['venue']->location}}" disabled >
                             <input  type="hidden" name="location" value="{{ $data['venue']->location }}" >
                             @endif
@@ -101,27 +108,27 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">MAC Address*</label>
                         @if ($is_activation)
-                          <input type="text" class="form-control" id="macaddress" 
-                              name="macaddress" placeholder="" 
-                              value="@if(Input::old('macaddress')){{Input::old('macaddress')}}@else{{$data['venue']->macaddress}}@endif" 
+                          <input type="text" class="form-control" id="macaddress"
+                              name="macaddress" placeholder=""
+                              value="@if(Input::old('macaddress')){{Input::old('macaddress')}}@else{{$data['venue']->macaddress}}@endif"
                               required>
                         @else
-                          <input type="text" class="form-control" id="macaddress" 
-                              name="xxx" placeholder="" 
-                              value="{{$data['venue']->macaddress}}" 
+                          <input type="text" class="form-control" id="macaddress"
+                              name="xxx" placeholder=""
+                              value="{{$data['venue']->macaddress}}"
                               disabled>
                           {{ Form::hidden('macaddress', $data['venue']->macaddress) }}
                         @endif
-                      </div>    
+                      </div>
 
                       <div class="form-group">
                         <label for="exampleInputEmail1">SSID</label>
-                          <input type="text" class="form-control" id="ssid" 
-                              name="ssid" placeholder="" 
-                              value="@if(Input::old('ssid')){{Input::old('ssid')}}@else{{$data['venue']->ssid}}@endif" 
+                          <input type="text" class="form-control" id="ssid"
+                              name="ssid" placeholder=""
+                              value="@if(Input::old('ssid')){{Input::old('ssid')}}@else{{$data['venue']->ssid}}@endif"
                           >
-                      </div>  
-                      
+                      </div>
+
                       <div class="form-group">
                        <label>Device Type</label>
                         <select name="device_type" id="device_type_select" class="form-control">
@@ -129,7 +136,7 @@
                             <option value="{{ $device_type["name"] }}"  {{ $device_type["selected"] }} >
                               {{ $device_type["name"] }}
                             </option>
-                          @endforeach 
+                          @endforeach
                         </select>
                       </div>
 
@@ -144,7 +151,7 @@
                       </div>
 
                       <!--Displaying the admin ssid details if any has been created in the database using the "Add Admin SSID" menu below-->
-                     
+
 
                       @if($edit)
                       <div class="table-responsive" id="config_admin_wifi_table">
@@ -178,25 +185,25 @@
                             <td><a class="btn btn-sm btn-danger"  id="deletessid3" venueid="{{$data['venue']->id;}}" adminid="{{$data['venue']->adminssid1;}}" href="{{ url('deladminssid'); }}/{{$data['venue']->id;}}/{{$data['venue']->adminssid3;}}">Delete</a></td>
                           </tr>
 
-                          
+
 
                         </table>
-                        
+
 
 
 
 
                       </div>
 
-                      
-                      
+
+
 
                       <!--adding functionality for admin wifi ssid configuration-->
                       <div class="form-group" id="addadminwifi">
-                        
+
 
                           <label id="selectadminwifi1"><input type="checkbox" name="admin_wifi" id="selectadminwifi"> Add Admin Network</label><br/>
-                          
+
                           <div id="admin_wifi_details">
                             <div id="adminwifiinput1">
                               <label><input type="text" name="adminssid1" placeholder="Enter First Network Name"></label>
@@ -208,10 +215,10 @@
                                   <option value="hidden">Hidden</option>
                                 </select>
                               </label>
-                             
+
                           </div>
                           <br/>
-                          <div id="adminwifiinput2"> 
+                          <div id="adminwifiinput2">
                             <label><input type="text" name="adminssid2" placeholder="Enter Second Network Name"></label>
                             <label><input type="text" name="secondnetworkpassword" placeholder="Second Network Password"></label>
                             <label>Network Type</label>
@@ -222,7 +229,7 @@
                               </select>
                             </label>
                           </div>
-                          <br/> 
+                          <br/>
 
                           <div id="adminwifiinput3">
                           <label><input type="text" name="adminssid3" placeholder="Enter Third Network Name"></label>
@@ -234,19 +241,19 @@
                               <option value="hidden">Hidden</option>
                             </select>
                           </label>
-                           
-                          </div><br/> 
-                           
-        
+
+                          </div><br/>
+
+
                           </div>
 
 
-                        
-                       
+
+
                       </div>
                       <!-- Mac-address bypass begins here-->
                       <div id="display_bypass_mac_addresses">
-                      
+
                       <table class="table">
                         <tr>
                             <th>S/N</th>
@@ -263,12 +270,12 @@
                                 </tr>
                   @endfor
                       </table>
-                        
+
 
                       </div>
 
                       <div class="form-group" id="addbypassmacaddress">
-                        
+
                         <label id="selectbypassmac"><input type=checkbox name="bypassmac" id="bypassmac"> Add bypassed MAC-Address</label>
                         <br>
                         <div id="bypassmacaddressgroup">
@@ -282,15 +289,15 @@
 
                         </div>
                         </form>
-    
+
                       </div>
                        @endif
                       <div class="form-group">
 
                       @if($edit)
 
-                           @if (\User::hasAccess("superadmin") || \User::hasAccess("admin")) 
-                          <div> 
+                           @if (\User::hasAccess("superadmin") || \User::hasAccess("admin"))
+                          <div>
                                     {{Form::checkbox('checkbox', 'tp_env', null, ["id" => "tpenv"])}}
                                     {{Form::label('tp_env', "Tabletpos Environment")}}
                                     <div class="form-inline">
@@ -306,13 +313,13 @@
                                                 <td><input type=text name="ipaddr" id="oldip{{$printer->id}}" value="{{$printer->ipaddress}}"></td>
                                                 <td><a href="javascript:void(0);"  dbid="{{$printer->id}}" id="updateprinter{{$printer->id}}" class="btn btn-small btn-default">Update</a></td>
                                                 <td><a href="javascript:void(0);"  dbid="{{$printer->id}}" id="deleteprinter{{$printer->id}}" class="btn btn-small btn-default btn-danger">Delete</a></td>
-                                             </tr> 
-                                            
+                                             </tr>
+
                                             @endforeach
                                         </table>
                                     </div>
 
-                            
+
                           </div><br/>
                           @endif
 
@@ -411,36 +418,36 @@
                       <div class="form-group">
                         <label>Server Hostname*</label>
                         <select id="serverlist" name="server_id" class="form-control no-radius" required></select>
-                      </div>  
+                      </div>
 
                       <div class="form-group">
                         <label for="exampleInputEmail1">Venue Status Comment</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" 
+                        <input type="text" class="form-control" id="exampleInputEmail1"
                             name="statuscomment" placeholder="" value="{{$data['venue']->statuscomment}}">
-                      </div> 
+                      </div>
 
                       <div class="form-group">
                         <input type="checkbox" id="alert_email_check" />
                         <label for="alert_email_check">Send status alert emails</label><br>
                         <small>If this option is selected an email will be sent to the email address below notifying them that the sensor is offline.</small>
-                      </div> 
+                      </div>
 
                       <div class="form-group" id="status_alert_container" style="display:none;">
                         <label for="status_alert_email">Status alert email address</label>
-                        <input type="text" class="form-control" id="status_alert_email" 
+                        <input type="text" class="form-control" id="status_alert_email"
                             name="alert_email_address_1" placeholder="Email Address 1" value="{{$data['venue']->alert_email_address_1}}">
-                        <input type="text" class="form-control" id="status_alert_email_2" 
+                        <input type="text" class="form-control" id="status_alert_email_2"
                         name="alert_email_address_2" placeholder="Email Address 2" value="{{$data['venue']->alert_email_address_2}}">
-                        <input type="text" class="form-control" id="status_alert_email_3" 
+                        <input type="text" class="form-control" id="status_alert_email_3"
                         name="alert_email_address_3" placeholder="Email Address 3" value="{{$data['venue']->alert_email_address_3}}">
-                      </div> 
+                      </div>
 
                       <input type="hidden" id="hf_send_alert_emails" name="send_alert_emails"  value="{{$data['venue']->send_alert_emails}}"/>
 
                     </div>
 
-                    <br> 
-                    <button id="submitform" class="btn btn-primary">Submit</button> 
+                    <br>
+                    <button id="submitform" class="btn btn-primary">Submit</button>
                     <a href="{{ url('hipwifi_showvenues'); }}" class="btn btn-default">Cancel</a>
                     <br>
                     <p id="submitallowed" class="rscnotdeployed"> *** Previously submitted configuration yet to be applied, please try again in 5 minutes ***</p>
@@ -512,7 +519,7 @@
         var edit = <?php echo $editval;?>;
         var device_type = document.getElementById('device_type_select');
         var device_type_sel = device_type.options[device_type.selectedIndex].text;
-        
+
         if (edit == 1 && device_type_sel == 'Mikrotik'){
           $('#storeopeninghours').show();
         }
@@ -523,10 +530,10 @@
       });
 
        $("#tpenv").click(function(){
-        
+
           $('#tabletpos_printers').toggle();
-        
-       }); 
+
+       });
 
       is_activation = {{ $is_activation }}
 
@@ -546,7 +553,7 @@
 
 
     $(document).ready(function(){
-      
+
       $(':checkbox:checked').prop('checked',false);
       $('#admin_wifi_details').hide();
       $("#bypassmacaddressgroup").hide();
@@ -577,10 +584,10 @@
       let hasAValue = false;
        for (var i = 0; i <= 9; i++) {
         $('#bypassmacentry' + i).hide();
-        
+
       //the if statement below fetches the content of checkmac, if the mac and comment are both null, only ',' is present in an index, then it hides the entry for that in // //the table.
           debugger;
-          
+
               if (checkmac[i] == ',') {
                   $('#mac' + i).hide();
                   $('#bypassmacentry' + i).show();
@@ -602,10 +609,10 @@
             else {
               $('#display_bypass_mac_addresses').hide();
             }
-       }   
-                
-      
-      
+       }
+
+
+
       //var numadminwifi = '?>';
       var adminssid1 = '<?php echo $adminssid1?>';
       var adminssid2 = '<?php echo $adminssid2?>';
@@ -615,14 +622,14 @@
       /*var numadminwifi = <?php?>;
       alert(wifi[0]);*/
 
-      
-       
-      
 
-      
- 
-    
-    
+
+
+
+
+
+
+
       var showadminwificonfig = <?php echo $showadminwificonfig?>;
       if (showadminwificonfig == 0) {
       $('#config_admin_wifi_table').hide();
@@ -642,7 +649,7 @@
             $('#config_admin_wifi_table').show();
             $('#adminwifiinput1').hide();
           }
-      
+
 
        if (showadminwificonfig == 1 && adminssid2 == ''){
         $('#config_admin_wifi_table').show();
@@ -665,13 +672,13 @@
       if (showadminwificonfig == 1 && adminssid1 == '' && adminssid2 =='' && adminssid3 == ''){
       $('#config_admin_wifi_table').hide();
       $('#selectadminwifi1').show();
-      
+
        }
        else if (showadminwificonfig == 1 && adminssid1 !== '' && adminssid2 !=='' && adminssid3 !== ''){
       $('#selectadminwifi1').hide();
-      
+
        }
-      
+
 
 
       });
@@ -684,9 +691,9 @@
     $('#bypassmac').click(function() {
     $("#bypassmacaddressgroup").toggle();
     });
-      
 
-   
+
+
 
 
       $('#submitprinter').click(function() {
@@ -714,11 +721,11 @@
               });
               $('#printererror').addClass('alert alert-danger');
               $('#printererror').html(errorsHtml);
-              
+
               }
-            
+
             else{
-              $("#tabletpos_printers tr:first").after(data); 
+              $("#tabletpos_printers tr:first").after(data);
               $("#printername").val("");
               $("#printerip").val("");
             }
@@ -726,7 +733,7 @@
             }
 
           });
-       
+
 
       }
 
@@ -757,18 +764,18 @@
               });
               $('#printererror').addClass('alert alert-danger');
               $('#printererror').html(errorsHtml);
-              
+
               }
-            
+
             else{
-             alert('Updated, press Submit button to save to AP.'); 
+             alert('Updated, press Submit button to save to AP.');
             }
 
             }
 
           });
-       
-         
+
+
 
         }
 
@@ -776,7 +783,7 @@
           id = $(this).attr('dbid');
           deletePrinter(id);
             });
-           
+
         function deletePrinter(id){
           input = {};
           input["id"] =  id;
@@ -789,29 +796,29 @@
                     $('#printerrow' + input["id"]).remove();
                     alert("Deleted, press Submit button to save to AP.");
                }
-            }); 
+            });
         }
-          
 
-        
-       
-         
 
-       
 
-    
 
-    
 
-    
-    
+
+
+
+
+
+
+
+
+
 
       $(function() {
         $('#countrielist').change(); // Need to go indirectly via a simulated click because can't do document delegate on page load
-        $('#brandlist').change(); 
+        $('#brandlist').change();
         buildServerList();
       });
-      
+
       $(document).delegate('#countrielist', 'change', function() {
         buildProvinceList();
       });
@@ -840,7 +847,7 @@
       $(document).delegate('#macaddress', 'focusout', function() {
         buildLocationCode();
       });
-      
+
 
       $('#submitform').click(function() {
 
@@ -855,7 +862,7 @@
 
         // if (isDuplicate("#macaddress", "macaddress", "venues", "Mac Address")) {
         //   alert("macaddress is duplicate : ");
-          
+
         //   message = "Mac Address " + $( "#macaddress" ).val() + " already exists";
         //   returnval = false;
         // } else {alert("macaddress is NOT duplicate : ");}
@@ -871,7 +878,7 @@
 
         // if (!returnval) sweetAlert("Error", message);
 
-        // return false; 
+        // return false;
       });
 
       function isSitenameDuplicate(sitename, brand_id) {
@@ -880,19 +887,19 @@
             type: "GET",
             dataType: 'json',
             contentType: "application/json",
-            data: { 
-                'sitename': sitename, 
-                'brand_id': brand_id 
+            data: {
+                'sitename': sitename,
+                'brand_id': brand_id
             },
             url: "{{ url('lib_issitenameduplicate'); }}",
             success: function(message) {
-                // alert("aaaaaaaaaaaaaaaaaaa "); 
-              if(message == "exists") { 
-                // alert("true "); 
-                return true; 
-              } else { 
+                // alert("aaaaaaaaaaaaaaaaaaa ");
+              if(message == "exists") {
+                // alert("true ");
+                return true;
+              } else {
                 // alert("false ");
-                return false; 
+                return false;
               }
             }
           });
@@ -906,19 +913,19 @@
             type: "GET",
             dataType: 'json',
             contentType: "application/json",
-            data: { 
-                'table': table, 
-                'column': column, 
-                'value': value 
+            data: {
+                'table': table,
+                'column': column,
+                'value': value
             },
             url: "{{ url('lib_isduplicate'); }}",
             success: function(message) {
-              if(message == "exists") { 
-                // alert("true "); 
-                return 1; 
-              } else { 
+              if(message == "exists") {
+                // alert("true ");
+                return 1;
+              } else {
                 // alert("false ");
-                return 0; 
+                return 0;
               }
             }
           });
@@ -939,11 +946,11 @@
             type: "GET",
             dataType: 'json',
             contentType: "application/json",
-            data: { 
-                'brand_id': brand_id, 
-                'sitename': sitename, 
-                'countrie_id': countrie_id, 
-                'province_id': province_id, 
+            data: {
+                'brand_id': brand_id,
+                'sitename': sitename,
+                'countrie_id': countrie_id,
+                'province_id': province_id,
                 'citie_id': citie_id
             },
             url: "{{ url('lib_buildlocationcode'); }}",
@@ -969,7 +976,7 @@
             contentType: "application/json",
             url: "{{ url('lib_getprovinces/" + countrie_id + "'); }}",
             success: function(provinces) {
-              var provincesjson = JSON.parse(provinces); 
+              var provincesjson = JSON.parse(provinces);
               console.log("Provinces : " + provinces);
 
               openSelect = '<select id="provincelist" name="countrie_id" class="form-control">';
@@ -997,7 +1004,7 @@
             contentType: "application/json",
             url: "{{ url('lib_getcities/" + province_id + "'); }}",
             success: function(cities) {
-              var citiesjson = JSON.parse(cities); 
+              var citiesjson = JSON.parse(cities);
               console.log("cities : " + cities);
 
               options = '<option id="citielist" selected="selected">Please select</option>';
@@ -1024,8 +1031,8 @@
             contentType: "application/json",
             url: "{{ url('lib_getservers/" + brand_id + "'); }}",
             success: function(servers) {
-              var serversjson = JSON.parse(servers); 
-              
+              var serversjson = JSON.parse(servers);
+
               openSelect = '<select id="serverlist" name="server_id" class="form-control">';
               options = '';
               selected = '';
@@ -1157,7 +1164,7 @@
           $('#sat_to').timepicker('option', 'maxTime', '12am');
           $('#sat_to').show();
         }
-      });      
+      });
 
 
       $('#sun_from').on('changeTime', function() {

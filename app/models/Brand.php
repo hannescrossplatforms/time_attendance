@@ -332,7 +332,7 @@ class Brand extends Eloquent {
                         ->whereNull('deleted_at')
                         ->orderBy('brands.name','ASC')
                         ->get();
-    
+
             }
         }
 

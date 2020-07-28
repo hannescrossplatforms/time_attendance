@@ -183,8 +183,8 @@ class AdminController extends \BaseController {
             'name.unique' => 'The brand name is already taken',
             'name.alpha_num_dash_spaces' => 'The full name can only contain letters, numbers, dashes and spaces',
             'code.required' => 'The brand code is required',
-            'code.unique' => 'The brand code is already taken',
-            'code.size' => 'The brand code must be 6 characters in length',
+            'code.unique' => 'The brand code is already taken'// ,
+            // 'code.size' => 'The brand code must be 6 characters in length',
         );
 
         $rules = array(
@@ -231,7 +231,7 @@ class AdminController extends \BaseController {
     {
         error_log("deleteBrand");
         $brand = \Brand::find($id);
-        
+
         $remdb = $brand->remotedb;
         $connection = null;
         if ($remdb) {
@@ -245,9 +245,9 @@ class AdminController extends \BaseController {
             if ($ids) {
                 $ids_param = implode(',', $ids);
             }
-            
 
-            
+
+
 
             // http://tracks03.hipzone.co.za/remove_venues?ids=1423
             $brand->users()->detach();
@@ -382,11 +382,11 @@ class AdminController extends \BaseController {
         if (\User::isVicinity()) {
             $data['brands'] = \Brand::whereRaw('parent_brand = 165 OR id = 165')->get();
         } else {
-            $data['brands'] = $brand->getBrandsForProduct('hipwifi and tna');    
+            $data['brands'] = $brand->getBrandsForProduct('hipwifi and tna');
         }
-        
-        
-        
+
+
+
 
         $data['ap_active_checked'] = "checked";
         $data['ap_inactive_checked'] = "";
@@ -455,7 +455,7 @@ error_log("admin_editVenue 10");
         $data['submitbutton'] = 'on';
 
         $data['old_sitename'] = $data['venue']["sitename"];
-        $data['venue']["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
+        $data['venue']["sitename"] = explode(' ', $data['venue']["sitename"])[1];//preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
         foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
 
         $encoded = json_encode($data);
@@ -509,7 +509,7 @@ error_log("admin_editVenueSave 10");
             $list_of_sensors = \Sensor::where('venue_id', '=', $id);
             foreach ($list_of_sensors as $sensor)
             {
-                $command = 'ssh  -v -i /var/www/.ssh/id_rsa root@vpn.hipzone.co.za -p 1759 "delete_keys ' . $sensor->name . '" 2>&1'; 
+                $command = 'ssh  -v -i /var/www/.ssh/id_rsa root@vpn.hipzone.co.za -p 1759 "delete_keys ' . $sensor->name . '" 2>&1';
                 $output = shell_exec($command);
                 $sensor->delete();
             }
@@ -520,7 +520,7 @@ error_log("admin_editVenueSave 10");
             error_log("admin_deleteVenue 30");
             $mikrotik = new \Mikrotik();
             $mikrotik->deleteVenue($venue);
-            
+
         }
 
         return \Redirect::route('admin_showvenues', ['json' => 1]);

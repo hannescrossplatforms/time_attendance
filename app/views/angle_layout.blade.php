@@ -19,7 +19,9 @@
   <link rel="stylesheet" href="{{asset('theme/vendor/weather-icons/css/weather-icons.css') }}">
   <link rel="stylesheet" href="{{asset('theme/css/bootstrap.css') }}" id="bscss">
   <link rel="stylesheet" href="{{asset('theme/css/app.css') }}" id="maincss">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -43,7 +45,7 @@
                @else
                   <div class="brand-logo"><img class="img-fluid" src="http://hiphub.hipzone.co.za/img/logo_hiphub_small.svg" alt="App Logo" style="height: 30px;float: left;"> <h4 style="color: white; margin-top: 5px;">TRACK</h4></div>
                   <div class="brand-logo-collapsed"><img class="img-fluid" src="http://hiphub.hipzone.co.za/img/logo_hiphub_small.svg" alt="App Logo"></div>
-               @endif   
+               @endif
                </a></div><!-- END navbar header-->
             <!-- START Left navbar-->
             <ul class="navbar-nav mr-auto flex-row">
@@ -61,7 +63,7 @@
                <!-- START Offsidebar button-->
             </ul><!-- END Right Navbar-->
             <!-- START Search form-->
-            
+
          </nav><!-- END Top Navbar-->
       </header><!-- sidebar-->
       <aside class="aside-container">
@@ -116,16 +118,16 @@
                     </li>
                   @endif
 
-                  
 
-                  
+
+
 
 
                </ul><!-- END sidebar nav-->
             </nav>
          </div><!-- END Sidebar (left)-->
       </aside><!-- offsidebar-->
-      
+
       </aside><!-- Main section-->
 
    <script src="{{asset('theme/vendor/modernizr/modernizr.custom.js')}}"></script><!-- STORAGE API-->
@@ -136,8 +138,8 @@
    <script src="{{asset('theme/vendor/jquery/dist/jquery.js')}}"></script>
    <script src="{{asset('theme/vendor/popper.js/dist/umd/popper.js')}}"></script>
    <script src="{{asset('theme/vendor/bootstrap/dist/js/bootstrap.js')}}"></script><!-- =============== PAGE VENDOR SCRIPTS ===============-->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+
    <script src="{{asset('theme/vendor/jquery-slimscroll/jquery.slimscroll.js')}}"></script><!-- SPARKLINE-->
    <script src="{{asset('theme/vendor/jquery-sparkline/jquery.sparkline.js')}}"></script><!-- FLOT CHART-->
    <script src="{{asset('theme/vendor/flot/jquery.flot.js')}}"></script>
@@ -149,6 +151,7 @@
    <script src="{{asset('theme/vendor/jquery.flot.spline/jquery.flot.spline.js')}}"></script><!-- EASY PIE CHART-->
    <script src="{{asset('theme/vendor/easy-pie-chart/dist/jquery.easypiechart.js')}}"></script><!-- MOMENT JS-->
    <script src="{{asset('theme/vendor/moment/min/moment-with-locales.js')}}"></script><!-- =============== APP SCRIPTS ===============-->
+   <script src="{{asset('theme/js/app.js')}}"></script><!-- =============== APP SCRIPTS ===============-->
    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
   <script src="http://maps.google.com/maps/api/js?key=AIzaSyB5WpGnCln1Y_nuB930tQso-DTLjvMx2x0" type="text/javascript"></script>
   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
@@ -159,7 +162,9 @@
   <script src="https://www.amcharts.com/lib/4/core.js"></script>
    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
    <script src="{{ asset('js/dashboard_master_chart.js') }}"></script>
+   <script src="{{ asset('js/dashboard_regional_chart.js') }}"></script>
    <!-- <script src="https://www.amcharts.com/lib/4/lang/de_DE.js"></script>
    <script src="https://www.amcharts.com/lib/4/geodata/germanyLow.js"></script>
    <script src="https://www.amcharts.com/lib/4/fonts/notosans-sc.js"></script> -->
@@ -193,11 +198,13 @@
    </div><!-- =============== VENDOR SCRIPTS ===============-->
 
      <!-- MODERNIZR-->
+<script>
+
+</script>
 
 
 
 
-  
      @yield('modals')
 
 </body>
