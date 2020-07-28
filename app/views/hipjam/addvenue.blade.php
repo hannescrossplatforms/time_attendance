@@ -159,7 +159,7 @@ if ($data["is_activation"]) {
                             @elseif ($data['venue']->track_slug == 'SBOutdoorRandViewCentre')
                             <label for="track_slug">Reset Board Auth Key</label>
                             <input disabled id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="59dc065f-788c-47d9-8a9c-519f2e035701">
-                            @elseif ($data['venue']->track_slug == 'SBOutdoor SephakoMakgathoDr')
+                            @elseif ($data['venue']->track_slug == 'SBOutdoorSephakoMakgathoDr')
                             <label for="track_slug">Reset Board Auth Key</label>
                             <input disabled id="track_slug" type="text" class="form-control" name="track_slug" placeholder="" value="78bc98fa-86ab-4854-8c78-8f0869faceff">
                             @elseif ($data['venue']->track_slug == 'SBOutdoorStoneridgeDrive')
