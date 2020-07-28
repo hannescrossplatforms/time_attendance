@@ -110,6 +110,12 @@ if ($data["is_activation"]) {
                         </div>
 
                         <div class="col-6">
+                          <div class="form-group">
+                            <label for="track_password">Time Zone</label>
+                            <select name="timezone" id="timezone_select" class="form-control" autocomplete="off">
+                              {{ $data['timezoneselect'] }}
+                            </select>
+                          </div>
                         </div>
                         
 
@@ -177,14 +183,7 @@ if ($data["is_activation"]) {
                           </div>
                         </div>
 
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label for="track_password">Time Zone</label>
-                            <select name="timezone" id="timezone_select" class="form-control" autocomplete="off">
-                              {{ $data['timezoneselect'] }}
-                            </select>
-                          </div>
-                        </div>
+                        
 
                         <div class="col-12">
                           <div class="form-group">
