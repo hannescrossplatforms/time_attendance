@@ -110,7 +110,7 @@ if ($data["is_activation"]) {
                         </div>
 
 
-                        @if ($data['venue']->track_slug == 'SBOutdoor MeadowdaleR24')
+                        
 
                         <div class="col-6">
                           <div class="form-group">
