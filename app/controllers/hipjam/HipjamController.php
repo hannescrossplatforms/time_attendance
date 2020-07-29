@@ -1959,8 +1959,13 @@ public function getOohSiteData() {
         $venue->track_ssid = $objData->track_ssid;
         $venue->track_password = $objData->track_password;
         $venue->timezone = $objData->timezone;
+
+        \Log::info("HANNES - hipjamcontrolle - kom in 1");
+        \Log::info("HANNES - hipjamcontrolle - track type $venue->track_type");
         if($venue->track_type == 'billboard'){
+            \Log::info("HANNES - hipjamcontrolle - kom in 2");
             if($venue->sonoff_device_uuid == null){
+                \Log::info("HANNES - hipjamcontrolle - kom in 3");
                 // Doesn't have uuids set, set it now.
                 $venue->sonoff_device_uuid = $this->uuid();
                 $venue->sonoff_device_auth_token = $this->uuid();
