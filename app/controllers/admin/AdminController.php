@@ -396,6 +396,9 @@ class AdminController extends \BaseController {
 
     public function admin_addVenueSave()
     {
+
+// HERE
+
         $input = \Input::all();
         $brand_id = \Input::get('brand_id');
         $brand_name = \Brand::find($brand_id)->name;
