@@ -322,7 +322,10 @@ Route::get('vicinity/view/venue/{id}/{name}', array('uses' => 'hipjam\HipjamCont
 // ============================================================================================================================ \\
 // ============================================================================================================================ \\
 Route::get('hipjam_viewvenue/{id}/{name}/json', array('uses' => 'hipjam\HipjamController@viewVenueJson', 'as' => 'hipjam_viewvenuejson'))->before('auth');
+Route::get('hipjam_viewvenue/{id}/{name}/json', array('uses' => 'hipjam\HipjamController@viewVenueJson', 'as' => 'hipjam_viewvenuejson'))->before('auth');
 Route::get('hipjam_viewvenue', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');
+Route::get('hipjam/all_ooh_sites','hipjam\HipjamController@oohSites');
+Route::get('hipjam/update_sonoff_status','hipjam\HipjamController@updateSonoffStatus');
 Route::get('hipjam/chartJsondata','hipjam\HipjamController@chartJsondata');
 Route::get('hipjam/heatmapJsondata','hipjam\HipjamController@heatmapJsondata');
 Route::get('hipjam/zonalJsondata','hipjam\HipjamController@zonalJsondata');
