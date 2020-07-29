@@ -1961,6 +1961,7 @@ public function getOohSiteData() {
         $venue->track_ssid = $objData->track_ssid;
         $venue->track_password = $objData->track_password;
         $venue->timezone = $objData->timezone;
+        $venue->track_type = $objData->track_type;
 
         \Log::info("HANNES - hipjamcontrolle - kom in 1");
         \Log::info("HANNES - hipjamcontrolle - track type $venue->track_type");
