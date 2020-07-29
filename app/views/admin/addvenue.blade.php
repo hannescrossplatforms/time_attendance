@@ -105,7 +105,7 @@
                       <div class="form-group">
                         <label>City*</label>
                         <select id="citielist" name="citie_id" class="form-control no-radius" placeholder"First select province" required>
-                          <option selected="selected">First select province</option>
+                          <option selected="selected">First select province1</option>
                         </select>
                       </div>
 
