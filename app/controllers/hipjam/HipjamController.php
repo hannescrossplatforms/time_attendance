@@ -1930,6 +1930,10 @@ public function getOohSiteData() {
             "created_at" =>  \Carbon\Carbon::now(),
             "updated_at" => \Carbon\Carbon::now(),
         );
+
+
+
+
         error_log("saveVenueInTrackDb 10");
         \DB::connection('track')->table("venues")->where('id', '=', $venue->id)->delete();
         error_log("saveVenueInTrackDb 20");
@@ -1941,6 +1945,10 @@ public function getOohSiteData() {
     //update the track server name and id
     public function editVenueServer()
     {
+
+        //HERE
+
+
         error_log("editVenueServer 10");
         $objData = json_decode(\Input::get("newrecord"));
         $id = $objData->id;
@@ -1951,6 +1959,14 @@ public function getOohSiteData() {
         $venue->track_ssid = $objData->track_ssid;
         $venue->track_password = $objData->track_password;
         $venue->timezone = $objData->timezone;
+        if($venue->track_type == 'billboard'){
+            if($venue->sonoff_device_uuid == null){
+                // Doesn't have uuids set, set it now.
+                $venue->sonoff_device_uuid = $this->uuid();
+                $venue->sonoff_device_auth_token = $this->uuid();
+            }
+        }
+
         $result = $venue->save();
 
         // Update the venues table on the server
@@ -1959,7 +1975,17 @@ public function getOohSiteData() {
         print_r($result); // For some reason the success condition in the javascript will only fir if I do this. Not quite sure why.
 
     }
-
+    
+    public function uuid()
+    {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
+    }
 
     public function updateSensordata()
     {
