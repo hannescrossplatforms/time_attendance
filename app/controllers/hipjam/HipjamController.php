@@ -4457,7 +4457,7 @@ public function getOohSiteData() {
                 'error' => 'Unauthorized access'], 401);
         }
 
-        $venues = \Venue::where('track_type', '=', 'billboard')->all();
+        $venues = \Venue::where('track_type', '=', 'billboard')->get();
         return response()->json([
             'venues' => $venues->toJson()], 200);
     }
