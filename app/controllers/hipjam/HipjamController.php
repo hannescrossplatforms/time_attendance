@@ -4434,18 +4434,24 @@ public function getOohSiteData() {
         print_r($json);
     }
     public function updateSonoffStatus(){
+
         $auth_token = \Input::get('auth_token');
-        $sonoff_auth_token = \Input::get('sonoff_device_auth_token');
+        $device_auth_token = \Input::get('device_auth_token');
+        $status = \Input::get('status');
+
         if ($auth_token != '001c2fcd-99a5-4bac-8689-3f73d4d46849'){
             return Response::json([
                 'error' => 'Unauthorized access'
             ],401);
         }
 
+        $settingStatus = false;
+        if($status == "on"){
+            $settingStatus = true;
+        }
 
-
-        $venue = \Venue::where('sonoff_device_auth_token', '=', $sonoff_auth_token)->first();
-        $venue->sonoff_device_on_status = true;
+        $venue = \Venue::where('sonoff_device_auth_token', '=', $device_auth_token)->first();
+        $venue->sonoff_device_on_status = $settingStatus;
         $venue.save();
 
         return Response::json([
