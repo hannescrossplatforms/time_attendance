@@ -4455,7 +4455,7 @@ public function getOohSiteData() {
         $venue->save();
 
         return Response::json([
-            'success' => 'true'
+            'success' => 'true', 'device_status_now' => $status
         ],200);
 
         
