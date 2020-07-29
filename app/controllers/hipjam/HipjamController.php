@@ -1946,8 +1946,9 @@ public function getOohSiteData() {
     public function editVenueServer()
     {
 
-        //HERE
-
+        //HEREtrack_type
+        $test = \Input::get("track_type");
+        \Log::info("HANNES - hipjamcontrolle - kom in 0 $test");
 
         error_log("editVenueServer 10");
         $objData = json_decode(\Input::get("newrecord"));
