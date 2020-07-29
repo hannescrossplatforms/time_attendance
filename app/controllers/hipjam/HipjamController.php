@@ -1947,7 +1947,7 @@ public function getOohSiteData() {
     {
 
         //HEREtrack_type
-        $test = json_decode(Input::all(), true);
+        $test = json_encode(Input::all());
         
         \Log::info("HANNES - hipjamcontrolle - kom in 0 $test");
 
