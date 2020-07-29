@@ -4445,7 +4445,7 @@ public function getOohSiteData() {
         $venue = \Venue::where('sonoff_device_auth_token', '=', $sonoff_auth_token)->first();
         $venue->sonoff_device_on_status = true;
         $venue.save();
-        return response()->json([
+        return json([
             'success' => 'true'], 200);
     
     }
@@ -4453,12 +4453,12 @@ public function getOohSiteData() {
     public function oohSites() {
         $auth_token = \Input::get('auth_token');
         if ($auth_token != '001c2fcd-99a5-4bac-8689-3f73d4d46849'){
-            return response()->json([
+            return json([
                 'error' => 'Unauthorized access'], 401);
         }
 
         $venues = \Venue::where('track_type', '=', 'billboard')->get();
-        return response()->json([
+        return json([
             'venues' => $venues->toJson()], 200);
     }
 
