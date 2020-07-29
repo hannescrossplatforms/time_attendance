@@ -4452,7 +4452,7 @@ public function getOohSiteData() {
 
         $venue = \Venue::where('sonoff_device_auth_token', '=', $device_auth_token)->first();
         $venue->sonoff_device_on_status = $settingStatus;
-        $venue.save();
+        $venue->save();
 
         return Response::json([
             'success' => 'true'
