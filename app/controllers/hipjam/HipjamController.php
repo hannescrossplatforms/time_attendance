@@ -1945,12 +1945,6 @@ public function getOohSiteData() {
     //update the track server name and id
     public function editVenueServer()
     {
-
-        //HEREtrack_type
-        $test = json_encode(Input::all());
-        
-        \Log::info("HANNES - hipjamcontrolle - kom in 0 $test");
-
         error_log("editVenueServer 10");
         $objData = json_decode(\Input::get("newrecord"));
         $id = $objData->id;
@@ -1963,12 +1957,8 @@ public function getOohSiteData() {
         $venue->timezone = $objData->timezone;
         $venue->track_type = $objData->track_type;
 
-        \Log::info("HANNES - hipjamcontrolle - kom in 1");
-        \Log::info("HANNES - hipjamcontrolle - track type $venue->track_type");
         if($venue->track_type == 'billboard'){
-            \Log::info("HANNES - hipjamcontrolle - kom in 2");
             if($venue->sonoff_device_uuid == null){
-                \Log::info("HANNES - hipjamcontrolle - kom in 3");
                 // Doesn't have uuids set, set it now.
                 $venue->sonoff_device_uuid = $this->uuid();
                 $venue->sonoff_device_auth_token = $this->uuid();
