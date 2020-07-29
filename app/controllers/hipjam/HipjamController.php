@@ -6,7 +6,7 @@ use Input;
 //use app\lib\Heatmap;
 use Session;
 use TrackSeenMacAddress;
-use Illuminate\Http\Response;
+use Response;
 
 // use BaseController;
 
@@ -4459,8 +4459,14 @@ public function getOohSiteData() {
         }
 
         $venues = \Venue::where('track_type', '=', 'billboard')->get();
-        return response()->json([
-            'venues' => $venues->toJson()], 200);
+
+        return Response::json([
+            'venues' => $venues->toJson()
+    ],200);
+
+
+
+        
     }
 
 }
