@@ -4433,7 +4433,8 @@ public function getOohSiteData() {
         print_r($json);
     }
     public function updateSonoffStatus(){
-        // $brand_id = \Venue::where('track_slug', '=', $venue)->first()->brand_id;
+        $auth_token = \Input::get('auth_token');
+        $sonoff_auth_token = \Input::get('sonoff_device_auth_token');
         if ($auth_token != '001c2fcd-99a5-4bac-8689-3f73d4d46849'){
             return response()->json([
                 'error' => 'Unauthorized access'], 401);
@@ -4441,7 +4442,7 @@ public function getOohSiteData() {
 
 
 
-        $venue = \Venue::where('sonoff_device_uuid', '=', $venue)->first();
+        $venue = \Venue::where('sonoff_device_auth_token', '=', $sonoff_auth_token)->first();
         $venue->sonoff_device_on_status = true;
         $venue.save();
         return response()->json([
@@ -4456,7 +4457,7 @@ public function getOohSiteData() {
                 'error' => 'Unauthorized access'], 401);
         }
 
-        $venues = Venue::where('track_type', '=', 'billboard')->all();
+        $venues = \Venue::where('track_type', '=', 'billboard')->all();
         return response()->json([
             'venues' => $venues->toJson()], 200);
     }
