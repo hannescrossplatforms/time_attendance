@@ -813,6 +813,7 @@ if ($data["is_activation"]) {
     newrecord['timezone'] = $('#timezone_select').val();
     newrecord['id'] = "{{$data['venue']->id}}";
     newrecord['venue_location'] = "{{$data['venue']->location}}";
+    newrecord['track_type'] = $('#track_type').val();
 
     var url = "{{ URL::route('hipjam_editvenueserver') }}";
     //console.log(newrecord);
