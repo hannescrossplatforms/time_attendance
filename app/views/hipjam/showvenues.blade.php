@@ -184,7 +184,7 @@ debugger;
           }
           var device_auth_token = "";
           if (value["sonoff_device_auth_token"] != null){
-            device_uuid = value["sonoff_device_auth_token"];
+            device_auth_token = value["sonoff_device_auth_token"];
           }
 
             rows = rows + '\
