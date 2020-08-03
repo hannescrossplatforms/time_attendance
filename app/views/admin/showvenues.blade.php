@@ -103,7 +103,8 @@
       function showVenuesTable(venuesjson) {
         let table_html = '';
         let tbody = $('#venue_table_body');
-
+        debugger;
+        debugger;
         $.each(venuesjson, function(index, value) {
           table_html += `
             <tr>
