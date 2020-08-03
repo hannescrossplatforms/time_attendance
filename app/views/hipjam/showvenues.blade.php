@@ -177,12 +177,22 @@ debugger;
 
             // console.log(`[${value['id']}] ${value["sitename"]} => VALUE: ${value['jam_activated']}; is_active: ${value['jam_activated'] === '1'}; is_false: ${value['jam_activated'] === '0'}`);
             // debugger;
+
+          var device_uuid = "";
+          if (value["sonoff_device_uuid"] != null){
+            device_uuid = value["sonoff_device_uuid"];
+          }
+          var device_auth_token = "";
+          if (value["sonoff_device_auth_token"] != null){
+            device_uuid = value["sonoff_device_auth_token"];
+          }
+
             rows = rows + '\
                     <tr>\n\
                       <td style="width: 20%;"> ' + value["sitename"]  + '</td>\n\
                       <td style="width: 15%;"> ' + (value["track_type"] === 'billboard' ? 'OOH Site' : 'Venue')  + '</td>\n\
-                      <td style="width: 20%;"> ' + value["sonoff_device_uuid"]  + '</td>\n\
-                      <td style="width: 20%;"> ' + value["sonoff_device_auth_token"]  + '</td>\n\
+                      <td style="width: 20%;"> ' + device_uuid  + '</td>\n\
+                      <td style="width: 20%;"> ' + device_auth_token  + '</td>\n\
                       <td>' + status_row + '</td>\n\
                       <td style="width: 65%"> ' + editbutton  + '<button class="btn btn-danger btn-disable" data-venueid="' + value["id"] + '">disable</button></td>\n\
                     </tr>\n\
