@@ -151,6 +151,8 @@ debugger;
                     <tr>\n\
                       <th>Venue Name</th>\n\
                       <th>Type</th>\n\
+                      <th>Reset Board UUID</th>\n\
+                      <th>Reset Board Auth Key</th>\n\
                       <th>Status</th>\n\
                       <th>\n\
                       </th>\n\
@@ -179,6 +181,8 @@ debugger;
                     <tr>\n\
                       <td style="width: 20%;"> ' + value["sitename"]  + '</td>\n\
                       <td style="width: 15%;"> ' + (value["track_type"] === 'billboard' ? 'OOH Site' : 'Venue')  + '</td>\n\
+                      <td style="width: 20%;"> ' + value["sonoff_device_uuid"]  + '</td>\n\
+                      <td style="width: 20%;"> ' + value["sonoff_device_auth_token"]  + '</td>\n\
                       <td>' + status_row + '</td>\n\
                       <td style="width: 65%"> ' + editbutton  + '<button class="btn btn-danger btn-disable" data-venueid="' + value["id"] + '">disable</button></td>\n\
                     </tr>\n\
