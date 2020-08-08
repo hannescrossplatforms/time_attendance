@@ -12,7 +12,7 @@ class AddRestartTimerToVenues extends Migration {
 	 */
 	public function up()
 	{
-		//
+		$table->date('sonoff_device_action_time')->nullable()->default(null);
 	}
 
 	/**
