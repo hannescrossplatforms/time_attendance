@@ -37,6 +37,7 @@ return array(
     'AddPicknpayTable' => $baseDir . '/app/database/migrations/2019_05_20_201803_add_picknpay_table.php',
     'AddProductId' => $baseDir . '/app/database/migrations/2016_11_13_103741_add_product_id.php',
     'AddRestartTimerToVenues' => $baseDir . '/app/database/migrations/2020_08_08_061119_add_restart_timer_to_venues.php',
+    'AddRestartToSonoffTimeVenuesTale' => $baseDir . '/app/database/migrations/2020_08_08_062543_add_restart_to_sonoff_time_venues_tale.php',
     'AddRscmodifytimeColumnToVenuesTable' => $baseDir . '/app/database/migrations/2017_03_13_115528_add_rscmodifytime_column_to_venues_table.php',
     'AddSitenameToRep7dayTable' => $baseDir . '/app/database/migrations/2015_08_25_122544_add_sitename_to_rep7day_table.php',
     'AddSocialHeadingToBrandsTable' => $baseDir . '/app/database/migrations/2016_03_14_080019_add_social_heading_to_brands_table.php',
