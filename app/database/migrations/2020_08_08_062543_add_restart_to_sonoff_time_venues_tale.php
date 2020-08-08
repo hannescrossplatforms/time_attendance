@@ -12,7 +12,10 @@ class AddRestartToSonoffTimeVenuesTale extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::table('venues', function(Blueprint $table)
+		{
+			$table->date('sonoff_device_action_time')->nullable()->default(null);
+		});
 	}
 
 	/**
