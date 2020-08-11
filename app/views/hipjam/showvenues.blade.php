@@ -202,12 +202,7 @@
         $( "#venueTable" ).html( table );
       }
 
-      function updateSonoffButtons(){
-        debugger;
-        $('.sonoff-button').each(function(){
-          alert("asdf");
-        });
-      };
+      
 
       $(document).delegate('.btn-delete', 'click', function() {
       var venueId = this.getAttribute('data-venueid');
@@ -234,6 +229,13 @@
           });
         });
       });
+
+      function updateSonoffButtons(){
+        debugger;
+        $('.sonoff-button').each(function(){
+          alert("asdf");
+        });
+      };
 
       $(document).on('click', '.btn-disable', function () {
       var venueId = $(this).data('venueid');
