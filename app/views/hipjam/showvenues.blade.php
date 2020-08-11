@@ -109,13 +109,16 @@
     }
 
       showVenuesTable(venuesJson);
+      updateSonoffButtons();
 
       $(document).delegate('#buildtable', 'click', function() {
         showVenuesTable(venuesJson);
+        updateSonoffButtons();
       });
 
       $(document).delegate('#reset', 'click', function() {
         showVenuesTable(venuesJson);
+        updateSonoffButtons();
       });
 
       $(document).delegate('#filter', 'click', function(event) {
@@ -135,6 +138,7 @@
             success: function(filteredVenuesjson) {
               // alert("success");
               showVenuesTable(filteredVenuesjson);
+              updateSonoffButtons();
             }
          });
       });
@@ -192,7 +196,7 @@
                     ';
         });
 
-        updateSonoffButtons();
+        
 
         let endTable = ' \
                   </tbody>\n\
@@ -225,6 +229,7 @@
             success: function(venues) {
               var venuesjson = JSON.parse(venues);
               showVenuesTable(venuesjson);
+              updateSonoffButtons();
             }
           });
         });
@@ -259,6 +264,7 @@
                 var venuesjson = JSON.parse(venues);
                 showVenuesTable(venuesjson);
                 buildVenueList();
+                updateSonoffButtons();
               }
             });
           }
