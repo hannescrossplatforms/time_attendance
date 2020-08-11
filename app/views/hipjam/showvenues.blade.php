@@ -296,37 +296,35 @@
 
 
         var url = 'http://hiphub.hipzone.co.za/hipjam/update_sonoff_status?auth_token=001c2fcd-99a5-4bac-8689-3f73d4d46849&device_auth_token=' + deviceAuthToken + '&status=off';
-        alert(url);
-        // $.ajax({
-        //       type: "GET",
-        //       dataType: 'json',
-        //       contentType: "application/json",
-        //       url: url,
-        //       success: function(venues) {
-        //         button.removeClass("btn-success");
-        //         button.addClass("btn-warning");
-        //         button.attr('sonoff_status', 'shutting_down');
-        //         button.html('Shutting Down');
-        //       }
-        //     });
+        $.ajax({
+              type: "GET",
+              dataType: 'json',
+              contentType: "application/json",
+              url: url,
+              success: function(venues) {
+                button.removeClass("btn-success");
+                button.addClass("btn-warning");
+                button.attr('sonoff_status', 'shutting_down');
+                button.html('Shutting Down');
+              }
+            });
       }
 
       function startUpVenue(){
         var venueId = button.attr('venue_id');
         var url = 'http://hiphub.hipzone.co.za/hipjam/update_sonoff_status?auth_token=001c2fcd-99a5-4bac-8689-3f73d4d46849&device_auth_token=' + deviceAuthToken + '&status=on';
-        alert(url);
-        // $.ajax({
-        //       type: "GET",
-        //       dataType: 'json',
-        //       contentType: "application/json",
-        //       url: url,
-        //       success: function(venues) {
-        //         button.removeClass("btn-danger");
-        //         button.addClass("btn-warning");
-        //         button.attr('sonoff_status', 'starting_up');
-        //         button.html('Starting Up');
-        //       }
-        //     });
+        $.ajax({
+              type: "GET",
+              dataType: 'json',
+              contentType: "application/json",
+              url: url,
+              success: function(venues) {
+                button.removeClass("btn-danger");
+                button.addClass("btn-warning");
+                button.attr('sonoff_status', 'starting_up');
+                button.html('Starting Up');
+              }
+            });
       }
 
       
