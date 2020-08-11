@@ -167,7 +167,7 @@
             editbutton = `<a href="/vicinity/venue/${value["id"]}" class="btn btn-primary btn-sm">edit</a>\n`
           }
 
-          var sonoff_button = '<button class="btn btn-success sonoff-button" venue_id="' +  value["id"] + '">ON<br><small>Click to turn off</small></button>';
+          var sonoff_button = '<button class="btn btn-success sonoff-button" venue_id="' +  value["id"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';
 
 
 ///
