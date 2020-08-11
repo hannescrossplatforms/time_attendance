@@ -288,12 +288,6 @@
       function shutDownVenue(button){
         var venueId = button.attr('venue_id');
         var deviceAuthToken = button.attr('device_auth_token');
-        // time_now = DateTime.now.strftime('%Y-%m-%d %H:%M:%S')
-        //         conn = Mysql::new("localhost", "hipzone", "aRhpf3aTu", "hiphub")
-        //         query = "update venues set sonoff_device_action_time = '#{time_now}', sonoff_device_on_status = false, sonoff_device_action_status = 'shutting_down'  where id = #{id}"
-
-
-
 
         var url = 'http://hiphub.hipzone.co.za/hipjam/update_sonoff_status?auth_token=001c2fcd-99a5-4bac-8689-3f73d4d46849&device_auth_token=' + deviceAuthToken + '&status=off';
         $.ajax({

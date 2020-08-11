@@ -4445,13 +4445,18 @@ public function getOohSiteData() {
             ],401);
         }
 
+        $sonoff_device_action_status = 'shutting_down';
         $settingStatus = false;
         if($status == "on"){
             $settingStatus = true;
+            $sonoffDeviceActionStatus = 'starting_up';
         }
 
         $venue = \Venue::where('sonoff_device_auth_token', '=', $device_auth_token)->first();
         $venue->sonoff_device_on_status = $settingStatus;
+        $venue->sonoff_device_action_status = $sonoffDeviceActionStatus;
+        $venue->sonoff_device_action_time = \Carbon\Carbon::now();
+
         $venue->save();
 
         return Response::json([
