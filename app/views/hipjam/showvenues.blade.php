@@ -269,8 +269,38 @@
       };
 
       $(document).on('click', '.sonoff-button', function(){
-        alert($(this).attr('venue_id'));
+        //Only if its a sonoff board else do the ewelink solution.
+
+        var button = $(this);
+        var sonoff_status = $(this).attr('sonoff_status');
+        if(sonoff_status == 'on'){
+          shutDownVenue(button);
+        }
+        else if(sonoff_status == 'off'){
+          startUpVenue(button);
+        }
+
+
+
+        
       });
+
+      function shutDownVenue(button){
+        var venueId = $(this).attr('venue_id');
+        button.removeClass("btn-success");
+        button.addClass("btn-warning");
+        button.attr('sonoff_status') = "shutting_down";
+
+      }
+
+      function startUpVenue(){
+        var venueId = $(this).attr('venue_id');
+        button.removeClass("btn-danger");
+        button.addClass("btn-warning");
+        button.attr('sonoff_status') = "starting_up";
+
+
+      }
 
       $(document).on('click', '.btn-disable', function () {
       var venueId = $(this).data('venueid');
