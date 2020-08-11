@@ -268,6 +268,10 @@
         });
       };
 
+      $(document).on('click', '.sonoff-button', function(){
+        alert('click');
+      });
+
       $(document).on('click', '.btn-disable', function () {
       var venueId = $(this).data('venueid');
       swal({
