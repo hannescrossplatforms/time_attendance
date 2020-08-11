@@ -269,7 +269,7 @@
       };
 
       $(document).on('click', '.sonoff-button', function(){
-        alert($(this).attr('id'));
+        alert($(this).attr('venue_id'));
       });
 
       $(document).on('click', '.btn-disable', function () {
