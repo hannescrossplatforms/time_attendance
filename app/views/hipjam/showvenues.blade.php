@@ -170,15 +170,6 @@
           if (value["sonoff_device_uuid"] != null){
             sonoff_button = '<button class="btn btn-success sonoff-button" venue_id="' +  value["id"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';  
           }
-          
-
-
-///
-
-        
-
-
-///
 
 
 
@@ -208,6 +199,12 @@
         table = beginTable + rows + endTable;
         $( "#venueTable" ).html( table );
       }
+
+      function updateSonoffButtons(){
+        $('.sonoff-button').each(function(){
+          alert("asdf");
+        });
+      };
 
       $(document).delegate('.btn-delete', 'click', function() {
       var venueId = this.getAttribute('data-venueid');
