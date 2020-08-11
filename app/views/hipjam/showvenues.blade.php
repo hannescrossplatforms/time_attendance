@@ -172,7 +172,7 @@
           }
           var sonoff_button = '';
           if (value["sonoff_device_uuid"] != null){
-            sonoff_button = '<button class="btn btn-success sonoff-button" venue_id="' +  value["id"] + '" sonoff_status="' + value["sonoff_device_action_status"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';  
+            sonoff_button = '<button class="btn sonoff-button" venue_id="' +  value["id"] + '" sonoff_status="' + value["sonoff_device_action_status"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';  
           }
 
 
@@ -240,6 +240,24 @@
           
           var sonoff_status = $(this).attr('sonoff_status');
           console.log(sonoff_status);
+
+          if(sonoff_status == 'on'){
+            //clickable, on, click to turn off
+            $(this).addClass("btn-success");
+          }
+          else if (sonoff_status == 'shutting_down'){
+            //not clickable, shutting down
+            $(this).addClass("btn-warning");
+          }
+          else if (sonoff_status == 'starting_up'){
+            //not clickable, starting up
+            $(this).addClass("btn-warning");
+          }
+          else if (sonoff_status == 'off') {
+            // clickable, Off, click to turn on
+            $(this).addClass("btn-danger");
+          }
+
         });
       };
 
