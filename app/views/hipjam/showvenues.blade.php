@@ -244,18 +244,22 @@
           if(sonoff_status == 'on'){
             //clickable, on, click to turn off
             $(this).addClass("btn-success");
+            $(this).value("ON");
           }
           else if (sonoff_status == 'shutting_down'){
             //not clickable, shutting down
             $(this).addClass("btn-warning");
+            $(this).value("Shutting Down");
           }
           else if (sonoff_status == 'starting_up'){
             //not clickable, starting up
             $(this).addClass("btn-warning");
+            $(this).value("Starting Up");
           }
           else if (sonoff_status == 'off') {
             // clickable, Off, click to turn on
             $(this).addClass("btn-danger");
+            $(this).value("Off");
           }
           else {
             $(this).hide();
