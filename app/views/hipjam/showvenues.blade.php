@@ -76,7 +76,7 @@
     <script>
 
     venuesJson = {{ $data['venuesJson'] }};
-    debugger;
+    
     buildVenueList();
 
     function buildVenueList() {
@@ -240,7 +240,7 @@
           
           var sonoff_status = $(this).attr('sonoff_status');
           console.log(sonoff_status);
-          debugger;
+          
           if(sonoff_status == 'on'){
             //clickable, on, click to turn off
             $(this).addClass("btn-success");
