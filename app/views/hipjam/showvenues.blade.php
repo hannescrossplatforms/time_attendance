@@ -290,6 +290,7 @@
         button.removeClass("btn-success");
         button.addClass("btn-warning");
         button.attr('sonoff_status') = "shutting_down";
+        button.html('Shutting Down');
 
       }
 
@@ -298,7 +299,7 @@
         button.removeClass("btn-danger");
         button.addClass("btn-warning");
         button.attr('sonoff_status') = "starting_up";
-
+        button.html('Starting Up');
 
       }
 
