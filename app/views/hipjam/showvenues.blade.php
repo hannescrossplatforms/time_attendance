@@ -172,7 +172,7 @@
           }
           var sonoff_button = '';
           if (value["sonoff_device_uuid"] != null){
-            sonoff_button = '<button class="btn sonoff-button" venue_id="' +  value["id"] + '" sonoff_status="' + value["sonoff_device_action_status"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';  
+            sonoff_button = '<button class="btn sonoff-button" device_auth_token="' + ${value["sonoff_device_auth_token"]} + '" venue_id="' +  value["id"] + '" sonoff_status="' + value["sonoff_device_action_status"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';  
           }
 
 
@@ -286,22 +286,50 @@
       });
 
       function shutDownVenue(button){
-        var venueId = $(this).attr('venue_id');
-        button.removeClass("btn-success");
-        button.addClass("btn-warning");
-        button.attr('sonoff_status', 'shutting_down');
-        button.html('Shutting Down');
+        var venueId = button.attr('venue_id');
+        var deviceAuthToken = button.attr('device_auth_token');
+        // time_now = DateTime.now.strftime('%Y-%m-%d %H:%M:%S')
+        //         conn = Mysql::new("localhost", "hipzone", "aRhpf3aTu", "hiphub")
+        //         query = "update venues set sonoff_device_action_time = '#{time_now}', sonoff_device_on_status = false, sonoff_device_action_status = 'shutting_down'  where id = #{id}"
 
+
+
+
+        var url = 'http://hiphub.hipzone.co.za/hipjam/update_sonoff_status?auth_token=001c2fcd-99a5-4bac-8689-3f73d4d46849&device_auth_token=' + deviceAuthToken + '&status=off';
+        alert(url);
+        // $.ajax({
+        //       type: "GET",
+        //       dataType: 'json',
+        //       contentType: "application/json",
+        //       url: url,
+        //       success: function(venues) {
+        //         button.removeClass("btn-success");
+        //         button.addClass("btn-warning");
+        //         button.attr('sonoff_status', 'shutting_down');
+        //         button.html('Shutting Down');
+        //       }
+        //     });
       }
 
       function startUpVenue(){
-        var venueId = $(this).attr('venue_id');
-        button.removeClass("btn-danger");
-        button.addClass("btn-warning");
-        button.attr('sonoff_status', 'starting_up');
-        button.html('Starting Up');
-
+        var venueId = button.attr('venue_id');
+        var url = 'http://hiphub.hipzone.co.za/hipjam/update_sonoff_status?auth_token=001c2fcd-99a5-4bac-8689-3f73d4d46849&device_auth_token=' + deviceAuthToken + '&status=on';
+        alert(url);
+        // $.ajax({
+        //       type: "GET",
+        //       dataType: 'json',
+        //       contentType: "application/json",
+        //       url: url,
+        //       success: function(venues) {
+        //         button.removeClass("btn-danger");
+        //         button.addClass("btn-warning");
+        //         button.attr('sonoff_status', 'starting_up');
+        //         button.html('Starting Up');
+        //       }
+        //     });
       }
+
+      
 
       $(document).on('click', '.btn-disable', function () {
       var venueId = $(this).data('venueid');
