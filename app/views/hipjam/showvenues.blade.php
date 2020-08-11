@@ -257,6 +257,9 @@
             // clickable, Off, click to turn on
             $(this).addClass("btn-danger");
           }
+          else {
+            $(this).hide();
+          }
 
         });
       };
