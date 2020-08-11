@@ -30,7 +30,7 @@
                 @if (\User::hasAccess("superadmin") || \User::hasAccess("admin") || \User::hasAccess("reseller"))
                 <form class="form-inline" role="form" style="margin-bottom: 15px;">
                   <div class="form-group">
-                    <label style="margin-right: 10px;">Select a venue for activation</label>
+                    <label style="margin-right: 10px;">Select a venue forr activation</label>
                     <select style="margin-right: 10px;" id="venuelist" name="venue_id" class="form-control no-radius" required></select>
                   </div>
                   <a id="activatevenue" class="btn btn-primary" style="color: white;"><i class="fas fa-plus"></i> Activate Venue</a>
