@@ -4445,7 +4445,7 @@ public function getOohSiteData() {
             ],401);
         }
 
-        $sonoff_device_action_status = 'shutting_down';
+        $sonoffDeviceActionStatus = 'shutting_down';
         $settingStatus = false;
         if($status == "on"){
             $settingStatus = true;
