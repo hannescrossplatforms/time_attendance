@@ -238,7 +238,7 @@
       function updateSonoffButtons(){
         debugger;
         $('.sonoff-button').each(function(){
-          alert("asdf");
+          console.log("hannes");
         });
       };
 
