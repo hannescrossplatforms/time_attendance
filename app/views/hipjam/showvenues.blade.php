@@ -76,11 +76,10 @@
     <script>
 
     venuesJson = {{ $data['venuesJson'] }};
-
+    debugger;
     buildVenueList();
 
     function buildVenueList() {
-      debugger;
             console.log("venues : xxxxxxxxxxxxxxxxxx " );
       $.ajax({
           type: "GET",
@@ -88,7 +87,6 @@
           contentType: "application/json",
           url: "{{ url('hipjam_getinactivevenues'); }}",
           success: function(venues) {
-            debugger;
             var venuesjson = JSON.parse(venues);
             console.log("venues : " + venues);
 
@@ -105,7 +103,7 @@
 
           },
           error: function(xhr, m){
-debugger;
+
           }
       });
     }
@@ -158,7 +156,7 @@ debugger;
                   </thead>\n\
                   <tbody>  \n';
         $.each(venuesjson, function(index, value) {
-          debugger;
+          
           if(("{{$data['user']}}" != "superadmin") && (value["track_slug"] == "" || value["track_server_location"] == "" ) ) {
             editbutton = '<a href="javascript:void(0)" onclick="alert(\'Track Venue Id and Track Server need to be set by a super admin before you can continue.\');" class="btn btn-primary btn-sm">edit</a>\n';
           } else {
@@ -174,7 +172,7 @@ debugger;
             let status_row = value['ap_active'] === '0' ? '<span class="badge badge-danger">INACTIVE</span>' : '<span class="badge badge-success">ACTIVE</span>'
 
             // console.log(`[${value['id']}] ${value["sitename"]} => VALUE: ${value['jam_activated']}; is_active: ${value['jam_activated'] === '1'}; is_false: ${value['jam_activated'] === '0'}`);
-            // debugger;
+            
 
             rows = rows + '\
                     <tr>\n\
