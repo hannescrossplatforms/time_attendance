@@ -166,8 +166,11 @@
           if ("{{$data['is_vicinity']}}") {
             editbutton = `<a href="/vicinity/venue/${value["id"]}" class="btn btn-primary btn-sm">edit</a>\n`
           }
-
-          var sonoff_button = '<button class="btn btn-success sonoff-button" venue_id="' +  value["id"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';
+          var sonoff_button = '';
+          if (value["sonoff_device_uuid"] != null){
+            sonoff_button = '<button class="btn btn-success sonoff-button" venue_id="' +  value["id"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';  
+          }
+          
 
 
 ///
