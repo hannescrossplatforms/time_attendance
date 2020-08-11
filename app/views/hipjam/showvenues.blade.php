@@ -244,7 +244,7 @@
           if(sonoff_status == 'on'){
             //clickable, on, click to turn off
             $(this).addClass("btn-success");
-            $(this).value("ON");
+            $(this).html('ON<br><small>Click to turn off</small>');
           }
           else if (sonoff_status == 'shutting_down'){
             //not clickable, shutting down
