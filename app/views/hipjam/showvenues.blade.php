@@ -254,7 +254,7 @@
           else if (sonoff_status == 'starting_up'){
             //not clickable, starting up
             $(this).addClass("btn-warning");
-            $(this).html('Shutting Down');
+            $(this).html('Starting Up');
           }
           else if (sonoff_status == 'off') {
             // clickable, Off, click to turn on
