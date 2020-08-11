@@ -80,6 +80,7 @@
     buildVenueList();
 
     function buildVenueList() {
+      debugger;
             console.log("venues : xxxxxxxxxxxxxxxxxx " );
       $.ajax({
           type: "GET",
