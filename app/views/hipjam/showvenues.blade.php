@@ -192,6 +192,8 @@
                     ';
         });
 
+        updateSonoffButtons();
+
         let endTable = ' \
                   </tbody>\n\
                 </table>';
