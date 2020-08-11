@@ -152,13 +152,12 @@ debugger;
                       <th>Venue Name</th>\n\
                       <th>Type</th>\n\
                       <th>Status</th>\n\
-                      <th>\n\
-                      </th>\n\
+                      <th>Actions</th>\n\
                     </tr>\n\
                   </thead>\n\
                   <tbody>  \n';
         $.each(venuesjson, function(index, value) {
-
+          debugger;
           if(("{{$data['user']}}" != "superadmin") && (value["track_slug"] == "" || value["track_server_location"] == "" ) ) {
             editbutton = '<a href="javascript:void(0)" onclick="alert(\'Track Venue Id and Track Server need to be set by a super admin before you can continue.\');" class="btn btn-primary btn-sm">edit</a>\n';
           } else {
