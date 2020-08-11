@@ -172,7 +172,7 @@
           }
           var sonoff_button = '';
           if (value["sonoff_device_uuid"] != null){
-            sonoff_button = '<button class="btn btn-success sonoff-button" venue_id="' +  value["id"] + ' sonoff_status='+ value["sonoff_device_action_status"] +'">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';  
+            sonoff_button = '<button class="btn btn-success sonoff-button" venue_id="' +  value["id"] + '" sonoff_status="' + value["sonoff_device_action_status"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';  
           }
 
 
