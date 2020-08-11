@@ -238,7 +238,7 @@
       function updateSonoffButtons(){
         $('.sonoff-button').each(function(){
           
-          var sonoff_status = $(this).attr('sonoff_device_action_status');
+          var sonoff_status = $(this).attr('sonoff_status');
           console.log(sonoff_status);
         });
       };
