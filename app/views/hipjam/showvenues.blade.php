@@ -269,7 +269,7 @@
       };
 
       $(document).on('click', '.sonoff-button', function(){
-        alert('click');
+        alert($(this).attr('id'));
       });
 
       $(document).on('click', '.btn-disable', function () {
