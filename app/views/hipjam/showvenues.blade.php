@@ -196,7 +196,7 @@
                       <td style="width: 20%;"> ' + value["sitename"]  + '</td>\n\
                       <td style="width: 15%;"> ' + (value["track_type"] === 'billboard' ? 'OOH Site' : 'Venue')  + '</td>\n\
                       <td>' + status_row + '</td>\n\
-                      <td style="width: 65%"> ' + editbutton  + '<button class="btn btn-danger btn-disable" data-venueid="' + value["id"] + '">disable</button>' + sonoff_button + '</td>\n\
+                      <td style="width: 65%"> ' + editbutton  + '<button class="btn btn-danger btn-disable" data-venueid="' + value["id"] + '">disable</button> ' + sonoff_button + '</td>\n\
                     </tr>\n\
                     ';
         });
