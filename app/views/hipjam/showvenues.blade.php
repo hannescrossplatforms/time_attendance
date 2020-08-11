@@ -167,6 +167,20 @@
             editbutton = `<a href="/vicinity/venue/${value["id"]}" class="btn btn-primary btn-sm">edit</a>\n`
           }
 
+          var sonoff_button = '<button class="btn btn-success sonoff-button" venue_id="' +  value["id"] + '">ON<br><small>Click to turn off</small></button>';
+
+
+///
+
+        
+
+
+///
+
+
+
+
+
 
             /*deletebutton = '<a class="btn btn-default btn-delete btn-sm" data-venueid = ' + value["id"] + ' href="#">delete</a>\n';*/
             let status_row = value['ap_active'] === '0' ? '<span class="badge badge-danger">INACTIVE</span>' : '<span class="badge badge-success">ACTIVE</span>'
@@ -179,7 +193,7 @@
                       <td style="width: 20%;"> ' + value["sitename"]  + '</td>\n\
                       <td style="width: 15%;"> ' + (value["track_type"] === 'billboard' ? 'OOH Site' : 'Venue')  + '</td>\n\
                       <td>' + status_row + '</td>\n\
-                      <td style="width: 65%"> ' + editbutton  + '<button class="btn btn-danger btn-disable" data-venueid="' + value["id"] + '">disable</button></td>\n\
+                      <td style="width: 65%"> ' + editbutton  + '<button class="btn btn-danger btn-disable" data-venueid="' + value["id"] + '">disable</button>' + sonoff_button + '</td>\n\
                     </tr>\n\
                     ';
         });
