@@ -290,6 +290,7 @@
 
             venues.forEach(function(item, index) {
                 getSensorInfo(item.id);
+                getSensorSonoff(item.id);
             });
 
         }
@@ -430,8 +431,7 @@
                     let lastReportedInTimes = [];
                     let displayStatusForRow = "";
                     let displayLastReportedForRow = "";
-
-                    debugger;
+                    
 
                     data.forEach(function(item, index) {
                         statuses.push(item.status);
@@ -464,6 +464,41 @@
                     setStatusForVenue(venueId, displayStatusForRow);
                     setLastReportedForVenue(venueId, displayLastReportedForRow);
                     //Hannes hier webhook
+
+                },
+                error: function() {
+
+                }
+
+            });
+        }
+
+        function getSensorSonoff(venueId) {
+            var url = '{{ URL::route('hipjam_getvenuesonoff')}}';
+            sentData = venueId;
+
+            $.ajax({
+                type: "POST",
+                data: "sentData=" + sentData,
+                dataType: 'json',
+                url: url,
+                async: true,
+
+                success: function(data) {
+
+                    debugger;
+                    
+
+                    data.forEach(function(item, index) {
+                        
+                    });
+
+                    
+
+                    
+                    // setStatusForVenue(venueId, displayStatusForRow);
+                    // setLastReportedForVenue(venueId, displayLastReportedForRow);
+                    
 
                 },
                 error: function() {
@@ -633,24 +668,23 @@
             let venue_id = $(this).data('venue-id');
             
             $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_off`, function(resp) {
-                debugger;
+                
                 if (venue_id == 1476) {
                     // Greenside
                     $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        debugger;
+                        
                     });
                 } else if (venue_id == 1490) {
                     //Guerilla Alpha
                     $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        debugger;
-                        var a = 3;
+                        
+                        
                         
                     });
                 } else if (venue_id == 1491) {
                     //Guerilla Bravo
                     $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        debugger;
-                        var a = 3;
+                        
                     });
                 } else if (venue_id == 1483) {
                     //Charlie
@@ -676,13 +710,13 @@
                 else if (venue_id == 1489) {
                     //Guerilla Randhill
                     $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        debugger;
+                        
                     });
                 }
                 else if (venue_id == 1488) {
                     //Guerilla sandton close
                     $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_sandton_close/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        debugger;
+                        
                     });
                 }
 
@@ -695,7 +729,7 @@
         $(document).on('click', '.turn-on-sensor', function() {
             let venue_id = $(this).data('venue-id');
             $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_on`, function(resp) {
-                debugger;
+                
 
 
                 if (venue_id == 1476) {

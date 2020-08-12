@@ -389,6 +389,7 @@ Route::post('hipjam_previewsensors', array('uses' => 'hipjam\HipjamController@pr
 
 Route::get('hipjam_monitorsensors', array('uses' => 'hipjam\HipjamController@monitorSensors', 'as' => 'hipjam_monitorsensors'))->before('auth');
 Route::post('hipjam_getvenuesensors/{venue_id}', array('uses' => 'hipjam\HipjamController@getVenueSensors', 'as' => 'hipjam_getvenuesensors'))->before('auth');
+Route::post('hipjam_getvenuesonoff/{venue_id}', array('uses' => 'hipjam\HipjamController@getVenueSonoff', 'as' => 'hipjam_getvenuesonoff'))->before('auth');
 
 // HipENGAGE routes //////////////////////////////////////////////////////////////
 Route::any('/hipengage_showdashboard', array('uses' => 'hipengage\HipengageController@showDashboard', 'as' => 'hipengage_showdashboard'))->before('auth');
