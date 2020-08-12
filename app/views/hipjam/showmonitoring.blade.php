@@ -440,7 +440,6 @@
         }
 
         function updateButtonStatus(venueId, data){
-            debugger;
             $('.sonoff-button').each(function(){    
                 if(parseInt($(this).attr('venue_id')) == parseInt(venueId)){
                     $(this).attr('sonoff_status', data.sonoff_device_action_status);
