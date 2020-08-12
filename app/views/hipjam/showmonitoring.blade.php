@@ -445,7 +445,7 @@
                 if(parseInt($(this).attr('venue_id')) == parseInt(venueId)){
                     $(this).attr('sonoff_status', data.sonoff_device_action_status);
                 }
-            }
+            });
         }
 
         $(document).on('click', '.sonoff-button', function(){
