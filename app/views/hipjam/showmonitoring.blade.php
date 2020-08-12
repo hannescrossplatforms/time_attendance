@@ -74,14 +74,10 @@
                                                 <!-- </td> -->
                                                 <td class="text-center">
 
-                                                
-
                                                 @if ($venue->sonoff_device_uuid != null)
                                                     <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                 @endif
                                                 
-
-                                                    
                                                 </td>
                                                 <td id="venue_last_reported_{{$venue->id}}"></td>
                                                 <td class="text-center" id="venue_status_{{$venue->id}}"></td>
@@ -432,7 +428,7 @@
 
                     debugger;
                     
-
+                    updateSonoffButtons();
                     
 
                 },
