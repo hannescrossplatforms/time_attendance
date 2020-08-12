@@ -426,7 +426,7 @@
 
                 success: function(data) {
 
-                    debugger;
+                    // debugger;
                     
                     updateSonoffButtons();
                     
