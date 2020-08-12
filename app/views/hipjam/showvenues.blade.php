@@ -170,10 +170,10 @@
           if ("{{$data['is_vicinity']}}") {
             editbutton = `<a href="/vicinity/venue/${value["id"]}" class="btn btn-primary btn-sm">edit</a>\n`
           }
-          var sonoff_button = '';
-          if (value["sonoff_device_uuid"] != null){
-            sonoff_button = '<button class="btn sonoff-button" device_auth_token="' + value["sonoff_device_auth_token"] + '" venue_id="' +  value["id"] + '" sonoff_status="' + value["sonoff_device_action_status"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';
-          }
+          // var sonoff_button = '';
+          // if (value["sonoff_device_uuid"] != null){
+          //   sonoff_button = '<button class="btn sonoff-button" device_auth_token="' + value["sonoff_device_auth_token"] + '" venue_id="' +  value["id"] + '" sonoff_status="' + value["sonoff_device_action_status"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';
+          // }
 
 
 
@@ -191,7 +191,7 @@
                       <td style="width: 20%;"> ' + value["sitename"]  + '</td>\n\
                       <td style="width: 15%;"> ' + (value["track_type"] === 'billboard' ? 'OOH Site' : 'Venue')  + '</td>\n\
                       <td>' + status_row + '</td>\n\
-                      <td style="width: 65%"> ' + editbutton  + '<button class="btn btn-danger btn-disable" data-venueid="' + value["id"] + '">disable</button> ' + sonoff_button + '</td>\n\
+                      <td style="width: 65%"> ' + editbutton  + '<button class="btn btn-danger btn-disable" data-venueid="' + value["id"] + '">disable</button> </td>\n\
                     </tr>\n\
                     ';
         });
