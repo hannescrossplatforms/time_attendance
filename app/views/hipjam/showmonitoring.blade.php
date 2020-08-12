@@ -431,6 +431,8 @@
                     let displayStatusForRow = "";
                     let displayLastReportedForRow = "";
 
+                    debugger;
+
                     data.forEach(function(item, index) {
                         statuses.push(item.status);
                         lastReportedInTimes.push(item.lastreportedin);
@@ -461,6 +463,7 @@
 
                     setStatusForVenue(venueId, displayStatusForRow);
                     setLastReportedForVenue(venueId, displayLastReportedForRow);
+                    //Hannes hier webhook
 
                 },
                 error: function() {
