@@ -73,71 +73,15 @@
 
                                                 <!-- </td> -->
                                                 <td class="text-center">
-                                                    @if ($venue->id == 1476)
-                                                    @if ($venue->status == 'Online')
-                                                    <button venuename='greenside' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
-                                                    @else
-                                                    <button venuename='greenside' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
-                                                    @endif
-                                                    @elseif($venue->id == 1490)
-                                                    <!-- Guerilla alpha alpha -->
-                                                    @if ($venue->status == 'Online')
-                                                    <button venuename='alpha' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
-                                                    @else
-                                                    <button venuename='alpha' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
-                                                    @endif
-                                                    @elseif($venue->id == 1491)
-                                                    <!-- Guerilla bravo -->
-                                                    @if ($venue->status == 'Online')
-                                                    <button venuename='bravo' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
-                                                    @else
-                                                    <button venuename='bravo' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
-                                                    @endif
-                                                    @elseif($venue->id == 1483)
-                                                    <!-- Vicinity charlie -->
-                                                    @if ($venue->status == 'Online')
-                                                    <button venuename='charlie' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
-                                                    @else
-                                                    <button venuename='charlie' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
-                                                    @endif
-                                                    @elseif($venue->id == 1484)
-                                                    <!-- Vicinity randhill -->
-                                                    @if ($venue->status == 'Online')
-                                                    <button venuename='randhill' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
-                                                    @else
-                                                    <button venuename='randhill' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
-                                                    @endif
-                                                    @elseif($venue->id == 1493)
-                                                    <!-- Guerrilla curatio house -->
-                                                    @if ($venue->status == 'Online')
-                                                    <button venuename='curatiohouse' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
-                                                    @else
-                                                    <button venuename='curatiohouse' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
-                                                    @endif
-                                                    @elseif($venue->id == 1486)
-                                                    <!-- Vicinity sandton close -->
-                                                    @if ($venue->status == 'Online')
-                                                    <button venuename='sandtonclose' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
-                                                    @else
-                                                    <button venuename='sandtonclose' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
-                                                    @endif
-                                                    @elseif($venue->id == 1489)
-                                                    <!-- Guerilla Randhill -->
-                                                    @if ($venue->status == 'Online')
-                                                    <button venuename='alpha' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
-                                                    @else
-                                                    <button venuename='alpha' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
-                                                    @endif
-                                                    @elseif($venue->id == 1488)
-                                                    <!-- Guerilla SandtonClose -->
-                                                    @if ($venue->status == 'Online')
-                                                    <button venuename='alpha' class="btn btn-success turn-off-sensor" data-venue-id="{{$venue->id}}">ON <br /> <small>Click to turn off</small></button>
-                                                    @else
-                                                    <button venuename='alpha' class="btn btn-danger turn-on-sensor" data-venue-id="{{$venue->id}}">OFF <br /> <small>Click to turn on</small></button>
-                                                    @endif
-                                                    @else
-                                                    <label class="label label-warning">N/A</label>
-                                                    @endif
+
+                                                
+
+                                                @if ($venue->sonoff_device_uuid != null)
+                                                    <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
+                                                @endif
+                                                
+
+                                                    
                                                 </td>
                                                 <td id="venue_last_reported_{{$venue->id}}"></td>
                                                 <td class="text-center" id="venue_status_{{$venue->id}}"></td>
@@ -489,15 +433,6 @@
                     debugger;
                     
 
-                    data.forEach(function(item, index) {
-                        
-                    });
-
-                    
-
-                    
-                    // setStatusForVenue(venueId, displayStatusForRow);
-                    // setLastReportedForVenue(venueId, displayLastReportedForRow);
                     
 
                 },
@@ -507,6 +442,42 @@
 
             });
         }
+
+        function updateSonoffButtons(){
+        $('.sonoff-button').each(function(){
+
+          var sonoff_status = $(this).attr('sonoff_status');
+          console.log(sonoff_status);
+          debugger;
+          if(sonoff_status == 'on'){
+            //clickable, on, click to turn off
+            $(this).addClass("btn-success");
+            $(this).html('ON<br><small>Click to turn off</small>');
+          }
+          else if (sonoff_status == 'shutting_down'){
+            //not clickable, shutting down
+            $(this).addClass("btn-warning");
+            $(this).html('Shutting Down');
+          }
+          else if (sonoff_status == 'starting_up'){
+            //not clickable, starting up
+            $(this).addClass("btn-warning");
+            $(this).html('Starting Up');
+          }
+          else if (sonoff_status == 'off') {
+            // clickable, Off, click to turn on
+            $(this).addClass("btn-danger");
+            $(this).html('Off<br><small>Click to turn on</small>');
+          }
+          else {
+            $(this).hide();
+          }
+
+        });
+      };
+
+
+
 
         function labelToNumberForComparrison(stringToGetNumbersFrom) {
 
