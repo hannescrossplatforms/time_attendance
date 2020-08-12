@@ -2108,10 +2108,10 @@ public function getOohSiteData() {
         $venue = \DB::table('venues')->select("sonoff_device_uuid", "sonoff_device_auth_token", "sonoff_device_on_status", "sonoff_device_action_status", "sonoff_device_action_time")->where('id', '=', $input)->first();        
         $sensordata = $sensor->getSensorsForVenue($input);
         
-        // $sensordata->toBase()->merge($venue);
+        $sensordata->merge($venue);
 
         // $sensordata->add($venue);
-        return $sensordata;
+        return $sensordata->all();
     }
 
 
