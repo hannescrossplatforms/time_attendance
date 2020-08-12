@@ -2111,6 +2111,8 @@ public function getOohSiteData() {
         // $sensordata->merge($venue);
 
         // $sensordata->add($venue);
+
+        $sensordata = $sensordata->toBase()->diff($venue->toBase());
         return $sensordata;
     }
 
