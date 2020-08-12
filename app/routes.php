@@ -284,6 +284,7 @@ Route::post('hipjam_editvenue', array('uses' => 'hipjam\HipjamController@editVen
 Route::get('hipjam_getinactivevenues/', array('uses' => 'hipjam\HipjamController@getInactiveVenues', 'as' => 'hipjam_getinactivevenues'))->before('auth');
 Route::get('hipjam_activatevenue/{id}', array('uses' => 'hipjam\HipjamController@activateVenue', 'as' => 'hipjam_activatevenue'))->before('auth');
 Route::post('hipjam_activatevenue', array('uses' => 'hipjam\HipjamController@activateVenueSave', 'as' => 'hipjam_activatevenue'))->before('auth');
+Route::post('hipjam_disablevenue/{id}', array('uses' => 'hipjam\HipjamController@disableVenue', 'as' => 'hipjam_disablevenue'))->before('auth');
 Route::get('hipjam_venue_config/{id}', array('uses' => 'hipjam\HipjamController@venueConfig', 'as' => 'hipjam_venueconfig'));
 Route::get('hipjam_linked_billboards', array('uses' => 'hipjam\HipjamController@linkedBillboards', 'as' => 'hipjam_linkedbillboards'));
 

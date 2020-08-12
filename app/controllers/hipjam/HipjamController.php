@@ -1830,6 +1830,25 @@ public function getOohSiteData() {
         return \View::make('hipjam.addvenue')->with('data', $data);
     }
 
+    public function disableVenue($id) {
+        error_log("disableVenue");
+        $venue = \Venue::find($id);
+        $brand_id = $venue->brand_id;
+        $remotedb_id = \Brand::find($brand_id)->remotedb_id;
+        $media = new \Media();
+
+        if($venue) {
+
+            \Venue::where("id", "=", $id)->update(['ap_active' => 0, 'jam_activated' => 0]);
+            // $venue->deleteVenueInRadius($venue, $remotedb_id);
+            // $media->where("venue_id", "=", $id)->delete();
+            // $mikrotik = new \Mikrotik();
+            // $mikrotik->deleteVenue($venue);
+        }
+
+        return \Redirect::route('hipwifi_showvenues', ['json' => 1, ]);
+    }
+
     public function activateVenueSave()
     {
         $utils = new \Utils();
@@ -1974,7 +1993,7 @@ public function getOohSiteData() {
         print_r($result); // For some reason the success condition in the javascript will only fir if I do this. Not quite sure why.
 
     }
-    
+
     public function uuid()
     {
         return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
@@ -4463,8 +4482,8 @@ public function getOohSiteData() {
             'success' => 'true', 'device_status_now' => $status
         ],200);
 
-        
-    
+
+
     }
 
     public function oohSites() {
@@ -4481,7 +4500,7 @@ public function getOohSiteData() {
         return Response::json([
             'venues' => $venues
         ],200);
-        
+
     }
 
 }

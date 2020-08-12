@@ -76,7 +76,7 @@
     <script>
 
     venuesJson = {{ $data['venuesJson'] }};
-    
+
     buildVenueList();
 
     function buildVenueList() {
@@ -160,7 +160,7 @@
                   </thead>\n\
                   <tbody>  \n';
         $.each(venuesjson, function(index, value) {
-          
+
           if(("{{$data['user']}}" != "superadmin") && (value["track_slug"] == "" || value["track_server_location"] == "" ) ) {
             editbutton = '<a href="javascript:void(0)" onclick="alert(\'Track Venue Id and Track Server need to be set by a super admin before you can continue.\');" class="btn btn-primary btn-sm">edit</a>\n';
           } else {
@@ -172,7 +172,7 @@
           }
           var sonoff_button = '';
           if (value["sonoff_device_uuid"] != null){
-            sonoff_button = '<button class="btn sonoff-button" device_auth_token="' + value["sonoff_device_auth_token"] + '" venue_id="' +  value["id"] + '" sonoff_status="' + value["sonoff_device_action_status"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';  
+            sonoff_button = '<button class="btn sonoff-button" device_auth_token="' + value["sonoff_device_auth_token"] + '" venue_id="' +  value["id"] + '" sonoff_status="' + value["sonoff_device_action_status"] + '">' + value["sonoff_device_action_status"] + '<br><small>Click to turn off</small></button>';
           }
 
 
@@ -184,7 +184,7 @@
             let status_row = value['ap_active'] === '0' ? '<span class="badge badge-danger">INACTIVE</span>' : '<span class="badge badge-success">ACTIVE</span>'
 
             // console.log(`[${value['id']}] ${value["sitename"]} => VALUE: ${value['jam_activated']}; is_active: ${value['jam_activated'] === '1'}; is_false: ${value['jam_activated'] === '0'}`);
-            
+
 
             rows = rows + '\
                     <tr>\n\
@@ -196,7 +196,7 @@
                     ';
         });
 
-        
+
 
         let endTable = ' \
                   </tbody>\n\
@@ -206,7 +206,7 @@
         $( "#venueTable" ).html( table );
       }
 
-      
+
 
       $(document).delegate('.btn-delete', 'click', function() {
       var venueId = this.getAttribute('data-venueid');
@@ -237,7 +237,7 @@
 
       function updateSonoffButtons(){
         $('.sonoff-button').each(function(){
-          
+
           var sonoff_status = $(this).attr('sonoff_status');
           console.log(sonoff_status);
           debugger;
@@ -282,7 +282,7 @@
 
 
 
-        
+
       });
 
       function shutDownVenue(button){
@@ -321,7 +321,7 @@
             });
       }
 
-      
+
 
       $(document).on('click', '.btn-disable', function () {
       var venueId = $(this).data('venueid');
@@ -340,7 +340,7 @@
               type: "GET",
               dataType: 'json',
               contentType: "application/json",
-              url: "{{ url('hipwifi_disablevenue/" + venueId + "'); }}",
+              url: "{{ url('hipjam_disablevenue/" + venueId + "'); }}",
               success: function(venues) {
                 var venuesjson = JSON.parse(venues);
                 showVenuesTable(venuesjson);
