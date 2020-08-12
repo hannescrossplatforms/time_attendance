@@ -2112,7 +2112,7 @@ public function getOohSiteData() {
 
         // $sensordata->add($venue);
 
-        $sensordata = $sensordata->unionAll($venue)->get();
+        // $sensordata = $sensordata->unionAll($venue)->get();
         return $sensordata;
     }
 
