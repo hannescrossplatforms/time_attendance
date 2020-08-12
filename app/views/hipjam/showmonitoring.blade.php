@@ -439,12 +439,65 @@
             });
         }
 
+        $(document).on('click', '.sonoff-button', function(){
+        //Only if its a sonoff board else do the ewelink solution.
+
+        var button = $(this);
+        var sonoff_status = $(this).attr('sonoff_status');
+        if(sonoff_status == 'on'){
+          shutDownVenue(button);
+        }
+        else if(sonoff_status == 'off'){
+          startUpVenue(button);
+        }
+
+
+
+
+      });
+
+      function shutDownVenue(button){
+        var venueId = button.attr('venue_id');
+        var deviceAuthToken = button.attr('device_auth_token');
+
+        var url = 'http://hiphub.hipzone.co.za/hipjam/update_sonoff_status?auth_token=001c2fcd-99a5-4bac-8689-3f73d4d46849&device_auth_token=' + deviceAuthToken + '&status=off';
+        $.ajax({
+              type: "GET",
+              dataType: 'json',
+              contentType: "application/json",
+              url: url,
+              success: function(venues) {
+                button.removeClass("btn-success");
+                button.addClass("btn-warning");
+                button.attr('sonoff_status', 'shutting_down');
+                button.html('Shutting Down');
+              }
+            });
+      }
+
+      function startUpVenue(){
+        var venueId = button.attr('venue_id');
+        var url = 'http://hiphub.hipzone.co.za/hipjam/update_sonoff_status?auth_token=001c2fcd-99a5-4bac-8689-3f73d4d46849&device_auth_token=' + deviceAuthToken + '&status=on';
+        $.ajax({
+              type: "GET",
+              dataType: 'json',
+              contentType: "application/json",
+              url: url,
+              success: function(venues) {
+                button.removeClass("btn-danger");
+                button.addClass("btn-warning");
+                button.attr('sonoff_status', 'starting_up');
+                button.html('Starting Up');
+              }
+            });
+      }
+
         function updateSonoffButtons(){
         $('.sonoff-button').each(function(){
 
           var sonoff_status = $(this).attr('sonoff_status');
           console.log(sonoff_status);
-          debugger;
+          
           if(sonoff_status == 'on'){
             //clickable, on, click to turn off
             $(this).addClass("btn-success");

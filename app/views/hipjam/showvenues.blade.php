@@ -109,16 +109,16 @@
     }
 
       showVenuesTable(venuesJson);
-      updateSonoffButtons();
+      // updateSonoffButtons();
 
       $(document).delegate('#buildtable', 'click', function() {
         showVenuesTable(venuesJson);
-        updateSonoffButtons();
+        // updateSonoffButtons();
       });
 
       $(document).delegate('#reset', 'click', function() {
         showVenuesTable(venuesJson);
-        updateSonoffButtons();
+        // updateSonoffButtons();
       });
 
       $(document).delegate('#filter', 'click', function(event) {
@@ -138,7 +138,7 @@
             success: function(filteredVenuesjson) {
               // alert("success");
               showVenuesTable(filteredVenuesjson);
-              updateSonoffButtons();
+              // updateSonoffButtons();
             }
          });
       });
@@ -229,44 +229,44 @@
             success: function(venues) {
               var venuesjson = JSON.parse(venues);
               showVenuesTable(venuesjson);
-              updateSonoffButtons();
+              // updateSonoffButtons();
             }
           });
         });
       });
 
-      function updateSonoffButtons(){
-        $('.sonoff-button').each(function(){
+      // function updateSonoffButtons(){
+      //   $('.sonoff-button').each(function(){
 
-          var sonoff_status = $(this).attr('sonoff_status');
-          console.log(sonoff_status);
-          debugger;
-          if(sonoff_status == 'on'){
-            //clickable, on, click to turn off
-            $(this).addClass("btn-success");
-            $(this).html('ON<br><small>Click to turn off</small>');
-          }
-          else if (sonoff_status == 'shutting_down'){
-            //not clickable, shutting down
-            $(this).addClass("btn-warning");
-            $(this).html('Shutting Down');
-          }
-          else if (sonoff_status == 'starting_up'){
-            //not clickable, starting up
-            $(this).addClass("btn-warning");
-            $(this).html('Starting Up');
-          }
-          else if (sonoff_status == 'off') {
-            // clickable, Off, click to turn on
-            $(this).addClass("btn-danger");
-            $(this).html('Off<br><small>Click to turn on</small>');
-          }
-          else {
-            $(this).hide();
-          }
+      //     var sonoff_status = $(this).attr('sonoff_status');
+      //     console.log(sonoff_status);
+      //     debugger;
+      //     if(sonoff_status == 'on'){
+      //       //clickable, on, click to turn off
+      //       $(this).addClass("btn-success");
+      //       $(this).html('ON<br><small>Click to turn off</small>');
+      //     }
+      //     else if (sonoff_status == 'shutting_down'){
+      //       //not clickable, shutting down
+      //       $(this).addClass("btn-warning");
+      //       $(this).html('Shutting Down');
+      //     }
+      //     else if (sonoff_status == 'starting_up'){
+      //       //not clickable, starting up
+      //       $(this).addClass("btn-warning");
+      //       $(this).html('Starting Up');
+      //     }
+      //     else if (sonoff_status == 'off') {
+      //       // clickable, Off, click to turn on
+      //       $(this).addClass("btn-danger");
+      //       $(this).html('Off<br><small>Click to turn on</small>');
+      //     }
+      //     else {
+      //       $(this).hide();
+      //     }
 
-        });
-      };
+      //   });
+      // };
 
       $(document).on('click', '.sonoff-button', function(){
         //Only if its a sonoff board else do the ewelink solution.
@@ -345,7 +345,7 @@
                 var venuesjson = JSON.parse(venues);
                 showVenuesTable(venuesjson);
                 buildVenueList();
-                updateSonoffButtons();
+                // updateSonoffButtons();
               }
             });
           }
