@@ -327,6 +327,7 @@ Route::get('hipjam_viewvenue/{id}/{name}/json', array('uses' => 'hipjam\HipjamCo
 Route::get('hipjam_viewvenue', array('uses' => 'hipjam\HipjamController@viewVenue', 'as' => 'hipjam_viewvenue'))->before('auth');
 Route::get('hipjam/all_ooh_sites','hipjam\HipjamController@oohSites');
 Route::get('hipjam/update_sonoff_status','hipjam\HipjamController@updateSonoffStatus');
+Route::get('hipjam/get_sonoff_status','hipjam\HipjamController@getSonoffStatus');
 Route::get('hipjam/chartJsondata','hipjam\HipjamController@chartJsondata');
 Route::get('hipjam/heatmapJsondata','hipjam\HipjamController@heatmapJsondata');
 Route::get('hipjam/zonalJsondata','hipjam\HipjamController@zonalJsondata');

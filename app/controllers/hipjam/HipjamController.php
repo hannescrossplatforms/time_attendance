@@ -4495,6 +4495,29 @@ public function getOohSiteData() {
 
     }
 
+    public function getSonoffStatus(){
+
+        $auth_token = \Input::get('auth_token');
+        $device_auth_token = \Input::get('device_auth_token');
+        $status = \Input::get('status');
+
+        if ($auth_token != '001c2fcd-99a5-4bac-8689-3f73d4d46849'){
+            return Response::json([
+                'error' => 'Unauthorized access'
+            ],401);
+        }
+
+
+        $venue = \Venue::where('sonoff_device_auth_token', '=', $device_auth_token)->first();
+
+        return Response::json([
+            'success' => 'true', 'device_status' => $venue->sonoff_device_on_status
+        ],200);
+
+
+
+    }
+
     public function oohSites() {
         $auth_token = \Input::get('auth_token');
         if ($auth_token != '001c2fcd-99a5-4bac-8689-3f73d4d46849'){
