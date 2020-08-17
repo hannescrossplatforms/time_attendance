@@ -79,12 +79,13 @@
                                                 
                                                     @if($venue->id == 1491)
                                                     <!-- 1491 bravo -->
-
+                                                        <button class="btn ewelink-sensor-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->status}}">{{$venue->status}}<br><small>Click to turn off</small></button>
                                                     @elseif($venue->id == 1490)
                                                     <!-- 1490 alpha -->
-
+                                                        <button class="btn ewelink-sensor-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->status}}">{{$venue->status}}<br><small>Click to turn off</small></button>
                                                     @elseif($venue->id == 1490)
                                                     <!-- 1483 charlie -->
+                                                        <button class="btn ewelink-sensor-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->status}}">{{$venue->status}}<br><small>Click to turn off</small></button>
                                                     @else
                                                         <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                     @endif
@@ -716,10 +717,16 @@
     </script>
 
     <script>
-        $(document).on('click', '.turn-off-sensor', function() {
-            let venue_id = $(this).data('venue-id');
-            
-            $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_off`, function(resp) {
+        $(document).on('click', '.ewelink-sensor-button', function() {
+            // let venue_id = $(this).data('venue-id');
+            let venue_id = $(this).attr("venue_id");
+            let venue_status = $(this).attr("sonoff_status");
+            let action = 'turn_on';
+            if(venue_status == 'Online'){
+                action = 'turn_off';
+            }
+            debugger;
+            $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/${action}`, function(resp) {
                 
                 if (venue_id == 1476) {
                     // Greenside
