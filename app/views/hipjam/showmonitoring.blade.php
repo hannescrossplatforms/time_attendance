@@ -567,28 +567,14 @@
 
           var sonoff_status = $(this).attr('sonoff_status');
           
-          if(sonoff_status == 'on'){
+          if(sonoff_status == 'Online'){
             //clickable, on, click to turn off
             $(this).removeClass("btn-danger");
             $(this).removeClass("btn-warning");
             $(this).addClass("btn-success");
             $(this).html('ON<br><small>Click to turn off</small>');
           }
-          else if (sonoff_status == 'shutting_down'){
-            //not clickable, shutting down
-            $(this).removeClass("btn-danger");
-            $(this).removeClass("btn-success");
-            $(this).addClass("btn-warning");
-            $(this).html('Shutting Down');
-          }
-          else if (sonoff_status == 'starting_up'){
-            //not clickable, starting up
-            $(this).removeClass("btn-danger");
-            $(this).removeClass("btn-success");
-            $(this).addClass("btn-warning");
-            $(this).html('Starting Up');
-          }
-          else if (sonoff_status == 'off') {
+          else if (sonoff_status == 'Offline') {
             // clickable, Off, click to turn on
             $(this).removeClass("btn-success");
             $(this).removeClass("btn-warning");
@@ -596,7 +582,7 @@
             $(this).html('Off<br><small>Click to turn on</small>');
           }
           else {
-            $(this).hide();
+            
           }
 
         });
