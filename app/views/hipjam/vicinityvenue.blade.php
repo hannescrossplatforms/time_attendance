@@ -134,6 +134,29 @@
                         </select>
                       </div>
                     </div>
+
+                    <div class="col-6">
+                      <div class="form-group">
+                        @if ($data['venue']->track_type == 'billboard')
+                        <label for="track_slug">Reset Board UUID</label>
+                        <input disabled type="text" class="form-control" value="{{$data['venue']->sonoff_device_uuid}}">
+                        @endif
+                      </div>
+                    </div>
+                    @if ($data['venue']->track_type == 'billboard')
+                    <div class="col-6">
+                    </div>
+                    @endif
+
+                    <div class="col-6">
+                      <div class="form-group">
+                      @if ($data['venue']->track_type == 'billboard')
+                        <label for="track_slug">Reset Board Auth Key</label>
+                        <input disabled type="text" class="form-control" value="{{$data['venue']->sonoff_device_auth_token}}">
+                      @endif
+                      </div>
+                    </div>
+
                     <div class="col-md-12 text-left">
                       <div class="form-group">
                         <label>Sensor Status : </label>

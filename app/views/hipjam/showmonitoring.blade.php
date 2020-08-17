@@ -75,7 +75,23 @@
                                                 <td class="text-center">
 
                                                 @if ($venue->sonoff_device_uuid != null)
-                                                    <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
+
+                                                
+                                                    @if($venue->id == 1491)
+                                                    <!-- 1491 bravo -->
+
+                                                    @elseif($venue->id == 1490)
+                                                    <!-- 1490 alpha -->
+
+                                                    @elseif($venue->id == 1490)
+                                                    <!-- 1483 charlie -->
+                                                    @else
+                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
+                                                    @endif
+
+
+
+                                                    
                                                 @endif
                                                 
                                                 </td>
