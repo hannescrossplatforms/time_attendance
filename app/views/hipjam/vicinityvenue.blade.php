@@ -135,6 +135,10 @@
                       </div>
                     </div>
 
+                    @if ($data['venue']->track_type == 'billboard')
+                    <div class="col-6">
+                    </div>
+                    @endif
                     <div class="col-6">
                       <div class="form-group">
                         @if ($data['venue']->track_type == 'billboard')
