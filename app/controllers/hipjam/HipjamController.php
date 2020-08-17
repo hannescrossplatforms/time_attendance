@@ -123,10 +123,13 @@ class HipjamController extends \BaseController
     public function checkAndSendStatusEmails() {
         // SELECT GROUP_CONCAT(id SEPARATOR ', ') ids FROM venues where send_alert_emails = 1
         $venue_ids = \DB::select("SELECT GROUP_CONCAT(id SEPARATOR ', ') ids FROM venues where send_alert_emails = 1")[0]->ids;
-        $sensors = \Sensor::whereRaw('venue_id IN ('.$venue_ids.') AND status != "Online"')->get();
+        $venue_clause = $venue_ids != '' ? 'venue_id IN ('.$venue_ids.') AND ' : 'false = true AND ';
+        $sensors = \Sensor::whereRaw($venue_clause.' status != "Online"')->get();
         $resp = array();
         foreach($sensors as $sensor) {
-                $venue = \Venue::find($sensor->venue_id);
+            $venue = \Venue::find($sensor->venue_id);
+            $lri_int = (int)preg_replace('/\D/', '', $sensor->lastreportedin);
+            if ($lri_int >= 5 && $lri_int < 10) {
                 $subject = $venue->sitename.' is offline';
                 $body = $venue->sitename.' ('.$sensor->mac.') has been offline for '.$sensor->lastreportedin;
 
@@ -139,6 +142,7 @@ class HipjamController extends \BaseController
                 if (isset($venue->alert_email_address_3) && $venue->alert_email_address_3 != '') {
                     \hipjam\HipjamController::sendMail($venue->alert_email_address_3, $subject, $body);
                 }
+            }
         }
 
         $resp['status'] = 'success';
@@ -2104,16 +2108,10 @@ public function getOohSiteData() {
     {
         $input = json_decode(\Input::get("sentData"));
         $sensor = new \Sensor();
-        $venue = \DB::table('venues')->select("sonoff_device_uuid", "sonoff_device_auth_token", "sonoff_device_on_status", "sonoff_device_action_status", "sonoff_device_action_time")->where('id', '=', $input)->first();        
         $sensordata = $sensor->getSensorsForVenue($input);
         return $sensordata;
     }
-    public function getVenueSonoff()
-    {
-        $input = json_decode(\Input::get("sentData"));
-        $venue = \DB::table('venues')->select("sonoff_device_uuid", "sonoff_device_auth_token", "sonoff_device_on_status", "sonoff_device_action_status", "sonoff_device_action_time")->where('id', '=', $input)->first();
-        return json_encode($venue);
-    }
+
 
 
     // DEPRECATED

@@ -1,5 +1,5 @@
 @extends('angle_admin_layout')
-<?php 
+<?php
 error_log("Edit is " . $data["edit"]);
 
 $edit = $data["edit"] ;
@@ -30,7 +30,7 @@ $edit = $data["edit"] ;
                 @if ($errors->has())
               <div class="alert alert-danger">
                   @foreach ($errors->all() as $error)
-                      {{ $error }}<br>        
+                      {{ $error }}<br>
                   @endforeach
               </div>
             @endif
@@ -42,7 +42,7 @@ $edit = $data["edit"] ;
                   action=" @if ($edit) {{ url('admin_editbrand'); }} @else {{ url('admin_addbrand'); }} @endif ">
               @if ($edit) {{ Form::hidden('id', $data['brand']->id) }} @endif
               @if ($edit) {{ Form::hidden('oldbrandcode', $data['brand']->code) }} @endif
-              @if (!$edit) 
+              @if (!$edit)
               <div class="form-group" style="{{\User::isVicinity() ? 'display:none' : ''}}">
                 <label>ISP*</label>
                 <select id="isplist" name="isp_id" class="form-control">
@@ -50,7 +50,7 @@ $edit = $data["edit"] ;
                     <option value="{{ $isp->id }}">
                       {{ $isp->name }} ({{ $isp->code }})
                     </option>
-                  @endforeach 
+                  @endforeach
                 </select>
               </div>
               @endif
@@ -58,15 +58,15 @@ $edit = $data["edit"] ;
 
 
                 <label for="exampleInputEmail1">Brand Name</label>
-                <input type="text" class="form-control" id="brand_name_input" placeholder="" 
-                        name="name" 
+                <input type="text" class="form-control" id="brand_name_input" placeholder=""
+                        name="name"
                         value="@if(Input::old('name')){{Input::old('name')}}@else{{$data['brand']->name;}}@endif"
                         maxlength="20">
               </div>
               <p id="brand_already_exists" style="color: red; font-size: 12px; display:none;">A brand with this name already exists.</p>
               <div class="form-group" style="{{\User::isVicinity() ? 'display:none' : ''}}">
                 <label for="exampleInputEmail1">Brand Code</label>
-                <input type="text" class="form-control" id="brand_code_input" size="6" placeholder="" name="code" 
+                <input type="text" class="form-control" id="brand_code_input" size="6" placeholder="" name="code"
                        value="@if(Input::old('code')){{Input::old('code')}}@else{{$data['brand']->code;}}@endif">
               </div>
               <div class="form-group" style="{{\User::isVicinity() ? 'display:none' : ''}}">
@@ -77,11 +77,11 @@ $edit = $data["edit"] ;
                       @if ($edit) @if ($data['brand']->countrie_id == $countrie->id)  selected  @endif @endif>
                       {{ $countrie->name }}
                     </option>
-                  @endforeach 
+                  @endforeach
                 </select>
               </div>
-              
-              <div class="form-group" style="{{\User::isVicinity() ? 'display:none' : ''}}">
+
+              <div class="form-group" style="">
                 <label>Products Enabled</label>
                 <div class="checkbox">
                 <label>
@@ -106,7 +106,7 @@ $edit = $data["edit"] ;
             @endif
             <button class="btn btn-primary" id="admin_add_brand_button" type="button">Submit</button>
             <a href="{{ url('admin_showbrands'); }}" class="btn btn-default">Cancel</a>
-            </form> 
+            </form>
             </div>
           </div>
 
@@ -121,14 +121,14 @@ $edit = $data["edit"] ;
 
 
 
-    
+
     <script>
       $(document).on('input', '#brand_name_input', function() {
         let sub = $('#brand_name_input').val().substring(0, 19)
         $('#brand_code_input').val(sub)
       });
     </script>
-    
+
 
     <script>
     var old_brand_name = $('#brand_name_input').val();
@@ -150,10 +150,10 @@ $edit = $data["edit"] ;
         $('#brand_already_exists').slideUp('fast');
         $('#mainform').submit();
       }
-      
+
     });
     </script>
-    
+
     <script>
 
 
@@ -172,7 +172,7 @@ $edit = $data["edit"] ;
         swal("Deleted!", "Brand has been deleted!", "success");
       });
     });
-	    	
+
     </script>
 
 
