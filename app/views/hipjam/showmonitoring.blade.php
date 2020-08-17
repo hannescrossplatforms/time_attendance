@@ -443,7 +443,7 @@
 
                 success: function(data) {
 
-                    // debugger;
+                    
                     updateButtonStatus(venueId, data);
                     updateSonoffButtons();
                     updateEwelinkButtons();
@@ -561,6 +561,8 @@
 
 
       function updateEwelinkButtons(){
+
+          debugger;
         $('.ewelink-sensor-button').each(function(){
 
           var sonoff_status = $(this).attr('sonoff_status');
