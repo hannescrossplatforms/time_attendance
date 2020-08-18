@@ -462,10 +462,10 @@
                 if(parseInt($(this).attr('venue_id')) == parseInt(venueId)){
 
                     if(data.sonoff_query_time != null){
-                        let device_date = new Date("2020-08-18 00:00:00");
+                        let device_date = new Date(data.sonoff_query_time);
                         let date = new Date();
                         let seconds_diff = (date - device_date) / 1000;
-
+                        
                         if (seconds_diff > 300){
                             $(this).attr('sonoff_status', 'offline');
                         }
