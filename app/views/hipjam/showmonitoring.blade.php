@@ -460,6 +460,14 @@
         function updateButtonStatus(venueId, data){
             $('.sonoff-button').each(function(){    
                 if(parseInt($(this).attr('venue_id')) == parseInt(venueId)){
+
+                    //If sonoff query time longer than 10 min ago then it does not work.
+
+                    debugger;
+                    var test = data.sonoff_query_time;
+
+
+
                     $(this).attr('sonoff_status', data.sonoff_device_action_status);
                 }
             });
