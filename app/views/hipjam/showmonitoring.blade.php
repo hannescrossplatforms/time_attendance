@@ -461,14 +461,22 @@
             $('.sonoff-button').each(function(){    
                 if(parseInt($(this).attr('venue_id')) == parseInt(venueId)){
 
-                    //If sonoff query time longer than 10 min ago then it does not work.
+                    if(data.sonoff_query_time != null){
+                        let device_date = new Date("2020-08-18 00:00:00");
+                        let date = new Date();
+                        let seconds_diff = (date - device_date) / 1000;
 
-                    debugger;
-                    var test = data.sonoff_query_time;
-
-
-
-                    $(this).attr('sonoff_status', data.sonoff_device_action_status);
+                        if (seconds_diff > 300){
+                            $(this).attr('sonoff_status', 'offline');
+                        }
+                        else {
+                            $(this).attr('sonoff_status', data.sonoff_device_action_status);
+                        }
+                    }
+                    else {
+                        $(this).attr('sonoff_status', data.sonoff_device_action_status);
+                    }
+                    
                 }
             });
         }
@@ -559,6 +567,13 @@
             $(this).removeClass("btn-warning");
             $(this).addClass("btn-danger");
             $(this).html('Off<br><small>Click to turn on</small>');
+          }
+          else if (sonoff_status == 'offline') {
+            // clickable, Off, click to turn on
+            $(this).removeClass("btn-success");
+            $(this).removeClass("btn-warning");
+            $(this).addClass("btn-danger");
+            $(this).html('Offline');
           }
           else {
             $(this).hide();
