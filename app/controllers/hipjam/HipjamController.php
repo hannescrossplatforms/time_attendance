@@ -4509,6 +4509,8 @@ public function getOohSiteData() {
 
 
         $venue = \Venue::where('sonoff_device_auth_token', '=', $device_auth_token)->first();
+        $venue->sonoff_query_time = \Carbon\Carbon::now()->addHours(2);
+        $venue->save();
 
         return Response::json([
             'success' => 'true', 'device_status' => $venue->sonoff_device_on_status
