@@ -561,8 +561,6 @@
 
 
       function updateEwelinkButtons(){
-
-          debugger;
         $('.ewelink-sensor-button').each(function(){
 
           var sonoff_status = $(this).attr('sonoff_status');
@@ -753,7 +751,6 @@
             if(venue_status == 'Online'){
                 action = 'turn_off';
             }
-            debugger;
             $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/${action}`, function(resp) {
                 
                 if (venue_id == 1476) {
@@ -764,8 +761,6 @@
                 } else if (venue_id == 1490) {
                     //Guerilla Alpha
                     $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-                        
                         
                     });
                 } else if (venue_id == 1491) {
