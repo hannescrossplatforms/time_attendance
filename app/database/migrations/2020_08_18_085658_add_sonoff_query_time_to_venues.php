@@ -12,7 +12,10 @@ class AddSonoffQueryTimeToVenues extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::table('venues', function(Blueprint $table)
+		{
+			$table->date('sonoff_query_time')->nullable()->default(null);
+		});
 	}
 
 	/**
