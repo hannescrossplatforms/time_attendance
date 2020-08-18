@@ -509,6 +509,9 @@ error_log("admin_editVenueSave 10");
             $list_of_sensors = \Sensor::where('venue_id', '=', $id);
             foreach ($list_of_sensors as $sensor)
             {
+                $sensor_command = 'ssh  -v -i /var/www/.ssh/id_rsa root@vpn.hipzone.co.za -p 1759 "delete_sensor_entries ' . $sensor->mac_address . '" 2>&1';
+                $sensor_output = shell_exec($sensor_command);
+
                 $command = 'ssh  -v -i /var/www/.ssh/id_rsa root@vpn.hipzone.co.za -p 1759 "delete_keys ' . $sensor->name . '" 2>&1';
                 $output = shell_exec($command);
                 $sensor->delete();

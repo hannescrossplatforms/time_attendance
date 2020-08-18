@@ -32,10 +32,10 @@ class LibController extends \BaseController {
         error_log("getBrandsForDatabase : remotedb_id : $remotedb_id");
 
         if (\User::hasAccess("superadmin")) {
-            $allowedbrands = \Brand::All();  
+            $allowedbrands = \Brand::All();
         } else {
             error_log("getBrandsForDatabase : NOT superadmin");
-            $allowedbrands = $user->brands;  
+            $allowedbrands = $user->brands;
         }
 
         $allowedbrand_ids = array();
@@ -106,7 +106,7 @@ class LibController extends \BaseController {
 
     public function isSitenameDuplicate()
     {
-        error_log("isSitenameDuplicate");        
+        error_log("isSitenameDuplicate");
         $brand_id = \Input::get('brand_id');
         $brand_name = \Brand::find($brand_id)->name;
         $sitename = \Input::get('sitename');
@@ -115,7 +115,7 @@ class LibController extends \BaseController {
 
         $venue = \Venue::where("sitename", $sitename)->get();
         if ($venue->isEmpty()) { $message = "empty"; } else { $message = "exists"; }
- 
+
         return \Response::json($message);
     }
 
@@ -180,7 +180,7 @@ class LibController extends \BaseController {
         error_log("lib filterBeacons : 10" );
         $data = array();
         $data['currentMenuItem'] = "Venue Monitoring";
-        
+
         $venueObj = new \Venue();
         $venues = $venueObj->getVenuesForUser("hipengage");
 
@@ -200,8 +200,8 @@ class LibController extends \BaseController {
                 if($beacon) {
 
                     $row = array();
-                    $row["sitename"] = $venue->sitename; 
-                    $row["beacon_id"] = $beacon->beacon_id; // 
+                    $row["sitename"] = $venue->sitename;
+                    $row["beacon_id"] = $beacon->beacon_id; //
                     $row["position"] = $venueposition->name; // From venuepositions
 
                     $lastBeaconMessage = \Beaconmessage::where('beacon_id', 'like', "%" . $beacon->beacon_id . "%")->orderBy('created_at', 'desc')->first();
@@ -217,7 +217,7 @@ class LibController extends \BaseController {
                 }
             }
         }
-        
+
         $data['beaconsJson'] = json_encode($data);
 
         return \Response::json($data['beaconsJson']);
@@ -244,7 +244,7 @@ class LibController extends \BaseController {
             } else {
                 $venue["hostname"] = "Server No longer exists";
             }
-            // $venue["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $venue["sitename"]); 
+            // $venue["sitename"] = preg_replace("/(.*) (.*$)/", "$2", $venue["sitename"]);
         }
 
         return \Response::json($venues);
@@ -272,10 +272,10 @@ class LibController extends \BaseController {
         $user =  \Auth::user();
 
         if (\User::hasAccess("superadmin")) {
-            $allowedbrands = \Brand::All();  
+            $allowedbrands = \Brand::All();
         } else {
             error_log("getBrands : NOT superadmin");
-            $allowedbrands = $user->brands;  
+            $allowedbrands = $user->brands;
         }
 
         $allowedbrand_ids = array();
@@ -305,9 +305,9 @@ class LibController extends \BaseController {
         // Save the desktop image
         if(\Input::file('dtimage')) {
             $file = array('dtimage' => \Input::file('dtimage'));
-            $extension = \Input::file('dtimage')->getClientOriginalExtension(); 
-            $fileName = "preview" .'-dt.'.$extension; 
-            \Input::file('dtimage')->move($destinationPath, $fileName); 
+            $extension = \Input::file('dtimage')->getClientOriginalExtension();
+            $fileName = "preview" .'-dt.'.$extension;
+            \Input::file('dtimage')->move($destinationPath, $fileName);
         }
 
         error_log("saveDtMedia : extension : $extension");
@@ -327,10 +327,10 @@ class LibController extends \BaseController {
         // Save the image
         if(\Input::file('mbimage')) {
             $file = array('mbimage' => \Input::file('mbimage'));
-            $extension = \Input::file('mbimage')->getClientOriginalExtension(); 
-            $fileName = "preview" . '.' . $extension; 
+            $extension = \Input::file('mbimage')->getClientOriginalExtension();
+            $fileName = "preview" . '.' . $extension;
             error_log("savePushMedia : Saving image : fileName = $fileName");
-            \Input::file('mbimage')->move($destinationPath, $fileName); 
+            \Input::file('mbimage')->move($destinationPath, $fileName);
         }
 
         error_log("savePushMedia : extension : $extension");
@@ -350,10 +350,10 @@ class LibController extends \BaseController {
         // Save the image
         if(\Input::file('mbimage')) {
             $file = array('mbimage' => \Input::file('mbimage'));
-            $extension = \Input::file('mbimage')->getClientOriginalExtension(); 
-            $fileName = "preview" . '.' . $extension; 
+            $extension = \Input::file('mbimage')->getClientOriginalExtension();
+            $fileName = "preview" . '.' . $extension;
             error_log("savelookupMedia : Saving image : fileName = $fileName");
-            \Input::file('mbimage')->move($destinationPath, $fileName); 
+            \Input::file('mbimage')->move($destinationPath, $fileName);
         }
 
         error_log("savelookupMedia : extension : $extension");
@@ -373,9 +373,9 @@ class LibController extends \BaseController {
         // Save the desktop image
         if(\Input::file('mbimage')) {
             $file = array('mbimage' => \Input::file('mbimage'));
-            $extension = \Input::file('mbimage')->getClientOriginalExtension(); 
-            $fileName = "preview" .'-mb.'.$extension; 
-            \Input::file('mbimage')->move($destinationPath, $fileName); 
+            $extension = \Input::file('mbimage')->getClientOriginalExtension();
+            $fileName = "preview" .'-mb.'.$extension;
+            \Input::file('mbimage')->move($destinationPath, $fileName);
         }
 
         error_log("saveMbMedia : extension : $extension");
@@ -392,7 +392,7 @@ class LibController extends \BaseController {
             return 1;
         } else {
             return 0;
-        } 
+        }
     }
 
     public function saveFpMedia() {
@@ -414,7 +414,7 @@ class LibController extends \BaseController {
         if ($validator->fails()) {
             //echo "Not Valid";
             return $validator->messages();
-        } else if( $this->correct_size(\Input::file('fpimage')) == 0 ){ 
+        } else if( $this->correct_size(\Input::file('fpimage')) == 0 ){
             $msg = array("file"=>"Image Dimension : 800W X 600H");
             print_r(json_encode($msg));
             die();
@@ -430,11 +430,11 @@ class LibController extends \BaseController {
 
             // Save the floorplan image
             if(\Input::file('fpimage')) {
-                $venue = \Input::get('venue_location'); 
+                $venue = \Input::get('venue_location');
                 $file = array('fpimage' => \Input::file('fpimage'));
-                $extension = \Input::file('fpimage')->getClientOriginalExtension(); 
+                $extension = \Input::file('fpimage')->getClientOriginalExtension();
                 //$fileName = "preview" .'-fp-'.$venue.'.'.$extension;
-                $fileName = $venue.'.'.$extension;  
+                $fileName = $venue.'.'.$extension;
                 //\Input::file('fpimage')->move($destinationPath, $fileName); //for testing purpose, now move the file to the /public/assets/track/images , because i cant access to my /var/www/ dir. - Anusha
                 \Input::file('fpimage')->move($destinationPath1, $fileName);
             }
@@ -486,7 +486,7 @@ class LibController extends \BaseController {
         $hostname = \Server::where("remotedb_id", "=", $remotedb_id)->first()->hostname;
         $hostname = "http://" . $hostname . "/";
 
-        // $hostname = $hostname + 
+        // $hostname = $hostname +
 
         // login?res=logoff&nasid=kauai_bayside
 
@@ -528,7 +528,7 @@ class LibController extends \BaseController {
 
         $measures = $trigger->measures();
         // echo "<pre>";
-        // echo print_r($measures);    
+        // echo print_r($measures);
         // echo "</pre>";
         // dd();
         return \Response::json(json_encode($measures));
@@ -571,10 +571,10 @@ class LibController extends \BaseController {
         if($id) {
 
             $smsnotification = \Smsnotification::find($id);
-            
+
             return \Response::json(json_encode($smsnotification));
 
-            
+
         } else {
 
             return 0;
@@ -601,10 +601,10 @@ class LibController extends \BaseController {
         if($id) {
 
             $emailnotification = \Emailnotification::find($id);
-            
+
             return \Response::json(json_encode($emailnotification));
 
-            
+
         } else {
 
             return 0;
@@ -623,7 +623,7 @@ class LibController extends \BaseController {
         error_log("lib_sendtestemail : subject = $subject");
         error_log("lib_sendtestemail : message = $message");
         error_log("lib_sendtestemail : headers = $headers");
-                    
+
         // $returnVals = mail($to,$subject,$message,$headers);
 
         $returnVals = \Mail::send('testemail', array('key' => 'value'), function($message) use($to, $subject)
@@ -651,10 +651,10 @@ class LibController extends \BaseController {
         if($id) {
 
             $apinotification = \Apinotification::find($id);
-            
+
             return \Response::json(json_encode($apinotification));
 
-            
+
         } else {
 
             return 0;
@@ -681,10 +681,10 @@ class LibController extends \BaseController {
         if($id) {
 
             $mgrnotification = \Mgrnotification::find($id);
-            
+
             return \Response::json(json_encode($mgrnotification));
 
-            
+
         } else {
 
             return 0;
@@ -709,8 +709,8 @@ class LibController extends \BaseController {
             $notifications = \Emailnotification::whereIn('engagebrand_code', $allowedbrandcodes)->get();
         } else if($type == "mgr") {
             $notifications = \Mgrnotification::whereIn('engagebrand_code', $allowedbrandcodes)->get();
-        } 
-        
+        }
+
         return \Response::json(json_encode($notifications));
 
     }
@@ -731,10 +731,10 @@ class LibController extends \BaseController {
         if($id) {
 
             $pushnotification = \Pushnotification::find($id);
-            
+
             return \Response::json(json_encode($pushnotification));
 
-            
+
         } else {
 
             return 0;
@@ -825,10 +825,10 @@ class LibController extends \BaseController {
 
         $venuepositions = $this->getVenuePositionsForLocation($location);
         // $venuepositions = "{}";
-      
+
         return \Response::json(json_encode($venuepositions));
     }
-    
+
     public function getVenuePositionsForLocation($location) {
         $venuepositions = \Venueposition::join('beacons', 'venuepositions.id', '=', 'beacons.venueposition_id')
                                                     ->selectRaw('venuepositions.*, beacons.beacon_id')
@@ -884,7 +884,7 @@ class LibController extends \BaseController {
 
             // echo($user->ispuser . " === $i <br>");
             // $i++;
-            $username = trim(substr($user->ispuser , 3)); 
+            $username = trim(substr($user->ispuser , 3));
 
             $x519record = \DB::connection("hipreports")->table("partner")->where('quickie_id', '=', 519)->where('ispuser', 'like', $user->ispuser)->first();
             if($x519record) $q519 = $x519record->answer ;
@@ -930,7 +930,7 @@ class LibController extends \BaseController {
                 $csvrecord["Browser"] = "";
                 $csvrecord["OS"] = "";
             }
-            
+
             // echo print_r($csvrecord, true) . "<br>";
             $rowdata = array_values($csvrecord); // append each row
             fputcsv($output, $rowdata);
@@ -968,7 +968,7 @@ class LibController extends \BaseController {
 
             // echo($user->ispuser . " === $i <br>");
             // $i++;
-            $username = trim(substr($user->ispuser , 3)); 
+            $username = trim(substr($user->ispuser , 3));
 
             $x530record = \DB::connection("hipreports")->table("partner")->where('quickie_id', '=', 530)->where('ispuser', 'like', $user->ispuser)->first();
             if($x530record) $q530 = $x530record->answer ;
@@ -1024,7 +1024,7 @@ class LibController extends \BaseController {
                 $csvrecord["Gender"] = "";
                 $csvrecord["Age Range"] = "";
                 $csvrecord["Language"] = "";
-                $csvrecord["City"] = "";                
+                $csvrecord["City"] = "";
             }
 
             $csvrecord["q530"] = $q530;
@@ -1043,7 +1043,7 @@ class LibController extends \BaseController {
                 $csvrecord["Browser"] = "";
                 $csvrecord["OS"] = "";
             }
-            
+
             // echo print_r($csvrecord, true) . "<br>";
             $rowdata = array_values($csvrecord); // append each row
             fputcsv($output, $rowdata);
@@ -1087,7 +1087,7 @@ class LibController extends \BaseController {
 
         foreach($users as $user) {
 
-            $username = trim(substr($user->ispuser , 3)); 
+            $username = trim(substr($user->ispuser , 3));
 
             // Get macaddress
             $x = \DB::connection("hipreports")->table("partner")->where('ispuser', 'like', $user->ispuser)->first();
@@ -1126,7 +1126,7 @@ class LibController extends \BaseController {
                 $csvrecord["Gender"] = "";
                 $csvrecord["Age Range"] = "";
                 $csvrecord["Language"] = "";
-                $csvrecord["City"] = "";                
+                $csvrecord["City"] = "";
             }
 
             if($openprofilerecord) {
@@ -1136,7 +1136,7 @@ class LibController extends \BaseController {
                 $csvrecord["Browser"] = "";
                 $csvrecord["OS"] = "";
             }
-            
+
             $rowdata = array_values($csvrecord); // append each row
             fputcsv($output, $rowdata);
 
@@ -1173,7 +1173,7 @@ class LibController extends \BaseController {
         foreach($users as $user) {
             $q581 = $q582 = "";
 
-            $username = trim(substr($user->ispuser , 3)); 
+            $username = trim(substr($user->ispuser , 3));
 
             $x581record = \DB::connection("hipreports")->table("partner")->where('quickie_id', '=', 581)->where('ispuser', 'like', $user->ispuser)->first();
             if($x581record) $q581 = $x581record->answer ;
@@ -1219,8 +1219,8 @@ class LibController extends \BaseController {
                 $csvrecord["Gender"] = "";
                 $csvrecord["Age Range"] = "";
                 $csvrecord["Language"] = "";
-                $csvrecord["City"] = "";                
-                $csvrecord["Income"] = "";                
+                $csvrecord["City"] = "";
+                $csvrecord["Income"] = "";
             }
 
             $csvrecord["q581"] = $q581;
@@ -1234,7 +1234,7 @@ class LibController extends \BaseController {
                 $csvrecord["Browser"] = "";
                 $csvrecord["OS"] = "";
             }
-            
+
             $rowdata = array_values($csvrecord); // append each row
             fputcsv($output, $rowdata);
 
@@ -1282,7 +1282,7 @@ class LibController extends \BaseController {
 
             // echo($user->ispuser . " === $i <br>");
             // $i++;
-            $username = trim(substr($user->ispuser , 3)); 
+            $username = trim(substr($user->ispuser , 3));
 
             $x148record = \DB::connection("hipreports")->table("partner")->where('quickie_id', '=', 148)->where('ispuser', 'like', $user->ispuser)->first();
             if($x148record) $q148 = $x148record->answer ;
@@ -1321,7 +1321,7 @@ class LibController extends \BaseController {
                 $csvrecord["Gender"] = "";
                 $csvrecord["Age Range"] = "";
                 $csvrecord["Language"] = "";
-                $csvrecord["City"] = "";                
+                $csvrecord["City"] = "";
             }
 
             $csvrecord["q148"] = $q148;
@@ -1335,7 +1335,7 @@ class LibController extends \BaseController {
                 $csvrecord["Browser"] = "";
                 $csvrecord["OS"] = "";
             }
-            
+
             // echo print_r($csvrecord, true) . "<br>";
             $rowdata = array_values($csvrecord); // append each row
             fputcsv($output, $rowdata);
@@ -1380,7 +1380,7 @@ class LibController extends \BaseController {
 
             // echo($user->ispuser . " === $i <br>");
             // $i++;
-            $username = trim(substr($user->ispuser , 3)); 
+            $username = trim(substr($user->ispuser , 3));
 
             $x521record = \DB::connection("hipreports")->table("partner")->where('quickie_id', '=', 521)->where('ispuser', 'like', $user->ispuser)->first();
             if($x521record) $q521 = $x521record->answer ;
@@ -1434,7 +1434,7 @@ class LibController extends \BaseController {
                 $csvrecord["Gender"] = "";
                 $csvrecord["Age Range"] = "";
                 $csvrecord["Language"] = "";
-                $csvrecord["City"] = "";                
+                $csvrecord["City"] = "";
             }
 
             $csvrecord["q521"] = $q521;
@@ -1453,7 +1453,7 @@ class LibController extends \BaseController {
                 $csvrecord["Browser"] = "";
                 $csvrecord["OS"] = "";
             }
-            
+
             // echo print_r($csvrecord, true) . "<br>";
             $rowdata = array_values($csvrecord); // append each row
             fputcsv($output, $rowdata);
@@ -1490,8 +1490,8 @@ class LibController extends \BaseController {
 
 
         foreach($x521records as $x521record) {
-            // $username = preg_replace("/(^.{3}) (.*$)/", "$2", $answer->ispuser); 
-            $username = trim(substr($x521record->ispuser , 3)); 
+            // $username = preg_replace("/(^.{3}) (.*$)/", "$2", $answer->ispuser);
+            $username = trim(substr($x521record->ispuser , 3));
             $q521 = $x521record->answer;
 
             $x522record = \DB::connection("hipreports")->table("partner")->where('quickie_id', '=', 522)->where('ispuser', 'like', $x521record->ispuser)->first();
@@ -1524,7 +1524,7 @@ class LibController extends \BaseController {
                 $csvrecord["Gender"] = "";
                 $csvrecord["Age Range"] = "";
                 $csvrecord["Language"] = "";
-                $csvrecord["City"] = "";                
+                $csvrecord["City"] = "";
             }
 
             if($secureprofilerecord) {
@@ -1544,7 +1544,7 @@ class LibController extends \BaseController {
                 $csvrecord["Browser"] = "";
                 $csvrecord["OS"] = "";
             }
-            
+
             // echo print_r($csvrecord, true) . "<br>";
             $rowdata = array_values($csvrecord); // append each row
             fputcsv($output, $rowdata);
@@ -1569,13 +1569,18 @@ class LibController extends \BaseController {
         $usersTM = array();
         $newUsersLM = array();
         $newUsersTM = array();
-        
 
-               
+
+
         foreach ($brands as $brand) {
             $connection = \DB::table('remotedbs')->where('id', "=", $brand->remotedb_id)->pluck('dbconnection');
             $onlineUsersCount = \DB::connection($connection)->table('radacct')->where('calledstationid', 'like', '%'.$brand->code.'%')->where('AcctStopTime', '=', '0000-00-00 00:00:00')->count();
-            $userCount = \DB::connection($connection)->table('secure_profile')->where('home_venue', 'like', '%'.$brand->name.'%')->count();
+            $userCount = 0;
+            try {
+                $userCount = \DB::connection($connection)->table('secure_profile')->where('home_venue', 'like', '%'.$brand->name.'%')->count();
+            } catch (\Illuminate\Database\QueryException $ex) {
+                $userCount = 0;
+            }
 
             $usersPerBrandLM = \DB::table('replastmonth')->where('brandcode', '=', $brand->code)->sum('currentunique');
             $usersPerBrandTM = \DB::table('repthismonth')->where('brandcode', '=', $brand->code)->sum('currentunique');
@@ -1587,7 +1592,7 @@ class LibController extends \BaseController {
             array_push($usersTM, $usersPerBrandTM);
             array_push($newUsersLM, $newUsersPerBrandLM);
             array_push($newUsersTM, $newUsersPerBrandTM);
-        }  
+        }
 
         $totalUsersOnline = array_sum($onlineUsers);
         $totalNoOfUsers = array_sum($usersPerBrand);
@@ -1595,7 +1600,7 @@ class LibController extends \BaseController {
         $totalUsersTM = array_sum($usersTM);
         $totalNewUsersLM = array_sum($newUsersLM);
         $totalNewUsersTM = array_sum($newUsersTM);
-        
+
         $details = array();
         $details["users"] = $totalNoOfUsers;
         $details["onlineusers"] = $totalUsersOnline;
@@ -1603,7 +1608,7 @@ class LibController extends \BaseController {
         $details["usersthismonth"] = $totalUsersTM;
         $details["newuserslastmonth"] = $totalNewUsersLM;
         $details["newusersthismonth"] = $totalNewUsersTM;
-        
+
         return $details;
 
     }
@@ -1627,12 +1632,12 @@ class LibController extends \BaseController {
             $noOfBrandsPerUser++;
             $sessionsPerBrandLM = \DB::table('replastmonth')->where('brandcode', '=', $brand->code)->sum('currentsessions');
             $sessionsPerBrandTM = \DB::table('repthismonth')->where('brandcode', '=', $brand->code)->sum('currentsessions');
-        
+
             $lmAvgDwellTime = \DB::table('replastmonth')->where('brandcode', '=', $brand->code)->avg('currentminutes');
             $tmAvgDwellTime = \DB::table('repthismonth')->where('brandcode', '=', $brand->code)->avg('currentminutes');
             $lmDataPerBrand = \DB::table('replastmonth')->where('brandcode', '=', $brand->code)->sum('currentdata');
             $tmDataPerBrand = \DB::table('repthismonth')->where('brandcode', '=', $brand->code)->sum('currentdata');
-        
+
 
             array_push($sessionsLM, $sessionsPerBrandLM);
             array_push($sessionsTM, $sessionsPerBrandTM);
@@ -1650,13 +1655,13 @@ class LibController extends \BaseController {
         $totalDataLMGB = round($totalDataLM/1024);
         $totalDataTM = array_sum($tmData);
         $totalDataTMGB = round($totalDataTM/1024);
-        
+
         $avgDwellTimeLM_final = round($totalAvgDwellTimeLM/$noOfBrandsPerUser);
         $avgDwellTimeTM_final = round($totalAvgDwellTimeTM/$noOfBrandsPerUser);
 
 
         $details = array();
-        
+
         $details["sessionslastmonth"] = $totalSessionsLM;
         $details["sessionsthismonth"] = $totalSessionsTM;
         $details["avgdwelltimelastmonth"] = $avgDwellTimeLM_final;
@@ -1665,7 +1670,7 @@ class LibController extends \BaseController {
         $details["thismonthdata"] = $totalDataTMGB;
         $details["length"] = $noOfBrandsPerUser;
 
-    
+
 
         return $details;
 
