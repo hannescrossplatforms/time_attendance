@@ -517,7 +517,7 @@
             });
       }
 
-      function startUpVenue(){
+      function startUpVenue(button){
           debugger;
         var venueId = button.attr('venue_id');
         var url = 'http://hiphub.hipzone.co.za/hipjam/update_sonoff_status?auth_token=001c2fcd-99a5-4bac-8689-3f73d4d46849&device_auth_token=' + deviceAuthToken + '&status=on';
