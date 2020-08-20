@@ -4473,7 +4473,7 @@ public function getOohSiteData() {
             ],401);
         }
 
-        $sonoffDeviceActionStatus = 'shutting_down';
+        $sonoffDeviceActionStatus = 'off';
         $settingStatus = false;
         if($status == "on"){
             $settingStatus = true;
