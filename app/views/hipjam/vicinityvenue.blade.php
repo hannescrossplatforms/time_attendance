@@ -134,33 +134,6 @@
                         </select>
                       </div>
                     </div>
-
-                    @if ($data['venue']->track_type == 'billboard')
-                    <div class="col-6">
-                    </div>
-                    @endif
-                    <div class="col-6">
-                      <div class="form-group">
-                        @if ($data['venue']->track_type == 'billboard')
-                        <label for="track_slug">Reset Board UUID</label>
-                        <input disabled type="text" class="form-control" value="{{$data['venue']->sonoff_device_uuid}}">
-                        @endif
-                      </div>
-                    </div>
-                    @if ($data['venue']->track_type == 'billboard')
-                    <div class="col-6">
-                    </div>
-                    @endif
-
-                    <div class="col-6">
-                      <div class="form-group">
-                      @if ($data['venue']->track_type == 'billboard')
-                        <label for="track_slug">Reset Board Auth Key</label>
-                        <input disabled type="text" class="form-control" value="{{$data['venue']->sonoff_device_auth_token}}">
-                      @endif
-                      </div>
-                    </div>
-
                     <div class="col-md-12 text-left">
                       <div class="form-group">
                         <label>Sensor Status : </label>
@@ -353,6 +326,12 @@
 
     data['timezone'] = $('#timezone_select').val();
     data['linked_billboard'] = $('#track_linked_billboard').val();
+
+    // emails
+    data['send_alert_emails'] = $('#alert_email_check').is(":checked");
+    data['alert_email_address_1'] = $('#status_alert_email').val();
+    data['alert_email_address_2'] = $('#status_alert_email_2').val();
+    data['alert_email_address_3'] = $('#status_alert_email_3').val();
 
 
     data['ap_active'] = $('#ap_active').prop('checked');

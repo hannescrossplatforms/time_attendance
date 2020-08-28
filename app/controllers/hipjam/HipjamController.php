@@ -1506,6 +1506,12 @@ public function getOohSiteData() {
 
         $venue->timezone = $form_data->timezone; // Time Zone
         $venue->jam_activated = true;
+
+        $venue->send_alert_emails = $form_data->send_alert_emails;
+        $venue->alert_email_address_1 = $form_data->alert_email_address_1;
+        $venue->alert_email_address_2 = $form_data->alert_email_address_2;
+        $venue->alert_email_address_3 = $form_data->alert_email_address_3;
+
         $result = $venue->save();
 
 
@@ -1919,6 +1925,12 @@ public function getOohSiteData() {
 
         createConfigYml($objReport, $update = true, $oldmac = null);
 
+        $input = \Input::all();
+        $venue = \Venue::find($track_venue_id);
+        $venue->alert_email_address_1 = $input['alert_email_address_1'];
+        $venue->alert_email_address_2 = $input['alert_email_address_2'];
+        $venue->alert_email_address_3 = $input['alert_email_address_3'];
+        $venue->save();
 
 
         //no data to update - venue_id is move to the track server side.
