@@ -75,33 +75,7 @@
                                                 <td class="text-center">
 
                                                 @if ($venue->sonoff_device_uuid != null)
-
-                                                
-                                                    @if($venue->id == 1491)
-                                                    <!-- 1491 bravo -->
-                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
-                                                    @elseif($venue->id == 1490)
-                                                    <!-- 1490 alpha -->
-                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
-                                                    @elseif($venue->id == 1490)
-                                                    <!-- 1483 charlie -->
-                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
-                                                        @elseif($venue->id == 1493)
-                                                    <!-- 1493 Guerrilla CuratioHouse -->
-                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
-                                                        @elseif($venue->id == 1489)
-                                                    <!-- 1493 Guerrilla Randhill  -->
-                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
-                                                        @elseif($venue->id == 1488)
-                                                    <!-- 1493 Guerrilla SandtonClose  -->
-                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
-                                                    @else
-                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
-                                                    @endif
-
-
-
-                                                    
+                                                    <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                 @endif
                                                 
                                                 </td>
