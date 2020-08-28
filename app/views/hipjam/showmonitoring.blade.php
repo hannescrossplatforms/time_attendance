@@ -79,22 +79,22 @@
                                                 
                                                     @if($venue->id == 1491)
                                                     <!-- 1491 bravo -->
-                                                        <button class="btn ewelink-sensor-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->status}}">{{$venue->status}}<br><small>Click to turn off</small></button>
+                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                     @elseif($venue->id == 1490)
                                                     <!-- 1490 alpha -->
-                                                        <button class="btn ewelink-sensor-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->status}}">{{$venue->status}}<br><small>Click to turn off</small></button>
+                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                     @elseif($venue->id == 1490)
                                                     <!-- 1483 charlie -->
-                                                        <button class="btn ewelink-sensor-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->status}}">{{$venue->status}}<br><small>Click to turn off</small></button>
+                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                         @elseif($venue->id == 1493)
                                                     <!-- 1493 Guerrilla CuratioHouse -->
-                                                        <button class="btn ewelink-sensor-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->status}}">{{$venue->status}}<br><small>Click to turn off</small></button>
+                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                         @elseif($venue->id == 1489)
                                                     <!-- 1493 Guerrilla Randhill  -->
-                                                        <button class="btn ewelink-sensor-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->status}}">{{$venue->status}}<br><small>Click to turn off</small></button>
+                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                         @elseif($venue->id == 1488)
                                                     <!-- 1493 Guerrilla SandtonClose  -->
-                                                        <button class="btn ewelink-sensor-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->status}}">{{$venue->status}}<br><small>Click to turn off</small></button>
+                                                        <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                     @else
                                                         <button class="btn sonoff-button" device_auth_token="{{$venue->sonoff_device_auth_token}}" venue_id="{{$venue->id}}" sonoff_status="{{$venue->sonoff_device_action_status}}">{{$venue->sonoff_device_action_status}}<br><small>Click to turn off</small></button>
                                                     @endif
@@ -455,7 +455,7 @@
                     
                     updateButtonStatus(venueId, data);
                     updateSonoffButtons();
-                    updateEwelinkButtons();
+                    // updateEwelinkButtons();
                     
 
                 },
@@ -491,19 +491,83 @@
         }
 
         $(document).on('click', '.sonoff-button', function(){
-        //Only if its a sonoff board else do the ewelink solution.
 
-        var button = $(this);
-        var sonoff_status = $(this).attr('sonoff_status');
-        if(sonoff_status == 'on'){
-          shutDownVenue(button);
-        }
-        else if(sonoff_status == 'off'){
-          startUpVenue(button);
-        }
+        //     let venue_id = $(this).attr("venue_id");
+        //     let venue_status = $(this).attr("sonoff_status");
+        //     let action = 'turn_on';
+        //     if(venue_status == 'Online'){
+        //         action = 'turn_off';
+        //     }
 
+        //     // Ewelink solution
+        //     if (venue_id in array){
+                
+        //         $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/${action}`, function(resp) {
+                
+        //         if (venue_id == 1476) {
+        //             // Greenside
+        //             $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                        
+        //             });
+        //         } else if (venue_id == 1490) {
+        //             //Guerilla Alpha
+        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                        
+        //             });
+        //         } else if (venue_id == 1491) {
+        //             //Guerilla Bravo
+        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                        
+        //             });
+        //         } else if (venue_id == 1483) {
+        //             //Charlie
+        //             $.get(`https://maker.ifttt.com/trigger/turn_off_charlie/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
+        //             });
+        //         } else if (venue_id == 1484) {
+        //             //Randhill
+        //             $.get(`https://maker.ifttt.com/trigger/turn_off_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
 
+        //             });
+        //         } else if (venue_id == 1493) {
+        //             //Curatio house
+        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerrilla_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+
+        //             });
+        //         } else if (venue_id == 1486) {
+        //             //Sandton Close
+        //             $.get(`https://maker.ifttt.com/trigger/turn_off_sandtonclose/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+
+        //             });
+        //         }
+        //         else if (venue_id == 1489) {
+        //             //Guerilla Randhill
+        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                        
+        //             });
+        //         }
+        //         else if (venue_id == 1488) {
+        //             //Guerilla sandton close
+        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_sandton_close/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+                        
+        //             });
+        //         }
+
+        //         window.location.href = 'http://hiphub.hipzone.co.za/hipjam_monitorsensors';
+        //     });
+        // }
+        // else {
+            // Sonoff solution
+            var button = $(this);
+            var sonoff_status = $(this).attr('sonoff_status');
+            if(sonoff_status == 'on'){
+                shutDownVenue(button);
+            }
+            else if(sonoff_status == 'off'){
+                startUpVenue(button);
+            }
+
+        // }
 
       });
 
@@ -594,31 +658,31 @@
       };
 
 
-      function updateEwelinkButtons(){
-        $('.ewelink-sensor-button').each(function(){
+    //   function updateEwelinkButtons(){
+    //     $('.ewelink-sensor-button').each(function(){
 
-          var sonoff_status = $(this).attr('sonoff_status');
+    //       var sonoff_status = $(this).attr('sonoff_status');
           
-          if(sonoff_status == 'Online'){
-            //clickable, on, click to turn off
-            $(this).removeClass("btn-danger");
-            $(this).removeClass("btn-warning");
-            $(this).addClass("btn-success");
-            $(this).html('ON<br><small>Click to turn off</small>');
-          }
-          else if (sonoff_status == 'Offline') {
-            // clickable, Off, click to turn on
-            $(this).removeClass("btn-success");
-            $(this).removeClass("btn-warning");
-            $(this).addClass("btn-danger");
-            $(this).html('Off<br><small>Click to turn on</small>');
-          }
-          else {
+    //       if(sonoff_status == 'Online'){
+    //         //clickable, on, click to turn off
+    //         $(this).removeClass("btn-danger");
+    //         $(this).removeClass("btn-warning");
+    //         $(this).addClass("btn-success");
+    //         $(this).html('ON<br><small>Click to turn off</small>');
+    //       }
+    //       else if (sonoff_status == 'Offline') {
+    //         // clickable, Off, click to turn on
+    //         $(this).removeClass("btn-success");
+    //         $(this).removeClass("btn-warning");
+    //         $(this).addClass("btn-danger");
+    //         $(this).html('Off<br><small>Click to turn on</small>');
+    //       }
+    //       else {
             
-          }
+    //       }
 
-        });
-      };
+    //     });
+    //   };
 
 
         function labelToNumberForComparrison(stringToGetNumbersFrom) {
@@ -777,132 +841,9 @@
     </script>
 
     <script>
-        $(document).on('click', '.ewelink-sensor-button', function() {
-            // let venue_id = $(this).data('venue-id');
-            let venue_id = $(this).attr("venue_id");
-            let venue_status = $(this).attr("sonoff_status");
-            let action = 'turn_on';
-            if(venue_status == 'Online'){
-                action = 'turn_off';
-            }
-            $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/${action}`, function(resp) {
-                
-                if (venue_id == 1476) {
-                    // Greenside
-                    $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-                    });
-                } else if (venue_id == 1490) {
-                    //Guerilla Alpha
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-                    });
-                } else if (venue_id == 1491) {
-                    //Guerilla Bravo
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-                    });
-                } else if (venue_id == 1483) {
-                    //Charlie
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_charlie/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
+        
 
-                    });
-                } else if (venue_id == 1484) {
-                    //Randhill
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                } else if (venue_id == 1493) {
-                    //Curatio house
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_guerrilla_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                } else if (venue_id == 1486) {
-                    //Sandton Close
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_sandtonclose/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                }
-                else if (venue_id == 1489) {
-                    //Guerilla Randhill
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-                    });
-                }
-                else if (venue_id == 1488) {
-                    //Guerilla sandton close
-                    $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_sandton_close/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-                    });
-                }
-
-                
-
-                window.location.href = 'http://hiphub.hipzone.co.za/hipjam_monitorsensors';
-            });
-        })
-
-        $(document).on('click', '.turn-on-sensor', function() {
-            let venue_id = $(this).data('venue-id');
-            $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/turn_on`, function(resp) {
-                
-
-
-                if (venue_id == 1476) {
-                    // Greenside
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_greenside/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                } else if (venue_id == 1490) {
-                    //Guerilla Alpha
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_guerilla_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                } else if (venue_id == 1491) {
-                    //Guerilla Bravo
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_guerilla_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                } else if (venue_id == 1483) {
-                    //Charlie
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_charlie/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                } else if (venue_id == 1484) {
-                    //Randhill
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                } else if (venue_id == 1493) {
-                    //Curatio house
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_guerrilla_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                } else if (venue_id == 1486) {
-                    //Sandton Close
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_sandtonclose/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                }
-                else if (venue_id == 1489) {
-                    //Guerilla Randhill
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_guerilla_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                } else if (venue_id == 1488) {
-                    //Guerilla sandton 
-                           
-                    $.get(`https://maker.ifttt.com/trigger/turn_on_guerilla_sandton_close/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-                    });
-                }
-
-
-
-
-                window.location.href = 'http://hiphub.hipzone.co.za/hipjam_monitorsensors';
-            });
-        })
+        
     </script>
 
     @stop
