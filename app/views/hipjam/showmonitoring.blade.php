@@ -425,7 +425,6 @@
                 async: true,
 
                 success: function(data) {
-                    debugger;
                     updateButtonStatus(venueId, data);
                     updateSonoffButtons();
                 },
