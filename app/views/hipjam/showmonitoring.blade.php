@@ -425,13 +425,8 @@
                 async: true,
 
                 success: function(data) {
-
-                    
                     updateButtonStatus(venueId, data);
                     updateSonoffButtons();
-                    // updateEwelinkButtons();
-                    
-
                 },
                 error: function() {
 
@@ -465,73 +460,6 @@
         }
 
         $(document).on('click', '.sonoff-button', function(){
-
-        //     let venue_id = $(this).attr("venue_id");
-        //     let venue_status = $(this).attr("sonoff_status");
-        //     let action = 'turn_on';
-        //     if(venue_status == 'Online'){
-        //         action = 'turn_off';
-        //     }
-
-        //     // Ewelink solution
-        //     if (venue_id in array){
-                
-        //         $.get(`http://hiphub.hipzone.co.za/hipjam_monitorsensors/${venue_id}/${action}`, function(resp) {
-                
-        //         if (venue_id == 1476) {
-        //             // Greenside
-        //             $.post(`https://maker.ifttt.com/trigger/turn_off_greenside/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-        //             });
-        //         } else if (venue_id == 1490) {
-        //             //Guerilla Alpha
-        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_alpha/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-        //             });
-        //         } else if (venue_id == 1491) {
-        //             //Guerilla Bravo
-        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_bravo/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-        //             });
-        //         } else if (venue_id == 1483) {
-        //             //Charlie
-        //             $.get(`https://maker.ifttt.com/trigger/turn_off_charlie/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-        //             });
-        //         } else if (venue_id == 1484) {
-        //             //Randhill
-        //             $.get(`https://maker.ifttt.com/trigger/turn_off_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-        //             });
-        //         } else if (venue_id == 1493) {
-        //             //Curatio house
-        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerrilla_curatiohouse/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-        //             });
-        //         } else if (venue_id == 1486) {
-        //             //Sandton Close
-        //             $.get(`https://maker.ifttt.com/trigger/turn_off_sandtonclose/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-
-        //             });
-        //         }
-        //         else if (venue_id == 1489) {
-        //             //Guerilla Randhill
-        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_randhill/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-        //             });
-        //         }
-        //         else if (venue_id == 1488) {
-        //             //Guerilla sandton close
-        //             $.get(`https://maker.ifttt.com/trigger/turn_off_guerilla_sandton_close/with/key/bAelf-3oTw4zsZBRxZzvrHa3XrDK9IGo4OIRqQ6RWZP`, function(res) {
-                        
-        //             });
-        //         }
-
-        //         window.location.href = 'http://hiphub.hipzone.co.za/hipjam_monitorsensors';
-        //     });
-        // }
-        // else {
-            // Sonoff solution
             var button = $(this);
             var sonoff_status = $(this).attr('sonoff_status');
             if(sonoff_status == 'on'){
@@ -540,9 +468,6 @@
             else if(sonoff_status == 'off'){
                 startUpVenue(button);
             }
-
-        // }
-
       });
 
       function shutDownVenue(button){
@@ -630,34 +555,6 @@
 
         });
       };
-
-
-    //   function updateEwelinkButtons(){
-    //     $('.ewelink-sensor-button').each(function(){
-
-    //       var sonoff_status = $(this).attr('sonoff_status');
-          
-    //       if(sonoff_status == 'Online'){
-    //         //clickable, on, click to turn off
-    //         $(this).removeClass("btn-danger");
-    //         $(this).removeClass("btn-warning");
-    //         $(this).addClass("btn-success");
-    //         $(this).html('ON<br><small>Click to turn off</small>');
-    //       }
-    //       else if (sonoff_status == 'Offline') {
-    //         // clickable, Off, click to turn on
-    //         $(this).removeClass("btn-success");
-    //         $(this).removeClass("btn-warning");
-    //         $(this).addClass("btn-danger");
-    //         $(this).html('Off<br><small>Click to turn on</small>');
-    //       }
-    //       else {
-            
-    //       }
-
-    //     });
-    //   };
-
 
         function labelToNumberForComparrison(stringToGetNumbersFrom) {
 
