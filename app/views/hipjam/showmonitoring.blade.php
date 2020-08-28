@@ -439,6 +439,10 @@
             $('.sonoff-button').each(function(){    
                 if(parseInt($(this).attr('venue_id')) == parseInt(venueId)){
 
+                    if (parseInt($(this).attr('venue_id')) == 1476){
+                        debugger;
+                    } 
+
                     if(data.sonoff_query_time != null){
                         let device_date = new Date(data.sonoff_query_time);
                         let date = new Date();
