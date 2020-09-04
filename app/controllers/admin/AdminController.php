@@ -365,7 +365,6 @@ class AdminController extends \BaseController {
         $data['adminssid1'] = '';
         $data['adminssid2'] = '';
         $data['adminssid3'] = '';
-        $data['serverOption'] = 1;
 
         $data['venue'] = new \Venue();
 
@@ -403,9 +402,6 @@ class AdminController extends \BaseController {
         $sitename = \Input::get('sitename');
         $sitename = $brand_name . " " . $sitename;
         $macaddress = \Input::get('macaddress');
-        $serverId = \Input::get('server_option');
-        
-
         $input['sitename'] = $sitename;
 
         $sitename_exists = \Venue::where("sitename", "like", $sitename)->first();
@@ -440,7 +436,6 @@ class AdminController extends \BaseController {
             $venue->address = $input['address'];
             $venue->contact = $input['contact'];
             $venue->notes = $input['notes'];
-            $venue->server_id =  (int)$serverId;
             $venue->save();
 
         }
@@ -456,7 +451,6 @@ error_log("admin_editVenue 10");
         $data['currentMenuItem'] = "Venue Management";
         $data['edit'] = true;
         $data['venue'] = \Venue::find($id);
-        $data['serverOption'] = \Venue::find($id)->server_id;
 
         $data['submitbutton'] = 'on';
 
@@ -480,7 +474,6 @@ error_log("admin_editVenueSave 10");
         $input['sitename'] = $sitename;
         $macaddress = \Input::get('macaddress');
         $connection = \Brand::find($brand_id)->remotedb->dbconnection;
-        $serverId = \Input::get('server_option');
 
         $utils = new \Utils();
 
@@ -498,7 +491,6 @@ error_log("admin_editVenueSave 10");
         $venue->address = $input['address'];
         $venue->contact = $input['contact'];
         $venue->notes = $input['notes'];
-        $venue->server_id =  (int)$serverId;
         $venue->save();
 
         return \Redirect::route('admin_showvenues');
