@@ -127,7 +127,24 @@
                         
 
                       <select name="server_option" class="form-control no-radius">
-                        
+                        @if ($data['serverOption'] == 1)
+                          <option selected name="server_option" value="1">
+                                Hipspot
+                          </option>
+                        @elseif
+                          <option name="server_option" value="1">
+                                Hipspot
+                          </option>
+                        @endif
+                        @if ($data['serverOption'] == 1)
+                          <option selected name="server_option" value="2">
+                          Newspot
+                          </option>
+                        @elseif
+                        <option name="server_option" value="2">
+                        Newspot
+                      </option>
+                        @endif
                         </select>
                       </div>
                       
