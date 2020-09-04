@@ -107,8 +107,8 @@
               <tbody>
                 @foreach($brands as $brand)
                   <tr>
-                    <td>{{ $brand }}</td> 
-                    <td>{{ $count[array_search($brand, $brands)] }} </td> 
+                    <td>{{ $brand }}</td>
+                    <td>{{ $count[array_search($brand, $brands)] }} </td>
                     <td> <span class="badge badge-success">{{ $onlinevenues[array_search($brand, $brands)] }}</span></td>
                     <td><span class="badge badge-danger">{{ $offlinevenues[array_search($brand, $brands)] }}</span></td>
                   </tr>
@@ -126,12 +126,12 @@
 
 
 <script type="text/javascript">
-  
+
 $(document).ready(function(){
 
   get_dashboard_details1();
   get_dashboard_details2();
-  
+
 })
 
 function get_dashboard_details1() {
@@ -144,7 +144,7 @@ function get_dashboard_details1() {
     success:function(data){
     $('#wifi_total_users').html(data['users']);
     $('#wifi_online_users').html(data['onlineusers']);
-    
+
     $('#usersthismonth').html( data['usersthismonth'] );
     $('#userslastmonth').html('Last month: ' + data['userslastmonth'] );
 
@@ -180,18 +180,19 @@ function get_dashboard_details2() {
       $('#datausedlastmonth').html('Last month: ' + data['lastmonthdata'] );
 
 
-    
-    
+
+
   }
 
   });
 
 }
-   
+
 </script>
 
 
 <script>
+  var active_infowindow = null;
   var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 5,
       center: new google.maps.LatLng(-30.341529, 25.322594),
@@ -332,21 +333,44 @@ function get_dashboard_details2() {
     var map_brands = {{$data['mapVenues']}};
     var no_lat_long_count = 0;
     var markers = [];
-    
-    $.each(map_brands[0], function(i, venue) {
-        
-      if ((venue.latitude === null || venue.latitude === '')) {
-        no_lat_long_count++;
-      } else {
-        marker = new google.maps.Marker({
-          position: new google.maps.LatLng(parseFloat(venue.latitude), parseFloat(venue.longitude)),
-          map: map,
-          icon: (($.now() / 1000) - 300 < venue.last_seen) ? 'http://hiphub.hipzone.co.za/img/retail_marker.png' : 'http://hiphub.hipzone.co.za/img/offline_retail_marker.gif',
-          venue_id: venue.id
+
+    $.each(map_brands, function(i, venues) {
+
+      if (venues.length !== 0) {
+        $.each(venues, function(i, venue) {
+          if ((venue.latitude === null || venue.latitude === '')) {
+            console.log('No LatLong')
+            no_lat_long_count++;
+          } else {
+            console.log('Has LatLong')
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(parseFloat(venue.latitude), parseFloat(venue.longitude)),
+              map: map,
+              icon: (($.now() / 1000) - 300 < venue.last_seen) ? 'http://hiphub.hipzone.co.za/img/retail_marker.png' : 'http://hiphub.hipzone.co.za/img/offline_retail_marker.gif',
+              venue_id: venue.id
+            });
+             // INFOWINDOW POPUP
+            google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+              return function() {
+
+                  let info_window = new google.maps.InfoWindow({
+                    content: `<div><strong>Venue Name:</strong> ${venue.sitename} </div>`
+                  });
+                  info_window.open(map, marker);
+                  active_infowindow = info_window;
+
+              }
+
+            })(marker, i));
+            marker.addListener('mouseout', function() {
+              active_infowindow.close();
+            });
+            markers.push(marker);
+          }
         });
-        markers.push(marker);
       }
-          
+
+
     });
 
     var markerCluster = new MarkerClusterer(map, markers, {

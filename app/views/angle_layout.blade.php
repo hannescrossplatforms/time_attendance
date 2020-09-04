@@ -110,7 +110,7 @@
                      </a>
                   </li>
 
-                  @if (\User::hasAccess("superadmin") || (\User::isVicinity() && \User::hasAccess("admin")))
+                  @if (\User::hasAccess("superadmin") || (\User::isVicinity() && (\User::hasAccess("admin") || \User::hasAccess("reseller"))))
                   <li @if ( $data['currentMenuItem']=="Venues" ) class="active" @endif>
                       <a href="http://hiphub.hipzone.co.za/admin_showdashboard" title="Administration">
                           <em class="fas fa-cog"></em><span data-localize="sidebar.nav.ADMINISTRATION">Admin</span>

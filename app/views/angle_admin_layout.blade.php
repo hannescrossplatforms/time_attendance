@@ -56,7 +56,7 @@
                <!-- START Offsidebar button-->
             </ul><!-- END Right Navbar-->
             <!-- START Search form-->
-            
+
          </nav><!-- END Top Navbar-->
       </header><!-- sidebar-->
       <aside class="aside-container">
@@ -88,7 +88,7 @@
                         <em class="fas fa-columns"></em><span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
                      </a>
                   </li>
-                  @if (\User::hasAccess("superadmin") || \User::hasAccess("admin"))
+                  @if (\User::hasAccess("superadmin") || (\User::isVicinity() && (\User::hasAccess("admin") || \User::hasAccess("reseller"))))
                   <li @if ( $data['currentMenuItem']=="User Admin" ) class="active" @endif>
                     <a href="{{ url('useradmin_showusers'); }}" title="User Admin">
                         <em class="fas fa-globe-africa"></em><span data-localize="sidebar.nav.USERADMIN">User Admin</span>
@@ -120,16 +120,16 @@
                     </li>
                   @endif
 
-                  
 
-                  
+
+
 
 
                </ul><!-- END sidebar nav-->
             </nav>
          </div><!-- END Sidebar (left)-->
       </aside><!-- offsidebar-->
-      
+
       </aside><!-- Main section-->
 
    <script src="{{asset('theme/vendor/modernizr/modernizr.custom.js')}}"></script><!-- STORAGE API-->
@@ -140,7 +140,7 @@
    <script src="{{asset('theme/vendor/jquery/dist/jquery.js')}}"></script>
    <script src="{{asset('theme/vendor/popper.js/dist/umd/popper.js')}}"></script>
    <script src="{{asset('theme/vendor/bootstrap/dist/js/bootstrap.js')}}"></script><!-- =============== PAGE VENDOR SCRIPTS ===============-->
-  
+
    <script src="{{asset('theme/vendor/jquery-slimscroll/jquery.slimscroll.js')}}"></script><!-- SPARKLINE-->
    <script src="{{asset('theme/vendor/jquery-sparkline/jquery.sparkline.js')}}"></script><!-- FLOT CHART-->
    <script src="{{asset('theme/vendor/flot/jquery.flot.js')}}"></script>
@@ -197,7 +197,7 @@
 
 
 
-  
+
      @yield('modals')
 
 </body>
