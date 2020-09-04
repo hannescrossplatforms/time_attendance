@@ -123,16 +123,31 @@
 
                       <div class="form-group">
                         <label>Server*</label>
-                        <select name="server_option" class="form-control no-radius">
-                          <option name="server_option" value="1">
+
+                        
+
+                      <select name="server_option" class="form-control no-radius">
+                        @if ($data['serverOption'] == 1)
+                          <option selected name="server_option" value="1">
                                 Hipspot
                           </option>
-                          <option selected name="server_option" value="2">
-                                Newspot
+                        @else
+                        <option name="server_option" value="1">
+                                Hipspot
                           </option>
+                        @end
+                        @if ($data['serverOption'] == 1)
+                          <option selected name="server_option" value="2">
+                          Newspot
+                          </option>
+                        @else
+                        <option name="server_option" value="2">
+                        Newspot
+                          </option>
+                        @end
                         </select>
                       </div>
-
+                      
 
                       <div  class="form-group">
                         <label for="exampleInputEmail1">Location</label>
