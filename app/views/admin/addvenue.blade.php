@@ -123,11 +123,11 @@
 
                       <div class="form-group">
                         <label>Server*</label>
-                        <select name="server_option" value="2" class="form-control no-radius">
+                        <select name="server_option" class="form-control no-radius">
                           <option name="server_option" value="1">
                                 Hipspot
                           </option>
-                          <option name="server_option" value="2">
+                          <option selected name="server_option" value="2">
                                 Newspot
                           </option>
                         </select>
