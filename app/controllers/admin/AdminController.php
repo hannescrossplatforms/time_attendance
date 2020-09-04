@@ -439,7 +439,7 @@ class AdminController extends \BaseController {
             $venue->address = $input['address'];
             $venue->contact = $input['contact'];
             $venue->notes = $input['notes'];
-            $venue->server_id = $serverId;
+            $venue->server_id =  (int)$serverId;
             $venue->save();
 
         }
