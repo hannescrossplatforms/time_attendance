@@ -131,16 +131,16 @@
                           <option selected name="server_option" value="1">
                                 Hipspot
                           </option>
-                        @elseif
+                        @else
                           <option name="server_option" value="1">
                                 Hipspot
                           </option>
                         @endif
-                        @if ($data['serverOption'] == 1)
+                        @if ($data['serverOption'] == 2)
                           <option selected name="server_option" value="2">
                           Newspot
                           </option>
-                        @elseif
+                        @else
                         <option name="server_option" value="2">
                         Newspot
                       </option>
