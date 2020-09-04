@@ -132,7 +132,7 @@
                           </option>
                         </select>
                       </div>
-                      @endif
+
 
                       <div  class="form-group">
                         <label for="exampleInputEmail1">Location</label>
