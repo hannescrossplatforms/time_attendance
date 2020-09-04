@@ -121,6 +121,19 @@
                       </div>
                       @endif
 
+                      <div class="form-group">
+                        <label>Server*</label>
+                        <select name="server_option" class="form-control no-radius">
+                          <option name="server_option" value="1">
+                                Hipspot
+                          </option>
+                          <option name="server_option" value="2">
+                                Newspot
+                          </option>
+                        </select>
+                      </div>
+                      @endif
+
                       <div  class="form-group">
                         <label for="exampleInputEmail1">Location</label>
                         <div id="locationCodeHidden"></div>
