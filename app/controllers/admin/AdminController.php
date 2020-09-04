@@ -365,6 +365,7 @@ class AdminController extends \BaseController {
         $data['adminssid1'] = '';
         $data['adminssid2'] = '';
         $data['adminssid3'] = '';
+        $data['serverOption'] = 1;
 
         $data['venue'] = new \Venue();
 
@@ -455,6 +456,7 @@ error_log("admin_editVenue 10");
         $data['currentMenuItem'] = "Venue Management";
         $data['edit'] = true;
         $data['venue'] = \Venue::find($id);
+        $data['serverOption'] = \Venue::find($id)->server_id;
 
         $data['submitbutton'] = 'on';
 
