@@ -402,6 +402,9 @@ class AdminController extends \BaseController {
         $sitename = \Input::get('sitename');
         $sitename = $brand_name . " " . $sitename;
         $macaddress = \Input::get('macaddress');
+        $serverId = \Input::get('server_option');
+        
+
         $input['sitename'] = $sitename;
 
         $sitename_exists = \Venue::where("sitename", "like", $sitename)->first();
@@ -436,6 +439,7 @@ class AdminController extends \BaseController {
             $venue->address = $input['address'];
             $venue->contact = $input['contact'];
             $venue->notes = $input['notes'];
+            $venue->server_id = $serverId;
             $venue->save();
 
         }
