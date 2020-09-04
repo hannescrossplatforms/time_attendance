@@ -93,7 +93,7 @@
                             @if (\User::hasAccess("superadmin")) 
                             <input  id="locationcode" name="location" class="form-control" type="text" 
                                     value="{{$data['venue']->location}}" 
-                                    placeholder="This field autocompletes - please complete all fields above" required>
+                                    placeholder="This field autocompletes2 - please complete all fields above" required>
                             @else
                             <input  id="" name="" class="form-control" type="text" 
                                     value="{{$data['venue']->location}}" disabled >
