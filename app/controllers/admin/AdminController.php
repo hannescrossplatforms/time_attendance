@@ -478,6 +478,7 @@ error_log("admin_editVenueSave 10");
         $input['sitename'] = $sitename;
         $macaddress = \Input::get('macaddress');
         $connection = \Brand::find($brand_id)->remotedb->dbconnection;
+        $serverId = \Input::get('server_option');
 
         $utils = new \Utils();
 
@@ -495,6 +496,7 @@ error_log("admin_editVenueSave 10");
         $venue->address = $input['address'];
         $venue->contact = $input['contact'];
         $venue->notes = $input['notes'];
+        $venue->server_id =  (int)$serverId;
         $venue->save();
 
         return \Redirect::route('admin_showvenues');
