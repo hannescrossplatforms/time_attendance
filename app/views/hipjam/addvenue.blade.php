@@ -39,7 +39,7 @@ if ($data["is_activation"]) {
               <em class="fas fa-sync"></em>
             </a>
             <div class="card-title">
-              Venue Information
+              Venue Informations
 
             </div>
           </div>
