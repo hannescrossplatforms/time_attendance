@@ -525,7 +525,8 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface
 
     public function insertVenueInRadius($venue, $remotedb_id)
     {
-
+        Log::info("[Venue.php insertVenueInRadius] - $remotedb_id");
+        
         $remodtedb = \DB::table('remotedbs')->select("*")->where('id', '=', $remotedb_id)->first();
         $connection = $remodtedb->dbconnection;
         error_log("Venue : insertVenueInRadius : connection : $connection");
