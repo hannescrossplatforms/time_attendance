@@ -493,7 +493,7 @@ private function getActivateRules() {
 
             $record = $this->constructNastypeRecord($type, $brand);
             $connection = $brand->remotedb->dbconnection;
-
+            
 
             \Log::info("HipwifiController: KOM 1");
             \Log::info("HipwifiController: connection = $connection");

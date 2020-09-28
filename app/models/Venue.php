@@ -538,7 +538,7 @@ class Venue extends Eloquent implements UserInterface, RemindableInterface
         }
 
         $record = $this->constructRadiusVenueRecord($media, $venue);
-
+        Log::info("[Venue.php insertVenueInRadius] Selected connection to write to:  - $connection");
         \DB::connection($connection)->table("naslookup")->insert($record);
     }
 
