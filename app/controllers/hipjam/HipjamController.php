@@ -683,7 +683,10 @@ public function getOohSiteData() {
         $data['all_venues'] = $venues;
 
 
-
+        // Vicinity Return Json Addition
+        if(\Request::has('vicinity_api_request') && \Request::has('api_key')){
+            return \Response::json($data);
+        }
         if ($json) {
             error_log("showDashboard : returning json");
             return \Response::json($data['venuesJson']);
@@ -967,7 +970,10 @@ public function getOohSiteData() {
 
         $data['all_venues'] = $venues;
 
-
+        // Vicinity Return Json Addition
+        if(\Request::has('vicinity_api_request') && \Request::has('api_key')){
+            return \Response::json($data);
+        }
 
         if ($json) {
             error_log("showDashboard : returning json");
@@ -1097,6 +1103,11 @@ public function getOohSiteData() {
         $data['brandsJason'] = $brandsJason;
 
         $data['brands'] = $jambrands;
+
+        // Vicinity Return Json Addition
+        if(\Request::has('vicinity_api_request') && \Request::has('api_key')){
+            return \Response::json($data);
+        }
 
         if ($json) {
             error_log("showDashboard : returning json");
@@ -1327,6 +1338,11 @@ public function getOohSiteData() {
         $data['is_vicinity'] = \User::isVicinity();
         //print_r($data['user']); die();
 
+        // Vicinity Return Json Addition
+        if(\Request::has('vicinity_api_request') && \Request::has('api_key')){
+            return \Response::json($data);
+        }
+
         if ($json) {
             error_log("showDashboard : returning json");
             return \Response::json($data['venuesJson']);
@@ -1421,6 +1437,11 @@ public function getOohSiteData() {
             $data['sensor_name'] = $brand_concat.$venue_concat;
         }
 
+        // Vicinity Return Json Addition
+        if(\Request::has('vicinity_api_request') && \Request::has('api_key')){
+            return \Response::json($data);
+        }
+
         return \View::make('hipjam.vicinityvenue')->with('data', $data);
     }
 
@@ -1469,6 +1490,11 @@ public function getOohSiteData() {
             $data['sensor_name'] = $sanitized_sitename.$sensors->count();
         }
 
+        // Vicinity Return Json Addition
+        if(\Request::has('vicinity_api_request') && \Request::has('api_key')){
+            return \Response::json($data);
+        }
+
         return \View::make('hipjam.vicinityvenue')->with('data', $data);
     }
 
@@ -1477,6 +1503,7 @@ public function getOohSiteData() {
         $venue =  \Venue::find($id);
         $obj['venue'] = $venue;
         $obj['brand'] = $venue->brand;
+
         return \Response::json($obj);
     }
 
@@ -2824,7 +2851,10 @@ public function getOohSiteData() {
         }
 
 
-
+        // Vicinity Return Json Addition
+        if(\Request::has('vicinity_api_request') && \Request::has('api_key')){
+            return \Response::json($data);
+        }
 
 
 
@@ -3167,6 +3197,11 @@ public function getOohSiteData() {
             return \Response::json($data['venuesJson']);
 
         } else {*/
+        // Vicinity Return Json Addition
+        if(\Request::has('vicinity_api_request') && \Request::has('api_key')){
+            return \Response::json($data);
+        }
+
         error_log("showDashboard : returning NON json");
         //return \View::make('hipjam.showvenues')->with('data', $data);
         return \View::make('hipjam.viewvenueajax')->with('data', $data);
@@ -4518,12 +4553,11 @@ public function getOohSiteData() {
                 'error' => 'Unauthorized access'
             ],401);
         }
-        
+
+
         $venue = \Venue::where('sonoff_device_auth_token', '=', $device_auth_token)->first();
         $venue->sonoff_query_time = \Carbon\Carbon::now()->addHours(2);
         $venue->save();
-
-        \Log::info("[HipjamController  getSonoffStatus] - device querying: $venue->sitename");
 
         return Response::json([
             'success' => 'true', 'device_status' => $venue->sonoff_device_on_status

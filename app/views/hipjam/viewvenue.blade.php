@@ -83,7 +83,7 @@
                                     <div class="container-fluid">
 
                                         <!-- Nav tabs -->
-                                        
+
                                         <!-- <br> -->
                                         <div class="row">
                                             <div class="col-12">
@@ -261,7 +261,7 @@
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-hourglass-end fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-success rounded-right">
-                                                        <div class="h2 mt-0" id="high_dwell_today">0</div>     
+                                                        <div class="h2 mt-0" id="high_dwell_today">0</div>
                                                         <div class="text-uppercase">High Dwell Customers</div>
                                                     </div>
                                                 </div>
@@ -286,7 +286,7 @@
                                                 </div>
                                             </div>
                                          -->
-                                            
+
 
                                             <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
@@ -297,7 +297,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
 
 
                                             <div class="col-xl-2 col-md-6">
@@ -326,7 +326,7 @@
                                         </div>
                                         @endif
 
-                                        
+
 
 
 
@@ -422,7 +422,7 @@
                                                 </div>
                                             </div>
                                             @endif
-                                            
+
                                             @if ($data['venue_type'] != 'billboard')
                                             <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
@@ -441,7 +441,7 @@
 
 
                                             <div class="col-xl-2 col-md-6">
-                                                
+
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-purple justify-content-center rounded-left"><em class="fas fa-hourglass-half fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-purple-dark rounded-right">
@@ -510,7 +510,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
 
 
 
@@ -529,10 +529,10 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                        
-                                        
-                                        
-                                        
+
+
+
+
                                         </div>
 
 
@@ -619,8 +619,8 @@
                                         @endif
                                     <input type="hidden" id="hf_total_conversions" value="{{$data['total_conversions']}}"/>
                                     <input type="hidden" id="hf_total_conversions_today" value="{{$data['total_conversions_today']}}"/>
-                                    
-                                            
+
+
                                         </div>
                                         <div class="row">
 
@@ -689,7 +689,7 @@
                                             </div>
                                             @endif
 
-                                            
+
 
 
                                         </div>
@@ -802,7 +802,7 @@
                                     <a class="float-right" href="javascript:void(0);" data-tool="card-collapse" data-toggle="tooltip" title="" data-original-title="Collapse card"><em class="fa fa-minus"></em></a>
                                     @if ($data['venue_type'] == 'billboard')
                                         <div class="card-title">Overall OOH Site Traffic (New vs. Returning)</div>
-                                    @else 
+                                    @else
                                         <div class="card-title">Overall Store Traffic (New vs. Returning)</div>
                                     @endif
                                     </div>
@@ -823,13 +823,13 @@
 
 
 
-                        
 
-                        
 
-                        
+
+
+
                     <input id="hf_venue_type" type="hidden" value="{{$data['venue_type']}}" />
-                
+
 
                     <script src="{{ asset('js/jquery_cookie.js') }}"></script>
                     <script src="{{ asset('js/fusioncharts.js') }}"></script>
@@ -865,7 +865,7 @@
         var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
         return match && decodeURIComponent(match[1].replace(/\+/g, " "));
     }
-    
+
     function setGraphTitle() {
         let title_element = $('#store_traffic_title');
         let is_billboard = $('#venue_type').val() === 'billboard';
@@ -957,7 +957,7 @@
                     $('#bounce_rate_today').html(`${Math.round(venue_data.bounce_rate)}%`);
                     $('#conversion_rate_today').html(`${ Math.round((conversions_today / venue_data.customers_in_store_today) * 100)}%`);
                     $('#strike_rate_today').html(`${((conversions_today / venue_data.customers_in_store_today) * 100).toFixed(2)}%`);
-                    
+
 
                     if (is_billboard) {
                         $('#live_window_today').html(venue_data.customers_in_store_today);
@@ -1124,7 +1124,7 @@
         //       },
         //       options: global_chart_options
         // });
-        
+
     }
 
     liveJam.AMChartSerializer = (data) => {
@@ -1176,14 +1176,16 @@
 
         chart.data = data;
 
-        var xaxis = chart.xAxes.push(new am4charts.ValueAxis());
-        xaxis.min = 0;
-        xaxis.max = 23;
-        xaxis.strictMinMax = true;
+        var xaxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        xaxis.dataFields.category = "x";
+        // xaxis.min = 0;
+        // xaxis.max = 23;
+        // xaxis.strictMinMax = true;
         var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         var series = chart.series.push(new am4charts.LineSeries());
 
-        series.dataFields.valueX = "x";
+
+        series.dataFields.categoryX = "x";
         series.dataFields.valueY = "y";
         series.strokeWidth = 2;
         series.fillOpacity = 0.3;
@@ -1256,7 +1258,7 @@
 //   }
 //   return chartData;
 // }
-  
+
 
     liveJam.renderNewVsReturningGraph = (data) => {
         // let graph_data = liveJam.graphSerializer(data);
@@ -1267,7 +1269,7 @@
         am4core.ready(function() {
 
             am4core.useTheme(am4themes_animated);
-        
+
             var chart = am4core.create('chart-06', am4charts.XYChart);
             chart.colors.step = 2;
             chart.data = series_data;
@@ -1325,10 +1327,10 @@
 
 
 
-        
+
         // let canvas = document.getElementById('chart-06');
         // let ctx = canvas.getContext("2d");
-        
+
         // var myBarChart = new Chart(ctx, {
         //     type: 'line',
         //     data: {
@@ -1365,6 +1367,7 @@
         let start = moment(filters.date_from);
         let end = moment(filters.date_to);
         let date_array = [];
+        let total_sessions_from_hour = 0;
 
         // Multi Day i.e. this week / this month etc.
         while (start.format('YYYY-MM-DD') !== end.format('YYYY-MM-DD')) {
@@ -1397,6 +1400,7 @@
                     } else {
                         hourly_averages[hours.id] = hourly_averages[hours.id] + parseInt(hours.data().customers);
                     }
+                    total_sessions_from_hour += hours.data().customers;
                 });
             });
             hourly_averages = $.map(hourly_averages, function(obj, key) {
@@ -1407,11 +1411,15 @@
                 };
             });
 
+            $('#rep_customer').html(total_sessions_from_hour)
+
+
+
             hourly_averages_for_avg_dwell = hourly_averages;
 
 
             liveJam.renderGenericAMChart('chart-container', liveJam.AMGenericChartSerializer(hourly_averages));
-        
+
             // let canvas = document.getElementById('chart-container');
             // let ctx = canvas.getContext("2d");
             // var myBarChart = new Chart(ctx, {
@@ -1473,7 +1481,7 @@
             var total_returning = 0;
 
             $.each(week_data, function(index, item) {
-                
+
                 dwell += item.data.average_dwell;
                 customers_in_store += item.data.customers_in_store_today;
                 new_customers_in_store += item.data.new_customers_today;
@@ -1488,7 +1496,7 @@
             return_reach_rate = Math.round(((customers_in_store - new_customers_in_store) / customers_in_store) * 100);
             total_returning = (customers_in_store - new_customers_in_store);
 
-            $('#rep_customer').html(customers_in_store);
+            // $('#rep_customer').html(customers_in_store);
             $('#gross_rate_point').html((parseFloat($('#reach_frequency').html()) * customers_in_store).toFixed(2));
             $('#conversion_floor_rate').html(total_conversions === 0 ? 0 : (customers_in_store / total_conversions).toFixed(2));
             $('#strike_rate').html(`${((total_conversions / customers_in_store) * 100).toFixed(2)}%`);
@@ -1499,7 +1507,7 @@
             $('#return_reach_rate').html(isNaN(return_reach_rate) ? 'No Data' : `${return_reach_rate}%`)
             $('#returning_customers').html(total_returning);
             $('#conversion_rate').html(`${ Math.round((total_conversions / customers_in_store) * 100)}%`);
-            
+
             if (dwell === null || dwell === undefined || dwell === '' || dwell.toString() === 'NaN') {
                 $('#rep_ave').html('0');
             } else {
@@ -1530,7 +1538,7 @@
         } else {
             avg_dwell_display.html(((hourly_averages_for_avg_dwell[parseInt(hour_selected)].value)/60).toFixed(2));
         }
-        
+
     });
 
     function get_query_string_key(key) {
@@ -1565,11 +1573,11 @@
     getFilters(false);
 
     if ($('#date_select').val() !== 'custom') {
-      getFilters(false);  
+      getFilters(false);
     } else {
       showCustomDateRange();
     }
-    
+
 
     $(document).on('change', '.changable-filter', function() {
       let date_filter = $('#date_select');
@@ -1578,7 +1586,7 @@
       } else {
         showCustomDateRange();
       }
-      
+
     })
 
     function showCustomDateRange() {
@@ -1586,7 +1594,7 @@
       let date_from = $('#custom_filter_date_from');
       let date_to = $('#custom_filter_date_to');
 
-    
+
       date_from.val(get_query_string_key('date_from'));
       date_to.val(get_query_string_key('date_to'))
 
