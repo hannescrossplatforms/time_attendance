@@ -494,12 +494,12 @@ private function getActivateRules() {
             $record = $this->constructNastypeRecord($type, $brand);
             $connection = $brand->remotedb->dbconnection;
             
-
+            
             \Log::info("HipwifiController: KOM 1");
             \Log::info("HipwifiController: connection = $connection");
             \Log::info("HipwifiController: KOM 2");
 
-            \Log::info("[HipwifiController activateBrandSave] - will save to nastype database");
+            \Log::info("[HipwifiController activateBrandSave] - will save to nastype database with connection: $connection");
 
 
             \DB::connection($connection)->table("nastype")->insert($record);
