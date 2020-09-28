@@ -499,7 +499,7 @@ private function getActivateRules() {
             \Log::info("HipwifiController: connection = $connection");
             \Log::info("HipwifiController: KOM 2");
 
-
+            \Log::info("[HipwifiController activateBrandSave] - will save to nastype database");
 
 
             \DB::connection($connection)->table("nastype")->insert($record);
