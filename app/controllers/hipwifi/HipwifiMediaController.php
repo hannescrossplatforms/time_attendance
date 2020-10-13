@@ -1142,12 +1142,18 @@ class HipwifiMediaController extends \BaseController {
             $assetsdir = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsdir")->first();
             $fullPath = $assetsdir->value . 'hipwifi/images/';
 
+            \Log::info("[HipwifiMediaController - editMediaSave] - asset dir is: $assetsdir");
+            \Log::info("[HipwifiMediaController - editMediaSave] - fullPath is: $fullPath");
+
             // Get Desktop File ///////////////////////////////////////////
             $sourceFullName = $fullPath . 'preview-dt.' . $dt_ext; 
             $destFullName = $fullPath . $input['location'] . '-dt.' . $dt_ext; 
+
+            \Log::info("[HipwifiMediaController - editMediaSave] - sourceFullName is: $sourceFullName");
+            \Log::info("[HipwifiMediaController - editMediaSave] - destFullName is: $destFullName");
+
             error_log("addMediaSave: DT : sourceFullName : $sourceFullName :::: destFullName : $destFullName");
-            \Log::info("[HipwifiMediaController - editMediaSave] - sourceFullName: $sourceFullName");
-            \Log::info("[HipwifiMediaController - editMediaSave] - destFullName: $destFullName");
+            
             \File::move($sourceFullName, $destFullName);
 
             // Get Mobile File ///////////////////////////////////////////
