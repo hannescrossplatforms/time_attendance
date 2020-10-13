@@ -342,7 +342,7 @@
             // $("#dtboxlink").html("<a id='dt1' class='fancybox fancybox.iframe' href='" + fullurl + "'>Iframe</a>");
             // $("#dt1").trigger( "click" );
             // $("#dtboxlink").html("");
- 
+            debugger;
             $('#preview_desktop_iframe').attr('src', fullurl);
             $('#preview_desktop_splash').modal('show');
 
