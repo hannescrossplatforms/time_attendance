@@ -1063,7 +1063,7 @@ class HipwifiMediaController extends \BaseController {
         $data['edit'] = true;
         // Hannes image 2
         $data['previewurl'] = $assetsserver->value . 'hipwifi/images/';
-        \Log::info("[HipwifiMediaController - editMedia] - previewurl: .", $data['previewurl']);
+        \Log::info("[HipwifiMediaController - editMedia] - previewurl: .", $assetsserver->value . 'hipwifi/images/');
         $data['media'] = \Media::find($id);
         $data['media']['brand_name'] = \Brand::find($data['media']['brand_id'])->name;
         \Log::info("[HipwifiMediaController - editMedia] - brand name: .", \Brand::find($data['media']['brand_id'])->name);
