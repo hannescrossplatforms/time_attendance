@@ -1142,7 +1142,6 @@ class HipwifiMediaController extends \BaseController {
             $assetsdir = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsdir")->first();
             $fullPath = $assetsdir->value . 'hipwifi/images/';
 
-            \Log::info("[HipwifiMediaController - editMediaSave] - asset dir is: $assetsdir");
             \Log::info("[HipwifiMediaController - editMediaSave] - fullPath is: $fullPath");
 
             // Get Desktop File ///////////////////////////////////////////
