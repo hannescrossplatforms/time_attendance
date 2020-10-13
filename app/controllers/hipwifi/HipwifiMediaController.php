@@ -1061,12 +1061,14 @@ class HipwifiMediaController extends \BaseController {
         $data = array();
         $data['currentMenuItem'] = "Media Management";
         $data['edit'] = true;
+        $logvar = $assetsserver->value . 'hipwifi/images/';
         // Hannes image 2
         $data['previewurl'] = $assetsserver->value . 'hipwifi/images/';
-        
+        \Log::info("[HipwifiMediaController - editMedia] - previewurl: $logvar");
         $data['media'] = \Media::find($id);
         $data['media']['brand_name'] = \Brand::find($data['media']['brand_id'])->name;
-        \Log::info("[HipwifiMediaController - editMedia] - brand name: .", \Brand::find($data['media']['brand_id'])->name);
+        $brandname = \Brand::find($data['media']['brand_id'])->name;
+        \Log::info("[HipwifiMediaController - editMedia] - brand name: $brandname");
         $dt_ext = $data['media']->dt_ext;
         $mb_ext = $data['media']->mb_ext;
 
@@ -1104,13 +1106,13 @@ class HipwifiMediaController extends \BaseController {
 
         // Copy in the files for preview
         if (\File::exists($dt_file)) {
-            \Log::info("[HipwifiMediaController - editMedia] - preview file exists at path: .", $dt_file);
-            \Log::info("[HipwifiMediaController - editMedia] - copying that preview file to: .", $dt_preview);
+            \Log::info("[HipwifiMediaController - editMedia] - preview file exists at path: $dt_file");
+            \Log::info("[HipwifiMediaController - editMedia] - copying that preview file to: $dt_preview");
             \File::copy($dt_file, $dt_preview);
         }
         if (\File::exists($mb_file)) {
-            \Log::info("[HipwifiMediaController - editMedia] - actual file exists at path: .", $mb_file);
-            \Log::info("[HipwifiMediaController - editMedia] - copying that actual file to: .", $mb_preview);
+            \Log::info("[HipwifiMediaController - editMedia] - actual file exists at path: $mb_file");
+            \Log::info("[HipwifiMediaController - editMedia] - copying that actual file to: $mb_preview");
             \File::copy($mb_file, $mb_preview);
         }
         
