@@ -15,7 +15,7 @@
 
         <link href="/web/css/v3m/v3m.css" rel="stylesheet" media="screen" />
 
-        <script type="text/javascript" src="/web/js/v26/jquery-1.6.js"></script>
+        <!-- <script type="text/javascript" src="/web/js/v26/jquery-1.6.js"></script> -->
 
             <link href="/web/css/v3m/style-blue-login.css" rel="stylesheet" media="screen" />
 
