@@ -73,6 +73,7 @@
                     <div class="col-md-6 text-left">
                       <div class="form-group" id="linked_billboard_container" style="display: none;">
                         <label for="track_linked_billboard">Linked OOH Site</label>
+
                         <select class="form-control" name="linked_billboard" id="track_linked_billboard" value="{{$data['venue']->linked_billboard}}">
                           <option>Unlinked</option>
                           <?php foreach ($data['billboards'] as $billboard) { ?>
@@ -246,6 +247,7 @@
 <script src="{{asset('js/jquery.timepicker.min.js')}}"></script>
 
 <script defer>
+
   console.log($('#hf_send_alert_emails').val() === '1')
   if ($('#hf_send_alert_emails').val() === '1') {
     $('#alert_email_check')[0].checked = true;
@@ -402,6 +404,7 @@
     let linked_billboard_container = $('#linked_billboard_container');
     let advertising_cost = $('#advertising_cost_container');
     if (selected_track_id === 'venue') {
+      $('#track_linked_billboard').val($('#track_linked_billboard').attr('value'));
       linked_billboard_container.slideDown('fast');
       advertising_cost.slideUp('fast');
     } else {

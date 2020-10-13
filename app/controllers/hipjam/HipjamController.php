@@ -674,7 +674,7 @@ public function getOohSiteData() {
             $data['cpa'] = 'N/A';
         }
 
-        if ($venue->advertising_cost && $venue->advertising_cost != 0) {
+        if ($venue->advertising_cost && $venue->advertising_cost != 0 && $data['advertising_cost'] != 0) {
             $data['roi'] = round(($data['potential_sales'] / $data['advertising_cost']) * 100, 2);
         } else {
             $data['roi'] = 'N/A';
@@ -1540,6 +1540,15 @@ public function getOohSiteData() {
         $venue->alert_email_address_3 = $form_data->alert_email_address_3;
 
         $result = $venue->save();
+
+        if ($venue->track_type == 'venue') {
+            if ($form_data->linked_billboard != 'Unlinked') {
+                $venue->linked_billboard = $form_data->linked_billboard;
+            } else {
+                $venue->linked_billboard = null;
+            }
+            $venue->save();
+        }
 
 
 
