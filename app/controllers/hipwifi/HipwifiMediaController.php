@@ -1119,15 +1119,16 @@ class HipwifiMediaController extends \BaseController {
         $id = \Input::get('id');
         $media =  \Media::find($id);
         $rules = array();
-
+        \Log::info("[HipwifiMediaController - editMediaSave] - 1");
         $validator = \Validator::make($input, $rules);
         if ($validator->fails()) {
+            \Log::info("[HipwifiMediaController - editMediaSave] - 2");
             $messages = $validator->messages();
 
             return \Redirect::to('hipwifi_addmedia')->withErrors($validator)->withInput();
 
         } else {
-
+            \Log::info("[HipwifiMediaController - editMediaSave] - 3");
             $dt_ext = \Input::get("dt_ext"); 
             $mb_ext = \Input::get("mb_ext");
 
@@ -1170,7 +1171,7 @@ class HipwifiMediaController extends \BaseController {
             $media->connect_btn_colour = \Input::get("connect_btn_colour");
             $media->connect_text_colour = \Input::get("connect_text_colour");
             $media->connect_btn_offset_from_top = \Input::get("connect_btn_offset_from_top");
-
+            \Log::info("[HipwifiMediaController - editMediaSave] - 4");
             error_log("editMediaSave : logo_choice : " . $media->logo_choice);
 
             $media->save();
@@ -1179,10 +1180,11 @@ class HipwifiMediaController extends \BaseController {
             $venue = new \Venue();
             $venue->refreshMediaLocations();
             $venue->synchToRadius($remotedb_id);
-
+            \Log::info("[HipwifiMediaController - editMediaSave] - 5");
 
         }
         $brand_id = $input['brand_id'];
+        \Log::info("[HipwifiMediaController - editMediaSave] - 6");
         return \Redirect::route('hipwifi_showsinglebrandmedia' , ['id' => $brand_id]);
     }
 
