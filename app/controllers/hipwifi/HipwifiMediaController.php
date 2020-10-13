@@ -1055,7 +1055,7 @@ class HipwifiMediaController extends \BaseController {
 
         \Log::info("[HipwifiMediaController - editMedia]");
         error_log('editMedia ' . $id);
-
+        
         $assetsserver = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
 
         $data = array();
@@ -1139,6 +1139,8 @@ class HipwifiMediaController extends \BaseController {
             $sourceFullName = $fullPath . 'preview-dt.' . $dt_ext; 
             $destFullName = $fullPath . $input['location'] . '-dt.' . $dt_ext; 
             error_log("addMediaSave: DT : sourceFullName : $sourceFullName :::: destFullName : $destFullName");
+            \Log::info("[HipwifiMediaController - editMediaSave] - sourceFullName: $sourceFullName");
+            \Log::info("[HipwifiMediaController - editMediaSave] - destFullName: $destFullName");
             \File::move($sourceFullName, $destFullName);
 
             // Get Mobile File ///////////////////////////////////////////
