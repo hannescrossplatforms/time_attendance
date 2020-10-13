@@ -77,7 +77,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Desktop Background3</label>
+                      <label>Desktop Background</label>
                       <div id="imagedisplaydt" style="display:none"></div>
 
                       <div id="previewdt">

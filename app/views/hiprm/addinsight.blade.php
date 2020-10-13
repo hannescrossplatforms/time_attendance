@@ -378,7 +378,7 @@
                 <div class="col-md-5">
                   <div class="panel panel-default">
                   <div class="panel-heading">
-                    Desktop Background1
+                    Desktop Background
                   </div>
                   <div class="panel-body">
                     <a href="#" class="btn btn-default btn-sm  btn-block" data-toggle="modal" data-target="#desktopBgModal">Upload new image</a>
