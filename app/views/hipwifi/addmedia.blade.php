@@ -247,13 +247,13 @@
     <!-- Placed at the end of the document so the pages load faster -->
   
     <script src="/js/colpick.js" type="text/javascript"></script>
-    <!-- <script type="text/javascript" src="/js/jquery.fancybox.pack.js?v=2.1.5"></script> -->
+    <script type="text/javascript" src="/js/jquery.fancybox.pack.js?v=2.1.5"></script>
     <!-- <script src="locationmanager.blade.php"></script>  -->
 
 
     <script type="text/javascript">
-      // $(".fancybox").fancybox();
-      // $('a.fancybox').fancybox();
+      $(".fancybox").fancybox();
+      $('a.fancybox').fancybox();
     </script>
 
    <script>
@@ -357,16 +357,16 @@
 
         // alert(brand_id);
 
-        // $(".fancybox").fancybox({
-        //     'width': 400,
-        //     'height': 700,
-        //     'transitionIn': 'elastic', // this option is for v1.3.4
-        //     'transitionOut': 'elastic', // this option is for v1.3.4
-        //     // if using v2.x AND set class fancybox.iframe, you may not need this
-        //     'type': 'iframe',
-        //     // if you want your iframe always will be 600x250 regardless the viewport size
-        //     'fitToView' : false  // use autoScale for v1.3.4
-        // });
+        $(".fancybox").fancybox({
+            'width': 400,
+            'height': 700,
+            'transitionIn': 'elastic', // this option is for v1.3.4
+            'transitionOut': 'elastic', // this option is for v1.3.4
+            // if using v2.x AND set class fancybox.iframe, you may not need this
+            'type': 'iframe',
+            // if you want your iframe always will be 600x250 regardless the viewport size
+            'fitToView' : false  // use autoScale for v1.3.4
+        });
 
         $.ajax({
           type: "GET",
