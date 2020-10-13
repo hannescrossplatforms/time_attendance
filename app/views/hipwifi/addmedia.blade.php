@@ -252,8 +252,8 @@
 
 
     <script type="text/javascript">
-      $(".fancybox").fancybox();
-      $('a.fancybox').fancybox();
+      // $(".fancybox").fancybox();
+      // $('a.fancybox').fancybox();
     </script>
 
    <script>
@@ -357,16 +357,16 @@
 
         // alert(brand_id);
 
-        $(".fancybox").fancybox({
-            'width': 400,
-            'height': 700,
-            'transitionIn': 'elastic', // this option is for v1.3.4
-            'transitionOut': 'elastic', // this option is for v1.3.4
-            // if using v2.x AND set class fancybox.iframe, you may not need this
-            'type': 'iframe',
-            // if you want your iframe always will be 600x250 regardless the viewport size
-            'fitToView' : false  // use autoScale for v1.3.4
-        });
+        // $(".fancybox").fancybox({
+        //     'width': 400,
+        //     'height': 700,
+        //     'transitionIn': 'elastic', // this option is for v1.3.4
+        //     'transitionOut': 'elastic', // this option is for v1.3.4
+        //     // if using v2.x AND set class fancybox.iframe, you may not need this
+        //     'type': 'iframe',
+        //     // if you want your iframe always will be 600x250 regardless the viewport size
+        //     'fitToView' : false  // use autoScale for v1.3.4
+        // });
 
         $.ajax({
           type: "GET",
