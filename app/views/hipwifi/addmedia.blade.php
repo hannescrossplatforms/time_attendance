@@ -483,7 +483,7 @@
       });
 
       function showDesktopImage(extension){
-
+        //Hannes image 1
         // The Math.random() is to ensure that the image gets refreshed by making the url unique
         src = "src='{{$data['previewurl']}}preview-dt." + extension + "?" + Math.random() + "'";
         imgtag = "<img " + src + " style='margin-bottom: 10px; width: 100%;' class='img-responsive'/>"
