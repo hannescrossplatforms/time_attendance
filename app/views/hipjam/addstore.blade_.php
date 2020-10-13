@@ -655,7 +655,7 @@ function drawCoordinatespreview(x,y){
       });
 
       $('#dtpreview').click(function(){
-          debugger;
+          
           var url = '{{ URL::route('hipjam_previewsensors')}}';
           $.ajax({
                 type: "POST",

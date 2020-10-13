@@ -440,6 +440,8 @@ body {
     <script type="text/javascript">
             /* &lt;![CDATA[ */
             jQuery(document).ready(function(){
+              debugger;
+      // H6
                 jQuery("a.initialSimpleDemo").modalBox({
                     getStaticContentFrom : "#simpleDemo"
                 });
