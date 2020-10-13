@@ -47,7 +47,7 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>Desktop Background</label>
+                        <label>Desktop Background2</label>
                         <div id="imagedisplaydt" style="display: block;"><img src="http://localhost/assets/hipwifi/images/preview-dt.jpg?0.004566776727714328" style="margin-bottom: 10px;" class="img-responsive"></div>
 
                         <div id="previewdt">

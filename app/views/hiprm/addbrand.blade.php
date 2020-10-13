@@ -29,7 +29,7 @@
                         </select>
                     </div>
               <div class="form-group">
-                <label for="exampleInputFile">Desktop Background</label>
+                <label for="exampleInputFile">Desktop Background4</label>
                 <input type="file" id="exampleInputFile">
                 <p class="help-block">Example block-level help text here.</p>
               </div>
