@@ -956,6 +956,8 @@ class HipwifiMediaController extends \BaseController {
     public function addMediaSave()
     {
 
+        error_log("[HipwifiMediaController - addMediaSave]");
+
         $input = \Input::all();
         print_r($input, false);
         error_log("brand_id : " . $input['brand_id']);
@@ -1052,6 +1054,7 @@ class HipwifiMediaController extends \BaseController {
 
     public function editMedia($id)
     {
+        error_log("[HipwifiMediaController - editMedia]");
         error_log('editMedia ' . $id);
 
         $assetsserver = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsserver")->first();
@@ -1112,6 +1115,7 @@ class HipwifiMediaController extends \BaseController {
 
     public function editMediaSave()
     {
+        error_log("[HipwifiMediaController - editMediaSave]");
         $input = \Input::all();
         $id = \Input::get('id');
         $media =  \Media::find($id);
@@ -1185,6 +1189,7 @@ class HipwifiMediaController extends \BaseController {
 
     public function deleteMedia($id)
     {
+        error_log("[HipwifiMediaController - deleteMedia]");
         error_log("deleteMedia");
         $media = \Media::find($id);
 
@@ -1205,6 +1210,7 @@ class HipwifiMediaController extends \BaseController {
 
     public function preview($type)
     {
+        error_log("[HipwifiMediaController - preview]");
         $customerdir = \DB::table('systemconfig')->select("*")->where('name', '=', "customerdir")->first();
         $previewDirectory = $customerdir->value . 'hipwifi/images/';
         $dtfiles = count(glob($previewDirectory . "preview-dt*"));
