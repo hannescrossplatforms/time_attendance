@@ -247,7 +247,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
   
     <script src="/js/colpick.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/js/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <!-- <script type="text/javascript" src="/js/jquery.fancybox.pack.js?v=2.1.5"></script> -->
     <!-- <script src="locationmanager.blade.php"></script>  -->
 
 
@@ -465,7 +465,7 @@
         showMobileImage(mb_ext);
         // $( "#mb_ext" ).html( "<input type='hidden' name='mb_ext' value='" + mb_ext + "'/>" );
       });
-
+      // Hannes image 3
       $('body').delegate('#dtimage','change', function(){
         var options = { 
               success:       showDesktopImage,
