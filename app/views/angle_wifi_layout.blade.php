@@ -146,7 +146,7 @@
    <script src="{{asset('theme/vendor/screenfull/dist/screenfull.js')}}"></script><!-- i18next-->
    <script src="{{asset('theme/vendor/i18next/i18next.js')}}"></script>
    <script src="{{asset('theme/vendor/i18next-xhr-backend/i18nextXHRBackend.js')}}"></script>
-   <!-- <script src="{{asset('theme/vendor/jquery/dist/jquery.js')}}"></script> -->
+   <script src="{{asset('theme/vendor/jquery/dist/jquery.js')}}"></script>
    <script src="{{asset('theme/vendor/popper.js/dist/umd/popper.js')}}"></script>
    <script src="{{asset('theme/vendor/bootstrap/dist/js/bootstrap.js')}}"></script><!-- =============== PAGE VENDOR SCRIPTS ===============-->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
