@@ -294,11 +294,15 @@ class LibController extends \BaseController {
     }
 
     public function saveDtMedia() {
-
+        //Hannes image 5
         error_log("saveDtMedia : 10");
+
+        
 
         $assetsdir = \DB::table('systemconfig')->select("*")->where('name', '=', "assetsdir")->first();
         $destinationPath = $assetsdir->value . 'hipwifi/images';
+
+        \Log::info("[LibController - saveDtMedia] - destinationPath is: $destinationPath");
 
         error_log("saveDtMedia : destinationPath : $destinationPath");
 
@@ -306,12 +310,14 @@ class LibController extends \BaseController {
         if(\Input::file('dtimage')) {
             $file = array('dtimage' => \Input::file('dtimage'));
             $extension = \Input::file('dtimage')->getClientOriginalExtension();
+            \Log::info("[LibController - saveDtMedia] - extension is: $extension");
             $fileName = "preview" .'-dt.'.$extension;
+            \Log::info("[LibController - saveDtMedia] - fileName is: $fileName");
             \Input::file('dtimage')->move($destinationPath, $fileName);
         }
 
         error_log("saveDtMedia : extension : $extension");
-
+        \Log::info("[LibController - saveDtMedia] - extension is: $extension");
         return "$extension";
     }
 
