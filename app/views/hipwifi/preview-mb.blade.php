@@ -24,6 +24,7 @@
     
 <script language="javascript" type="text/javascript">
         debugger;
+        alert("asdf");
         console.log("H - comes here1");
         document.cookie="testcookie";
         cookieEnabled=(document.cookie.indexOf("testcookie")!=-1)? true : false;
