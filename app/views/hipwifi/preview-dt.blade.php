@@ -170,6 +170,7 @@ body {
             
 <script type="text/javascript" language="javascript">
         debugger;
+        console.log("H - comes here1");
         document.cookie="testcookie";
         cookieEnabled=(document.cookie.indexOf("testcookie")!=-1)? true : false;
         if (!cookieEnabled) {
