@@ -1174,10 +1174,10 @@ class HipwifiMediaController extends \BaseController {
             $media->mb_ext = \Input::get("mb_ext"); 
             // $media->login_process = \Input::get("loginprocess"); // Mismatch in names do to a javascript name confusion
             $media->welcome_flag = \Input::get("welcome_flag");
-            $media->ef_group_pos = \Input::get("ef_group_pos");
+            $media->ef_group_pos = $input->ef_group_pos;
 
             $ef_group_pos = \Input::get("ef_group_pos");
-            \Log::info("[HipwifiMediaController - editMediaSave] media id after found: $ef_group_pos");
+            \Log::info("[HipwifiMediaController - editMediaSave] ef_group_pos: $ef_group_pos");
 
             $media->ef_transparency = \Input::get("ef_transparency");
             $media->ef_colour = \Input::get("ef_colour");
