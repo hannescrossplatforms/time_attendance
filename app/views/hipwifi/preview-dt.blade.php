@@ -169,7 +169,7 @@ body {
 
             
 <script type="text/javascript" language="javascript">
-
+        debugger;
         document.cookie="testcookie";
         cookieEnabled=(document.cookie.indexOf("testcookie")!=-1)? true : false;
         if (!cookieEnabled) {
