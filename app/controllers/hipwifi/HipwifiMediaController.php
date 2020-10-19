@@ -1121,10 +1121,12 @@ class HipwifiMediaController extends \BaseController {
 
     public function editMediaSave()
     {
+        // Hannes hier
         \Log::info("[HipwifiMediaController - editMediaSave]");
         $input = \Input::all();
         $id = \Input::get('id');
         $media =  \Media::find($id);
+        error_log("[HipwifiMediaController] - editMediaSave] media id after found: $media->id");
         $rules = array();
         \Log::info("[HipwifiMediaController - editMediaSave] - 1");
         $validator = \Validator::make($input, $rules);
