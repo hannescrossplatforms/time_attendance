@@ -224,8 +224,11 @@
         </div>
 
 
-<!-- Configure Mobile -->
-<div class="modal fade" id="configMobileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        
+      </form>
+      <!-- Configure Mobile -->
+      <div class="modal fade" id="configMobileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
@@ -310,8 +313,6 @@
           </div>
         </div>
 
-
-      </form>
     </div>
   <!-- </form> -->
 </section>
