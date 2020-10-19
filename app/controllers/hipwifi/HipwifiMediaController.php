@@ -1133,6 +1133,7 @@ class HipwifiMediaController extends \BaseController {
         if ($validator->fails()) {
             \Log::info("[HipwifiMediaController - editMediaSave] - 2");
             $messages = $validator->messages();
+            \Log::info("[HipwifiMediaController - editMediaSave] - error messages: $messages");
 
             return \Redirect::to('hipwifi_addmedia')->withErrors($validator)->withInput();
 
