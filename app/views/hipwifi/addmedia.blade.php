@@ -212,7 +212,7 @@
                     @endif
 
                     <div id="locationCodeHidden"></div> <br />
-                    <button type="submit" class="btn btn-primary">@if ($edit) Update @else Submit @endif</button>
+                    <button class="btn btn-primary">@if ($edit) Update @else Submit @endif</button>
                     <a href="{{ url('hipwifi_showbrandmedia'); }}" class="btn btn-default">Cancel</a>
                   </div>
                 </div>
@@ -828,6 +828,7 @@
                 <div class="form-group">
                   <label style="font-weight: 700;">‘Entry field group’ position (offset from top) </label>
                   <input id="ef_group_pos" name="ef_group_pos" value="{{$data['media']->ef_group_pos}}" type="text" class="form-control">
+                  <input id="" name="hannes_test" value="10101}" type="text" class="form-control">
                 </div>
                 <div class="form-group">
                   <label style="font-weight: 700;">‘Entry field’ Transparency level (0% to 100%)</label>
