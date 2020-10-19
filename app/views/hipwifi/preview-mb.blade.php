@@ -61,7 +61,7 @@
             <ul>
                 <li>
                     <div class="merrormsg"></div>
-                    <!-- <input name="login[username]" id="login_username" type="text" placeholder="Username" /> -->
+                    <input name="login[username]" id="login_username" type="text" placeholder="Username" />
 
                 </li>
                 <BR>
