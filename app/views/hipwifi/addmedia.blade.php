@@ -7,8 +7,12 @@
 @section('content')
 
 
-<!-- Configure Mobile -->
-<div class="modal fade" id="configMobileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<section class="section-container">
+  <form role="form" id="mainform" method="post" enctype="multipart/form-data" action=" @if ($edit) {{ url('hipwifi_editmedia'); }} @else {{ url('hipwifi_addmedia'); }} @endif ">
+
+  <!-- Configure Mobile -->
+  <div class="modal fade" id="configMobileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
@@ -93,8 +97,6 @@
           </div>
         </div>
 
-<!-- <section class="section-container"> -->
-  <form role="form" id="mainform" method="post" enctype="multipart/form-data" action=" @if ($edit) {{ url('hipwifi_editmedia'); }} @else {{ url('hipwifi_addmedia'); }} @endif ">
     <div class="content-wrapper">
       <div class="content-heading">
         <div>Login Page Manager<small data-localize="dashboard.WELCOME"></small></div><!-- START Language list-->
@@ -317,7 +319,7 @@
       
     </div>
   <!-- </form> -->
-<!-- </section> -->
+</section>
 
 <style>
   .modal-dialog.full {
