@@ -322,6 +322,9 @@
 </section>
 
 <style>
+  .modal-backdrop{
+    display:none!important;
+  }
   .modal-dialog.full {
     width: 100%;
     height: 100%;
