@@ -60,14 +60,14 @@
                         <ul>
                 <li>
                     <div class="merrormsg"></div>
-                    <input name="login[username]" id="login_username" type="text" placeholder ="Username" />
+                    <input name="login[username]" id="login_username" type="text" placeholder="Username" />
                     
                 </li>
                 <BR>
                 <li>
                     <div class="merrormsg"></div>
                     
-                    <input name="login[password]" id="login_password" type="password" placeholder ="Password"/>
+                    <input name="login[password]" id="login_password" type="password" placeholder="Password"/>
                 </li>
             </ul>
             
