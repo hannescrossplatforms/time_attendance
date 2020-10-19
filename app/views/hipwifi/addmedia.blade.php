@@ -19,7 +19,86 @@
         <!-- Configure Mobile -->
         <div class="modal fade" id="configMobileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
-            
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel" style="font-size: 20px;font-weight: 700;">Configuration</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img src="/img/wifi_mobile_skin.png" class="img-responsive" style="width: 100%;" />
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label style="font-weight: 700;">Welcome Message</label>
+                      <br>
+                      <label class="radio-inline">
+                        <input type="radio" name="welcome_flag" value="1" {{ $data['flag_on_checked']}}> On
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" style="margin-left: 10px;" name="welcome_flag" value="0" {{ $data['flag_off_checked']}}> Off
+                      </label>
+                    </div>
+
+                    <div class="form-group">
+                      <label style="font-weight: 700;">‘Entry field group’ position (offset from top) </label>
+                      <input id="ef_group_pos" name="ef_group_pos" value="{{$data['media']->ef_group_pos}}" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label style="font-weight: 700;">‘Entry field’ Transparency level (0% to 100%)</label>
+                      <input id="ef_transparency" name="ef_transparency" value="{{$data['media']->ef_transparency}}" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label style="font-weight: 700;">‘Background’ Colour </label>
+                      <input class="input-big" style="float: right;" id="bg_colour" name="bg_colour" type="color" value='{{$data['media']->bg_colour}}'>
+                    </div>
+                    <div class="form-group">
+                      <label style="font-weight: 700;">‘Entry field’ Colour </label>
+                      <input class="input-big" style="float: right;" id="ef_colour" name="ef_colour" type="color" value='{{$data['media']->ef_colour}}'>
+                    </div>
+                    <div class="form-group">
+                      <label style="font-weight: 700;">‘Entry field’ Outline and Text colour </label>
+                      <input class="input-big" style="float: right;" id="ef_outline_text_colour" name="ef_outline_text_colour" type="color" value='{{$data['media']->ef_outline_text_colour}}'>
+                    </div>
+                    <div class="form-group">
+                      <label style="font-weight: 700;">Zone In Button gap to ‘Entry field group’ </label>
+                      <input id="zonein_gap" name="zonein_gap" value="{{$data['media']->zonein_gap}}" type="text" class="form-control" placeholder="100px">
+                    </div>
+                    <div class="form-group">
+                      <label style="font-weight: 700;">Zone In Button colour </label>
+                      <input class="input-big" style="float: right;" id="zonein_btn_colour" name="zonein_btn_colour" type="color" value='{{$data['media']->zonein_btn_colour}}'>
+                    </div>
+                    <div class="form-group">
+                      <label style="font-weight: 700;">Zone In Button – text colour </label>
+                      <input class="input-big" style="float: right;" id="zone_txt_colour" name="zone_txt_colour" type="color" value='{{$data['media']->zone_txt_colour}}'>
+                    </div>
+                    <div class="form-group">
+                      <label style="font-weight: 700;">FAQ |SUPPORT & Powered By - Text Colour</label>
+                      <input class="input-big" style="float: right;" id="faq_colour" name="faq_colour" type="color" value='{{$data['media']->faq_colour}}'>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label style="font-weight: 700;">Logo Choice</label>
+                      <br>
+                      <label class="radio-inline">
+                        <input type="radio" id="logo_choice" name="logo_choice" value="white" {{ $data['logo_choice_white']}}> White
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" style="margin-left: 10px;" id="logo_choice" name="logo_choice" value="black" {{ $data['logo_choice_black']}}> Black
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
           </div>
         </div>
 
