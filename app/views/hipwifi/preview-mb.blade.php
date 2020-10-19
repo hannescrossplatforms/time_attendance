@@ -26,7 +26,7 @@
         debugger;
         alert("asdf");
         console.log("H - comes here1");
-        document.cookie="testcookie";
+        document.cookie="testcookie;SameSite=None";
         cookieEnabled=(document.cookie.indexOf("testcookie")!=-1)? true : false;
         if (!cookieEnabled) {
             window.location = "/login/cookiesdisabled";
