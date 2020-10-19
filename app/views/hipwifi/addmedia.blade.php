@@ -349,13 +349,10 @@
 </script>
 
 <script>
-  dt_ext = "{{$data["
-  media "]->dt_ext}}";
-  mb_ext = "{{$data["
-  media "]->mb_ext}}";
+  dt_ext = "{{$data["media"]->dt_ext}}";
+  mb_ext = "{{$data["media"]->mb_ext}}";
   @if($edit)
-  brand_id = "{{$data["
-  media "]->brand_id}}";
+  brand_id = "{{$data["media"]->brand_id}}";
   @else
   brand_id = 0;
   @endif
