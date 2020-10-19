@@ -212,7 +212,7 @@
                     @endif
 
                     <div id="locationCodeHidden"></div> <br />
-                    <button class="btn btn-primary">@if ($edit) Update @else Submit @endif</button>
+                    <button type="submit" class="btn btn-primary">@if ($edit) Update @else Submit @endif</button>
                     <a href="{{ url('hipwifi_showbrandmedia'); }}" class="btn btn-default">Cancel</a>
                   </div>
                 </div>
