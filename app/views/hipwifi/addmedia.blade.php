@@ -172,7 +172,7 @@
                     {{ Form::hidden('brand_id', $data['media']->brand_id) }}
                     {{ Form::hidden('location', $data['media']->location) }}
                     <input id="locationcode" name="location" class="form-control" type="text" value="{{$data['media']->location}}" disabled>
-
+                    <input id="hannes_test" name="hannes_test" value="10101" type="text" class="form-control">
                     @else
 
                     <div class="form-group">
@@ -828,7 +828,6 @@
                 <div class="form-group">
                   <label style="font-weight: 700;">‘Entry field group’ position (offset from top) </label>
                   <input id="ef_group_pos" name="ef_group_pos" value="{{$data['media']->ef_group_pos}}" type="text" class="form-control">
-                  <input id="" name="hannes_test" value="10101}" type="text" class="form-control">
                 </div>
                 <div class="form-group">
                   <label style="font-weight: 700;">‘Entry field’ Transparency level (0% to 100%)</label>
