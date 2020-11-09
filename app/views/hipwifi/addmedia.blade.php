@@ -628,7 +628,7 @@
         $("#login_process_div").html("<input type='hidden' name='login_process' id='login_process' value='" + login_process + "'/>")
         $("#welcome_message_div").html("<input type='hidden' name='welcome_message' id='welcome_message' value='" + arr['welcome_message'] + "'/>")
 
-        htmlstring = "<label>Login Processs : </label> " + arr["login_process_name"];
+        htmlstring = "<label>Login Process : </label> " + arr["login_process_name"];
         $("#login_process_name").html(htmlstring);
       }
     });
