@@ -537,7 +537,7 @@
         fullurl = fullurl + "&zonein_btn_text=" + data["brand"]["zonein_btn_text"];
         // fullurl = encodeURI(fullurl);
         fullurl = encodeURI(fullurl).replace(/[!'()*]/g, escape);
-
+        alert(fullurl);
         console.log("brand code :  " + brand['code']);
 
         $('#mobile_preview_iframe').attr('src', fullurl);
