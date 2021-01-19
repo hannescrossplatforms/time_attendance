@@ -237,6 +237,8 @@ function processBrandReports() {
     'queryname': 'age'
   };
 
+
+  console.log(`BRAND AGE URL: ${branddatasingleurl}`);
   $.ajax({
     type: "GET",
     dataType: 'json',
