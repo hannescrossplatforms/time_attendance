@@ -664,9 +664,10 @@ public function getOohSiteData() {
                                                 ) as inq
                                         ");
 
+
         $data['avg_basket_value'] = \DB::select("SELECT sum(avg_basket_value) total_avg_basket_value FROM brands WHERE id = 165 OR parent_brand = 165")[0]->total_avg_basket_value;
         $data['potential_sales'] = $data['conversions'] * $data['avg_basket_value'];
-        $data['advertising_cost'] = \DB::select("SELECT sum(advertising_cost) adv_cost FROM venues WHERE id IN (".$billboards.")")[0]->adv_cost;
+        $data['advertising_cost'] = \DB::select("SELECT sum(advertising_cost) adv_cost FROM venues")[0]->adv_cost;
 
         if ($data['conversions'] != 0) {
             $data['cpa'] = round($data['advertising_cost'] / $data['conversions'], 2);
@@ -2842,7 +2843,7 @@ public function getOohSiteData() {
         $data['potential_sales'] = $data['total_conversions'] * $data['avg_basket_value'];
 
         $data['potential_sales_today'] = $data['total_conversions_today'] * $data['avg_basket_value'];
-
+        $data['advertising_cost'] = $venue->advertising_cost;
         if ($data['total_conversions'] != 0) {
             $data['cpa'] = round($venue->advertising_cost / $data['total_conversions'], 2);
             $data['cpa_today'] = round(($venue->advertising_cost / 31) / $data['total_conversions_today'], 2);

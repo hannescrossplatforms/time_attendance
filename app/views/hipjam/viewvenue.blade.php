@@ -387,7 +387,7 @@
                                                     <div class="col-8 py-3 bg-danger-dark rounded-right">
                                                         <div class="h2 mt-0" id="rep_customer">0</div>
                                                         @if ($data['venue_type'] == 'billboard')
-                                                        <div class="text-uppercase">Total Reach</div>
+                                                        <div class="text-uppercase">Reach</div>
                                                         @else
                                                         <div class="text-uppercase">Total Customers in Store</div>
                                                         @endif
@@ -439,7 +439,7 @@
                                             </div>
                                             @endif
 
-
+                                            @if ($data['venue_type'] != 'billboard')
                                             <div class="col-xl-2 col-md-6">
 
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
@@ -510,7 +510,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            @endif
 
 
 
@@ -539,7 +539,7 @@
                                         <div class="row">
 
                                         @if ($data['venue_type'] == 'billboard')
-                                            <div class="col-xl-2 col-md-6">
+                                            <!-- <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-danger-dark justify-content-center rounded-left"><em class="fas fa-cart-plus fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-danger rounded-right">
@@ -547,7 +547,7 @@
                                                         <div class="text-uppercase">New Reach Rate</div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         @else
                                             <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
@@ -566,7 +566,7 @@
                                                     <div class="col-4 d-flex align-items-center bg-warning-dark justify-content-center rounded-left"><em class="fas fa-retweet fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-warning rounded-right">
                                                         <div class="h2 mt-0" id="return_reach_rate">0</div>
-                                                        <div class="text-uppercase">Return Reach Rate</div>
+                                                        <div class="text-uppercase">Return Reach</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -587,7 +587,7 @@
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-success rounded-right">
-                                                        <div class="h2 mt-0" id="reach_frequency">{{$data['reach_frequency'][0]->avg_seen_times}}</div>
+                                                        <div class="h2 mt-0" id="reach_frequency">0</div>
                                                         <div class="text-uppercase">Frequency</div>
                                                     </div>
                                                 </div>
@@ -595,7 +595,7 @@
                                         @endif
 
                                         @if ($data['venue_type'] == 'billboard')
-                                            <div class="col-xl-2 col-md-6">
+                                            <!-- <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-purple rounded-right">
@@ -603,7 +603,7 @@
                                                         <div class="text-uppercase">Gross Rate Point</div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         @endif
 
                                         @if ($data['venue_type'] == 'billboard')
@@ -612,7 +612,7 @@
                                                     <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-layer-group fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-primary rounded-right">
                                                         <div class="h2 mt-0" id="conversion_floor_rate" data-total-conversions="{{$data['total_conversions']}}">0</div>
-                                                        <div class="text-uppercase">Conversion Floor Rate</div>
+                                                        <div class="text-uppercase">Conversions</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -626,7 +626,7 @@
 
 
                                             @if ($data['venue_type'] == 'billboard')
-                                                <div class="col-xl-2 col-md-6">
+                                                <!-- <div class="col-xl-2 col-md-6">
                                                     <div class="card flex-row align-items-center align-items-stretch border-0">
                                                         <div class="col-4 d-flex align-items-center bg-danger justify-content-center rounded-left"><em class="fas fa-broadcast-tower fa-3x"></em></div>
                                                         <div class="col-8 py-3 bg-danger-dark rounded-right">
@@ -634,11 +634,11 @@
                                                             <div class="text-uppercase">Strike Rate</div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             @endif
 
                                             @if ($data['venue_type'] == 'billboard')
-                                                <div class="col-xl-2 col-md-6">
+                                                <!-- <div class="col-xl-2 col-md-6">
                                                     <div class="card flex-row align-items-center align-items-stretch border-0">
                                                         <div class="col-4 d-flex align-items-center bg-warning justify-content-center rounded-left"><em class="fas fa-broadcast-tower fa-3x"></em></div>
                                                         <div class="col-8 py-3 bg-warning-dark rounded-right">
@@ -650,11 +650,11 @@
                                                             <div class="text-uppercase" style="margin-top: -9px;">Strike Time</div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             @endif
 
                                             @if ($data['venue_type'] == 'billboard')
-                                            <div class="col-xl-2 col-md-6">
+                                            <!-- <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-success rounded-right">
@@ -662,11 +662,11 @@
                                                         <div class="text-uppercase">Strike Distance</div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             @endif
 
                                             @if ($data['venue_type'] == 'billboard')
-                                            <div class="col-xl-2 col-md-6">
+                                            <!-- <div class="col-xl-2 col-md-6">
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-purple rounded-right">
@@ -674,7 +674,7 @@
                                                         <div class="text-uppercase">Potential Sales</div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             @endif
 
                                             @if ($data['venue_type'] == 'billboard')
@@ -682,8 +682,18 @@
                                                 <div class="card flex-row align-items-center align-items-stretch border-0">
                                                     <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
                                                     <div class="col-8 py-3 bg-primary rounded-right">
-                                                        <div class="h2 mt-0" id="strike_distance">R {{$data['cpa']}}</div>
+                                                        <div class="h2 mt-0" id="strike_distance">{{$data['cpa']}} ZAR</div>
                                                         <div class="text-uppercase">CPA (Cost per Acquisition)</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-md-6">
+                                                <div class="card flex-row align-items-center align-items-stretch border-0">
+                                                    <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="fas fa-chalkboard-teacher fa-3x"></em></div>
+                                                    <div class="col-8 py-3 bg-primary rounded-right">
+                                                        <div class="h2 mt-0" id="cpm" data-advertising-cost="{{$data['advertising_cost']}}">N/A ZAR</div>
+                                                        <div class="text-uppercase">CPM</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1411,7 +1421,7 @@
                 };
             });
 
-            $('#rep_customer').html(total_sessions_from_hour)
+            // $('#rep_customer').html(total_sessions_from_hour)
 
 
 
@@ -1479,6 +1489,7 @@
             var return_reach_rate = 0;
             var total_conversions = parseInt($('#hf_total_conversions').val());
             var total_returning = 0;
+            var advertising_cost = $('#cpm').data('advertising-cost');
 
             $.each(week_data, function(index, item) {
 
@@ -1493,20 +1504,23 @@
             dwell = (dwell / week_data.length) / 60
             bounce_rate = Math.round((bounces / total_sessions) * 100)
             new_reach_rate = Math.round((new_customers_in_store / customers_in_store) * 100);
-            return_reach_rate = Math.round(((customers_in_store - new_customers_in_store) / customers_in_store) * 100);
+            return_reach_rate = (customers_in_store - new_customers_in_store);
             total_returning = (customers_in_store - new_customers_in_store);
 
             // $('#rep_customer').html(customers_in_store);
+            $('#reach_frequency').html((customers_in_store / return_reach_rate).toFixed(2))
             $('#gross_rate_point').html((parseFloat($('#reach_frequency').html()) * customers_in_store).toFixed(2));
-            $('#conversion_floor_rate').html(total_conversions === 0 ? 0 : (customers_in_store / total_conversions).toFixed(2));
+            $('#conversion_floor_rate').html(total_conversions.toFixed(2));
             $('#strike_rate').html(`${((total_conversions / customers_in_store) * 100).toFixed(2)}%`);
+            $('#rep_customer').html(customers_in_store);
             $('#new_rep_customer').html(new_customers_in_store);
             $('#engaged_customers').html(high_dwell_customers);
             $('#bounce_rate').html(isNaN(bounce_rate) ? 'No Data' : `${bounce_rate}%`);
             $('#new_reach_rate').html(isNaN(new_reach_rate) ? 'No Data' : `${new_reach_rate}%`)
-            $('#return_reach_rate').html(isNaN(return_reach_rate) ? 'No Data' : `${return_reach_rate}%`)
+            $('#return_reach_rate').html(isNaN(return_reach_rate) ? 'No Data' : `${return_reach_rate}`)
             $('#returning_customers').html(total_returning);
             $('#conversion_rate').html(`${ Math.round((total_conversions / customers_in_store) * 100)}%`);
+            $('#cpm').html(`${(advertising_cost / (customers_in_store / 1000)).toFixed(2)} ZAR`)
 
             if (dwell === null || dwell === undefined || dwell === '' || dwell.toString() === 'NaN') {
                 $('#rep_ave').html('0');
