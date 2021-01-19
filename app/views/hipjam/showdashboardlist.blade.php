@@ -7,6 +7,7 @@
   <div class="content-wrapper">
 
     <input type="hidden" id="hf_conversions" , value="{{$data['conversions']}}" />
+    <input type="hidden" id="hf_advertising_cost" , value="{{$data['advertising_cost']}}" />
     <input type="hidden" id="hf_conversions_today" , value="{{$data['conversions_today']}}" />
 
     <div class="row" id="filter_container">
@@ -115,7 +116,7 @@
             <a class="float-right" href="#metrics" data-toggle="collapse" data-target="#metrics"><em class="fa fa-minus" style="color: #c1c2c3;"></em></a>
             <div class="card-title">Metrics</div>
           </div>
-          
+
           <div class="card-body collapse show" id="metrics">
             <div class="row">
 
@@ -238,7 +239,7 @@
             <a class="float-right" href="#regional_metrics" data-toggle="collapse" data-target="#regional_metrics"><em class="fa fa-minus" style="color: #c1c2c3;"></em></a>
             <div class="card-title">Regional Metrics</div>
           </div>
-          
+
           <div class="card-body collapse show" id="regional_metrics">
             <div class="row">
 
@@ -337,7 +338,7 @@
             <a class="float-right" href="#ooh_site_performance" data-toggle="collapse" data-target="#ooh_site_performance"><em class="fa fa-minus" style="color: #c1c2c3;"></em></a>
             <div class="card-title">OOH Site Performance</div>
           </div>
-          
+
             <div class="card-body collapse show" id="ooh_site_performance">
               <div class="row">
                 <div class="col-xl-4 col-md-12">
@@ -356,8 +357,8 @@
                   <div class="card flex-row align-items-center align-items-stretch border-0">
                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
                     <div class="col-8 py-3 bg-success rounded-right">
-                      <div class="h2 mt-0" id="real_time_reach"><i class='fas fa-spinner fa-spin'></i></div>
-                      <div class="text-uppercase">Real-time Reach</div>
+                      <div class="h2 mt-0" id="reach"><i class='fas fa-spinner fa-spin'></i></div>
+                      <div class="text-uppercase">Reach</div>
                     </div>
                   </div>
                 </div>
@@ -367,8 +368,8 @@
                   <div class="card flex-row align-items-center align-items-stretch border-0">
                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
                     <div class="col-8 py-3 bg-success rounded-right">
-                      <div class="h2 mt-0" id="avg_dwell_time"><i class='fas fa-spinner fa-spin'></i></div>
-                      <div class="text-uppercase">Average Dwell Time</div>
+                      <div class="h2 mt-0" id="return_reach"><i class='fas fa-spinner fa-spin'></i></div>
+                      <div class="text-uppercase">Return Reach</div>
                     </div>
                   </div>
                 </div>
@@ -378,8 +379,8 @@
                   <div class="card flex-row align-items-center align-items-stretch border-0">
                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
                     <div class="col-8 py-3 bg-success rounded-right">
-                      <div class="h2 mt-0" id="strike_rate"><i class='fas fa-spinner fa-spin'></i></div>
-                      <div class="text-uppercase">Strike Rate</div>
+                      <div class="h2 mt-0" id="frequency"><i class='fas fa-spinner fa-spin'></i></div>
+                      <div class="text-uppercase">Frequency</div>
                     </div>
                   </div>
                 </div>
@@ -389,12 +390,8 @@
                   <div class="card flex-row align-items-center align-items-stretch border-0">
                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
                     <div class="col-8 py-3 bg-success rounded-right">
-                      <div class="h2 mt-0" id="strike_time">
-                        <small style="font-size: 11px;">{{$data['strike_time'][0]->days}} Days</small> |
-                        <small style="font-size: 11px;">{{$data['strike_time'][0]->hours}} Hours</small> |
-                        <small style="font-size: 11px;">{{$data['strike_time'][0]->minutes}} Minutes</small>
-                      </div>
-                      <div class="text-uppercase">Strike Time</div>
+                      <div class="h2 mt-0" id="conversions"><i class='fas fa-spinner fa-spin'></i></div>
+                      <div class="text-uppercase">Conversions</div>
                     </div>
                   </div>
                 </div>
@@ -404,8 +401,8 @@
                   <div class="card flex-row align-items-center align-items-stretch border-0">
                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
                     <div class="col-8 py-3 bg-success rounded-right">
-                      <div class="h2 mt-0" id="strike_distance">{{$data['strike_distance'][0]->distance}}KM</div>
-                      <div class="text-uppercase">Strike Distance</div>
+                      <div class="h2 mt-0" id="cpm"><i class='fas fa-spinner fa-spin'></i></div>
+                      <div class="text-uppercase">CPM</div>
                     </div>
                   </div>
                 </div>
@@ -415,30 +412,19 @@
                   <div class="card flex-row align-items-center align-items-stretch border-0">
                     <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
                     <div class="col-8 py-3 bg-success rounded-right">
-                      <div class="h2 mt-0" id="potential_sales">R {{$data['potential_sales']}}</div>
-                      <div class="text-uppercase">Potential Sales</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-xl-4 col-md-12">
-                  <!-- START card-->
-                  <div class="card flex-row align-items-center align-items-stretch border-0">
-                    <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
-                    <div class="col-8 py-3 bg-success rounded-right">
-                      <div class="h2 mt-0" id="potential_sales">R {{$data['roi']}}</div>
-                      <div class="text-uppercase">ROI</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-xl-4 col-md-12">
-                  <!-- START card-->
-                  <div class="card flex-row align-items-center align-items-stretch border-0">
-                    <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
-                    <div class="col-8 py-3 bg-success rounded-right">
-                      <div class="h2 mt-0" id="potential_sales">R {{$data['cpa']}}</div>
+                      <div class="h2 mt-0" id="cpa"><i class='fas fa-spinner fa-spin'></i></div>
                       <div class="text-uppercase">CPA</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-4 col-md-12">
+                  <!-- START card-->
+                  <div class="card flex-row align-items-center align-items-stretch border-0">
+                    <div class="col-4 d-flex align-items-center bg-success-dark justify-content-center rounded-left"><em class="fas fa-map-signs fa-3x"></em></div>
+                    <div class="col-8 py-3 bg-success rounded-right">
+                      <div class="h2 mt-0" id="roi"><i class='fas fa-spinner fa-spin'></i></div>
+                      <div class="text-uppercase">ROI</div>
                     </div>
                   </div>
                 </div>
@@ -466,9 +452,9 @@
             <a class="float-right" href="#venue_performance" data-toggle="collapse" data-target="#venue_performance"><em class="fa fa-minus" style="color: #c1c2c3;"></em></a>
             <div class="card-title">Venue Performance</div>
           </div>
-          
+
           <div class="card-body collapse show" id="venue_performance">
-            <div class="card-wrapper">  
+            <div class="card-wrapper">
               <div class="row">
 
                 <div class="col-xl-4 col-md-12">
@@ -687,13 +673,13 @@
       try {
         liveJam.db = firebase.firestore()
         liveJam.all = liveJam.db.collection
-        
+
       } catch {
           firebase.initializeApp(config);
           firebase.analytics();
           liveJam.db = firebase.firestore()
           liveJam.all = liveJam.db.collection
-        
+
       }
 
 
@@ -1171,7 +1157,7 @@
 
     // liveJam.compileData('week', function (week_data) {
     // setTimeout(
-    // function() 
+    // function()
     // {
     //   let best_performing_data = best_performing;
 
@@ -1259,16 +1245,15 @@
     let dates = getDateArray();
     let promise_array = [];
     let conversions = parseInt($('#hf_conversions').val());
+    let advertising_cost = parseFloat($('#hf_advertising_cost').val());
 
-    let ooh_total_reach = 0;
-    let ooh_real_time_reach = 0;
-    let ooh_avg_dwell_time = 0;
-    let ooh_strike_rate = 0;
-    let ooh_strike_time = 0;
-    let ooh_strike_distance = 0;
-    let ooh_potential_sales = 0;
-    let ooh_roi = 0;
+    let ooh_reach = 0;
+    let ooh_return_reach = 0;
+    let ooh_frequency = 0;
+    let ooh_conversions = 0;
+    let ooh_cpm = 0;
     let ooh_cpa = 0;
+    let ooh_roi = 0;
 
     $.each(sensors, function(i_s, sensor) {
       if (sensor.track_type === 'billboard') {
@@ -1276,9 +1261,8 @@
           promise_array.push(firebase.firestore().collection(sensor.id).doc(date).get().then(function(doc) {
             if (doc.exists) {
               let ooh_data = doc.data();
-              ooh_total_reach += ooh_data.customers_in_store_today;
-              ooh_real_time_reach += ooh_data.customers_in_store_now;
-              ooh_avg_dwell_time += isNaN(ooh_data.average_dwell) ? 0 : ooh_data.average_dwell;
+              ooh_reach += ooh_data.customers_in_store_today;
+              ooh_return_reach += (ooh_data.customers_in_store_today - ooh_data.new_customers_today);
             }
           }))
         });
@@ -1286,9 +1270,17 @@
     });
 
     Promise.allSettled(promise_array).then(([result]) => {
-      $('#real_time_reach').html(ooh_real_time_reach);
-      $('#avg_dwell_time').html(Math.round((ooh_avg_dwell_time / (dates.length * sensors.length)) / 60))
-      $('#strike_rate').html(`${Math.round((conversions / ooh_total_reach) * 100)}%`)
+      $('#reach').html(ooh_reach);
+      $('#return_reach').html(ooh_return_reach);
+      $('#frequency').html((ooh_reach / ooh_return_reach).toFixed(2));
+      $('#conversions').html(conversions);
+      $('#cpm').html(`${((advertising_cost * 1000) / ooh_reach).toFixed(2)} ZAR`);
+      if (conversions === 0) {
+        $('#cpa').html(`N/A ZAR`);
+      } else {
+        $('#cpa').html(`${(advertising_cost / conversions).toFixed(2)} ZAR`);
+      }
+      $('#roi').html(`${((conversions / advertising_cost) * 100).toFixed(2)}%`);
     });
   }
 
