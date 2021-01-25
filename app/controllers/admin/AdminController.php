@@ -1,13 +1,16 @@
 <?php
 
 namespace admin;
+
 use Input;
 use DB;
+use Illuminate\Support\Str;
 
 
 // use BaseController;
 
-class AdminController extends \BaseController {
+class AdminController extends \BaseController
+{
 
     public function admin_showdashboard()
     {
@@ -60,18 +63,16 @@ class AdminController extends \BaseController {
         // print_r($brands);
         $data['currentMenuItem'] = "Brand Management";
 
-        if($json) {
-            error_log("showDashboard : returning json" );
+        if ($json) {
+            error_log("showDashboard : returning json");
             return \Response::json($brandsJason);
-
         } else {
             return \View::make('admin.showbrands')->with('data', $data);
-
         }
     }
 
 
- public function admin_addBrand()
+    public function admin_addBrand()
     {
         error_log('addBrand xxx');
         $data = array();
@@ -91,7 +92,8 @@ class AdminController extends \BaseController {
         return \View::make('admin.addbrand')->with('data', $data);
     }
 
-    public function admin_check_if_brand_exists() {
+    public function admin_check_if_brand_exists()
+    {
         $name = \Input::get("name");
         $exists = \Brand::where("name", "like", $name)->first();
         $obj = (object) [
@@ -110,7 +112,7 @@ class AdminController extends \BaseController {
 
         $name = \Input::get("name");
         $exists = \Brand::where("name", "like", $name)->first();
-        if(!is_null($exists)) {
+        if (!is_null($exists)) {
             $exists->forceDelete();
         }
 
@@ -131,14 +133,12 @@ class AdminController extends \BaseController {
         if ($validator->fails()) {
             $messages = $validator->messages();
             return \Redirect::to('admin_addbrand')->withErrors($validator)->withInput();
-
         } else {
 
             $brand = $this->constructBrandRecord($brand, $input, true);
             $brand->save();
             $user = \Auth::user();
             $user->brands()->attach($brand->id);
-
         }
 
         return \Redirect::route('admin_showbrands');
@@ -151,14 +151,14 @@ class AdminController extends \BaseController {
         $data['currentMenuItem'] = "Brand Management";
         $data['brand'] = \Brand::find($id);
 
-        if($data['brand']->hipwifi) $data['brand']->hipwifi = "checked";
-        if($data['brand']->hiprm) $data['brand']->hiprm = "checked";
-        if($data['brand']->hipjam) $data['brand']->hipjam = "checked";
-        if($data['brand']->hipengage) $data['brand']->hipengage = "checked";
+        if ($data['brand']->hipwifi) $data['brand']->hipwifi = "checked";
+        if ($data['brand']->hiprm) $data['brand']->hiprm = "checked";
+        if ($data['brand']->hipjam) $data['brand']->hipjam = "checked";
+        if ($data['brand']->hipengage) $data['brand']->hipengage = "checked";
         //Hannes todo: Add the hiptna to the brands table. Map it and on save make sure it works.
-        if($data['brand']->hiptna) $data['brand']->hiptna = "checked";
-        if($data['brand']->userdatabtn) $data['brand']->userdatabtn = "checked";
-        if($data['brand']->logindatabtn) $data['brand']->logindatabtn = "checked";
+        if ($data['brand']->hiptna) $data['brand']->hiptna = "checked";
+        if ($data['brand']->userdatabtn) $data['brand']->userdatabtn = "checked";
+        if ($data['brand']->logindatabtn) $data['brand']->logindatabtn = "checked";
 
 
         $countries = \Countrie::All();
@@ -176,20 +176,20 @@ class AdminController extends \BaseController {
         $brand = \Brand::find($id);
 
         $input = \Input::all();
-        $input["servercount"]= sizeof(\Input::get('server_ids'));
+        $input["servercount"] = sizeof(\Input::get('server_ids'));
 
         $messages = array(
             'name.required' => 'The brand name is required',
             'name.unique' => 'The brand name is already taken',
             'name.alpha_num_dash_spaces' => 'The full name can only contain letters, numbers, dashes and spaces',
             'code.required' => 'The brand code is required',
-            'code.unique' => 'The brand code is already taken'// ,
+            'code.unique' => 'The brand code is already taken' // ,
             // 'code.size' => 'The brand code must be 6 characters in length',
         );
 
         $rules = array(
-            'name'      => 'required|alpha_num_dash_spaces|unique:brands,name,'.$id,
-            'code'      => 'required|size:6|unique:brands,code,'.$id,
+            'name'      => 'required|alpha_num_dash_spaces|unique:brands,name,' . $id,
+            'code'      => 'required|size:6|unique:brands,code,' . $id,
             // 'servercount'    => 'array_not_null',
         );
 
@@ -197,13 +197,11 @@ class AdminController extends \BaseController {
         if ($validator->fails()) {
             $messages = $validator->messages();
 
-            return \Redirect::to('admin_editbrand/'.$id)->withErrors($validator)->withInput();
-
+            return \Redirect::to('admin_editbrand/' . $id)->withErrors($validator)->withInput();
         } else {
 
             $brand = $this->constructBrandRecord($brand, $input, false);
             $brand->save();
-
         }
 
 
@@ -211,7 +209,7 @@ class AdminController extends \BaseController {
         // Update brand status in hipengage
         $engagebrand = \Engagebrand::where('code', 'like', $brand->code)->first();
 
-        if($engagebrand) {
+        if ($engagebrand) {
             $engagebrand->active = $brand->hipengage;
         } else {
             $brand->auth_token = exec("uuidgen -r");
@@ -238,7 +236,7 @@ class AdminController extends \BaseController {
             $connection = $brand->remotedb->dbconnection;
         }
 
-        if($brand) {
+        if ($brand) {
 
             $ids = $brand->venues()->pluck('id');
             $ids_param = null;
@@ -266,15 +264,15 @@ class AdminController extends \BaseController {
 
             if ($connection != null) {
                 // Delete the nastypes and naslookups in hipwifi
-                \DB::connection($connection)->table("nastype")->where('type', 'like' , "%" . $brand->code)->delete();
-                \DB::connection($connection)->table("naslookup")->where('location', 'like' , "___" . $brand->code . "%")->delete();
+                \DB::connection($connection)->table("nastype")->where('type', 'like', "%" . $brand->code)->delete();
+                \DB::connection($connection)->table("naslookup")->where('location', 'like', "___" . $brand->code . "%")->delete();
             }
         }
 
         return \Redirect::route('admin_showbrands', ['json' => 1]);
     }
 
-        public function constructBrandRecord($brand, $input, $newrecord)
+    public function constructBrandRecord($brand, $input, $newrecord)
     {
 
         if (\User::isVicinity()) {
@@ -282,12 +280,12 @@ class AdminController extends \BaseController {
             $brand->remotedb_id = 1;
         }
 
-        if($newrecord) {
+        if ($newrecord) {
             $brand->isp_id = \Input::get('isp_id');
             $brand->remotedb_id = \Input::get('remotedb_id');
         }
 
-        if(!$brand->auth_token) {
+        if (!$brand->auth_token) {
             $brand->auth_token = exec("uuidgen -r");
         }
 
@@ -297,13 +295,41 @@ class AdminController extends \BaseController {
         $brand->code = \Input::get('code');
         $brand->countrie_id = \Input::get('countrie_id');
 
-        if(\Input::get('hipwifi') == "on") { $brand->hipwifi = 1; } else { $brand->hipwifi = 0; }
-        if(\Input::get('hiprm') == "on") { $brand->hiprm = 1; } else { $brand->hiprm = 0; }
-        if(\Input::get('hipjam') == "on") { $brand->hipjam = 1; } else { $brand->hipjam = 0; }
-        if(\Input::get('hipengage') == "on") { $brand->hipengage = 1; } else { $brand->hipengage = 0; }
-        if(\Input::get('hiptna') == "on") { $brand->hiptna = 1; } else { $brand->hiptna = 0; }
-        if(\Input::get('userdatabtn') == "on") { $brand->userdatabtn = 1; } else { $brand->userdatabtn = 0; }
-        if(\Input::get('logindatabtn') == "on") { $brand->logindatabtn = 1; } else { $brand->logindatabtn = 0; }
+        if (\Input::get('hipwifi') == "on") {
+            $brand->hipwifi = 1;
+        } else {
+            $brand->hipwifi = 0;
+        }
+        if (\Input::get('hiprm') == "on") {
+            $brand->hiprm = 1;
+        } else {
+            $brand->hiprm = 0;
+        }
+        if (\Input::get('hipjam') == "on") {
+            $brand->hipjam = 1;
+        } else {
+            $brand->hipjam = 0;
+        }
+        if (\Input::get('hipengage') == "on") {
+            $brand->hipengage = 1;
+        } else {
+            $brand->hipengage = 0;
+        }
+        if (\Input::get('hiptna') == "on") {
+            $brand->hiptna = 1;
+        } else {
+            $brand->hiptna = 0;
+        }
+        if (\Input::get('userdatabtn') == "on") {
+            $brand->userdatabtn = 1;
+        } else {
+            $brand->userdatabtn = 0;
+        }
+        if (\Input::get('logindatabtn') == "on") {
+            $brand->logindatabtn = 1;
+        } else {
+            $brand->logindatabtn = 0;
+        }
 
         return $brand;
     }
@@ -333,16 +359,13 @@ class AdminController extends \BaseController {
 
         $data['currentMenuItem'] = "Venue Management";
 
-        if($json) {
-            error_log("admin_showvenues : returning json" );
+        if ($json) {
+            error_log("admin_showvenues : returning json");
             return \Response::json($data['venuesJason']);
-
         } else {
-            error_log("showDashboard : returning NON json" );
+            error_log("showDashboard : returning NON json");
             return \View::make('admin.showvenues')->with('data', $data);
-
         }
-
     }
 
 
@@ -367,6 +390,11 @@ class AdminController extends \BaseController {
         $data['adminssid3'] = '';
 
         $data['venue'] = new \Venue();
+        
+        
+
+
+
 
         $othervars = array("name" => "Other", "selected" => "selected=\"selected\"");
         $mikvars = array("name" => "Mikrotik", "selected" => "");
@@ -405,11 +433,11 @@ class AdminController extends \BaseController {
         $input['sitename'] = $sitename;
 
         $sitename_exists = \Venue::where("sitename", "like", $sitename)->first();
-        if(! is_null($sitename_exists)) {
+        if (!is_null($sitename_exists)) {
             $sitename_exists->forceDelete();
         }
 
-        $messages = array('', );
+        $messages = array('',);
         $rules = array(
             'sitename'       => 'required|alpha_num_dash_spaces|unique:venues',
         );
@@ -419,7 +447,6 @@ class AdminController extends \BaseController {
             $messages = $validator->messages();
 
             return \Redirect::to('admin_addvenue')->withErrors($validator)->withInput();
-
         } else {
             $utils = new \Utils();
 
@@ -436,8 +463,10 @@ class AdminController extends \BaseController {
             $venue->address = $input['address'];
             $venue->contact = $input['contact'];
             $venue->notes = $input['notes'];
+            $venue->sonoff_device_uuid = Str::uuid();
+            $venue->sonoff_device_auth_token =  Str::uuid();
+            $venue->sonoff_deice_action_status = "starting_up";
             $venue->save();
-
         }
 
         return \Redirect::route('admin_showvenues');
@@ -446,7 +475,7 @@ class AdminController extends \BaseController {
 
     public function admin_editVenue($id)
     {
-error_log("admin_editVenue 10");
+        error_log("admin_editVenue 10");
         $data = array();
         $data['currentMenuItem'] = "Venue Management";
         $data['edit'] = true;
@@ -455,16 +484,18 @@ error_log("admin_editVenue 10");
         $data['submitbutton'] = 'on';
 
         $data['old_sitename'] = $data['venue']["sitename"];
-        $data['venue']["sitename"] = explode(' ', $data['venue']["sitename"])[1];//preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
-        foreach($data['venue'] as $key => $value) { error_log("TTT : $key => $value"); };
+        $data['venue']["sitename"] = explode(' ', $data['venue']["sitename"])[1]; //preg_replace("/(.*) (.*$)/", "$2", $data['venue']["sitename"]);
+        foreach ($data['venue'] as $key => $value) {
+            error_log("TTT : $key => $value");
+        };
 
         $encoded = json_encode($data);
         return \View::make('admin.addvenue')->with('data', $data);
     }
 
-public function admin_editVenueSave()
+    public function admin_editVenueSave()
     {
-error_log("admin_editVenueSave 10");
+        error_log("admin_editVenueSave 10");
 
         $input = \Input::all();
         $brand_id = \Input::get('brand_id');
@@ -504,11 +535,10 @@ error_log("admin_editVenueSave 10");
         $remotedb_id = \Brand::find($brand_id)->remotedb_id;
         $media = new \Media();
 
-        if($venue) {
+        if ($venue) {
             error_log("admin_deleteVenue - deleting venue - id = $id");
             $list_of_sensors = \Sensor::where('venue_id', '=', $id);
-            foreach ($list_of_sensors as $sensor)
-            {
+            foreach ($list_of_sensors as $sensor) {
                 $sensor_command = 'ssh  -v -i /var/www/.ssh/id_rsa root@vpn.hipzone.co.za -p 1759 "delete_sensor_entries ' . $sensor->mac_address . '" 2>&1';
                 $sensor_output = shell_exec($sensor_command);
 
@@ -523,65 +553,60 @@ error_log("admin_editVenueSave 10");
             error_log("admin_deleteVenue 30");
             $mikrotik = new \Mikrotik();
             $mikrotik->deleteVenue($venue);
-
         }
 
         return \Redirect::route('admin_showvenues', ['json' => 1]);
     }
 
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-// Name: roleedit
+    // Name: roleedit
 
-// Purpose:  To load edit role page and fetch all details for the edit role page.
+    // Purpose:  To load edit role page and fetch all details for the edit role page.
 
-// It fetch all details of a particular role from database and load edit role view page
+    // It fetch all details of a particular role from database and load edit role view page
 
-// Created at 22-11-2016 by Anusha
+    // Created at 22-11-2016 by Anusha
 
-// Last updated at 06-12-2016 by Prajeesh
+    // Last updated at 06-12-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
-    public function roleedit( $roleId = '' )
+    public function roleedit($roleId = '')
     {
-//        echo $roleId;die("here");
+        //        echo $roleId;die("here");
         $data = array();
         $data['currentMenuItem'] = "Roles and Permissions";
         $data['product'] = \Product::get();
         //$data['permission'] =  \Permission::get();
-        $data['roleDetails'] =  \Role::where('id',$roleId)->get();
+        $data['roleDetails'] =  \Role::where('id', $roleId)->get();
 
-        $data['permission'] = DB::table('permissions')->
-            whereNotIn('id' , function( $permission ) use ( $roleId ) {
-            $permission->select( 'permission_id' )->from( 'permission_role' )->
-            where( 'role_id' , '=' , $roleId );
+        $data['permission'] = DB::table('permissions')->whereNotIn('id', function ($permission) use ($roleId) {
+            $permission->select('permission_id')->from('permission_role')->where('role_id', '=', $roleId);
         })->get();
 
-        $data['added_permission'] = DB::table('permissions')->
-            whereIn('id' , function( $permissionrole ) use ( $roleId ) {
-            $permissionrole->select( 'permission_id' )->from( 'permission_role' )->
-            where( 'role_id' , '=' , $roleId );
+        $data['added_permission'] = DB::table('permissions')->whereIn('id', function ($permissionrole) use ($roleId) {
+            $permissionrole->select('permission_id')->from('permission_role')->where('role_id', '=', $roleId);
         })->get();
 
 
         return \View::make('admin.editrole')->with('data', $data);
     }
 
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-// Name: getAvailableProducts
+    // Name: getAvailableProducts
 
-// Purpose:  To populate admin permission tab and role tabe dropdown
+    // Purpose:  To populate admin permission tab and role tabe dropdown
 
-// It fetch all available product list from the table product to populate admin
-// permission tab and role tabe dropdown.
+    // It fetch all available product list from the table product to populate admin
+    // permission tab and role tabe dropdown.
 
-// Created at 24-11-2016 by Prajeesh
+    // Created at 24-11-2016 by Prajeesh
 
-// Last updated at 24-11-2016 by Prajeesh
+    // Last updated at 24-11-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public function getAvailableProducts()
     {
@@ -589,20 +614,20 @@ error_log("admin_editVenueSave 10");
         return \Response::json($product);
     }
 
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-// Name: addPermission
+    // Name: addPermission
 
-// Purpose:  To add permiision to the table  permissions
+    // Purpose:  To add permiision to the table  permissions
 
-// It receive content from the form submission in the permission tab page, insert it to
-// the table permissions.
+    // It receive content from the form submission in the permission tab page, insert it to
+    // the table permissions.
 
-// Created at 24-11-2016 by Prajeesh
+    // Created at 24-11-2016 by Prajeesh
 
-// Last updated at 24-11-2016 by Prajeesh
+    // Last updated at 24-11-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public function addPermission()
     {
@@ -615,79 +640,78 @@ error_log("admin_editVenueSave 10");
         $objPermission->product_id = $objData['permission_product_id'];
         $objPermission->save();
 
-        $lastInsertedID =$objPermission->id;
+        $lastInsertedID = $objPermission->id;
 
-        $permissionJson =  \Permission::where('id',$lastInsertedID)->get();
+        $permissionJson =  \Permission::where('id', $lastInsertedID)->get();
         $product = \Product::get();
-        $rows='';
+        $rows = '';
 
-        foreach ($permissionJson as $value){
+        foreach ($permissionJson as $value) {
 
-            $rows =$rows.'<tr>\
-                          <td class="tnastafftd_name" style="width:19%;"> <input id="permission_name_'. $value->id .'" class="form-control no-radius" placeholder="Name"  type="text" value="' . $value->name . '"> </td>\
-                          <td class="tnastafftd_name" style="width:23%;"> <input id="permission_code_'. $value->id .'" class="form-control no-radius" placeholder="Code" type="text" value="' .$value->code . '"> </td>\
-                          <td class="tnastafftd_name" style="width:19%;"> <input id="permission_description_'. $value->id .'" class="form-control no-radius" placeholder="Description" type="text" value="' . $value->description . '"> </td>\
-                          <td class="tnastafftd_name" style="width:19.5%;"> <select id="permission_product_id_'. $value->id .'" class="form-control no-radius product_code"><option>Product Code</option>';
+            $rows = $rows . '<tr>\
+                          <td class="tnastafftd_name" style="width:19%;"> <input id="permission_name_' . $value->id . '" class="form-control no-radius" placeholder="Name"  type="text" value="' . $value->name . '"> </td>\
+                          <td class="tnastafftd_name" style="width:23%;"> <input id="permission_code_' . $value->id . '" class="form-control no-radius" placeholder="Code" type="text" value="' . $value->code . '"> </td>\
+                          <td class="tnastafftd_name" style="width:19%;"> <input id="permission_description_' . $value->id . '" class="form-control no-radius" placeholder="Description" type="text" value="' . $value->description . '"> </td>\
+                          <td class="tnastafftd_name" style="width:19.5%;"> <select id="permission_product_id_' . $value->id . '" class="form-control no-radius product_code"><option>Product Code</option>';
 
-            foreach($product as $product_value) {
-                if($value->product_id == $product_value->id) {
+            foreach ($product as $product_value) {
+                if ($value->product_id == $product_value->id) {
 
                     $option_selected =  'selected="selected"';
-
                 } else {
 
                     $option_selected     =   '';
                 }
-              $rows = $rows.'<option value="' . $product_value->id . '"' . $option_selected . '>'.$product_value->name . '</option>';
+                $rows = $rows . '<option value="' . $product_value->id . '"' . $option_selected . '>' . $product_value->name . '</option>';
             };
 
 
-$rows =$rows.'</select></td>\
-                          <td class="tnastafftd_add_update" style="width:17%;"> <a id="updatePermissionDetails_'. $value->id .'" class="btn btn-default btn-delete btn-sm" onclick="updatePermissionDetails('. $value->id .');">Update</a> <a id="deletePermissionDetails_'. $value->id .'" class="btn btn-default btn-delete btn-sm" onclick="deletePermissionDetails('. $value->id .');">Delete</a></td>\
+            $rows = $rows . '</select></td>\
+                          <td class="tnastafftd_add_update" style="width:17%;"> <a id="updatePermissionDetails_' . $value->id . '" class="btn btn-default btn-delete btn-sm" onclick="updatePermissionDetails(' . $value->id . ');">Update</a> <a id="deletePermissionDetails_' . $value->id . '" class="btn btn-default btn-delete btn-sm" onclick="deletePermissionDetails(' . $value->id . ');">Delete</a></td>\
                           <td></td>\
                         </tr>\
                     ';
         }
-        $data = array('row'=>$rows);
+        $data = array('row' => $rows);
         print_r(json_encode($data));
     }
 
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-// Name: showAvailablePermission
+    // Name: showAvailablePermission
 
-// Purpose:  To show all available permission in permission tab view page.
+    // Purpose:  To show all available permission in permission tab view page.
 
-// It fetch all available permission from the permissions table to list it on permission
-// tab view page..
+    // It fetch all available permission from the permissions table to list it on permission
+    // tab view page..
 
-// Created at 29-11-2016 by Prajeesh
+    // Created at 29-11-2016 by Prajeesh
 
-// Last updated at 29-11-2016 by Prajeesh
+    // Last updated at 29-11-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public function  showAvailablePermission()
     {
-        $permissionJson =  \Permission::orderBy('created_at','DESC')
-                                                ->get();
+        $permissionJson =  \Permission::orderBy('created_at', 'DESC')
+            ->get();
         return \Response::json($permissionJson);
     }
 
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-// Name: deletePermission
+    // Name: deletePermission
 
-// Purpose:  To delete available permission in permission tab view page.
+    // Purpose:  To delete available permission in permission tab view page.
 
-// It recieve permission id via ajax and delete permission from the permissions table on delete
-// button click.
+    // It recieve permission id via ajax and delete permission from the permissions table on delete
+    // button click.
 
-// Created at 29-11-2016 by Prajeesh
+    // Created at 29-11-2016 by Prajeesh
 
-// Last updated at 29-11-2016 by Prajeesh
+    // Last updated at 29-11-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public function  deletePermission()
     {
@@ -696,25 +720,24 @@ $rows =$rows.'</select></td>\
         $objDeletePermission = \Permission::find($objData['id']);
         $objDeletePermission->delete();
 
-        $data = array( 'id' => $objData['id'] );
+        $data = array('id' => $objData['id']);
         print_r(json_encode($data));
-
     }
 
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-// Name: updatePermission
+    // Name: updatePermission
 
-// Purpose:  To update permission in permission tab view page.
+    // Purpose:  To update permission in permission tab view page.
 
-// It fetch all details from the form via ajax and update permissions table row have that
-// particular permission_id.
+    // It fetch all details from the form via ajax and update permissions table row have that
+    // particular permission_id.
 
-// Created at 30-11-2016 by Prajeesh
+    // Created at 30-11-2016 by Prajeesh
 
-// Last updated at 30-11-2016 by Prajeesh
+    // Last updated at 30-11-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public function  updatePermission()
     {
@@ -726,44 +749,43 @@ $rows =$rows.'</select></td>\
         $objUpdatePermission->description = $objData['permission_description'];
         $objUpdatePermission->product_id = $objData['permission_product_id'];
         $objUpdatePermission->save();
-
     }
 
-// Name: showAvailableRoles
+    // Name: showAvailableRoles
 
-// Purpose:  To show all available roles in role tab view page.
+    // Purpose:  To show all available roles in role tab view page.
 
-// It fetch all available roles from the roles table to list it on role
-// tab view page..
+    // It fetch all available roles from the roles table to list it on role
+    // tab view page..
 
-// Created at 01-12-2016 by Prajeesh
+    // Created at 01-12-2016 by Prajeesh
 
-// Last updated at 01-12-2016 by Prajeesh
+    // Last updated at 01-12-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public function  showAvailableRoles()
     {
-        $roleJson =  \Role::orderBy('created_at','DESC')
-                                                ->get();
+        $roleJson =  \Role::orderBy('created_at', 'DESC')
+            ->get();
         return \Response::json($roleJson);
     }
 
 
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-// Name: addRole
+    // Name: addRole
 
-// Purpose:  To add role to the table  roles
+    // Purpose:  To add role to the table  roles
 
-// It receive content from the form submission in the role tab page, insert it to
-// the table roles.
+    // It receive content from the form submission in the role tab page, insert it to
+    // the table roles.
 
-// Created at 01-12-2016 by Prajeesh
+    // Created at 01-12-2016 by Prajeesh
 
-// Last updated at 01-12-2016 by Prajeesh
+    // Last updated at 01-12-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public function addRole()
     {
@@ -775,53 +797,51 @@ $rows =$rows.'</select></td>\
         $objRole->product_id = $objData['role_product_id'];
         $objRole->save();
 
-        $lastInsertedID =$objRole->id;
+        $lastInsertedID = $objRole->id;
 
-        $roleJson =  \Role::where('id',$lastInsertedID)->get();
+        $roleJson =  \Role::where('id', $lastInsertedID)->get();
         $product = \Product::get();
-        $rows='';
+        $rows = '';
 
-        foreach ($roleJson as $value){
+        foreach ($roleJson as $value) {
 
             $href = 'http://localhost/prajeesh/hiphub/public/admin_roleedit/' . $value->id;
             $rows = $rows . '<tr>\
                 <td>' . $value->name . '</td>\
                 <td>' . $value->description . '</td> <td>';
 
-                   foreach($product as $product_value){
-                        if($product_value->id == $value->product_id){
-                            $product_name = $product_value->name;
+            foreach ($product as $product_value) {
+                if ($product_value->id == $value->product_id) {
+                    $product_name = $product_value->name;
+                } else {
+                    $product_name = '';
+                }
+                $rows = $rows . $product_name;
+            }
 
-                        } else {
-                            $product_name = '';
-
-                        }
-                       $rows = $rows . $product_name ;
-                    }
-
-        $rows = $rows . '</td><td><a href="'. $href .'" class="btn btn-default btn-sm">Edit</a>
+            $rows = $rows . '</td><td><a href="' . $href . '" class="btn btn-default btn-sm">Edit</a>
                     <a id="btn_delete_' . $value->id . '" class="btn btn-default btn-delete btn-sm" data-roleid = "' . $value->id . '" href="#">Delete</a>
                 </td>';
         }
-        $data = array('row'=>$rows);
+        $data = array('row' => $rows);
         print_r(json_encode($data));
     }
 
 
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-// Name: editRole
+    // Name: editRole
 
-// Purpose:  To edit role details and to add permissions to the role
+    // Purpose:  To edit role details and to add permissions to the role
 
-// It fetch all details from the form via ajax and update role details. Also it add permissions to
-// the same role in permission role table.
+    // It fetch all details from the form via ajax and update role details. Also it add permissions to
+    // the same role in permission role table.
 
-// Created at 06-12-2016 by Prajeesh
+    // Created at 06-12-2016 by Prajeesh
 
-// Last updated at 06-12-2016 by Prajeesh
+    // Last updated at 06-12-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public function editRole()
     {
@@ -846,29 +866,26 @@ $rows =$rows.'</select></td>\
             $objPermissionRole->role_id = $objData['role_id'];
             $objPermissionRole->save();
 
-            $data = array('message'=>'success');
-
+            $data = array('message' => 'success');
         }
 
         print_r(json_encode($data));
-
-
     }
 
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-// Name: deleteRole
+    // Name: deleteRole
 
-// Purpose:  To delete available role in role tab view page.
+    // Purpose:  To delete available role in role tab view page.
 
-// It recieve role id via ajax and delete role from the role table on delete
-// button click.
+    // It recieve role id via ajax and delete role from the role table on delete
+    // button click.
 
-// Created at 02-12-2016 by Prajeesh
+    // Created at 02-12-2016 by Prajeesh
 
-// Last updated at 02-12-2016 by Prajeesh
+    // Last updated at 02-12-2016 by Prajeesh
 
-//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public function  deleteRole()
     {
@@ -877,10 +894,7 @@ $rows =$rows.'</select></td>\
         $objDeleteRole = \Role::find($objData['id']);
         $objDeleteRole->delete();
 
-        $data = array( 'id' => $objData['id'] );
+        $data = array('id' => $objData['id']);
         print_r(json_encode($data));
-
     }
-
-
 }

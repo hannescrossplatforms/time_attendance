@@ -237,7 +237,7 @@ function processBrandReports() {
     'queryname': 'age'
   };
 
-
+  // http://hiphub.hipzone.co.za/hipreports_hipwifi_branddatajsonsingle
   console.log(`BRAND AGE URL: ${branddatasingleurl}`);
   $.ajax({
     type: "GET",
