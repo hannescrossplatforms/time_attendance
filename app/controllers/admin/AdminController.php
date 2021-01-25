@@ -4,7 +4,6 @@ namespace admin;
 
 use Input;
 use DB;
-use Illuminate\Support\Str;
 
 
 // use BaseController;
@@ -390,8 +389,8 @@ class AdminController extends \BaseController
         $data['adminssid3'] = '';
 
         $data['venue'] = new \Venue();
-        
-        
+
+
 
 
 
@@ -463,8 +462,8 @@ class AdminController extends \BaseController
             $venue->address = $input['address'];
             $venue->contact = $input['contact'];
             $venue->notes = $input['notes'];
-            $venue->sonoff_device_uuid = Str::uuid();
-            $venue->sonoff_device_auth_token =  Str::uuid();
+            $venue->sonoff_device_uuid = exec("uuidgen -r");
+            $venue->sonoff_device_auth_token =  exec("uuidgen -r");
             $venue->sonoff_deice_action_status = "starting_up";
             $venue->save();
         }
