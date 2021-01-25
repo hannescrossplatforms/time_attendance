@@ -464,7 +464,7 @@ class AdminController extends \BaseController
             $venue->notes = $input['notes'];
             $venue->sonoff_device_uuid = exec("uuidgen -r");
             $venue->sonoff_device_auth_token =  exec("uuidgen -r");
-            $venue->sonoff_deice_action_status = "starting_up";
+            $venue->sonoff_device_action_status = "starting_up";
             $venue->save();
         }
 
